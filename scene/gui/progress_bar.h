@@ -32,6 +32,8 @@
 #define PROGRESS_BAR_H
 
 #include "scene/gui/range.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
 
 class ProgressBar : public Range {
 	GDCLASS(ProgressBar, Range);

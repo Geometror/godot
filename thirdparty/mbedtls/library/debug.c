@@ -17,14 +17,20 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
+#include "mbedtls/ecdh.h"
+#include "mbedtls/ecp.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/ssl.h"
+#include "mbedtls/x509_crt.h"
 #if defined(MBEDTLS_DEBUG_C)
 
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc      calloc
 #define mbedtls_free        free
 #define mbedtls_time_t      time_t
@@ -32,12 +38,12 @@
 #define mbedtls_vsnprintf   vsnprintf
 #endif
 
-#include "mbedtls/debug.h"
-#include "mbedtls/error.h"
-
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "mbedtls/debug.h"
+#include "mbedtls/error.h"
 
 #if ( defined(__ARMCC_VERSION) || defined(_MSC_VER) ) && \
     !defined(inline) && !defined(__cplusplus)

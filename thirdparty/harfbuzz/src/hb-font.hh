@@ -29,10 +29,16 @@
 #ifndef HB_FONT_HH
 #define HB_FONT_HH
 
-#include "hb.hh"
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
 
+#include "hb.hh"
 #include "hb-face.hh"
 #include "hb-shaper.hh"
+#include "hb-config.hh"
+#include "hb.h"
 
 
 /*
@@ -98,6 +104,7 @@ DECLARE_NULL_INSTANCE (hb_font_funcs_t);
 
 #define HB_SHAPER_IMPLEMENT(shaper) HB_SHAPER_DATA_INSTANTIATE_SHAPERS(shaper, font);
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
 
 struct hb_font_t

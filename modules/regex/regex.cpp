@@ -29,10 +29,15 @@
 /*************************************************************************/
 
 #include "regex.h"
+
 #include "core/os/memory.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
 
 extern "C" {
 #include <pcre2.h>
+#include <stddef.h>
 }
 
 static void *_regex_malloc(PCRE2_SIZE size, void *user) {

@@ -24,9 +24,14 @@ Mozilla Public License (http://mozilla.org/MPL) or the GNU General Public
 License, as published by the Free Software Foundation, either version 2
 of the License or (at your option) any later version.
 */
+#include <stdlib.h>
+#include <string.h>
+
 #include "inc/Face.h"
 #include "inc/Font.h"
 #include "inc/GlyphCache.h"
+#include "graphite2/Font.h"
+#include "inc/Main.h"
 
 using namespace graphite2;
 

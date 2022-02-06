@@ -4,10 +4,17 @@
 */
 #include <stdio.h>
 #include <string.h>
+
 #define ENET_BUILDING_LIB 1
 #include "enet/utility.h"
 #include "enet/time.h"
 #include "enet/enet.h"
+#include "enet/callbacks.h"
+#include "enet/godot.h"
+#include "enet/godot_ext.h"
+#include "enet/list.h"
+#include "enet/protocol.h"
+#include "enet/types.h"
 
 static size_t commandSizes [ENET_PROTOCOL_COMMAND_COUNT] =
 {

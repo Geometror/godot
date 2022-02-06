@@ -10,7 +10,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <sys/types.h>
 #if defined (__NetBSD__)
 #include <net/if.h>
 #endif
@@ -20,6 +19,7 @@
 #include <ws2tcpip.h>
 #include <io.h>
 #include <iphlpapi.h>
+
 #include "win32_snprintf.h"
 #if !defined(_MSC_VER)
 #include <stdint.h>
@@ -63,10 +63,12 @@ struct sockaddr_un {
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <net/if.h>
+
 #define closesocket close
 #endif
 
 #include "miniupnpc_socketdef.h"
+#include "upnpdev.h"
 
 #if !defined(__DragonFly__) && !defined(__OpenBSD__) && !defined(__NetBSD__) && !defined(__APPLE__) && !defined(_WIN32) && !defined(__CYGWIN__) && !defined(__sun) && !defined(__GNU__) && !defined(__FreeBSD_kernel__) && !defined(__HAIKU__)
 #define HAS_IP_MREQN
@@ -98,6 +100,8 @@ struct ip_mreqn
 #include "minissdpc.h"
 #include "miniupnpc.h"
 #include "receivedata.h"
+
+struct timeval;
 
 #if !(defined(_WIN32) || defined(__amigaos__) || defined(__amigaos4__))
 

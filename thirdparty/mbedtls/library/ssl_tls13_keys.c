@@ -17,16 +17,14 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3_EXPERIMENTAL)
+
+#include <stdint.h>
+#include <string.h>
 
 #include "mbedtls/hkdf.h"
 #include "mbedtls/ssl_internal.h"
 #include "ssl_tls13_keys.h"
-
-#include <stdint.h>
-#include <string.h>
 
 #define MBEDTLS_SSL_TLS1_3_LABEL( name, string )       \
     .name = string,

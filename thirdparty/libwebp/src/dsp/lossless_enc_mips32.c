@@ -13,8 +13,6 @@
 //             Jovan Zelincevic (jovan.zelincevic@imgtec.com)
 
 #include "src/dsp/dsp.h"
-#include "src/dsp/lossless.h"
-#include "src/dsp/lossless_common.h"
 
 #if defined(WEBP_USE_MIPS32)
 

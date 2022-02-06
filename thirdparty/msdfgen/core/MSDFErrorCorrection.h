@@ -6,6 +6,7 @@
 #include "BitmapRef.hpp"
 
 namespace msdfgen {
+class Shape;
 
 /// Performs error correction on a computed MSDF to eliminate interpolation artifacts. This is a low-level class, you may want to use the API in msdf-error-correction.h instead.
 class MSDFErrorCorrection {

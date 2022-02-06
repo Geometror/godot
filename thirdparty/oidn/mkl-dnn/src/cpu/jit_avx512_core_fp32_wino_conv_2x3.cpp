@@ -15,14 +15,19 @@
  *******************************************************************************/
 
 #include <assert.h>
+#include <stdint.h>
+#include <initializer_list>
 
 #include "c_types_map.hpp"
 #include "mkldnn_thread.hpp"
 #include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "jit_avx512_core_fp32_wino_conv_2x3.hpp"
 #include "jit_generator.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "nstl.hpp"
+#include "primitive_attr.hpp"
+#include "xbyak_mnemonic.h"
 
 namespace mkldnn {
 namespace impl {

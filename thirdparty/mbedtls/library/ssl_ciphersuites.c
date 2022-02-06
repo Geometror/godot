@@ -19,20 +19,21 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
 #if defined(MBEDTLS_SSL_TLS_C)
 
 #if defined(MBEDTLS_PLATFORM_C)
-#include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
 #endif
 
+#include <string.h>
+
 #include "mbedtls/ssl_ciphersuites.h"
 #include "mbedtls/ssl.h"
-
-#include <string.h>
 
 #undef HAVE_SHA384
 #if defined(MBEDTLS_SHA512_C) && !defined(MBEDTLS_SHA512_NO_SHA384)

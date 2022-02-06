@@ -31,11 +31,22 @@
 #ifndef NETWORKED_MULTIPLAYER_ENET_H
 #define NETWORKED_MULTIPLAYER_ENET_H
 
+#include <enet/enet.h>
+#include <stdint.h>
+
 #include "core/crypto/crypto.h"
 #include "core/multiplayer/multiplayer_peer.h"
-
 #include "enet_connection.h"
-#include <enet/enet.h>
+#include "core/error/error_list.h"
+#include "core/io/ip_address.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/typedefs.h"
+#include "enet/types.h"
+#include "modules/enet/enet_packet_peer.h"
 
 class ENetMultiplayerPeer : public MultiplayerPeer {
 	GDCLASS(ENetMultiplayerPeer, MultiplayerPeer);

@@ -6,7 +6,6 @@
  * others. All Rights Reserved.
  *******************************************************************************
  */
-#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_SERVICE || !UCONFIG_NO_TRANSLITERATION
 

@@ -34,11 +34,11 @@
 
 #define SH_EXPORTING
 
+#include <glslang/OSDependent/osinclude.h>
 #include <cassert>
 
 #include "InitializeDll.h"
 #include "../glslang/Include/InitializeGlobals.h"
-#include "../glslang/Public/ShaderLang.h"
 #include "../glslang/Include/PoolAlloc.h"
 
 namespace glslang {

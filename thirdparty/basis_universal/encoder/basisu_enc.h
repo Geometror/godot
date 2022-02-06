@@ -13,9 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #pragma once
-#include "../transcoder/basisu.h"
-#include "../transcoder/basisu_transcoder_internal.h"
-
+#include <assert.h>
+#include <ctype.h>
+#include <stdarg.h>
+#include <string.h>
+#include <transcoder/basisu_containers.h>
 #include <mutex>
 #include <atomic>
 #include <condition_variable>
@@ -23,6 +25,16 @@
 #include <thread>
 #include <unordered_map>
 #include <ostream>
+#include <cmath>
+#include <cstdint>
+#include <cstdio>
+#include <random>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "../transcoder/basisu.h"
+#include "../transcoder/basisu_transcoder_internal.h"
 
 #if !defined(_WIN32) || defined(__MINGW32__)
 #include <libgen.h>

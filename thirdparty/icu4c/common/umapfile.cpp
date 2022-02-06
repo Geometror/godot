@@ -9,20 +9,6 @@
 ******************************************************************************/
 
 
-/*----------------------------------------------------------------------------
- *
- *       Memory mapped file wrappers for use by the ICU Data Implementation
- *       All of the platform-specific implementation for mapping data files
- *         is here.  The rest of the ICU Data implementation uses only the
- *         wrapper functions.
- *
- *----------------------------------------------------------------------------*/
-/* Defines _XOPEN_SOURCE for access to POSIX functions.
- * Must be before any other #includes. */
-#include "uposixdefs.h"
-
-#include "unicode/putil.h"
-#include "unicode/ustring.h"
 #include "udatamem.h"
 #include "umapfile.h"
 
@@ -80,9 +66,11 @@ typedef HANDLE MemoryMap;
 #   if MAP_IMPLEMENTATION==MAP_390DLL
         /*   No memory mapping for 390 batch mode.  Fake it using dll loading.  */
 #       include <dll.h>
+
 #       include "cstring.h"
 #       include "cmemory.h"
 #       include "unicode/udata.h"
+
 #       define LIB_PREFIX "lib"
 #       define LIB_SUFFIX ".dll"
         /* This is inconvenient until we figure out what to do with U_ICUDATA_NAME in utypes.h */
@@ -90,6 +78,7 @@ typedef HANDLE MemoryMap;
 #   endif
 #elif MAP_IMPLEMENTATION==MAP_STDIO
 #   include <stdio.h>
+
 #   include "cmemory.h"
 
     typedef void *MemoryMap;

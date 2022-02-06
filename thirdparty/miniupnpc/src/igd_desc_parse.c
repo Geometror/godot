@@ -7,7 +7,7 @@
  * LICENCE file provided in this distribution. */
 
 #include "igd_desc_parse.h"
-#include <stdio.h>
+
 #include <string.h>
 
 /* Start element handler :

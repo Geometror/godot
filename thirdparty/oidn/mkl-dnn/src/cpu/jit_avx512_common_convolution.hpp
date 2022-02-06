@@ -17,18 +17,26 @@
 #ifndef CPU_JIT_AVX512_COMMON_CONVOLUTION_HPP
 #define CPU_JIT_AVX512_COMMON_CONVOLUTION_HPP
 
+#include <assert.h>
+#include <stddef.h>
+
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
 #include "mkldnn_thread.hpp"
 #include "utils.hpp"
-
 #include "cpu_barrier.hpp"
 #include "cpu_convolution_pd.hpp"
 #include "cpu_primitive.hpp"
 #include "cpu_reducer.hpp"
-
 #include "jit_transpose_src_utils.hpp"
 #include "jit_avx512_common_conv_kernel.hpp"
+#include "convolution_pd.hpp"
+#include "cpu_isa_traits.hpp"
+#include "jit_primitive_conf.hpp"
+#include "mkldnn_traits.hpp"
+#include "mkldnn_types.h"
+#include "primitive_desc.hpp"
+#include "primitive_exec_types.hpp"
 
 namespace mkldnn {
 namespace impl {
@@ -276,6 +284,7 @@ private:
     void execute_backward_weights(const exec_ctx_t &ctx) const;
     void prepare_scratchpad_data(const exec_ctx_t &ctx) const;
     struct thread_info_t;
+
     void compute_diff_weights(const thread_info_t *) const;
     void compute_diff_weights_3d(const thread_info_t *) const;
     void reduce_diff_weights(const thread_info_t *) const;

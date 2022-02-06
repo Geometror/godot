@@ -17,11 +17,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-#include <algorithm>
-#include <fstream>
+#include <assert.h>
+#include <stdint.h>
+#include <stdio.h>
 #include <iomanip>
 #include <limits>
 #include <sstream>
+#include <cmath>
+#include <string>
+#include <utility>
 #if _OPENMP
 #include <omp.h>
 #endif // _OPENMP
@@ -35,7 +39,11 @@
 #include "vhacdVHACD.h"
 #include "vhacdVector.h"
 #include "vhacdVolume.h"
-#include "FloatMath.h"
+#include "btAlignedObjectArray.h"
+#include "btVector3.h"
+#include "vhacdManifoldMesh.h"
+#include "vhacdRaycastMesh.h"
+#include "vhacdVector.inl"
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 #define MIN(a, b) (((a) < (b)) ? (a) : (b))

@@ -3,9 +3,11 @@
 
 #include <cstdlib>
 #include <cstdio>
+
 #include "Shape.h"
 
 namespace msdfgen {
+class Shape;
 
 /// Deserializes a text description of a vector shape into output.
 bool readShapeDescription(FILE *input, Shape &output, bool *colorsSpecified = NULL);

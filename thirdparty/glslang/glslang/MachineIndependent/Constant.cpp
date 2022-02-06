@@ -36,11 +36,21 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
-#include "localintermediate.h"
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/intermediate.h>
 #include <cmath>
-#include <cfloat>
 #include <cstdlib>
 #include <climits>
+#include <algorithm>
+#include <memory>
+#include <vector>
+
+#include "localintermediate.h"
 
 namespace {
 

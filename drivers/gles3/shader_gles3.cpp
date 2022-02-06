@@ -29,11 +29,17 @@
 /*************************************************************************/
 
 #include "shader_gles3.h"
+
+#include "core/error/error_list.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/string_builder.h"
+#include "core/templates/list.h"
+#include "core/templates/pair.h"
+#include "glad/glad.h"
 #ifdef GLES3_ENABLED
 
-#include "core/io/compression.h"
 #include "core/io/dir_access.h"
-#include "core/io/file_access.h"
 
 void ShaderGLES3::_add_stage(const char *p_code, StageType p_stage_type) {
 	Vector<String> lines = String(p_code).split("\n");

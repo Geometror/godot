@@ -16,10 +16,11 @@
 
 #include "c_types_map.hpp"
 #include "mkldnn_thread.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "jit_avx512_common_convolution.hpp"
+#include "cpu_barrier.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "nstl.hpp"
 
 namespace mkldnn {
 namespace impl {

@@ -32,6 +32,14 @@
 #define SCROLL_BAR_H
 
 #include "scene/gui/range.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/node_path.h"
+
+class InputEvent;
+class Node;
 
 class ScrollBar : public Range {
 	GDCLASS(ScrollBar, Range);

@@ -33,6 +33,17 @@
 #include "core/io/marshalls.h"
 #include "scene/main/node.h"
 #include "scene/main/window.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/multiplayer/multiplayer_peer.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "scene/main/scene_tree.h"
 
 MultiplayerCacheInterface *SceneCacheInterface::_create(MultiplayerAPI *p_multiplayer) {
 	return memnew(SceneCacheInterface(p_multiplayer));

@@ -26,15 +26,19 @@
  */
 
 
-#include "unicode/putil.h"
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/ustring.h"
 #include "unicode/utf.h"
 #include "unicode/utf8.h"
 #include "unicode/utf16.h"
 #include "cstring.h"
-#include "cmemory.h"
 #include "ustr_imp.h"
-#include "uassert.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
 
 U_CAPI UChar* U_EXPORT2 
 u_strFromUTF32WithSub(UChar *dest,

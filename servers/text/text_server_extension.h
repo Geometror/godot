@@ -31,11 +31,30 @@
 #ifndef TEXT_SERVER_EXTENSION_H
 #define TEXT_SERVER_EXTENSION_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/object/gdvirtual.gen.inc"
 #include "core/object/script_language.h"
 #include "core/os/thread_safe.h"
 #include "core/variant/native_ptr.h"
 #include "servers/text_server.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+
+class Image;
 
 class TextServerExtension : public TextServer {
 	GDCLASS(TextServerExtension, TextServer);

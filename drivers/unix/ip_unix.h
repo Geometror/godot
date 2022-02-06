@@ -32,6 +32,12 @@
 #define IP_UNIX_H
 
 #include "core/io/ip.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+
+struct IPAddress;
 
 #if defined(UNIX_ENABLED) || defined(WINDOWS_ENABLED)
 

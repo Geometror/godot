@@ -17,9 +17,10 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_PEM_PARSE_C) || defined(MBEDTLS_PEM_WRITE_C)
+
+#include <string.h>
 
 #include "mbedtls/pem.h"
 #include "mbedtls/base64.h"
@@ -30,12 +31,11 @@
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
 
-#include <string.h>
-
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free
 #endif

@@ -8,10 +8,9 @@
 * sharedobject.cpp
 */
 #include "sharedobject.h"
-#include "mutex.h"
+
 #include "uassert.h"
 #include "umutex.h"
-#include "unifiedcache.h"
 
 U_NAMESPACE_BEGIN
 

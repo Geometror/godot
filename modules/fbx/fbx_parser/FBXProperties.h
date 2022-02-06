@@ -76,11 +76,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef FBX_PROPERTIES_H
 #define FBX_PROPERTIES_H
 
-#include "FBXParser.h"
 #include <map>
 #include <memory>
 #include <string>
 #include <vector>
+
+#include "FBXParser.h"
 
 namespace FBXDocParser {
 

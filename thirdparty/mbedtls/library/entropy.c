@@ -17,8 +17,8 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
+#include "mbedtls/sha512.h"
 #if defined(MBEDTLS_ENTROPY_C)
 
 #if defined(MBEDTLS_TEST_NULL_ENTROPY)
@@ -27,12 +27,12 @@
 #warning "**** THIS BUILD IS *NOT* SUITABLE FOR PRODUCTION USE "
 #endif
 
+#include <string.h>
+
 #include "mbedtls/entropy.h"
 #include "mbedtls/entropy_poll.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_FS_IO)
 #include <stdio.h>
@@ -47,6 +47,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf     printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

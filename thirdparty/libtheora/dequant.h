@@ -19,6 +19,7 @@
 # define _dequant_H (1)
 # include "quant.h"
 # include "bitpack.h"
+#include "theora/codec.h"
 
 int oc_quant_params_unpack(oc_pack_buf *_opb,
  th_quant_info *_qinfo);

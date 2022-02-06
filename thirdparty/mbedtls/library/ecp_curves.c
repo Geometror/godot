@@ -17,18 +17,20 @@
  *  limitations under the License.
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_ECP_C)
+
+#include <string.h>
 
 #include "mbedtls/ecp.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
 #include "mbedtls/bn_mul.h"
-
-#include "ecp_invasive.h"
-
-#include <string.h>
 
 #if !defined(MBEDTLS_ECP_ALT)
 

@@ -2,7 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh_statistics.h"
+
+#include <assert.h>
+#include <stdlib.h>
+
 #include "../../common/algorithms/parallel_reduce.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/bvh/bvh_node_ref.h"
+#include "kernels/geometry/primitive.h"
 
 namespace embree
 {

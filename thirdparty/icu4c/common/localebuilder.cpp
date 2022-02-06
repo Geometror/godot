@@ -1,7 +1,7 @@
 // © 2019 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 
-#include <utility>
+#include <stdint.h>
 
 #include "bytesinkutil.h"  // CharStringByteSink
 #include "charstr.h"
@@ -9,6 +9,16 @@
 #include "ulocimp.h"
 #include "unicode/localebuilder.h"
 #include "unicode/locid.h"
+#include "cmemory.h"
+#include "unicode/localpointer.h"
+#include "unicode/strenum.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uloc.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

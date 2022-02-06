@@ -19,9 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <alloca.h>
+#include <float.h>
+#include <math.h>
+#include <stdint.h>
+
 #include "tvgMath.h"
-#include "tvgRender.h"
 #include "tvgSwCommon.h"
+#include "thorvg.h"
+#include "tvgCommon.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */
@@ -61,8 +67,6 @@ static inline uint32_t _argbJoin(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 
 #include "tvgSwRasterTexmap.h"
 #include "tvgSwRasterC.h"
-#include "tvgSwRasterAvx.h"
-#include "tvgSwRasterNeon.h"
 
 
 static inline bool _compositing(const SwSurface* surface)

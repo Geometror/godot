@@ -18,9 +18,9 @@
 #define PRIMITIVE_EXEC_TYPES_HPP
 
 #include <unordered_map>
+#include <utility>
 
 #include "mkldnn_types.h"
-
 #include "c_types_map.hpp"
 #include "memory.hpp"
 #include "primitive_desc.hpp"

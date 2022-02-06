@@ -30,11 +30,15 @@
 
 #include "image_loader_jpegd.h"
 
-#include "core/os/os.h"
-#include "core/string/print_string.h"
-
 #include <jpgd.h>
 #include <string.h>
+#include <stdint.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 Error jpeg_load_image_from_buffer(Image *p_image, const uint8_t *p_buffer, int p_buffer_len) {
 	jpgd::jpeg_decoder_mem_stream mem_stream(p_buffer, p_buffer_len);

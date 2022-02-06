@@ -14,11 +14,20 @@
 *   created by: Markus W. Scherer
 */
 
-#include "utypeinfo.h"  // for 'typeid' to work
+#include <stddef.h>
+#include <stdint.h>
+#include <typeinfo>
+
 #include "unicode/utypes.h"
 #include "unicode/stringtriebuilder.h"
 #include "uassert.h"
 #include "uhash.h"
+#include "cmemory.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_CDECL_BEGIN
 

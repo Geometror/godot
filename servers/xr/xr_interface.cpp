@@ -29,6 +29,10 @@
 /*************************************************************************/
 
 #include "xr_interface.h"
+
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "servers/xr_server.h"
 // #include "servers/rendering/renderer_compositor.h"
 
 void XRInterface::_bind_methods() {

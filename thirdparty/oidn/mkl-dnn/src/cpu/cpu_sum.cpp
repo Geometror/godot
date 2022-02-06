@@ -15,6 +15,7 @@
 *******************************************************************************/
 
 #include "cpu_engine.hpp"
+#include "c_types_map.hpp"
 
 /*
 #include "cpu/ref_sum.hpp"

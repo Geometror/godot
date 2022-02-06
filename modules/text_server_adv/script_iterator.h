@@ -31,16 +31,18 @@
 #ifndef SCRIPT_ITERATOR_H
 #define SCRIPT_ITERATOR_H
 
-#include "servers/text_server.h"
-
 #include <unicode/uchar.h>
 #include <unicode/uloc.h>
 #include <unicode/uscript.h>
 #include <unicode/ustring.h>
 #include <unicode/utypes.h>
-
 #include <hb-icu.h>
 #include <hb.h>
+#include <stdint.h>
+
+#include "servers/text_server.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 class ScriptIterator {
 	static const int PAREN_STACK_DEPTH = 128;

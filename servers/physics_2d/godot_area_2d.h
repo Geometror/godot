@@ -31,14 +31,25 @@
 #ifndef GODOT_AREA_2D_H
 #define GODOT_AREA_2D_H
 
-#include "godot_collision_object_2d.h"
+#include <stdint.h>
 
+#include "godot_collision_object_2d.h"
 #include "core/templates/self_list.h"
 #include "servers/physics_server_2d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object_id.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
 
 class GodotSpace2D;
 class GodotBody2D;
 class GodotConstraint2D;
+struct Transform2D;
 
 class GodotArea2D : public GodotCollisionObject2D {
 	PhysicsServer2D::AreaSpaceOverrideMode gravity_override_mode = PhysicsServer2D::AREA_SPACE_OVERRIDE_DISABLED;

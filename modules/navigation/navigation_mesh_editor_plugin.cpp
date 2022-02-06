@@ -31,11 +31,19 @@
 #ifdef TOOLS_ENABLED
 #include "navigation_mesh_editor_plugin.h"
 
-#include "core/io/marshalls.h"
-#include "core/io/resource_saver.h"
 #include "navigation_mesh_generator.h"
-#include "scene/3d/mesh_instance_3d.h"
 #include "scene/gui/box_container.h"
+#include "core/error/error_macros.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "editor/editor_node.h"
+#include "scene/3d/navigation_region_3d.h"
+#include "scene/gui/button.h"
+#include "scene/gui/dialogs.h"
+#include "scene/gui/label.h"
+#include "scene/main/node.h"
 
 void NavigationMeshEditor::_node_removed(Node *p_node) {
 	if (p_node == node) {

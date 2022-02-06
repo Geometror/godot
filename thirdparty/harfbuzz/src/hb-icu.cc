@@ -27,19 +27,24 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <assert.h>
+
 #include "hb.hh"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uscript.h"
+#include "unicode/utf.h"
+#include "unicode/utypes.h"
+#include "unicode/uvernum.h"
 
 #ifdef HAVE_ICU
-
-#include "hb-icu.h"
-
-#include "hb-machinery.hh"
 
 #include <unicode/uchar.h>
 #include <unicode/unorm2.h>
 #include <unicode/ustring.h>
-#include <unicode/utf16.h>
-#include <unicode/uversion.h>
+
+#include "hb-icu.h"
+#include "hb-machinery.hh"
 
 /* ICU extra semicolon, fixed since 65, https://github.com/unicode-org/icu/commit/480bec3 */
 #if U_ICU_VERSION_MAJOR_NUM < 65 && (defined(__GNUC__) || defined(__clang__))

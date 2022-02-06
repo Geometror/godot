@@ -30,7 +30,16 @@
 
 #include "websocket_multiplayer_peer.h"
 
-#include "core/os/os.h"
+#include <string.h>
+
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/websocket/websocket_peer.h"
 
 WebSocketMultiplayerPeer::WebSocketMultiplayerPeer() {
 }

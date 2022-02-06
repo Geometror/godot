@@ -30,7 +30,10 @@
 
 #include "register_types.h"
 
-#include "ogg_packet_sequence.h"
+#include "core/object/class_db.h"
+
+class OGGPacketSequence;
+class OGGPacketSequencePlayback;
 
 void register_ogg_types() {
 	GDREGISTER_CLASS(OGGPacketSequence);

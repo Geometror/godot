@@ -16,7 +16,21 @@
 *   created by: Markus W. Scherer
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "umutex.h"
+#include "unicode/bytestream.h"
+#include "unicode/char16ptr.h"
+#include "unicode/platform.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uchar.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unorm2.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
@@ -24,12 +38,8 @@
 #include "unicode/normalizer2.h"
 #include "unicode/stringoptions.h"
 #include "unicode/unistr.h"
-#include "unicode/unorm.h"
-#include "cstring.h"
-#include "mutex.h"
 #include "norm2allmodes.h"
 #include "normalizer2impl.h"
-#include "uassert.h"
 #include "ucln_cmn.h"
 
 using icu::Normalizer2Impl;

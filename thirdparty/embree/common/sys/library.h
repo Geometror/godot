@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "platform.h"
 
 namespace embree

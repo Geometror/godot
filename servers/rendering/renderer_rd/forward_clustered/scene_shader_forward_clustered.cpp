@@ -29,9 +29,16 @@
 /*************************************************************************/
 
 #include "scene_shader_forward_clustered.h"
+
 #include "core/config/project_settings.h"
 #include "core/math/math_defs.h"
 #include "render_forward_clustered.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
 
 using namespace RendererSceneRenderImplementation;
 

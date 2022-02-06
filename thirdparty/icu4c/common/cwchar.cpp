@@ -16,8 +16,7 @@
 *   created by: Markus W. Scherer
 */
 
-#include "unicode/utypes.h"
-
+#include "unicode/platform.h"
 #if !U_HAVE_WCSCPY
 
 #include "cwchar.h"

@@ -1,8 +1,7 @@
 // © 2019 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 
-#include "unicode/utypes.h"
-
+#include "unicode/uconfig.h"
 #if U_ENABLE_TRACING
 
 #include "restrace.h"

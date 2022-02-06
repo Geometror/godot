@@ -33,6 +33,8 @@
 
 #include "core/string/node_path.h"
 #include "core/string/string_name.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
 
 class SceneStringNames {
 	friend void register_scene_types();

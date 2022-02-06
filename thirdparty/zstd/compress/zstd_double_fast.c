@@ -10,6 +10,10 @@
 
 #include "zstd_compress_internal.h"
 #include "zstd_double_fast.h"
+#include "../common/zstd_internal.h"
+#include "compiler.h"
+#include "debug.h"
+#include "mem.h"
 
 
 void ZSTD_fillDoubleHashTable(ZSTD_matchState_t* ms,

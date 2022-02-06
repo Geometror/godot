@@ -7,19 +7,40 @@
 *******************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "uelement.h"
+#include "unicode/brkiter.h"
+#include "unicode/localpointer.h"
+#include "unicode/locid.h"
+#include "unicode/platform.h"
+#include "unicode/stringtriebuilder.h"
+#include "unicode/ubrk.h"
+#include "unicode/ucharstrie.h"
+#include "unicode/uconfig.h"
+#include "unicode/uloc.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/ustringtrie.h"
+#include "unicode/utext.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class CharacterIterator;
+}  // namespace icu_70
 #if !UCONFIG_NO_BREAK_ITERATION && !UCONFIG_NO_FILTERED_BREAK_ITERATION
 
 #include "cmemory.h"
-
 #include "unicode/filteredbrk.h"
 #include "unicode/ucharstriebuilder.h"
 #include "unicode/ures.h"
-
 #include "uresimp.h" // ures_getByKeyWithFallback
 #include "ubrkimpl.h" // U_ICUDATA_BRKITR
 #include "uvector.h"
-#include "cmemory.h"
 #include "umutex.h"
 
 U_NAMESPACE_BEGIN
@@ -30,6 +51,7 @@ U_NAMESPACE_BEGIN
 
 #if FB_DEBUG
 #include <stdio.h>
+
 static void _fb_trace(const char *m, const UnicodeString *s, UBool b, int32_t d, const char *f, int l) {
   char buf[2048];
   if(s) {

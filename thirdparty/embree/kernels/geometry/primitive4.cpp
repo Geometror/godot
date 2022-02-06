@@ -1,7 +1,8 @@
 // Copyright 2009-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
-#include "primitive.h"
+#include <stddef.h>
+
 #include "curveNv.h"
 #include "curveNi.h"
 #include "curveNi_mb.h"
@@ -16,6 +17,7 @@
 #include "object.h"
 #include "instance.h"
 #include "subgrid.h"
+#include "kernels/common/geometry.h"
 
 namespace embree
 {

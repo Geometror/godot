@@ -30,7 +30,11 @@
 
 #include "gdnative/string_name.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/string/string_name.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
 
 static_assert(sizeof(godot_string_name) == sizeof(StringName), "StringName size mismatch");
 

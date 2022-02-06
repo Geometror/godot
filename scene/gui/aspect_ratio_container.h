@@ -32,6 +32,9 @@
 #define ASPECT_RATIO_CONTAINER_H
 
 #include "scene/gui/container.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/variant/binder_common.h"
 
 class AspectRatioContainer : public Container {
 	GDCLASS(AspectRatioContainer, Container);

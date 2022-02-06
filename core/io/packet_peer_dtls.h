@@ -33,6 +33,14 @@
 
 #include "core/crypto/crypto.h"
 #include "core/io/packet_peer_udp.h"
+#include "core/error/error_list.h"
+#include "core/io/packet_peer.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
+
+class PacketPeerUDP;
 
 class PacketPeerDTLS : public PacketPeer {
 	GDCLASS(PacketPeerDTLS, PacketPeer);

@@ -30,12 +30,26 @@
 
 #include "renderer_canvas_render_rd.h"
 
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "core/math/geometry_2d.h"
 #include "core/math/math_defs.h"
 #include "core/math/math_funcs.h"
 #include "renderer_compositor_rd.h"
 #include "servers/rendering/rendering_server_default.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
 
 void RendererCanvasRenderRD::_update_transform_2d_to_mat4(const Transform2D &p_transform, float *p_mat4) {
 	p_mat4[0] = p_transform.elements[0][0];

@@ -3,11 +3,46 @@
 
 #define RTC_EXPORT_API
 
-#include "default.h"
+#include <assert.h>
+#include <stdlib.h>
+#include <sys/types.h>
+
 #include "device.h"
 #include "scene.h"
 #include "context.h"
 #include "../../include/embree3/rtcore_ray.h"
+#include "common/math/affinespace.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/math/lbbox.h"
+#include "common/math/linearspace3.h"
+#include "common/math/math.h"
+#include "common/math/quaternion.h"
+#include "common/math/vec3.h"
+#include "common/math/vec3fa.h"
+#include "common/sys/mutex.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
+#include "embree3/rtcore_buffer.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_config.h"
+#include "embree3/rtcore_device.h"
+#include "embree3/rtcore_geometry.h"
+#include "embree3/rtcore_quaternion.h"
+#include "embree3/rtcore_scene.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/accelset.h"
+#include "kernels/common/buffer.h"
+#include "kernels/common/geometry.h"
+#include "kernels/common/isa.h"
+#include "kernels/common/point_query.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/scene_triangle_mesh.h"
+#include "kernels/common/stat.h"
+#include "kernels/config.h"
+
+struct RTCRayN;
+
 using namespace embree;
 
 RTC_NAMESPACE_BEGIN;

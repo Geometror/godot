@@ -40,8 +40,24 @@
 #include "scene/gui/menu_button.h"
 #include "scene/gui/option_button.h"
 #include "scene/gui/popup_menu.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 class ImportDockParameters;
+class Button;
+class ConfirmationDialog;
+class Control;
+class EditorInspector;
+class Label;
+class MenuButton;
+class OptionButton;
+
 class ImportDock : public VBoxContainer {
 	GDCLASS(ImportDock, VBoxContainer);
 

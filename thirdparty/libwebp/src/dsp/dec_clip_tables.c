@@ -11,6 +11,8 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include <stdint.h>
+
 #include "src/dsp/dsp.h"
 
 // define to 0 to have run-time table initialization

@@ -32,6 +32,13 @@
 #define GODOT_BODY_DIRECT_STATE_3D_H
 
 #include "servers/physics_server_3d.h"
+#include "core/math/basis.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/templates/rid.h"
 
 class GodotBody3D;
 

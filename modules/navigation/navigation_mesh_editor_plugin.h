@@ -31,6 +31,16 @@
 #ifndef NAVIGATION_MESH_EDITOR_PLUGIN_H
 #define NAVIGATION_MESH_EDITOR_PLUGIN_H
 
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "scene/gui/control.h"
+
+class AcceptDialog;
+class Button;
+class EditorNode;
+class HBoxContainer;
+class Label;
+class Node;
 #ifdef TOOLS_ENABLED
 
 #include "editor/editor_node.h"

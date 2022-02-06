@@ -31,10 +31,17 @@
 #ifndef GODOT_STEP_3D_H
 #define GODOT_STEP_3D_H
 
-#include "godot_space_3d.h"
+#include <stdint.h>
 
+#include "godot_space_3d.h"
 #include "core/templates/local_vector.h"
 #include "core/templates/thread_work_pool.h"
+#include "core/math/math_defs.h"
+
+class GodotBody3D;
+class GodotConstraint3D;
+class GodotSoftBody3D;
+class GodotSpace3D;
 
 class GodotStep3D {
 	uint64_t _step = 1;

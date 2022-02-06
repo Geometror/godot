@@ -2,12 +2,20 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "sysinfo.h"
+
+#include <assert.h>
+#include <sched.h>
+#include <stdint.h>
+#include <string.h>
+#include <fstream>
+
 #include "intrinsics.h"
-#include "string.h"
 #include "ref.h"
+#include "common/sys/platform.h"
 #if defined(__FREEBSD__)
 #include <sys/cpuset.h>
 #include <pthread_np.h>
+
 typedef cpuset_t cpu_set_t;
 #endif
 
@@ -506,7 +514,6 @@ namespace embree
 
 #if defined(__LINUX__)
 
-#include <stdio.h>
 #include <unistd.h>
 
 namespace embree
@@ -608,7 +615,6 @@ namespace embree
 
 #if defined(__UNIX__)
 
-#include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/time.h>
 #include <pthread.h>

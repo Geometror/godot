@@ -33,6 +33,14 @@
 
 #include "editor/debugger/editor_debugger_server.h"
 #include "modules/websocket/websocket_server.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+
+class RemoteDebuggerPeer;
+class WebSocketServer;
 
 class EditorDebuggerServerWebSocket : public EditorDebuggerServer {
 	GDCLASS(EditorDebuggerServerWebSocket, EditorDebuggerServer);

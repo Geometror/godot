@@ -5,11 +5,10 @@
 // created: 2019may08 Markus W. Scherer
 
 #include <utility>
+
 #include "unicode/utypes.h"
 #include "unicode/bytestrie.h"
-#include "unicode/localpointer.h"
 #include "unicode/locid.h"
-#include "unicode/uobject.h"
 #include "unicode/ures.h"
 #include "charstr.h"
 #include "cstring.h"
@@ -17,12 +16,17 @@
 #include "lsr.h"
 #include "uassert.h"
 #include "ucln_cmn.h"
-#include "uhash.h"
 #include "uinvchar.h"
 #include "umutex.h"
 #include "uniquecharstr.h"
 #include "uresdata.h"
 #include "uresimp.h"
+#include "cmemory.h"
+#include "resource.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/ustringtrie.h"
 
 U_NAMESPACE_BEGIN
 

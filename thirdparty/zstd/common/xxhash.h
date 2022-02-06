@@ -44,6 +44,10 @@ XXH64       13.8 GB/s            1.9 GB/s
 XXH32        6.8 GB/s            6.0 GB/s
 */
 
+#include <stddef.h>
+
+struct XXH32_state_s;
+struct XXH64_state_s;
 #if defined (__cplusplus)
 extern "C" {
 #endif
@@ -56,6 +60,7 @@ extern "C" {
 *  Definitions
 ******************************/
 #include "zstd_deps.h"
+
 typedef enum { XXH_OK=0, XXH_ERROR } XXH_errorcode;
 
 

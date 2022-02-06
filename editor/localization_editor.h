@@ -35,6 +35,16 @@
 #include "editor_file_dialog.h"
 #include "editor_locale_dialog.h"
 #include "scene/gui/tree.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "scene/gui/box_container.h"
+
+class Button;
+class EditorFileDialog;
+class EditorLocaleDialog;
+class Tree;
+class UndoRedo;
 
 class LocalizationEditor : public VBoxContainer {
 	GDCLASS(LocalizationEditor, VBoxContainer);

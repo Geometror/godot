@@ -50,13 +50,15 @@
 
 #define _USE_MATH_DEFINES       //Math Constants are not defined in Standard C/C++.
 
-#include <cstring>
-#include <math.h>
-#include <clocale>
 #include <ctype.h>
-#include "tvgSvgLoaderCommon.h"
+#include <stdlib.h>
+#include <cstring>
+#include <clocale>
+#include <cmath>
+
 #include "tvgSvgPath.h"
 #include "tvgSvgUtil.h"
+#include "tvgArray.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

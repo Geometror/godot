@@ -17,10 +17,11 @@
  *  limitations under the License.
  */
 
-#include "common.h"
 
-#include "mbedtls/certs.h"
 
+#include <stddef.h>
+
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_CERTS_C)
 
 /*

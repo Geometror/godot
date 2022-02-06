@@ -5,11 +5,15 @@
 // created: 2017feb08 Markus W. Scherer
 
 #include "unicode/edits.h"
+
+#include <stddef.h>
+
 #include "unicode/unistr.h"
 #include "unicode/utypes.h"
 #include "cmemory.h"
 #include "uassert.h"
 #include "util.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

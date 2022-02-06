@@ -25,8 +25,7 @@
 *   06/28/2000  helena           Major rewrite for the callback API changes.
 */
 
-#include "unicode/utypes.h"
-
+#include "unicode/uconfig.h"
 #if !UCONFIG_NO_CONVERSION && !UCONFIG_NO_LEGACY_CONVERSION && !UCONFIG_ONLY_HTML_CONVERSION
 
 #include "unicode/ucnv_err.h"

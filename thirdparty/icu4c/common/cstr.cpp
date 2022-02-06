@@ -7,14 +7,14 @@
 *******************************************************************************
 *   file name:  charstr.cpp
 */
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
-#include "unicode/putil.h"
 #include "unicode/unistr.h"
-
 #include "cstr.h"
-
 #include "charstr.h"
-#include "uinvchar.h"
+#include "unicode/platform.h"
 
 U_NAMESPACE_BEGIN
 

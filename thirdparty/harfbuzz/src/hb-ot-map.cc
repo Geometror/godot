@@ -27,6 +27,7 @@
  */
 
 #include "hb.hh"
+#include "hb-set.hh"
 
 #ifndef HB_NO_OT_SHAPE
 

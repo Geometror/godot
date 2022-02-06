@@ -11,9 +11,11 @@
 **********************************************************************
 */
 #include "unicode/ucat.h"
+
+#include <stddef.h>
+
 #include "unicode/ustring.h"
 #include "cstring.h"
-#include "uassert.h"
 
 /* Separator between set_num and msg_num */
 static const char SEPARATOR = '%';

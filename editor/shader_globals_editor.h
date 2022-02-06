@@ -38,8 +38,15 @@
 #include "editor/editor_sectioned_inspector.h"
 #include "scene/gui/dialogs.h"
 #include "scene/gui/tab_container.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "scene/gui/box_container.h"
 
 class ShaderGlobalsEditorInterface;
+class Button;
+class EditorInspector;
+class LineEdit;
+class OptionButton;
 
 class ShaderGlobalsEditor : public VBoxContainer {
 	GDCLASS(ShaderGlobalsEditor, VBoxContainer)

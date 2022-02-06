@@ -31,6 +31,17 @@
 #include "core/templates/local_vector.h"
 #include "scene/3d/skeleton_3d.h"
 #include "scene/resources/skeleton_modification_3d.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/string/node_path.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/variant.h"
+
+class Node3D;
+class SkeletonModificationStack3D;
 
 #ifndef SKELETONMODIFICATION3DCCDIK_H
 #define SKELETONMODIFICATION3DCCDIK_H

@@ -22,7 +22,14 @@
 #ifndef __UINVCHAR_H__
 #define __UINVCHAR_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "cstring.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 #ifdef __cplusplus
 #include "unicode/unistr.h"
 #endif

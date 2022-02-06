@@ -29,8 +29,10 @@
 /*************************************************************************/
 
 #include "register_types.h"
+
 #include "core/object/class_db.h"
-#include "jsonrpc.h"
+
+class JSONRPC;
 
 void register_jsonrpc_types() {
 	GDREGISTER_CLASS(JSONRPC);

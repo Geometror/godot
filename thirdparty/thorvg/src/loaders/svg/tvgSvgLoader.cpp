@@ -51,15 +51,25 @@
 
 #define _USE_MATH_DEFINES       //Math Constants are not defined in Standard C/C++.
 
+#include <float.h>
+#include <ctype.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <strings.h>
 #include <cstring>
 #include <fstream>
-#include <float.h>
-#include <math.h>
-#include "tvgLoader.h"
+#include <cmath>
+#include <utility>
+
 #include "tvgXmlParser.h"
 #include "tvgSvgLoader.h"
 #include "tvgSvgSceneBuilder.h"
 #include "tvgSvgUtil.h"
+#include "thorvg.h"
+#include "tvgArray.h"
+#include "tvgCommon.h"
+
+struct ;
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

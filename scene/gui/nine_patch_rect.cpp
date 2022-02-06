@@ -32,6 +32,12 @@
 
 #include "scene/scene_string_names.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/templates/rid.h"
+#include "core/variant/variant.h"
+#include "scene/main/canvas_item.h"
+#include "scene/resources/texture.h"
 
 void NinePatchRect::_notification(int p_what) {
 	if (p_what == NOTIFICATION_DRAW) {

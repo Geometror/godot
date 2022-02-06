@@ -28,13 +28,17 @@
 #define HB_SUBSET_HH
 
 
+#include <utility>
+
 #include "hb.hh"
-
 #include "hb-subset.h"
-
 #include "hb-machinery.hh"
 #include "hb-subset-input.hh"
 #include "hb-subset-plan.hh"
+#include "hb-dispatch.hh"
+#include "hb.h"
+
+struct hb_serialize_context_t;
 
 struct hb_subset_context_t :
        hb_dispatch_context_t<hb_subset_context_t, bool, HB_DEBUG_SUBSET>

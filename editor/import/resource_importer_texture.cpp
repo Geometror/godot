@@ -32,9 +32,20 @@
 
 #include "core/io/config_file.h"
 #include "core/io/image_loader.h"
-#include "core/version.h"
 #include "editor/editor_file_system.h"
 #include "editor/editor_node.h"
+#include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/math/color.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+#include "scene/resources/texture.h"
 
 void ResourceImporterTexture::_texture_reimport_roughness(const Ref<StreamTexture2D> &p_tex, const String &p_normal_path, RS::TextureDetectRoughnessChannel p_channel) {
 	ERR_FAIL_COND(p_tex.is_null());

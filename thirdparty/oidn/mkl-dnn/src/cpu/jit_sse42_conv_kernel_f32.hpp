@@ -22,6 +22,8 @@
 #include "jit_generator.hpp"
 #include "jit_primitive_conf.hpp"
 #include "jit_uni_eltwise.hpp"
+#include "cpu_isa_traits.hpp"
+#include "memory_desc_wrapper.hpp"
 
 namespace mkldnn {
 namespace impl {

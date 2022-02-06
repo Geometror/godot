@@ -33,6 +33,12 @@
 
 #include "scene/2d/skeleton_2d.h"
 #include "scene/resources/skeleton_modification_stack_2d.h"
+#include "core/io/resource.h"
+#include "core/object/gdvirtual.gen.inc"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
 
 ///////////////////////////////////////
 // SkeletonModification2D

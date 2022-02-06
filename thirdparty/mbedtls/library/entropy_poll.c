@@ -22,9 +22,11 @@
 #define _GNU_SOURCE
 #endif
 
-#include "common.h"
-
 #include <string.h>
+#include <features.h>
+#include <syscall.h>
+
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_ENTROPY_C)
 
@@ -106,7 +108,6 @@ int mbedtls_platform_entropy_poll( void *data, unsigned char *output, size_t len
  */
 #if ((defined(__linux__) && defined(__GLIBC__)) || defined(__midipix__))
 #include <unistd.h>
-#include <sys/syscall.h>
 #if defined(SYS_getrandom)
 #define HAVE_GETRANDOM
 #include <errno.h>
@@ -130,6 +131,7 @@ static int getrandom_wrapper( void *buf, size_t buflen, unsigned int flags )
     (defined(__DragonFly__) && __DragonFly_version >= 500700)
 #include <errno.h>
 #include <sys/random.h>
+
 #define HAVE_GETRANDOM
 static int getrandom_wrapper( void *buf, size_t buflen, unsigned int flags )
 {

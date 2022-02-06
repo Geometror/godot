@@ -32,13 +32,23 @@
 
 #include "core/os/os.h"
 #include "servers/rendering_server.h"
-#include "texture_basisu.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
 
 #ifdef TOOLS_ENABLED
 #include <encoder/basisu_comp.h>
 #endif
 
 #include <transcoder/basisu_transcoder.h>
+#include <encoder/basisu_enc.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_containers.h>
+#include <transcoder/basisu_global_selector_palette.h>
 
 enum BasisDecompressFormat {
 	BASIS_DECOMPRESS_RG,

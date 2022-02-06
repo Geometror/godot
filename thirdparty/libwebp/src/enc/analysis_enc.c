@@ -14,10 +14,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdint.h>
 
 #include "src/enc/vp8i_enc.h"
-#include "src/enc/cost_enc.h"
 #include "src/utils/utils.h"
+#include "dec/common_dec.h"
+#include "dsp/dsp.h"
+#include "utils/thread_utils.h"
+#include "webp/encode.h"
+#include "webp/types.h"
 
 #define MAX_ITERS_K_MEANS  6
 

@@ -16,6 +16,9 @@
 #include <assert.h>
 #include <stdlib.h>
 
+#include "dsp/dsp.h"
+#include "webp/decode.h"
+
 //-----------------------------------------------------------------------------
 // Plain-C version
 

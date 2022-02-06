@@ -26,6 +26,7 @@
   #endif
 #endif
 
+#include <limits.h>
 #include <vector>
 #include <mutex>
 

@@ -21,17 +21,13 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_MD_C)
 
 #include "mbedtls/md.h"
 #include "mbedtls/md_internal.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include "mbedtls/md2.h"
-#include "mbedtls/md4.h"
 #include "mbedtls/md5.h"
 #include "mbedtls/ripemd160.h"
 #include "mbedtls/sha1.h"
@@ -42,6 +38,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free
 #endif

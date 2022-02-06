@@ -31,10 +31,14 @@
 #ifndef XML_PARSER_H
 #define XML_PARSER_H
 
+#include <stdint.h>
+
 #include "core/io/file_access.h"
 #include "core/object/ref_counted.h"
 #include "core/string/ustring.h"
 #include "core/templates/vector.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
 
 /*
   Based on irrXML (see their zlib license). Added mainly for compatibility with their Collada loader.

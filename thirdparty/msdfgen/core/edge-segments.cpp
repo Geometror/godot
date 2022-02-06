@@ -1,8 +1,13 @@
 
 #include "edge-segments.h"
 
+#include <math.h>
+
 #include "arithmetics.hpp"
 #include "equation-solver.h"
+#include "core/EdgeColor.h"
+#include "core/SignedDistance.h"
+#include "core/Vector2.h"
 
 namespace msdfgen {
 

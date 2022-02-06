@@ -31,6 +31,25 @@
 #ifndef RASTERIZER_SCENE_OPENGL_H
 #define RASTERIZER_SCENE_OPENGL_H
 
+#include <stdint.h>
+
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/typed_array.h"
+#include "servers/rendering/renderer_scene.h"
+
+class Image;
+struct Rect2;
+struct Rect2i;
+struct Transform3D;
+template <class T> class PagedArray;
 #ifdef GLES3_ENABLED
 
 #include "core/math/camera_matrix.h"

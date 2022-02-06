@@ -32,6 +32,12 @@
 #define REMOTE_TRANSFORM_2D_H
 
 #include "scene/2d/node_2d.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/string/node_path.h"
+#include "core/variant/typed_array.h"
+
+class String;
 
 class RemoteTransform2D : public Node2D {
 	GDCLASS(RemoteTransform2D, Node2D);

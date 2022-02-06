@@ -35,11 +35,15 @@
 
 #if !defined(GLSLANG_WEB) && !defined(GLSLANG_ANGLE)
 
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/MachineIndependent/LiveTraverser.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <stdlib.h>
+#include <memory>
+
 #include "../Include/Common.h"
 #include "../Include/InfoSink.h"
 #include "../Include/Types.h"
-
-#include "gl_types.h"
 #include "iomapper.h"
 #include "SymbolTable.h"
 

@@ -30,7 +30,11 @@
 
 #include "gdnative/transform_3d.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/math/transform_3d.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
 
 static_assert(sizeof(godot_transform3d) == sizeof(Transform3D), "Transform3D size mismatch");
 

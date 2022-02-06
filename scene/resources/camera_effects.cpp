@@ -31,6 +31,9 @@
 #include "camera_effects.h"
 
 #include "servers/rendering_server.h"
+#include "core/object/class_db.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
 
 RID CameraEffects::get_rid() const {
 	return camera_effects;

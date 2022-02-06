@@ -30,6 +30,14 @@
 
 #include "gjk_epa.h"
 
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/typedefs.h"
+#include "servers/physics_3d/godot_collision_solver_3d.h"
+#include "servers/physics_3d/godot_shape_3d.h"
+
 /* Disabling formatting for thirdparty code snippet */
 /* clang-format off */
 

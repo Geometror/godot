@@ -1,6 +1,8 @@
 
 #include "Projection.h"
 
+#include "core/Vector2.h"
+
 namespace msdfgen {
 
 Projection::Projection() : scale(1), translate(0) { }

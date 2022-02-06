@@ -2,8 +2,11 @@
 #ifndef __CVTT_BCCOMMON_H__
 #define __CVTT_BCCOMMON_H__
 
+#include <stdint.h>
+
 #include "ConvectionKernels_AggregatedError.h"
 #include "ConvectionKernels_ParallelMath.h"
+#include "ConvectionKernels.h"
 
 namespace cvtt
 {

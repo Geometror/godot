@@ -27,10 +27,13 @@
 #include <string.h>
 #include <assert.h>
 #include <stdio.h>
+#include <netinet/in.h>
+#include <stdlib.h>
 
 #include "wslay_frame.h"
-#include "wslay_net.h"
 #include "wslay_macro.h"
+#include "wslay/wslay.h"
+
 /* Start of utf8 dfa */
 /* Copyright (c) 2008-2010 Bjoern Hoehrmann <bjoern@hoehrmann.de>
  * See http://bjoern.hoehrmann.de/utf-8/decoder/dfa/ for details.

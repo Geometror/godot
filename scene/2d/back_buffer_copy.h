@@ -32,6 +32,9 @@
 #define BACKBUFFERCOPY_H
 
 #include "scene/2d/node_2d.h"
+#include "core/math/rect2.h"
+#include "core/object/object.h"
+#include "core/variant/binder_common.h"
 
 class BackBufferCopy : public Node2D {
 	GDCLASS(BackBufferCopy, Node2D);

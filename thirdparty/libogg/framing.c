@@ -127,6 +127,8 @@ static void _ogg_crc_init(){
 #endif
 
 #include "crctable.h"
+#include "ogg/config_types.h"
+#include "ogg/os_types.h"
 
 /* init the encode/decode logical stream state */
 

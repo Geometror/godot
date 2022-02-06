@@ -12,7 +12,18 @@
 #ifndef UNIFILT_H
 #define UNIFILT_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class Replaceable;
+class TransliterationRuleData;
+}  // namespace icu_70
 
 #if U_SHOW_CPLUSPLUS_API
 

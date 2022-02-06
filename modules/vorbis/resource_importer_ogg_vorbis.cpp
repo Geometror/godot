@@ -30,12 +30,22 @@
 
 #include "resource_importer_ogg_vorbis.h"
 
+#include <stdint.h>
+#include <string.h>
+
 #include "audio_stream_ogg_vorbis.h"
 #include "core/io/file_access.h"
 #include "core/io/resource_saver.h"
-#include "scene/resources/texture.h"
 #include "thirdparty/libogg/ogg/ogg.h"
 #include "thirdparty/libvorbis/vorbis/codec.h"
+#include "core/error/error_macros.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/ogg/ogg_packet_sequence.h"
 
 String ResourceImporterOGGVorbis::get_importer_name() const {
 	return "oggvorbisstr";

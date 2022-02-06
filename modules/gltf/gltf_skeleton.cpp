@@ -30,6 +30,14 @@
 
 #include "gltf_skeleton.h"
 
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "modules/gltf/gltf_document.h"
+
+class BoneAttachment3D;
+class Skeleton3D;
+
 void GLTFSkeleton::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_joints"), &GLTFSkeleton::get_joints);
 	ClassDB::bind_method(D_METHOD("set_joints", "joints"), &GLTFSkeleton::set_joints);

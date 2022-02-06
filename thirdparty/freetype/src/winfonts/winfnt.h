@@ -24,6 +24,11 @@
 #include <freetype/ftwinfnt.h>
 #include <freetype/internal/ftdrv.h>
 
+#include "freetype/config/ftheader.h"
+#include "freetype/freetype.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdrv.h"
+
 
 FT_BEGIN_HEADER
 

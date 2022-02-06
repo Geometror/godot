@@ -52,8 +52,34 @@
 #include "scene/gui/tab_container.h"
 #include "scene/gui/tree.h"
 #include "scene/main/timer.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
 
 class EditorNode;
+class Button;
+class CheckBox;
+class CheckButton;
+class Control;
+class EditorExportPreset;
+class EditorFileDialog;
+class EditorFileSystemDirectory;
+class EditorInspector;
+class EditorPropertyPath;
+class HBoxContainer;
+class ItemList;
+class Label;
+class LineEdit;
+class MarginContainer;
+class MenuButton;
+class OptionButton;
+class RichTextLabel;
+class TabContainer;
+class Tree;
+class TreeItem;
 
 class ProjectExportDialog : public ConfirmationDialog {
 	GDCLASS(ProjectExportDialog, ConfirmationDialog);

@@ -34,6 +34,9 @@
 #include "core/object/class_db.h"
 #include "core/string/ustring.h"
 #include "scene/gui/panel_container.h"
+#include "core/object/object.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
 
 class EditorVCSInterface : public Object {
 	GDCLASS(EditorVCSInterface, Object)

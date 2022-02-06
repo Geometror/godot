@@ -35,7 +35,6 @@
 #include "editor/editor_spin_slider.h"
 #include "editor/property_editor.h"
 #include "editor/property_selector.h"
-
 #include "scene/gui/control.h"
 #include "scene/gui/file_dialog.h"
 #include "scene/gui/menu_button.h"
@@ -46,10 +45,50 @@
 #include "scene/gui/texture_rect.h"
 #include "scene/resources/animation.h"
 #include "scene_tree_editor.h"
+#include "core/math/color.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/node_path.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+#include "scene/gui/box_container.h"
+#include "scene/gui/range.h"
+#include "scene/gui/view_panner.h"
+#include "scene/resources/texture.h"
 
 class AnimationPlayer;
 class AnimationTrackEdit;
 class ViewPanner;
+class Button;
+class CheckBox;
+class ConfirmationDialog;
+class EditorSpinSlider;
+class HScrollBar;
+class HSlider;
+class InputEvent;
+class Label;
+class LineEdit;
+class MenuButton;
+class Node3D;
+class Node;
+class OptionButton;
+class PanelContainer;
+class Popup;
+class PopupMenu;
+class PropertySelector;
+class SceneTreeDialog;
+class ScrollContainer;
+class SpinBox;
+class TextureRect;
+class Tree;
+class TreeItem;
+class UndoRedo;
 
 class AnimationTimelineEdit : public Range {
 	GDCLASS(AnimationTimelineEdit, Range);

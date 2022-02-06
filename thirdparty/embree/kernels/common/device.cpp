@@ -2,25 +2,29 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "device.h"
+
+#include <assert.h>
+#include <emmintrin.h>
+#include <xmmintrin.h>
+#include <iostream>
+#include <limits>
+#include <map>
+#include <string>
+
 #include "../hash.h"
-#include "scene_triangle_mesh.h"
-#include "scene_user_geometry.h"
-#include "scene_instance.h"
-#include "scene_curves.h"
-#include "scene_subdiv_mesh.h"
-
-#include "../subdiv/tessellation_cache.h"
-
-#include "acceln.h"
-#include "geometry.h"
-
-#include "../geometry/cylinder.h"
-
 #include "../bvh/bvh4_factory.h"
-#include "../bvh/bvh8_factory.h"
-
-#include "../../common/tasking/taskscheduler.h"
 #include "../../common/sys/alloc.h"
+#include "common/math/math.h"
+#include "common/sys/mutex.h"
+#include "common/sys/platform.h"
+#include "common/sys/regression.h"
+#include "common/sys/sysinfo.h"
+#include "common/tasking/taskschedulerinternal.h"
+#include "embree3/rtcore_config.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/isa.h"
+#include "kernels/common/state.h"
+#include "kernels/config.h"
 
 namespace embree
 {

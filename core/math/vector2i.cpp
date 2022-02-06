@@ -32,6 +32,7 @@
 
 #include "core/math/vector2.h"
 #include "core/string/ustring.h"
+#include "core/math/math_funcs.h"
 
 Vector2i Vector2i::clamp(const Vector2i &p_min, const Vector2i &p_max) const {
 	return Vector2i(

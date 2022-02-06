@@ -17,20 +17,36 @@
 *   were moved here to break dependency cycles among parts of the common library.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/char16ptr.h"
+#include "unicode/locid.h"
+#include "unicode/platform.h"
+#include "unicode/stringoptions.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/ustring.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class CharacterIterator;
+class Edits;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/brkiter.h"
 #include "unicode/casemap.h"
-#include "unicode/chariter.h"
 #include "unicode/localpointer.h"
 #include "unicode/ubrk.h"
 #include "unicode/ucasemap.h"
 #include "unicode/utext.h"
-#include "cmemory.h"
 #include "uassert.h"
-#include "ucase.h"
 #include "ucasemap_imp.h"
 
 U_NAMESPACE_BEGIN

@@ -19,6 +19,9 @@
 *   that then do not depend on resource bundle code and likely-subtags data.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/bytestream.h"
 #include "unicode/utypes.h"
 #include "unicode/locid.h"
@@ -33,6 +36,10 @@
 #include "cstring.h"
 #include "ulocimp.h"
 #include "ustr_imp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 /**
  * These are the canonical strings for unknown languages, scripts and regions.

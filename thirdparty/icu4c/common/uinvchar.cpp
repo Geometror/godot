@@ -19,6 +19,8 @@
 *   for better modularization.
 */
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
 #include "unicode/ustring.h"
 #include "udataswp.h"
@@ -26,6 +28,7 @@
 #include "cmemory.h"
 #include "uassert.h"
 #include "uinvchar.h"
+#include "unicode/putil.h"
 
 /* invariant-character handling --------------------------------------------- */
 

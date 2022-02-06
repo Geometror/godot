@@ -30,7 +30,11 @@
 
 #include "gdnative/node_path.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/string/node_path.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
 
 static_assert(sizeof(godot_node_path) == sizeof(NodePath), "NodePath size mismatch");
 

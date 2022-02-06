@@ -14,12 +14,14 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include "mkldnn.h"
+#include <assert.h>
 
+#include "mkldnn.h"
 #include "c_types_map.hpp"
 #include "type_helpers.hpp"
 #include "utils.hpp"
 #include "cpu/gemm/os_blas.hpp"
+#include "mkldnn_types.h"
 
 using namespace mkldnn::impl;
 using namespace mkldnn::impl::status;

@@ -19,9 +19,17 @@
 #ifndef __UTRIE2_H__
 #define __UTRIE2_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/utf8.h"
 #include "putilimp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/utf16.h"
+#include "unicode/uversion.h"
 
 U_CDECL_BEGIN
 
@@ -63,6 +71,7 @@ typedef struct UTrie UTrie;
  * Use only with public API macros and functions.
  */
 struct UTrie2;
+
 typedef struct UTrie2 UTrie2;
 
 /* Public UTrie2 API functions: read-only access ---------------------------- */
@@ -639,6 +648,7 @@ U_CDECL_BEGIN
 
 /** Build-time trie structure. */
 struct UNewTrie2;
+
 typedef struct UNewTrie2 UNewTrie2;
 
 /*

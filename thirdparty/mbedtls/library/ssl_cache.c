@@ -21,22 +21,26 @@
  * to store and retrieve the session information.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
+#include "mbedtls/platform_time.h"
+#include "mbedtls/ssl.h"
+#include "mbedtls/x509.h"
+#include "mbedtls/x509_crt.h"
 #if defined(MBEDTLS_SSL_CACHE_C)
 
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free      free
 #endif
 
+#include <string.h>
+
 #include "mbedtls/ssl_cache.h"
 #include "mbedtls/ssl_internal.h"
-
-#include <string.h>
 
 void mbedtls_ssl_cache_init( mbedtls_ssl_cache_context *cache )
 {

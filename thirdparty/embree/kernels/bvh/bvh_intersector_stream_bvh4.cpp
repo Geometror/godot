@@ -2,6 +2,17 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh_intersector_stream.cpp"
+#include "common/math/math.h"
+#include "common/math/vec3.h"
+#include "common/simd/vboolf4_sse2.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/bvh/bvh_intersector_stream.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/default.h"
+#include "kernels/config.h"
 
 namespace embree
 {

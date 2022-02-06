@@ -38,11 +38,6 @@ POSSIBILITY OF SUCH DAMAGE.
 -----------------------------------------------------------------------------
 */
 
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 /* These defines enable debugging code */
 
 /* #define DEBUG_FRAMES_DISPLAY */
@@ -60,7 +55,12 @@ information, and fields within it. */
 #define PSSTART start_subject   /* Field containing processed string start */
 #define PSEND   end_subject     /* Field containing processed string end */
 
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "pcre2_internal.h"
+#include "pcre2_ucp.h"
 
 #define RECURSE_UNSET 0xffffffffu  /* Bigger than max group number */
 

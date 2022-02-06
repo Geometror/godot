@@ -4,7 +4,11 @@
 */
 #define ENET_BUILDING_LIB 1
 #include <string.h>
+
 #include "enet/enet.h"
+#include "enet/callbacks.h"
+#include "enet/godot.h"
+#include "enet/types.h"
 
 typedef struct _ENetSymbol
 {

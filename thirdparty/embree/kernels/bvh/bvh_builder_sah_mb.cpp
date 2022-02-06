@@ -1,29 +1,40 @@
 // Copyright 2009-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
+#include <assert.h>
+#include <stddef.h>
+#include <string>
+
 #include "bvh.h"
-#include "bvh_builder.h"
 #include "../builders/bvh_builder_msmblur.h"
-
 #include "../builders/primrefgen.h"
-#include "../builders/splitter.h"
-
-#include "../geometry/linei.h"
-#include "../geometry/triangle.h"
-#include "../geometry/trianglev.h"
 #include "../geometry/trianglev_mb.h"
 #include "../geometry/trianglei.h"
-#include "../geometry/quadv.h"
-#include "../geometry/quadi.h"
-#include "../geometry/object.h"
-#include "../geometry/instance.h"
 #include "../geometry/subgrid.h"
-
-#include "../common/state.h"
-
-// FIXME: remove after removing BVHNBuilderMBlurRootTimeSplitsSAH
-#include "../../common/algorithms/parallel_for_for.h"
 #include "../../common/algorithms/parallel_for_for_prefix_sum.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/math/lbbox.h"
+#include "common/math/math.h"
+#include "common/math/range.h"
+#include "common/math/vec3.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/sys/intrinsics.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/builders/bvh_builder_sah.h"
+#include "kernels/builders/priminfo.h"
+#include "kernels/common/alloc.h"
+#include "kernels/common/builder.h"
+#include "kernels/common/geometry.h"
+#include "kernels/common/primref.h"
+#include "kernels/common/primref_mb.h"
+#include "kernels/common/scene.h"
+#include "kernels/common/scene_grid_mesh.h"
+#include "kernels/common/scene_triangle_mesh.h"
+#include "kernels/common/vector.h"
+#include "kernels/config.h"
 
 
 namespace embree

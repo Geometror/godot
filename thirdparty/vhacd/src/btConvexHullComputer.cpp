@@ -13,11 +13,14 @@ subject to the following restrictions:
 */
 
 #include <string.h>
+#include <new>
 
 #include "btAlignedObjectArray.h"
 #include "btConvexHullComputer.h"
 #include "btMinMax.h"
 #include "btVector3.h"
+#include "btAlignedAllocator.h"
+#include "btScalar.h"
 
 #ifdef __GNUC__
 #include <stdint.h>

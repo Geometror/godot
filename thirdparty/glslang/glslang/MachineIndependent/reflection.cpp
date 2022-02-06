@@ -35,11 +35,20 @@
 
 #if !defined(GLSLANG_WEB) && !defined(GLSLANG_ANGLE)
 
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdio.h>
+#include <list>
+#include <memory>
+#include <set>
+
 #include "../Include/Common.h"
 #include "reflection.h"
-#include "LiveTraverser.h"
 #include "localintermediate.h"
-
 #include "gl_types.h"
 
 //

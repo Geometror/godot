@@ -1,13 +1,10 @@
 // Copyright 2009-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
-#include "../common/isa.h" // to define EMBREE_TARGET_SIMD8
-
 #if defined (EMBREE_TARGET_SIMD8)
 
 #include "bvh8_factory.h"
 #include "../bvh/bvh.h"
-
 #include "../geometry/curveNv.h"
 #include "../geometry/curveNi.h"
 #include "../geometry/curveNi_mb.h"

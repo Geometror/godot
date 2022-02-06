@@ -14,7 +14,14 @@
 #ifndef __DICTIONARYDATA_H__
 #define __DICTIONARYDATA_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 

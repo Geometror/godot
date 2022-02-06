@@ -3,19 +3,20 @@
 
 // file: rbbi_cache.cpp
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
+#include "unicode/ucptrie.h"
+#include "unicode/urename.h"
+#include "unicode/utext.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/ubrk.h"
 #include "unicode/rbbi.h"
-
 #include "rbbi_cache.h"
-
 #include "brkeng.h"
-#include "cmemory.h"
 #include "rbbidata.h"
-#include "rbbirb.h"
 #include "uassert.h"
 #include "uvectr32.h"
 

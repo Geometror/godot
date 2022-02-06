@@ -18,7 +18,11 @@
  * them at run time with png_set_write_fn(...).
  */
 
+#include <stdio.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pnglibconf.h"
 
 #ifdef PNG_WRITE_SUPPORTED
 

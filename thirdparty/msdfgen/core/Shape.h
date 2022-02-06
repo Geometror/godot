@@ -2,10 +2,12 @@
 #pragma once
 
 #include <vector>
+
 #include "Contour.h"
 #include "Scanline.h"
 
 namespace msdfgen {
+class Scanline;
 
 // Threshold of the dot product of adjacent edge directions to be considered convergent.
 #define MSDFGEN_CORNER_DOT_EPSILON .000001

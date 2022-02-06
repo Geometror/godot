@@ -13,7 +13,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include "basisu_uastc_enc.h"
-#include "basisu_astc_decomp.h"
+
+#include <assert.h>
+#include <encoder/basisu_etc.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_transcoder_internal.h>
+#include <transcoder/basisu_transcoder_uastc.h>
+#include <cmath>
+#include <cstdint>
+#include <cstring>
+#include <mutex>
+#include <unordered_map>
+#include <utility>
+
 #include "basisu_gpu_texture.h"
 #include "basisu_bc7enc.h"
 

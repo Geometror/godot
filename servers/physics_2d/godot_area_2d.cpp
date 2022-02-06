@@ -29,8 +29,12 @@
 /*************************************************************************/
 
 #include "godot_area_2d.h"
+
 #include "godot_body_2d.h"
 #include "godot_space_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/transform_2d.h"
+#include "servers/physics_2d/godot_collision_object_2d.h"
 
 GodotArea2D::BodyKey::BodyKey(GodotBody2D *p_body, uint32_t p_body_shape, uint32_t p_area_shape) {
 	rid = p_body->get_self();

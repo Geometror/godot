@@ -19,9 +19,9 @@
 */
 
 #include <stdlib.h>
+
 #include "unicode/utypes.h"
 #include "cmemory.h"
-#include "utrie.h"
 #include "utrie2.h"
 #include "uarrsort.h"
 #include "propsvec.h"

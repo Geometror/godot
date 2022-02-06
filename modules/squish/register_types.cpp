@@ -31,6 +31,7 @@
 #include "register_types.h"
 
 #include "image_decompress_squish.h"
+#include "core/io/image.h"
 
 void register_squish_types() {
 	Image::_image_decompress_bc = image_decompress_squish;

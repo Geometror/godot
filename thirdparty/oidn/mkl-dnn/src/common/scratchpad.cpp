@@ -14,10 +14,10 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include "mkldnn_thread.hpp"
-#include "utils.hpp"
+#include <assert.h>
 
 #include "scratchpad.hpp"
+#include "nstl.hpp"
 
 namespace mkldnn {
 namespace impl {

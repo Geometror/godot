@@ -1,10 +1,16 @@
 // © 2021 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 
-#include <utility>
-#include <ctgmath>
+#include <cmath>
 
 #include "unicode/utypes.h"
+#include "resource.h"
+#include "uhash.h"
+#include "unicode/localpointer.h"
+#include "unicode/locid.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "uresdata.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -17,14 +23,9 @@
 #include "ubrkimpl.h"
 #include "uresimp.h"
 #include "uvectr32.h"
-#include "uvector.h"
-
 #include "unicode/brkiter.h"
-#include "unicode/resbund.h"
-#include "unicode/ubrk.h"
 #include "unicode/uniset.h"
 #include "unicode/ustring.h"
-#include "unicode/utf.h"
 
 U_NAMESPACE_BEGIN
 

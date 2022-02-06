@@ -14,14 +14,20 @@
 * limitations under the License.
 *******************************************************************************/
 
+#include <limits.h>
+#include <initializer_list>
+
 #include "c_types_map.hpp"
 #include "nstl.hpp"
 #include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "cpu_barrier.hpp"
-
 #include "jit_avx512_common_conv_kernel.hpp"
+#include "memory_tracking.hpp"
+#include "mkldnn_thread.hpp"
+#include "mkldnn_types.h"
+#include "primitive_attr.hpp"
+#include "z_magic.hpp"
 
 #define GET_OFF(field) offsetof(jit_conv_call_s, field)
 #define KNx_L2_EFFECTIVE_CAPACITY ((512-64)*1024)

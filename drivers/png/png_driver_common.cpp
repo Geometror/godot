@@ -30,10 +30,14 @@
 
 #include "png_driver_common.h"
 
-#include "core/os/os.h"
-
 #include <png.h>
 #include <string.h>
+
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/templates/vector.h"
+#include "pngconf.h"
 
 namespace PNGDriverCommon {
 

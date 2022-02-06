@@ -29,6 +29,10 @@
 /*************************************************************************/
 
 #include "vulkan_context_x11.h"
+
+#include "core/error/error_macros.h"
+#include "vulkan/vulkan_core.h"
+#include "vulkan/vulkan_xlib.h"
 #ifdef USE_VOLK
 #include <volk.h>
 #else

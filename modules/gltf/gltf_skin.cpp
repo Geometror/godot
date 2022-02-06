@@ -30,6 +30,12 @@
 
 #include "gltf_skin.h"
 
+#include "core/object/class_db.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/gltf/gltf_document.h"
+
 void GLTFSkin::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_skin_root"), &GLTFSkin::get_skin_root);
 	ClassDB::bind_method(D_METHOD("set_skin_root", "skin_root"), &GLTFSkin::set_skin_root);

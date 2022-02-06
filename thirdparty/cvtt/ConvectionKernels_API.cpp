@@ -21,18 +21,20 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#include "ConvectionKernels_Config.h"
 
+#include <stddef.h>
+
+#include "ConvectionKernels_ParallelMath.h"
 #if !defined(CVTT_SINGLE_FILE) || defined(CVTT_SINGLE_FILE_IMPL)
 
 #include <stdint.h>
+#include <assert.h>
+
 #include "ConvectionKernels.h"
 #include "ConvectionKernels_Util.h"
 #include "ConvectionKernels_BC67.h"
 #include "ConvectionKernels_ETC.h"
 #include "ConvectionKernels_S3TC.h"
-
-#include <assert.h>
 
 namespace cvtt
 {

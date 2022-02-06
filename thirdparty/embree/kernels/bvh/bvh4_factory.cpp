@@ -2,12 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh4_factory.h"
-#include "../bvh/bvh.h"
 
+#include <assert.h>
+#include <string>
+
+#include "../bvh/bvh.h"
 #include "../geometry/curveNv.h"
 #include "../geometry/curveNi.h"
 #include "../geometry/curveNi_mb.h"
-#include "../geometry/linei.h"
 #include "../geometry/triangle.h"
 #include "../geometry/trianglev.h"
 #include "../geometry/trianglev_mb.h"
@@ -19,9 +21,20 @@
 #include "../geometry/instance.h"
 #include "../geometry/subgrid.h"
 #include "../common/accelinstance.h"
+#include "kernels/bvh/bvh_factory.h"
+#include "kernels/common/builder.h"
+#include "kernels/common/device.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/scene.h"
+#include "kernels/config.h"
 
 namespace embree
 {
+struct QuadMesh;
+struct TriangleMesh;
+struct UserGeometry;
+struct VirtualCurveIntersector;
+
   DECLARE_SYMBOL2(Accel::Collider,BVH4ColliderUserGeom);
 
   DECLARE_ISA_FUNCTION(VirtualCurveIntersector*,VirtualCurveIntersector4i,void);

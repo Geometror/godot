@@ -14,13 +14,14 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include "mkldnn_types.h"
+#include <stddef.h>
 
 #include "c_types_map.hpp"
 #include "type_helpers.hpp"
 #include "nstl.hpp"
-
 #include "jit_uni_pooling.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "mkldnn_thread.hpp"
 
 namespace mkldnn {
 namespace impl {

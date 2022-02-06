@@ -16,6 +16,11 @@
 
 #include "platform.h"
 
+#include <mm_malloc.h>
+#include <cassert>
+#include <memory>
+#include <new>
+
 namespace oidn {
 
   // ----------------------------------------------------------------------------

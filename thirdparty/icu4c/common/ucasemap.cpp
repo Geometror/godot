@@ -18,6 +18,9 @@
 *   Case mapping service object and functions using it.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/brkiter.h"
 #include "unicode/bytestream.h"
@@ -27,21 +30,20 @@
 #include "unicode/stringpiece.h"
 #include "unicode/ubrk.h"
 #include "unicode/uloc.h"
-#include "unicode/ustring.h"
 #include "unicode/ucasemap.h"
-#if !UCONFIG_NO_BREAK_ITERATION
-#include "unicode/utext.h"
-#endif
-#include "unicode/utf.h"
 #include "unicode/utf8.h"
-#include "unicode/utf16.h"
 #include "bytesinkutil.h"
-#include "cmemory.h"
 #include "cstring.h"
 #include "uassert.h"
 #include "ucase.h"
 #include "ucasemap_imp.h"
 #include "ustr_imp.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
+#include "utrie2.h"
 
 U_NAMESPACE_USE
 

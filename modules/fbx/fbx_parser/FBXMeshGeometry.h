@@ -73,15 +73,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef FBX_MESH_GEOMETRY_H
 #define FBX_MESH_GEOMETRY_H
 
+#include <stddef.h>
+#include <stdint.h>
+#include <iostream>
+#include <string>
+#include <vector>
+
 #include "core/math/color.h"
 #include "core/math/vector2.h"
 #include "core/math/vector3.h"
 #include "core/templates/vector.h"
-
 #include "FBXDocument.h"
 #include "FBXParser.h"
-
-#include <iostream>
+#include "core/string/ustring.h"
 
 #define AI_MAX_NUMBER_OF_TEXTURECOORDS 4
 #define AI_MAX_NUMBER_OF_COLOR_SETS 8

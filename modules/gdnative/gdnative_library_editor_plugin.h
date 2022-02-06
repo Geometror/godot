@@ -31,6 +31,24 @@
 #ifndef GDNATIVE_LIBRARY_EDITOR_PLUGIN_H
 #define GDNATIVE_LIBRARY_EDITOR_PLUGIN_H
 
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+#include "editor/editor_plugin.h"
+#include "scene/gui/control.h"
+
+class Button;
+class ConfirmationDialog;
+class EditorFileDialog;
+class EditorNode;
+class LineEdit;
+class MenuButton;
+class Tree;
 #ifdef TOOLS_ENABLED
 #include "editor/editor_node.h"
 #include "gdnative.h"

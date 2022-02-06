@@ -31,14 +31,25 @@
 #ifndef GDSCRIPT_LANGUAGE_PROTOCOL_H
 #define GDSCRIPT_LANGUAGE_PROTOCOL_H
 
+#include <stdint.h>
+
 #include "core/io/stream_peer.h"
 #include "core/io/stream_peer_tcp.h"
 #include "core/io/tcp_server.h"
 #include "gdscript_text_document.h"
 #include "gdscript_workspace.h"
 #include "lsp.hpp"
-
 #include "modules/modules_enabled.gen.h" // For jsonrpc.
+#include "core/error/error_list.h"
+#include "core/io/ip_address.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 #ifdef MODULE_JSONRPC_ENABLED
 #include "modules/jsonrpc/jsonrpc.h"
 #else

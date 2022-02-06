@@ -31,6 +31,9 @@
 #ifndef VULKAN_CONTEXT_H
 #define VULKAN_CONTEXT_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/error/error_list.h"
 #include "core/os/mutex.h"
 #include "core/string/ustring.h"
@@ -38,6 +41,11 @@
 #include "core/templates/rid_owner.h"
 #include "servers/display_server.h"
 #include "servers/rendering/rendering_device.h"
+#include "core/math/color.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "vulkan/vk_platform.h"
+#include "vulkan/vulkan_core.h"
 
 #ifdef USE_VOLK
 #include <volk.h>

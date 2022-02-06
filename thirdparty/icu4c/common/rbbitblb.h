@@ -14,7 +14,17 @@
 #ifndef RBBITBLB_H
 #define RBBITBLB_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class RBBINode;
+class UVector;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 

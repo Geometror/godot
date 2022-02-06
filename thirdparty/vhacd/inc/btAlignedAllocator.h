@@ -20,6 +20,10 @@ subject to the following restrictions:
 ///so we replace _aligned_malloc and _aligned_free with our own
 ///that is better portable and more predictable
 
+#include <stddef.h>
+#include <stdint.h>
+#include <new>
+
 #include "btScalar.h"
 
 // -- GODOT start --

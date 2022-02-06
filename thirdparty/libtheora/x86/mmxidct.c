@@ -19,6 +19,7 @@
   Originally written by Rudolf Marek, based on code from On2's VP3.*/
 #include "x86int.h"
 #include "../dct.h"
+#include "ogg/config_types.h"
 
 #if defined(OC_X86_ASM)
 

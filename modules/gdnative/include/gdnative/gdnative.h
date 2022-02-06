@@ -188,7 +188,6 @@ typedef void godot_object;
 /////// Array
 
 #include <gdnative/array.h>
-
 // single API file for Packed*Array
 #include <gdnative/packed_arrays.h>
 
@@ -197,6 +196,11 @@ void GDAPI godot_object_destroy(godot_object *p_o);
 ////// Variant
 
 #include <gdnative/variant.h>
+
+#include "gdnative/math_defs.h"
+#include "gdnative/variant_struct.h"
+
+struct godot_gdnative_api_struct;
 
 ////// Singleton API
 

@@ -20,12 +20,6 @@
 *   implementation functions on the USet implementation.
 */
 
-#include "unicode/utypes.h"
-#include "unicode/uset.h"
-#include "unicode/ucnv.h"
-#include "ucnv_bld.h"
-#include "uset_imp.h"
-
 #if !UCONFIG_NO_CONVERSION
 
 U_CAPI void U_EXPORT2

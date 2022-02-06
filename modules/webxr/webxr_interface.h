@@ -33,6 +33,12 @@
 
 #include "servers/xr/xr_interface.h"
 #include "servers/xr/xr_positional_tracker.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+
+class XRPositionalTracker;
 
 /**
 	The WebXR interface is a VR/AR interface that can be used on the web.

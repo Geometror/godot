@@ -19,8 +19,15 @@
 #ifndef __UNISETSPAN_H__
 #define __UNISETSPAN_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uniset.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/uset.h"
+#include "unicode/uversion.h"
+#include "uvector.h"
 
 U_NAMESPACE_BEGIN
 

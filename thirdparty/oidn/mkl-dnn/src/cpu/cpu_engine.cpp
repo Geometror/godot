@@ -14,13 +14,10 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <assert.h>
-
 #include "type_helpers.hpp"
-#include "verbose.hpp"
-
 #include "cpu_engine.hpp"
 #include "cpu_memory.hpp"
+#include "cpu_isa_traits.hpp"
 
 //#include "cpu/rnn/ref_rnn.hpp"
 

@@ -33,6 +33,15 @@
 
 #include "scene/2d/node_2d.h"
 #include "scene/resources/curve.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
+#include "core/variant/typed_array.h"
+
+class String;
 
 class Path2D : public Node2D {
 	GDCLASS(Path2D, Node2D);

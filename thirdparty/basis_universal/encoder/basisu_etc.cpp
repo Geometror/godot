@@ -14,6 +14,11 @@
 // limitations under the License.
 #include "basisu_etc.h"
 
+#include <encoder/basisu_enc.h>
+#include <math.h>
+#include <stdlib.h>
+#include <transcoder/basisu.h>
+
 #if BASISU_SUPPORT_SSE
 #define CPPSPMD_NAME(a) a##_sse41
 #include "basisu_kernels_declares.h"

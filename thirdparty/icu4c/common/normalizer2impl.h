@@ -19,7 +19,24 @@
 #ifndef __NORMALIZER2IMPL_H__
 #define __NORMALIZER2IMPL_H__
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "umutex.h"
+#include "unicode/char16ptr.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unorm2.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class Normalizer2;
+class UnicodeSet;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_NORMALIZATION
 
@@ -42,7 +59,6 @@
 U_NAMESPACE_BEGIN
 
 struct CanonIterData;
-
 class ByteSink;
 class Edits;
 class InitCanonIterData;

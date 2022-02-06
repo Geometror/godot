@@ -15,9 +15,14 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdint.h>
+
 #include "src/webp/types.h"
 #include "src/webp/encode.h"
 #include "src/webp/format_constants.h"
+
+struct VP8LBackwardRefs;
+struct VP8LHashChain;
 
 #ifdef __cplusplus
 extern "C" {

@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_CANVAS_RENDER_RD_H
 #define RENDERING_SERVER_CANVAS_RENDER_RD_H
 
+#include <stdint.h>
+
 #include "servers/rendering/renderer_canvas_render.h"
 #include "servers/rendering/renderer_compositor.h"
 #include "servers/rendering/renderer_rd/pipeline_cache_rd.h"
@@ -39,6 +41,26 @@
 #include "servers/rendering/renderer_rd/shaders/canvas_occlusion.glsl.gen.h"
 #include "servers/rendering/rendering_device.h"
 #include "servers/rendering/shader_compiler.h"
+#include "core/math/color.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/rid_owner.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/shader_language.h"
+#include "servers/rendering_server.h"
+
+struct PropertyInfo;
+struct Rect2;
+struct Transform3D;
 
 class RendererCanvasRenderRD : public RendererCanvasRender {
 	RendererStorageRD *storage;

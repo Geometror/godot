@@ -8,6 +8,8 @@
 #include "generator-config.h"
 
 namespace msdfgen {
+class Projection;
+class Shape;
 
 /// Predicts potential artifacts caused by the interpolation of the MSDF and corrects them by converting nearby texels to single-channel.
 void msdfErrorCorrection(const BitmapRef<float, 3> &sdf, const Shape &shape, const Projection &projection, double range, const MSDFGeneratorConfig &config = MSDFGeneratorConfig());

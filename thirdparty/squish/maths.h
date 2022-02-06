@@ -28,6 +28,7 @@
 
 #include <cmath>
 #include <algorithm>
+
 #include "config.h"
 
 namespace squish {

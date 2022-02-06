@@ -43,7 +43,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "zlib.h"
+#include "zconf.h"
 
 /* GODOT start */
 /* Mighty Gentoo saves the day by breaking the API of their zlib.h,
@@ -104,6 +106,7 @@ typedef  64BIT_INT_CUSTOM_TYPE ZPOS64_T;
 #else
 #ifdef HAS_STDINT_H
 #include "stdint.h"
+
 typedef uint64_t ZPOS64_T;
 #else
 

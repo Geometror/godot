@@ -13,13 +13,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include "basisu_comp.h"
-#include "basisu_enc.h"
-#include <unordered_set>
+
+#include <assert.h>
+#include <encoder/basisu_backend.h>
+#include <encoder/basisu_basis_file.h>
+#include <encoder/basisu_etc.h>
+#include <encoder/basisu_frontend.h>
+#include <encoder/basisu_uastc_enc.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <transcoder/basisu_transcoder.h>
+#include <transcoder/basisu_transcoder_internal.h>
 #include <atomic>
+
+#include "basisu_enc.h"
 
 // basisu_transcoder.cpp is where basisu_miniz lives now, we just need the declarations here.
 #define MINIZ_NO_ZLIB_COMPATIBLE_NAMES
 #include "basisu_miniz.h"
+
+namespace basist {
+struct uastc_block;
+}  // namespace basist
 
 #if !BASISD_SUPPORT_KTX2
 #error BASISD_SUPPORT_KTX2 must be enabled (set to 1).

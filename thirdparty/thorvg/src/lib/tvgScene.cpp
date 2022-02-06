@@ -19,7 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <stdint.h>
+#include <memory>
+
 #include "tvgSceneImpl.h"
+#include "thorvg.h"
+#include "tvgArray.h"
+#include "tvgCommon.h"
+#include "tvgPaint.h"
 
 /************************************************************************/
 /* External Class Implementation                                        */

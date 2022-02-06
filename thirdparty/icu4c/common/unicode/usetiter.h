@@ -9,7 +9,12 @@
 #ifndef USETITER_H
 #define USETITER_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 #if U_SHOW_CPLUSPLUS_API
 

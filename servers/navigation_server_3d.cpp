@@ -30,6 +30,9 @@
 
 #include "navigation_server_3d.h"
 
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+
 NavigationServer3D *NavigationServer3D::singleton = nullptr;
 
 void NavigationServer3D::_bind_methods() {

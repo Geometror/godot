@@ -35,6 +35,15 @@
 #include "editor/editor_plugin.h"
 #include "scene/3d/gpu_particles_collision_3d.h"
 #include "scene/resources/material.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+
+class Button;
+class EditorFileDialog;
+class EditorNode;
+class GPUParticlesCollisionSDF3D;
+class HBoxContainer;
+struct EditorProgress;
 
 class GPUParticlesCollisionSDF3DEditorPlugin : public EditorPlugin {
 	GDCLASS(GPUParticlesCollisionSDF3DEditorPlugin, EditorPlugin);

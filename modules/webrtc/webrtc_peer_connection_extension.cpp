@@ -30,6 +30,12 @@
 
 #include "webrtc_peer_connection_extension.h"
 
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "modules/webrtc/webrtc_data_channel.h"
+#include "modules/webrtc/webrtc_peer_connection.h"
+
 void WebRTCPeerConnectionExtension::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("make_default"), &WebRTCPeerConnectionExtension::make_default);
 

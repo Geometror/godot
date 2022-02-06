@@ -30,6 +30,12 @@
 
 #include "audio_stream_generator.h"
 
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+
 void AudioStreamGenerator::set_mix_rate(float p_mix_rate) {
 	mix_rate = p_mix_rate;
 }

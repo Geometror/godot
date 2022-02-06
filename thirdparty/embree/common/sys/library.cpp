@@ -2,8 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "library.h"
+
 #include "sysinfo.h"
 #include "filename.h"
+#include "common/sys/platform.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Windows Platform

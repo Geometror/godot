@@ -33,6 +33,11 @@
 
 #include "scene/gui/box_container.h"
 #include "scene/gui/menu_button.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/templates/map.h"
+
+class MenuButton;
 
 class EditorRunNative : public HBoxContainer {
 	GDCLASS(EditorRunNative, HBoxContainer);

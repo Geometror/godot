@@ -32,8 +32,12 @@
 #define AUDIOEFFECTDISTORTION_H
 
 #include "servers/audio/audio_effect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/binder_common.h"
 
 class AudioEffectDistortion;
+struct AudioFrame;
 
 class AudioEffectDistortionInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectDistortionInstance, AudioEffectInstance);

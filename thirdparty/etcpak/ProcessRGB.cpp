@@ -1,21 +1,23 @@
-#include <array>
 #include <string.h>
+#include <array>
 #include <limits>
+#include <algorithm>
+#include <cmath>
+#include <utility>
 #ifdef __ARM_NEON
 #  include <arm_neon.h>
 #endif
 
-#include "Dither.hpp"
 #include "ForceInline.hpp"
 #include "Math.hpp"
 #include "ProcessCommon.hpp"
 #include "ProcessRGB.hpp"
 #include "Tables.hpp"
-#include "Vector.hpp"
 #if defined __SSE4_1__ || defined __AVX2__ || defined _MSC_VER
 #  ifdef _MSC_VER
 #    include <intrin.h>
 #    include <Windows.h>
+
 #    define _bswap(x) _byteswap_ulong(x)
 #    define _bswap64(x) _byteswap_uint64(x)
 #  else
@@ -3173,9 +3175,6 @@ void CompressEtc2Alpha( const uint32_t* src, uint64_t* dst, uint32_t blocks, siz
     }
     while( --blocks );
 }
-
-#include <chrono>
-#include <thread>
 
 void CompressEtc1Rgb( const uint32_t* src, uint64_t* dst, uint32_t blocks, size_t width )
 {

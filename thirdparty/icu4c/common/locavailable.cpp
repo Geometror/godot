@@ -19,6 +19,9 @@
 *   that then do not depend on resource bundle code and res_index bundles.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/errorcode.h"
 #include "unicode/utypes.h"
 #include "unicode/locid.h"
@@ -27,9 +30,16 @@
 #include "cmemory.h"
 #include "cstring.h"
 #include "ucln_cmn.h"
-#include "uassert.h"
 #include "umutex.h"
 #include "uresimp.h"
+#include "resource.h"
+#include "unicode/localpointer.h"
+#include "unicode/platform.h"
+#include "unicode/strenum.h"
+#include "unicode/uenum.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 // C++ API ----------------------------------------------------------------- ***
 

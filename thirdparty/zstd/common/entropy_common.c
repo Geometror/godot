@@ -12,13 +12,22 @@
  * You may select, at your option, one of the above-listed licenses.
 ****************************************************************** */
 
+#include <stddef.h>
+
 /* *************************************
 *  Dependencies
 ***************************************/
 #include "mem.h"
 #include "error_private.h"       /* ERR_*, ERROR */
+#include "bitstream.h"
+#include "compiler.h"
+#include "debug.h"
+#include "zstd_deps.h"
+#include "zstd_errors.h"
+
 #define FSE_STATIC_LINKING_ONLY  /* FSE_MIN_TABLELOG */
 #include "fse.h"
+
 #define HUF_STATIC_LINKING_ONLY  /* HUF_TABLELOG_ABSOLUTEMAX */
 #include "huf.h"
 

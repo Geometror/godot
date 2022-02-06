@@ -16,6 +16,24 @@
 
 #include "autoencoder.h"
 
+#include <stdint.h>
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+
+#include "OpenImageDenoise/oidn.hpp"
+#include "common/exception.h"
+#include "common/platform.h"
+#include "common/tensor.h"
+#include "core/common.h"
+#include "core/device.h"
+#include "core/filter.h"
+#include "core/network.h"
+#include "core/node.h"
+#include "core/transfer_function.h"
+#include "cpu_isa_traits.hpp"
+#include "mkldnn.hpp"
+
 namespace oidn {
 
   // --------------------------------------------------------------------------

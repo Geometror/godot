@@ -17,6 +17,8 @@
 #ifndef _V_REG_H_
 #define _V_REG_H_
 
+#include "backends.h"
+
 #define VI_TRANSFORMB 1
 #define VI_WINDOWB 1
 #define VI_TIMEB 1

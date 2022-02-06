@@ -30,12 +30,21 @@
 
 #include "ip_unix.h"
 
+#include <netinet/in.h>
+#include <stdint.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/ip_address.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
+
 #if defined(UNIX_ENABLED) || defined(WINDOWS_ENABLED)
 
 #include <string.h>
 
 #ifdef WINDOWS_ENABLED
 #include <stdio.h>
+
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <winsock2.h>
@@ -55,7 +64,6 @@
 #endif
 #include <ifaddrs.h>
 #endif
-#include <arpa/inet.h>
 #include <sys/socket.h>
 #ifdef __FreeBSD__
 #include <netinet/in.h>

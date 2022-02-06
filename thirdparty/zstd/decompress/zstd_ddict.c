@@ -15,10 +15,15 @@
 *  Dependencies
 *********************************************************/
 #include "../common/zstd_deps.h"   /* ZSTD_memcpy, ZSTD_memmove, ZSTD_memset */
-#include "../common/cpu.h"         /* bmi2 */
 #include "../common/mem.h"         /* low level memory routines */
+#include "debug.h"
+#include "error_private.h"
+#include "zstd_errors.h"
+#include "zstd_internal.h"
+
 #define FSE_STATIC_LINKING_ONLY
 #include "../common/fse.h"
+
 #define HUF_STATIC_LINKING_ONLY
 #include "../common/huf.h"
 #include "zstd_decompress_internal.h"

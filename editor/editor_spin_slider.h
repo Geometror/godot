@@ -34,6 +34,16 @@
 #include "scene/gui/line_edit.h"
 #include "scene/gui/range.h"
 #include "scene/gui/texture_rect.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+
+class InputEvent;
+class LineEdit;
+class Popup;
+class TextureRect;
 
 class EditorSpinSlider : public Range {
 	GDCLASS(EditorSpinSlider, Range);

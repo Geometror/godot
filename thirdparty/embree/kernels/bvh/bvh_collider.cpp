@@ -2,10 +2,30 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh_collider.h"
+
+#include <stdint.h>
+#include <string>
+#include <utility>
+
 #include "../geometry/triangle_triangle_intersector.h"
+#include "common/algorithms/parallel_for.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/varying.h"
+#include "common/simd/vboolf4_sse2.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "common/sys/intrinsics.h"
+#include "common/sys/regression.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/scene.h"
+#include "kernels/common/scene_triangle_mesh.h"
+#include "kernels/geometry/object.h"
 
 namespace embree
 { 
+template <typename T> struct Vec3;
+
   namespace isa
   {
 #define CSTAT(x)

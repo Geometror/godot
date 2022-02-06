@@ -32,6 +32,8 @@
 #define PANEL_H
 
 #include "scene/gui/control.h"
+#include "core/object/object.h"
+#include "core/variant/binder_common.h"
 
 class Panel : public Control {
 	GDCLASS(Panel, Control);

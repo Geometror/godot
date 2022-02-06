@@ -33,6 +33,13 @@
 
 #include "godot_body_2d.h"
 #include "godot_constraint_2d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/typedefs.h"
+
+class GodotBody2D;
+class GodotSpace2D;
+struct Transform2D;
 
 class GodotBodyPair2D : public GodotConstraint2D {
 	enum {

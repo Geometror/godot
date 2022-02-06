@@ -29,9 +29,13 @@
 /*************************************************************************/
 
 #include "xr_interface_extension.h"
+
 #include "servers/rendering/renderer_rd/renderer_storage_rd.h"
-#include "servers/rendering/renderer_storage.h"
-#include "servers/rendering/rendering_server_globals.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/object/class_db.h"
 
 void XRInterfaceExtension::_bind_methods() {
 	GDVIRTUAL_BIND(_get_name);

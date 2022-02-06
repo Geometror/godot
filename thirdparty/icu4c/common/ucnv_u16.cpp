@@ -16,8 +16,6 @@
 *   UTF-16 converter implementation. Used to be in ucnv_utf.c.
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_CONVERSION
 
 #include "unicode/ucnv.h"

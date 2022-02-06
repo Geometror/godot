@@ -32,9 +32,15 @@
 #define VIEW_PANNER_H
 
 #include "core/object/ref_counted.h"
+#include "core/input/shortcut.h"
+#include "core/math/rect2.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
 
 class InputEvent;
 class Shortcut;
+class Variant;
 
 class ViewPanner : public RefCounted {
 	GDCLASS(ViewPanner, RefCounted);

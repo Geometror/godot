@@ -11,7 +11,15 @@
 //
 
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
+#include "rbbinode.h"
+#include "uelement.h"
+#include "unicode/localpointer.h"
+#include "unicode/uchar.h"
+#include "unicode/urename.h"
+#include "uvector.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 

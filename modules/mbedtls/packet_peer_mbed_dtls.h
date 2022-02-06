@@ -31,10 +31,19 @@
 #ifndef PACKET_PEER_MBED_DTLS_H
 #define PACKET_PEER_MBED_DTLS_H
 
+#include <mbedtls/timing.h>
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/io/packet_peer_dtls.h"
 #include "ssl_context_mbedtls.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
 
-#include <mbedtls/timing.h>
+class CryptoKey;
+class PacketPeerUDP;
+class X509Certificate;
 
 class PacketPeerMbedDTLS : public PacketPeerDTLS {
 private:

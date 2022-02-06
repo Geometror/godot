@@ -31,13 +31,22 @@
 #include "resource_importer_texture_atlas.h"
 
 #include "atlas_import_failed.xpm"
-#include "core/io/file_access.h"
 #include "core/io/image_loader.h"
 #include "core/io/resource_saver.h"
 #include "core/math/geometry_2d.h"
 #include "editor/editor_atlas_packer.h"
 #include "scene/resources/mesh.h"
 #include "scene/resources/texture.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/math/color.h"
+#include "core/math/vector2i.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+#include "scene/resources/bit_map.h"
 
 String ResourceImporterTextureAtlas::get_importer_name() const {
 	return "texture_atlas";

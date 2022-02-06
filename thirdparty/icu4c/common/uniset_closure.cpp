@@ -21,15 +21,31 @@
 *   code also builds UnicodeSets from patterns and needs uniset_props.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/brkiter.h"
 #include "unicode/locid.h"
 #include "unicode/parsepos.h"
 #include "unicode/uniset.h"
-#include "cmemory.h"
 #include "ruleiter.h"
 #include "ucase.h"
 #include "util.h"
 #include "uvector.h"
+#include "unicode/platform.h"
+#include "unicode/uchar.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uset.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
+#include "uset_imp.h"
+
+namespace icu_70 {
+class SymbolTable;
+}  // namespace icu_70
 
 U_NAMESPACE_BEGIN
 

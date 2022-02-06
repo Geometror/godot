@@ -31,10 +31,36 @@
 #ifndef VISUALSCRIPT_PROPERTYSELECTOR_H
 #define VISUALSCRIPT_PROPERTYSELECTOR_H
 
+#include <stdint.h>
+
 #include "../visual_script.h"
 #include "editor/editor_help.h"
 #include "editor/property_editor.h"
 #include "scene/gui/rich_text_label.h"
+#include "core/doc_data.h"
+#include "core/math/color.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "scene/gui/dialogs.h"
+#include "scene/resources/texture.h"
+
+class Button;
+class Control;
+class EditorHelpBit;
+class InputEvent;
+class LineEdit;
+class OptionButton;
+class Script;
+class Tree;
+class TreeItem;
+class VBoxContainer;
 
 class VisualScriptPropertySelector : public ConfirmationDialog {
 	GDCLASS(VisualScriptPropertySelector, ConfirmationDialog);
@@ -81,6 +107,7 @@ class VisualScriptPropertySelector : public ConfirmationDialog {
 	Tree *results_tree;
 
 	class SearchRunner;
+
 	Ref<SearchRunner> search_runner;
 
 	void _update_icons();

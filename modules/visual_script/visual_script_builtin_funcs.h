@@ -32,6 +32,12 @@
 #define VISUAL_SCRIPT_BUILTIN_FUNCS_H
 
 #include "visual_script.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/callable.h"
+
+class Variant;
 
 class VisualScriptBuiltinFunc : public VisualScriptNode {
 	GDCLASS(VisualScriptBuiltinFunc, VisualScriptNode);

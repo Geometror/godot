@@ -12,8 +12,12 @@
 // Author: Urvang (urvang@google.com)
 
 #include "src/utils/filters_utils.h"
+
 #include <stdlib.h>
 #include <string.h>
+
+#include "dsp/dsp.h"
+#include "webp/types.h"
 
 // -----------------------------------------------------------------------------
 // Quick estimate of a potentially interesting filter mode to try.

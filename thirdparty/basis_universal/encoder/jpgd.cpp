@@ -36,9 +36,11 @@
 #endif
 
 #include "jpgd.h"
+
 #include <string.h>
-#include <algorithm>
 #include <assert.h>
+#include <stdlib.h>
+#include <utility>
 
 #ifdef _MSC_VER
 #pragma warning (disable : 4611) // warning C4611: interaction between '_setjmp' and C++ object destruction is non-portable

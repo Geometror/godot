@@ -15,15 +15,17 @@
 *******************************************************************************/
 
 #include <assert.h>
+#include <stddef.h>
+#include <stdio.h>
 
 #include "c_types_map.hpp"
 #include "memory_desc_wrapper.hpp"
 #include "mkldnn_debug.h"
 #include "nstl.hpp"
 #include "type_helpers.hpp"
-#include "utils.hpp"
-
 #include "jit_uni_reorder.hpp"
+#include "mkldnn_types.h"
+#include "primitive_attr.hpp"
 
 using namespace mkldnn::impl::types;
 using namespace mkldnn::impl::status;

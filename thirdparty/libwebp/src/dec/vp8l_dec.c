@@ -13,16 +13,26 @@
 //          Jyrki Alakuijala (jyrki@google.com)
 
 #include <stdlib.h>
+#include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "src/dec/alphai_dec.h"
 #include "src/dec/vp8li_dec.h"
 #include "src/dsp/dsp.h"
 #include "src/dsp/lossless.h"
 #include "src/dsp/lossless_common.h"
-#include "src/dsp/yuv.h"
-#include "src/utils/endian_inl_utils.h"
 #include "src/utils/huffman_utils.h"
 #include "src/utils/utils.h"
+#include "dec/vp8_dec.h"
+#include "dec/webpi_dec.h"
+#include "utils/bit_reader_utils.h"
+#include "utils/color_cache_utils.h"
+#include "utils/rescaler_utils.h"
+#include "webp/decode.h"
+#include "webp/format_constants.h"
+#include "webp/types.h"
 
 #define NUM_ARGB_CACHE_ROWS          16
 

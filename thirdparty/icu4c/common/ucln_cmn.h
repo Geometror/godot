@@ -19,6 +19,9 @@
 
 #include "unicode/utypes.h"
 #include "ucln.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 /* These are the cleanup functions for various APIs. */
 /* @return true if cleanup complete successfully.*/

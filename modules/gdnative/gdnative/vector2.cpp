@@ -30,9 +30,13 @@
 
 #include "gdnative/vector2.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/math/vector2.h"
 #include "core/math/vector2i.h"
 #include "core/os/memory.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/math_defs.h"
 
 static_assert(sizeof(godot_vector2) == sizeof(Vector2), "Vector2 size mismatch");
 static_assert(sizeof(godot_vector2i) == sizeof(Vector2i), "Vector2i size mismatch");

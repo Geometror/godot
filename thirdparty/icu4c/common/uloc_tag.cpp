@@ -7,11 +7,12 @@
 **********************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/bytestream.h"
 #include "unicode/utypes.h"
-#include "unicode/ures.h"
 #include "unicode/localpointer.h"
-#include "unicode/putil.h"
 #include "unicode/uenum.h"
 #include "unicode/uloc.h"
 #include "ustr_imp.h"
@@ -23,6 +24,11 @@
 #include "uinvchar.h"
 #include "ulocimp.h"
 #include "uassert.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 
 /* struct holding a single variant */

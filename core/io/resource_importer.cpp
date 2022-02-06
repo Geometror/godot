@@ -33,6 +33,12 @@
 #include "core/config/project_settings.h"
 #include "core/os/os.h"
 #include "core/variant/variant_parser.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/set.h"
 
 bool ResourceFormatImporter::SortImporterByName::operator()(const Ref<ResourceImporter> &p_a, const Ref<ResourceImporter> &p_b) const {
 	return p_a->get_importer_name() < p_b->get_importer_name();

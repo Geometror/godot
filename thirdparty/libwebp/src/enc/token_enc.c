@@ -18,11 +18,15 @@
 
 #include <assert.h>
 #include <stdlib.h>
-#include <string.h>
+#include <stdint.h>
 
 #include "src/enc/cost_enc.h"
 #include "src/enc/vp8i_enc.h"
 #include "src/utils/utils.h"
+#include "dec/common_dec.h"
+#include "dsp/dsp.h"
+#include "utils/bit_writer_utils.h"
+#include "webp/types.h"
 
 #if !defined(DISABLE_TOKEN_BUFFER)
 

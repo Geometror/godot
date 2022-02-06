@@ -37,9 +37,22 @@
 #include "joints/godot_hinge_joint_3d.h"
 #include "joints/godot_pin_joint_3d.h"
 #include "joints/godot_slider_joint_3d.h"
-
 #include "core/debugger/engine_debugger.h"
 #include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/templates/map.h"
+#include "core/templates/vset.h"
+#include "core/variant/array.h"
+#include "servers/physics_3d/godot_area_3d.h"
+#include "servers/physics_3d/godot_body_3d.h"
+#include "servers/physics_3d/godot_broad_phase_3d.h"
+#include "servers/physics_3d/godot_collision_object_3d.h"
+#include "servers/physics_3d/godot_joint_3d.h"
+#include "servers/physics_3d/godot_shape_3d.h"
+#include "servers/physics_3d/godot_soft_body_3d.h"
+#include "servers/physics_3d/godot_space_3d.h"
+#include "servers/physics_3d/godot_step_3d.h"
 
 #define FLUSH_QUERY_CHECK(m_object) \
 	ERR_FAIL_COND_MSG(m_object->get_space() && flushing_queries, "Can't change this state while flushing queries. Use call_deferred() or set_deferred() to change monitoring state instead.");

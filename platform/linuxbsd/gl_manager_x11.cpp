@@ -30,12 +30,19 @@
 
 #include "gl_manager_x11.h"
 
+#include <GL/gl.h>
+#include <X11/extensions/Xrender.h>
+
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/os/os.h"
+#include "core/string/ustring.h"
+
+struct Vector2i;
+
 #ifdef X11_ENABLED
 #if defined(GLES3_ENABLED)
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 #define GLX_GLXEXT_PROTOTYPES
 #include <GL/glx.h>

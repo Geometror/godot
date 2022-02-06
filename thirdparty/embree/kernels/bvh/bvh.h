@@ -3,6 +3,11 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <queue>
+#include <string>
+#include <vector>
+
 /* include all node types */
 #include "bvh_node_aabb.h"
 #include "bvh_node_aabb_mb.h"
@@ -10,9 +15,22 @@
 #include "bvh_node_obb.h"
 #include "bvh_node_obb_mb.h"
 #include "bvh_node_qaabb.h"
+#include "common/math/lbbox.h"
+#include "common/sys/alloc.h"
+#include "common/sys/intrinsics.h"
+#include "common/sys/platform.h"
+#include "common/sys/vector.h"
+#include "kernels/bvh/bvh_node_base.h"
+#include "kernels/bvh/bvh_node_ref.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/alloc.h"
 
 namespace embree
 {
+class Device;
+class Scene;
+struct PrimitiveType;
+
   /*! flags used to enable specific node types in intersectors */
   enum BVHNodeFlags
   {

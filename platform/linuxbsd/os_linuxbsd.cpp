@@ -32,6 +32,18 @@
 
 #include "core/io/dir_access.h"
 #include "main/main.h"
+#include "core/error/error_macros.h"
+#include "core/input/input.h"
+#include "core/io/file_access.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "joypad_linux.h"
+#include "servers/audio_server.h"
+#include "servers/display_server.h"
 
 #ifdef X11_ENABLED
 #include "display_server_x11.h"
@@ -43,13 +55,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-#include <dlfcn.h>
-#include <fcntl.h>
 #include <sys/stat.h>
-#include <sys/types.h>
 #include <unistd.h>
+#include <stdint.h>
 
 void OS_LinuxBSD::alert(const String &p_alert, const String &p_title) {
 	const char *message_programs[] = { "zenity", "kdialog", "Xdialog", "xmessage" };

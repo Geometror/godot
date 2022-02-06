@@ -35,6 +35,13 @@
 #include "editor/editor_node.h"
 #include "editor/editor_settings.h"
 #include "modules/websocket/remote_debugger_peer_websocket.h"
+#include "core/debugger/remote_debugger_peer.h"
+#include "core/error/error_macros.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "modules/websocket/websocket_server.h"
 
 void EditorDebuggerServerWebSocket::_peer_connected(int p_id, String _protocol) {
 	pending_peers.push_back(p_id);

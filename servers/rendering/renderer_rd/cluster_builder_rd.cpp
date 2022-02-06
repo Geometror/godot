@@ -29,8 +29,15 @@
 /*************************************************************************/
 
 #include "cluster_builder_rd.h"
+
+#include <string.h>
+
 #include "servers/rendering/rendering_device.h"
-#include "servers/rendering/rendering_server_globals.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "servers/rendering/renderer_storage.h"
 
 ClusterBuilderSharedDataRD::ClusterBuilderSharedDataRD() {
 	RD::VertexFormatID vertex_format;

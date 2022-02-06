@@ -16,10 +16,11 @@
  ********************************************************************/
 
 #include <stdlib.h>
-#include <string.h>
-#include <ogg/ogg.h>
+
 #include "huffdec.h"
-#include "decint.h"
+#include "huffman.h"
+#include "ocintrin.h"
+#include "ogg/os_types.h"
 
 
 /*The ANSI offsetof macro is broken on some platforms (e.g., older DECs).*/

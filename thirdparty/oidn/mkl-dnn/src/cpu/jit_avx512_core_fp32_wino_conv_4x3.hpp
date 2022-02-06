@@ -17,13 +17,25 @@
 #ifndef CPU_JIT_AVX512_CORE_FP32_WINO_CONV_4x3_HPP
 #define CPU_JIT_AVX512_CORE_FP32_WINO_CONV_4x3_HPP
 
+#include <assert.h>
+#include <stddef.h>
+
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
-
 #include "cpu_convolution_pd.hpp"
 #include "cpu_primitive.hpp"
-
 #include "jit_avx512_core_fp32_wino_conv_4x3_kernel.hpp"
+#include "convolution_pd.hpp"
+#include "cpu_isa_traits.hpp"
+#include "jit_avx512_common_conv_winograd_kernel_f32.hpp"
+#include "jit_generator.hpp"
+#include "jit_primitive_conf.hpp"
+#include "mkldnn_thread.hpp"
+#include "mkldnn_traits.hpp"
+#include "mkldnn_types.h"
+#include "primitive_desc.hpp"
+#include "primitive_exec_types.hpp"
+#include "utils.hpp"
 
 namespace mkldnn {
 namespace impl {

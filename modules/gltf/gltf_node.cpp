@@ -30,6 +30,10 @@
 
 #include "gltf_node.h"
 
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "modules/gltf/gltf_document.h"
+
 void GLTFNode::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_parent"), &GLTFNode::get_parent);
 	ClassDB::bind_method(D_METHOD("set_parent", "parent"), &GLTFNode::set_parent);

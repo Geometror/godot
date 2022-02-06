@@ -16,10 +16,16 @@
 #ifndef UVECTOR32_H
 #define UVECTOR32_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uobject.h"
 #include "uhash.h"
 #include "uassert.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

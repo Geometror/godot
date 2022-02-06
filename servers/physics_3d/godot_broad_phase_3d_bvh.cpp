@@ -31,6 +31,11 @@
 #include "godot_broad_phase_3d_bvh.h"
 
 #include "godot_collision_object_3d.h"
+#include "bvh_tree.h"
+#include "core/error/error_macros.h"
+#include "core/math/bvh_tree.h"
+#include "core/os/memory.h"
+#include "servers/physics_3d/godot_broad_phase_3d.h"
 
 GodotBroadPhase3DBVH::ID GodotBroadPhase3DBVH::create(GodotCollisionObject3D *p_object, int p_subindex, const AABB &p_aabb, bool p_static) {
 	ID oid = bvh.create(p_object, true, p_aabb, p_subindex, !p_static, 1 << p_object->get_type(), p_static ? 0 : 0xFFFFF); // Pair everything, don't care?

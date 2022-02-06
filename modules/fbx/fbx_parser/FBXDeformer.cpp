@@ -73,14 +73,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  @brief Assimp::FBX::NodeAttribute (and subclasses) implementation
  */
 
+#include <stdint.h>
+#include <algorithm>
+#include <string>
+#include <vector>
+
 #include "FBXDocument.h"
 #include "FBXDocumentUtil.h"
 #include "FBXMeshGeometry.h"
 #include "FBXParser.h"
-#include "core/math/math_funcs.h"
 #include "core/math/transform_3d.h"
-
-#include <iostream>
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
 
 namespace FBXDocParser {
 

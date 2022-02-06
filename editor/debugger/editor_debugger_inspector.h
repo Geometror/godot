@@ -31,6 +31,17 @@
 #ifndef EDITOR_DEBUGGER_INSPECTOR_H
 #define EDITOR_DEBUGGER_INSPECTOR_H
 #include "editor/editor_inspector.h"
+#include "core/io/resource.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/variant/variant.h"
+
+class Array;
 
 class EditorDebuggerRemoteObject : public Object {
 	GDCLASS(EditorDebuggerRemoteObject, Object);

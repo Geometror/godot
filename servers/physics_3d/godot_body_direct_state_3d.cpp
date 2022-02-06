@@ -32,6 +32,8 @@
 
 #include "godot_body_3d.h"
 #include "godot_space_3d.h"
+#include "core/error/error_macros.h"
+#include "core/templates/vector.h"
 
 Vector3 GodotPhysicsDirectBodyState3D::get_total_gravity() const {
 	return body->gravity;

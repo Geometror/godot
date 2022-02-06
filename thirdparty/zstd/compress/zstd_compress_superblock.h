@@ -15,7 +15,10 @@
 *  Dependencies
 ***************************************/
 
+#include <stddef.h>
+
 #include "../zstd.h" /* ZSTD_CCtx */
+#include "../common/zstd_internal.h"
 
 /*-*************************************
 *  Target Compressed Block Size

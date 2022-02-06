@@ -32,6 +32,10 @@
 #define AUDIOEFFECTDELAY_H
 
 #include "servers/audio/audio_effect.h"
+#include "core/math/audio_frame.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
 
 class AudioEffectDelay;
 

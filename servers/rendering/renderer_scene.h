@@ -31,8 +31,33 @@
 #ifndef RENDERINGSERVERSCENE_H
 #define RENDERINGSERVERSCENE_H
 
+#include <stdint.h>
+
 #include "servers/rendering/renderer_compositor.h"
 #include "servers/xr/xr_interface.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/typed_array.h"
+#include "core/variant/variant.h"
+#include "servers/rendering_server.h"
+
+class Image;
+class ObjectID;
+class XRInterface;
+struct AABB;
+struct Plane;
+struct PropertyInfo;
+struct Rect2;
+struct Transform3D;
 
 class RendererScene {
 public:

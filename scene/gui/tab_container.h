@@ -34,6 +34,23 @@
 #include "scene/gui/container.h"
 #include "scene/gui/popup.h"
 #include "scene/resources/text_line.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
+
+class Control;
+class InputEvent;
+class Node;
+class Popup;
+class StyleBox;
+class Texture2D;
+struct Color;
 
 class TabContainer : public Container {
 	GDCLASS(TabContainer, Container);

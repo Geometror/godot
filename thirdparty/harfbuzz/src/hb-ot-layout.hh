@@ -29,14 +29,16 @@
 #ifndef HB_OT_LAYOUT_HH
 #define HB_OT_LAYOUT_HH
 
-#include "hb.hh"
+#include <stdint.h>
 
+#include "hb.hh"
 #include "hb-font.hh"
 #include "hb-buffer.hh"
 #include "hb-open-type.hh"
 #include "hb-ot-shape.hh"
 #include "hb-set-digest.hh"
-
+#include "hb-unicode.hh"
+#include "hb.h"
 
 struct hb_ot_shape_plan_t;
 

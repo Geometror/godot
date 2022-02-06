@@ -35,6 +35,16 @@
 #include "scene/resources/bit_map.h"
 #include "scene/resources/rectangle_shape_2d.h"
 #include "scene/resources/texture.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
+#include "scene/resources/shape_2d.h"
+
+class InputEvent;
 
 class TouchScreenButton : public Node2D {
 	GDCLASS(TouchScreenButton, Node2D);

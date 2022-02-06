@@ -31,9 +31,26 @@
 #ifndef RENDERER_SCENE_OCCLUSION_CULL_H
 #define RENDERER_SCENE_OCCLUSION_CULL_H
 
+#include <float.h>
+
 #include "core/math/camera_matrix.h"
 #include "core/templates/local_vector.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+
+class ThreadWorkPool;
 
 class RendererSceneOcclusionCull {
 protected:

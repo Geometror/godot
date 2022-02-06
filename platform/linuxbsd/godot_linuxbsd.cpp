@@ -35,6 +35,8 @@
 
 #include "main/main.h"
 #include "os_linuxbsd.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
 
 int main(int argc, char *argv[]) {
 	OS_LinuxBSD os;

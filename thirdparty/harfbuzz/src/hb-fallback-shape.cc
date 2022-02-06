@@ -24,8 +24,12 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "hb-shaper-impl.hh"
-
+#include "hb-buffer.hh"
+#include "hb-font.hh"
+#include "hb-shaper.hh"
+#include "hb-unicode.hh"
+#include "hb.h"
+#include "hb.hh"
 #ifndef HB_NO_FALLBACK_SHAPE
 
 /*

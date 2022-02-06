@@ -12,7 +12,13 @@
  *
  */
 
+#include <stdlib.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pngdebug.h"
+#include "pnglibconf.h"
+#include "pngstruct.h"
 
 #if defined(PNG_READ_SUPPORTED) || defined(PNG_WRITE_SUPPORTED)
 

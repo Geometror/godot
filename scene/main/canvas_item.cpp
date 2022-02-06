@@ -34,12 +34,22 @@
 #include "scene/2d/canvas_group.h"
 #include "scene/main/canvas_layer.h"
 #include "scene/main/window.h"
-#include "scene/resources/canvas_item_material.h"
 #include "scene/resources/font.h"
 #include "scene/resources/multimesh.h"
 #include "scene/resources/style_box.h"
 #include "scene/resources/world_2d.h"
 #include "scene/scene_string_names.h"
+#include "core/error/error_macros.h"
+#include "core/input/input_event.h"
+#include "core/io/image.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector2i.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "scene/main/viewport.h"
+#include "scene/resources/material.h"
+#include "scene/resources/mesh.h"
 
 #ifdef TOOLS_ENABLED
 bool CanvasItem::_edit_is_selected_on_click(const Point2 &p_point, double p_tolerance) const {

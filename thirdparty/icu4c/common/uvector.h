@@ -14,11 +14,16 @@
 #ifndef UVECTOR_H
 #define UVECTOR_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uobject.h"
 #include "cmemory.h"
 #include "uarrsort.h"
 #include "uelement.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

@@ -13,6 +13,9 @@
 #include "igd_desc_parse.h"
 #include "upnpdev.h"
 
+struct IGDdatas;
+struct UPNPDev;
+
 /* error codes : */
 #define UPNPDISCOVER_SUCCESS (0)
 #define UPNPDISCOVER_UNKNOWN_ERROR (-1)

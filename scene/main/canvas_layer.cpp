@@ -29,8 +29,18 @@
 /*************************************************************************/
 
 #include "canvas_layer.h"
+
 #include "canvas_item.h"
 #include "viewport.h"
+#include "core/error/error_macros.h"
+#include "core/math/rect2.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "scene/resources/world_2d.h"
+#include "servers/rendering_server.h"
 
 void CanvasLayer::set_layer(int p_xform) {
 	layer = p_xform;

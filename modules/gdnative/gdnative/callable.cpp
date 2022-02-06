@@ -30,8 +30,11 @@
 
 #include "gdnative/callable.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/variant/callable.h"
-#include "core/variant/variant.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
 
 static_assert(sizeof(godot_callable) == sizeof(Callable), "Callable size mismatch");
 

@@ -15,10 +15,19 @@
 ******************************************************************************
 */
 
-#include "utypeinfo.h"  // for 'typeid' to work
+#include <stdint.h>
+#include <typeinfo>
 
-#include "unicode/chariter.h"
 #include "unicode/schriter.h"
+#include "unicode/char16ptr.h"
+#include "unicode/uchriter.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class ForwardCharacterIterator;
+}  // namespace icu_70
 
 U_NAMESPACE_BEGIN
 

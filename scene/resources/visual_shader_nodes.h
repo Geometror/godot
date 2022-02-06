@@ -32,6 +32,20 @@
 #define VISUAL_SHADER_NODES_H
 
 #include "scene/resources/visual_shader.h"
+#include "core/math/color.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+#include "scene/resources/shader.h"
+#include "scene/resources/texture.h"
+
+class StringName;
 
 ///////////////////////////////////////
 /// Vector Base Node

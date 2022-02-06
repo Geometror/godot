@@ -37,6 +37,13 @@
 #include "modules/websocket/wsl_client.h"
 #endif
 #include "core/debugger/remote_debugger_peer.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/array.h"
+#include "modules/websocket/websocket_client.h"
+#include "modules/websocket/websocket_peer.h"
 
 class RemoteDebuggerPeerWebSocket : public RemoteDebuggerPeer {
 	Ref<WebSocketClient> ws_client;

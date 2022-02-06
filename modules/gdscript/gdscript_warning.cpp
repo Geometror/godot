@@ -31,6 +31,7 @@
 #include "gdscript_warning.h"
 
 #include "core/variant/variant.h"
+#include "core/error/error_macros.h"
 
 #ifdef DEBUG_ENABLED
 

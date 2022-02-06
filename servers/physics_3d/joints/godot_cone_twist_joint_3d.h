@@ -54,6 +54,12 @@ Written by: Marcus Hennix
 
 #include "servers/physics_3d/godot_joint_3d.h"
 #include "servers/physics_3d/joints/godot_jacobian_entry_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "servers/physics_server_3d.h"
+
+class GodotBody3D;
 
 // GodotConeTwistJoint3D can be used to simulate ragdoll joints (upper arm, leg etc).
 class GodotConeTwistJoint3D : public GodotJoint3D {

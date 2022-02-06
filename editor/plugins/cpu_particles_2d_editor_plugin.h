@@ -37,6 +37,19 @@
 #include "scene/2d/cpu_particles_2d.h"
 #include "scene/gui/box_container.h"
 #include "scene/gui/file_dialog.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+
+class CPUParticles2D;
+class CheckBox;
+class ConfirmationDialog;
+class EditorFileDialog;
+class EditorNode;
+class HBoxContainer;
+class MenuButton;
+class OptionButton;
+class SpinBox;
+class UndoRedo;
 
 class CPUParticles2DEditorPlugin : public EditorPlugin {
 	GDCLASS(CPUParticles2DEditorPlugin, EditorPlugin);

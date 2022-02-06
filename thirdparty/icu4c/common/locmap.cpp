@@ -28,12 +28,13 @@
  */
 
 #include "locmap.h"
-#include "bytesinkutil.h"
-#include "charstr.h"
+
+#include <stddef.h>
+
 #include "cstring.h"
 #include "cmemory.h"
-#include "ulocimp.h"
-#include "unicode/uloc.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
 
 #if U_PLATFORM_HAS_WIN32_API && UCONFIG_USE_WINDOWS_LCID_MAPPING_API
 #include <windows.h>

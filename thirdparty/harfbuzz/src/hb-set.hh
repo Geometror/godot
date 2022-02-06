@@ -28,8 +28,11 @@
 #ifndef HB_SET_HH
 #define HB_SET_HH
 
+#include <initializer_list>
+
 #include "hb.hh"
 #include "hb-bit-set-invertible.hh"
+#include "hb.h"
 
 
 template <typename impl_t>

@@ -13,6 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #pragma once
+#include <assert.h>
+#include <stdint.h>
+#include <string.h>
+#include <transcoder/basisu_containers.h>
+
 #include "../transcoder/basisu.h"
 #include "basisu_enc.h"
 

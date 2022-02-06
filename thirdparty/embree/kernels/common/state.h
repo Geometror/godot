@@ -3,10 +3,22 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <string>
+#include <vector>
+
 #include "default.h"
+#include "common/sys/filename.h"
+#include "common/sys/mutex.h"
+#include "common/sys/ref.h"
+#include "common/sys/sysinfo.h"
+#include "common/sys/thread.h"
+#include "embree3/rtcore_device.h"
 
 namespace embree
 {
+class TokenStream;
+
   /* mutex to make printing to cout thread safe */
   extern MutexSys g_printMutex;
 

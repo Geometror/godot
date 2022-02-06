@@ -2,8 +2,11 @@
 #pragma once
 
 #include "edge-segments.h"
+#include "core/EdgeColor.h"
+#include "core/Vector2.h"
 
 namespace msdfgen {
+class EdgeSegment;
 
 /// Container for a single edge of dynamic type.
 class EdgeHolder {

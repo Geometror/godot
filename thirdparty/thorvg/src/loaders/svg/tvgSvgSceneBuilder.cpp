@@ -49,13 +49,21 @@
 */
 
 
+#include <math.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include <cstring>
 #include <string>
+#include <utility>
+
 #include "tvgMath.h"
 #include "tvgSvgLoaderCommon.h"
 #include "tvgSvgSceneBuilder.h"
 #include "tvgSvgPath.h"
 #include "tvgSvgUtil.h"
+#include "thorvg.h"
+#include "tvgArray.h"
+#include "tvgCommon.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

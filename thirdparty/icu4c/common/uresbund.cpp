@@ -21,13 +21,14 @@
 ******************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/ures.h"
 #include "unicode/ustring.h"
-#include "unicode/ucnv.h"
 #include "charstr.h"
 #include "uresimp.h"
 #include "ustr_imp.h"
-#include "cwchar.h"
 #include "ucln_cmn.h"
 #include "cmemory.h"
 #include "cstring.h"
@@ -40,6 +41,17 @@
 #include "putilimp.h"
 #include "uassert.h"
 #include "uresdata.h"
+#include "resource.h"
+#include "restrace.h"
+#include "unicode/localpointer.h"
+#include "unicode/platform.h"
+#include "unicode/putil.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uloc.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 using namespace icu;
 
@@ -3168,10 +3180,6 @@ ures_getKeywordValues(const char *path, const char *keyword, UErrorCode *status)
             const char *k;
             int32_t i;
             k = ures_getKey(subPtr);
-
-#if defined(URES_TREE_DEBUG)
-            /* fprintf(stderr, "%s | %s | %s | %s\n", path?path:"<ICUDATA>", keyword, locale, k); */
-#endif
             if(k == NULL || *k == 0 ||
                     uprv_strcmp(k, DEFAULT_TAG) == 0 || uprv_strncmp(k, "private-", 8) == 0) {
                 // empty or "default" or unlisted type

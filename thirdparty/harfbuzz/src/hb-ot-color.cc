@@ -25,12 +25,15 @@
  * Google Author(s): Sascha Brawer, Behdad Esfahbod
  */
 
-#include "hb.hh"
-
+#include "hb-blob.hh"
+#include "hb-face.hh"
+#include "hb-font.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
+#include "hb.h"
 #ifndef HB_NO_COLOR
 
 #include "hb-ot.h"
-
 #include "hb-ot-color-cbdt-table.hh"
 #include "hb-ot-color-colr-table.hh"
 #include "hb-ot-color-cpal-table.hh"

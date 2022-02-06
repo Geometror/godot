@@ -33,7 +33,18 @@
 #include "core/input/input.h"
 #include "core/os/os.h"
 #include "servers/display_server.h"
-#include "servers/rendering/rendering_server_globals.h"
+#include "core/error/error_macros.h"
+#include "core/math/quaternion.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2i.h"
+#include "core/object/class_db.h"
+#include "core/os/thread_safe.h"
+#include "core/templates/rid.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_compositor.h"
+#include "servers/xr/xr_positional_tracker.h"
+#include "servers/xr_server.h"
 
 StringName MobileVRInterface::get_name() const {
 	return "Native mobile";

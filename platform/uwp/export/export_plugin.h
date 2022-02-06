@@ -31,6 +31,9 @@
 #ifndef UWP_EXPORT_PLUGIN_H
 #define UWP_EXPORT_PLUGIN_H
 
+#include <zlib.h>
+#include <stdint.h>
+
 #include "core/config/project_settings.h"
 #include "core/crypto/crypto_core.h"
 #include "core/io/dir_access.h"
@@ -41,13 +44,22 @@
 #include "core/version.h"
 #include "editor/editor_export.h"
 #include "editor/editor_node.h"
-
 #include "thirdparty/minizip/unzip.h"
 #include "thirdparty/minizip/zip.h"
-
 #include "app_packager.h"
-
-#include <zlib.h>
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "editor/editor_paths.h"
+#include "scene/resources/texture.h"
 
 // Capabilities
 static const char *uwp_capabilities[] = {

@@ -16,11 +16,11 @@
 
 #include <stdio.h>
 #include <ogg/ogg.h>
+
 #include "vorbis/codec.h"
-#include "codec_internal.h"
 #include "registry.h"
 #include "misc.h"
-#include "os.h"
+#include "backends.h"
 
 int vorbis_synthesis(vorbis_block *vb,ogg_packet *op){
   vorbis_dsp_state     *vd= vb ? vb->vd : 0;

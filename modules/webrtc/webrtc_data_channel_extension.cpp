@@ -30,6 +30,9 @@
 
 #include "webrtc_data_channel_extension.h"
 
+#include "core/error/error_macros.h"
+#include "modules/webrtc/webrtc_data_channel.h"
+
 void WebRTCDataChannelExtension::_bind_methods() {
 	ADD_PROPERTY_DEFAULT("write_mode", WRITE_MODE_BINARY);
 

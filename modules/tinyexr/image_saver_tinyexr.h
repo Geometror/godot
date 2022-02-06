@@ -32,6 +32,11 @@
 #define IMAGE_SAVER_TINYEXR_H
 
 #include "core/os/os.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+
+class Image;
 
 Error save_exr(const String &p_path, const Ref<Image> &p_img, bool p_grayscale);
 

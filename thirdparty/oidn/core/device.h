@@ -16,7 +16,15 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <mutex>
+#include <string>
+
 #include "common.h"
+#include "OpenImageDenoise/oidn.hpp"
+#include "common/platform.h"
+#include "common/ref.h"
+#include "common/thread.h"
 
 namespace oidn {
 

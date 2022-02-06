@@ -43,7 +43,6 @@
 #include "gltf_spec_gloss.h"
 #include "gltf_state.h"
 #include "gltf_texture.h"
-
 #include "core/crypto/crypto_core.h"
 #include "core/error/error_macros.h"
 #include "core/io/dir_access.h"
@@ -70,8 +69,37 @@
 #include "scene/resources/mesh.h"
 #include "scene/resources/multimesh.h"
 #include "scene/resources/surface_tool.h"
-
 #include "modules/modules_enabled.gen.h" // For csg, gridmap.
+#include "core/config/engine.h"
+#include "core/io/image.h"
+#include "core/io/resource_loader.h"
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/math/quaternion.h"
+#include "core/math/transform_2d.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/class_db.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "core/string/node_path.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/list.h"
+#include "core/templates/local_vector.h"
+#include "core/templates/pair.h"
+#include "modules/gltf/gltf_buffer_view.h"
+#include "scene/3d/bone_attachment_3d.h"
+#include "scene/3d/importer_mesh_instance_3d.h"
+#include "scene/3d/light_3d.h"
+#include "scene/3d/skeleton_3d.h"
+#include "scene/main/node.h"
+#include "scene/resources/animation.h"
+#include "scene/resources/material.h"
+#include "scene/resources/mesh_library.h"
+#include "scene/resources/skin.h"
+#include "scene/resources/texture.h"
 
 #ifdef MODULE_CSG_ENABLED
 #include "modules/csg/csg_shape.h"
@@ -81,9 +109,9 @@
 #endif // MODULE_GRIDMAP_ENABLED
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <float.h>
+#include <string.h>
 #include <cstdint>
-#include <limits>
 
 Error GLTFDocument::_serialize(Ref<GLTFState> state, const String &p_path) {
 	if (!state->buffers.size()) {

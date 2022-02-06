@@ -31,6 +31,9 @@
 #ifndef AUDIO_SERVER_H
 #define AUDIO_SERVER_H
 
+#include <stdint.h>
+#include <atomic>
+
 #include "core/math/audio_frame.h"
 #include "core/object/class_db.h"
 #include "core/os/os.h"
@@ -38,8 +41,20 @@
 #include "core/variant/variant.h"
 #include "servers/audio/audio_effect.h"
 #include "servers/audio/audio_filter_sw.h"
-
-#include <atomic>
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/safe_refcount.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
 
 class AudioDriverDummy;
 class AudioStream;

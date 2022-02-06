@@ -20,6 +20,9 @@
 ******************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/appendable.h"
 #include "unicode/putil.h"
@@ -27,16 +30,26 @@
 #include "cmemory.h"
 #include "unicode/ustring.h"
 #include "unicode/unistr.h"
-#include "unicode/utf.h"
 #include "unicode/utf16.h"
 #include "uelement.h"
 #include "ustr_imp.h"
 #include "umutex.h"
 #include "uassert.h"
+#include "putilimp.h"
+#include "unicode/bytestream.h"
+#include "unicode/char16ptr.h"
+#include "unicode/platform.h"
+#include "unicode/rep.h"
+#include "unicode/stringpiece.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if 0
 
 #include <iostream>
+
 using namespace std;
 
 //DEBUGGING

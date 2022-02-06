@@ -15,6 +15,9 @@
 *
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "cmemory.h"
 #include "unicode/ubidi.h"
 #include "unicode/ustring.h"
@@ -22,6 +25,11 @@
 #include "unicode/utf16.h"
 #include "ustr_imp.h"
 #include "unicode/ubiditransform.h"
+#include "unicode/platform.h"
+#include "unicode/uchar.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
 
 /* Some convenience defines */
 #define LTR                     UBIDI_LTR

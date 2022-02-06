@@ -19,9 +19,15 @@
 #include <freetype/ftstroke.h>
 #include <freetype/fttrigon.h>
 #include <freetype/ftoutln.h>
-#include <freetype/internal/ftmemory.h>
-#include <freetype/internal/ftdebug.h>
-#include <freetype/internal/ftobjs.h>
+#include <freetype/fterrors.h>
+#include <stddef.h>
+
+#include "freetype/ftglyph.h"
+#include "freetype/ftrender.h"
+#include "freetype/ftsystem.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftmemory.h"
+#include "freetype/internal/ftobjs.h"
 
 
   /* declare an extern to access `ft_outline_glyph_class' globally */

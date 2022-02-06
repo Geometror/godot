@@ -30,17 +30,20 @@
 
 #include "net_socket_posix.h"
 
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+
 #ifndef UNIX_SOCKET_UNAVAILABLE
 #if defined(UNIX_ENABLED)
 
 #include <errno.h>
-#include <netdb.h>
 #include <poll.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <sys/ioctl.h>
-#include <sys/types.h>
 #include <unistd.h>
 #ifndef NO_FCNTL
 #include <fcntl.h>
@@ -48,7 +51,6 @@
 #include <sys/ioctl.h>
 #endif
 #include <netinet/in.h>
-
 #include <sys/socket.h>
 #ifdef JAVASCRIPT_ENABLED
 #include <arpa/inet.h>
@@ -76,8 +78,8 @@
 #elif defined(WINDOWS_ENABLED)
 #include <winsock2.h>
 #include <ws2tcpip.h>
-
 #include <mswsock.h>
+
 // Some custom defines to minimize ifdefs
 #define SOCK_EMPTY INVALID_SOCKET
 #define SOCK_BUF(x) (char *)(x)

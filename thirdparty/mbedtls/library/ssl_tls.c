@@ -25,7 +25,27 @@
  *  http://www.ietf.org/rfc/rfc4346.txt
  */
 
+#include <stdint.h>
+#include <time.h>
+
 #include "common.h"
+#include "mbedtls/asn1.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
+#include "mbedtls/dhm.h"
+#include "mbedtls/ecdh.h"
+#include "mbedtls/ecp.h"
+#include "mbedtls/md.h"
+#include "mbedtls/md5.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/sha1.h"
+#include "mbedtls/sha256.h"
+#include "mbedtls/sha512.h"
+#include "mbedtls/ssl_ciphersuites.h"
+#include "mbedtls/x509.h"
+#include "mbedtls/x509_crl.h"
+#include "mbedtls/x509_crt.h"
 
 #if defined(MBEDTLS_SSL_TLS_C)
 
@@ -33,9 +53,12 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free      free
 #endif
+
+#include <string.h>
 
 #include "mbedtls/ssl.h"
 #include "mbedtls/ssl_internal.h"
@@ -44,8 +67,6 @@
 #include "mbedtls/platform_util.h"
 #include "mbedtls/version.h"
 #include "mbedtls/constant_time.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
 #include "mbedtls/psa_util.h"

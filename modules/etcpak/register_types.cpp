@@ -31,6 +31,7 @@
 #include "register_types.h"
 
 #include "image_compress_etcpak.h"
+#include "core/io/image.h"
 
 void register_etcpak_types() {
 	Image::_image_compress_etc1_func = _compress_etc1;

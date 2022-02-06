@@ -35,8 +35,11 @@
 #ifndef _INFOSINK_INCLUDED_
 #define _INFOSINK_INCLUDED_
 
-#include "../Include/Common.h"
+#include <stdio.h>
 #include <cmath>
+#include <string>
+
+#include "../Include/Common.h"
 
 namespace glslang {
 

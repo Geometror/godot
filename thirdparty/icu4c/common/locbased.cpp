@@ -11,6 +11,9 @@
 **********************************************************************
 */
 #include "locbased.h"
+
+#include <stddef.h>
+
 #include "cstring.h"
 
 U_NAMESPACE_BEGIN

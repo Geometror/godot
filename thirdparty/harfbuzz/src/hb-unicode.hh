@@ -31,7 +31,11 @@
 #ifndef HB_UNICODE_HH
 #define HB_UNICODE_HH
 
+#include <stdint.h>
+
 #include "hb.hh"
+#include "hb-config.hh"
+#include "hb.h"
 
 
 extern HB_INTERNAL const uint8_t _hb_modified_combining_class[256];

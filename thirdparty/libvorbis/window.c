@@ -14,10 +14,6 @@
 
  ********************************************************************/
 
-#include <stdlib.h>
-#include <math.h>
-#include "os.h"
-#include "misc.h"
 #include "window.h"
 
 static const float vwin64[32] = {

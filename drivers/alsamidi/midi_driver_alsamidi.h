@@ -31,15 +31,19 @@
 #ifndef MIDI_DRIVER_ALSAMIDI_H
 #define MIDI_DRIVER_ALSAMIDI_H
 
+#include <alsa/rawmidi.h>
+
+#include "core/error/error_list.h"
+#include "core/variant/variant.h"
 #ifdef ALSAMIDI_ENABLED
+
+#include <stdio.h>
 
 #include "core/os/midi_driver.h"
 #include "core/os/mutex.h"
 #include "core/os/thread.h"
 #include "core/templates/vector.h"
-
 #include "../alsa/asound-so_wrap.h"
-#include <stdio.h>
 
 class MIDIDriverALSAMidi : public MIDIDriver {
 	Thread thread;

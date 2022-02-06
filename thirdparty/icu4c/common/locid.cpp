@@ -31,6 +31,8 @@
 ******************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
 #include <utility>
 
 #include "unicode/bytestream.h"
@@ -40,7 +42,6 @@
 #include "unicode/stringpiece.h"
 #include "unicode/uloc.h"
 #include "unicode/ures.h"
-
 #include "bytesinkutil.h"
 #include "charstr.h"
 #include "charstrmap.h"
@@ -56,6 +57,16 @@
 #include "uniquecharstr.h"
 #include "ustr_imp.h"
 #include "uvector.h"
+#include "uelement.h"
+#include "unicode/localpointer.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 U_CDECL_BEGIN
 static UBool U_CALLCONV locale_cleanup(void);

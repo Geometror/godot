@@ -30,8 +30,8 @@ Licensed under the MIT License.
 
 http://go.microsoft.com/fwlink/?LinkId=248926
 */
-#include "ConvectionKernels_Config.h"
 
+#include <stdint.h>
 #if !defined(CVTT_SINGLE_FILE) || defined(CVTT_SINGLE_FILE_IMPL)
 
 #include "ConvectionKernels_BC7_Prio.h"

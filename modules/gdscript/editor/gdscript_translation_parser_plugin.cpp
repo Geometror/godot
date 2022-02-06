@@ -32,6 +32,11 @@
 
 #include "core/io/resource_loader.h"
 #include "modules/gdscript/gdscript.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 void GDScriptEditorTranslationParserPlugin::get_recognized_extensions(List<String> *r_extensions) const {
 	GDScriptLanguage::get_singleton()->get_recognized_extensions(r_extensions);

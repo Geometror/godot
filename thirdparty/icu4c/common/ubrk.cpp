@@ -7,19 +7,28 @@
 ********************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/localpointer.h"
+#include "unicode/locid.h"
+#include "unicode/parseerr.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/utext.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/ubrk.h"
-
 #include "unicode/brkiter.h"
 #include "unicode/uloc.h"
-#include "unicode/ustring.h"
-#include "unicode/uchriter.h"
 #include "unicode/rbbi.h"
 #include "rbbirb.h"
-#include "uassert.h"
 #include "cmemory.h"
 
 U_NAMESPACE_USE

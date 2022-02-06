@@ -31,15 +31,22 @@
 #ifndef GL_MANAGER_X11_H
 #define GL_MANAGER_X11_H
 
+#include <X11/X.h>
+#include <X11/Xutil.h>
+
+#include "core/error/error_list.h"
+
+struct Vector2i;
 #ifdef X11_ENABLED
 
 #ifdef GLES3_ENABLED
 
+#include <X11/Xlib.h>
+#include <X11/extensions/Xrender.h>
+
 #include "core/os/os.h"
 #include "core/templates/local_vector.h"
 #include "servers/display_server.h"
-#include <X11/Xlib.h>
-#include <X11/extensions/Xrender.h>
 
 struct GLManager_X11_Private;
 

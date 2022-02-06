@@ -33,6 +33,7 @@
 
 #include "core/io/resource.h"
 #include "core/templates/rid.h"
+#include "core/object/object.h"
 
 class CameraEffects : public Resource {
 	GDCLASS(CameraEffects, Resource);

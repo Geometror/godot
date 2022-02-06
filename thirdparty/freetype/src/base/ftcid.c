@@ -17,8 +17,12 @@
 
 
 #include <freetype/ftcid.h>
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/services/svcid.h>
+#include <freetype/fterrors.h>
+#include <stddef.h>
+
+#include "freetype/freetype.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/services/svcid.h"
 
 
   /* documentation is in ftcid.h */

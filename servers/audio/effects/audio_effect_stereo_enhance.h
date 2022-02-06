@@ -32,8 +32,11 @@
 #define AUDIOEFFECTSTEREOENHANCE_H
 
 #include "servers/audio/audio_effect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class AudioEffectStereoEnhance;
+struct AudioFrame;
 
 class AudioEffectStereoEnhanceInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectStereoEnhanceInstance, AudioEffectInstance);

@@ -3,6 +3,10 @@
 
 #include "Shape.h"
 
+namespace msdfgen {
+class Shape;
+}  // namespace msdfgen
+
 #define MSDFGEN_EDGE_LENGTH_PRECISION 4
 
 namespace msdfgen {

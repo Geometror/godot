@@ -2,7 +2,20 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh.h"
+
+#include <iostream>
+#include <memory>
+
 #include "bvh_statistics.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/sys/mutex.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/bvh/bvh_node_aabb.h"
+#include "kernels/common/device.h"
+#include "kernels/common/scene.h"
+#include "kernels/common/state.h"
+#include "kernels/geometry/primitive.h"
 
 namespace embree
 {

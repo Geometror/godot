@@ -43,6 +43,7 @@
 #ifndef _unz64_H
 #define _unz64_H
 
+#include "zconf.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -13,15 +13,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include "basisu_enc.h"
+
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <strings.h>
+#include <sys/time.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_transcoder_internal.h>
+#include <vector>
+#include <algorithm>
+#include <memory>
+
 #include "lodepng.h"
 #include "basisu_resampler.h"
-#include "basisu_resampler_filters.h"
 #include "basisu_etc.h"
 #include "../transcoder/basisu_transcoder.h"
 #include "basisu_bc7enc.h"
 #include "apg_bmp.h"
 #include "jpgd.h"
-#include <vector>
 
 #if defined(_WIN32)
 // For QueryPerformanceCounter/QueryPerformanceFrequency
@@ -197,6 +207,7 @@ namespace basisu
 	}
 #elif defined(__APPLE__) || defined(__OpenBSD__)
 #include <sys/time.h>
+
 	inline void query_counter(timer_ticks* pTicks)
 	{
 		struct timeval cur_time;
@@ -208,7 +219,6 @@ namespace basisu
 		*pTicks = 1000000;
 	}
 #elif defined(__GNUC__)
-#include <sys/timex.h>
 	inline void query_counter(timer_ticks* pTicks)
 	{
 		struct timeval cur_time;

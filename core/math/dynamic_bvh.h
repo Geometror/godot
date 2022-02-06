@@ -31,11 +31,20 @@
 #ifndef DYNAMIC_BVH_H
 #define DYNAMIC_BVH_H
 
+#include <alloca.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "core/math/aabb.h"
 #include "core/templates/list.h"
 #include "core/templates/local_vector.h"
 #include "core/templates/paged_allocator.h"
 #include "core/typedefs.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/vector3.h"
 
 // Based on bullet Dbvh
 

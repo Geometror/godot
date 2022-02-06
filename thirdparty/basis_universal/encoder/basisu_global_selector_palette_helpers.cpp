@@ -14,6 +14,9 @@
 // limitations under the License.
 #include "basisu_global_selector_palette_helpers.h"
 
+#include <encoder/basisu_etc.h>
+#include <transcoder/basisu_global_selector_palette.h>
+
 namespace basisu
 {
 	uint64_t etc1_global_selector_codebook_find_best_entry(const basist::etc1_global_selector_codebook &codebook,

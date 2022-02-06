@@ -1,6 +1,7 @@
 #if !defined(_x86_mmxfrag_H)
 # define _x86_mmxfrag_H (1)
 # include <stddef.h>
+
 # include "x86int.h"
 
 #if defined(OC_X86_ASM)

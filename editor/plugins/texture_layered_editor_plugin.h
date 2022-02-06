@@ -35,6 +35,19 @@
 #include "editor/editor_plugin.h"
 #include "scene/resources/shader.h"
 #include "scene/resources/texture.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "editor/editor_inspector.h"
+#include "scene/gui/control.h"
+
+class EditorNode;
+class InputEvent;
+class Label;
+class Shader;
+class ShaderMaterial;
+class SpinBox;
+class TextureLayered;
 
 class TextureLayeredEditor : public Control {
 	GDCLASS(TextureLayeredEditor, Control);

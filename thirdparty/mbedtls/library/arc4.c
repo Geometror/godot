@@ -22,20 +22,20 @@
  *  http://groups.google.com/group/sci.crypt/msg/10a300c9d21afca0
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_ARC4_C)
+
+#include <string.h>
 
 #include "mbedtls/arc4.h"
 #include "mbedtls/platform_util.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_SELF_TEST)
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

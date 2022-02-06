@@ -31,12 +31,17 @@
 #ifndef REGEX_H
 #define REGEX_H
 
+#include <stdint.h>
+
 #include "core/object/ref_counted.h"
 #include "core/string/ustring.h"
 #include "core/templates/map.h"
 #include "core/templates/vector.h"
 #include "core/variant/array.h"
 #include "core/variant/dictionary.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/variant/variant.h"
 
 class RegExMatch : public RefCounted {
 	GDCLASS(RegExMatch, RefCounted);

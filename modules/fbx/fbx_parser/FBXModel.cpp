@@ -74,10 +74,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  @brief Assimp::FBX::Model implementation
  */
 
+#include <stdint.h>
+#include <algorithm>
+#include <string>
+#include <vector>
+
 #include "FBXDocument.h"
 #include "FBXDocumentUtil.h"
 #include "FBXMeshGeometry.h"
 #include "FBXParser.h"
+#include "fbx_parser/FBXTokenizer.h"
 
 namespace FBXDocParser {
 

@@ -31,15 +31,28 @@
 #ifndef GODOT_BODY_2D_H
 #define GODOT_BODY_2D_H
 
+#include <stdint.h>
+
 #include "godot_area_2d.h"
 #include "godot_collision_object_2d.h"
-
 #include "core/templates/list.h"
 #include "core/templates/pair.h"
 #include "core/templates/vset.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/object/object_id.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "servers/physics_server_2d.h"
 
 class GodotConstraint2D;
 class GodotPhysicsDirectBodyState2D;
+class GodotSpace2D;
 
 class GodotBody2D : public GodotCollisionObject2D {
 	PhysicsServer2D::BodyMode mode = PhysicsServer2D::BODY_MODE_DYNAMIC;

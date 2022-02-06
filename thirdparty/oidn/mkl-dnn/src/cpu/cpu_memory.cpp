@@ -18,9 +18,7 @@
 
 #include "mkldnn_traits.hpp"
 #include "mkldnn_thread.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "cpu_memory.hpp"
 
 namespace mkldnn {

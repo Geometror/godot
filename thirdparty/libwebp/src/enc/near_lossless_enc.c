@@ -16,10 +16,13 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "src/dsp/lossless_common.h"
 #include "src/utils/utils.h"
 #include "src/enc/vp8li_enc.h"
+#include "webp/encode.h"
 
 #if (WEBP_NEAR_LOSSLESS == 1)
 

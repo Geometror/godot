@@ -31,6 +31,11 @@
 #include "camera_feed.h"
 
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/object/class_db.h"
+#include "core/string/print_string.h"
+#include "core/variant/variant.h"
 
 void CameraFeed::_bind_methods() {
 	// The setters prefixed with _ are only exposed so we can have feeds through GDNative!

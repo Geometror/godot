@@ -1,7 +1,26 @@
 // Copyright 2009-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
+#include <new>
+#include <utility>
+
 #include "bvh_intersector_hybrid.cpp"
+#include "common/math/math.h"
+#include "common/math/vec3.h"
+#include "common/simd/vboolf4_sse2.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/bvh/bvh_intersector_hybrid.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/default.h"
+#include "kernels/config.h"
+#include "kernels/geometry/intersector_iterators.h"
+#include "kernels/geometry/triangle_intersector.h"
+#include "kernels/geometry/trianglei_intersector.h"
+#include "kernels/geometry/trianglev_intersector.h"
+#include "kernels/geometry/trianglev_mb_intersector.h"
 
 namespace embree
 {

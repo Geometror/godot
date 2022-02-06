@@ -12,14 +12,15 @@
 **********************************************************************
 */
 #include "propname.h"
+
+#include <stddef.h>
+
 #include "unicode/uchar.h"
-#include "unicode/udata.h"
 #include "unicode/uscript.h"
-#include "umutex.h"
-#include "cmemory.h"
 #include "cstring.h"
-#include "uarrsort.h"
 #include "uinvchar.h"
+#include "unicode/bytestrie.h"
+#include "unicode/ustringtrie.h"
 
 #define INCLUDED_FROM_PROPNAME_CPP
 #include "propname_data.h"

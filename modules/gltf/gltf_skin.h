@@ -33,6 +33,15 @@
 
 #include "core/io/resource.h"
 #include "gltf_document.h"
+#include "core/math/transform_3d.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "scene/resources/skin.h"
 
 class GLTFSkin : public Resource {
 	GDCLASS(GLTFSkin, Resource);

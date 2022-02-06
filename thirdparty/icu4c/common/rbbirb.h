@@ -14,7 +14,22 @@
 #ifndef RBBIRB_H
 #define RBBIRB_H
 
+#include <cstdint>
+
 #include "unicode/utypes.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class BreakIterator;
+class ParsePosition;
+class UVector;
+class UnicodeFunctor;
+class UnicodeSet;
+struct RBBIDataHeader;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -220,6 +235,7 @@ typedef std::pair<int32_t, int32_t> IntPair;
 //----------------------------------------------------------------------------
 #ifdef RBBI_DEBUG
 #include <stdio.h>
+
 #define RBBIDebugPrintf printf
 #define RBBIDebugPuts puts
 #else

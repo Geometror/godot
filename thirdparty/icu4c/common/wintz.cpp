@@ -11,15 +11,13 @@
 ********************************************************************************
 */
 
-#include "unicode/utypes.h"
-
+#include "unicode/platform.h"
 #if U_PLATFORM_USES_ONLY_WIN32_API
 
 #include "wintz.h"
 #include "charstr.h"
 #include "cmemory.h"
 #include "cstring.h"
-
 #include "unicode/ures.h"
 #include "unicode/unistr.h"
 #include "uresimp.h"

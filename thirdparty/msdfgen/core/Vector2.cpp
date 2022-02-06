@@ -1,6 +1,9 @@
 
 #include "Vector2.h"
 
+#include <cmath>
+#include <cstdlib>
+
 namespace msdfgen {
 
 Vector2::Vector2(double val) : x(val), y(val) { }

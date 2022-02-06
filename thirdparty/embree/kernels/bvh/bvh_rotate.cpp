@@ -3,6 +3,16 @@
 
 #include "bvh_rotate.h"
 
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/simd/varying.h"
+#include "common/simd/vboolf4_sse2.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "common/sys/intrinsics.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/bvh/bvh_node_ref.h"
+
 namespace embree
 {
   namespace isa 

@@ -3,6 +3,11 @@
  
 #pragma once
 
+#include <assert.h>
+#include <stddef.h>
+#include <atomic>
+#include <type_traits>
+
 #include "default.h"
 #include "device.h"
 #include "builder.h"
@@ -17,12 +22,22 @@
 #include "scene_grid_mesh.h"
 #include "scene_points.h"
 #include "../subdiv/tessellation_cache.h"
-
 #include "acceln.h"
 #include "geometry.h"
+#include "common/math/math.h"
+#include "common/sys/alloc.h"
+#include "common/sys/mutex.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
+#include "common/sys/vector.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_scene.h"
 
 namespace embree
 {
+class Device;
+struct TaskScheduler;
+
   /*! Base class all scenes are derived from */
   class Scene : public AccelN
   {

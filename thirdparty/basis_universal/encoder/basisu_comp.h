@@ -13,6 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #pragma once
+#include <encoder/basisu_enc.h>
+#include <encoder/basisu_global_selector_palette_helpers.h>
+#include <encoder/basisu_gpu_texture.h>
+#include <limits.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_containers.h>
+#include <transcoder/basisu_file_headers.h>
+#include <string>
+
 #include "basisu_frontend.h"
 #include "basisu_backend.h"
 #include "basisu_basis_file.h"

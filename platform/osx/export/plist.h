@@ -33,9 +33,17 @@
 #ifndef PLIST_H
 #define PLIST_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/crypto/crypto_core.h"
 #include "core/io/file_access.h"
 #include "modules/modules_enabled.gen.h" // For regex.
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 #ifdef MODULE_REGEX_ENABLED
 

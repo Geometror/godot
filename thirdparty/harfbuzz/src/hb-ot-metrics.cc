@@ -22,15 +22,21 @@
  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
  */
 
-#include "hb.hh"
+#include <assert.h>
+#include <math.h>
 
+#include "hb.hh"
 #include "hb-ot-var-mvar-table.hh"
-#include "hb-ot-gasp-table.hh" // Just so we compile it; unused otherwise.
 #include "hb-ot-os2-table.hh"
 #include "hb-ot-post-table.hh"
 #include "hb-ot-hhea-table.hh"
 #include "hb-ot-metrics.hh"
 #include "hb-ot-face.hh"
+#include "hb-blob.hh"
+#include "hb-face.hh"
+#include "hb-font.hh"
+#include "hb-machinery.hh"
+#include "hb-open-type.hh"
 
 
 /**

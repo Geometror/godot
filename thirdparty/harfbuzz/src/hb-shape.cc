@@ -27,12 +27,11 @@
  */
 
 #include "hb.hh"
-
 #include "hb-shaper.hh"
-#include "hb-shape-plan.hh"
 #include "hb-buffer.hh"
 #include "hb-font.hh"
 #include "hb-machinery.hh"
+#include "hb.h"
 
 
 /**

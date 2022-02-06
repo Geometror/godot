@@ -33,6 +33,14 @@
 
 #include "scene/gui/dialogs.h"
 #include "scene/gui/tree.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+
+class Label;
+class Tree;
+class TreeItem;
+
 class EditorAssetInstaller : public ConfirmationDialog {
 	GDCLASS(EditorAssetInstaller, ConfirmationDialog);
 

@@ -13,8 +13,14 @@
 #ifndef __PLURAL_MAP_H__
 #define __PLURAL_MAP_H__
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/uobject.h"
 #include "cmemory.h"
+#include "unicode/umachine.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

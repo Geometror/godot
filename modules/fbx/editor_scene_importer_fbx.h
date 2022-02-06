@@ -31,11 +31,26 @@
 #ifndef EDITOR_SCENE_IMPORTER_FBX_H
 #define EDITOR_SCENE_IMPORTER_FBX_H
 
+#include <stdint.h>
+#include <vector>
+
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+
+class Animation;
+class StringName;
+class Variant;
+struct FBXBone;
+struct FBXNode;
+struct ImportState;
+struct PivotTransform;
 #ifdef TOOLS_ENABLED
 
 #include "data/import_state.h"
 #include "tools/import_utils.h"
-
 #include "core/io/resource_importer.h"
 #include "core/string/ustring.h"
 #include "core/templates/local_vector.h"
@@ -49,7 +64,6 @@
 #include "scene/animation/animation_player.h"
 #include "scene/resources/animation.h"
 #include "scene/resources/surface_tool.h"
-
 #include "fbx_parser/FBXDocument.h"
 #include "fbx_parser/FBXImportSettings.h"
 #include "fbx_parser/FBXMeshGeometry.h"

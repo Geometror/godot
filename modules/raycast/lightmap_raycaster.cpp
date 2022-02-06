@@ -32,9 +32,23 @@
 
 #include "lightmap_raycaster.h"
 
-#ifdef __SSE2__
-#include <pmmintrin.h>
-#endif
+#include <emmintrin.h>
+#include <string.h>
+#include <xmmintrin.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "embree3/rtcore_buffer.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_ray.h"
+#include "embree3/rtcore_scene.h"
 
 LightmapRaycaster *LightmapRaycasterEmbree::create_embree_raycaster() {
 	return memnew(LightmapRaycasterEmbree);

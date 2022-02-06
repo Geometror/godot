@@ -8,6 +8,8 @@
 #include "BitmapRef.hpp"
 
 namespace msdfgen {
+class Projection;
+class Shape;
 
 /// Rasterizes the shape into a monochrome bitmap.
 void rasterize(const BitmapRef<float, 1> &output, const Shape &shape, const Projection &projection, FillRule fillRule = FILL_NONZERO);

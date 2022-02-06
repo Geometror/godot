@@ -35,6 +35,20 @@
 #include "core/multiplayer/multiplayer_api.h"
 #include "scene/main/node.h"
 #include "scene/main/window.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/multiplayer/multiplayer_peer.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/string/node_path.h"
+#include "core/templates/set.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "scene/main/scene_tree.h"
 
 MultiplayerRPCInterface *SceneRPCInterface::_create(MultiplayerAPI *p_multiplayer) {
 	return memnew(SceneRPCInterface(p_multiplayer));

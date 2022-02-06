@@ -32,8 +32,17 @@
 #define EDITORPREVIEWPLUGINS_H
 
 #include "editor/editor_resource_preview.h"
-
 #include "core/templates/safe_refcount.h"
+#include "core/io/resource.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/semaphore.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+
+class Image;
+class Texture2D;
 
 void post_process_preview(Ref<Image> p_image);
 

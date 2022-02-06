@@ -24,11 +24,17 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <assert.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "hb.hh"
 #include "hb-shape-plan.hh"
 #include "hb-shaper.hh"
 #include "hb-font.hh"
 #include "hb-buffer.hh"
+#include "hb-atomic.hh"
+#include "hb-face.hh"
 
 
 /**
@@ -113,6 +119,7 @@ hb_shape_plan_key_t::init (bool                           copy,
       else if (0 == strcmp (*shaper_list, #shaper)) \
 	HB_SHAPER_PLAN (shaper);
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
   }
   else
@@ -124,7 +131,6 @@ hb_shape_plan_key_t::init (bool                           copy,
 #define HB_SHAPER_IMPLEMENT(shaper) \
       else if (shapers[i].func == _hb_##shaper##_shape) \
 	HB_SHAPER_PLAN (shaper);
-#include "hb-shaper-list.hh"
 #undef HB_SHAPER_IMPLEMENT
   }
 #undef HB_SHAPER_PLAN
@@ -421,7 +427,6 @@ _hb_shape_plan_execute_internal (hb_shape_plan_t    *shape_plan,
 #define HB_SHAPER_IMPLEMENT(shaper) \
   else if (shape_plan->key.shaper_func == _hb_##shaper##_shape) \
     HB_SHAPER_EXECUTE (shaper);
-#include "hb-shaper-list.hh"
 #undef HB_SHAPER_IMPLEMENT
 
 #undef HB_SHAPER_EXECUTE

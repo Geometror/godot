@@ -30,10 +30,20 @@
 
 #include "video_stream_theora.h"
 
-#include "core/config/project_settings.h"
-#include "core/os/os.h"
+#include <stdio.h>
+#include <string.h>
 
+#include "core/config/project_settings.h"
 #include "thirdparty/misc/yuv2rgb.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "ogg/config_types.h"
+#include "scene/resources/texture.h"
+#include "theora/theoradec.h"
+#include "vorbis/codec.h"
 
 int VideoStreamPlaybackTheora::buffer_data() {
 	char *buffer = ogg_sync_buffer(&oy, 4096);

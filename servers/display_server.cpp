@@ -31,8 +31,11 @@
 #include "display_server.h"
 
 #include "core/input/input.h"
-#include "scene/resources/texture.h"
 #include "servers/display_server_headless.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+
+class Image;
 
 DisplayServer *DisplayServer::singleton = nullptr;
 

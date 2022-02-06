@@ -16,13 +16,18 @@
  */
 
 
-#include <freetype/internal/ftdebug.h>
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/ftserv.h>
-#include <freetype/internal/services/svpsinfo.h>
-
-
   /* documentation is in t1tables.h */
+
+#include <freetype/fterrors.h>
+#include <stddef.h>
+
+#include "freetype/freetype.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/ftserv.h"
+#include "freetype/internal/services/svpsinfo.h"
+#include "freetype/t1tables.h"
 
   FT_EXPORT_DEF( FT_Error )
   FT_Get_PS_Font_Info( FT_Face          face,

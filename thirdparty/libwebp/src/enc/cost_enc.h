@@ -16,7 +16,14 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdint.h>
+
 #include "src/enc/vp8i_enc.h"
+#include "dec/common_dec.h"
+#include "dsp/dsp.h"
+#include "webp/types.h"
+
+struct VP8Residual;
 
 #ifdef __cplusplus
 extern "C" {

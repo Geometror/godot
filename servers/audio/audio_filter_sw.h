@@ -32,6 +32,7 @@
 #define AUDIO_FILTER_SW_H
 
 #include "core/math/math_funcs.h"
+#include "core/typedefs.h"
 
 class AudioFilterSW {
 public:

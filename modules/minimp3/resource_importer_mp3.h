@@ -33,6 +33,14 @@
 
 #include "audio_stream_mp3.h"
 #include "core/io/resource_importer.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+
+class StringName;
+class Variant;
 
 class ResourceImporterMP3 : public ResourceImporter {
 	GDCLASS(ResourceImporterMP3, ResourceImporter);

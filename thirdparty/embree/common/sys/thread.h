@@ -3,11 +3,13 @@
 
 #pragma once
 
+#include <sys/types.h>
+#include <vector>
+
 #include "platform.h"
 #include "mutex.h"
 #include "alloc.h"
 #include "vector.h"
-#include <vector>
 
 namespace embree
 {

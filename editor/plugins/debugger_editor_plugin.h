@@ -32,6 +32,8 @@
 #define DEBUGGER_EDITOR_PLUGIN_H
 
 #include "editor/editor_plugin.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
 
 class EditorNode;
 class EditorFileServer;

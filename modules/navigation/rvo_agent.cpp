@@ -31,6 +31,11 @@
 #include "rvo_agent.h"
 
 #include "nav_map.h"
+#include "Agent.h"
+#include "Vector3.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/variant/callable.h"
 
 RvoAgent::RvoAgent() {
 	callback.id = ObjectID();

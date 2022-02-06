@@ -25,6 +25,10 @@
  * Red Hat Author(s): Behdad Esfahbod
  */
 
+#include <errno.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "hb.hh"
 #include "hb-blob.hh"
 

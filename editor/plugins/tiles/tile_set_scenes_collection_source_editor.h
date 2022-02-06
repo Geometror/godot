@@ -34,6 +34,21 @@
 #include "editor/editor_node.h"
 #include "scene/gui/box_container.h"
 #include "scene/resources/tile_set.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/variant.h"
+
+class Button;
+class Control;
+class EditorInspector;
+class ItemList;
+class Label;
+class Texture2D;
+class UndoRedo;
 
 class TileSetScenesCollectionSourceEditor : public HBoxContainer {
 	GDCLASS(TileSetScenesCollectionSourceEditor, HBoxContainer);

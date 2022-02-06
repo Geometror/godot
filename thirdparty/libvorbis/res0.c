@@ -21,14 +21,14 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 #include <ogg/ogg.h>
+#include <alloca.h>
+
 #include "vorbis/codec.h"
-#include "codec_internal.h"
-#include "registry.h"
 #include "codebook.h"
 #include "misc.h"
-#include "os.h"
+#include "backends.h"
+#include "ogg/os_types.h"
 
 #if defined(TRAIN_RES) || defined (TRAIN_RESAUX)
 #include <stdio.h>

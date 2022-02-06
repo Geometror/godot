@@ -32,6 +32,14 @@
 #define EDITOR_FOLDING_H
 
 #include "scene/main/node.h"
+#include "core/io/resource.h"
+#include "core/string/ustring.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+
+class Array;
+class Node;
+class Object;
 
 class EditorFolding {
 	Vector<String> _get_unfolds(const Object *p_object);

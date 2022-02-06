@@ -30,13 +30,21 @@
 
 #include "register_types.h"
 
-#include "servers/rendering/rendering_device.h"
-
-#include "glslang_resource_limits.h"
-
-#include <glslang/Include/Types.h>
 #include <glslang/Public/ShaderLang.h>
 #include <glslang/SPIRV/GlslangToSpv.h>
+#include <SPIRV/Logger.h>
+#include <SPIRV/SpvTools.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <stdint.h>
+#include <string.h>
+#include <string>
+#include <vector>
+
+#include "servers/rendering/rendering_device.h"
+#include "glslang_resource_limits.h"
+#include "core/error/error_macros.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 static Vector<uint8_t> _compile_shader_glsl(RenderingDevice::ShaderStage p_stage, const String &p_source_code, RenderingDevice::ShaderLanguage p_language, String *r_error, const RenderingDevice::Capabilities *p_capabilities) {
 	Vector<uint8_t> ret;

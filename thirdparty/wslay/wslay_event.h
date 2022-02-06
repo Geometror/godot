@@ -30,8 +30,13 @@
 #endif /* HAVE_CONFIG_H */
 
 #include <wslay/wslay.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #include "wslay_queue.h"
+#include "wslay_frame.h"
+
+struct wslay_event_context;
 
 struct wslay_event_byte_chunk {
   struct wslay_queue_entry qe;

@@ -28,12 +28,12 @@
 #define HB_SUBSET_PLAN_HH
 
 #include "hb.hh"
-
 #include "hb-subset.h"
 #include "hb-subset-input.hh"
-
 #include "hb-map.hh"
 #include "hb-set.hh"
+#include "hb-face.hh"
+#include "hb.h"
 
 struct hb_subset_plan_t
 {

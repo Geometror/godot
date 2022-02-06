@@ -18,7 +18,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+
 #include "internal.h"
+#include "ogg/os_types.h"
+#include "theora/codec.h"
 
 
 

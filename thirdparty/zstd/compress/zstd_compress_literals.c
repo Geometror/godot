@@ -13,6 +13,14 @@
  ***************************************/
 #include "zstd_compress_literals.h"
 
+#include "compress/zstd_compress_internal.h"
+#include "debug.h"
+#include "error_private.h"
+#include "mem.h"
+#include "zstd_deps.h"
+#include "zstd_errors.h"
+#include "zstd_internal.h"
+
 size_t ZSTD_noCompressLiterals (void* dst, size_t dstCapacity, const void* src, size_t srcSize)
 {
     BYTE* const ostart = (BYTE*)dst;

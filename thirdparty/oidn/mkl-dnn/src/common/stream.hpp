@@ -18,10 +18,11 @@
 #define STREAM_HPP
 
 #include <assert.h>
-#include "mkldnn.h"
 
+#include "mkldnn.h"
 #include "c_types_map.hpp"
 #include "engine.hpp"
+#include "nstl.hpp"
 
 struct mkldnn_stream: public mkldnn::impl::c_compatible {
     mkldnn_stream(mkldnn::impl::engine_t *engine, unsigned flags)

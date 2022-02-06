@@ -40,6 +40,21 @@
 #include "scene/gui/menu_button.h"
 #include "scene/gui/option_button.h"
 #include "scene/gui/popup_menu.h"
+#include "core/math/color.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "scene/gui/box_container.h"
+#include "scene/resources/font.h"
+
+class Button;
+class ColorPickerButton;
+class Control;
+class EditorFileSystemDirectory;
+class EditorNode;
+class OptionButton;
+class SpinBox;
 
 /*************************************************************************/
 

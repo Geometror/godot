@@ -32,6 +32,7 @@
 #define LIGHTMAP_PROBE_H
 
 #include "scene/3d/node_3d.h"
+#include "core/object/object.h"
 
 class LightmapProbe : public Node3D {
 	GDCLASS(LightmapProbe, Node3D)

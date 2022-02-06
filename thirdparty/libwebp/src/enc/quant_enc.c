@@ -14,10 +14,16 @@
 #include <assert.h>
 #include <math.h>
 #include <stdlib.h>  // for abs()
+#include <stdint.h>
+#include <string.h>
 
 #include "src/dsp/quant.h"
 #include "src/enc/vp8i_enc.h"
 #include "src/enc/cost_enc.h"
+#include "dec/common_dec.h"
+#include "dsp/dsp.h"
+#include "webp/encode.h"
+#include "webp/types.h"
 
 #define DO_TRELLIS_I4  1
 #define DO_TRELLIS_I16 1   // not a huge gain, but ok at low bitrate.

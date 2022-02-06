@@ -8,9 +8,14 @@
 */
 
 #include "ulist.h"
+
+#include <stddef.h>
+
 #include "cmemory.h"
 #include "cstring.h"
 #include "uenumimp.h"
+
+struct UListNode;
 
 typedef struct UListNode UListNode;
 struct UListNode {

@@ -20,8 +20,6 @@
 *   09/08/2004  grhoten     split from ucnv.c
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_CONVERSION
 
 #include "unicode/ustring.h"

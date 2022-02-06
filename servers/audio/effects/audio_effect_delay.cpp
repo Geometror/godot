@@ -29,8 +29,15 @@
 /*************************************************************************/
 
 #include "audio_effect_delay.h"
+
+#include <math.h>
+
 #include "core/math/math_funcs.h"
 #include "servers/audio_server.h"
+#include "core/math/math_defs.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
 void AudioEffectDelayInstance::process(const AudioFrame *p_src_frames, AudioFrame *p_dst_frames, int p_frame_count) {
 	int todo = p_frame_count;

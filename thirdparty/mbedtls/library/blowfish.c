@@ -23,14 +23,17 @@
  *
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_BLOWFISH_C)
 
+#include <string.h>
+
 #include "mbedtls/blowfish.h"
 #include "mbedtls/platform_util.h"
-
-#include <string.h>
 
 #if !defined(MBEDTLS_BLOWFISH_ALT)
 

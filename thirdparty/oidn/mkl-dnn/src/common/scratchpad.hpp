@@ -17,6 +17,8 @@
 #ifndef COMMON_SCRATCHPAD_HPP
 #define COMMON_SCRATCHPAD_HPP
 
+#include <stddef.h>
+
 #include "utils.hpp"
 
 namespace mkldnn {

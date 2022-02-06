@@ -18,12 +18,6 @@
 *   Swap collation binaries.
 */
 
-#include "unicode/udata.h" /* UDataInfo */
-#include "utrie.h"
-#include "utrie2.h"
-#include "udataswp.h"
-#include "cmemory.h"
-#include "ucol_data.h"
 #include "ucol_swp.h"
 
 /* swapping ----------------------------------------------------------------- */

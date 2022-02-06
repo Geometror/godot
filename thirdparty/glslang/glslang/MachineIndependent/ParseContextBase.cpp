@@ -36,7 +36,24 @@
 
 // Implement the TParseContextBase class.
 
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/InfoSink.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Scan.h>
+#include <glslang/MachineIndependent/SymbolTable.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdio.h>
 #include <cstdarg>
+#include <algorithm>
+#include <functional>
+#include <map>
+#include <vector>
 
 #include "ParseHelper.h"
 

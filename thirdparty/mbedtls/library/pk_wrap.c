@@ -17,16 +17,17 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
 #if defined(MBEDTLS_PK_C)
+#include <string.h>
+
 #include "mbedtls/pk_internal.h"
 #include "mbedtls/error.h"
-
 /* Even if RSA not activated, for the sake of RSA-alt */
 #include "mbedtls/rsa.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_ECP_C)
 #include "mbedtls/ecp.h"
@@ -54,6 +55,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free
 #endif

@@ -30,6 +30,25 @@
 
 #include "gltf_state.h"
 
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/gltf/gltf_accessor.h"
+#include "modules/gltf/gltf_animation.h"
+#include "modules/gltf/gltf_buffer_view.h"
+#include "modules/gltf/gltf_camera.h"
+#include "modules/gltf/gltf_document.h"
+#include "modules/gltf/gltf_light.h"
+#include "modules/gltf/gltf_mesh.h"
+#include "modules/gltf/gltf_node.h"
+#include "modules/gltf/gltf_skeleton.h"
+#include "modules/gltf/gltf_skin.h"
+#include "modules/gltf/gltf_texture.h"
+
+class AnimationPlayer;
+class Node;
+
 void GLTFState::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_json"), &GLTFState::get_json);
 	ClassDB::bind_method(D_METHOD("set_json", "json"), &GLTFState::set_json);

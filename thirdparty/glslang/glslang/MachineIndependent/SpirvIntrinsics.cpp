@@ -35,6 +35,15 @@
 
 #ifndef GLSLANG_WEB
 
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <map>
+#include <string>
+#include <vector>
+
 //
 // GL_EXT_spirv_intrinsics
 //

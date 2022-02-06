@@ -14,12 +14,17 @@
 * limitations under the License.
 *******************************************************************************/
 
+#include <assert.h>
+#include <math.h>
+#include <stdlib.h>
+
 #include "c_types_map.hpp"
 #include "mkldnn_thread.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "jit_avx2_convolution.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "mkldnn_types.h"
+#include "nstl.hpp"
 
 namespace mkldnn {
 namespace impl {

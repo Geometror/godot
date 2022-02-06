@@ -14,15 +14,14 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <assert.h>
-#include "mkldnn.h"
+#include <stddef.h>
 
+#include "mkldnn.h"
 #include "c_types_map.hpp"
 #include "engine.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "reorder_pd.hpp"
+#include "memory_desc_wrapper.hpp"
 
 using namespace mkldnn::impl;
 using namespace mkldnn::impl::utils;

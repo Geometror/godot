@@ -14,7 +14,10 @@
  * # Date: 2021-01-22, 23:29:00 GMT [KW]
  */
 
+#include <stdint.h>
+
 #include "hb.hh"
+#include "hb.h"
 
 #ifndef HB_NO_OT_SHAPE
 

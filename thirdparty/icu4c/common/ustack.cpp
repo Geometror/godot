@@ -7,7 +7,14 @@
 **********************************************************************
 */
 
+#include <stdint.h>
+
 #include "uvector.h"
+#include "cmemory.h"
+#include "uelement.h"
+#include "unicode/uobject.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

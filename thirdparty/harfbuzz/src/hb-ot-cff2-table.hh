@@ -27,9 +27,23 @@
 #ifndef HB_OT_CFF2_TABLE_HH
 #define HB_OT_CFF2_TABLE_HH
 
+#include <string.h>
+#include <new>
+
 #include "hb-ot-cff-common.hh"
 #include "hb-subset-cff2.hh"
 #include "hb-draw.hh"
+#include "hb-cff-interp-common.hh"
+#include "hb-cff-interp-dict-common.hh"
+#include "hb-machinery.hh"
+#include "hb-open-type.hh"
+#include "hb-ot-layout-common.hh"
+#include "hb-sanitize.hh"
+#include "hb-serialize.hh"
+#include "hb.h"
+#include "hb.hh"
+
+struct hb_subset_context_t;
 
 namespace CFF {
 

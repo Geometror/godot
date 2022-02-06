@@ -40,14 +40,31 @@
 // Build the intermediate representation.
 //
 
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/Public/ShaderLang.h>
+#include <utility>
+#include <tuple>
+#include <algorithm>
+#include <cstddef>
+#include <list>
+#include <string>
+#include <type_traits>
+#include <vector>
+
 #include "localintermediate.h"
 #include "RemoveTree.h"
 #include "SymbolTable.h"
 #include "propagateNoContraction.h"
 
-#include <cfloat>
-#include <utility>
-#include <tuple>
+class TInfoSink;
 
 namespace glslang {
 

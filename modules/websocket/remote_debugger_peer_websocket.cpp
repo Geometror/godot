@@ -31,6 +31,12 @@
 #include "remote_debugger_peer_websocket.h"
 
 #include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer_peer.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "modules/websocket/wsl_client.h"
 
 Error RemoteDebuggerPeerWebSocket::connect_to_host(const String &p_uri) {
 	Vector<String> protocols;

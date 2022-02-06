@@ -17,16 +17,16 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/asn1.h"
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_X509_CREATE_C)
+
+#include <string.h>
 
 #include "mbedtls/x509.h"
 #include "mbedtls/asn1write.h"
 #include "mbedtls/error.h"
 #include "mbedtls/oid.h"
-
-#include <string.h>
 
 /* Structure linking OIDs for X.509 DN AttributeTypes to their
  * string representations and default string encodings used by Mbed TLS. */

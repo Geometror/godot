@@ -32,8 +32,11 @@
 
 #include "thread_posix.h"
 
+#include <pthread.h>
+
 #include "core/os/thread.h"
 #include "core/string/ustring.h"
+#include "core/error/error_list.h"
 
 #ifdef PTHREAD_BSD_SET_NAME
 #include <pthread_np.h>

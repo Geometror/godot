@@ -31,6 +31,8 @@
 #ifndef PLUGINSCRIPT_LANGUAGE_H
 #define PLUGINSCRIPT_LANGUAGE_H
 
+#include <pluginscript/godot_pluginscript.h>
+
 // Godot imports
 #include "core/io/resource_loader.h"
 #include "core/io/resource_saver.h"
@@ -39,10 +41,21 @@
 #include "core/templates/self_list.h"
 // PluginScript imports
 #include "pluginscript_loader.h"
-#include <pluginscript/godot_pluginscript.h>
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/os/mutex.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/set.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
 class PluginScript;
 class PluginScriptInstance;
+class Object;
+struct MethodInfo;
+template <class F, class S> struct Pair;
 
 class PluginScriptLanguage : public ScriptLanguage {
 	friend class PluginScript;

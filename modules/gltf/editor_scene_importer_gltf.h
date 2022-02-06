@@ -30,11 +30,21 @@
 
 #ifndef EDITOR_SCENE_IMPORTER_GLTF_H
 #define EDITOR_SCENE_IMPORTER_GLTF_H
+#include <stdint.h>
+
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+
+class Node;
+class StringName;
+class Variant;
 #ifdef TOOLS_ENABLED
 #include "gltf_state.h"
-
 #include "gltf_document_extension.h"
-
 #include "editor/import/resource_importer_scene.h"
 #include "scene/main/node.h"
 #include "scene/resources/packed_scene.h"

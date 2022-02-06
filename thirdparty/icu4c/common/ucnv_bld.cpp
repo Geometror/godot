@@ -21,8 +21,6 @@
  *   06/29/2000  helena      Major rewrite of the callback interface.
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_CONVERSION
 
 #include "unicode/putil.h"
@@ -49,6 +47,7 @@
 
 #if 0
 #include <stdio.h>
+
 extern void UCNV_DEBUG_LOG(char *what, char *who, void *p, int l);
 #define UCNV_DEBUG_LOG(x,y,z) UCNV_DEBUG_LOG(x,y,z,__LINE__)
 #else

@@ -23,8 +23,11 @@
  *
  */
 
+#include <errno.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "hb.hh"
-#include "hb-machinery.hh"
 #include "hb-number.hh"
 #include "hb-number-parser.hh"
 

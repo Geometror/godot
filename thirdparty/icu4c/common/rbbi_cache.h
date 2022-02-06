@@ -6,13 +6,17 @@
 #ifndef RBBI_CACHE_H
 #define RBBI_CACHE_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/rbbi.h"
 #include "unicode/uobject.h"
-
 #include "uvectr32.h"
 
 U_NAMESPACE_BEGIN

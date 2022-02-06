@@ -30,13 +30,19 @@
 
 #include "rendering_server_default.h"
 
-#include "core/config/project_settings.h"
-#include "core/io/marshalls.h"
+#include <stdint.h>
+
 #include "core/os/os.h"
-#include "core/templates/sort_array.h"
 #include "renderer_canvas_cull.h"
 #include "renderer_scene_cull.h"
 #include "rendering_server_globals.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "servers/rendering/renderer_canvas_render.h"
+#include "servers/rendering/renderer_compositor.h"
+#include "servers/rendering/renderer_viewport.h"
+#include "servers/xr_server.h"
 
 // careful, these may run in different threads than the rendering server
 

@@ -33,9 +33,13 @@
 
 #include "core/templates/vector.h"
 #include "scene/resources/bit_map.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/ref_counted.h"
 
 struct Vector2;
 struct Vector2i;
+class BitMap;
 
 class EditorAtlasPacker {
 public:

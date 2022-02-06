@@ -32,6 +32,17 @@
 #define LIGHTOCCLUDER2D_H
 
 #include "scene/2d/node_2d.h"
+#include "core/io/resource.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/typed_array.h"
+
+class String;
 
 class OccluderPolygon2D : public Resource {
 	GDCLASS(OccluderPolygon2D, Resource);

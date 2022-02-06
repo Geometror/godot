@@ -30,7 +30,12 @@
 
 #include "gdnative/string.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/string/ustring.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/math_defs.h"
 
 static_assert(sizeof(godot_string) == sizeof(String), "String size mismatch");
 static_assert(sizeof(godot_char_type) == sizeof(char32_t), "char32_t size mismatch");

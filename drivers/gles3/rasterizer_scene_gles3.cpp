@@ -29,6 +29,13 @@
 /*************************************************************************/
 
 #include "rasterizer_scene_gles3.h"
+
+#include "core/io/image.h"
+
+struct Rect2;
+struct Rect2i;
+struct Transform3D;
+template <class T> class PagedArray;
 #ifdef GLES3_ENABLED
 
 // TODO: 3D support not implemented yet.

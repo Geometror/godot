@@ -19,11 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <math.h>
+#include <stdlib.h>
+
 #include "tvgSwCommon.h"
 #include "tvgTaskScheduler.h"
 #include "tvgSwRenderer.h"
 #include "tvgMath.h"
+#include "tvgCommon.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

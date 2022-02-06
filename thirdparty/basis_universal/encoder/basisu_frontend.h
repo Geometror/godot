@@ -13,12 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #pragma once
+#include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_containers.h>
+#include <transcoder/basisu_global_selector_palette.h>
+#include <mutex>
+
 #include "basisu_enc.h"
 #include "basisu_etc.h"
 #include "basisu_gpu_texture.h"
 #include "basisu_global_selector_palette_helpers.h"
 #include "../transcoder/basisu_file_headers.h"
 #include "../transcoder/basisu_transcoder.h"
+
+namespace basist {
+class basisu_lowlevel_etc1s_transcoder;
+}  // namespace basist
 
 namespace basisu
 {

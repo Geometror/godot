@@ -34,11 +34,15 @@
 #include "core/io/file_access.h"
 #include "core/io/resource_loader.h"
 #include "core/math/math_funcs.h"
-#include "core/object/script_language.h"
 #include "core/os/os.h"
-#include "scene/main/node.h" //only so casting works
-
-#include <stdio.h>
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/os/rw_lock.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/templates/hashfuncs.h"
+#include "core/templates/pair.h"
+#include "core/variant/variant.h"
 
 void Resource::emit_changed() {
 	emit_signal(CoreStringNames::get_singleton()->changed);

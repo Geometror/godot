@@ -32,6 +32,8 @@
 #define REFERENCE_RECT_H
 
 #include "scene/gui/control.h"
+#include "core/math/color.h"
+#include "core/object/object.h"
 
 class ReferenceRect : public Control {
 	GDCLASS(ReferenceRect, Control);

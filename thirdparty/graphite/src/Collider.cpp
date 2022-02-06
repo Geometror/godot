@@ -24,16 +24,25 @@ Mozilla Public License (http://mozilla.org/MPL) or the GNU General Public
 License, as published by the Free Software Foundation, either version 2
 of the License or (at your option) any later version.
 */
-#include <algorithm>
 #include <limits>
-#include <cmath>
-#include <string>
 #include <functional>
+
 #include "inc/Collider.h"
 #include "inc/Segment.h"
 #include "inc/Slot.h"
 #include "inc/GlyphCache.h"
 #include "inc/Sparse.h"
+#include "inc/Face.h"
+#include "inc/GlyphFace.h"
+#include "inc/Intervals.h"
+#include "inc/List.h"
+#include "inc/Main.h"
+#include "inc/Position.h"
+#include "inc/Silf.h"
+
+namespace graphite2 {
+class json;
+}  // namespace graphite2
 
 #define ISQRT2 0.707106781f
 

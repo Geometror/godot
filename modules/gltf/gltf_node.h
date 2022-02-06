@@ -33,6 +33,11 @@
 
 #include "core/io/resource.h"
 #include "gltf_document.h"
+#include "core/math/quaternion.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
 
 class GLTFNode : public Resource {
 	GDCLASS(GLTFNode, Resource);

@@ -34,10 +34,22 @@
 #include "editor/editor_node.h"
 #include "editor/editor_plugin.h"
 #include "scene/resources/scene_replication_config.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/node_path.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "scene/gui/box_container.h"
 
 class ConfirmationDialog;
 class MultiplayerSynchronizer;
 class Tree;
+class AcceptDialog;
+class Button;
+class EditorNode;
+class LineEdit;
+class Node;
+class Texture2D;
 
 class ReplicationEditor : public VBoxContainer {
 	GDCLASS(ReplicationEditor, VBoxContainer);

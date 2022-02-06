@@ -22,9 +22,12 @@
 #ifndef _TVG_FILL_H_
 #define _TVG_FILL_H_
 
+#include <stdint.h>
 #include <cstdlib>
 #include <cstring>
+
 #include "tvgCommon.h"
+#include "thorvg.h"
 
 template<typename T>
 struct DuplicateMethod

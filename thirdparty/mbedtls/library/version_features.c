@@ -17,13 +17,12 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_VERSION_C)
 
-#include "mbedtls/version.h"
-
 #include <string.h>
+
+#include "mbedtls/version.h"
 
 static const char * const features[] = {
 #if defined(MBEDTLS_VERSION_FEATURES)

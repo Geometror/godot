@@ -13,6 +13,11 @@
 */
 
 #include "hash.h"
+#include "uhash.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 /**
  * Deleter for Hashtable objects.

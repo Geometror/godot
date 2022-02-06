@@ -35,7 +35,14 @@
 
 #include "audio_stream_mp3.h"
 
-#include "core/io/file_access.h"
+#include <minimp3.h>
+#include <minimp3_ex.h>
+#include <string.h>
+
+#include "core/error/error_macros.h"
+#include "core/math/audio_frame.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
 
 int AudioStreamPlaybackMP3::_mix_internal(AudioFrame *p_buffer, int p_frames) {
 	ERR_FAIL_COND_V(!active, 0);

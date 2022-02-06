@@ -48,6 +48,9 @@ be in code units. */
 
 static int configured_link_size = LINK_SIZE;
 
+#include <stdint.h>
+#include <string.h>
+
 #include "pcre2_internal.h"
 
 /* These macros are the standard way of turning unquoted text into C strings.

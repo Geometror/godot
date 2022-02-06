@@ -32,6 +32,8 @@
 #define COLOR_RECT_H
 
 #include "scene/gui/control.h"
+#include "core/math/color.h"
+#include "core/object/object.h"
 
 class ColorRect : public Control {
 	GDCLASS(ColorRect, Control);

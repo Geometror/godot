@@ -48,10 +48,13 @@
 // have been visited.  This is implemented below by the inReadableOrder()
 // function.
 
-#include "spvIR.h"
-
+#include <SPIRV/spirv.hpp>
 #include <cassert>
 #include <unordered_set>
+#include <functional>
+#include <vector>
+
+#include "spvIR.h"
 
 using spv::Block;
 using spv::Id;

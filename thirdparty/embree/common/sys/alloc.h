@@ -3,9 +3,13 @@
 
 #pragma once
 
-#include "platform.h"
+#include <assert.h>
 #include <vector>
 #include <set>
+#include <cstddef>
+#include <new>
+
+#include "platform.h"
 
 namespace embree
 {

@@ -32,9 +32,22 @@
 
 #include "static_raycaster.h"
 
-#ifdef __SSE2__
-#include <pmmintrin.h>
-#endif
+#include <emmintrin.h>
+#include <stdint.h>
+#include <string.h>
+#include <xmmintrin.h>
+
+#include "core/error/error_macros.h"
+#include "core/math/vector3.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "embree3/rtcore_buffer.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_scene.h"
+
+struct RTCRayHit;
 
 RTCDevice StaticRaycasterEmbree::embree_device;
 

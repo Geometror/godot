@@ -32,9 +32,23 @@
 
 #include "godot_collision_solver_2d.h"
 #include "godot_physics_server_2d.h"
-
-#include "core/os/os.h"
-#include "core/templates/pair.h"
+#include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_2d.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "core/templates/rid_owner.h"
+#include "core/variant/variant.h"
+#include "servers/physics_2d/godot_area_2d.h"
+#include "servers/physics_2d/godot_area_pair_2d.h"
+#include "servers/physics_2d/godot_body_2d.h"
+#include "servers/physics_2d/godot_body_pair_2d.h"
+#include "servers/physics_2d/godot_broad_phase_2d.h"
+#include "servers/physics_2d/godot_collision_object_2d.h"
+#include "servers/physics_2d/godot_constraint_2d.h"
+#include "servers/physics_2d/godot_shape_2d.h"
 
 #define TEST_MOTION_MARGIN_MIN_VALUE 0.0001
 #define TEST_MOTION_MIN_CONTACT_DEPTH_FACTOR 0.05

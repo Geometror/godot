@@ -33,6 +33,9 @@
 
 #include "scene/gui/box_container.h"
 #include "scene/gui/button.h"
+#include "core/object/object.h"
+
+class Button;
 
 class EditorZoomWidget : public HBoxContainer {
 	GDCLASS(EditorZoomWidget, HBoxContainer);

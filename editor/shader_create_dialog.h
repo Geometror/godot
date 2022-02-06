@@ -39,6 +39,18 @@
 #include "scene/gui/line_edit.h"
 #include "scene/gui/option_button.h"
 #include "scene/gui/panel_container.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+
+class Button;
+class CheckBox;
+class EditorFileDialog;
+class GridContainer;
+class Label;
+class LineEdit;
+class OptionButton;
+class PanelContainer;
 
 class ShaderCreateDialog : public ConfirmationDialog {
 	GDCLASS(ShaderCreateDialog, ConfirmationDialog);

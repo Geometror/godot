@@ -32,6 +32,18 @@
 #define MESH_DATA_TOOL_H
 
 #include "scene/resources/mesh.h"
+#include "core/error/error_list.h"
+#include "core/math/color.h"
+#include "core/math/plane.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "scene/resources/material.h"
+
+class ArrayMesh;
 
 class MeshDataTool : public RefCounted {
 	GDCLASS(MeshDataTool, RefCounted);

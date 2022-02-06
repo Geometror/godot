@@ -31,8 +31,7 @@
 #include "renderer_compositor.h"
 
 #include "core/config/project_settings.h"
-#include "core/os/os.h"
-#include "core/string/print_string.h"
+#include "servers/rendering/renderer_canvas_render.h"
 
 RendererCompositor *(*RendererCompositor::_create_func)() = nullptr;
 

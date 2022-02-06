@@ -11,7 +11,19 @@
  * and license in png.h
  */
 
+#include <bits/types/struct_tm.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pngdebug.h"
+#include "pnglibconf.h"
+#include "pngstruct.h"
+#include "zconf.h"
+#include "zlib.h"
 #ifdef PNG_SIMPLIFIED_WRITE_STDIO_SUPPORTED
 #  include <errno.h>
 #endif /* SIMPLIFIED_WRITE_STDIO */

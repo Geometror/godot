@@ -31,7 +31,13 @@
 #ifndef SPATIAL_VELOCITY_TRACKER_H
 #define SPATIAL_VELOCITY_TRACKER_H
 
+#include <stdint.h>
+
 #include "scene/3d/node_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
 
 class VelocityTracker3D : public RefCounted {
 	GDCLASS(VelocityTracker3D, RefCounted);

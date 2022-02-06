@@ -31,10 +31,15 @@
 #include "shader.h"
 
 #include "core/io/file_access.h"
-#include "scene/scene_string_names.h"
 #include "servers/rendering/shader_language.h"
 #include "servers/rendering_server.h"
 #include "texture.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 Shader::Mode Shader::get_mode() const {
 	return mode;

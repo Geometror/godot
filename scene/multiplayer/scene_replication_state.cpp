@@ -30,10 +30,12 @@
 
 #include "scene/multiplayer/scene_replication_state.h"
 
-#include "core/multiplayer/multiplayer_api.h"
 #include "scene/multiplayer/multiplayer_spawner.h"
 #include "scene/multiplayer/multiplayer_synchronizer.h"
 #include "scene/scene_string_names.h"
+#include "core/error/error_macros.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/variant/variant.h"
 
 SceneReplicationState::TrackedNode &SceneReplicationState::_track(const ObjectID &p_id) {
 	if (!tracked_nodes.has(p_id)) {

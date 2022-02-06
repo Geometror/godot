@@ -17,7 +17,19 @@
  *  limitations under the License.
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
+#include "mbedtls/dhm.h"
+#include "mbedtls/ecdh.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/ssl_ciphersuites.h"
+#include "mbedtls/x509.h"
+#include "mbedtls/x509_crt.h"
 
 #if defined(MBEDTLS_SSL_SRV_C)
 
@@ -25,9 +37,12 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free      free
 #endif
+
+#include <string.h>
 
 #include "mbedtls/ssl.h"
 #include "mbedtls/ssl_internal.h"
@@ -36,8 +51,6 @@
 #include "mbedtls/platform_util.h"
 #include "constant_time_internal.h"
 #include "mbedtls/constant_time.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_ECP_C)
 #include "mbedtls/ecp.h"

@@ -28,9 +28,15 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#include "modules/modules_enabled.gen.h" // For regex.
+#include <limits>
 
+#include "modules/modules_enabled.gen.h" // For regex.
 #include "lipo.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
+#include "platform/osx/export/macho.h"
 
 #ifdef MODULE_REGEX_ENABLED
 

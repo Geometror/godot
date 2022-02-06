@@ -31,12 +31,21 @@
 #ifndef AUDIO_STREAM_LIBVORBIS_H
 #define AUDIO_STREAM_LIBVORBIS_H
 
+#include <stdint.h>
+
 #include "core/variant/variant.h"
 #include "modules/ogg/ogg_packet_sequence.h"
 #include "servers/audio/audio_stream.h"
 #include "thirdparty/libvorbis/vorbis/codec.h"
+#include "core/io/resource.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
 
 class AudioStreamOGGVorbis;
+class OGGPacketSequence;
+class OGGPacketSequencePlayback;
+struct AudioFrame;
 
 class AudioStreamPlaybackOGGVorbis : public AudioStreamPlaybackResampled {
 	GDCLASS(AudioStreamPlaybackOGGVorbis, AudioStreamPlaybackResampled);

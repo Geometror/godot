@@ -30,9 +30,17 @@
 
 #include "godot_step_3d.h"
 
-#include "godot_joint_3d.h"
-
 #include "core/os/os.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "servers/physics_3d/godot_area_3d.h"
+#include "servers/physics_3d/godot_body_3d.h"
+#include "servers/physics_3d/godot_constraint_3d.h"
+#include "servers/physics_3d/godot_soft_body_3d.h"
+#include "servers/physics_3d/godot_space_3d.h"
+#include "servers/physics_server_3d.h"
 
 #define BODY_ISLAND_COUNT_RESERVE 128
 #define BODY_ISLAND_SIZE_RESERVE 512

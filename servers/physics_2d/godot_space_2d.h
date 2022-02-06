@@ -31,16 +31,33 @@
 #ifndef GODOT_SPACE_2D_H
 #define GODOT_SPACE_2D_H
 
+#include <stdint.h>
+
 #include "godot_area_2d.h"
 #include "godot_area_pair_2d.h"
 #include "godot_body_2d.h"
 #include "godot_body_pair_2d.h"
 #include "godot_broad_phase_2d.h"
 #include "godot_collision_object_2d.h"
-
 #include "core/config/project_settings.h"
 #include "core/templates/hash_map.h"
 #include "core/typedefs.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "servers/physics_server_2d.h"
+
+class GodotArea2D;
+class GodotBody2D;
+class GodotBroadPhase2D;
+class GodotCollisionObject2D;
+class GodotShape2D;
+class GodotSpace2D;
+struct Rect2;
 
 class GodotPhysicsDirectSpaceState2D : public PhysicsDirectSpaceState2D {
 	GDCLASS(GodotPhysicsDirectSpaceState2D, PhysicsDirectSpaceState2D);

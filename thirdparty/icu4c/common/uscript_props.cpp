@@ -14,12 +14,18 @@
 *   created by: Markus W. Scherer
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/unistr.h"
 #include "unicode/uscript.h"
 #include "unicode/utf16.h"
 #include "ustr_imp.h"
 #include "cmemory.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 namespace {
 

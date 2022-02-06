@@ -3,13 +3,37 @@
 
 #pragma once
 
+#include <assert.h>
+#include <stddef.h>
 #include <type_traits>
+#include <atomic>
+#include <functional>
+#include <memory>
+#include <ostream>
+#include <vector>
 
 #include "bvh_builder_twolevel_internal.h"
 #include "bvh.h"
 #include "../common/primref.h"
 #include "../builders/priminfo.h"
 #include "../builders/primrefgen.h"
+#include "common/algorithms/parallel_reduce.h"
+#include "common/math/bbox.h"
+#include "common/math/math.h"
+#include "common/math/range.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
+#include "common/sys/sysinfo.h"
+#include "embree3/rtcore_common.h"
+#include "kernels/common/builder.h"
+#include "kernels/common/geometry.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/scene.h"
+#include "kernels/common/vector.h"
+
+namespace embree {
+class AccelData;
+}  // namespace embree
 
 /* new open/merge builder */
 #define ENABLE_DIRECT_SAH_MERGE_BUILDER 1

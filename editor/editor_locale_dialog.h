@@ -33,6 +33,8 @@
 
 #include "core/string/translation.h"
 #include "scene/gui/dialogs.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
 
 class Button;
 class HBoxContainer;

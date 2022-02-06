@@ -33,6 +33,12 @@
 
 #include "core/debugger/remote_debugger_peer.h"
 #include "core/object/ref_counted.h"
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+
+class RemoteDebuggerPeer;
+class StringName;
 
 class EditorDebuggerServer : public RefCounted {
 public:

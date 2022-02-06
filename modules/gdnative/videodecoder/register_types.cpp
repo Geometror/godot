@@ -32,6 +32,8 @@
 
 #include "core/object/class_db.h"
 #include "video_stream_gdnative.h"
+#include "core/io/resource_loader.h"
+#include "core/object/ref_counted.h"
 
 static Ref<ResourceFormatLoaderVideoStreamGDNative> resource_loader_vsgdnative;
 

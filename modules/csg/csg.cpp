@@ -30,9 +30,14 @@
 
 #include "csg.h"
 
+#include <alloca.h>
+
 #include "core/math/geometry_2d.h"
 #include "core/math/math_funcs.h"
 #include "core/templates/sort_array.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/templates/pair.h"
 
 // Static helper functions.
 

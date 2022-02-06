@@ -3,6 +3,16 @@
 
 #pragma once
 
+#include <assert.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <list>
+#include <atomic>
+#include <exception>
+#include <memory>
+#include <new>
+#include <vector>
+
 #include "../sys/platform.h"
 #include "../sys/alloc.h"
 #include "../sys/barrier.h"
@@ -13,8 +23,7 @@
 #include "../sys/atomic.h"
 #include "../math/range.h"
 #include "../../include/embree3/rtcore.h"
-
-#include <list>
+#include "embree3/rtcore_config.h"
 
 namespace embree
 {

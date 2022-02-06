@@ -24,8 +24,10 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "hb.hh"
-
+#include "hb-ot-shape-normalize.hh"
+#include "hb-ot-shape.hh"
+#include "hb-unicode.hh"
+#include "hb.h"
 #ifndef HB_NO_OT_SHAPE
 
 #include "hb-ot-shape-complex.hh"

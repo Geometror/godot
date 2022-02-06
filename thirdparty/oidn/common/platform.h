@@ -25,6 +25,7 @@
 #endif
 
 #include <xmmintrin.h>
+#include <stddef.h>
 #include <cstdint>
 #include <climits>
 #include <limits>
@@ -36,6 +37,7 @@
 #include <sstream>
 #include <iostream>
 #include <cassert>
+
 #include "include/OpenImageDenoise/oidn.hpp"
 
 namespace oidn {

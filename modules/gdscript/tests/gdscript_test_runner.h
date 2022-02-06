@@ -37,6 +37,8 @@
 #include "core/string/ustring.h"
 #include "core/templates/vector.h"
 
+class StringName;
+
 namespace GDScriptTests {
 
 void init_autoloads();

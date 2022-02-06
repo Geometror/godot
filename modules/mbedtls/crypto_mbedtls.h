@@ -31,15 +31,27 @@
 #ifndef CRYPTO_MBEDTLS_H
 #define CRYPTO_MBEDTLS_H
 
-#include "core/crypto/crypto.h"
-#include "core/io/resource.h"
-
 #include <mbedtls/ctr_drbg.h>
 #include <mbedtls/entropy.h>
 #include <mbedtls/ssl.h>
+#include <stdint.h>
+
+#include "core/crypto/crypto.h"
+#include "core/io/resource.h"
+#include "core/crypto/hashing_context.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/x509_crt.h"
 
 class CryptoMbedTLS;
 class SSLContextMbedTLS;
+
 class CryptoKeyMbedTLS : public CryptoKey {
 private:
 	mbedtls_pk_context pkey;

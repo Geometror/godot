@@ -39,15 +39,20 @@
     #pragma warning(disable : 4464) // relative include path contains '..'
 #endif
 
-#include "SpvTools.h"
-#include "glslang/Include/intermediate.h"
-
 #include <string>
 #include <vector>
 
+#include "SpvTools.h"
+#include "glslang/Include/intermediate.h"
 #include "Logger.h"
 
+namespace spv {
+class SpvBuildLogger;
+}  // namespace spv
+
 namespace glslang {
+class TIntermediate;
+struct SpvOptions;
 
 void GetSpirvVersion(std::string&);
 int GetSpirvGeneratorVersion();

@@ -31,6 +31,8 @@
 #ifndef SHADER_RD_H
 #define SHADER_RD_H
 
+#include <stdint.h>
+
 #include "core/os/mutex.h"
 #include "core/string/string_builder.h"
 #include "core/templates/hash_map.h"
@@ -39,6 +41,14 @@
 #include "core/templates/rid_owner.h"
 #include "core/variant/variant.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+
+class StringBuilder;
 
 class ShaderRD {
 	//versions

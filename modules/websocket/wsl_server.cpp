@@ -31,8 +31,20 @@
 #ifndef JAVASCRIPT_ENABLED
 
 #include "wsl_server.h"
-#include "core/config/project_settings.h"
+
 #include "core/os/os.h"
+#include "core/crypto/crypto.h"
+#include "core/error/error_macros.h"
+#include "core/io/stream_peer_ssl.h"
+#include "core/io/tcp_server.h"
+#include "core/string/print_string.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/websocket/websocket_multiplayer_peer.h"
+#include "modules/websocket/websocket_peer.h"
+#include "modules/websocket/wsl_peer.h"
 
 bool WSLServer::PendingPeer::_parse_request(const Vector<String> p_protocols, String &r_resource_name) {
 	Vector<String> psa = String((char *)req_buf).split("\r\n");

@@ -26,17 +26,27 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <assert.h>
+#include <limits.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "hb.hh"
+#include "graphite2/Font.h"
+#include "graphite2/Types.h"
+#include "hb-atomic.hh"
+#include "hb-buffer.hh"
+#include "hb-face.hh"
+#include "hb-font.hh"
+#include "hb-machinery.hh"
+#include "hb-ot.h"
+#include "hb-shaper.hh"
 
 #ifdef HAVE_GRAPHITE2
 
-#include "hb-shaper-impl.hh"
-
-#include "hb-graphite2.h"
-
 #include <graphite2/Segment.h>
 
-#include "hb-ot-layout.h"
+#include "hb-graphite2.h"
 
 
 /**

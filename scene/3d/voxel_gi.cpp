@@ -33,6 +33,21 @@
 #include "mesh_instance_3d.h"
 #include "multimesh_instance_3d.h"
 #include "voxelizer.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/face3.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+#include "scene/3d/node_3d.h"
+#include "scene/main/node.h"
+#include "scene/main/scene_tree.h"
+#include "servers/rendering_server.h"
 
 void VoxelGIData::_set_data(const Dictionary &p_data) {
 	ERR_FAIL_COND(!p_data.has("bounds"));

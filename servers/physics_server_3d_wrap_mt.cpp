@@ -31,6 +31,8 @@
 #include "physics_server_3d_wrap_mt.h"
 
 #include "core/os/os.h"
+#include "core/config/project_settings.h"
+#include "core/os/memory.h"
 
 void PhysicsServer3DWrapMT::thread_exit() {
 	exit = true;

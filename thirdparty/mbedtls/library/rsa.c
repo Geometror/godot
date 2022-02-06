@@ -35,9 +35,12 @@
  *
  */
 
-#include "common.h"
-
+#include "mbedtls/asn1.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_RSA_C)
+
+#include <string.h>
 
 #include "mbedtls/rsa.h"
 #include "mbedtls/rsa_internal.h"
@@ -46,8 +49,6 @@
 #include "mbedtls/error.h"
 #include "constant_time_internal.h"
 #include "mbedtls/constant_time.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_PKCS1_V21)
 #include "mbedtls/md.h"
@@ -61,6 +62,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #define mbedtls_calloc calloc
 #define mbedtls_free   free

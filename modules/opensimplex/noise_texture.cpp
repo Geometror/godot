@@ -31,6 +31,15 @@
 #include "noise_texture.h"
 
 #include "core/core_string_names.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "modules/opensimplex/open_simplex_noise.h"
+#include "servers/rendering_server.h"
 
 NoiseTexture::NoiseTexture() {
 	noise = Ref<OpenSimplexNoise>();

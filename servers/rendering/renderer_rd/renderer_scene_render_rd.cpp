@@ -30,10 +30,24 @@
 
 #include "renderer_scene_render_rd.h"
 
+#include <math.h>
+
 #include "core/config/project_settings.h"
 #include "core/os/os.h"
-#include "renderer_compositor_rd.h"
 #include "servers/rendering/rendering_server_default.h"
+#include "core/error/error_list.h"
+#include "core/io/image.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2i.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/templates/sort_array.h"
+#include "servers/rendering/renderer_compositor.h"
+#include "servers/rendering/renderer_rd/effects_rd.h"
+#include "servers/rendering/renderer_rd/shaders/sky.glsl.gen.h"
+#include "servers/rendering/rendering_server_globals.h"
 
 void get_vogel_disk(float *r_kernel, int p_sample_count) {
 	const float golden_angle = 2.4;

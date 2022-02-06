@@ -65,9 +65,27 @@
 //   are tracked in the intermediate representation, not the symbol table.
 //
 
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/SpirvIntrinsics.h>
+#include <glslang/Include/Types.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <algorithm>
+#include <functional>
+#include <map>
+#include <memory>
+#include <string>
+#include <type_traits>
+#include <vector>
+
 #include "../Include/Common.h"
 #include "../Include/intermediate.h"
 #include "../Include/InfoSink.h"
+
+class TInfoSink;
 
 namespace glslang {
 

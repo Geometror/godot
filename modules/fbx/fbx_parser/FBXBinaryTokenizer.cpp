@@ -75,11 +75,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *    for binary files.
  */
 
+#include <stdint.h>
+#include <string.h>
+#include <string>
+
 #include "ByteSwapper.h"
 #include "FBXTokenizer.h"
 #include "core/string/print_string.h"
-
-#include <stdint.h>
+#include "core/string/ustring.h"
 
 namespace FBXDocParser {
 // ------------------------------------------------------------------------------------------------

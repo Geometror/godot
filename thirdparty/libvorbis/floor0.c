@@ -14,22 +14,18 @@
 
  ********************************************************************/
 
-#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <ogg/ogg.h>
+#include <stdio.h>
+
 #include "vorbis/codec.h"
-#include "codec_internal.h"
-#include "registry.h"
-#include "lpc.h"
 #include "lsp.h"
 #include "codebook.h"
 #include "scales.h"
 #include "misc.h"
-#include "os.h"
-
-#include "misc.h"
-#include <stdio.h>
+#include "backends.h"
+#include "ogg/os_types.h"
 
 typedef struct {
   int ln;

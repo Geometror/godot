@@ -9,8 +9,13 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include <assert.h>
+#include <stdint.h>
+#include <stdlib.h>
+
 #include "src/dsp/dsp.h"
 #include "src/enc/cost_enc.h"
+#include "enc/vp8i_enc.h"
 
 //------------------------------------------------------------------------------
 // Boolean-cost cost table

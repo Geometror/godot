@@ -15,6 +15,10 @@
  */
 
 #include "hb.hh"
+#include "hb-buffer.hh"
+#include "hb-ot-layout.hh"
+
+struct hb_ot_shape_plan_t;
 
 #ifndef HB_NO_OT_SHAPE
 

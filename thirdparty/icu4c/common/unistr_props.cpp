@@ -18,10 +18,14 @@
 *   Character property dependent functions moved here from unistr.cpp
 */
 
-#include "unicode/utypes.h"
+#include <stdint.h>
+
 #include "unicode/uchar.h"
 #include "unicode/unistr.h"
 #include "unicode/utf16.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

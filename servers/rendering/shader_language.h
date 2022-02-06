@@ -31,6 +31,8 @@
 #ifndef SHADER_LANGUAGE_H
 #define SHADER_LANGUAGE_H
 
+#include <stdint.h>
+
 #include "core/object/script_language.h"
 #include "core/string/string_name.h"
 #include "core/string/ustring.h"
@@ -38,6 +40,13 @@
 #include "core/templates/map.h"
 #include "core/typedefs.h"
 #include "core/variant/variant.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+
+struct ScriptCodeCompletionOption;
 
 #ifdef DEBUG_ENABLED
 #include "shader_warnings.h"

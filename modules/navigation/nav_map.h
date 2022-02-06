@@ -31,13 +31,17 @@
 #ifndef RVO_SPACE_H
 #define RVO_SPACE_H
 
-#include "nav_rid.h"
+#include <KdTree.h>
+#include <stdint.h>
+#include <vector>
 
+#include "nav_rid.h"
 #include "core/math/math_defs.h"
 #include "core/templates/map.h"
 #include "nav_utils.h"
-
-#include <KdTree.h>
+#include "core/math/vector3.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
 
 class NavRegion;
 class RvoAgent;

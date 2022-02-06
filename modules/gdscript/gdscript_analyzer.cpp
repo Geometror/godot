@@ -30,6 +30,8 @@
 
 #include "gdscript_analyzer.h"
 
+#include <stdint.h>
+
 #include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/io/file_access.h"
@@ -39,6 +41,22 @@
 #include "core/templates/hash_map.h"
 #include "gdscript.h"
 #include "gdscript_utility_functions.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3i.h"
+#include "core/object/method_bind.h"
+#include "core/templates/map.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/templates/pair.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "modules/gdscript/gdscript_cache.h"
+#include "modules/gdscript/gdscript_parser.h"
+#include "modules/gdscript/gdscript_warning.h"
 
 static MethodInfo info_from_utility_func(const StringName &p_function) {
 	ERR_FAIL_COND_V(!Variant::has_utility_function(p_function), MethodInfo());

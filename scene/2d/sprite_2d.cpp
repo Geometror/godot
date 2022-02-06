@@ -31,8 +31,19 @@
 #include "sprite_2d.h"
 
 #include "core/core_string_names.h"
-#include "scene/main/window.h"
 #include "scene/scene_string_names.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_2d.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "scene/main/canvas_item.h"
+#include "scene/main/viewport.h"
+#include "scene/resources/texture.h"
 
 #ifdef TOOLS_ENABLED
 Dictionary Sprite2D::_edit_get_state() const {

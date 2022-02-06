@@ -14,6 +14,8 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "src/enc/vp8i_enc.h"
 #include "src/utils/random_utils.h"
@@ -21,6 +23,8 @@
 #include "src/dsp/dsp.h"
 #include "src/dsp/lossless.h"
 #include "src/dsp/yuv.h"
+#include "webp/encode.h"
+#include "webp/types.h"
 
 // Uncomment to disable gamma-compression during RGB->U/V averaging
 #define USE_GAMMA_COMPRESSION

@@ -31,11 +31,17 @@
 #ifndef GODOT_UPNP_H
 #define GODOT_UPNP_H
 
-#include "core/object/ref_counted.h"
-
-#include "upnp_device.h"
-
 #include <miniupnpc.h>
+
+#include "core/object/ref_counted.h"
+#include "upnp_device.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+
+class UPNPDevice;
+struct UPNPDev;
 
 class UPNP : public RefCounted {
 	GDCLASS(UPNP, RefCounted);

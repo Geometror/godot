@@ -33,6 +33,13 @@
 #include "core/math/transform_2d.h"
 #include "core/math/transform_3d.h"
 #include "servers/navigation_server_3d.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/vector3.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "scene/2d/navigation_region_2d.h"
+#include "scene/resources/navigation_mesh.h"
 
 NavigationServer2D *NavigationServer2D::singleton = nullptr;
 

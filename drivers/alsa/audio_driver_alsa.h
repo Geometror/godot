@@ -31,12 +31,18 @@
 #ifndef AUDIO_DRIVER_ALSA_H
 #define AUDIO_DRIVER_ALSA_H
 
+#include <alsa/pcm.h>
+#include <stdint.h>
+
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
 #ifdef ALSA_ENABLED
 
 #include "core/os/mutex.h"
 #include "core/os/thread.h"
 #include "servers/audio_server.h"
-
 #include "asound-so_wrap.h"
 
 class AudioDriverALSA : public AudioDriver {

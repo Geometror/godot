@@ -30,10 +30,23 @@
 
 #include "gdscript_extend_parser.h"
 
-#include "../gdscript.h"
 #include "../gdscript_analyzer.h"
 #include "gdscript_language_protocol.h"
 #include "gdscript_workspace.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/resource.h"
+#include "core/math/vector2i.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/ref_counted.h"
+#include "core/string/char_utils.h"
+#include "core/string/string_name.h"
+#include "core/templates/map.h"
+#include "core/variant/variant.h"
+#include "modules/gdscript/gdscript_parser.h"
+#include "modules/gdscript/gdscript_tokenizer.h"
+#include "modules/gdscript/gdscript_warning.h"
+#include "modules/gdscript/language_server/lsp.hpp"
 
 void ExtendGDScriptParser::update_diagnostics() {
 	diagnostics.clear();

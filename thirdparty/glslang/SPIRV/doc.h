@@ -38,9 +38,10 @@
 
 #pragma once
 
-#include "spirv.hpp"
-
 #include <vector>
+#include <algorithm>
+
+#include "spirv.hpp"
 
 namespace spv {
 

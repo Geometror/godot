@@ -13,8 +13,14 @@
 //          Vikas (vikasa@google.com)
 
 #include <assert.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "src/mux/muxi.h"
 #include "src/utils/utils.h"
+#include "webp/format_constants.h"
+#include "webp/mux.h"
+#include "webp/mux_types.h"
 
 #define UNDEFINED_CHUNK_SIZE ((uint32_t)(-1))
 

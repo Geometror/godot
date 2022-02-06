@@ -20,6 +20,9 @@
 *   that then do not depend on resource bundle code and this data.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/putil.h"
 #include "unicode/uloc.h"
@@ -27,6 +30,9 @@
 #include "cstring.h"
 #include "ulocimp.h"
 #include "uresimp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 /*
  * Lookup a resource bundle table item with fallback on the table level.

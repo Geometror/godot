@@ -32,6 +32,14 @@
 #define IMAGE_LOADER_SVG_H
 
 #include "core/io/image_loader.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/dictionary.h"
+
+class FileAccess;
+class Image;
 
 class ImageLoaderSVG : public ImageFormatLoader {
 	Dictionary replace_colors;

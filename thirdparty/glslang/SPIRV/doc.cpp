@@ -42,17 +42,10 @@
 
 #include "doc.h"
 
-#include <cstdio>
-#include <cstring>
-#include <algorithm>
+#include <SPIRV/spirv.hpp>
 
 namespace spv {
     extern "C" {
-        // Include C-based headers that don't have a namespace
-        #include "GLSL.ext.KHR.h"
-        #include "GLSL.ext.EXT.h"
-        #include "GLSL.ext.AMD.h"
-        #include "GLSL.ext.NV.h"
     }
 }
 

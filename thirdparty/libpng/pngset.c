@@ -16,7 +16,15 @@
  * info struct and allows us to change the structure in the future.
  */
 
+#include <limits.h>
+#include <string.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pngdebug.h"
+#include "pnglibconf.h"
+#include "pngstruct.h"
+#include "zconf.h"
 
 #if defined(PNG_READ_SUPPORTED) || defined(PNG_WRITE_SUPPORTED)
 

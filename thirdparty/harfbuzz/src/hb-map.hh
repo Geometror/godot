@@ -27,7 +27,15 @@
 #ifndef HB_MAP_HH
 #define HB_MAP_HH
 
+#include <stddef.h>
+#include <stdint.h>
+#include <initializer_list>
+#include <new>
+#include <type_traits>
+#include <utility>
+
 #include "hb.hh"
+#include "hb.h"
 
 
 /*

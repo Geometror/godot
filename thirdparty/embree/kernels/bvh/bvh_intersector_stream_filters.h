@@ -3,12 +3,23 @@
 
 #pragma once
 
+#include <stddef.h>
+
 #include "../common/default.h"
 #include "../common/ray.h"
 #include "../common/scene.h"
+#include "common/sys/sysinfo.h"
+
+struct RTCRay;
+struct RTCRayHit;
+struct RTCRayHitNp;
+struct RTCRayNp;
 
 namespace embree
 {
+class Scene;
+struct IntersectContext;
+
   namespace isa
   {
     class RayStreamFilter

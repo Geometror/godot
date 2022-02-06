@@ -33,6 +33,11 @@
 
 #include "core/object/class_db.h"
 #include "core/variant/variant.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/dictionary.h"
 
 class JSONRPC : public Object {
 	GDCLASS(JSONRPC, Object)

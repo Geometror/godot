@@ -32,6 +32,11 @@
 
 #include "servers/physics_server_2d.h"
 #include "servers/rendering_server.h"
+#include "core/object/class_db.h"
+#include "core/templates/vector.h"
+
+class RID;
+
 void RectangleShape2D::_update_shape() {
 	PhysicsServer2D::get_singleton()->shape_set_data(get_rid(), size * 0.5);
 	emit_changed();

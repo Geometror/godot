@@ -17,12 +17,12 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_VERSION_C)
 
-#include "mbedtls/version.h"
 #include <string.h>
+
+#include "mbedtls/version.h"
 
 unsigned int mbedtls_version_get_number( void )
 {

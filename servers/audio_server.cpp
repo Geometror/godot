@@ -30,20 +30,26 @@
 
 #include "audio_server.h"
 
+#include <cstring>
+#include <algorithm>
+#include <iterator>
+
 #include "core/config/project_settings.h"
 #include "core/debugger/engine_debugger.h"
 #include "core/error/error_macros.h"
-#include "core/io/file_access.h"
 #include "core/io/resource_loader.h"
 #include "core/math/audio_frame.h"
 #include "core/os/os.h"
 #include "core/string/string_name.h"
 #include "core/templates/pair.h"
-#include "scene/resources/audio_stream_sample.h"
 #include "servers/audio/audio_driver_dummy.h"
 #include "servers/audio/effects/audio_effect_compressor.h"
-
-#include <cstring>
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector2.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "servers/audio/audio_stream.h"
 
 #ifdef TOOLS_ENABLED
 #define MARK_EDITED set_edited(true);

@@ -31,6 +31,8 @@
 #ifndef GLTF_STATE_H
 #define GLTF_STATE_H
 
+#include <stdint.h>
+
 #include "gltf_accessor.h"
 #include "gltf_animation.h"
 #include "gltf_buffer_view.h"
@@ -43,13 +45,23 @@
 #include "gltf_skeleton.h"
 #include "gltf_skin.h"
 #include "gltf_texture.h"
-
 #include "core/io/resource.h"
 #include "core/templates/map.h"
 #include "core/templates/pair.h"
 #include "core/templates/vector.h"
 #include "scene/animation/animation_player.h"
 #include "scene/resources/texture.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/set.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "scene/resources/material.h"
+
+class AnimationPlayer;
+class Node;
 
 class GLTFState : public Resource {
 	GDCLASS(GLTFState, Resource);

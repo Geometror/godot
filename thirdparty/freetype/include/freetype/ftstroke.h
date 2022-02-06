@@ -22,6 +22,12 @@
 #include <freetype/ftoutln.h>
 #include <freetype/ftglyph.h>
 
+#include "freetype/config/ftheader.h"
+#include "freetype/config/public-macros.h"
+#include "freetype/freetype.h"
+#include "freetype/ftimage.h"
+#include "freetype/fttypes.h"
+
 
 FT_BEGIN_HEADER
 

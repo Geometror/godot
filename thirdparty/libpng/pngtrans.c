@@ -11,7 +11,12 @@
  * and license in png.h
  */
 
+#include <stddef.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pngdebug.h"
+#include "pnglibconf.h"
 
 #if defined(PNG_READ_SUPPORTED) || defined(PNG_WRITE_SUPPORTED)
 

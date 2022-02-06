@@ -29,7 +29,16 @@
 /*************************************************************************/
 
 #include "audio_effect_compressor.h"
+
+#include <cmath>
+
 #include "servers/audio_server.h"
+#include "core/math/audio_frame.h"
+#include "core/math/math_funcs.h"
+#include "core/object/class_db.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
 void AudioEffectCompressorInstance::process(const AudioFrame *p_src_frames, AudioFrame *p_dst_frames, int p_frame_count) {
 	float threshold = Math::db2linear(base->threshold);

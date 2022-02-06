@@ -31,7 +31,16 @@
 #include "audio_stream.h"
 
 #include "core/config/project_settings.h"
-#include "core/os/os.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector2.h"
+#include "core/object/class_db.h"
+#include "core/string/print_string.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "servers/audio_server.h"
 
 void AudioStreamPlayback::start(float p_from_pos) {
 	if (GDVIRTUAL_CALL(_start, p_from_pos)) {

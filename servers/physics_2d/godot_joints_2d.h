@@ -33,6 +33,11 @@
 
 #include "godot_body_2d.h"
 #include "godot_constraint_2d.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/typedefs.h"
+#include "servers/physics_server_2d.h"
 
 class GodotJoint2D : public GodotConstraint2D {
 	real_t bias = 0;

@@ -33,6 +33,11 @@
 #include "core/extension/native_extension_manager.h"
 #include "drivers/png/image_loader_png.h"
 #include "drivers/png/resource_saver_png.h"
+#include "core/extension/native_extension.h"
+#include "core/io/image_loader.h"
+#include "core/io/resource_saver.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
 
 static ImageLoaderPNG *image_loader_png;
 static Ref<ResourceSaverPNG> resource_saver_png;

@@ -30,6 +30,8 @@
 
 #include "servers/rendering/renderer_rd/renderer_scene_environment_rd.h"
 
+#include "core/error/error_macros.h"
+
 uint64_t RendererSceneEnvironmentRD::auto_exposure_counter = 2;
 
 void RendererSceneEnvironmentRD::set_ambient_light(const Color &p_color, RS::EnvironmentAmbientSource p_ambient, float p_energy, float p_sky_contribution, RS::EnvironmentReflectionSource p_reflection_source) {

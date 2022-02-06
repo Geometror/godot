@@ -30,6 +30,8 @@
 
 #include "editor_node.h"
 
+#include <stdlib.h>
+
 #include "core/config/project_settings.h"
 #include "core/extension/native_extension_manager.h"
 #include "core/input/input.h"
@@ -40,7 +42,6 @@
 #include "core/io/resource_saver.h"
 #include "core/io/stream_peer_ssl.h"
 #include "core/object/class_db.h"
-#include "core/object/message_queue.h"
 #include "core/os/keyboard.h"
 #include "core/os/os.h"
 #include "core/os/time.h"
@@ -49,8 +50,6 @@
 #include "core/version.h"
 #include "core/version_hash.gen.h"
 #include "main/main.h"
-#include "scene/3d/importer_mesh_instance_3d.h"
-#include "scene/gui/center_container.h"
 #include "scene/gui/control.h"
 #include "scene/gui/dialogs.h"
 #include "scene/gui/file_dialog.h"
@@ -61,15 +60,11 @@
 #include "scene/gui/split_container.h"
 #include "scene/gui/tab_bar.h"
 #include "scene/gui/tab_container.h"
-#include "scene/gui/texture_progress_bar.h"
 #include "scene/main/window.h"
 #include "scene/resources/packed_scene.h"
 #include "servers/display_server.h"
-#include "servers/navigation_server_2d.h"
 #include "servers/navigation_server_3d.h"
 #include "servers/physics_server_2d.h"
-#include "servers/rendering/rendering_device.h"
-
 #include "editor/audio_stream_preview.h"
 #include "editor/debugger/debug_adapter/debug_adapter_server.h"
 #include "editor/debugger/editor_debugger_node.h"
@@ -90,11 +85,9 @@
 #include "editor/editor_resource_picker.h"
 #include "editor/editor_resource_preview.h"
 #include "editor/editor_run_native.h"
-#include "editor/editor_run_script.h"
 #include "editor/editor_scale.h"
 #include "editor/editor_settings.h"
 #include "editor/editor_settings_dialog.h"
-#include "editor/editor_spin_slider.h"
 #include "editor/editor_themes.h"
 #include "editor/editor_toaster.h"
 #include "editor/editor_translation_parser.h"
@@ -120,11 +113,7 @@
 #include "editor/multi_node_edit.h"
 #include "editor/node_dock.h"
 #include "editor/plugin_config_dialog.h"
-#include "editor/plugins/animation_blend_space_1d_editor.h"
-#include "editor/plugins/animation_blend_space_2d_editor.h"
-#include "editor/plugins/animation_blend_tree_editor_plugin.h"
 #include "editor/plugins/animation_player_editor_plugin.h"
-#include "editor/plugins/animation_state_machine_editor.h"
 #include "editor/plugins/animation_tree_editor_plugin.h"
 #include "editor/plugins/asset_library_editor_plugin.h"
 #include "editor/plugins/audio_stream_editor_plugin.h"
@@ -137,7 +126,6 @@
 #include "editor/plugins/cpu_particles_3d_editor_plugin.h"
 #include "editor/plugins/curve_editor_plugin.h"
 #include "editor/plugins/debugger_editor_plugin.h"
-#include "editor/plugins/editor_debugger_plugin.h"
 #include "editor/plugins/editor_preview_plugins.h"
 #include "editor/plugins/font_editor_plugin.h"
 #include "editor/plugins/gpu_particles_2d_editor_plugin.h"
@@ -192,9 +180,64 @@
 #include "editor/project_settings_editor.h"
 #include "editor/quick_open.h"
 #include "editor/register_exporters.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/extension/native_extension.h"
+#include "core/input/input_enums.h"
+#include "core/input/input_event.h"
+#include "core/input/shortcut.h"
+#include "core/io/dir_access.h"
+#include "core/io/image.h"
+#include "core/io/resource_importer.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/object_id.h"
+#include "core/object/script_language.h"
+#include "core/object/undo_redo.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/variant/array.h"
+#include "core/version_generated.gen.h"
+#include "editor/editor_file_dialog.h"
+#include "editor/editor_native_shader_source_visualizer.h"
+#include "editor/property_editor.h"
+#include "editor/scene_tree_dock.h"
+#include "editor/scene_tree_editor.h"
+#include "scene/animation/animation_player.h"
+#include "scene/gui/box_container.h"
+#include "scene/gui/button.h"
+#include "scene/gui/check_box.h"
+#include "scene/gui/color_picker.h"
+#include "scene/gui/label.h"
+#include "scene/gui/margin_container.h"
+#include "scene/gui/option_button.h"
+#include "scene/gui/popup.h"
+#include "scene/gui/popup_menu.h"
+#include "scene/gui/rich_text_label.h"
+#include "scene/gui/scroll_bar.h"
+#include "scene/gui/texture_rect.h"
+#include "scene/gui/tree.h"
+#include "scene/main/scene_tree.h"
+#include "scene/main/timer.h"
+#include "scene/main/viewport.h"
+#include "scene/resources/environment.h"
+#include "scene/resources/mesh_library.h"
+#include "scene/resources/world_3d.h"
+#include "servers/physics_server_3d.h"
+#include "servers/rendering_server.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+class AnimationTrackEditPlugin;
+class Camera3D;
+class EditorDebuggerPlugin;
+class EditorImportPlugin;
+class EditorNode3DGizmo;
+class EditorNode3DGizmoPlugin;
+class EditorScript;
+class EditorSpinSlider;
+class EditorVCSInterface;
 
 EditorNode *EditorNode::singleton = nullptr;
 

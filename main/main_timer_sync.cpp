@@ -30,6 +30,12 @@
 
 #include "main_timer_sync.h"
 
+#include <math.h>
+
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/typedefs.h"
+
 void MainFrameTime::clamp_process_step(double min_process_step, double max_process_step) {
 	if (process_step < min_process_step) {
 		process_step = min_process_step;

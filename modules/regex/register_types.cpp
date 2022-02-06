@@ -29,8 +29,11 @@
 /*************************************************************************/
 
 #include "register_types.h"
+
 #include "core/object/class_db.h"
-#include "regex.h"
+
+class RegEx;
+class RegExMatch;
 
 void register_regex_types() {
 	GDREGISTER_CLASS(RegExMatch);

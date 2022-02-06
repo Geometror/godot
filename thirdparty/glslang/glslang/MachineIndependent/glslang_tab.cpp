@@ -85,10 +85,25 @@ possible; please let me know if you discover discrepancies.
 Jutta Degener, 1995
 */
 
+#include <features.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/ResourceLimits.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <stdlib.h>
+#include <string.h>
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "SymbolTable.h"
 #include "ParseHelper.h"
 #include "../Public/ShaderLang.h"
-#include "attribute.h"
 
 using namespace glslang;
 
@@ -117,6 +132,7 @@ using namespace glslang;
 # endif
 
 #include "glslang_tab.cpp.h"
+
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -743,6 +759,7 @@ extern int yylex(YYSTYPE*, TParseContext&);
 # include <limits.h> /* INFRINGES ON USER NAME SPACE */
 # if defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
 #  include <stdint.h> /* INFRINGES ON USER NAME SPACE */
+
 #  define YY_STDINT_H
 # endif
 #endif
@@ -813,6 +830,7 @@ typedef int yytype_uint16;
 #  define YYSIZE_T size_t
 # elif defined __STDC_VERSION__ && 199901 <= __STDC_VERSION__
 #  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
+
 #  define YYSIZE_T size_t
 # else
 #  define YYSIZE_T unsigned
@@ -838,6 +856,7 @@ typedef int yy_state_fast_t;
 # if defined YYENABLE_NLS && YYENABLE_NLS
 #  if ENABLE_NLS
 #   include <libintl.h> /* INFRINGES ON USER NAME SPACE */
+
 #   define YY_(Msgid) dgettext ("bison-runtime", Msgid)
 #  endif
 # endif
@@ -918,6 +937,7 @@ typedef int yy_state_fast_t;
 #    define YYSTACK_ALLOC __alloca
 #   elif defined _MSC_VER
 #    include <malloc.h> /* INFRINGES ON USER NAME SPACE */
+
 #    define alloca _alloca
 #   else
 #    define YYSTACK_ALLOC alloca
@@ -4470,6 +4490,7 @@ enum { YYENOMEM = -2 };
 
 # ifndef YYFPRINTF
 #  include <stdio.h> /* INFRINGES ON USER NAME SPACE */
+
 #  define YYFPRINTF fprintf
 # endif
 

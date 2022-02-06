@@ -24,6 +24,9 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "hb.hh"
 #include "hb-shaper.hh"
 #include "hb-machinery.hh"
@@ -32,6 +35,7 @@
 static const hb_shaper_entry_t all_shapers[] = {
 #define HB_SHAPER_IMPLEMENT(name) {#name, _hb_##name##_shape},
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
 };
 #ifndef HB_NO_SHAPER

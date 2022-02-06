@@ -7,6 +7,10 @@
  * This library is distributed under the MIT License. See notice at the end of this file.
  */
 /* clang-format off */
+#include <stdint.h>
+
+#include "vulkan/vulkan_core.h"
+#include "vulkan/vulkan_xlib.h"
 #ifndef VOLK_H_
 #define VOLK_H_
 

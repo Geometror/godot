@@ -31,6 +31,14 @@
 #ifndef JOYPAD_LINUX_H
 #define JOYPAD_LINUX_H
 
+#include <stdint.h>
+
+#include "core/input/input_enums.h"
+#include "core/string/ustring.h"
+#include "core/templates/safe_refcount.h"
+#include "core/templates/vector.h"
+
+class Input;
 #ifdef JOYDEV_ENABLED
 #include "core/input/input.h"
 #include "core/os/mutex.h"

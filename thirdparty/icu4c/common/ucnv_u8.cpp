@@ -20,8 +20,6 @@
 *   UTF-8 converter, with a branch for converting supplementary code points.
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_CONVERSION
 
 #include "unicode/ucnv.h"

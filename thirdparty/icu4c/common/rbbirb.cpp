@@ -11,30 +11,30 @@
 //    RBBI engine.
 //
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/urename.h"
+#include "uvector.h"
+
+namespace icu_70 {
+class BreakIterator;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
-#include "unicode/brkiter.h"
 #include "unicode/rbbi.h"
-#include "unicode/ubrk.h"
 #include "unicode/unistr.h"
-#include "unicode/uniset.h"
-#include "unicode/uchar.h"
-#include "unicode/uchriter.h"
 #include "unicode/ustring.h"
-#include "unicode/parsepos.h"
 #include "unicode/parseerr.h"
-
 #include "cmemory.h"
-#include "cstring.h"
 #include "rbbirb.h"
 #include "rbbinode.h"
 #include "rbbiscan.h"
 #include "rbbisetb.h"
 #include "rbbitblb.h"
 #include "rbbidata.h"
-#include "uassert.h"
 
 
 U_NAMESPACE_BEGIN

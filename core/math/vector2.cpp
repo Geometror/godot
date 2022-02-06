@@ -32,6 +32,7 @@
 
 #include "core/math/vector2i.h"
 #include "core/string/ustring.h"
+#include "core/error/error_macros.h"
 
 real_t Vector2::angle() const {
 	return Math::atan2(y, x);

@@ -36,6 +36,11 @@
 #include "core/os/thread_safe.h"
 #include "core/templates/rid.h"
 #include "core/variant/variant.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
 
 /**
 	The camera server is a singleton object that gives access to the various

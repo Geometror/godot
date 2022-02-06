@@ -29,7 +29,13 @@
 /*************************************************************************/
 
 #include "dtls_server_mbedtls.h"
+
 #include "packet_peer_mbed_dtls.h"
+#include "core/error/error_macros.h"
+#include "core/io/packet_peer_dtls.h"
+#include "core/io/packet_peer_udp.h"
+#include "core/os/memory.h"
+#include "modules/mbedtls/ssl_context_mbedtls.h"
 
 Error DTLSServerMbedTLS::setup(Ref<CryptoKey> p_key, Ref<X509Certificate> p_cert, Ref<X509Certificate> p_ca_chain) {
 	ERR_FAIL_COND_V(_cookies->setup() != OK, ERR_ALREADY_IN_USE);

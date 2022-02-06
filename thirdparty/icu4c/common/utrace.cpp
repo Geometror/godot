@@ -12,8 +12,10 @@
 */
 
 #include "unicode/utrace.h"
+
+#include <stddef.h>
+
 #include "utracimp.h"
-#include "cstring.h"
 #include "uassert.h"
 #include "ucln_cmn.h"
 

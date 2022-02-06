@@ -33,6 +33,12 @@
 #include "core/config/project_settings.h"
 #include "core/io/dir_access.h"
 #include "core/io/file_access.h"
+#include "core/error/error_list.h"
+#include "core/io/config_file.h"
+#include "core/templates/list.h"
+#include "core/typedefs.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 String PluginConfigIOS::resolve_local_dependency_path(String plugin_config_dir, String dependency_path) {
 	String absolute_path;

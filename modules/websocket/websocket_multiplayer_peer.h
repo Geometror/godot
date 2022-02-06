@@ -31,10 +31,16 @@
 #ifndef WEBSOCKET_MULTIPLAYER_PEER_H
 #define WEBSOCKET_MULTIPLAYER_PEER_H
 
+#include <stdint.h>
+
 #include "core/error/error_list.h"
 #include "core/multiplayer/multiplayer_peer.h"
 #include "core/templates/list.h"
 #include "websocket_peer.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
 
 class WebSocketMultiplayerPeer : public MultiplayerPeer {
 	GDCLASS(WebSocketMultiplayerPeer, MultiplayerPeer);

@@ -11,7 +11,11 @@
 //
 // Author: Christian Duvivier (cduvivier@google.com)
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "src/dsp/dsp.h"
+#include "webp/types.h"
 
 #if defined(WEBP_HAVE_NEON_RTCD)
 #include <stdio.h>
@@ -59,10 +63,12 @@ static WEBP_INLINE void GetCPUInfo(int cpu_info[4], int info_type) {
 
 #if defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 150030729  // >= VS2008 SP1
 #include <intrin.h>
+
 #define GetCPUInfo(info, type) __cpuidex(info, type, 0)  // set ecx=0
 #define WEBP_HAVE_MSC_CPUID
 #elif _MSC_VER > 1310
 #include <intrin.h>
+
 #define GetCPUInfo __cpuid
 #define WEBP_HAVE_MSC_CPUID
 #endif
@@ -83,6 +89,7 @@ static WEBP_INLINE uint64_t xgetbv(void) {
 #elif (defined(_M_X64) || defined(_M_IX86)) && \
       defined(_MSC_FULL_VER) && _MSC_FULL_VER >= 160040219  // >= VS2010 SP1
 #include <immintrin.h>
+
 #define xgetbv() _xgetbv(0)
 #elif defined(_MSC_VER) && defined(_M_IX86)
 static WEBP_INLINE uint64_t xgetbv(void) {

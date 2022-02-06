@@ -17,13 +17,18 @@
 *   were moved here to break dependency cycles among parts of the common library.
 */
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/localpointer.h"
+#include "unicode/uconfig.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/brkiter.h"
 #include "unicode/locid.h"
-#include "unicode/ucasemap.h"
 #include "unicode/unistr.h"
 #include "ucasemap_imp.h"
 

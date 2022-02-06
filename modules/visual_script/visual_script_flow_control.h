@@ -32,6 +32,12 @@
 #define VISUAL_SCRIPT_FLOW_CONTROL_H
 
 #include "visual_script.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 class VisualScriptReturn : public VisualScriptNode {
 	GDCLASS(VisualScriptReturn, VisualScriptNode);

@@ -32,10 +32,17 @@
 #define WEBRTC_PEER_CONNECTION_EXTENSION_H
 
 #include "webrtc_peer_connection.h"
-
 #include "core/object/gdvirtual.gen.inc"
 #include "core/object/script_language.h"
 #include "core/variant/native_ptr.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/dictionary.h"
+
+class WebRTCDataChannel;
 
 class WebRTCPeerConnectionExtension : public WebRTCPeerConnection {
 	GDCLASS(WebRTCPeerConnectionExtension, WebRTCPeerConnection);

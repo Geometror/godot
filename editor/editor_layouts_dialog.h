@@ -32,9 +32,13 @@
 #define EDITOR_LAYOUTS_DIALOG_H
 
 #include "scene/gui/dialogs.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class LineEdit;
 class ItemList;
+class InputEvent;
+class VBoxContainer;
 
 class EditorLayoutsDialog : public ConfirmationDialog {
 	GDCLASS(EditorLayoutsDialog, ConfirmationDialog);

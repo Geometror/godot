@@ -30,8 +30,10 @@
 */
 
 #include "maths.h"
-#include "simd.h"
+
 #include <cfloat>
+
+#include "simd_sse.h"
 
 namespace squish {
 

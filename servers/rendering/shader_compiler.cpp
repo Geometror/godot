@@ -30,10 +30,12 @@
 
 #include "shader_compiler.h"
 
-#include "core/config/project_settings.h"
-#include "core/os/os.h"
 #include "servers/rendering/shader_types.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/string/print_string.h"
+#include "core/templates/list.h"
+#include "core/variant/variant.h"
 
 #define SL ShaderLanguage
 

@@ -30,8 +30,14 @@
 
 #include "gdnative/dictionary.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/variant/dictionary.h"
-#include "core/variant/variant.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/variant_struct.h"
+
+class Variant;
 
 static_assert(sizeof(godot_dictionary) == sizeof(Dictionary), "Dictionary size mismatch");
 

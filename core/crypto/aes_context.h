@@ -33,6 +33,10 @@
 
 #include "core/crypto/crypto_core.h"
 #include "core/object/ref_counted.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
 
 class AESContext : public RefCounted {
 	GDCLASS(AESContext, RefCounted);

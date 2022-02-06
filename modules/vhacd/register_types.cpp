@@ -29,8 +29,15 @@
 /*************************************************************************/
 
 #include "register_types.h"
+
+#include <stdint.h>
+#include <string.h>
+
 #include "scene/resources/mesh.h"
 #include "thirdparty/vhacd/public/VHACD.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/templates/vector.h"
 
 static Vector<Vector<Vector3>> convex_decompose(const real_t *p_vertices, int p_vertex_count, const uint32_t *p_triangles, int p_triangle_count, const Mesh::ConvexDecompositionSettings &p_settings, Vector<Vector<uint32_t>> *r_convex_indices) {
 	VHACD::IVHACD::Parameters params;

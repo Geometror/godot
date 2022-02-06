@@ -7,6 +7,9 @@
 **********************************************************************
 */
 #include "unicode/usetiter.h"
+
+#include <stddef.h>
+
 #include "unicode/uniset.h"
 #include "unicode/unistr.h"
 #include "uvector.h"

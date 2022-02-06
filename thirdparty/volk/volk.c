@@ -2,6 +2,8 @@
 /* clang-format off */
 #include "volk.h"
 
+#include <stddef.h>
+
 #ifdef _WIN32
 	typedef const char* LPCSTR;
 	typedef struct HINSTANCE__* HINSTANCE;

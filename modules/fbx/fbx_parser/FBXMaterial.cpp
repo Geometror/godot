@@ -73,15 +73,25 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  @brief Assimp::FBX::Material and Assimp::FBX::Texture implementation
  */
 
+#include <stdint.h>
+#include <string.h>
+#include <algorithm> // std::transform
+#include <map>
+#include <string>
+#include <vector>
+
 #include "ByteSwapper.h"
 #include "FBXDocument.h"
 #include "FBXDocumentUtil.h"
 #include "FBXImportSettings.h"
 #include "FBXParser.h"
 #include "FBXProperties.h"
-
 #include "FBXUtil.h"
-#include <algorithm> // std::transform
+#include "core/error/error_macros.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/string/print_string.h"
+#include "fbx_parser/FBXTokenizer.h"
 
 namespace FBXDocParser {
 

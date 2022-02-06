@@ -30,14 +30,15 @@ Licensed under the MIT License.
 
 http://go.microsoft.com/fwlink/?LinkId=248926
 */
-#include "ConvectionKernels_Config.h"
 
+#include <stddef.h>
+#include <stdint.h>
 #if !defined(CVTT_SINGLE_FILE) || defined(CVTT_SINGLE_FILE_IMPL)
+
+#include <algorithm>
 
 #include "ConvectionKernels.h"
 #include "ConvectionKernels_ParallelMath.h"
-
-#include <algorithm>
 
 namespace cvtt
 {

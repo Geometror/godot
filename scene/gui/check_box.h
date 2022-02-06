@@ -32,6 +32,9 @@
 #define CHECK_BOX_H
 
 #include "scene/gui/button.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
 
 class CheckBox : public Button {
 	GDCLASS(CheckBox, Button);

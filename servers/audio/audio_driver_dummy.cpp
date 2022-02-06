@@ -30,8 +30,12 @@
 
 #include "audio_driver_dummy.h"
 
+#include <stddef.h>
+
 #include "core/config/project_settings.h"
 #include "core/os/os.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
 
 Error AudioDriverDummy::init() {
 	active = false;

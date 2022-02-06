@@ -30,7 +30,13 @@
 
 #include "pivot_transform.h"
 
+#include <string>
+
 #include "tools/import_utils.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "fbx_parser/FBXDocument.h"
+#include "fbx_parser/FBXProperties.h"
 
 void PivotTransform::ReadTransformChain() {
 	const FBXDocParser::PropertyTable *props = fbx_model;

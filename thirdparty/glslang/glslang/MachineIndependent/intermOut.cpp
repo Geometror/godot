@@ -46,7 +46,19 @@
 #else
 #include <cmath>
 #endif
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdio.h>
+#include <string.h>
 #include <cstdint>
+#include <memory>
+#include <set>
+#include <vector>
 
 namespace {
 

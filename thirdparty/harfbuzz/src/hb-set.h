@@ -24,6 +24,7 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include "hb.h"
 #if !defined(HB_H_IN) && !defined(HB_NO_SINGLE_HEADER_ERROR)
 #error "Include <hb.h> instead."
 #endif

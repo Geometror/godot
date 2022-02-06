@@ -19,8 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <float.h>
+#include <memory>
+
 #include "tvgMath.h"
 #include "tvgPaint.h"
+#include "tvgArray.h"
+#include "tvgCommon.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

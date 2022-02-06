@@ -74,13 +74,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  @brief Assimp::FBX::NodeAttribute (and subclasses) implementation
  */
 
+#include <stdint.h>
+#include <algorithm>
+#include <map>
+#include <string>
+#include <vector>
+
 #include "FBXDocument.h"
 #include "FBXParser.h"
-#include <iostream>
 
 namespace FBXDocParser {
 
-class FbxPoseNode;
 // ------------------------------------------------------------------------------------------------
 FbxPose::FbxPose(uint64_t id, const ElementPtr element, const Document &doc, const std::string &name) :
 		Object(id, element, name) {

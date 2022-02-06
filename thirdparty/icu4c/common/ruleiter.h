@@ -13,7 +13,12 @@
 #ifndef _RULEITER_H_
 #define _RULEITER_H_
 
+#include <stdint.h>
+
 #include "unicode/uobject.h"
+#include "unicode/umachine.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

@@ -31,12 +31,31 @@
 #ifndef DISPLAY_SERVER_H
 #define DISPLAY_SERVER_H
 
+#include <stdint.h>
+#include <cmath>
+
 #include "core/input/input.h"
 #include "core/io/resource.h"
 #include "core/os/os.h"
 #include "core/variant/callable.h"
+#include "core/error/error_list.h"
+#include "core/input/input_enums.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/os/keyboard.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
 
 class Texture2D;
+class Image;
 
 class DisplayServer : public Object {
 	GDCLASS(DisplayServer, Object)

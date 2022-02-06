@@ -32,8 +32,11 @@
 #define AUDIO_EFFECT_LIMITER_H
 
 #include "servers/audio/audio_effect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class AudioEffectLimiter;
+struct AudioFrame;
 
 class AudioEffectLimiterInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectLimiterInstance, AudioEffectInstance);

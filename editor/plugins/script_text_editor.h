@@ -35,6 +35,34 @@
 #include "scene/gui/dialogs.h"
 #include "scene/gui/tree.h"
 #include "script_editor_plugin.h"
+#include "core/io/resource.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "editor/code_editor.h"
+
+class ColorPicker;
+class Control;
+class HBoxContainer;
+class InputEvent;
+class Label;
+class MenuButton;
+class Node;
+class PopupMenu;
+class PopupPanel;
+class RichTextLabel;
+class Texture2D;
+class Tree;
 
 class ConnectionInfoDialog : public AcceptDialog {
 	GDCLASS(ConnectionInfoDialog, AcceptDialog);

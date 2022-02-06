@@ -11,6 +11,7 @@
 #include "lsr.h"
 #include "uinvchar.h"
 #include "ustr_imp.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

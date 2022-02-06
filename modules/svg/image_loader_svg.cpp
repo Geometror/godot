@@ -30,10 +30,21 @@
 
 #include "image_loader_svg.h"
 
+#include <thorvg.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <memory>
+#include <utility>
+
 #include "core/os/memory.h"
 #include "core/variant/variant.h"
-
-#include <thorvg.h>
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/math/color.h"
+#include "core/math/math_funcs.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 void ImageLoaderSVG::_replace_color_property(const String &p_prefix, String &r_string) {
 	// Replace colors in the SVG based on what is configured in `replace_colors`.

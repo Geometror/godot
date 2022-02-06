@@ -31,10 +31,21 @@
 #ifndef WEBSOCKET_CLIENT_H
 #define WEBSOCKET_CLIENT_H
 
+#include <stdint.h>
+
 #include "core/crypto/crypto.h"
 #include "core/error/error_list.h"
 #include "websocket_multiplayer_peer.h"
 #include "websocket_peer.h"
+#include "core/io/ip_address.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "modules/websocket/websocket_macros.h"
+
+class WebSocketPeer;
+class X509Certificate;
 
 class WebSocketClient : public WebSocketMultiplayerPeer {
 	GDCLASS(WebSocketClient, WebSocketMultiplayerPeer);

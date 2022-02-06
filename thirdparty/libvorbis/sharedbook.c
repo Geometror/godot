@@ -18,12 +18,12 @@
 #include <limits.h>
 #include <math.h>
 #include <string.h>
-#include <ogg/ogg.h>
-#include "os.h"
+#include <alloca.h>
+
 #include "misc.h"
-#include "vorbis/codec.h"
 #include "codebook.h"
-#include "scales.h"
+#include "ogg/config_types.h"
+#include "ogg/os_types.h"
 
 /**** pack/unpack helpers ******************************************/
 

@@ -30,7 +30,11 @@
 
 #include "gdnative/plane.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/math/plane.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
 
 static_assert(sizeof(godot_plane) == sizeof(Plane), "Plane size mismatch");
 

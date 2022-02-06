@@ -32,8 +32,10 @@
 
 #include "core/config/engine.h"
 #include "servers/navigation_server_3d.h"
-
 #include "godot_navigation_server.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "editor/editor_plugin.h"
 
 #ifndef _3D_DISABLED
 #include "navigation_mesh_generator.h"

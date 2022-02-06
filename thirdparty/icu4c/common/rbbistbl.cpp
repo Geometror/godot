@@ -10,7 +10,23 @@
 ***************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "uelement.h"
+#include "uhash.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class RBBIRuleScanner;
+class UnicodeFunctor;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -18,11 +34,8 @@
 #include "unicode/uniset.h"
 #include "unicode/uchar.h"
 #include "unicode/parsepos.h"
-
-#include "cstr.h"
 #include "rbbinode.h"
 #include "rbbirb.h"
-#include "umutex.h"
 
 
 //

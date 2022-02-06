@@ -31,13 +31,28 @@
 #ifndef GODOT_BODY_3D_H
 #define GODOT_BODY_3D_H
 
+#include <stdint.h>
+
 #include "godot_area_3d.h"
 #include "godot_collision_object_3d.h"
-
 #include "core/templates/vset.h"
+#include "core/math/basis.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/object_id.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "servers/physics_server_3d.h"
 
 class GodotConstraint3D;
 class GodotPhysicsDirectBodyState3D;
+class GodotSpace3D;
 
 class GodotBody3D : public GodotCollisionObject3D {
 	PhysicsServer3D::BodyMode mode = PhysicsServer3D::BODY_MODE_DYNAMIC;

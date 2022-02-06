@@ -8,6 +8,8 @@
 #include "BitmapRef.hpp"
 
 namespace msdfgen {
+class Projection;
+class Shape;
 
 /// Analytically constructs a scanline at y evaluating fill by linear interpolation of the SDF.
 void scanlineSDF(Scanline &line, const BitmapConstRef<float, 1> &sdf, const Projection &projection, double y, bool inverseYAxis = false);

@@ -30,7 +30,11 @@
 
 #include "register_types.h"
 
-#include "audio_stream_mp3.h"
+#include "core/io/resource_importer.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+
+class AudioStreamMP3;
 
 #ifdef TOOLS_ENABLED
 #include "core/config/engine.h"

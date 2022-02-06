@@ -31,8 +31,15 @@
 #ifndef RENDERING_SERVER_SCENE_ENVIRONMENT_RD_H
 #define RENDERING_SERVER_SCENE_ENVIRONMENT_RD_H
 
+#include <stdint.h>
+
 #include "servers/rendering/renderer_scene_render.h"
 #include "servers/rendering/rendering_device.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "servers/rendering_server.h"
 
 class RendererSceneEnvironmentRD {
 private:

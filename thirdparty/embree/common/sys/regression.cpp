@@ -3,6 +3,8 @@
 
 #include "regression.h"
 
+#include <vector>
+
 namespace embree
 {
   /* registerRegressionTest is invoked from static initializers, thus

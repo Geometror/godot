@@ -17,9 +17,8 @@
 //
 
 #include <stdlib.h>
-#include <string.h>
+
 #include "RecastAlloc.h"
-#include "RecastAssert.h"
 
 static void *rcAllocDefault(size_t size, rcAllocHint)
 {

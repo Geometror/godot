@@ -29,11 +29,14 @@
 #ifndef HB_FACE_HH
 #define HB_FACE_HH
 
-#include "hb.hh"
+#include <limits.h>
 
+#include "hb.hh"
 #include "hb-shaper.hh"
 #include "hb-shape-plan.hh"
 #include "hb-ot-face.hh"
+#include "hb-atomic.hh"
+#include "hb.h"
 
 
 /*
@@ -42,6 +45,7 @@
 
 #define HB_SHAPER_IMPLEMENT(shaper) HB_SHAPER_DATA_INSTANTIATE_SHAPERS(shaper, face);
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
 
 struct hb_face_t

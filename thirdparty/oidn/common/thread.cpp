@@ -23,8 +23,13 @@
   #include <mach/mach_init.h>
 #endif
 
-#include "thread.h"
+#include <stddef.h>
 #include <fstream>
+#include <algorithm>
+#include <string>
+
+#include "thread.h"
+#include "common/platform.h"
 
 namespace oidn {
 

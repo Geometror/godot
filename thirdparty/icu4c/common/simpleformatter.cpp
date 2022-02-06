@@ -8,10 +8,14 @@
 * simpleformatter.cpp
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/simpleformatter.h"
 #include "unicode/unistr.h"
-#include "uassert.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

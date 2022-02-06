@@ -26,14 +26,21 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "hb.hh"
+#include <stdint.h>
+#include <new>
+#include <utility>
 
+#include "hb.hh"
 #include "hb-face.hh"
 #include "hb-blob.hh"
 #include "hb-open-file.hh"
 #include "hb-ot-face.hh"
 #include "hb-ot-cmap-table.hh"
 #include "hb-map.hh"
+#include "hb-machinery.hh"
+#include "hb-open-type.hh"
+#include "hb-sanitize.hh"
+#include "hb-serialize.hh"
 
 
 /**

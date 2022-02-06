@@ -14,12 +14,24 @@
 // limitations under the License.
 #pragma once
 
+#include <assert.h>
+#include <encoder/basisu_enc.h>
+#include <stdint.h>
+#include <transcoder/basisu_containers.h>
+
 #include "../transcoder/basisu.h"
 #include "basisu_etc.h"
 #include "../transcoder/basisu_global_selector_palette.h"
 
+namespace basist {
+class etc1_global_palette_entry_modifier;
+class etc1_global_selector_codebook;
+}  // namespace basist
+
 namespace basisu
 {
+struct etc_block;
+
 	const uint32_t cPixelBlockWidth = 4;
 	const uint32_t cPixelBlockHeight = 4;
 	const uint32_t cPixelBlockTotalPixels = cPixelBlockWidth * cPixelBlockHeight;

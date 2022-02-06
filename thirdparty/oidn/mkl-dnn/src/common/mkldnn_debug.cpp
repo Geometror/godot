@@ -14,16 +14,14 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <assert.h>
 #include <stdio.h>
 #include <cinttypes>
 
 #include "mkldnn_debug.h"
 #include "mkldnn_types.h"
-
 #include "c_types_map.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
+#include "memory_desc_wrapper.hpp"
 
 #define DPRINT(...) do { \
     int l = snprintf(str + written_len, str_len, __VA_ARGS__); \

@@ -30,20 +30,39 @@
 
 #include "gdscript_test_runner.h"
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "../gdscript.h"
 #include "../gdscript_analyzer.h"
 #include "../gdscript_compiler.h"
 #include "../gdscript_parser.h"
-
 #include "core/config/project_settings.h"
-#include "core/core_string_names.h"
 #include "core/io/dir_access.h"
-#include "core/io/file_access_pack.h"
 #include "core/os/os.h"
 #include "core/string/string_builder.h"
 #include "scene/resources/packed_scene.h"
+#include "core/error/error_list.h"
+#include "core/io/file_access.h"
+#include "core/io/resource.h"
+#include "core/io/resource_loader.h"
+#include "core/object/class_db.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "modules/gdscript/gdscript_warning.h"
+#include "scene/main/node.h"
+#include "thirdparty/doctest/doctest.h"
 
-#include "tests/test_macros.h"
+class GDScriptFunction;
 
 namespace GDScriptTests {
 

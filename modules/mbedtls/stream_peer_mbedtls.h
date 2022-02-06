@@ -31,8 +31,19 @@
 #ifndef STREAM_PEER_OPEN_SSL_H
 #define STREAM_PEER_OPEN_SSL_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/io/stream_peer_ssl.h"
 #include "ssl_context_mbedtls.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+
+class CryptoKey;
+class SSLContextMbedTLS;
+class StreamPeer;
+class X509Certificate;
 
 class StreamPeerMbedTLS : public StreamPeerSSL {
 private:

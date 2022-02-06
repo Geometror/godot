@@ -30,18 +30,29 @@
 
 #include "test_gdscript.h"
 
-#include "core/config/project_settings.h"
+#include <stdint.h>
+
 #include "core/io/file_access.h"
-#include "core/io/file_access_pack.h"
-#include "core/os/main_loop.h"
 #include "core/os/os.h"
 #include "core/string/string_builder.h"
-#include "scene/resources/packed_scene.h"
-
 #include "modules/gdscript/gdscript_analyzer.h"
 #include "modules/gdscript/gdscript_compiler.h"
 #include "modules/gdscript/gdscript_parser.h"
 #include "modules/gdscript/gdscript_tokenizer.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/object/ref_counted.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "modules/gdscript/gdscript.h"
+#include "modules/gdscript/gdscript_function.h"
+#include "modules/gdscript/tests/gdscript_test_runner.h"
 
 #ifdef TOOLS_ENABLED
 #include "editor/editor_settings.h"

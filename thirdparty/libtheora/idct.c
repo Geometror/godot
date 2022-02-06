@@ -15,9 +15,9 @@
 
  ********************************************************************/
 
-#include <string.h>
 #include "internal.h"
 #include "dct.h"
+#include "ogg/config_types.h"
 
 /*Performs an inverse 8 point Type-II DCT transform.
   The output is scaled by a factor of 2 relative to the orthonormal version of

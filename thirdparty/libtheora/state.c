@@ -17,7 +17,13 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stddef.h>
+
 #include "internal.h"
+#include "ocintrin.h"
+#include "ogg/config_types.h"
+#include "ogg/os_types.h"
+#include "theora/codec.h"
 #if defined(OC_X86_ASM)
 #if defined(_MSC_VER)
 # include "x86_vc/x86int.h"
@@ -27,6 +33,7 @@
 #endif
 #if defined(OC_DUMP_IMAGES)
 # include <stdio.h>
+
 # include "png.h"
 #endif
 

@@ -31,6 +31,8 @@
 #include "register_types.h"
 
 #include "image_loader_hdr.h"
+#include "core/io/image_loader.h"
+#include "core/os/memory.h"
 
 static ImageLoaderHDR *image_loader_hdr = nullptr;
 

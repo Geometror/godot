@@ -21,8 +21,10 @@
  *  limitations under the License.
  */
 
-#include "common.h"
+#include <stddef.h>
 
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_CIPHER_C)
 
 #include "mbedtls/cipher_internal.h"
@@ -80,6 +82,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free
 #endif

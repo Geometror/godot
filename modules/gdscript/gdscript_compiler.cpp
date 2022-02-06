@@ -34,8 +34,26 @@
 #include "gdscript_byte_codegen.h"
 #include "gdscript_cache.h"
 #include "gdscript_utility_functions.h"
-
 #include "core/config/project_settings.h"
+#include "core/debugger/engine_debugger.h"
+#include "core/doc_data.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/io/resource_loader.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/os/memory.h"
+#include "core/string/node_path.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/templates/pair.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "modules/gdscript/gdscript_codegen.h"
+#include "modules/gdscript/gdscript_function.h"
+#include "modules/gdscript/gdscript_parser.h"
 
 bool GDScriptCompiler::_is_class_member_property(CodeGen &codegen, const StringName &p_name) {
 	if (codegen.function_node && codegen.function_node->is_static) {

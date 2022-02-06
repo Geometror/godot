@@ -19,6 +19,8 @@
 
 #include <ogg/ogg.h>
 
+#include "ogg/config_types.h"
+
 /* This structure encapsulates huffman and VQ style encoding books; it
    doesn't do anything specific to either.
 

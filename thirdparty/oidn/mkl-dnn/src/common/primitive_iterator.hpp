@@ -17,11 +17,11 @@
 #define PRIMITIVE_ITERATOR_HPP
 
 #include "mkldnn.h"
-
 #include "c_types_map.hpp"
 #include "engine.hpp"
 #include "primitive_desc.hpp"
 #include "type_helpers.hpp"
+#include "nstl.hpp"
 
 struct mkldnn_primitive_desc_iterator: public mkldnn::impl::c_compatible {
     using pd_create_f = mkldnn::impl::engine_t::primitive_desc_create_f;

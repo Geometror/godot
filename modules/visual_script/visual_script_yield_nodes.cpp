@@ -33,7 +33,17 @@
 #include "core/os/os.h"
 #include "scene/main/node.h"
 #include "scene/main/scene_tree.h"
-#include "visual_script_nodes.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/templates/list.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "modules/visual_script/visual_script.h"
 
 //////////////////////////////////////////
 ////////////////YIELD///////////

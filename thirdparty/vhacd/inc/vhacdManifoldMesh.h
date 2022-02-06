@@ -15,9 +15,15 @@ All rights reserved.
 #pragma once
 #ifndef VHACD_MANIFOLD_MESH_H
 #define VHACD_MANIFOLD_MESH_H
+#include <stddef.h>
+#include <stdint.h>
+
 #include "vhacdCircularList.h"
 #include "vhacdSArray.h"
 #include "vhacdVector.h"
+#include "vhacdCircularList.inl"
+#include "vhacdVector.inl"
+
 namespace VHACD {
 class TMMTriangle;
 class TMMEdge;

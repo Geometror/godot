@@ -34,6 +34,16 @@
 #include "scene/gui/line_edit.h"
 #include "scene/gui/range.h"
 #include "scene/main/timer.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+
+class InputEvent;
+class LineEdit;
+class Texture2D;
+class Timer;
 
 class SpinBox : public Range {
 	GDCLASS(SpinBox, Range);

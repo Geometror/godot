@@ -31,6 +31,15 @@
 #ifndef WSLPEER_H
 #define WSLPEER_H
 
+#include <stdint.h>
+
+#include "core/io/ip_address.h"
+#include "core/io/stream_peer.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "modules/websocket/websocket_macros.h"
 #ifndef JAVASCRIPT_ENABLED
 
 #include "core/error/error_list.h"

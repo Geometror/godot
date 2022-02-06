@@ -17,8 +17,12 @@
 #include "unicode/unistr.h"
 #include "unicode/uobject.h"
 #include "unicode/utypes.h"
-
 #include "charstr.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class UnicodeString;
+}  // namespace icu_70
 
 /**
  * ICU-internal class CStr, a small helper class to facilitate passing UnicodeStrings

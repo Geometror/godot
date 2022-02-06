@@ -22,10 +22,14 @@
 
 #include "umutex.h"
 
+#include <condition_variable>
+#include <new>
+
 #include "unicode/utypes.h"
 #include "uassert.h"
 #include "ucln_cmn.h"
 #include "cmemory.h"
+#include "unicode/uclean.h"
 
 U_NAMESPACE_BEGIN
 

@@ -28,12 +28,55 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#include "gdscript_function.h"
+#include <alloca.h>
+#include <stdint.h>
 
+#include "gdscript_function.h"
 #include "core/core_string_names.h"
 #include "core/os/os.h"
 #include "gdscript.h"
 #include "gdscript_lambda_callable.h"
+#include "core/debugger/engine_debugger.h"
+#include "core/debugger/script_debugger.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/os/mutex.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/self_list.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/callable_bind.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+#include "core/variant/variant_internal.h"
+#include "modules/gdscript/gdscript_utility_functions.h"
+
+class NodePath;
+class RID;
+struct AABB;
+struct Basis;
+struct Plane;
+struct Quaternion;
+struct Rect2;
+struct Rect2i;
+struct Transform2D;
+struct Transform3D;
 
 Variant *GDScriptFunction::_get_variant(int p_address, GDScriptInstance *p_instance, Variant *p_stack, String &r_error) const {
 	int address = p_address & ADDR_MASK;
@@ -438,12 +481,6 @@ Variant GDScriptFunction::call(GDScriptInstance *p_instance, const Variant **p_a
 	Variant **instruction_args = nullptr;
 	const void **call_args_ptr = nullptr;
 	int defarg = 0;
-
-#ifdef DEBUG_ENABLED
-
-	//GDScriptLanguage::get_singleton()->calls++;
-
-#endif
 
 	uint32_t alloca_size = 0;
 	GDScript *script;

@@ -24,7 +24,14 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <stdint.h>
+
 #include "hb.hh"
+#include "hb-buffer.hh"
+#include "hb-font.hh"
+#include "hb-ot-layout.hh"
+#include "hb-ot-shape.hh"
+#include "hb-unicode.hh"
 
 #ifndef HB_NO_OT_SHAPE
 

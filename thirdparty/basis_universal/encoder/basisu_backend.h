@@ -14,6 +14,11 @@
 // limitations under the License.
 #pragma once
 
+#include <assert.h>
+#include <stdint.h>
+#include <transcoder/basisu_containers.h>
+#include <transcoder/basisu_file_headers.h>
+
 #include "../transcoder/basisu.h"
 #include "basisu_enc.h"
 #include "../transcoder/basisu_transcoder_internal.h"

@@ -40,8 +40,27 @@
 #include "scene/gui/separator.h"
 #include "scene/gui/split_container.h"
 #include "scene/gui/texture_rect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
 
 class DependencyRemoveDialog;
+class Button;
+class DirAccess;
+class HBoxContainer;
+class HSplitContainer;
+class InputEvent;
+class ItemList;
+class LineEdit;
+class OptionButton;
+class PopupMenu;
+class Texture2D;
+class TextureRect;
+class VBoxContainer;
+struct Vector2;
 
 class EditorFileDialog : public ConfirmationDialog {
 	GDCLASS(EditorFileDialog, ConfirmationDialog);

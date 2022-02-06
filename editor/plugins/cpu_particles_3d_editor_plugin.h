@@ -33,6 +33,13 @@
 
 #include "editor/plugins/gpu_particles_3d_editor_plugin.h"
 #include "scene/3d/cpu_particles_3d.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "editor/editor_plugin.h"
+
+class CPUParticles3D;
+class EditorNode;
+class Node;
 
 class CPUParticles3DEditor : public GPUParticles3DEditorBase {
 	GDCLASS(CPUParticles3DEditor, GPUParticles3DEditorBase);

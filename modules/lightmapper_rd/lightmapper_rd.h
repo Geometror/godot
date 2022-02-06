@@ -31,12 +31,32 @@
 #ifndef LIGHTMAPPER_RD_H
 #define LIGHTMAPPER_RD_H
 
+#include <stdint.h>
+
 #include "core/templates/local_vector.h"
 #include "scene/3d/lightmapper.h"
 #include "scene/resources/mesh.h"
 #include "servers/rendering/rendering_device.h"
+#include "core/io/image.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/hashfuncs.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
 class RDShaderFile;
+class RID;
+class RenderingDevice;
+struct AABB;
+struct Vector3i;
+
 class LightmapperRD : public Lightmapper {
 	GDCLASS(LightmapperRD, Lightmapper)
 

@@ -31,6 +31,8 @@
 #ifndef JAVASCRIPT_EXPORT_PLUGIN_H
 #define JAVASCRIPT_EXPORT_PLUGIN_H
 
+#include <stdint.h>
+
 #include "core/io/image_loader.h"
 #include "core/io/stream_peer_ssl.h"
 #include "core/io/tcp_server.h"
@@ -40,8 +42,26 @@
 #include "main/splash.gen.h"
 #include "platform/javascript/logo.gen.h"
 #include "platform/javascript/run_icon.gen.h"
-
 #include "export_server.h"
+#include "core/config/project_settings.h"
+#include "core/error/error_list.h"
+#include "core/io/image.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/os/mutex.h"
+#include "core/os/thread.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "scene/resources/texture.h"
+#include "scene/resources/theme.h"
+
+class Array;
+class Dictionary;
+class EditorHTTPServer;
 
 class EditorExportPlatformJavaScript : public EditorExportPlatform {
 	GDCLASS(EditorExportPlatformJavaScript, EditorExportPlatform);

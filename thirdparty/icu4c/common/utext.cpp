@@ -16,10 +16,10 @@
 *   created by: Markus W. Scherer
 */
 
+#include <stdint.h>
 #include <cstddef>
 
 #include "unicode/utypes.h"
-#include "unicode/ustring.h"
 #include "unicode/unistr.h"
 #include "unicode/chariter.h"
 #include "unicode/utext.h"
@@ -28,9 +28,13 @@
 #include "unicode/utf16.h"
 #include "ustr_imp.h"
 #include "cmemory.h"
-#include "cstring.h"
 #include "uassert.h"
-#include "putilimp.h"
+#include "unicode/char16ptr.h"
+#include "unicode/platform.h"
+#include "unicode/rep.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_USE
 

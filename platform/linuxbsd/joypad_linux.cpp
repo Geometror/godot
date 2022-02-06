@@ -35,8 +35,27 @@
 #include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <linux/input-event-codes.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/select.h>
 #include <linux/input.h>
 #include <unistd.h>
+#include <cmath>
+
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/input/input.h"
+#include "core/math/vector2.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/typedefs.h"
+
+struct udev_device;
+struct udev_enumerate;
+struct udev_list_entry;
+struct udev_monitor;
 
 #ifdef UDEV_ENABLED
 #include "libudev-so_wrap.h"

@@ -14,8 +14,6 @@
 *   created by: Markus W. Scherer
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_FORMATTING
 
 #include "unicode/messagepattern.h"

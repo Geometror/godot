@@ -31,6 +31,7 @@
 #include "tests/test_utils.h"
 
 #include "core/os/os.h"
+#include "core/string/ustring.h"
 
 String TestUtils::get_data_path(const String &p_file) {
 	String data_path = "../tests/data";

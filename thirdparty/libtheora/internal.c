@@ -16,9 +16,11 @@
  ********************************************************************/
 
 #include <stdlib.h>
-#include <limits.h>
 #include <string.h>
+
 #include "internal.h"
+#include "ogg/ogg.h"
+#include "ogg/os_types.h"
 
 
 

@@ -29,13 +29,17 @@
 /*************************************************************************/
 
 #include "register_types.h"
+
 #include "core/config/project_settings.h"
 #include "webrtc_data_channel.h"
-#include "webrtc_multiplayer_peer.h"
 #include "webrtc_peer_connection.h"
+#include "core/object/class_db.h"
+#include "core/object/object.h"
+#include "core/variant/variant.h"
 
-#include "webrtc_data_channel_extension.h"
-#include "webrtc_peer_connection_extension.h"
+class WebRTCDataChannelExtension;
+class WebRTCMultiplayerPeer;
+class WebRTCPeerConnectionExtension;
 
 void register_webrtc_types() {
 #define SET_HINT(NAME, _VAL_, _MAX_) \

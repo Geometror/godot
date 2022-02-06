@@ -27,12 +27,11 @@
  * FORTRAN version
  */
 
-#include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
 #include "smallft.h"
-#include "os.h"
-#include "misc.h"
+#include "ogg/os_types.h"
 
 static void drfti1(int n, float *wa, int *ifac){
   static int ntryh[4] = { 4,2,3,5 };

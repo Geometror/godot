@@ -29,7 +29,13 @@
 /*************************************************************************/
 
 #include "height_map_shape_3d.h"
+
 #include "servers/physics_server_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/class_db.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 Vector<Vector3> HeightMapShape3D::get_debug_mesh_lines() const {
 	Vector<Vector3> points;

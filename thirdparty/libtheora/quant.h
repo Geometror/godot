@@ -19,6 +19,7 @@
 # define _quant_H (1)
 # include "theora/codec.h"
 # include "ocintrin.h"
+#include "ogg/config_types.h"
 
 typedef ogg_uint16_t   oc_quant_table[64];
 

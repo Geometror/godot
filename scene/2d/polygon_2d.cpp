@@ -32,6 +32,17 @@
 
 #include "core/math/geometry_2d.h"
 #include "skeleton_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/transform_2d.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "scene/main/canvas_item.h"
+#include "scene/main/node.h"
+#include "scene/resources/texture.h"
+#include "servers/rendering_server.h"
 
 #ifdef TOOLS_ENABLED
 Dictionary Polygon2D::_edit_get_state() const {

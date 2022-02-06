@@ -22,7 +22,15 @@
 #ifndef _TVG_LOADER_H_
 #define _TVG_LOADER_H_
 
+#include <stdint.h>
+#include <memory>
+#include <string>
+
 #include "tvgLoadModule.h"
+
+namespace tvg {
+class LoadModule;
+}  // namespace tvg
 
 struct LoaderMgr
 {

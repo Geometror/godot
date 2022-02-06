@@ -24,6 +24,9 @@
    -------------------------------------------------------------------------- */
 
 #include "colourblock.h"
+
+#include <utility>
+
 // -- Godot start --
 #include "alpha.h"
 // -- Godot end --

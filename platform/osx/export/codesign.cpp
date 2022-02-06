@@ -30,15 +30,27 @@
 
 #include "codesign.h"
 
+#include <bits/types/struct_tm.h>
+#include <string.h>
+#include <ctime>
+#include <initializer_list>
+#include <limits>
+
 #include "lipo.h"
 #include "macho.h"
 #include "plist.h"
-
-#include "core/os/os.h"
-#include "editor/editor_settings.h"
 #include "modules/modules_enabled.gen.h" // For regex.
-
-#include <ctime>
+#include "core/crypto/crypto.h"
+#include "core/crypto/crypto_core.h"
+#include "core/error/error_macros.h"
+#include "core/io/dir_access.h"
+#include "core/io/file_access.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "editor/editor_paths.h"
+#include "modules/regex/regex.h"
 
 #ifdef MODULE_REGEX_ENABLED
 

@@ -26,16 +26,28 @@
  */
 
 #include "hb.hh"
-
 #include "hb-aat-layout.hh"
-#include "hb-aat-layout-ankr-table.hh"
-#include "hb-aat-layout-bsln-table.hh" // Just so we compile it; unused otherwise.
 #include "hb-aat-layout-feat-table.hh"
-#include "hb-aat-layout-just-table.hh" // Just so we compile it; unused otherwise.
 #include "hb-aat-layout-kerx-table.hh"
 #include "hb-aat-layout-morx-table.hh"
 #include "hb-aat-layout-trak-table.hh"
-#include "hb-aat-ltag-table.hh"
+#include "hb-aat-layout-common.hh"
+#include "hb-aat-map.hh"
+#include "hb-blob.hh"
+#include "hb-buffer.hh"
+#include "hb-face.hh"
+#include "hb-font.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
+#include "hb-ot-layout-gdef-table.hh"
+#include "hb-ot-layout.hh"
+#include "hb-ot.h"
+#include "hb-sanitize.hh"
+
+namespace AAT {
+struct ankr;
+}  // namespace AAT
+struct hb_ot_shape_plan_t;
 
 
 /*

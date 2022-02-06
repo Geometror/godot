@@ -31,6 +31,40 @@
 #ifndef RASTERIZER_STORAGE_OPENGL_H
 #define RASTERIZER_STORAGE_OPENGL_H
 
+#include <stddef.h>
+#include <stdint.h>
+
+#include "core/io/image.h"
+#include "core/math/aabb.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2i.h"
+#include "core/math/transform_2d.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/object/ref_counted.h"
+#include "core/os/thread.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "glad/glad.h"
+#include "servers/rendering/rendering_device.h"
+#include "servers/rendering_server.h"
+
+class ShaderGLES3;
+struct PropertyInfo;
+struct Rect2;
 #ifdef GLES3_ENABLED
 
 #include "core/templates/local_vector.h"
@@ -40,7 +74,6 @@
 #include "servers/rendering/renderer_storage.h"
 #include "servers/rendering/shader_compiler.h"
 #include "servers/rendering/shader_language.h"
-
 #include "shaders/copy.glsl.gen.h"
 
 class RasterizerCanvasGLES3;

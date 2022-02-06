@@ -4,6 +4,14 @@
 #pragma once
 
 #include "../../include/embree3/rtcore.h"
+
+#include <stddef.h>
+#include <stdlib.h>
+
+#include "common/sys/platform.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_config.h"
+
 RTC_NAMESPACE_USE
 
 namespace embree

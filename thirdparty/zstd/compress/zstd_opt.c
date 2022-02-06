@@ -8,9 +8,15 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
+#include <limits.h>
+
 #include "zstd_compress_internal.h"
 #include "hist.h"
 #include "zstd_opt.h"
+#include "../common/zstd_internal.h"
+#include "compiler.h"
+#include "debug.h"
+#include "zstd_deps.h"
 
 
 #define ZSTD_LITFREQ_ADD    2   /* scaling factor for litFreq, so that frequencies adapt faster to new stats */

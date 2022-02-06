@@ -31,6 +31,10 @@
 #ifndef NATIVE_SCRIPT_H
 #define NATIVE_SCRIPT_H
 
+#include <nativescript/godot_nativescript.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "core/doc_data.h"
 #include "core/io/resource.h"
 #include "core/io/resource_loader.h"
@@ -43,10 +47,23 @@
 #include "core/templates/safe_refcount.h"
 #include "core/templates/self_list.h"
 #include "scene/main/node.h"
-
 #include "modules/gdnative/gdnative.h"
+#include "core/error/error_list.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
 
-#include <nativescript/godot_nativescript.h>
+template <class F, class S> struct Pair;
 
 struct NativeScriptDesc {
 	struct Method {

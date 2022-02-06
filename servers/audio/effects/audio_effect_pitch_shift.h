@@ -31,7 +31,14 @@
 #ifndef AUDIO_EFFECT_PITCH_SHIFT_H
 #define AUDIO_EFFECT_PITCH_SHIFT_H
 
+#include <string.h>
+
 #include "servers/audio/audio_effect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/binder_common.h"
+
+struct AudioFrame;
 
 class SMBPitchShift {
 	enum {

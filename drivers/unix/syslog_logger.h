@@ -31,6 +31,9 @@
 #ifndef SYSLOG_LOGGER_H
 #define SYSLOG_LOGGER_H
 
+#include <stdarg.h>
+
+#include "core/typedefs.h"
 #ifdef UNIX_ENABLED
 
 #include "core/io/logger.h"

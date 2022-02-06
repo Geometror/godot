@@ -38,6 +38,9 @@
 #endif
 
 #include "tvgRawLoader.h"
+#include "config.h"
+#include "tvgCommon.h"
+#include "tvgLoadModule.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

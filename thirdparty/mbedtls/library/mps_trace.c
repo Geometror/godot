@@ -19,16 +19,15 @@
  *  This file is part of Mbed TLS (https://tls.mbed.org)
  */
 
-#include "common.h"
-
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3_EXPERIMENTAL)
 
 #include "mps_common.h"
 
 #if defined(MBEDTLS_MPS_ENABLE_TRACE)
 
-#include "mps_trace.h"
 #include <stdarg.h>
+
+#include "mps_trace.h"
 
 static int trace_depth = 0;
 

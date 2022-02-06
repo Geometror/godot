@@ -13,6 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include "basisu_resampler.h"
+
+#include <assert.h>
+#include <stdlib.h>
+#include <string.h>
+#include <transcoder/basisu.h>
+#include <cmath>
+
 #include "basisu_resampler_filters.h"
 
 #define RESAMPLER_DEBUG 0

@@ -18,6 +18,16 @@
  */
 
 #include "common.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
+#include "mbedtls/dhm.h"
+#include "mbedtls/ecdh.h"
+#include "mbedtls/ecp.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/ssl_ciphersuites.h"
+#include "mbedtls/x509_crt.h"
 
 #if defined(MBEDTLS_SSL_CLI_C)
 
@@ -25,6 +35,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free      free
 #endif
@@ -41,7 +52,6 @@
 #endif /* MBEDTLS_USE_PSA_CRYPTO */
 
 #include <string.h>
-
 #include <stdint.h>
 
 #if defined(MBEDTLS_HAVE_TIME)

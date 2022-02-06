@@ -31,10 +31,38 @@
 #ifndef DISPLAY_SERVER_X11_H
 #define DISPLAY_SERVER_X11_H
 
+#include <X11/X.h>
+#include <stdint.h>
+
+#include "core/error/error_list.h"
+#include "core/input/input_enums.h"
+#include "core/io/resource.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/os/keyboard.h"
+#include "core/os/mutex.h"
+#include "core/os/thread.h"
+#include "core/os/thread_safe.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/safe_refcount.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+
+class GLManager_X11;
+class Image;
+class InputEvent;
+class InputEventWithModifiers;
+class RenderingDeviceVulkan;
+class VulkanContextX11;
 #ifdef X11_ENABLED
 
 #include "servers/display_server.h"
-
 #include "core/input/input.h"
 #include "core/templates/local_vector.h"
 #include "drivers/alsa/audio_driver_alsa.h"

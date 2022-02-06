@@ -32,7 +32,15 @@
 
 #include "core/config/engine.h"
 #include "java_class_wrapper.h"
-#include "jni_singleton.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+
+class JNISingleton;
 
 #if !defined(ANDROID_ENABLED)
 static JavaClassWrapper *java_class_wrapper = nullptr;

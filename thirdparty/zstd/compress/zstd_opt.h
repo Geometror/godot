@@ -15,7 +15,11 @@
 extern "C" {
 #endif
 
+#include <stddef.h>
+
 #include "zstd_compress_internal.h"
+#include "mem.h"
+#include "zstd_internal.h"
 
 /* used in ZSTD_loadDictionaryContent() */
 void ZSTD_updateTree(ZSTD_matchState_t* ms, const BYTE* ip, const BYTE* iend);

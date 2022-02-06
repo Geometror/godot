@@ -31,6 +31,14 @@
 #include "font_editor_plugin.h"
 
 #include "editor/editor_scale.h"
+#include "core/error/error_macros.h"
+#include "core/math/color.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "scene/main/canvas_item.h"
+#include "scene/resources/font.h"
+
+class EditorNode;
 
 void FontDataPreview::_notification(int p_what) {
 	if (p_what == NOTIFICATION_DRAW) {

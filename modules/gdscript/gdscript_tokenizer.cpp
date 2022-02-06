@@ -30,7 +30,11 @@
 
 #include "gdscript_tokenizer.h"
 
+#include <stdint.h>
+
 #include "core/error/error_macros.h"
+#include "core/string/char_utils.h"
+#include "core/string/node_path.h"
 
 #ifdef TOOLS_ENABLED
 #include "editor/editor_settings.h"

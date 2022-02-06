@@ -2,15 +2,23 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh_refit.h"
-#include "bvh_statistics.h"
 
-#include "../geometry/linei.h"
+#include <assert.h>
+
 #include "../geometry/triangle.h"
 #include "../geometry/trianglev.h"
 #include "../geometry/trianglei.h"
-#include "../geometry/quadv.h"
-#include "../geometry/object.h"
-#include "../geometry/instance.h"
+#include "common/algorithms/parallel_for.h"
+#include "common/math/lbbox.h"
+#include "common/math/range.h"
+#include "common/math/vec3.h"
+#include "common/simd/varying.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/bvh/bvh_node_ref.h"
+#include "kernels/common/default.h"
+#include "kernels/common/scene_triangle_mesh.h"
+#include "kernels/config.h"
 
 namespace embree
 {

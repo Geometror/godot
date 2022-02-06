@@ -30,10 +30,20 @@
 
 #include "gdscript_language_server.h"
 
-#include "core/io/file_access.h"
 #include "core/os/os.h"
 #include "editor/editor_log.h"
 #include "editor/editor_node.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/ip_address.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "editor/editor_settings.h"
+#include "modules/gdscript/language_server/gdscript_language_protocol.h"
+#include "scene/main/node.h"
+
+class GDScriptTextDocument;
+class GDScriptWorkspace;
 
 GDScriptLanguageServer::GDScriptLanguageServer() {
 	_EDITOR_DEF("network/language_server/remote_host", host);

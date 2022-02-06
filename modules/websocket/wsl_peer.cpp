@@ -32,12 +32,17 @@
 
 #include "wsl_peer.h"
 
+#include <sys/types.h>
+
 #include "wsl_client.h"
 #include "wsl_server.h"
-
 #include "core/crypto/crypto_core.h"
 #include "core/math/random_number_generator.h"
 #include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/string/print_string.h"
+#include "modules/websocket/packet_buffer.h"
+#include "modules/websocket/websocket_peer.h"
 
 String WSLPeer::generate_key() {
 	// Random key

@@ -4,6 +4,7 @@
 #pragma once
 
 #include "mutex.h"
+#include "common/sys/platform.h"
 
 namespace embree
 {

@@ -30,6 +30,8 @@
 
 #include "renderer_storage_rd.h"
 
+#include <string.h>
+
 #include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/io/resource_loader.h"
@@ -37,6 +39,17 @@
 #include "renderer_compositor_rd.h"
 #include "servers/rendering/rendering_server_globals.h"
 #include "servers/rendering/shader_language.h"
+#include "core/error/error_list.h"
+#include "core/io/resource.h"
+#include "core/math/geometry_3d.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/quaternion.h"
+#include "core/object/object.h"
+#include "core/templates/pair.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "servers/rendering/renderer_rd/effects_rd.h"
 
 bool RendererStorageRD::can_create_resources_async() const {
 	return true;

@@ -32,6 +32,10 @@
 #define SEPARATOR_H
 
 #include "scene/gui/control.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+
 class Separator : public Control {
 	GDCLASS(Separator, Control);
 

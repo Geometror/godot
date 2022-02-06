@@ -25,6 +25,8 @@
 
 #include "colourset.h"
 
+#include <cmath>
+
 namespace squish {
 
 ColourSet::ColourSet( u8 const* rgba, int mask, int flags )

@@ -16,8 +16,6 @@
  *   created by: Ram Viswanadha
  */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_IDNA
 
 #include "unicode/uidna.h"

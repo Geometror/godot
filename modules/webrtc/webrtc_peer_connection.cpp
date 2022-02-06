@@ -30,6 +30,12 @@
 
 #include "webrtc_peer_connection.h"
 
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+
 #ifdef JAVASCRIPT_ENABLED
 #include "webrtc_peer_connection_js.h"
 #else

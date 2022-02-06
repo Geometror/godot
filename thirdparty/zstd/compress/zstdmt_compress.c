@@ -27,6 +27,10 @@
 #include "zstd_compress_internal.h"  /* MIN, ERROR, ZSTD_*, ZSTD_highbit32 */
 #include "zstd_ldm.h"
 #include "zstdmt_compress.h"
+#include "../common/zstd_internal.h"
+#include "debug.h"
+#include "error_private.h"
+#include "zstd_errors.h"
 
 /* Guards code to support resizing the SeqPool.
  * We will want to resize the SeqPool to save memory in the future.

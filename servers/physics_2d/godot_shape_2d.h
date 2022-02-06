@@ -32,6 +32,26 @@
 #define GODOT_SHAPE_2D_H
 
 #include "servers/physics_server_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+
+class GodotCapsuleShape2D;
+class GodotCircleShape2D;
+class GodotConcavePolygonShape2D;
+class GodotConvexPolygonShape2D;
+class GodotRectangleShape2D;
+class GodotSegmentShape2D;
+class GodotSeparationRayShape2D;
+
 #define _SEGMENT_IS_VALID_SUPPORT_THRESHOLD 0.99998
 
 class GodotShape2D;

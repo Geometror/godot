@@ -37,9 +37,29 @@
 #include "scene/gui/file_dialog.h"
 #include "scene/gui/scroll_container.h"
 #include "scene/gui/tree.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/variant.h"
+#include "scene/gui/control.h"
 
 class ProjectDialog;
 class ProjectList;
+class AcceptDialog;
+class Button;
+class CheckBox;
+class ConfirmationDialog;
+class EditorAbout;
+class EditorAssetLibrary;
+class FileDialog;
+class HBoxContainer;
+class InputEvent;
+class Label;
+class LineEdit;
+class LinkButton;
+class OptionButton;
+class TabContainer;
 
 enum FilterOption {
 	NAME,

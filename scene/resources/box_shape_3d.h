@@ -32,6 +32,12 @@
 #define BOX_SHAPE_H
 
 #include "scene/resources/shape_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 class BoxShape3D : public Shape3D {
 	GDCLASS(BoxShape3D, Shape3D);

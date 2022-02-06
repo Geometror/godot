@@ -13,6 +13,10 @@
 
 #include "src/enc/cost_enc.h"
 
+#include <stdlib.h>
+
+#include "enc/vp8i_enc.h"
+
 //------------------------------------------------------------------------------
 // Level cost tables
 

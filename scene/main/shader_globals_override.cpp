@@ -32,6 +32,13 @@
 
 #include "scene/3d/node_3d.h"
 #include "scene/scene_string_names.h"
+#include "core/object/class_db.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "scene/main/scene_tree.h"
+#include "servers/rendering_server.h"
 
 StringName *ShaderGlobalsOverride::_remap(const StringName &p_name) const {
 	StringName *r = param_remaps.getptr(p_name);

@@ -27,8 +27,12 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "hb-buffer.hh"
 #include "hb-utf.hh"
+#include "hb-unicode.hh"
 
 
 /**

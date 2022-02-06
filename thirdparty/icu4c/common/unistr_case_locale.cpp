@@ -17,11 +17,13 @@
 *   were moved here to break dependency cycles among parts of the common library.
 */
 
-#include "unicode/utypes.h"
+#include <stddef.h>
+
 #include "unicode/locid.h"
-#include "unicode/ucasemap.h"
 #include "unicode/unistr.h"
 #include "ucasemap_imp.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

@@ -3,10 +3,28 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <vector>
+
 #include "accel.h"
+#include "kernels/common/point_query.h"
+
+struct RTCRay16;
+struct RTCRay4;
+struct RTCRay8;
+struct RTCRay;
+struct RTCRayHit16;
+struct RTCRayHit4;
+struct RTCRayHit8;
+struct RTCRayHit;
+struct RTCRayHitN;
+struct RTCRayN;
 
 namespace embree
 {
+struct IntersectContext;
+struct PointQueryContext;
+
   /*! merges N acceleration structures together, by processing them in order */
   class AccelN : public Accel
   {

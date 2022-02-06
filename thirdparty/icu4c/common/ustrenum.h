@@ -13,8 +13,18 @@
 #ifndef _USTRENUM_H_
 #define _USTRENUM_H_
 
+#include <stdint.h>
+
 #include "unicode/uenum.h"
 #include "unicode/strenum.h"
+#include "unicode/platform.h"
+#include "unicode/uobject.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class UnicodeString;
+}  // namespace icu_70
 
 //----------------------------------------------------------------------
 U_NAMESPACE_BEGIN

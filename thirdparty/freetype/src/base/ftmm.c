@@ -16,12 +16,17 @@
  */
 
 
-#include <freetype/internal/ftdebug.h>
-
 #include <freetype/ftmm.h>
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/services/svmm.h>
-#include <freetype/internal/services/svmetric.h>
+#include <freetype/fterrors.h>
+#include <stddef.h>
+
+#include "freetype/freetype.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/services/svmetric.h"
+#include "freetype/internal/services/svmm.h"
 
 
   /**************************************************************************

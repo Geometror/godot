@@ -31,8 +31,13 @@
 #ifndef CALLABLE_BIND_H
 #define CALLABLE_BIND_H
 
+#include <stdint.h>
+
 #include "core/variant/callable.h"
 #include "core/variant/variant.h"
+#include "core/object/object_id.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 class CallableCustomBind : public CallableCustom {
 	Callable callable;

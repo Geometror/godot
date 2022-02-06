@@ -41,18 +41,20 @@
 // GLSL scanning, leveraging the scanning done by the preprocessor.
 //
 
+#include <glslang/Include/InfoSink.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/Public/ShaderLang.h>
 #include <cstring>
 #include <unordered_map>
 #include <unordered_set>
+#include <map>
 
 #include "../Include/Types.h"
 #include "SymbolTable.h"
 #include "ParseHelper.h"
-#include "attribute.h"
 #include "glslang_tab.cpp.h"
 #include "ScanContext.h"
 #include "Scan.h"
-
 // preprocessor includes
 #include "preprocessor/PpContext.h"
 #include "preprocessor/PpTokens.h"

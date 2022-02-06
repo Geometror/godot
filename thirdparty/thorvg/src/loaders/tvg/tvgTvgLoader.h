@@ -23,8 +23,16 @@
 #ifndef _TVG_TVG_LOADER_H_
 #define _TVG_TVG_LOADER_H_
 
+#include <stdint.h>
+#include <memory>
+#include <string>
+
 #include "tvgTaskScheduler.h"
 #include "tvgTvgCommon.h"
+#include "thorvg.h"
+#include "tvgLoadModule.h"
+
+class TvgBinInterpreterBase;
 
 
 class TvgLoader : public LoadModule, public Task

@@ -22,6 +22,8 @@
 #include <limits.h>
 #include <ogg/ogg.h>
 
+#include "ogg/os_types.h"
+
 #define BUFFER_INCREMENT 256
 
 static const unsigned long mask[]=

@@ -34,6 +34,15 @@
 #include "core/templates/safe_refcount.h"
 #include "scene/main/node.h"
 #include "servers/audio/audio_stream.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+
+class AudioStream;
+class AudioStreamPlayback;
+struct AudioFrame;
 
 class AudioStreamPlayer : public Node {
 	GDCLASS(AudioStreamPlayer, Node);

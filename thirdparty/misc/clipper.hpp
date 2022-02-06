@@ -58,6 +58,8 @@
 #include <ostream>
 #include <functional>
 #include <queue>
+#include <exception>
+#include <string>
 
 namespace ClipperLib {
 
@@ -131,6 +133,7 @@ enum JoinType {jtSquare, jtRound, jtMiter};
 enum EndType {etClosedPolygon, etClosedLine, etOpenButt, etOpenSquare, etOpenRound};
 
 class PolyNode;
+
 typedef std::vector< PolyNode* > PolyNodes;
 
 class PolyNode 

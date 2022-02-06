@@ -28,7 +28,21 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <assert.h>
+#include <new>
+#include <utility>
+
 #include "hb.hh"
+#include "hb-aat-layout-common.hh"
+#include "hb-blob.hh"
+#include "hb-dispatch.hh"
+#include "hb-face.hh"
+#include "hb-font.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-layout-common.hh"
+#include "hb-ot-layout-gsubgpos.hh"
+#include "hb-ot.h"
+#include "hb-set.hh"
 
 #ifndef HB_NO_OT_LAYOUT
 
@@ -41,18 +55,11 @@
 #include "hb-ot-face.hh"
 #include "hb-ot-map.hh"
 #include "hb-map.hh"
-
 #include "hb-ot-kern-table.hh"
 #include "hb-ot-layout-gdef-table.hh"
 #include "hb-ot-layout-gsub-table.hh"
 #include "hb-ot-layout-gpos-table.hh"
 #include "hb-ot-layout-base-table.hh" // Just so we compile it; unused otherwise.
-#include "hb-ot-layout-jstf-table.hh" // Just so we compile it; unused otherwise.
-#include "hb-ot-name-table.hh"
-#include "hb-ot-os2-table.hh"
-
-#include "hb-aat-layout-morx-table.hh"
-#include "hb-aat-layout-opbd-table.hh" // Just so we compile it; unused otherwise.
 
 /**
  * SECTION:hb-ot-layout

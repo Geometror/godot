@@ -33,10 +33,31 @@
 #include "editor/editor_resource_preview.h"
 #include "editor/editor_scale.h"
 #include "editor/editor_settings.h"
-
 #include "scene/gui/item_list.h"
-
 #include "core/core_string_names.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/io/resource_loader.h"
+#include "core/math/vector2i.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/undo_redo.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "editor/editor_file_system.h"
+#include "editor/editor_inspector.h"
+#include "scene/gui/button.h"
+#include "scene/gui/control.h"
+#include "scene/gui/label.h"
+#include "scene/gui/scroll_container.h"
+#include "scene/gui/split_container.h"
+#include "scene/main/canvas_item.h"
+#include "scene/main/node.h"
+#include "scene/resources/packed_scene.h"
+
+class Texture2D;
 
 void TileSetScenesCollectionSourceEditor::TileSetScenesCollectionProxyObject::set_id(int p_id) {
 	ERR_FAIL_COND(p_id < 0);

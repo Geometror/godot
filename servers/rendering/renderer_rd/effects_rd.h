@@ -31,6 +31,8 @@
 #ifndef EFFECTS_RD_H
 #define EFFECTS_RD_H
 
+#include <stdint.h>
+
 #include "core/math/camera_matrix.h"
 #include "servers/rendering/renderer_rd/pipeline_cache_rd.h"
 #include "servers/rendering/renderer_rd/shaders/blur_raster.glsl.gen.h"
@@ -67,8 +69,18 @@
 #include "servers/rendering/renderer_rd/shaders/subsurface_scattering.glsl.gen.h"
 #include "servers/rendering/renderer_rd/shaders/tonemap.glsl.gen.h"
 #include "servers/rendering/renderer_scene_render.h"
-
 #include "servers/rendering_server.h"
+#include "core/math/color.h"
+#include "core/math/vector2i.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "servers/rendering/rendering_device.h"
+
+struct Rect2;
+struct Rect2i;
+struct Vector2;
 
 class EffectsRD {
 private:

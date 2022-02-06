@@ -35,6 +35,14 @@
 #include "scene/gui/box_container.h"
 #include "scene/gui/button.h"
 #include "scene/gui/popup_menu.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/templates/vector.h"
+
+class EditorHistory;
+class Label;
+class PopupMenu;
+class TextureRect;
 
 class EditorPath : public Button {
 	GDCLASS(EditorPath, Button);

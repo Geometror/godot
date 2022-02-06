@@ -7,12 +7,17 @@
 #ifndef __LOCDISTANCE_H__
 #define __LOCDISTANCE_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/bytestrie.h"
 #include "unicode/localematcher.h"
 #include "unicode/locid.h"
 #include "unicode/uobject.h"
 #include "lsr.h"
+#include "loclikelysubtags.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

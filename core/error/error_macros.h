@@ -31,8 +31,9 @@
 #ifndef ERROR_MACROS_H
 #define ERROR_MACROS_H
 
-#include "core/typedefs.h"
+#include <stdint.h>
 
+#include "core/typedefs.h"
 #include "core/templates/safe_refcount.h"
 
 class String;

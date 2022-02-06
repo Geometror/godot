@@ -18,11 +18,7 @@
 // Modified to work without allocating memory, also removed some unused function. 
 // -- GODOT end --
 
-#include <math.h>
-#include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
-#include <errno.h>
 
 #include "open-simplex-noise.h"
 

@@ -30,8 +30,12 @@
 
 #include "gdnative/transform2d.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/math/transform_2d.h"
 #include "core/os/memory.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/math_defs.h"
 
 static_assert(sizeof(godot_transform2d) == sizeof(Transform2D), "Transform2D size mismatch");
 

@@ -17,11 +17,13 @@
  */
 
 #include <freetype/freetype.h>
-#include <freetype/tttags.h>
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/ftstream.h>
-#include <freetype/internal/services/svsfnt.h>
-#include <freetype/internal/services/svttglyf.h>
+
+#include "freetype/config/public-macros.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/ftstream.h"
+#include "freetype/internal/services/svsfnt.h"
+#include "freetype/internal/services/svttglyf.h"
 
 
   /* documentation is in freetype.h */

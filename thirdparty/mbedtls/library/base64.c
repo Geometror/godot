@@ -18,13 +18,14 @@
  */
 
 #include "common.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_BASE64_C)
 
+#include <stdint.h>
+
 #include "mbedtls/base64.h"
 #include "constant_time_internal.h"
-
-#include <stdint.h>
 
 #if defined(MBEDTLS_SELF_TEST)
 #include <string.h>
@@ -32,6 +33,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

@@ -32,6 +32,12 @@
 #define DEFAULT_THEME_H
 
 #include "scene/resources/theme.h"
+#include "core/object/ref_counted.h"
+
+class Font;
+class StyleBox;
+class Texture2D;
+class Theme;
 
 const int default_font_size = 16;
 

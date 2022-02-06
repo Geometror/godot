@@ -146,6 +146,17 @@
 // 7) If the extension has additional requirements like minimum SPIR-V version required, add them
 //    to extensionRequires()
 
+#include <assert.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/InfoSink.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdio.h>
+#include <string.h>
+#include <map>
+#include <string>
+
 #include "parseVersions.h"
 #include "localintermediate.h"
 

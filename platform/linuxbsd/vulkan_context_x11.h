@@ -31,8 +31,12 @@
 #ifndef VULKAN_DEVICE_X11_H
 #define VULKAN_DEVICE_X11_H
 
-#include "drivers/vulkan/vulkan_context.h"
 #include <X11/Xlib.h>
+#include <X11/X.h>
+
+#include "drivers/vulkan/vulkan_context.h"
+#include "core/error/error_list.h"
+#include "servers/display_server.h"
 
 class VulkanContextX11 : public VulkanContext {
 	virtual const char *_get_platform_surface_extension() const;

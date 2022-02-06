@@ -33,6 +33,19 @@
 
 #include "scene/3d/camera_3d.h"
 #include "servers/xr/xr_positional_tracker.h"
+#include "core/math/math_defs.h"
+#include "core/math/plane.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/typed_array.h"
+#include "scene/3d/node_3d.h"
+
+class XRPose;
 
 /*
 	XRCamera is a subclass of camera which will register itself with its parent XROrigin and as a result is automatically positioned

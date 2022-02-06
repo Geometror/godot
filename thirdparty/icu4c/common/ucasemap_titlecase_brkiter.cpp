@@ -17,7 +17,23 @@
 *   were moved here to break dependency cycles among parts of the common library.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/localpointer.h"
+#include "unicode/platform.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utext.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class ByteSink;
+class Edits;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -25,8 +41,6 @@
 #include "unicode/ubrk.h"
 #include "unicode/casemap.h"
 #include "unicode/ucasemap.h"
-#include "cmemory.h"
-#include "ucase.h"
 #include "ucasemap_imp.h"
 
 U_NAMESPACE_BEGIN

@@ -8,12 +8,10 @@ table names from _pcre2_xxx to xxxx, thereby avoiding name clashes
 with the library. At present, just one of these tables is actually
 needed. */
 
+#include <stdint.h>
+
+#include "pcre2_ucp.h"
 #ifndef PCRE2_PCRE2TEST
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include "pcre2_internal.h"
 
 #endif /* PCRE2_PCRE2TEST */

@@ -20,7 +20,16 @@
  * SOFTWARE.
  */
 
+#include <stdint.h>
+#include <memory>
+#include <string>
+
 #include "tvgPictureImpl.h"
+#include "thorvg.h"
+#include "tvgCommon.h"
+#include "tvgLoadModule.h"
+#include "tvgPaint.h"
+#include "tvgRender.h"
 
 /************************************************************************/
 /* External Class Implementation                                        */

@@ -30,31 +30,52 @@
 
 #include "editor_scene_importer_fbx.h"
 
+#include <stddef.h>
+#include <string>
+#include <cstdint>
+#include <map>
+
 #include "data/fbx_anim_container.h"
 #include "data/fbx_material.h"
 #include "data/fbx_mesh_data.h"
 #include "data/fbx_skeleton.h"
 #include "tools/import_utils.h"
-
-#include "core/io/image_loader.h"
 #include "editor/editor_log.h"
 #include "editor/editor_node.h"
 #include "editor/import/resource_importer_scene.h"
-#include "scene/3d/bone_attachment_3d.h"
-#include "scene/3d/camera_3d.h"
 #include "scene/3d/importer_mesh_instance_3d.h"
-#include "scene/3d/light_3d.h"
-#include "scene/main/node.h"
 #include "scene/resources/material.h"
-
 #include "fbx_parser/FBXDocument.h"
 #include "fbx_parser/FBXImportSettings.h"
 #include "fbx_parser/FBXMeshGeometry.h"
 #include "fbx_parser/FBXParser.h"
 #include "fbx_parser/FBXProperties.h"
 #include "fbx_parser/FBXTokenizer.h"
-
-#include <string>
+#include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/math/basis.h"
+#include "core/math/math_defs.h"
+#include "core/math/quaternion.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/os/memory.h"
+#include "core/os/os.h"
+#include "core/string/node_path.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "data/fbx_bone.h"
+#include "data/fbx_node.h"
+#include "data/import_state.h"
+#include "data/pivot_transform.h"
+#include "scene/3d/skeleton_3d.h"
+#include "scene/animation/animation_player.h"
+#include "scene/resources/animation.h"
+#include "scene/resources/skin.h"
 
 void EditorSceneFormatImporterFBX::get_extensions(List<String> *r_extensions) const {
 	// register FBX as the one and only format for FBX importing

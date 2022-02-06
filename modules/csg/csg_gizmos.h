@@ -34,6 +34,14 @@
 #include "csg_shape.h"
 #include "editor/editor_plugin.h"
 #include "editor/plugins/node_3d_editor_gizmos.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+
+class Camera3D;
+class EditorNode;
+class Node3D;
 
 class CSGShape3DGizmoPlugin : public EditorNode3DGizmoPlugin {
 	GDCLASS(CSGShape3DGizmoPlugin, EditorNode3DGizmoPlugin);

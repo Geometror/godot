@@ -33,11 +33,13 @@
 #include "core/templates/ordered_hash_map.h"
 #include "core/templates/safe_refcount.h"
 #include "core/variant/variant.h"
-// required in this order by VariantInternal, do not remove this comment.
-#include "core/object/class_db.h"
-#include "core/object/object.h"
-#include "core/variant/type_info.h"
 #include "core/variant/variant_internal.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hashfuncs.h"
+#include "core/typedefs.h"
 
 struct DictionaryPrivate {
 	SafeRefCount refcount;

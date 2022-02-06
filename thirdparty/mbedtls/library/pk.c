@@ -17,23 +17,18 @@
  *  limitations under the License.
  */
 
-#include "common.h"
+#include <stddef.h>
 
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
 #if defined(MBEDTLS_PK_C)
 #include "mbedtls/pk.h"
 #include "mbedtls/pk_internal.h"
-
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
 
 #if defined(MBEDTLS_RSA_C)
 #include "mbedtls/rsa.h"
-#endif
-#if defined(MBEDTLS_ECP_C)
-#include "mbedtls/ecp.h"
-#endif
-#if defined(MBEDTLS_ECDSA_C)
-#include "mbedtls/ecdsa.h"
 #endif
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)

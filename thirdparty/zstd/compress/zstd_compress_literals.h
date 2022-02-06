@@ -11,7 +11,10 @@
 #ifndef ZSTD_COMPRESS_LITERALS_H
 #define ZSTD_COMPRESS_LITERALS_H
 
+#include <stddef.h>
+
 #include "zstd_compress_internal.h" /* ZSTD_hufCTables_t, ZSTD_minGain() */
+#include "../common/zstd_internal.h"
 
 
 size_t ZSTD_noCompressLiterals (void* dst, size_t dstCapacity, const void* src, size_t srcSize);

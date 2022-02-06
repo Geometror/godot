@@ -16,7 +16,15 @@
  * at each function.
  */
 
+#include <setjmp.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pngdebug.h"
+#include "pnglibconf.h"
 
 #if defined(PNG_READ_SUPPORTED) || defined(PNG_WRITE_SUPPORTED)
 

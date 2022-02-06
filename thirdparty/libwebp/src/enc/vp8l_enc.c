@@ -14,6 +14,8 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "src/enc/backward_references_enc.h"
 #include "src/enc/histogram_enc.h"
@@ -25,6 +27,9 @@
 #include "src/utils/huffman_encode_utils.h"
 #include "src/utils/utils.h"
 #include "src/webp/format_constants.h"
+#include "utils/thread_utils.h"
+#include "webp/encode.h"
+#include "webp/types.h"
 
 // Maximum number of histogram images (sub-blocks).
 #define MAX_HUFF_IMAGE_SIZE       2600

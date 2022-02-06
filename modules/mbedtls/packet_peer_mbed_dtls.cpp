@@ -29,10 +29,19 @@
 /*************************************************************************/
 
 #include "packet_peer_mbed_dtls.h"
-#include "mbedtls/platform_util.h"
 
-#include "core/io/file_access.h"
-#include "core/io/stream_peer_ssl.h"
+#include <string.h>
+
+#include "core/crypto/crypto.h"
+#include "core/error/error_macros.h"
+#include "core/io/ip_address.h"
+#include "core/io/packet_peer.h"
+#include "core/io/packet_peer_udp.h"
+#include "core/os/memory.h"
+#include "mbedtls/ssl.h"
+#include "mbedtls/timing.h"
+#include "modules/mbedtls/crypto_mbedtls.h"
+#include "modules/mbedtls/ssl_context_mbedtls.h"
 
 int PacketPeerMbedDTLS::bio_send(void *ctx, const unsigned char *buf, size_t len) {
 	if (buf == nullptr || len <= 0) {

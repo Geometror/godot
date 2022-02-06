@@ -30,8 +30,14 @@
 
 #include "stream_peer_mbedtls.h"
 
-#include "core/io/file_access.h"
 #include "core/io/stream_peer_tcp.h"
+#include "core/crypto/crypto.h"
+#include "core/error/error_macros.h"
+#include "core/io/stream_peer.h"
+#include "core/os/memory.h"
+#include "mbedtls/ssl.h"
+#include "modules/mbedtls/crypto_mbedtls.h"
+#include "modules/mbedtls/ssl_context_mbedtls.h"
 
 int StreamPeerMbedTLS::bio_send(void *ctx, const unsigned char *buf, size_t len) {
 	if (buf == nullptr || len <= 0) {

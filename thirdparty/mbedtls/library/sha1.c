@@ -22,21 +22,25 @@
  *  http://www.itl.nist.gov/fipspubs/fip180-1.htm
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_SHA1_C)
+
+#include <string.h>
 
 #include "mbedtls/sha1.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_SELF_TEST)
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

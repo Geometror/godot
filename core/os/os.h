@@ -31,6 +31,10 @@
 #ifndef OS_H
 #define OS_H
 
+#include <stdarg.h>
+#include <stdlib.h>
+#include <stdint.h>
+
 #include "core/config/engine.h"
 #include "core/io/image.h"
 #include "core/io/logger.h"
@@ -38,9 +42,13 @@
 #include "core/string/ustring.h"
 #include "core/templates/list.h"
 #include "core/templates/vector.h"
+#include "core/error/error_list.h"
+#include "core/math/vector2.h"
+#include "core/os/mutex.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
-#include <stdarg.h>
-#include <stdlib.h>
+class MainLoop;
 
 class OS {
 	static OS *singleton;

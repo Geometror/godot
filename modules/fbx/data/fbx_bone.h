@@ -31,12 +31,23 @@
 #ifndef FBX_BONE_H
 #define FBX_BONE_H
 
+#include <stdint.h>
+
 #include "fbx_node.h"
 #include "import_state.h"
-
 #include "fbx_parser/FBXDocument.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
 
 struct PivotTransform;
+namespace FBXDocParser {
+class Cluster;
+class Geometry;
+class ModelLimbNode;
+}  // namespace FBXDocParser
+struct FBXNode;
+struct FBXSkeleton;
+struct ImportState;
 
 struct FBXBone : public RefCounted {
 	uint64_t parent_bone_id = 0;

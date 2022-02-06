@@ -41,11 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 /* This module contains internal functions for comparing and finding the length
 of strings. These are used instead of strcmp() etc because the standard
 functions work only on 8-bit data. */
-
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <stddef.h>
 
 #include "pcre2_internal.h"
 

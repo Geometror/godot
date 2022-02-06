@@ -47,6 +47,9 @@
 
 #include <freetype/freetype.h>
 
+#include "freetype/config/ftheader.h"
+#include "freetype/config/public-macros.h"
+
 #ifdef FREETYPE_H
 #error "freetype.h of FreeType 1 has been loaded!"
 #error "Please fix the directory search order for header files"

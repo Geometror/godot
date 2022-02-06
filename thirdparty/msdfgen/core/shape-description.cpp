@@ -2,6 +2,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "shape-description.h"
 
+#include <vector>
+
+#include "core/Contour.h"
+#include "core/EdgeColor.h"
+#include "core/EdgeHolder.h"
+#include "core/Shape.h"
+#include "core/Vector2.h"
+#include "core/edge-segments.h"
+
 namespace msdfgen {
 
 int readCharF(FILE *input) {

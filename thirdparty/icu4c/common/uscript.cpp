@@ -15,6 +15,9 @@
 ******************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/uchar.h"
 #include "unicode/uscript.h"
 #include "unicode/uloc.h"
@@ -23,6 +26,10 @@
 #include "cmemory.h"
 #include "cstring.h"
 #include "ulocimp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
 
 static const UScriptCode JAPANESE[3] = { USCRIPT_KATAKANA, USCRIPT_HIRAGANA, USCRIPT_HAN };
 static const UScriptCode KOREAN[2] = { USCRIPT_HANGUL, USCRIPT_HAN };

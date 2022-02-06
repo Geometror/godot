@@ -3,6 +3,21 @@
 
 #include "bvh_builder.h"
 
+#include <algorithm>
+
+#include "common/math/math.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "common/simd/vuint4_sse2.h"
+#include "kernels/builders/bvh_builder_sah.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/bvh/bvh_node_aabb.h"
+#include "kernels/bvh/bvh_node_aabb_mb.h"
+#include "kernels/bvh/bvh_node_qaabb.h"
+#include "kernels/common/builder.h"
+#include "kernels/common/primref.h"
+
 namespace embree
 {
   namespace isa

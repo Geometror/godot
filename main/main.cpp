@@ -30,8 +30,10 @@
 
 #include "main.h"
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "core/config/project_settings.h"
-#include "core/core_string_names.h"
 #include "core/crypto/crypto.h"
 #include "core/debugger/engine_debugger.h"
 #include "core/extension/extension_api_dump.h"
@@ -42,7 +44,6 @@
 #include "core/io/file_access_pack.h"
 #include "core/io/file_access_zip.h"
 #include "core/io/image_loader.h"
-#include "core/io/ip.h"
 #include "core/io/resource_loader.h"
 #include "core/object/message_queue.h"
 #include "core/os/os.h"
@@ -73,6 +74,42 @@
 #include "servers/rendering/rendering_server_default.h"
 #include "servers/text_server.h"
 #include "servers/xr_server.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/io/logger.h"
+#include "core/io/resource.h"
+#include "core/io/resource_saver.h"
+#include "core/io/resource_uid.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/class_db.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "core/version_generated.gen.h"
+#include "editor/debugger/editor_debugger_node.h"
+#include "editor/editor_paths.h"
+#include "scene/main/node.h"
+#include "scene/main/viewport.h"
+#include "scene/resources/texture.h"
+#include "servers/rendering_server.h"
+#include "servers/xr/xr_interface.h"
 
 #ifdef TESTS_ENABLED
 #include "tests/test_main.h"
@@ -90,8 +127,6 @@
 #include "main/splash_editor.gen.h"
 #endif
 #endif
-
-#include "modules/modules_enabled.gen.h" // For mono.
 
 /* Static members */
 

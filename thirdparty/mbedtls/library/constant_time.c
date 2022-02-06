@@ -27,6 +27,8 @@
 #include "mbedtls/constant_time.h"
 #include "mbedtls/error.h"
 #include "mbedtls/platform_util.h"
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
 
 #if defined(MBEDTLS_BIGNUM_C)
 #include "mbedtls/bignum.h"
@@ -39,11 +41,6 @@
 #if defined(MBEDTLS_RSA_C)
 #include "mbedtls/rsa.h"
 #endif
-
-#if defined(MBEDTLS_BASE64_C)
-#include "constant_time_invasive.h"
-#endif
-
 #include <string.h>
 
 int mbedtls_ct_memcmp( const void *a,

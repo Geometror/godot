@@ -33,9 +33,15 @@
  *
  */
 
-#include "common.h"
+#include <features.h>
+#include <stdint.h>
+#include <stdio.h>
 
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_BIGNUM_C)
+
+#include <limits.h>
+#include <string.h>
 
 #include "mbedtls/bignum.h"
 #include "mbedtls/bn_mul.h"
@@ -43,14 +49,12 @@
 #include "mbedtls/error.h"
 #include "constant_time_internal.h"
 
-#include <limits.h>
-#include <string.h>
-
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
 #include <stdlib.h>
+
 #define mbedtls_printf     printf
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free

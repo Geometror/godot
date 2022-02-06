@@ -32,23 +32,16 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
+#include <pthread.h>
+#include <assert.h>
+#include <stdint.h>
+#include <cstdio>
+
 //
 // This file contains the Linux-specific functions
 //
 #include "../osinclude.h"
 #include "../../../OGLCompilersDLL/InitializeDll.h"
-
-#include <pthread.h>
-#include <semaphore.h>
-#include <assert.h>
-#include <errno.h>
-#include <stdint.h>
-#include <cstdio>
-#include <sys/time.h>
-
-#if !defined(__Fuchsia__)
-#include <sys/resource.h>
-#endif
 
 namespace glslang {
 

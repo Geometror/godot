@@ -31,10 +31,14 @@
 #ifndef GODOT_BROAD_PHASE_2D_H
 #define GODOT_BROAD_PHASE_2D_H
 
+#include <stdint.h>
+
 #include "core/math/math_funcs.h"
 #include "core/math/rect2.h"
 
 class GodotCollisionObject2D;
+struct Rect2;
+struct Vector2;
 
 class GodotBroadPhase2D {
 public:

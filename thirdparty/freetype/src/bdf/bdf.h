@@ -30,9 +30,18 @@
  * Based on bdf.h,v 1.16 2000/03/16 20:08:51 mleisher
  */
 
+#include "thirdparty/freetype/src/bdf/bdf.h"
+
 #include <freetype/internal/ftobjs.h>
 #include <freetype/internal/ftstream.h>
 #include <freetype/internal/fthash.h>
+
+#include "freetype/config/ftheader.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/fthash.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/ftstream.h"
 
 
 FT_BEGIN_HEADER

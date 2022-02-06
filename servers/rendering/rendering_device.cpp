@@ -31,6 +31,8 @@
 #include "rendering_device.h"
 
 #include "rendering_device_binds.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
 
 RenderingDevice *RenderingDevice::singleton = nullptr;
 

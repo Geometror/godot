@@ -75,9 +75,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "FBXProperties.h"
+
+#include <stdint.h>
+#include <string.h>
+#include <memory>
+
 #include "FBXDocumentUtil.h"
 #include "FBXParser.h"
 #include "FBXTokenizer.h"
+#include "core/math/vector3.h"
 
 namespace FBXDocParser {
 

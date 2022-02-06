@@ -32,14 +32,24 @@
 
 #include "core/io/marshalls.h"
 #include "core/object/message_queue.h"
-#include "scene/3d/light_3d.h"
 #include "scene/resources/mesh_library.h"
 #include "scene/resources/physics_material.h"
-#include "scene/resources/primitive_meshes.h"
 #include "scene/resources/surface_tool.h"
-#include "scene/scene_string_names.h"
 #include "servers/navigation_server_3d.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/pair.h"
+#include "core/variant/dictionary.h"
+#include "scene/main/scene_tree.h"
+#include "scene/resources/material.h"
+#include "scene/resources/navigation_mesh.h"
+#include "scene/resources/shape_3d.h"
+#include "scene/resources/world_3d.h"
+#include "servers/physics_server_3d.h"
 
 bool GridMap::_set(const StringName &p_name, const Variant &p_value) {
 	String name = p_name;

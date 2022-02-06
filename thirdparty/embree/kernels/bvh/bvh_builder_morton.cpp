@@ -1,22 +1,43 @@
 // Copyright 2009-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
-#include "bvh.h"
-#include "bvh_statistics.h"
-#include "bvh_rotate.h"
-#include "../common/profile.h"
-#include "../../common/algorithms/parallel_prefix_sum.h"
+#include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <limits>
+#include <new>
 
+#include "bvh.h"
+#include "bvh_rotate.h"
 #include "../builders/primrefgen.h"
 #include "../builders/bvh_builder_morton.h"
-
 #include "../geometry/triangle.h"
 #include "../geometry/trianglev.h"
 #include "../geometry/trianglei.h"
 #include "../geometry/quadv.h"
-#include "../geometry/quadi.h"
 #include "../geometry/object.h"
 #include "../geometry/instance.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/math/lbbox.h"
+#include "common/math/math.h"
+#include "common/math/range.h"
+#include "common/math/vec3.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/varying.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/common/alloc.h"
+#include "kernels/common/buffer.h"
+#include "kernels/common/builder.h"
+#include "kernels/common/default.h"
+#include "kernels/common/scene_instance.h"
+#include "kernels/common/scene_quad_mesh.h"
+#include "kernels/common/scene_triangle_mesh.h"
+#include "kernels/common/scene_user_geometry.h"
+#include "kernels/common/vector.h"
+#include "kernels/config.h"
 
 #if defined(__64BIT__)
 #  define ROTATE_TREE 1 // specifies number of tree rotation rounds to perform

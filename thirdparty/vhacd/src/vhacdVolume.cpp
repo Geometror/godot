@@ -17,13 +17,21 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
+#include <math.h>
+#include <string.h>
+#include <assert.h>
+#include <stdint.h>
+#include <algorithm>
+#include <queue>
+
 #include "btConvexHullComputer.h"
 #include "vhacdVolume.h"
-#include <algorithm>
-#include <float.h>
-#include <math.h>
-#include <queue>
-#include <string.h>
+#include "btAlignedObjectArray.h"
+#include "btVector3.h"
+#include "vhacdMesh.h"
+#include "vhacdSArray.h"
+#include "vhacdVector.h"
+#include "vhacdVector.inl"
 
 #ifdef _MSC_VER
 #pragma warning(disable:4458 4100)

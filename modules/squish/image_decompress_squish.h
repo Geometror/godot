@@ -33,6 +33,8 @@
 
 #include "core/io/image.h"
 
+class Image;
+
 void image_decompress_squish(Image *p_image);
 
 #endif // IMAGE_DECOMPRESS_SQUISH_H

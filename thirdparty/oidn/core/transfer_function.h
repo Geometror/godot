@@ -16,8 +16,18 @@
 
 #pragma once
 
+#include <algorithm>
+#include <cmath>
+#include <memory>
+
 #include "image.h"
 #include "node.h"
+#include "common/platform.h"
+#include "core/math.h"
+
+namespace mkldnn {
+struct stream;
+}  // namespace mkldnn
 
 namespace oidn {
 

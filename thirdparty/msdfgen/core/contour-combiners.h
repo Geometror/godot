@@ -1,10 +1,14 @@
 
 #pragma once
 
+#include <vector>
+
 #include "Shape.h"
 #include "edge-selectors.h"
+#include "core/Vector2.h"
 
 namespace msdfgen {
+class Shape;
 
 /// Simply selects the nearest contour.
 template <class EdgeSelector>

@@ -4,8 +4,6 @@
 #endif
 #endif
 
-// -- GODOT start --
-#include <zlib.h> // Should come before including tinyexr.
 // -- GODOT end --
 
 #define TINYEXR_IMPLEMENTATION

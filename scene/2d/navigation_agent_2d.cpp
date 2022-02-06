@@ -32,6 +32,15 @@
 
 #include "core/math/geometry_2d.h"
 #include "servers/navigation_server_2d.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "scene/2d/node_2d.h"
+#include "scene/resources/world_2d.h"
 
 void NavigationAgent2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_rid"), &NavigationAgent2D::get_rid);

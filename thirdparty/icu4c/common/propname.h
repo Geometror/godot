@@ -14,11 +14,21 @@
 #ifndef PROPNAME_H
 #define PROPNAME_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/bytestrie.h"
 #include "unicode/uchar.h"
 #include "udataswp.h"
 #include "uprops.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class BytesTrie;
+}  // namespace icu_70
 
 /*
  * This header defines the in-memory layout of the property names data

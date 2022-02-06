@@ -21,18 +21,17 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_CIPHER_C)
+
+#include <stdlib.h>
+#include <string.h>
 
 #include "mbedtls/cipher.h"
 #include "mbedtls/cipher_internal.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
 #include "mbedtls/constant_time.h"
-
-#include <stdlib.h>
-#include <string.h>
 
 #if defined(MBEDTLS_CHACHAPOLY_C)
 #include "mbedtls/chachapoly.h"
@@ -64,7 +63,6 @@
 #endif
 
 #if defined(MBEDTLS_PLATFORM_C)
-#include "mbedtls/platform.h"
 #else
 #define mbedtls_calloc calloc
 #define mbedtls_free   free

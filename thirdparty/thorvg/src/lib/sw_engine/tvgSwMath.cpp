@@ -19,8 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <math.h>
+#include <bits/std_abs.h>
+#include <stdint.h>
+#include <cmath>
+
 #include "tvgSwCommon.h"
+#include "thorvg.h"
 
 
 /************************************************************************/
@@ -30,6 +34,7 @@
 //clz: count leading zero’s
 #if defined(_MSC_VER) && !defined(__clang__)
     #include <intrin.h>
+
     static uint32_t __inline _clz(uint32_t value)
     {
         unsigned long leadingZero = 0;

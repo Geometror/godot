@@ -40,10 +40,8 @@
 #if ITT_PLATFORM==ITT_PLATFORM_WIN
 #include <windows.h>
 #endif /* ITT_PLATFORM==ITT_PLATFORM_WIN */
-#if ITT_PLATFORM != ITT_PLATFORM_MAC && ITT_PLATFORM != ITT_PLATFORM_FREEBSD
-#include <malloc.h>
-#endif
 #include <stdlib.h>
+#include <dlfcn.h>
 
 #include "jitprofiling.h"
 

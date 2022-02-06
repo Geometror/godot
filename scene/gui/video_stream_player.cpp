@@ -33,6 +33,18 @@
 #include "core/os/os.h"
 #include "scene/scene_string_names.h"
 #include "servers/audio_server.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "scene/main/canvas_item.h"
+#include "scene/main/node.h"
+#include "scene/resources/texture.h"
+#include "scene/resources/video_stream.h"
 
 int VideoStreamPlayer::sp_get_channel_count() const {
 	if (playback.is_null()) {

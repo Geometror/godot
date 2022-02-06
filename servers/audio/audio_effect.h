@@ -33,6 +33,10 @@
 
 #include "core/io/resource.h"
 #include "core/math/audio_frame.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+
+struct AudioFrame;
 
 class AudioEffectInstance : public RefCounted {
 	GDCLASS(AudioEffectInstance, RefCounted);

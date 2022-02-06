@@ -24,13 +24,19 @@
 #define __UDATASWP_H__
 
 #include <stdarg.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 /* forward declaration */
 
 U_CDECL_BEGIN
 
 struct UDataSwapper;
+
 typedef struct UDataSwapper UDataSwapper;
 
 /**

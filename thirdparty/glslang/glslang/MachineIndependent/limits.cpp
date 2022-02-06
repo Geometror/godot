@@ -51,6 +51,14 @@
 // N.B.: assuming the last rule excludes function calls
 //
 
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/SymbolTable.h>
+#include <set>
+#include <vector>
+
 #include "ParseHelper.h"
 
 namespace glslang {

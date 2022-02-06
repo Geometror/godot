@@ -31,11 +31,12 @@
 // Chroma upsampling reference: "Fast Scheme for Image Size Change in the Compressed Domain"
 // http://vision.ai.uiuc.edu/~dugad/research/dct/index.html
 
-#include <memory.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <setjmp.h>
 #include <stdint.h>
+#include <string.h>
+
 #include "tvgJpgd.h"
 
 #ifdef _MSC_VER

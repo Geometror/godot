@@ -10,25 +10,34 @@
 **********************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
-#include "unicode/parsepos.h"
 #include "unicode/symtable.h"
 #include "unicode/uniset.h"
 #include "unicode/ustring.h"
 #include "unicode/utf8.h"
 #include "unicode/utf16.h"
-#include "ruleiter.h"
 #include "cmemory.h"
 #include "cstring.h"
 #include "patternprops.h"
 #include "uelement.h"
 #include "util.h"
 #include "uvector.h"
-#include "charstr.h"
-#include "ustrfmt.h"
 #include "uassert.h"
 #include "bmpset.h"
 #include "unisetspan.h"
+#include "unicode/platform.h"
+#include "unicode/rep.h"
+#include "unicode/umachine.h"
+#include "unicode/unifilt.h"
+#include "unicode/unimatch.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uset.h"
+#include "unicode/uversion.h"
 
 // HIGH_VALUE > all valid values. 110000 for codepoints
 #define UNICODESET_HIGH 0x0110000
@@ -78,6 +87,7 @@ static inline UChar32 pinCodePoint(UChar32& c) {
 
 #ifdef DEBUG_MEM
 #include <stdio.h>
+
 static int32_t _dbgCount = 0;
 
 static inline void _dbgct(UnicodeSet* set) {
@@ -810,6 +820,7 @@ UnicodeSet& UnicodeSet::add(UChar32 start, UChar32 end) {
 
 #ifdef DEBUG_US_ADD
 #include <stdio.h>
+
 void dump(UChar32 c) {
     if (c <= 0xFF) {
         printf("%c", (char)c);

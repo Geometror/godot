@@ -32,6 +32,8 @@
 #define PANEL_CONTAINER_H
 
 #include "scene/gui/container.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
 
 class PanelContainer : public Container {
 	GDCLASS(PanelContainer, Container);

@@ -2,9 +2,18 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "barrier.h"
+
+#include <assert.h>
+#include <string>
+#include <vector>
+
 #include "condition.h"
 #include "regression.h"
 #include "thread.h"
+#include "common/sys/atomic.h"
+#include "common/sys/intrinsics.h"
+#include "common/sys/mutex.h"
+#include "common/sys/sysinfo.h"
 
 #if defined (__WIN32__)
 

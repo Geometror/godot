@@ -35,6 +35,11 @@
 #include "core/math/plane.h"
 #include "core/math/transform_3d.h"
 #include "core/math/vector3.h"
+#include "core/math/math_defs.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+
+struct Transform3D;
 
 struct _NO_DISCARD_ Face3 {
 	enum Side {

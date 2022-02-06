@@ -42,14 +42,10 @@ Carsten Bormann
 
 *********************************************************************/
 
-#include <stdlib.h>
 #include <string.h>
-#include <math.h>
-#include "os.h"
-#include "smallft.h"
+#include <alloca.h>
+
 #include "lpc.h"
-#include "scales.h"
-#include "misc.h"
 
 /* Autocorrelation LPC coeff generation algorithm invented by
    N. Levinson in 1947, modified by J. Durbin in 1959. */

@@ -31,9 +31,21 @@
 #ifndef NAVIGATION_SERVER_2D_H
 #define NAVIGATION_SERVER_2D_H
 
+#include <stdint.h>
+
 #include "core/object/class_db.h"
 #include "core/templates/rid.h"
 #include "scene/2d/navigation_region_2d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+
+class NavigationPolygon;
+struct Transform2D;
 
 // This server exposes the `NavigationServer3D` features in the 2D world.
 class NavigationServer2D : public Object {

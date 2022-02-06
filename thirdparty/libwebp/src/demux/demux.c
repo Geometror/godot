@@ -17,11 +17,14 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "src/utils/utils.h"
 #include "src/webp/decode.h"     // WebPGetFeatures
 #include "src/webp/demux.h"
 #include "src/webp/format_constants.h"
+#include "webp/mux_types.h"
+#include "webp/types.h"
 
 #define DMUX_MAJ_VERSION 1
 #define DMUX_MIN_VERSION 2

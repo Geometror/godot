@@ -44,6 +44,11 @@
 
 #include "SymbolTable.h"
 
+#include <glslang/Include/Common.h>
+#include <glslang/Include/InfoSink.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/Include/intermediate.h>
+
 namespace glslang {
 
 //

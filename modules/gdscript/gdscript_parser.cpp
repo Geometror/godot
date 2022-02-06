@@ -30,14 +30,18 @@
 
 #include "gdscript_parser.h"
 
+#include <math.h>
+
 #include "core/config/project_settings.h"
-#include "core/io/file_access.h"
-#include "core/io/resource_loader.h"
 #include "core/math/math_defs.h"
 #include "gdscript.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/string/print_string.h"
+#include "core/variant/callable.h"
+#include "modules/gdscript/gdscript_tokenizer.h"
 
 #ifdef DEBUG_ENABLED
-#include "core/os/os.h"
 #include "core/string/string_builder.h"
 #include "gdscript_warning.h"
 #endif // DEBUG_ENABLED

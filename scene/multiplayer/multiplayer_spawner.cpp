@@ -30,10 +30,14 @@
 
 #include "multiplayer_spawner.h"
 
-#include "core/io/marshalls.h"
 #include "core/multiplayer/multiplayer_api.h"
-#include "scene/main/window.h"
 #include "scene/scene_string_names.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/array.h"
 
 void MultiplayerSpawner::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("spawn", "data"), &MultiplayerSpawner::spawn, DEFVAL(Variant()));

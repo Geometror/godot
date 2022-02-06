@@ -36,11 +36,10 @@
 #ifndef RVO_KD_TREE_H_
 #define RVO_KD_TREE_H_
 
-#include "API.h"
-
 #include <cstddef>
 #include <vector>
 
+#include "API.h"
 #include "Vector3.h"
 
 // Note: Slightly modified to work better with Godot.

@@ -34,6 +34,14 @@
 #include "core/io/resource.h"
 #include "core/object/gdvirtual.gen.inc"
 #include "core/object/script_language.h"
+#include "core/math/color.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/dictionary.h"
 
 class TextEdit;
 

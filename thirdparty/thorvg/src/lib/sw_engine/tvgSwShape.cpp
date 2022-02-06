@@ -19,10 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <float.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "tvgSwCommon.h"
 #include "tvgBezier.h"
-#include <float.h>
-#include <math.h>
+#include "thorvg.h"
+#include "tvgCommon.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

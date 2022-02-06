@@ -15,12 +15,15 @@
 * limitations under the License.
 *******************************************************************************/
 
+#include <stddef.h>
+
 #include "c_types_map.hpp"
 #include "nstl.hpp"
 #include "utils.hpp"
-#include "cpu_pooling_pd.hpp"
-
 #include "jit_uni_pool_kernel_f32.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "mkldnn_types.h"
+#include "pooling_pd.hpp"
 
 namespace mkldnn {
 namespace impl {

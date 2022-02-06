@@ -32,6 +32,8 @@
 #define CHECK_BUTTON_H
 
 #include "scene/gui/button.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
 
 class CheckButton : public Button {
 	GDCLASS(CheckButton, Button);

@@ -13,6 +13,9 @@
 #ifndef RBBISCAN_H
 #define RBBISCAN_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uobject.h"
 #include "unicode/rbbi.h"
@@ -24,6 +27,13 @@
                           //    looks up references to $variables within a set.
 #include "rbbinode.h"
 #include "rbbirpt.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+struct RBBIRuleTableEl;
+}  // namespace icu_70
 
 U_NAMESPACE_BEGIN
 

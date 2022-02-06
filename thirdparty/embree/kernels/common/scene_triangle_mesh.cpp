@@ -2,10 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "scene_triangle_mesh.h"
-#include "scene.h"
+
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "kernels/common/buffer.h"
+#include "kernels/common/geometry.h"
+#include "kernels/common/rtcore.h"
 
 namespace embree
 {
+class Device;
 #if defined(EMBREE_LOWEST_ISA)
 
   TriangleMesh::TriangleMesh (Device* device)

@@ -17,9 +17,9 @@
 #ifndef _V_PSY_H_
 #define _V_PSY_H_
 #include "smallft.h"
-
 #include "backends.h"
 #include "envelope.h"
+#include "vorbis/codec.h"
 
 #ifndef EHMER_MAX
 #define EHMER_MAX 56

@@ -30,8 +30,12 @@
 
 #include "gdnative/array.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/os/memory.h"
 #include "core/variant/array.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/variant_struct.h"
 
 static_assert(sizeof(godot_array) == sizeof(Array), "Array size mismatch");
 

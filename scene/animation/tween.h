@@ -32,6 +32,16 @@
 #define TWEEN_H
 
 #include "core/object/ref_counted.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/string/node_path.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
 
 class Tween;
 class Node;

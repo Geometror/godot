@@ -30,6 +30,8 @@
 
 #include "import_utils.h"
 
+#include "core/error/error_macros.h"
+
 Vector3 ImportUtils::deg2rad(const Vector3 &p_rotation) {
 	return p_rotation / 180.0 * Math_PI;
 }

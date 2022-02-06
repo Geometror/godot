@@ -2,9 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "alloc.h"
-#include "intrinsics.h"
+
+#include <bits/mman-map-flags-generic.h>
+#include <mm_malloc.h>
+#include <fstream>
+#include <iostream>
+#include <string>
+
 #include "sysinfo.h"
 #include "mutex.h"
+#include "common/sys/platform.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 /// All Platforms
@@ -185,9 +192,7 @@ namespace embree
 #if defined(__UNIX__)
 
 #include <sys/mman.h>
-#include <errno.h>
 #include <stdlib.h>
-#include <string.h>
 #include <sstream>
 
 #if defined(__MACOSX__)

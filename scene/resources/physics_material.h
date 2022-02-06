@@ -33,6 +33,10 @@
 
 #include "core/io/resource.h"
 #include "servers/physics_server_3d.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
 
 class PhysicsMaterial : public Resource {
 	GDCLASS(PhysicsMaterial, Resource);

@@ -32,6 +32,8 @@
 #define GRID_CONTAINER_H
 
 #include "scene/gui/container.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
 
 class GridContainer : public Container {
 	GDCLASS(GridContainer, Container);

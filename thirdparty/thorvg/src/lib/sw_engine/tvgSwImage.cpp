@@ -19,8 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <stdint.h>
+#include <stdlib.h>
+#include <cmath>
+
 #include "tvgMath.h"
 #include "tvgSwCommon.h"
+#include "thorvg.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

@@ -18,6 +18,8 @@
 
 #include "unicode/utypes.h"
 #include "unicode/errorcode.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

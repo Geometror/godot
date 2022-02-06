@@ -30,9 +30,54 @@
 
 #include "text_server_adv.h"
 
+#include <hb-ot.h>
+#include <string.h>
+#include <memory>
+#include <vector>
+
 #include "core/error/error_macros.h"
-#include "core/string/print_string.h"
 #include "core/string/translation.h"
+#include "core/Bitmap.h"
+#include "core/Bitmap.hpp"
+#include "core/Contour.h"
+#include "core/Projection.h"
+#include "core/Shape.h"
+#include "core/ShapeDistanceFinder.hpp"
+#include "core/Vector2.h"
+#include "core/edge-coloring.h"
+#include "core/edge-segments.h"
+#include "core/generator-config.h"
+#include "core/io/file_access.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/msdf-error-correction.h"
+#include "core/string/char_utils.h"
+#include "core/templates/list.h"
+#include "core/templates/pair.h"
+#include "freetype/config/integer-types.h"
+#include "freetype/freetype.h"
+#include "freetype/ftadvanc.h"
+#include "freetype/fterrors.h"
+#include "freetype/ftglyph.h"
+#include "freetype/ftmm.h"
+#include "freetype/ftoutln.h"
+#include "freetype/ftstroke.h"
+#include "freetype/fttypes.h"
+#include "freetype/tttables.h"
+#include "hb-ft.h"
+#include "hb.h"
+#include "modules/text_server_adv/script_iterator.h"
+#include "servers/rendering_server.h"
+#include "unicode/ubidi.h"
+#include "unicode/ubrk.h"
+#include "unicode/uchar.h"
+#include "unicode/uclean.h"
+#include "unicode/umachine.h"
+#include "unicode/unorm2.h"
+#include "unicode/ustring.h"
+#include "unicode/utf.h"
+#include "unicode/utypes.h"
 
 #ifdef ICU_STATIC_DATA
 #include "thirdparty/icu4c/icudata.gen.h"
@@ -44,7 +89,6 @@
 #include "core/ShapeDistanceFinder.h"
 #include "core/contour-combiners.h"
 #include "core/edge-selectors.h"
-#include "msdfgen.h"
 #endif
 
 /*************************************************************************/

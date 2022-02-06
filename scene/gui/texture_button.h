@@ -33,6 +33,13 @@
 
 #include "scene/gui/base_button.h"
 #include "scene/resources/bit_map.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/binder_common.h"
+#include "scene/resources/texture.h"
+
 class TextureButton : public BaseButton {
 	GDCLASS(TextureButton, BaseButton);
 

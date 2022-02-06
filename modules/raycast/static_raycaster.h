@@ -34,6 +34,14 @@
 
 #include <embree3/rtcore.h>
 
+#include "core/object/object.h"
+#include "core/templates/set.h"
+#include "core/variant/variant.h"
+#include "embree3/rtcore_device.h"
+#include "embree3/rtcore_geometry.h"
+
+template <class T> class Vector;
+
 class StaticRaycasterEmbree : public StaticRaycaster {
 	GDCLASS(StaticRaycasterEmbree, StaticRaycaster);
 

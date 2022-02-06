@@ -17,9 +17,11 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <ogg/ogg.h>
+
 #include "dequant.h"
-#include "decint.h"
+#include "internal.h"
+#include "ogg/config_types.h"
+#include "ogg/os_types.h"
 
 int oc_quant_params_unpack(oc_pack_buf *_opb,th_quant_info *_qinfo){
   th_quant_base *base_mats;

@@ -32,6 +32,13 @@
 #define LINE_BUILDER_H
 
 #include "line_2d.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/templates/vector.h"
+
+class Curve;
+class Gradient;
+struct Rect2;
 
 class LineBuilder {
 public:

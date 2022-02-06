@@ -22,15 +22,20 @@
  *  http://csrc.nist.gov/publications/nistpubs/800-90/SP800-90revised_March2007.pdf
  */
 
+#include <limits.h>
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/aes.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_CTR_DRBG_C)
+
+#include <string.h>
 
 #include "mbedtls/ctr_drbg.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_FS_IO)
 #include <stdio.h>
@@ -41,6 +46,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

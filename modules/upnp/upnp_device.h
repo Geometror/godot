@@ -32,6 +32,9 @@
 #define GODOT_UPNP_DEVICE_H
 
 #include "core/object/ref_counted.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
 
 class UPNPDevice : public RefCounted {
 	GDCLASS(UPNPDevice, RefCounted);

@@ -29,7 +29,12 @@
 /*************************************************************************/
 
 #include "shader_warnings.h"
+
 #include "core/variant/variant.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
 
 #ifdef DEBUG_ENABLED
 

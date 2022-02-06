@@ -28,14 +28,20 @@
    */
 
 
-#include <freetype/internal/ftdebug.h>
-
 #include <freetype/ftglyph.h>
 #include <freetype/ftoutln.h>
 #include <freetype/ftbitmap.h>
-#include <freetype/internal/ftobjs.h>
+#include <freetype/fterrors.h>
+#include <stddef.h>
 
-#include "ftbase.h"
+#include "freetype/config/public-macros.h"
+#include "freetype/freetype.h"
+#include "freetype/ftimage.h"
+#include "freetype/ftrender.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
 
 
   /**************************************************************************

@@ -17,10 +17,15 @@
 
 
 #include <freetype/ftsynth.h>
-#include <freetype/internal/ftdebug.h>
-#include <freetype/internal/ftobjs.h>
 #include <freetype/ftoutln.h>
 #include <freetype/ftbitmap.h>
+
+#include "freetype/config/ftstdlib.h"
+#include "freetype/freetype.h"
+#include "freetype/ftimage.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
 
 
   /**************************************************************************

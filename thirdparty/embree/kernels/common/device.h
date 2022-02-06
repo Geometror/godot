@@ -3,9 +3,16 @@
 
 #pragma once
 
+#include <sys/types.h>
+#include <memory>
+
 #include "default.h"
 #include "state.h"
 #include "accel.h"
+#include "common/sys/alloc.h"
+#include "embree3/rtcore_device.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/vector.h"
 
 namespace embree
 {

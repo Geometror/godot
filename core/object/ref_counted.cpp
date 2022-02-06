@@ -30,7 +30,10 @@
 
 #include "ref_counted.h"
 
+#include <stdint.h>
+
 #include "core/object/script_language.h"
+#include "core/object/class_db.h"
 
 bool RefCounted::init_ref() {
 	if (reference()) {

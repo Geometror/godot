@@ -29,8 +29,12 @@
 /*************************************************************************/
 
 #include "godot_collision_object_2d.h"
+
 #include "godot_physics_server_2d.h"
 #include "godot_space_2d.h"
+#include "core/math/vector2.h"
+#include "servers/physics_2d/godot_broad_phase_2d.h"
+#include "servers/physics_2d/godot_shape_2d.h"
 
 void GodotCollisionObject2D::add_shape(GodotShape2D *p_shape, const Transform2D &p_transform, bool p_disabled) {
 	Shape s;

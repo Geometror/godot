@@ -32,6 +32,12 @@
 #define GLTF_ANIMATION_H
 
 #include "core/io/resource.h"
+#include "core/math/math_defs.h"
+#include "core/math/quaternion.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
 
 class GLTFAnimation : public Resource {
 	GDCLASS(GLTFAnimation, Resource);

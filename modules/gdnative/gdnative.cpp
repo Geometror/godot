@@ -30,14 +30,15 @@
 
 #include "gdnative.h"
 
-#include "core/config/project_settings.h"
-#include "core/core_constants.h"
-#include "core/io/dir_access.h"
-#include "core/io/file_access.h"
-#include "core/io/file_access_encrypted.h"
-#include "core/os/os.h"
+#include <stddef.h>
 
-#include "scene/main/scene_tree.h"
+#include "core/config/project_settings.h"
+#include "core/os/os.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "gdnative/variant_struct.h"
+#include "gdnative_api_struct.gen.h"
 
 static const String init_symbol = "gdnative_init";
 static const String terminate_symbol = "gdnative_terminate";

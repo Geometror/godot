@@ -31,21 +31,25 @@
 #include "crypto_mbedtls.h"
 
 #include "core/io/file_access.h"
-
-#include "core/config/engine.h"
-#include "core/config/project_settings.h"
 #include "core/io/certs_compressed.gen.h"
 #include "core/io/compression.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/ctr_drbg.h"
+#include "mbedtls/entropy.h"
+#include "mbedtls/platform_util.h"
+#include "mbedtls/rsa.h"
+#include "mbedtls/x509.h"
 
-#ifdef TOOLS_ENABLED
-#include "editor/editor_settings.h"
-#endif
 #define PEM_BEGIN_CRT "-----BEGIN CERTIFICATE-----\n"
 #define PEM_END_CRT "-----END CERTIFICATE-----\n"
 
 #include <mbedtls/debug.h>
 #include <mbedtls/md.h>
 #include <mbedtls/pem.h>
+#include <string.h>
 
 CryptoKey *CryptoKeyMbedTLS::create() {
 	return memnew(CryptoKeyMbedTLS);

@@ -11,8 +11,13 @@
 */
 
 #include "unicode/unifilt.h"
+
 #include "unicode/rep.h"
 #include "unicode/utf16.h"
+
+namespace icu_70 {
+class TransliterationRuleData;
+}  // namespace icu_70
 
 U_NAMESPACE_BEGIN
 UOBJECT_DEFINE_ABSTRACT_RTTI_IMPLEMENTATION(UnicodeFilter)

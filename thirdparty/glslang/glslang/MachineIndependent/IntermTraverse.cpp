@@ -35,6 +35,11 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/Types.h>
+#include <vector>
+
 #include "../Include/intermediate.h"
 
 namespace glslang {

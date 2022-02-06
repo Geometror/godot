@@ -31,10 +31,27 @@
 #ifndef GDSCRIPT_BYTE_CODEGEN
 #define GDSCRIPT_BYTE_CODEGEN
 
-#include "gdscript_codegen.h"
+#include <stdint.h>
 
+#include "gdscript_codegen.h"
 #include "gdscript_function.h"
 #include "gdscript_utility_functions.h"
+#include "core/error/error_macros.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+
+class GDScript;
+class MethodBind;
+namespace Multiplayer {
+struct RPCConfig;
+}  // namespace Multiplayer
 
 class GDScriptByteCodeGenerator : public GDScriptCodeGenerator {
 	struct StackSlot {

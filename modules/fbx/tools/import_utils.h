@@ -31,12 +31,22 @@
 #ifndef IMPORT_UTILS_FBX_IMPORTER_H
 #define IMPORT_UTILS_FBX_IMPORTER_H
 
-#include "core/io/image_loader.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <string>
+#include <vector>
 
+#include "core/io/image_loader.h"
 #include "data/import_state.h"
 #include "fbx_parser/FBXDocument.h"
-
-#include <string>
+#include "core/math/basis.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/quaternion.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
 
 #define CONVERT_FBX_TIME(time) static_cast<double>(time) / 46186158000LL
 

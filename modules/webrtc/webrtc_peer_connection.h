@@ -33,6 +33,15 @@
 
 #include "core/io/packet_peer.h"
 #include "modules/webrtc/webrtc_data_channel.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
+
+class Dictionary;
+class WebRTCDataChannel;
 
 class WebRTCPeerConnection : public RefCounted {
 	GDCLASS(WebRTCPeerConnection, RefCounted);

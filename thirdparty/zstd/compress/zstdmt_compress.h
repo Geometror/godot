@@ -25,8 +25,14 @@
  *        otherwise ZSTDMT_createCCtx*() will fail.
  */
 
+#include <stddef.h>
+
 /* ===   Dependencies   === */
 #include "../common/zstd_deps.h"   /* size_t */
+#include "../common/pool.h"
+#include "mem.h"
+#include "zstd_internal.h"
+
 #define ZSTD_STATIC_LINKING_ONLY   /* ZSTD_parameters */
 #include "../zstd.h"            /* ZSTD_inBuffer, ZSTD_outBuffer, ZSTDLIB_API */
 

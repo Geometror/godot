@@ -32,8 +32,25 @@
 
 #include "core/config/project_settings.h"
 #include "renderer_canvas_cull.h"
-#include "renderer_scene_cull.h"
 #include "rendering_server_globals.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2i.h"
+#include "core/object/ref_counted.h"
+#include "core/os/os.h"
+#include "core/templates/pair.h"
+#include "core/templates/set.h"
+#include "core/templates/thread_work_pool.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_canvas_render.h"
+#include "servers/rendering/renderer_compositor.h"
+#include "servers/rendering/renderer_scene_occlusion_cull.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/renderer_thread_pool.h"
+#include "servers/xr/xr_interface.h"
+#include "servers/xr_server.h"
 
 static Transform2D _canvas_get_transform(RendererViewport::Viewport *p_viewport, RendererCanvasCull::Canvas *p_canvas, RendererViewport::Viewport::CanvasData *p_canvas_data, const Vector2 &p_vp_size) {
 	Transform2D xf = p_viewport->global_transform;

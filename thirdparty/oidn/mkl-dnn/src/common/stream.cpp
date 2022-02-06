@@ -14,13 +14,11 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <assert.h>
 #include "mkldnn.h"
-
 #include "c_types_map.hpp"
-#include "engine.hpp"
 #include "stream.hpp"
 #include "utils.hpp"
+#include "type_helpers.hpp"
 
 using namespace mkldnn::impl;
 using namespace mkldnn::impl::status;

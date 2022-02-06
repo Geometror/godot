@@ -30,12 +30,20 @@
 
 #include "effects_rd.h"
 
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "core/math/math_defs.h"
-#include "core/os/os.h"
-
 #include "servers/rendering/renderer_rd/renderer_compositor_rd.h"
 #include "thirdparty/misc/cubemap_coeffs.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/string/ustring.h"
 
 bool EffectsRD::get_prefer_raster_effects() {
 	return prefer_raster_effects;

@@ -33,16 +33,20 @@
 
 #include "core/io/resource.h"
 #include "core/variant/dictionary.h"
-
 #include "gltf_document.h"
 #include "gltf_document_extension.h"
 #include "scene/3d/importer_mesh_instance_3d.h"
 #include "scene/3d/mesh_instance_3d.h"
 #include "scene/main/node.h"
 #include "scene/resources/importer_mesh.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class GLTFDocumentExtension;
 class GLTFDocument;
+class Node;
+
 class GLTFDocumentExtensionConvertImporterMesh : public GLTFDocumentExtension {
 	GDCLASS(GLTFDocumentExtensionConvertImporterMesh, GLTFDocumentExtension);
 

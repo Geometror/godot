@@ -31,12 +31,39 @@
 #ifndef RENDERING_SERVER_SCENE_RENDER_FORWARD_CLUSTERED_H
 #define RENDERING_SERVER_SCENE_RENDER_FORWARD_CLUSTERED_H
 
+#include <stdint.h>
+
 #include "core/templates/paged_allocator.h"
 #include "servers/rendering/renderer_rd/forward_clustered/scene_shader_forward_clustered.h"
 #include "servers/rendering/renderer_rd/pipeline_cache_rd.h"
 #include "servers/rendering/renderer_rd/renderer_scene_render_rd.h"
 #include "servers/rendering/renderer_rd/renderer_storage_rd.h"
 #include "servers/rendering/renderer_rd/shaders/scene_forward_clustered.glsl.gen.h"
+#include "core/math/aabb.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/color.h"
+#include "core/math/plane.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/templates/local_vector.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/sort_array.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "servers/rendering/renderer_scene.h"
+#include "servers/rendering/renderer_scene_render.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/rendering_device.h"
+#include "servers/rendering_server.h"
+
+class RendererStorageRD;
+struct Vector3i;
+template <class T> class PagedArray;
 
 namespace RendererSceneRenderImplementation {
 

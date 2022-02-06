@@ -29,7 +29,14 @@
 /*************************************************************************/
 
 #include "godot_collision_solver_2d.h"
+
 #include "godot_collision_solver_2d_sat.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/typedefs.h"
+#include "servers/physics_2d/godot_shape_2d.h"
+#include "servers/physics_server_2d.h"
 
 #define collision_solver sat_2d_calculate_penetration
 //#define collision_solver gjk_epa_calculate_penetration

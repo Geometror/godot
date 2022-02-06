@@ -31,7 +31,15 @@
 #ifndef AUDIO_EFFECT_SPECTRUM_ANALYZER_H
 #define AUDIO_EFFECT_SPECTRUM_ANALYZER_H
 
+#include <stdint.h>
+
 #include "servers/audio/audio_effect.h"
+#include "core/math/audio_frame.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
 
 class AudioEffectSpectrumAnalyzer;
 

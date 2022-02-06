@@ -32,11 +32,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
-//
-// The top level algorithms for linking multiple
-// shaders together.
-//
-#include "../Include/Common.h"
+#include <glslang/Include/InfoSink.h>
+#include <glslang/Public/ShaderLang.h>
+
 #include "../Include/ShHandle.h"
 
 //

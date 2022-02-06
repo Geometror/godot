@@ -7,7 +7,18 @@
  *****************************************************************************
  */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "uhash.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
@@ -16,7 +27,6 @@
 #include "unicode/uchar.h"
 #include "unicode/uniset.h"
 #include "unicode/usetiter.h"
-#include "unicode/ustring.h"
 #include "unicode/utf16.h"
 #include "cmemory.h"
 #include "hash.h"

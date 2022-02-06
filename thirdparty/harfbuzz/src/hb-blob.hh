@@ -30,6 +30,7 @@
 #define HB_BLOB_HH
 
 #include "hb.hh"
+#include "hb.h"
 
 
 /*

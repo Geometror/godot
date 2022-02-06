@@ -47,10 +47,7 @@
 #ifndef SpvBuilder_H
 #define SpvBuilder_H
 
-#include "Logger.h"
-#include "spirv.hpp"
-#include "spvIR.h"
-
+#include <assert.h>
 #include <algorithm>
 #include <map>
 #include <memory>
@@ -59,8 +56,15 @@
 #include <stack>
 #include <unordered_map>
 #include <map>
+#include <string>
+#include <vector>
+
+#include "Logger.h"
+#include "spirv.hpp"
+#include "spvIR.h"
 
 namespace spv {
+class SpvBuildLogger;
 
 typedef enum {
     Spv_1_0 = (1 << 16),

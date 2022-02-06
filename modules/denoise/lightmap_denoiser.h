@@ -33,8 +33,11 @@
 
 #include "core/object/class_db.h"
 #include "scene/3d/lightmapper.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 struct OIDNDeviceImpl;
+class Image;
 
 class LightmapDenoiserOIDN : public LightmapDenoiser {
 	GDCLASS(LightmapDenoiserOIDN, LightmapDenoiser);

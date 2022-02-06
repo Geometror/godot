@@ -2,6 +2,8 @@
 #ifndef __CVTT_CONVECTIONKERNELS_ETC_H__
 #define __CVTT_CONVECTIONKERNELS_ETC_H__
 
+#include <stdint.h>
+
 #include "ConvectionKernels.h"
 #include "ConvectionKernels_ParallelMath.h"
 

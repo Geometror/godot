@@ -16,11 +16,13 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-#include "common.h"
 
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
 #if defined(MBEDTLS_HKDF_C)
 
 #include <string.h>
+
 #include "mbedtls/hkdf.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"

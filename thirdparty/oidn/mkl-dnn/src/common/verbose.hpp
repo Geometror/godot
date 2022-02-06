@@ -27,6 +27,19 @@
 
 namespace mkldnn {
 namespace impl {
+struct batch_normalization_pd_t;
+struct concat_pd_t;
+struct convolution_pd_t;
+struct deconvolution_pd_t;
+struct eltwise_pd_t;
+struct inner_product_pd_t;
+struct lrn_pd_t;
+struct pooling_pd_t;
+struct reorder_pd_t;
+struct rnn_pd_t;
+struct shuffle_pd_t;
+struct softmax_pd_t;
+struct sum_pd_t;
 
 struct verbose_t {
     int level;

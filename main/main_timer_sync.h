@@ -31,6 +31,8 @@
 #ifndef MAIN_TIMER_SYNC_H
 #define MAIN_TIMER_SYNC_H
 
+#include <stdint.h>
+
 #include "core/config/engine.h"
 
 struct MainFrameTime {

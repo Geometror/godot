@@ -30,12 +30,16 @@ Licensed under the MIT License.
 
 http://go.microsoft.com/fwlink/?LinkId=248926
 */
-#include "ConvectionKernels_Config.h"
 
+#include <assert.h>
+#include <float.h>
+#include <cmath>
+#include <utility>
+
+#include "ConvectionKernels.h"
 #if !defined(CVTT_SINGLE_FILE) || defined(CVTT_SINGLE_FILE_IMPL)
 
 #include "ConvectionKernels_S3TC.h"
-
 #include "ConvectionKernels_AggregatedError.h"
 #include "ConvectionKernels_BCCommon.h"
 #include "ConvectionKernels_EndpointRefiner.h"

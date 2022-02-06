@@ -21,12 +21,20 @@
 #ifndef __UCASE_H__
 #define __UCASE_H__
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uset.h"
 #include "putilimp.h"
 #include "uset_imp.h"
 #include "udataswp.h"
 #include "utrie2.h"
+#include "unicode/platform.h"
+#include "unicode/uchar.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #ifdef __cplusplus
 U_NAMESPACE_BEGIN

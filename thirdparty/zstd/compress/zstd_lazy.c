@@ -10,6 +10,9 @@
 
 #include "zstd_compress_internal.h"
 #include "zstd_lazy.h"
+#include "../common/zstd_internal.h"
+#include "compiler.h"
+#include "debug.h"
 
 
 /*-*************************************
@@ -876,6 +879,7 @@ typedef U32 ZSTD_VecMask;   /* Clarifies when we are interacting with a U32 repr
 #if !defined(ZSTD_NO_INTRINSICS) && defined(__SSE2__) /* SIMD SSE version */
 
 #include <emmintrin.h>
+
 typedef __m128i ZSTD_Vec128;
 
 /* Returns a 128-bit container with 128-bits from src */
@@ -925,6 +929,7 @@ static ZSTD_VecMask ZSTD_Vec256_cmpMask8(ZSTD_Vec256 x, ZSTD_Vec256 y) {
 #elif !defined(ZSTD_NO_INTRINSICS) && defined(__ARM_NEON) /* SIMD ARM NEON Version */
 
 #include <arm_neon.h>
+
 typedef uint8x16_t ZSTD_Vec128;
 
 static ZSTD_Vec128 ZSTD_Vec128_read(const void* const src) {

@@ -3,7 +3,11 @@
 
 #pragma once
 
+#include <stddef.h>
+
 #include "bvh.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
 
 namespace embree
 {

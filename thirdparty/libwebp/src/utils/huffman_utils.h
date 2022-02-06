@@ -15,8 +15,12 @@
 #define WEBP_UTILS_HUFFMAN_UTILS_H_
 
 #include <assert.h>
+#include <stdint.h>
+
 #include "src/webp/format_constants.h"
 #include "src/webp/types.h"
+
+struct HTreeGroup;
 
 #ifdef __cplusplus
 extern "C" {

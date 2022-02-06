@@ -31,6 +31,9 @@
 #ifndef IPHONE_EXPORT_PLUGIN_H
 #define IPHONE_EXPORT_PLUGIN_H
 
+#include <sys/stat.h>
+#include <stdint.h>
+
 #include "core/config/project_settings.h"
 #include "core/io/file_access.h"
 #include "core/io/image_loader.h"
@@ -46,10 +49,25 @@
 #include "main/splash.gen.h"
 #include "platform/iphone/logo.gen.h"
 #include "string.h"
-
 #include "godot_plugin_config.h"
+#include "core/error/error_list.h"
+#include "core/io/config_file.h"
+#include "core/io/dir_access.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/os/mutex.h"
+#include "core/os/thread.h"
+#include "core/string/char_utils.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "scene/resources/texture.h"
 
-#include <sys/stat.h>
+class Image;
 
 class EditorExportPlatformIOS : public EditorExportPlatform {
 	GDCLASS(EditorExportPlatformIOS, EditorExportPlatform);

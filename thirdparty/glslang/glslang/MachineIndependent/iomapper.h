@@ -35,13 +35,26 @@
 
 #if !defined(GLSLANG_WEB) && !defined(GLSLANG_ANGLE)
 
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/Public/ShaderLang.h>
+#include <string.h>
+#include <algorithm>
+#include <map>
+#include <string>
+#include <vector>
 #ifndef _IOMAPPER_INCLUDED
 #define _IOMAPPER_INCLUDED
 
 #include <cstdint>
-#include "LiveTraverser.h"
 #include <unordered_map>
 #include <unordered_set>
+
+#include "LiveTraverser.h"
 //
 // A reflection database and its interface, consistent with the OpenGL API reflection queries.
 //
@@ -51,6 +64,7 @@ class TInfoSink;
 namespace glslang {
 
 class TIntermediate;
+
 struct TVarEntryInfo {
     long long id;
     TIntermSymbol* symbol;

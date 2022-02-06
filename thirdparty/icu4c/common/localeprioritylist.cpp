@@ -15,6 +15,8 @@
 #include "uarrsort.h"
 #include "uassert.h"
 #include "uhash.h"
+#include "unicode/platform.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

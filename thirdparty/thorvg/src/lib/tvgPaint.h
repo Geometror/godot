@@ -22,11 +22,17 @@
 #ifndef _TVG_PAINT_H_
 #define _TVG_PAINT_H_
 
+#include <stdint.h>
+#include <stdlib.h>
+
 #include "tvgRender.h"
+#include "thorvg.h"
 
 
 namespace tvg
 {
+template <class T> struct Array;
+
     enum ContextFlag {Invalid = 0, FastTrack = 1};
 
     struct Iterator

@@ -30,10 +30,19 @@
 
 #include "godot_body_pair_3d.h"
 
+#include <stdint.h>
+
 #include "godot_collision_solver_3d.h"
 #include "godot_space_3d.h"
-
-#include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_3d.h"
+#include "core/typedefs.h"
+#include "servers/physics_3d/godot_body_3d.h"
+#include "servers/physics_3d/godot_shape_3d.h"
+#include "servers/physics_3d/godot_soft_body_3d.h"
+#include "servers/physics_server_3d.h"
 
 #define MIN_VELOCITY 0.0001
 #define MAX_BIAS_ROTATION (Math_PI / 8)

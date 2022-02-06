@@ -32,6 +32,7 @@
 #define GLTF_CAMERA_H
 
 #include "core/io/resource.h"
+#include "core/object/object.h"
 
 class GLTFCamera : public Resource {
 	GDCLASS(GLTFCamera, Resource);

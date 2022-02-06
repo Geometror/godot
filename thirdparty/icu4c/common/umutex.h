@@ -20,6 +20,8 @@
 #ifndef UMUTEX_H
 #define UMUTEX_H
 
+#include <stddef.h>
+#include <stdint.h>
 #include <atomic>
 #include <condition_variable>
 #include <mutex>
@@ -28,8 +30,11 @@
 #include "unicode/utypes.h"
 #include "unicode/uclean.h"
 #include "unicode/uobject.h"
-
 #include "putilimp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if defined(U_USER_ATOMICS_H) || defined(U_USER_MUTEX_H)
 // Support for including an alternate implementation of atomic & mutex operations has been withdrawn.

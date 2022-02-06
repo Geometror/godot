@@ -3,11 +3,37 @@
 
 #pragma once
 
+#include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <ostream>
+
 #include "geometry.h"
 #include "buffer.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/math/lbbox.h"
+#include "common/math/math.h"
+#include "common/math/range.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/varying.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
+#include "common/sys/sysinfo.h"
+#include "common/sys/vector.h"
+#include "embree3/rtcore_buffer.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_geometry.h"
+#include "kernels/builders/priminfo.h"
+#include "kernels/common/isa.h"
+#include "kernels/common/primref.h"
+#include "kernels/common/primref_mb.h"
+#include "kernels/common/vector.h"
 
 namespace embree
 {
+class Device;
+
   /*! Triangle Mesh */
   struct TriangleMesh : public Geometry
   {

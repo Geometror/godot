@@ -25,23 +25,22 @@
  */
 
 #include "hb.hh"
+#include "hb-face.hh"
+#include "hb-ot-metrics.hh"
+#include "hb.h"
 
 #ifndef HB_NO_OT_FONT
 
 #include "hb-ot.h"
-
 #include "hb-font.hh"
 #include "hb-machinery.hh"
 #include "hb-ot-face.hh"
-
 #include "hb-ot-cmap-table.hh"
 #include "hb-ot-glyf-table.hh"
 #include "hb-ot-cff1-table.hh"
 #include "hb-ot-cff2-table.hh"
 #include "hb-ot-hmtx-table.hh"
-#include "hb-ot-os2-table.hh"
 #include "hb-ot-post-table.hh"
-#include "hb-ot-stat-table.hh" // Just so we compile it; unused otherwise.
 #include "hb-ot-vorg-table.hh"
 #include "hb-ot-color-cbdt-table.hh"
 #include "hb-ot-color-sbix-table.hh"

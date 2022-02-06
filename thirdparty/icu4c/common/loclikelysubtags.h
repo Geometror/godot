@@ -7,7 +7,9 @@
 #ifndef __LOCLIKELYSUBTAGS_H__
 #define __LOCLIKELYSUBTAGS_H__
 
+#include <stdint.h>
 #include <utility>
+
 #include "unicode/utypes.h"
 #include "unicode/bytestrie.h"
 #include "unicode/locid.h"
@@ -15,6 +17,12 @@
 #include "unicode/ures.h"
 #include "charstrmap.h"
 #include "lsr.h"
+#include "unicode/uconfig.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class CharString;
+}  // namespace icu_70
 
 U_NAMESPACE_BEGIN
 

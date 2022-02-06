@@ -31,14 +31,28 @@
 #ifndef GODOT_NAVIGATION_SERVER_H
 #define GODOT_NAVIGATION_SERVER_H
 
+#include <stdint.h>
+#include <vector>
+
 #include "core/templates/local_vector.h"
 #include "core/templates/rid.h"
 #include "core/templates/rid_owner.h"
 #include "servers/navigation_server_3d.h"
-
 #include "nav_map.h"
 #include "nav_region.h"
 #include "rvo_agent.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/os/mutex.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+
+class NavigationMesh;
+class Node;
+class Object;
+struct Transform3D;
 
 /// The commands are functions executed during the `sync` phase.
 

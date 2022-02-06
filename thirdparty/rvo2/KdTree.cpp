@@ -33,6 +33,8 @@
 #include "KdTree.h"
 
 #include <algorithm>
+#include <memory>
+#include <utility>
 
 #include "Agent.h"
 #include "Definitions.h"

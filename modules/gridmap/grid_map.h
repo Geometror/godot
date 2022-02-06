@@ -31,9 +31,30 @@
 #ifndef GRID_MAP_H
 #define GRID_MAP_H
 
+#include <stdint.h>
+
 #include "scene/3d/node_3d.h"
 #include "scene/resources/mesh_library.h"
 #include "scene/resources/multimesh.h"
+#include "core/io/resource.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+#include "scene/resources/mesh.h"
+#include "servers/rendering_server.h"
+
+class MeshLibrary;
 
 //heh heh, godotsphir!! this shares no code and the design is completely different with previous projects i've done..
 //should scale better with hardware that supports instancing

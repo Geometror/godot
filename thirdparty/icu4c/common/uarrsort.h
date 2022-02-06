@@ -21,7 +21,12 @@
 #ifndef __UARRSORT_H__
 #define __UARRSORT_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 U_CDECL_BEGIN
 /**

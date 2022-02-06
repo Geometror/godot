@@ -39,6 +39,28 @@
 #include "scene/gui/rich_text_label.h"
 #include "scene/gui/tab_container.h"
 #include "scene/gui/texture_rect.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+
+class Button;
+class Control;
+class InputEvent;
+class InputEventConfigurationDialog;
+class Label;
+class LineEdit;
+class PanelContainer;
+class SectionedInspector;
+class TabContainer;
+class TextureRect;
+class Timer;
+class Tree;
+class TreeItem;
+class UndoRedo;
 
 class EditorSettingsDialog : public AcceptDialog {
 	GDCLASS(EditorSettingsDialog, AcceptDialog);

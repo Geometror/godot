@@ -30,6 +30,16 @@
 
 #include "os_unix.h"
 
+#include <bits/types/struct_tm.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/dir_access.h"
+#include "core/io/file_access.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "drivers/unix/ip_unix.h"
+
 #ifdef UNIX_ENABLED
 
 #include "core/config/project_settings.h"
@@ -39,7 +49,6 @@
 #include "drivers/unix/file_access_unix.h"
 #include "drivers/unix/net_socket_posix.h"
 #include "drivers/unix/thread_posix.h"
-#include "servers/rendering_server.h"
 
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -54,9 +63,7 @@
 #include <assert.h>
 #include <dlfcn.h>
 #include <errno.h>
-#include <poll.h>
 #include <signal.h>
-#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

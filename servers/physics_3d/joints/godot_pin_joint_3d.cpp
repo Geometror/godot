@@ -49,6 +49,11 @@ subject to the following restrictions:
 
 #include "godot_pin_joint_3d.h"
 
+#include "core/math/basis.h"
+#include "core/math/transform_3d.h"
+#include "core/os/memory.h"
+#include "servers/physics_3d/godot_body_3d.h"
+
 bool GodotPinJoint3D::setup(real_t p_step) {
 	dynamic_A = (A->get_mode() > PhysicsServer3D::BODY_MODE_KINEMATIC);
 	dynamic_B = (B->get_mode() > PhysicsServer3D::BODY_MODE_KINEMATIC);

@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_COMPOSITOR_H
 #define RENDERING_SERVER_COMPOSITOR_H
 
+#include <stdint.h>
+
 #include "core/math/camera_matrix.h"
 #include "core/templates/pair.h"
 #include "core/templates/self_list.h"
@@ -38,7 +40,20 @@
 #include "servers/rendering/renderer_scene.h"
 #include "servers/rendering/renderer_storage.h"
 #include "servers/rendering_server.h"
+#include "core/math/color.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/typedefs.h"
+#include "servers/display_server.h"
+
 class RendererSceneRender;
+class Image;
+class RendererCanvasRender;
+class RendererStorage;
+
 struct BlitToScreen {
 	RID render_target;
 	Rect2 src_rect = Rect2(0.0, 0.0, 1.0, 1.0);

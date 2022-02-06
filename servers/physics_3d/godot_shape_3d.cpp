@@ -30,10 +30,21 @@
 
 #include "godot_shape_3d.h"
 
+#include <stdint.h>
+
 #include "core/io/image.h"
 #include "core/math/convex_hull.h"
 #include "core/math/geometry_3d.h"
 #include "core/templates/sort_array.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/face3.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector2.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/variant/dictionary.h"
 
 // GodotHeightMapShape3D is based on Bullet btHeightfieldTerrainShape.
 

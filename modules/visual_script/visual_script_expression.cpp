@@ -30,6 +30,17 @@
 
 #include "visual_script_expression.h"
 
+#include <math.h>
+
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/string/char_utils.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "modules/visual_script/visual_script.h"
+#include "modules/visual_script/visual_script_builtin_funcs.h"
+
 bool VisualScriptExpression::_set(const StringName &p_name, const Variant &p_value) {
 	if (String(p_name) == "expression") {
 		expression = p_value;

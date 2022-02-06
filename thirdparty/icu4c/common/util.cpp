@@ -10,10 +10,13 @@
 **********************************************************************
 */
 
+#include <stddef.h>
+
 #include "unicode/unimatch.h"
 #include "unicode/utf16.h"
 #include "patternprops.h"
 #include "util.h"
+#include "unicode/rep.h"
 
 // Define UChar constants using hex for EBCDIC compatibility
 

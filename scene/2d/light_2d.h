@@ -32,6 +32,20 @@
 #define LIGHT_2D_H
 
 #include "scene/2d/node_2d.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/typedefs.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/typed_array.h"
+#include "scene/resources/texture.h"
+
+class String;
 
 class Light2D : public Node2D {
 	GDCLASS(Light2D, Node2D);

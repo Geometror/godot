@@ -160,6 +160,8 @@ typedef struct {
 
 #include <gdnative/gdnative.h>
 
+#include "gdnative/math_defs.h"
+
 // Byte.
 
 void GDAPI godot_packed_byte_array_new(godot_packed_byte_array *p_self);

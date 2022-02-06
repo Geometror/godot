@@ -24,6 +24,9 @@
    -------------------------------------------------------------------------- */
 
 #include "singlecolourfit.h"
+
+#include <limits.h>
+
 #include "colourset.h"
 #include "colourblock.h"
 

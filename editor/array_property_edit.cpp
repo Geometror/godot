@@ -32,6 +32,12 @@
 
 #include "core/io/marshalls.h"
 #include "editor_node.h"
+#include "core/object/class_db.h"
+#include "core/object/undo_redo.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "scene/main/node.h"
 
 #define ITEMS_PER_PAGE 100
 

@@ -13,6 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #pragma once
+#include <stddef.h>
+#include <stdint.h>
+
 #include "../transcoder/basisu.h"
 
 #define BASISU_RESAMPLER_DEBUG_OPS (0)

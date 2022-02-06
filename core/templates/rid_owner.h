@@ -31,6 +31,10 @@
 #ifndef RID_OWNER_H
 #define RID_OWNER_H
 
+#include <stdio.h>
+#include <stdint.h>
+#include <typeinfo>
+
 #include "core/os/memory.h"
 #include "core/os/spin_lock.h"
 #include "core/string/print_string.h"
@@ -39,9 +43,9 @@
 #include "core/templates/rid.h"
 #include "core/templates/safe_refcount.h"
 #include "core/templates/set.h"
-
-#include <stdio.h>
-#include <typeinfo>
+#include "core/error/error_macros.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
 
 class RID_AllocBase {
 	static SafeNumeric<uint64_t> base_id;

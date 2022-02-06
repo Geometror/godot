@@ -18,8 +18,6 @@
 *   Character conversion functions moved here from ustring.c
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_CONVERSION
 
 #include "unicode/ustring.h"

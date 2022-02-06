@@ -30,12 +30,24 @@
 
 #include "renderer_scene_cull.h"
 
+#include <alloca.h>
+
 #include "core/config/project_settings.h"
-#include "core/os/os.h"
 #include "rendering_server_default.h"
 #include "rendering_server_globals.h"
+#include "core/error/error_macros.h"
+#include "core/math/geometry_3d.h"
+#include "core/math/math_funcs.h"
+#include "core/string/ustring.h"
+#include "core/templates/pair.h"
+#include "core/templates/thread_work_pool.h"
+#include "servers/rendering/renderer_compositor.h"
+#include "servers/rendering/renderer_thread_pool.h"
+#include "servers/rendering/renderer_viewport.h"
+#include "servers/xr/xr_interface.h"
+#include "servers/xr_server.h"
 
-#include <new>
+class Image;
 
 /* CAMERA API */
 

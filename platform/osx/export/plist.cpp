@@ -29,8 +29,13 @@
 /*************************************************************************/
 
 #include "modules/modules_enabled.gen.h" // For regex.
-
 #include "plist.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/os/memory.h"
+#include "core/templates/list.h"
+#include "core/typedefs.h"
 
 #ifdef MODULE_REGEX_ENABLED
 

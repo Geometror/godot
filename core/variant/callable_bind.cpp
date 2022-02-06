@@ -30,6 +30,8 @@
 
 #include "callable_bind.h"
 
+#include <alloca.h>
+
 //////////////////////////////////
 
 uint32_t CallableCustomBind::hash() const {

@@ -3,14 +3,27 @@
 
 #pragma once
 
+#include <stddef.h>
+
 #include "../common/scene.h"
 #include "../common/primref.h"
 #include "../common/primref_mb.h"
 #include "priminfo.h"
 #include "bvh_builder_morton.h"
+#include "common/math/bbox.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/common/geometry.h"
+#include "kernels/common/vector.h"
 
 namespace embree
 { 
+class Scene;
+struct BuildProgressMonitor;
+struct GridMesh;
+struct PrimRef;
+struct PrimRefMB;
+struct SubGridBuildData;
+
   namespace isa
   {
     PrimInfo createPrimRefArray(Geometry* geometry, unsigned int geomID, size_t numPrimitives, mvector<PrimRef>& prims, BuildProgressMonitor& progressMonitor);

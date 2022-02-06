@@ -29,8 +29,11 @@
 /*************************************************************************/
 
 #include "register_types.h"
-#include "noise_texture.h"
-#include "open_simplex_noise.h"
+
+#include "core/object/class_db.h"
+
+class NoiseTexture;
+class OpenSimplexNoise;
 
 void register_opensimplex_types() {
 	GDREGISTER_CLASS(OpenSimplexNoise);

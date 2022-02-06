@@ -33,6 +33,8 @@
 
 #include <X11/XF86keysym.h>
 #include <X11/Xlib.h>
+#include <X11/X.h>
+
 #define XK_MISCELLANY
 #define XK_LATIN1
 #define XK_XKB_KEYS

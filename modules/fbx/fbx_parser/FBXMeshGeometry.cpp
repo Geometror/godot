@@ -74,13 +74,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  @brief Assimp::FBX::MeshGeometry implementation
  */
 
-#include <functional>
+#include <map>
+#include <memory>
+#include <tuple>
 
 #include "FBXDocument.h"
 #include "FBXDocumentUtil.h"
-#include "FBXImportSettings.h"
 #include "FBXMeshGeometry.h"
 #include "core/math/vector3.h"
+#include "core/error/error_macros.h"
+#include "core/string/print_string.h"
+#include "fbx_parser/FBXParser.h"
+#include "fbx_parser/FBXTokenizer.h"
 
 namespace FBXDocParser {
 

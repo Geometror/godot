@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_SCENE_SKY_RD_H
 #define RENDERING_SERVER_SCENE_SKY_RD_H
 
+#include <stdint.h>
+
 #include "core/templates/rid_owner.h"
 #include "servers/rendering/renderer_compositor.h"
 #include "servers/rendering/renderer_rd/renderer_scene_environment_rd.h"
@@ -38,9 +40,30 @@
 #include "servers/rendering/renderer_rd/shaders/sky.glsl.gen.h"
 #include "servers/rendering/renderer_scene_render.h"
 #include "servers/rendering/rendering_device.h"
+#include "core/math/basis.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_rd/pipeline_cache_rd.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/shader_compiler.h"
+#include "servers/rendering/shader_language.h"
+#include "servers/rendering_server.h"
 
 // Forward declare RendererSceneRenderRD so we can pass it into some of our methods, these classes are pretty tightly bound
 class RendererSceneRenderRD;
+class Image;
+class RendererSceneEnvironmentRD;
+struct PropertyInfo;
+struct Transform3D;
 
 class RendererSceneSkyRD {
 public:

@@ -32,6 +32,9 @@
 
 #include "core/config/engine.h"
 #include "core/multiplayer/multiplayer_api.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
 
 Object *MultiplayerSynchronizer::_get_prop_target(Object *p_obj, const NodePath &p_path) {
 	if (p_path.get_name_count() == 0) {

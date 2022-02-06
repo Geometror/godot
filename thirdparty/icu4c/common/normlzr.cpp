@@ -8,18 +8,29 @@
  *************************************************************************
  */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/char16ptr.h"
+#include "unicode/normalizer2.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unorm.h"
+#include "unicode/unorm2.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
-#include "unicode/uniset.h"
 #include "unicode/unistr.h"
 #include "unicode/chariter.h"
 #include "unicode/schriter.h"
 #include "unicode/uchriter.h"
 #include "unicode/normlzr.h"
 #include "unicode/utf16.h"
-#include "cmemory.h"
 #include "normalizer2impl.h"
 #include "uprops.h"  // for uniset_getUnicode32Instance()
 

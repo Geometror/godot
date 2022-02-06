@@ -17,7 +17,9 @@
 
 
 #include <freetype/ftgasp.h>
-#include <freetype/internal/tttypes.h>
+
+#include "freetype/freetype.h"
+#include "freetype/internal/tttypes.h"
 
 
   FT_EXPORT_DEF( FT_Int )

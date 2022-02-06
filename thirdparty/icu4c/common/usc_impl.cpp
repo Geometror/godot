@@ -15,9 +15,13 @@
 ******************************************************************************
 */
 
+#include <stddef.h>
+
 #include "unicode/uscript.h"
 #include "usc_impl.h"
 #include "cmemory.h"
+
+struct ParenStackEntry;
 
 #define PAREN_STACK_DEPTH 32
 

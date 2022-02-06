@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_DEFAULT_H
 #define RENDERING_SERVER_DEFAULT_H
 
+#include <cstdint>
+
 #include "core/math/octree.h"
 #include "core/templates/command_queue_mt.h"
 #include "core/templates/ordered_hash_map.h"
@@ -41,6 +43,35 @@
 #include "servers/rendering/renderer_compositor.h"
 #include "servers/rendering_server.h"
 #include "servers/server_wrap_mt_common.h"
+#include "core/io/image.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_2d.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/os/mutex.h"
+#include "core/os/thread.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/safe_refcount.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/typed_array.h"
+#include "core/variant/variant.h"
+#include "servers/display_server.h"
+#include "servers/rendering/renderer_scene.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/rendering_device.h"
 
 class RenderingServerDefault : public RenderingServer {
 	enum {
@@ -125,6 +156,10 @@ public:
 #endif
 
 #include "servers/server_wrap_mt_common.h"
+
+struct Plane;
+struct PropertyInfo;
+struct Rect2;
 
 //from now on, calls forwarded to this singleton
 #define ServerName RendererStorage

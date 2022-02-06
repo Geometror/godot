@@ -31,8 +31,21 @@
 #include "fbx_skeleton.h"
 
 #include "import_state.h"
-
 #include "tools/import_utils.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/transform_3d.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "data/fbx_bone.h"
+#include "data/fbx_node.h"
+#include "data/pivot_transform.h"
+#include "scene/3d/node_3d.h"
+#include "scene/3d/skeleton_3d.h"
 
 void FBXSkeleton::init_skeleton(const ImportState &state) {
 	int skeleton_bone_count = skeleton_bones.size();

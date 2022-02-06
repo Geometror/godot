@@ -18,19 +18,25 @@
 *   Case-mapping functions moved here from unistr.cpp
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/brkiter.h"
-#include "unicode/casemap.h"
 #include "unicode/edits.h"
-#include "unicode/putil.h"
-#include "cstring.h"
 #include "cmemory.h"
 #include "unicode/ustring.h"
 #include "unicode/unistr.h"
-#include "unicode/uchar.h"
 #include "uassert.h"
 #include "ucasemap_imp.h"
 #include "uelement.h"
+#include "ucase.h"
+#include "unicode/platform.h"
+#include "unicode/stringoptions.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

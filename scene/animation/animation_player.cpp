@@ -30,10 +30,28 @@
 
 #include "animation_player.h"
 
+#include <bits/std_abs.h>
+#include <stdlib.h>
+#include <cmath>
+
 #include "core/config/engine.h"
 #include "core/object/message_queue.h"
 #include "scene/scene_string_names.h"
 #include "servers/audio/audio_stream.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_3d.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/undo_redo.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/variant/array.h"
+#include "scene/2d/node_2d.h"
+#include "scene/3d/mesh_instance_3d.h"
+#include "scene/3d/node_3d.h"
+#include "scene/3d/skeleton_3d.h"
 
 #ifdef TOOLS_ENABLED
 #include "editor/editor_node.h"

@@ -14,18 +14,19 @@
 
  ********************************************************************/
 
-#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
 #include <ogg/ogg.h>
+#include <alloca.h>
+
 #include "vorbis/codec.h"
-#include "codec_internal.h"
-#include "codebook.h"
 #include "window.h"
 #include "registry.h"
-#include "psy.h"
 #include "misc.h"
+#include "backends.h"
+#include "bitrate.h"
+#include "ogg/os_types.h"
+#include "smallft.h"
 
 /* simplistic, wasteful way of doing this (unique lookup for each
    mode/submapping); there should be a central repository for
@@ -146,12 +147,7 @@ static vorbis_info_mapping *mapping0_unpack(vorbis_info *vi,oggpack_buffer *opb)
   return(NULL);
 }
 
-#include "os.h"
-#include "lpc.h"
-#include "lsp.h"
-#include "envelope.h"
 #include "mdct.h"
-#include "psy.h"
 #include "scales.h"
 
 #if 0

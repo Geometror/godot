@@ -23,6 +23,7 @@
 #define _TVG_BEZIER_H_
 
 #include "tvgCommon.h"
+#include "thorvg.h"
 
 namespace tvg
 {

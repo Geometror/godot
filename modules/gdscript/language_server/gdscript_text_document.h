@@ -34,6 +34,14 @@
 #include "core/io/file_access.h"
 #include "core/object/ref_counted.h"
 #include "lsp.hpp"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+
+class FileAccess;
 
 class GDScriptTextDocument : public RefCounted {
 	GDCLASS(GDScriptTextDocument, RefCounted)

@@ -30,9 +30,20 @@
 
 #include "test_shader_lang.h"
 
-#include "core/os/main_loop.h"
 #include "core/os/os.h"
 #include "servers/rendering/shader_language.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 typedef ShaderLanguage SL;
 

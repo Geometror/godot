@@ -24,7 +24,9 @@
    -------------------------------------------------------------------------- */
 
 #include "colourfit.h"
+
 #include "colourset.h"
+#include "squish.h"
 
 namespace squish {
 

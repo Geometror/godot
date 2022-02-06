@@ -15,11 +15,15 @@
  *
  */
 
-#include <freetype/internal/ftdebug.h>
-
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/services/svotval.h>
 #include <freetype/ftotval.h>
+#include <freetype/fterrors.h>
+
+#include "freetype/freetype.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/services/svotval.h"
 
 
   /* documentation is in ftotval.h */

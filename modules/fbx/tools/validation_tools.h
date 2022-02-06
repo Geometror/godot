@@ -31,6 +31,10 @@
 #ifndef FBX_VALIDATION_TOOLS_H
 #define FBX_VALIDATION_TOOLS_H
 
+#include "core/error/error_list.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/pair.h"
 #ifdef TOOLS_ENABLED
 
 #include "core/io/file_access.h"

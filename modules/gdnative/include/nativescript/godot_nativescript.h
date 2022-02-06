@@ -32,6 +32,10 @@
 #define GODOT_NATIVESCRIPT_H
 
 #include <gdnative/gdnative.h>
+#include <stdint.h>
+
+#include "gdnative/math_defs.h"
+#include "gdnative/variant_struct.h"
 
 #ifdef __cplusplus
 extern "C" {

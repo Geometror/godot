@@ -41,6 +41,33 @@
 #include "editor/shader_globals_editor.h"
 #include "editor_autoload_settings.h"
 #include "scene/gui/tab_container.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "scene/gui/dialogs.h"
+
+class ActionMapEditor;
+class Button;
+class CheckButton;
+class Dictionary;
+class EditorAutoloadSettings;
+class EditorData;
+class EditorPluginSettings;
+class ImportDefaultsEditor;
+class InputEvent;
+class Label;
+class LineEdit;
+class LocalizationEditor;
+class OptionButton;
+class PanelContainer;
+class ProjectSettings;
+class SectionedInspector;
+class ShaderGlobalsEditor;
+class TabContainer;
+class TextureRect;
+class Timer;
+class UndoRedo;
 
 class ProjectSettingsEditor : public AcceptDialog {
 	GDCLASS(ProjectSettingsEditor, AcceptDialog);

@@ -24,13 +24,23 @@
  * Adobe Author(s): Michiharu Ariza
  */
 
+#include <new>
+
 #include "hb.hh"
+#include "hb-bimap.hh"
+#include "hb-cff-interp-common.hh"
+#include "hb-cff-interp-cs-common.hh"
+#include "hb-ot-cff-common.hh"
+#include "hb-serialize.hh"
+#include "hb-set.hh"
+#include "hb-subset.h"
+#include "hb-subset.hh"
+#include "hb.h"
 
 #ifndef HB_NO_SUBSET_CFF
 
 #include "hb-open-type.hh"
 #include "hb-ot-cff2-table.hh"
-#include "hb-set.h"
 #include "hb-subset-cff2.hh"
 #include "hb-subset-plan.hh"
 #include "hb-subset-cff-common.hh"

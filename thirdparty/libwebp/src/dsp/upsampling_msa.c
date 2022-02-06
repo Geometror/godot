@@ -11,7 +11,6 @@
 //
 // Author: Prashant Patil (prashant.patil@imgtec.com)
 
-#include <string.h>
 #include "src/dsp/dsp.h"
 
 #if defined(WEBP_USE_MSA)

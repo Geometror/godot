@@ -31,14 +31,21 @@
 #ifndef AUDIO_STREAM_H
 #define AUDIO_STREAM_H
 
+#include <stdint.h>
+
 #include "core/io/image.h"
 #include "core/io/resource.h"
 #include "servers/audio/audio_filter_sw.h"
 #include "servers/audio_server.h"
-
 #include "core/object/gdvirtual.gen.inc"
 #include "core/object/script_language.h"
 #include "core/variant/native_ptr.h"
+#include "core/math/audio_frame.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/set.h"
 
 class AudioStreamPlayback : public RefCounted {
 	GDCLASS(AudioStreamPlayback, RefCounted);

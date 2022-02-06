@@ -8,10 +8,15 @@
 // Author: wilsonh@google.com (Wilson Hsieh)
 //
 
-#include "unicode/utypes.h"
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/stringpiece.h"
 #include "cstring.h"
 #include "cmemory.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

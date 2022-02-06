@@ -32,6 +32,15 @@
 #define VISUAL_SCRIPT_FUNC_NODES_H
 
 #include "visual_script.h"
+#include "core/object/object.h"
+#include "core/string/node_path.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+
+class Node;
 
 class VisualScriptFunctionCall : public VisualScriptNode {
 	GDCLASS(VisualScriptFunctionCall, VisualScriptNode);

@@ -4,6 +4,22 @@
 // flags: /home/hp/Projects/godot/pulse/generate-wrapper.py --include /usr/include/pulse/pulseaudio.h --sys-include <pulse/pulseaudio.h> --soname libpulse.so.0 --omit-prefix _pa_ --init-name pulse --output-header pulse-so_wrap.h --output-implementation pulse-so_wrap.c
 //
 #include <stdint.h>
+#include <pulse/channelmap.h>
+#include <pulse/context.h>
+#include <pulse/def.h>
+#include <pulse/format.h>
+#include <pulse/introspect.h>
+#include <pulse/mainloop-api.h>
+#include <pulse/mainloop-signal.h>
+#include <pulse/mainloop.h>
+#include <pulse/operation.h>
+#include <pulse/proplist.h>
+#include <pulse/sample.h>
+#include <pulse/scache.h>
+#include <pulse/stream.h>
+#include <pulse/subscribe.h>
+#include <pulse/thread-mainloop.h>
+#include <pulse/volume.h>
 
 #define pa_get_library_version pa_get_library_version_dylibloader_orig_pulse
 #define pa_bytes_per_second pa_bytes_per_second_dylibloader_orig_pulse
@@ -362,7 +378,6 @@
 #define pa_timeval_store pa_timeval_store_dylibloader_orig_pulse
 #define pa_timeval_load pa_timeval_load_dylibloader_orig_pulse
 #define pa_rtclock_now pa_rtclock_now_dylibloader_orig_pulse
-#include <pulse/pulseaudio.h>
 #undef pa_get_library_version
 #undef pa_bytes_per_second
 #undef pa_frame_size
@@ -722,6 +737,9 @@
 #undef pa_rtclock_now
 #include <dlfcn.h>
 #include <stdio.h>
+
+struct timeval;
+
 const char* (*pa_get_library_version_dylibloader_wrapper_pulse)( void);
 size_t (*pa_bytes_per_second_dylibloader_wrapper_pulse)(const pa_sample_spec*);
 size_t (*pa_frame_size_dylibloader_wrapper_pulse)(const pa_sample_spec*);

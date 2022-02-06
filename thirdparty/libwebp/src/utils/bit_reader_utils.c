@@ -15,8 +15,14 @@
 #include "src/webp/config.h"
 #endif
 
+#include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
+
 #include "src/utils/bit_reader_inl_utils.h"
 #include "src/utils/utils.h"
+#include "utils/bit_reader_utils.h"
+#include "utils/endian_inl_utils.h"
 
 //------------------------------------------------------------------------------
 // VP8BitReader

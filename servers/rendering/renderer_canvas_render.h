@@ -31,7 +31,22 @@
 #ifndef RENDERINGSERVERCANVASRENDER_H
 #define RENDERINGSERVERCANVASRENDER_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "servers/rendering/renderer_storage.h"
+#include "core/error/error_macros.h"
+#include "core/math/aabb.h"
+#include "core/math/color.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/os/memory.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "servers/rendering_server.h"
 
 class RendererCanvasRender {
 public:

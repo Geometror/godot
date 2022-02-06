@@ -33,6 +33,18 @@
 
 #include "core/templates/hash_map.h"
 #include "scene/gui/dialogs.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "scene/gui/control.h"
+#include "scene/main/node.h"
+
+class Button;
+class Label;
+struct Rect2;
 
 // Performs the actual search
 class FindInFiles : public Node {

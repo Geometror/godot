@@ -35,6 +35,15 @@
 #include "editor/editor_plugin.h"
 #include "scene/3d/voxel_gi.h"
 #include "scene/resources/material.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+
+class Button;
+class EditorFileDialog;
+class EditorNode;
+class HBoxContainer;
+class VoxelGI;
+struct EditorProgress;
 
 class VoxelGIEditorPlugin : public EditorPlugin {
 	GDCLASS(VoxelGIEditorPlugin, EditorPlugin);

@@ -41,10 +41,13 @@
    */
 
 
-#include <freetype/freetype.h>
 #include <freetype/ftlogging.h>
-#include <freetype/internal/ftdebug.h>
-#include <freetype/internal/ftobjs.h>
+#include <stddef.h>
+
+#include "freetype/config/public-macros.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
 
 
 #ifdef FT_DEBUG_LOGGING
@@ -171,6 +174,7 @@
   static const char*  ft_trace_toggles[trace_count + 1] =
   {
 #include <freetype/internal/fttrace.h>
+
     NULL
   };
 

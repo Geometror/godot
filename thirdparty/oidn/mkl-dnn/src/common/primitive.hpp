@@ -20,7 +20,6 @@
 #include <assert.h>
 
 #include "mkldnn.h"
-
 #include "c_types_map.hpp"
 #include "nstl.hpp"
 #include "primitive_desc.hpp"

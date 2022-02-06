@@ -34,6 +34,13 @@
 #include "core/templates/ordered_hash_map.h"
 #include "servers/rendering_server.h"
 #include "shader_language.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 class ShaderTypes {
 	struct Type {

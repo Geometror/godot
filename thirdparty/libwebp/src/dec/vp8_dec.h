@@ -14,7 +14,13 @@
 #ifndef WEBP_DEC_VP8_DEC_H_
 #define WEBP_DEC_VP8_DEC_H_
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "src/webp/decode.h"
+#include "webp/types.h"
+
+struct VP8Io;
 
 #ifdef __cplusplus
 extern "C" {

@@ -24,8 +24,16 @@
  */
 
 #include "common.h"
+#include "mbedtls/asn1.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/x509.h"
 
 #if defined(MBEDTLS_X509_CRT_WRITE_C)
+
+#include <string.h>
 
 #include "mbedtls/x509_crt.h"
 #include "mbedtls/asn1write.h"
@@ -33,8 +41,6 @@
 #include "mbedtls/oid.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/sha1.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_PEM_WRITE_C)
 #include "mbedtls/pem.h"

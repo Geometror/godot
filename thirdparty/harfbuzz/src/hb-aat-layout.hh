@@ -28,9 +28,14 @@
 #define HB_AAT_LAYOUT_HH
 
 #include "hb.hh"
-
 #include "hb-ot-shape.hh"
 #include "hb-aat-ltag-table.hh"
+#include "hb-aat.h"
+#include "hb.h"
+
+struct hb_aat_map_builder_t;
+struct hb_aat_map_t;
+struct hb_ot_shape_plan_t;
 
 struct hb_aat_feature_mapping_t
 {

@@ -33,6 +33,7 @@
 #include "lightmap_raycaster.h"
 #include "raycast_occlusion_cull.h"
 #include "static_raycaster.h"
+#include "core/os/memory.h"
 
 RaycastOcclusionCull *raycast_occlusion_cull = nullptr;
 

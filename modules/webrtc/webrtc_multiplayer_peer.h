@@ -31,8 +31,18 @@
 #ifndef WEBRTC_MULTIPLAYER_H
 #define WEBRTC_MULTIPLAYER_H
 
+#include <stdint.h>
+
 #include "core/multiplayer/multiplayer_peer.h"
 #include "webrtc_peer_connection.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "modules/webrtc/webrtc_data_channel.h"
 
 class WebRTCMultiplayerPeer : public MultiplayerPeer {
 	GDCLASS(WebRTCMultiplayerPeer, MultiplayerPeer);

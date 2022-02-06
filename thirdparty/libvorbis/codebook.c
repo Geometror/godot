@@ -15,14 +15,13 @@
  ********************************************************************/
 
 #include <stdlib.h>
-#include <string.h>
-#include <math.h>
 #include <ogg/ogg.h>
-#include "vorbis/codec.h"
+#include <alloca.h>
+
 #include "codebook.h"
-#include "scales.h"
 #include "misc.h"
 #include "os.h"
+#include "ogg/os_types.h"
 
 /* packs the given codebook into the bitstream **************************/
 

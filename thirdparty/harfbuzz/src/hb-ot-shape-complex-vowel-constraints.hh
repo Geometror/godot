@@ -28,8 +28,10 @@
 #define HB_OT_SHAPE_COMPLEX_VOWEL_CONSTRAINTS_HH
 
 #include "hb.hh"
-
 #include "hb-ot-shape-complex.hh"
+#include "hb.h"
+
+struct hb_ot_shape_plan_t;
 
 HB_INTERNAL void
 _hb_preprocess_text_vowel_constraints (const hb_ot_shape_plan_t *plan,

@@ -10,12 +10,20 @@
 #ifndef DICTBE_H
 #define DICTBE_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uniset.h"
 #include "unicode/utext.h"
-
 #include "brkeng.h"
 #include "uvectr32.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class UVector32;
+}  // namespace icu_70
 
 U_NAMESPACE_BEGIN
 

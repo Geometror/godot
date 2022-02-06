@@ -30,11 +30,17 @@
 
 #include "core_constants.h"
 
-#include "core/input/input_event.h"
 #include "core/multiplayer/multiplayer.h"
-#include "core/object/class_db.h"
 #include "core/os/keyboard.h"
 #include "core/variant/variant.h"
+#include "core/error/error_list.h"
+#include "core/input/input_enums.h"
+#include "core/math/math_defs.h"
+#include "core/object/method_bind.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/type_info.h"
 
 struct _CoreConstant {
 #ifdef DEBUG_METHODS_ENABLED

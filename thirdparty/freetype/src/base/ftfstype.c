@@ -15,10 +15,13 @@
  *
  */
 
-#include <freetype/t1tables.h>
 #include <freetype/tttables.h>
-#include <freetype/internal/ftserv.h>
-#include <freetype/internal/services/svpsinfo.h>
+#include <stddef.h>
+
+#include "freetype/freetype.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftserv.h"
+#include "freetype/internal/services/svpsinfo.h"
 
 
   /* documentation is in freetype.h */

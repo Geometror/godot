@@ -7,23 +7,28 @@
  ************************************************************************************
  */
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
+#include "unicode/localpointer.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+
+namespace icu_70 {
+struct LSTMData;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/uchar.h"
 #include "unicode/uniset.h"
-#include "unicode/chariter.h"
 #include "unicode/ures.h"
 #include "unicode/udata.h"
-#include "unicode/putil.h"
 #include "unicode/ustring.h"
 #include "unicode/uscript.h"
-#include "unicode/ucharstrie.h"
-#include "unicode/bytestrie.h"
-
 #include "brkeng.h"
-#include "cmemory.h"
 #include "dictbe.h"
 #include "lstmbe.h"
 #include "charstr.h"

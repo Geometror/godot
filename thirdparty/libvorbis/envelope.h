@@ -18,6 +18,7 @@
 #define _V_ENVELOPE_
 
 #include "mdct.h"
+#include "vorbis/codec.h"
 
 #define VE_PRE    16
 #define VE_WIN    4

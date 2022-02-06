@@ -43,6 +43,26 @@
 #include "scene/gui/slider.h"
 #include "scene/gui/spin_box.h"
 #include "scene/gui/texture_rect.h"
+#include "core/math/color.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
+#include "scene/gui/base_button.h"
+#include "scene/gui/control.h"
+#include "scene/gui/margin_container.h"
+#include "scene/resources/material.h"
+
+class HSlider;
+class InputEvent;
+class Label;
+class PopupPanel;
+class Shader;
+class SpinBox;
 
 class ColorPresetButton : public BaseButton {
 	GDCLASS(ColorPresetButton, BaseButton);

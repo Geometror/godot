@@ -4,13 +4,14 @@
 // localematcher.cpp
 // created: 2019may08 Markus W. Scherer
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/localebuilder.h"
 #include "unicode/localematcher.h"
 #include "unicode/locid.h"
 #include "unicode/stringpiece.h"
 #include "unicode/uloc.h"
-#include "unicode/uobject.h"
 #include "cstring.h"
 #include "localeprioritylist.h"
 #include "loclikelysubtags.h"
@@ -20,6 +21,12 @@
 #include "uhash.h"
 #include "ustr_imp.h"
 #include "uvector.h"
+#include "cmemory.h"
+#include "unicode/platform.h"
+#include "unicode/uenum.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #define UND_LSR LSR("und", "", "", LSR::EXPLICIT_LSR)
 

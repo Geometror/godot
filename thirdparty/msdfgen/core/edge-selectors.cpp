@@ -1,7 +1,14 @@
 
 #include "edge-selectors.h"
 
+#include <math.h>
+#include <stddef.h>
+
 #include "arithmetics.hpp"
+#include "core/EdgeColor.h"
+#include "core/SignedDistance.h"
+#include "core/Vector2.h"
+#include "core/edge-segments.h"
 
 namespace msdfgen {
 

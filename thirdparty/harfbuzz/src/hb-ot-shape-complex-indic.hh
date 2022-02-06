@@ -27,9 +27,15 @@
 #ifndef HB_OT_SHAPE_COMPLEX_INDIC_HH
 #define HB_OT_SHAPE_COMPLEX_INDIC_HH
 
-#include "hb.hh"
+#include <stdint.h>
 
+#include "hb.hh"
 #include "hb-ot-shape-complex-syllabic.hh"
+#include "hb-ot-layout.hh"
+#include "hb-ot-map.hh"
+#include "hb-ot-shape-complex.hh"
+#include "hb-ot.h"
+#include "hb.h"
 
 
 /* buffer var allocations */

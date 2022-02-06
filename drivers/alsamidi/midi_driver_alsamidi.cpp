@@ -32,10 +32,14 @@
 
 #include "midi_driver_alsamidi.h"
 
-#include "core/os/os.h"
-#include "core/string/print_string.h"
-
 #include <errno.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+#include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/string/ustring.h"
+#include "drivers/alsa/asound-so_wrap.h"
 
 static int get_message_size(uint8_t message) {
 	switch (message & 0xF0) {

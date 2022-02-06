@@ -11,7 +11,12 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include <stdint.h>
+#include <string.h>
+
 #include "src/enc/vp8i_enc.h"
+#include "dec/common_dec.h"
+#include "utils/bit_writer_utils.h"
 
 //------------------------------------------------------------------------------
 // Default probabilities

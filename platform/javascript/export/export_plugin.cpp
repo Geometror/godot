@@ -30,6 +30,27 @@
 
 #include "export_plugin.h"
 
+#include "core/error/error_macros.h"
+#include "core/io/dir_access.h"
+#include "core/io/file_access.h"
+#include "core/io/ip.h"
+#include "core/io/ip_address.h"
+#include "core/io/zip_io.h"
+#include "core/math/color.h"
+#include "core/os/os.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+#include "editor/editor_paths.h"
+#include "editor/editor_settings.h"
+#include "platform/javascript/export/export_server.h"
+#include "platform/javascript/logo.gen.h"
+#include "platform/javascript/run_icon.gen.h"
+#include "thirdparty/minizip/ioapi.h"
+#include "thirdparty/minizip/unzip.h"
+
 Error EditorExportPlatformJavaScript::_extract_template(const String &p_template, const String &p_dir, const String &p_name, bool pwa) {
 	FileAccess *src_f = nullptr;
 	zlib_filefunc_def io = zipio_create_io_from_file(&src_f);

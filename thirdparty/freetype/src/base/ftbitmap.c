@@ -16,11 +16,18 @@
  */
 
 
-#include <freetype/internal/ftdebug.h>
-
 #include <freetype/ftbitmap.h>
 #include <freetype/ftimage.h>
-#include <freetype/internal/ftobjs.h>
+#include <freetype/fterrors.h>
+#include <stddef.h>
+
+#include "freetype/config/ftstdlib.h"
+#include "freetype/freetype.h"
+#include "freetype/ftcolor.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
 
 
   /**************************************************************************

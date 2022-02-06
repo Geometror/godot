@@ -15,14 +15,15 @@
 */
 
 #include "unicode/utypes.h"
-#include "unicode/icuplug.h"
 #include "unicode/uclean.h"
-#include "cmemory.h"
-#include "icuplugimp.h"
 #include "ucln_cmn.h"
-#include "ucnv_io.h"
 #include "umutex.h"
 #include "utracimp.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

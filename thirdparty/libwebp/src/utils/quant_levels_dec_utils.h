@@ -14,6 +14,8 @@
 #ifndef WEBP_UTILS_QUANT_LEVELS_DEC_UTILS_H_
 #define WEBP_UTILS_QUANT_LEVELS_DEC_UTILS_H_
 
+#include <stdint.h>
+
 #include "src/webp/types.h"
 
 #ifdef __cplusplus

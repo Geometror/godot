@@ -29,9 +29,19 @@
 /*************************************************************************/
 
 #include "enet_multiplayer_peer.h"
-#include "core/io/ip.h"
+
+#include <string.h>
+
 #include "core/io/marshalls.h"
 #include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/class_db.h"
+#include "core/string/string_name.h"
+#include "core/templates/pair.h"
+#include "core/variant/variant.h"
+#include "enet/enet.h"
+#include "modules/enet/enet_connection.h"
 
 void ENetMultiplayerPeer::set_target_peer(int p_peer) {
 	target_peer = p_peer;

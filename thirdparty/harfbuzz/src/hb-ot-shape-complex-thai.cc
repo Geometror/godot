@@ -24,7 +24,15 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <string.h>
+
 #include "hb.hh"
+#include "hb-buffer.hh"
+#include "hb-ot-layout.hh"
+#include "hb-ot-map.hh"
+#include "hb-ot-shape-normalize.hh"
+#include "hb-ot-shape.hh"
+#include "hb.h"
 
 #ifndef HB_NO_OT_SHAPE
 

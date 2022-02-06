@@ -31,15 +31,40 @@
 #ifndef VISUAL_SCRIPT_H
 #define VISUAL_SCRIPT_H
 
+#include <stdint.h>
+
 #include "core/debugger/engine_debugger.h"
 #include "core/debugger/script_debugger.h"
 #include "core/doc_data.h"
 #include "core/object/script_language.h"
 #include "core/os/thread.h"
+#include "core/error/error_list.h"
+#include "core/io/resource.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/os/mutex.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 class VisualScriptInstance;
 class VisualScriptNodeInstance;
 class VisualScript;
+namespace Multiplayer {
+struct RPCConfig;
+}  // namespace Multiplayer
+template <class F, class S> struct Pair;
 
 class VisualScriptNode : public Resource {
 	GDCLASS(VisualScriptNode, Resource);

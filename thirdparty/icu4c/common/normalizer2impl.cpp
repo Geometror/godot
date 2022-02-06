@@ -19,13 +19,13 @@
 // #define UCPTRIE_DEBUG
 
 #include "unicode/utypes.h"
+#include "unicode/ucpmap.h"
+#include "unicode/uniset.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
 #include "unicode/bytestream.h"
 #include "unicode/edits.h"
-#include "unicode/normalizer2.h"
-#include "unicode/stringoptions.h"
 #include "unicode/ucptrie.h"
 #include "unicode/udata.h"
 #include "unicode/umutablecptrie.h"
@@ -34,11 +34,9 @@
 #include "unicode/utf8.h"
 #include "bytesinkutil.h"
 #include "cmemory.h"
-#include "mutex.h"
 #include "normalizer2impl.h"
 #include "putilimp.h"
 #include "uassert.h"
-#include "ucptrie_impl.h"
 #include "uset_imp.h"
 #include "uvector.h"
 

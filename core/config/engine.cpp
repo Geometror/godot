@@ -31,11 +31,16 @@
 #include "engine.h"
 
 #include "core/authors.gen.h"
-#include "core/config/project_settings.h"
 #include "core/donors.gen.h"
 #include "core/license.gen.h"
 #include "core/version.h"
 #include "core/version_hash.gen.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/print_string.h"
+#include "core/variant/variant.h"
+#include "core/version_generated.gen.h"
 
 void Engine::set_physics_ticks_per_second(int p_ips) {
 	ERR_FAIL_COND_MSG(p_ips <= 0, "Engine iterations per second must be greater than 0.");

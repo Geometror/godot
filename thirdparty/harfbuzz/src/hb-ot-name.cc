@@ -24,12 +24,18 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <stdint.h>
+
 #include "hb.hh"
+#include "hb-face.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
+#include "hb-ot.h"
+#include "hb.h"
 
 #ifndef HB_NO_NAME
 
 #include "hb-ot-name-table.hh"
-
 #include "hb-utf.hh"
 
 

@@ -34,6 +34,9 @@
 #include "../gdscript_parser.h"
 #include "editor/editor_plugin.h"
 #include "gdscript_language_protocol.h"
+#include "core/object/object.h"
+#include "core/os/thread.h"
+#include "core/string/ustring.h"
 
 class GDScriptLanguageServer : public EditorPlugin {
 	GDCLASS(GDScriptLanguageServer, EditorPlugin);

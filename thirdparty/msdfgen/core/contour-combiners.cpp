@@ -1,7 +1,14 @@
 
 #include "contour-combiners.h"
 
+#include <math.h>
+#include <memory>
+
 #include "arithmetics.hpp"
+#include "core/Contour.h"
+#include "core/Shape.h"
+#include "core/SignedDistance.h"
+#include "core/edge-selectors.h"
 
 namespace msdfgen {
 

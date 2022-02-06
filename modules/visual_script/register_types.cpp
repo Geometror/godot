@@ -31,7 +31,6 @@
 #include "register_types.h"
 
 #include "core/config/engine.h"
-#include "core/io/resource_loader.h"
 #include "visual_script.h"
 #include "visual_script_builtin_funcs.h"
 #include "visual_script_expression.h"
@@ -39,11 +38,15 @@
 #include "visual_script_func_nodes.h"
 #include "visual_script_nodes.h"
 #include "visual_script_yield_nodes.h"
+#include "core/object/class_db.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
 
 VisualScriptLanguage *visual_script_language = nullptr;
 
 #ifdef TOOLS_ENABLED
 #include "editor/visual_script_editor.h"
+
 static VisualScriptCustomNodes *vs_custom_nodes_singleton = nullptr;
 #endif
 

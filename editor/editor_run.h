@@ -33,6 +33,10 @@
 
 #include "core/os/os.h"
 #include "scene/main/node.h"
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+
 class EditorRun {
 public:
 	enum Status {

@@ -31,9 +31,22 @@
 #ifndef GODOT_SHAPE_3D_H
 #define GODOT_SHAPE_3D_H
 
+#include <math.h>
+
 #include "core/math/geometry_3d.h"
 #include "core/templates/local_vector.h"
 #include "servers/physics_server_3d.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/math_defs.h"
+#include "core/math/plane.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
 class GodotShape3D;
 

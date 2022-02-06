@@ -29,12 +29,25 @@
 /*************************************************************************/
 
 #include "raycast_occlusion_cull.h"
+
+#include <emmintrin.h>
+#include <string.h>
+#include <xmmintrin.h>
+
 #include "core/config/project_settings.h"
 #include "core/templates/local_vector.h"
-
-#ifdef __SSE2__
-#include <pmmintrin.h>
-#endif
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/os/memory.h"
+#include "core/os/os.h"
+#include "core/os/thread.h"
+#include "core/string/ustring.h"
+#include "core/templates/thread_work_pool.h"
+#include "core/typedefs.h"
+#include "embree3/rtcore_buffer.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_scene.h"
 
 RaycastOcclusionCull *RaycastOcclusionCull::raycast_singleton = nullptr;
 

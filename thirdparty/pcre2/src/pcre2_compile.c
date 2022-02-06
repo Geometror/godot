@@ -47,7 +47,12 @@ POSSIBILITY OF SUCH DAMAGE.
 #define PSSTART start_pattern  /* Field containing processed string start */
 #define PSEND   end_pattern    /* Field containing processed string end */
 
+#include <limits.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "pcre2_internal.h"
+#include "pcre2_ucp.h"
 
 /* In rare error cases debugging might require calling pcre2_printint(). */
 
@@ -58,6 +63,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define PRINTABLE(c) ((c) >= 32 && (c) < 127)
 #endif
 #include "pcre2_printint.c"
+
 #define DEBUG_CALL_PRINTINT
 #endif
 

@@ -31,8 +31,13 @@
 #ifndef DIR_ACCESS_H
 #define DIR_ACCESS_H
 
+#include <stdint.h>
+
 #include "core/string/ustring.h"
 #include "core/typedefs.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
 
 //@ TODO, excellent candidate for THREAD_SAFE MACRO, should go through all these and add THREAD_SAFE where it applies
 class DirAccess {

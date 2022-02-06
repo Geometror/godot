@@ -32,6 +32,20 @@
 
 #include "core/config/project_settings.h"
 #include "core/io/dir_access.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "servers/rendering/renderer_rd/forward_clustered/render_forward_clustered.h"
+#include "servers/rendering/renderer_rd/forward_mobile/render_forward_mobile.h"
+#include "servers/rendering/renderer_rd/shader_rd.h"
+#include "servers/rendering/rendering_device.h"
 
 void RendererCompositorRD::prepare_for_blitting_render_targets() {
 	RD::get_singleton()->prepare_screen_for_drawing();

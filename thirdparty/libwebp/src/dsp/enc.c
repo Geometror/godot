@@ -13,9 +13,13 @@
 
 #include <assert.h>
 #include <stdlib.h>  // for abs()
+#include <stdint.h>
+#include <string.h>
 
 #include "src/dsp/dsp.h"
 #include "src/enc/vp8i_enc.h"
+#include "utils/utils.h"
+#include "webp/types.h"
 
 static WEBP_INLINE uint8_t clip_8b(int v) {
   return (!(v & ~0xff)) ? v : (v < 0) ? 0 : 255;

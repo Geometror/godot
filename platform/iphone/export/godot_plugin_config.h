@@ -31,9 +31,16 @@
 #ifndef IPHONE_GODOT_PLUGIN_CONFIG_H
 #define IPHONE_GODOT_PLUGIN_CONFIG_H
 
+#include <stdint.h>
+
 #include "core/error/error_list.h"
 #include "core/io/config_file.h"
 #include "core/string/ustring.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/vector.h"
+
+class ConfigFile;
 
 /*
  The `config` section and fields are required and defined as follow:

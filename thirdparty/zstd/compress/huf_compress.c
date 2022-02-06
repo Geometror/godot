@@ -20,6 +20,8 @@
 #endif
 
 
+#include <stddef.h>
+
 /* **************************************************************
 *  Includes
 ****************************************************************/
@@ -27,8 +29,13 @@
 #include "../common/compiler.h"
 #include "../common/bitstream.h"
 #include "hist.h"
+#include "debug.h"
+#include "mem.h"
+#include "zstd_errors.h"
+
 #define FSE_STATIC_LINKING_ONLY   /* FSE_optimalTableLog_internal */
 #include "../common/fse.h"        /* header compression */
+
 #define HUF_STATIC_LINKING_ONLY
 #include "../common/huf.h"
 #include "../common/error_private.h"

@@ -190,8 +190,14 @@
 
 #include <setjmp.h>
 #include <limits.h>
-#include <memory.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "tvgSwCommon.h"
+#include "thorvg.h"
+#include "tvgCommon.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

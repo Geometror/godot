@@ -33,6 +33,8 @@
 #include "core/config/project_settings.h"
 #include "lightmapper_rd.h"
 #include "scene/3d/lightmapper.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
 
 #ifndef _3D_DISABLED
 static Lightmapper *create_lightmapper_rd() {

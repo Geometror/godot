@@ -42,6 +42,7 @@ extern "C" {
 
 #undef ERROR   /* reported already defined on VS 2015 (Rich Geldreich) */
 #include <windows.h>
+
 #undef ERROR
 #define ERROR(name) ZSTD_ERROR(name)
 

@@ -31,11 +31,20 @@
 #ifndef GODOT_GRADLE_EXPORT_UTIL_H
 #define GODOT_GRADLE_EXPORT_UTIL_H
 
+#include <stdint.h>
+
 #include "core/io/dir_access.h"
 #include "core/io/file_access.h"
 #include "core/io/zip_io.h"
 #include "core/os/os.h"
 #include "editor/editor_export.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "servers/display_server.h"
+
+class EditorExportPreset;
 
 const String godot_project_name_xml_string = R"(<?xml version="1.0" encoding="utf-8"?>
 <!--WARNING: THIS FILE WILL BE OVERWRITTEN AT BUILD TIME-->

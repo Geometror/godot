@@ -22,23 +22,26 @@
  */
 
 #include "common.h"
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
+#include "mbedtls/platform_time.h"
+#include "mbedtls/ssl.h"
 
 #if defined(MBEDTLS_SSL_COOKIE_C)
 
 #if defined(MBEDTLS_PLATFORM_C)
-#include "mbedtls/platform.h"
 #else
 #define mbedtls_calloc    calloc
 #define mbedtls_free      free
 #endif
+
+#include <string.h>
 
 #include "mbedtls/ssl_cookie.h"
 #include "mbedtls/ssl_internal.h"
 #include "mbedtls/error.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/constant_time.h"
-
-#include <string.h>
 
 /*
  * If DTLS is in use, then at least one of SHA-1, SHA-256, SHA-512 is

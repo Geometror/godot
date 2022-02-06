@@ -30,9 +30,29 @@
 
 #include "renderer_scene_gi_rd.h"
 
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "servers/rendering/renderer_rd/renderer_scene_render_rd.h"
-#include "servers/rendering/rendering_server_default.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/geometry_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/paged_array.h"
+#include "servers/rendering/renderer_compositor.h"
+#include "servers/rendering/renderer_rd/effects_rd.h"
+#include "servers/rendering/renderer_rd/renderer_scene_environment_rd.h"
+#include "servers/rendering/renderer_rd/renderer_storage_rd.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/rendering_server_globals.h"
 
 const Vector3i RendererSceneGIRD::SDFGI::Cascade::DIRTY_ALL = Vector3i(0x7FFFFFFF, 0x7FFFFFFF, 0x7FFFFFFF);
 

@@ -30,11 +30,20 @@
 
 #include "godot_soft_body_3d.h"
 
-#include "godot_space_3d.h"
+#include <string.h>
+#include <cmath>
 
+#include "godot_space_3d.h"
 #include "core/math/geometry_3d.h"
 #include "core/templates/map.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_3d.h"
+#include "core/os/memory.h"
+#include "core/variant/array.h"
+#include "servers/physics_3d/godot_area_3d.h"
+#include "servers/physics_3d/godot_collision_object_3d.h"
 
 // Based on Bullet soft body.
 

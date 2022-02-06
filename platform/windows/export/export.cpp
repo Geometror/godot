@@ -30,7 +30,22 @@
 
 #include "export.h"
 
+#include <stdint.h>
+#include <string.h>
+
 #include "export_plugin.h"
+#include "core/error/error_list.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "editor/editor_export.h"
+#include "editor/editor_settings.h"
+#include "platform/windows/logo.gen.h"
+#include "scene/resources/texture.h"
 
 static Error fixup_embedded_pck(const String &p_path, int64_t p_embedded_start, int64_t p_embedded_size);
 

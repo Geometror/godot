@@ -19,6 +19,8 @@
 *   06/24/02    weiv        Added support for resource sharing
 */
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
 #include "unicode/udata.h"
 #include "unicode/ustring.h"
@@ -27,13 +29,10 @@
 #include "cstring.h"
 #include "resource.h"
 #include "uarrsort.h"
-#include "uassert.h"
-#include "ucol_swp.h"
 #include "udataswp.h"
 #include "uinvchar.h"
 #include "uresdata.h"
 #include "uresimp.h"
-#include "utracimp.h"
 
 /*
  * Resource access helpers

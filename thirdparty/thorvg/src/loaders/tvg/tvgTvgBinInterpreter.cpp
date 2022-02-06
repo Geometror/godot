@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <memory.h>
 
 #ifdef _WIN32
     #include <malloc.h>
@@ -27,7 +26,17 @@
     #include <alloca.h>
 #endif
 
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <memory>
+#include <type_traits>
+#include <utility>
+
 #include "tvgTvgCommon.h"
+#include "thorvg.h"
+#include "tvgBinaryDesc.h"
+#include "tvgCommon.h"
 
 
 /************************************************************************/

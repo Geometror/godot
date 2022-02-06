@@ -10,10 +10,17 @@
 **********************************************************************
 */
 
+#include <stdint.h>
+
 #include "unicode/uchar.h"
 #include "unicode/utf16.h"
 #include "patternprops.h"
 #include "util.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

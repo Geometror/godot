@@ -5,7 +5,6 @@
  * others. All Rights Reserved.
  */
 
-#include "unicode/unistr.h"
 #include "charstr.h"
 #include "cstring.h"
 #include "pluralmap.h"

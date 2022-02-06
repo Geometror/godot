@@ -34,8 +34,35 @@
 #include "editor/editor_node.h"
 #include "editor/editor_plugin.h"
 #include "grid_map.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "scene/gui/box_container.h"
 
 class Node3DEditorPlugin;
+class Button;
+class Camera3D;
+class ConfirmationDialog;
+class EditorNode;
+class GridMap;
+class HSlider;
+class InputEvent;
+class ItemList;
+class Label;
+class LineEdit;
+class MenuButton;
+class MeshLibrary;
+class Node;
+class Panel;
+class SpinBox;
+class StandardMaterial3D;
+class UndoRedo;
 
 class GridMapEditor : public VBoxContainer {
 	GDCLASS(GridMapEditor, VBoxContainer);

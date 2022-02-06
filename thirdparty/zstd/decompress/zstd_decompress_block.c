@@ -16,15 +16,19 @@
 *********************************************************/
 #include "../common/zstd_deps.h"   /* ZSTD_memcpy, ZSTD_memmove, ZSTD_memset */
 #include "../common/compiler.h"    /* prefetch */
-#include "../common/cpu.h"         /* bmi2 */
 #include "../common/mem.h"         /* low level memory routines */
+#include "bitstream.h"
+#include "debug.h"
+#include "error_private.h"
+#include "zstd_errors.h"
+
 #define FSE_STATIC_LINKING_ONLY
 #include "../common/fse.h"
+
 #define HUF_STATIC_LINKING_ONLY
 #include "../common/huf.h"
 #include "../common/zstd_internal.h"
 #include "zstd_decompress_internal.h"   /* ZSTD_DCtx */
-#include "zstd_ddict.h"  /* ZSTD_DDictDictContent */
 #include "zstd_decompress_block.h"
 
 /*_*******************************************************

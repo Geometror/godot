@@ -11,7 +11,7 @@ C99
 #endif
 
 #include "apg_bmp.h"
-#include <assert.h>
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>

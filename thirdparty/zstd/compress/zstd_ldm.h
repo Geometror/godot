@@ -15,8 +15,13 @@
 extern "C" {
 #endif
 
+#include <stddef.h>
+
 #include "zstd_compress_internal.h"   /* ldmParams_t, U32 */
 #include "../zstd.h"   /* ZSTD_CCtx, size_t */
+#include "../common/zstd_internal.h"
+#include "mem.h"
+#include "zstd_internal.h"
 
 /*-*************************************
 *  Long distance matching

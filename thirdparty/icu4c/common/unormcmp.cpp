@@ -20,13 +20,31 @@
 *   Allows unorm.cpp to not depend on any character properties code.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/char16ptr.h"
+#include "unicode/normalizer2.h"
+#include "unicode/platform.h"
+#include "unicode/stringoptions.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/unorm2.h"
+#include "unicode/urename.h"
+#include "unicode/utf.h"
+#include "unicode/utf16.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class UnicodeSet;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_NORMALIZATION
 
 #include "unicode/unorm.h"
 #include "unicode/ustring.h"
-#include "cmemory.h"
 #include "normalizer2impl.h"
 #include "ucase.h"
 #include "uprops.h"

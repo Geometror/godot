@@ -29,8 +29,26 @@
 /*************************************************************************/
 
 #include "csg_gizmos.h"
+
 #include "editor/plugins/node_3d_editor_plugin.h"
 #include "scene/3d/camera_3d.h"
+#include "core/math/color.h"
+#include "core/math/geometry_3d.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/object/undo_redo.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "editor/editor_settings.h"
+#include "modules/csg/csg_shape.h"
+#include "scene/3d/node_3d.h"
+#include "scene/resources/material.h"
+#include "scene/resources/mesh.h"
+
+class EditorNode;
 
 ///////////
 

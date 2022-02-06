@@ -30,6 +30,7 @@
 #include "hb.hh"
 #include "hb-shaper.hh"
 #include "hb-ot-shape.hh"
+#include "hb.h"
 
 
 struct hb_shape_plan_key_t

@@ -31,12 +31,22 @@
 #ifndef AUDIO_DRIVER_PULSEAUDIO_H
 #define AUDIO_DRIVER_PULSEAUDIO_H
 
+#include <pulse/channelmap.h>
+#include <pulse/context.h>
+#include <pulse/introspect.h>
+#include <pulse/mainloop.h>
+#include <pulse/stream.h>
+#include <stdint.h>
+
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
 #ifdef PULSEAUDIO_ENABLED
 
 #include "core/os/mutex.h"
 #include "core/os/thread.h"
 #include "servers/audio_server.h"
-
 #include "pulse-so_wrap.h"
 
 class AudioDriverPulseAudio : public AudioDriver {

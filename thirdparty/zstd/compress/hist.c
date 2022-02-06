@@ -18,6 +18,8 @@
 #include "../common/debug.h"           /* assert, DEBUGLOG */
 #include "../common/error_private.h"   /* ERROR */
 #include "hist.h"
+#include "zstd_deps.h"
+#include "zstd_errors.h"
 
 
 /* --- Error management --- */

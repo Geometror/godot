@@ -47,6 +47,10 @@ a sequence of compiled codes. */
 #endif
 
 
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "pcre2_internal.h"
 
 /* Magic number to provide a small check against being handed junk. */

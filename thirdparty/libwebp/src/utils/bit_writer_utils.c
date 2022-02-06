@@ -17,7 +17,6 @@
 #include <stdlib.h>
 
 #include "src/utils/bit_writer_utils.h"
-#include "src/utils/endian_inl_utils.h"
 #include "src/utils/utils.h"
 
 //------------------------------------------------------------------------------

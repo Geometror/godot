@@ -22,6 +22,13 @@
 
 #include <freetype/internal/ftobjs.h>
 
+#include "freetype/config/ftheader.h"
+#include "freetype/config/ftoption.h"
+#include "freetype/freetype.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftobjs.h"
+
 
 FT_BEGIN_HEADER
 

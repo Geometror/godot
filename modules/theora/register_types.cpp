@@ -31,6 +31,9 @@
 #include "register_types.h"
 
 #include "video_stream_theora.h"
+#include "core/io/resource_loader.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
 
 static Ref<ResourceFormatLoaderTheora> resource_loader_theora;
 

@@ -14,16 +14,30 @@
 // limitations under the License.                                           //
 // ======================================================================== //
 
+#include <stddef.h>
+#include <map>
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "common/tensor.h"
 #include "image.h"
 #include "node.h"
 #include "input_reorder.h"
 #include "output_reorder.h"
 #include "transfer_function.h"
+#include "OpenImageDenoise/oidn.hpp"
+#include "common/ref.h"
+#include "core/device.h"
+#include "mkldnn.hpp"
 
 #pragma once
 
 namespace oidn {
+class HDRTransferFunction;
+class Node;
+class TransferFunction;
+struct Image;
 
   // Progress state
   struct Progress

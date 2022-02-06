@@ -32,6 +32,13 @@ THE SOFTWARE.
 #include <freetype/internal/ftdrv.h>
 #include <freetype/internal/ftstream.h>
 
+#include "freetype/config/ftheader.h"
+#include "freetype/freetype.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdrv.h"
+#include "freetype/internal/ftstream.h"
+
 
 FT_BEGIN_HEADER
 

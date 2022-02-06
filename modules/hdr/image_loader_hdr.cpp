@@ -30,8 +30,15 @@
 
 #include "image_loader_hdr.h"
 
-#include "core/os/os.h"
-#include "core/string/print_string.h"
+#include <stdint.h>
+#include <cmath>
+
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/math/color.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 Error ImageLoaderHDR::load_image(Ref<Image> p_image, FileAccess *f, bool p_force_linear, float p_scale) {
 	String header = f->get_token();

@@ -36,13 +36,15 @@
 // Disassembler for SPIR-V.
 //
 
+#include <SPIRV/spirv.hpp>
 #include <cstdlib>
 #include <cstring>
 #include <cassert>
 #include <iomanip>
 #include <stack>
 #include <sstream>
-#include <cstring>
+#include <memory>
+#include <string>
 
 #include "disassemble.h"
 #include "doc.h"

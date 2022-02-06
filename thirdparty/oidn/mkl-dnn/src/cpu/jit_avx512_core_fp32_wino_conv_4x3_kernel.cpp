@@ -14,15 +14,21 @@
 * limitations under the License.
 *******************************************************************************/
 
+#include <assert.h>
+#include <stddef.h>
+#include <cmath>
+#include <initializer_list>
+
 #include "c_types_map.hpp"
 #include "mkldnn_thread.hpp"
 #include "nstl.hpp"
 #include "type_helpers.hpp"
 #include "utils.hpp"
-
-#include <math.h>
-
 #include "jit_avx512_core_fp32_wino_conv_4x3_kernel.hpp"
+#include "jit_avx512_common_conv_winograd_kernel_f32.hpp"
+#include "mkldnn_types.h"
+#include "primitive_attr.hpp"
+#include "xbyak_mnemonic.h"
 
 #define GET_OFF(field) offsetof(jit_wino_transform_call_s, field)
 

@@ -20,7 +20,20 @@
 // This file was generated from the java source file BreakIterator.java
 // *****************************************************************************
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/locid.h"
+#include "unicode/platform.h"
+#include "unicode/putil.h"
+#include "unicode/ubrk.h"
+#include "unicode/uconfig.h"
+#include "unicode/uloc.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -30,10 +43,7 @@
 #include "unicode/ures.h"
 #include "unicode/ustring.h"
 #include "unicode/filteredbrk.h"
-#include "ucln_cmn.h"
 #include "cstring.h"
-#include "umutex.h"
-#include "servloc.h"
 #include "locbased.h"
 #include "uresimp.h"
 #include "uassert.h"

@@ -30,8 +30,16 @@
 #ifndef HB_BUFFER_HH
 #define HB_BUFFER_HH
 
+#include <assert.h>
+#include <limits.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "hb.hh"
 #include "hb-unicode.hh"
+#include "hb.h"
 
 
 #ifndef HB_BUFFER_MAX_LEN_FACTOR

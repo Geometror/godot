@@ -2,7 +2,18 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "state.h"
+
+#include <assert.h>
+#include <stdio.h>
+#include <iostream>
+
 #include "../../common/lexers/streamfilters.h"
+#include "common/lexers/stream.h"
+#include "common/lexers/tokenstream.h"
+#include "common/sys/platform.h"
+#include "common/sys/string.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_scene.h"
 
 namespace embree
 {

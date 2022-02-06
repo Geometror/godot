@@ -13,8 +13,16 @@
 //          Vikas (vikasa@google.com)
 
 #include <assert.h>
+#include <stdint.h>
+#include <string.h>
+
 #include "src/mux/muxi.h"
 #include "src/utils/utils.h"
+#include "dec/vp8_dec.h"
+#include "webp/format_constants.h"
+#include "webp/mux.h"
+#include "webp/mux_types.h"
+#include "webp/types.h"
 
 //------------------------------------------------------------------------------
 // Life of a mux object.

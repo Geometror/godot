@@ -27,27 +27,28 @@
  *  http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf
  */
 
-#include "common.h"
+#include <bits/types/struct_tm.h>
+#include <stdint.h>
 
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
 #if defined(MBEDTLS_X509_USE_C)
+
+#include <stdio.h>
+#include <string.h>
 
 #include "mbedtls/x509.h"
 #include "mbedtls/asn1.h"
 #include "mbedtls/error.h"
 #include "mbedtls/oid.h"
 
-#include <stdio.h>
-#include <string.h>
-
-#if defined(MBEDTLS_PEM_PARSE_C)
-#include "mbedtls/pem.h"
-#endif
-
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
 #include <stdlib.h>
+
 #define mbedtls_free      free
 #define mbedtls_calloc    calloc
 #define mbedtls_printf    printf
@@ -59,7 +60,6 @@
 #endif
 #if defined(MBEDTLS_HAVE_TIME_DATE)
 #include "mbedtls/platform_util.h"
-#include <time.h>
 #endif
 
 #define CHECK(code) if( ( ret = ( code ) ) != 0 ){ return( ret ); }

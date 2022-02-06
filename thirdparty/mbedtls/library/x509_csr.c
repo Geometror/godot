@@ -27,16 +27,17 @@
  *  http://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf
  */
 
-#include "common.h"
-
+#include "mbedtls/asn1.h"
+#include "mbedtls/config.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/x509.h"
 #if defined(MBEDTLS_X509_CSR_PARSE_C)
+
+#include <string.h>
 
 #include "mbedtls/x509_csr.h"
 #include "mbedtls/error.h"
-#include "mbedtls/oid.h"
 #include "mbedtls/platform_util.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_PEM_PARSE_C)
 #include "mbedtls/pem.h"
@@ -47,6 +48,7 @@
 #else
 #include <stdlib.h>
 #include <stdio.h>
+
 #define mbedtls_free       free
 #define mbedtls_calloc    calloc
 #define mbedtls_snprintf   snprintf

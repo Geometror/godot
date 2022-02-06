@@ -31,7 +31,8 @@
 #include "gdnative/signal.h"
 
 #include "core/variant/callable.h"
-#include "core/variant/variant.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
 
 static_assert(sizeof(godot_signal) == sizeof(Signal), "Signal size mismatch");
 

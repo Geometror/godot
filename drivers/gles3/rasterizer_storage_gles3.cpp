@@ -29,12 +29,22 @@
 /*************************************************************************/
 
 #include "rasterizer_storage_gles3.h"
+
+#include <stdio.h>
+
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "drivers/gles3/shader_gles3.h"
+#include "drivers/gles3/shaders/canvas.glsl.gen.h"
+#include "drivers/gles3/shaders/copy.glsl.gen.h"
+
+struct Rect2;
 #ifdef GLES3_ENABLED
 
-#include "core/config/project_settings.h"
 #include "core/math/transform_3d.h"
 #include "rasterizer_canvas_gles3.h"
-#include "rasterizer_scene_gles3.h"
 #include "servers/rendering/shader_language.h"
 
 GLuint RasterizerStorageGLES3::system_fbo = 0;

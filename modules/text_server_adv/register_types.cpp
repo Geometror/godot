@@ -31,6 +31,9 @@
 #include "register_types.h"
 
 #include "text_server_adv.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "servers/text_server.h"
 
 void preregister_text_server_adv_types() {
 	GDREGISTER_CLASS(TextServerAdvanced);

@@ -19,14 +19,21 @@
 
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
-
 #include "cpu_memory.hpp"
 #include "jit_generator.hpp"
 #include "jit_primitive_conf.hpp"
 #include "jit_uni_eltwise.hpp"
+#include "cpu_isa_traits.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "nstl.hpp"
+#include "utils.hpp"
 
 namespace mkldnn {
 namespace impl {
+namespace memory_tracking {
+struct registrar_t;
+}  // namespace memory_tracking
+
 namespace cpu {
 
 struct jit_avx2_conv_fwd_kernel_f32: public jit_generator {

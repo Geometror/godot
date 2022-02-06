@@ -17,8 +17,9 @@
 #ifndef PRIMITIVE_ATTR_HPP
 #define PRIMITIVE_ATTR_HPP
 
-#include "mkldnn.h"
+#include <assert.h>
 
+#include "mkldnn.h"
 #include "c_types_map.hpp"
 #include "nstl.hpp"
 #include "utils.hpp"

@@ -17,12 +17,22 @@
 #ifndef CPU_JIT_TRANSPOSE_SRC_HPP
 #define CPU_JIT_TRANSPOSE_SRC_HPP
 
+#include <assert.h>
+#include <stddef.h>
+
 #include "cpu_barrier.hpp"
 #include "jit_primitive_conf.hpp"
+#include "cpu_isa_traits.hpp"
+#include "jit_generator.hpp"
 
 namespace mkldnn {
 namespace impl {
 namespace cpu {
+namespace simple_barrier {
+struct ctx_t;
+}  // namespace simple_barrier
+struct jit_1x1_conv_conf_t;
+struct jit_conv_conf_t;
 
 struct jit_trans_src_t {
     struct ctx_t {

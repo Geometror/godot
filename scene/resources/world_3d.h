@@ -36,10 +36,18 @@
 #include "scene/resources/environment.h"
 #include "servers/physics_server_3d.h"
 #include "servers/rendering_server.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
+#include "core/typedefs.h"
 
 class Camera3D;
 class VisibleOnScreenNotifier3D;
 struct SpatialIndexer;
+class CameraEffects;
+class Environment;
+class PhysicsDirectSpaceState3D;
 
 class World3D : public Resource {
 	GDCLASS(World3D, Resource);

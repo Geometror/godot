@@ -18,11 +18,14 @@
 # define _internal_H (1)
 # include <stdlib.h>
 # include <limits.h>
+#include <features.h>
+#include <stddef.h>
 # if defined(HAVE_CONFIG_H)
 #  include <config.h>
 # endif
 # include "theora/codec.h"
 # include "theora/theora.h"
+#include "ogg/config_types.h"
 
 # if defined(_MSC_VER)
 /*Disable missing EMMS warnings.*/
@@ -40,6 +43,15 @@
 # include "ocintrin.h"
 # include "huffman.h"
 # include "quant.h"
+
+struct oc_base_opt_data;
+struct oc_base_opt_vtable;
+struct oc_border_info;
+struct oc_fragment;
+struct oc_fragment_plane;
+struct oc_sb_flags;
+struct oc_state_dispatch_vtable;
+struct oc_theora_state;
 
 /*Some assembly constructs require aligned operands.*/
 # if defined(OC_X86_ASM)

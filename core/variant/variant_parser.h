@@ -34,6 +34,15 @@
 #include "core/io/file_access.h"
 #include "core/io/resource.h"
 #include "core/variant/variant.h"
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+
+class Array;
+class Dictionary;
+class FileAccess;
+template <class T> class Ref;
+template <class T> class Vector;
 
 class VariantParser {
 public:

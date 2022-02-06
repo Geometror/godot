@@ -29,6 +29,7 @@
 
 #include "hb.hh"
 #include "hb-machinery.hh"
+#include "hb.h"
 
 typedef hb_bool_t hb_shape_func_t (hb_shape_plan_t    *shape_plan,
 				   hb_font_t          *font,
@@ -39,6 +40,7 @@ typedef hb_bool_t hb_shape_func_t (hb_shape_plan_t    *shape_plan,
 #define HB_SHAPER_IMPLEMENT(name) \
 	extern "C" HB_INTERNAL hb_shape_func_t _hb_##name##_shape;
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
 
 struct hb_shaper_entry_t {
@@ -61,6 +63,7 @@ enum hb_shaper_order_t
 #define HB_SHAPER_IMPLEMENT(Shaper) \
       HB_SHAPER_ORDER (Shaper),
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
   _HB_SHAPERS_COUNT_PLUS_ONE,
   HB_SHAPERS_COUNT = _HB_SHAPERS_COUNT_PLUS_ONE - 1,
@@ -113,12 +116,14 @@ struct hb_shaper_object_dataset_t
     this->parent_data = parent_data;
 #define HB_SHAPER_IMPLEMENT(shaper) shaper.init0 ();
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
   }
   void fini ()
   {
 #define HB_SHAPER_IMPLEMENT(shaper) shaper.fini ();
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
   }
 
@@ -128,6 +133,7 @@ struct hb_shaper_object_dataset_t
 				typename hb_shaper_object_data_type_t<HB_SHAPER_ORDER(shaper), Object>::value \
 			       > shaper;
 #include "hb-shaper-list.hh"
+
 #undef HB_SHAPER_IMPLEMENT
 };
 

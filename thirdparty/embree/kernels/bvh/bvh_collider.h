@@ -3,12 +3,22 @@
 
 #pragma once
 
+#include <stddef.h>
+
 #include "bvh.h"
 #include "../geometry/trianglev.h"
 #include "../geometry/object.h"
+#include "common/math/bbox.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
+#include "common/sys/vector.h"
+#include "embree3/rtcore_scene.h"
 
 namespace embree
 {
+class Scene;
+template <typename T, size_t alignment> struct aligned_allocator;
+
   namespace isa
   {
     template<int N>

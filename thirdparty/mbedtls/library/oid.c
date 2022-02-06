@@ -19,16 +19,19 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/asn1.h"
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
+#include "mbedtls/ecp.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
 #if defined(MBEDTLS_OID_C)
-
-#include "mbedtls/oid.h"
-#include "mbedtls/rsa.h"
-#include "mbedtls/error.h"
 
 #include <stdio.h>
 #include <string.h>
+
+#include "mbedtls/oid.h"
+#include "mbedtls/error.h"
 
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"

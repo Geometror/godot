@@ -30,6 +30,9 @@
 
 #include "renderer_scene_render.h"
 
+#include "core/error/error_macros.h"
+#include "core/math/plane.h"
+
 void RendererSceneRender::CameraData::set_camera(const Transform3D p_transform, const CameraMatrix p_projection, bool p_is_ortogonal, bool p_vaspect) {
 	view_count = 1;
 	is_ortogonal = p_is_ortogonal;

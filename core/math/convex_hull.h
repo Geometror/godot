@@ -43,10 +43,14 @@ subject to the following restrictions:
 #ifndef CONVEX_HULL_H
 #define CONVEX_HULL_H
 
+#include <stdint.h>
+
 #include "core/math/geometry_3d.h"
 #include "core/math/vector3.h"
 #include "core/templates/local_vector.h"
 #include "core/templates/vector.h"
+#include "core/error/error_list.h"
+#include "core/math/math_defs.h"
 
 /// Convex hull implementation based on Preparata and Hong
 /// See https://code.google.com/archive/p/bullet/issues/275

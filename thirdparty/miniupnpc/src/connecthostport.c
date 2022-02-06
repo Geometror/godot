@@ -14,31 +14,30 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <asm/param.h>
 #ifdef _WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <io.h>
+
 #define MAXHOSTNAMELEN 64
 #include "win32_snprintf.h"
+
 #define herror
 #define socklen_t int
 #else /* #ifdef _WIN32 */
 #include <unistd.h>
-#include <sys/types.h>
-#ifdef MINIUPNPC_SET_SOCKET_TIMEOUT
-#include <sys/time.h>
-#endif /* #ifdef MINIUPNPC_SET_SOCKET_TIMEOUT */
-#include <sys/param.h>
 #include <sys/select.h>
 #include <errno.h>
+
 #define closesocket close
 #include <netdb.h>
 #include <netinet/in.h>
+
 /* defining MINIUPNPC_IGNORE_EINTR enable the ignore of interruptions
  * during the connect() call */
 #define MINIUPNPC_IGNORE_EINTR
 #include <sys/socket.h>
-#include <sys/select.h>
 #endif /* #else _WIN32 */
 
 #if defined(__amigaos__) || defined(__amigaos4__)
@@ -46,6 +45,7 @@
 #endif
 
 #include "connecthostport.h"
+#include "thirdparty/miniupnpc/src/miniupnpc_socketdef.h"
 
 #ifndef MAXHOSTNAMELEN
 #define MAXHOSTNAMELEN 64

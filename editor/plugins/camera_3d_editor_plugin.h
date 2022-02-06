@@ -34,6 +34,14 @@
 #include "editor/editor_node.h"
 #include "editor/editor_plugin.h"
 #include "scene/3d/camera_3d.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "scene/gui/control.h"
+
+class Button;
+class EditorNode;
+class Node;
+class Panel;
 
 class Camera3DEditor : public Control {
 	GDCLASS(Camera3DEditor, Control);

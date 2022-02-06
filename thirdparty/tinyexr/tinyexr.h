@@ -1,3 +1,8 @@
+#include <memory>
+#include <queue>
+
+#include "zconf.h"
+#include "zlib.h"
 #ifndef TINYEXR_H_
 #define TINYEXR_H_
 /*

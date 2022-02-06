@@ -30,14 +30,25 @@
 
 #include "gdnative/gdnative.h"
 
+#include <gdnative/variant.h>
+
 #include "core/config/engine.h"
 #include "core/core_constants.h"
 #include "core/error/error_macros.h"
 #include "core/object/class_db.h"
-#include "core/os/os.h"
 #include "core/variant/variant.h"
-
 #include "modules/gdnative/gdnative.h"
+#include "core/object/method_bind.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "gdnative/dictionary.h"
+#include "gdnative/string_name.h"
 
 #ifdef __cplusplus
 extern "C" {

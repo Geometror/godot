@@ -18,9 +18,14 @@
 #define CPU_BARRIER_HPP
 
 #include <assert.h>
+#include <stddef.h>
 
 #include "jit_generator.hpp"
 #include "utils.hpp"
+
+namespace Xbyak {
+struct Reg64;
+}  // namespace Xbyak
 
 namespace mkldnn {
 namespace impl {

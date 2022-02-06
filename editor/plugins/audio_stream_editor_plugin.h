@@ -36,6 +36,19 @@
 #include "scene/audio/audio_stream_player.h"
 #include "scene/gui/color_rect.h"
 #include "scene/resources/texture.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "servers/audio/audio_stream.h"
+
+class AudioStreamPlayer;
+class Button;
+class Control;
+class EditorNode;
+class InputEvent;
+class Label;
+class ObjectID;
 
 class AudioStreamEditor : public ColorRect {
 	GDCLASS(AudioStreamEditor, ColorRect);

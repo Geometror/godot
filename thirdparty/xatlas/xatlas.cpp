@@ -40,14 +40,24 @@ Copyright (c) 2012 Brandon Pelfrey
 #if XATLAS_C_API
 #include "xatlas_c.h"
 #endif
+#include <assert.h>
+#include <float.h> // FLT_MAX
+#include <limits.h>
+#include <stdlib.h>
 #include <atomic>
 #include <condition_variable>
 #include <mutex>
 #include <thread>
-#include <assert.h>
-#include <float.h> // FLT_MAX
-#include <limits.h>
-#include <math.h>
+#include <cmath>
+#include <cstdint>
+#include <new>
+
+namespace xatlas {
+namespace internal {
+struct MemTag;
+}  // namespace internal
+}  // namespace xatlas
+
 #define __STDC_LIMIT_MACROS
 #include <stdint.h>
 #include <stdio.h>
@@ -3937,6 +3947,7 @@ namespace opennl {
 #define NL_DELETE_VECTOR(ptr)  XA_FREE(ptr)
 
 struct NLMatrixStruct;
+
 typedef NLMatrixStruct * NLMatrix;
 typedef void (*NLDestroyMatrixFunc)(NLMatrix M);
 typedef void (*NLMultMatrixVectorFunc)(NLMatrix M, const double* x, double* y);

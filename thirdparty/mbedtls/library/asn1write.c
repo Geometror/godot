@@ -17,19 +17,25 @@
  *  limitations under the License.
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/asn1.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_ASN1_WRITE_C)
 
+#include <string.h>
+
 #include "mbedtls/asn1write.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free
 #endif

@@ -31,8 +31,9 @@
 #ifndef GLTF_DOCUMENT_H
 #define GLTF_DOCUMENT_H
 
-#include "gltf_animation.h"
+#include <cstdint>
 
+#include "gltf_animation.h"
 #include "core/error/error_list.h"
 #include "core/variant/dictionary.h"
 #include "core/variant/variant.h"
@@ -46,10 +47,20 @@
 #include "scene/animation/animation_player.h"
 #include "scene/resources/material.h"
 #include "scene/resources/texture.h"
-
 #include "modules/modules_enabled.gen.h" // For csg, gridmap.
-
-#include <cstdint>
+#include "core/io/resource.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/typed_array.h"
 
 class GLTFState;
 class GLTFSkin;
@@ -60,6 +71,25 @@ class CSGShape3D;
 class GridMap;
 class MultiMeshInstance3D;
 class GLTFDocumentExtension;
+class Animation;
+class AnimationPlayer;
+class BaseMaterial3D;
+class BoneAttachment3D;
+class Camera3D;
+class FileAccess;
+class ImporterMeshInstance3D;
+class Light3D;
+class MeshInstance3D;
+class Node3D;
+class Node;
+class Skeleton3D;
+class Skin;
+class Texture2D;
+struct Basis;
+struct Quaternion;
+struct Transform2D;
+struct Transform3D;
+struct Vector3;
 
 using GLTFAccessorIndex = int;
 using GLTFAnimationIndex = int;

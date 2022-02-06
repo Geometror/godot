@@ -19,10 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <fstream>
 #include <string.h>
-#include "tvgLoader.h"
+#include <stdlib.h>
+
 #include "tvgRawLoader.h"
+#include "thorvg.h"
+#include "tvgRender.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

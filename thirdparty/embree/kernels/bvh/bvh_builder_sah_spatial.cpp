@@ -1,25 +1,41 @@
 // Copyright 2009-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
+#include <stddef.h>
+#include <algorithm>
+#include <limits>
+#include <string>
+
 #include "bvh.h"
 #include "bvh_builder.h"
-
 #include "../builders/primrefgen.h"
 #include "../builders/primrefgen_presplit.h"
 #include "../builders/splitter.h"
-
-#include "../geometry/linei.h"
 #include "../geometry/triangle.h"
 #include "../geometry/trianglev.h"
-#include "../geometry/trianglev_mb.h"
 #include "../geometry/trianglei.h"
-#include "../geometry/quadv.h"
-#include "../geometry/quadi.h"
-#include "../geometry/object.h"
-#include "../geometry/instance.h"
-#include "../geometry/subgrid.h"
-
-#include "../common/state.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/math/lbbox.h"
+#include "common/math/math.h"
+#include "common/math/range.h"
+#include "common/math/vec3.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vuint4_sse2.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/builders/bvh_builder_sah.h"
+#include "kernels/builders/heuristic_spatial.h"
+#include "kernels/builders/priminfo.h"
+#include "kernels/common/alloc.h"
+#include "kernels/common/builder.h"
+#include "kernels/common/device.h"
+#include "kernels/common/primref.h"
+#include "kernels/common/scene.h"
+#include "kernels/common/scene_triangle_mesh.h"
+#include "kernels/common/vector.h"
+#include "kernels/config.h"
 
 namespace embree
 {

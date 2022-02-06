@@ -18,15 +18,18 @@
 #define _JIT_UNI_REORDER_HPP
 
 #include <assert.h>
+#include <stddef.h>
 
 #include "c_types_map.hpp"
 #include "type_helpers.hpp"
-
 #include "cpu_primitive.hpp"
 #include "cpu_reorder_pd.hpp"
+#include "mkldnn_types.h"
 
 namespace mkldnn {
 namespace impl {
+struct reorder_pd_t;
+
 namespace cpu {
 
 namespace tr {

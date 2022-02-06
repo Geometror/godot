@@ -22,7 +22,10 @@
  *  http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_SHA512_C)
 
@@ -44,6 +47,7 @@
 #else
 #include <stdio.h>
 #include <stdlib.h>
+
 #define mbedtls_printf printf
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free

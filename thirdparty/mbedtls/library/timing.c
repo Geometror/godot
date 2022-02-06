@@ -17,12 +17,14 @@
  *  limitations under the License.
  */
 
-#include "common.h"
+#include <stdint.h>
 
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_SELF_TEST) && defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf     printf
 #endif
 
@@ -55,7 +57,6 @@ struct _hr_time
 #else
 
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/time.h>
 #include <signal.h>
 #include <time.h>

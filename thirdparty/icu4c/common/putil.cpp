@@ -39,12 +39,14 @@
 ******************************************************************************
 */
 
-// Defines _XOPEN_SOURCE for access to POSIX functions.
-// Must be before any other #includes.
-#include "uposixdefs.h"
-
 // First, the platform type. Need this for U_PLATFORM.
 #include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
+#include "unicode/uvernum.h"
+#include "unicode/uversion.h"
 
 #if U_PLATFORM == U_PF_MINGW && defined __STRICT_ANSI__
 /* tzset isn't defined in strict ANSI on MinGW. */
@@ -55,10 +57,18 @@
  * Cygwin with GCC requires inclusion of time.h after the above disabling strict asci mode statement.
  */
 #include <time.h>
+#include <bits/types/struct_tm.h>
+#include <stdint.h>
 
 #if !U_PLATFORM_USES_ONLY_WIN32_API
 #include <sys/time.h>
 #endif
+
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <locale.h>
+#include <float.h>
 
 /* include the rest of the ICU headers */
 #include "unicode/putil.h"
@@ -68,17 +78,8 @@
 #include "umutex.h"
 #include "cmemory.h"
 #include "cstring.h"
-#include "locmap.h"
 #include "ucln_cmn.h"
 #include "charstr.h"
-
-/* Include standard headers. */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <locale.h>
-#include <float.h>
 
 #ifndef U_COMMON_IMPLEMENTATION
 #error U_COMMON_IMPLEMENTATION not set - must be set for all ICU source files in common/ - see https://unicode-org.github.io/icu/userguide/howtouseicu
@@ -101,6 +102,7 @@
 #   define NOIME
 #   define NOMCX
 #   include <windows.h>
+
 #   include "unicode/uloc.h"
 #   include "wintz.h"
 #elif U_PLATFORM == U_PF_OS400
@@ -112,8 +114,6 @@
 #elif U_PLATFORM == U_PF_OS390
 #   include "unicode/ucnv.h"   /* Needed for UCNV_SWAP_LFNL_OPTION_STRING */
 #elif U_PLATFORM_IS_DARWIN_BASED || U_PLATFORM_IS_LINUX_BASED || U_PLATFORM == U_PF_BSD || U_PLATFORM == U_PF_SOLARIS
-#   include <limits.h>
-#   include <unistd.h>
 #   if U_PLATFORM == U_PF_SOLARIS
 #       ifndef _XPG4_2
 #           define _XPG4_2
@@ -132,10 +132,6 @@
  * depend on more feature, we can test on U_HAVE_NL_LANGINFO.
  *
  */
-
-#if U_HAVE_NL_LANGINFO_CODESET
-#include <langinfo.h>
-#endif
 
 /**
  * Simple things (presence of functions, etc) should just go in configure.in and be added to
@@ -702,6 +698,7 @@ extern U_IMPORT char *U_TZNAME[];
 #define CHECK_LOCALTIME_LINK 1
 #if U_PLATFORM_IS_DARWIN_BASED
 #include <tzfile.h>
+
 #define TZZONEINFO      (TZDIR "/")
 #elif U_PLATFORM == U_PF_SOLARIS
 #define TZDEFAULT       "/etc/localtime"

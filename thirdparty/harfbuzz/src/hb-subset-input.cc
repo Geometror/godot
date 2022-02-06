@@ -24,8 +24,11 @@
  * Google Author(s): Garret Rieger, Rod Sheeter, Behdad Esfahbod
  */
 
-#include "hb-subset.hh"
 #include "hb-set.hh"
+#include "hb-subset-input.hh"
+#include "hb-subset.h"
+#include "hb.h"
+#include "hb.hh"
 
 /**
  * hb_subset_input_create_or_fail:

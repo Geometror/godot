@@ -27,9 +27,12 @@
 #ifndef HB_OT_SHAPE_COMPLEX_KHMER_HH
 #define HB_OT_SHAPE_COMPLEX_KHMER_HH
 
-#include "hb.hh"
+#include <assert.h>
+#include <stdint.h>
 
+#include "hb.hh"
 #include "hb-ot-shape-complex-indic.hh"
+#include "hb.h"
 
 
 /* buffer var allocations */

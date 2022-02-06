@@ -31,8 +31,18 @@
 #ifndef RESOURCE_SAVER_PNG_H
 #define RESOURCE_SAVER_PNG_H
 
+#include <stdint.h>
+
 #include "core/io/image.h"
 #include "core/io/resource_saver.h"
+#include "core/error/error_list.h"
+#include "core/io/resource.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+
+class Image;
 
 class ResourceSaverPNG : public ResourceFormatSaver {
 public:

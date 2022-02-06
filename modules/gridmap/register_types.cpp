@@ -29,9 +29,12 @@
 /*************************************************************************/
 
 #include "register_types.h"
+
+#include "editor/editor_plugin.h"
+
+class GridMap;
 #ifndef _3D_DISABLED
 #include "core/object/class_db.h"
-#include "grid_map.h"
 #include "grid_map_editor_plugin.h"
 #endif
 

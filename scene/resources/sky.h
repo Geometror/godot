@@ -34,6 +34,13 @@
 #include "core/os/thread.h"
 #include "scene/resources/material.h"
 #include "scene/resources/texture.h"
+#include "core/io/resource.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/variant/binder_common.h"
+
+class Material;
 
 class Sky : public Resource {
 	GDCLASS(Sky, Resource);

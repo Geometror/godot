@@ -9,9 +9,13 @@
 #ifndef RBBINODE_H
 #define RBBINODE_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/unistr.h"
 #include "unicode/uobject.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 //
 //  class RBBINode

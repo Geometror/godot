@@ -31,7 +31,15 @@
 #ifndef GODOT_COLLISION_SOLVER_3D_H
 #define GODOT_COLLISION_SOLVER_3D_H
 
+#include <stdint.h>
+
 #include "godot_shape_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+
+class GodotShape3D;
+struct AABB;
+struct Transform3D;
 
 class GodotCollisionSolver3D {
 public:

@@ -14,6 +14,17 @@
 // limitations under the License.
 #include "basisu_bc7enc.h"
 
+#include <assert.h>
+#include <encoder/basisu_enc.h>
+#include <limits.h>
+#include <string.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_transcoder_internal.h>
+#include <transcoder/basisu_transcoder_uastc.h>
+#include <algorithm>
+#include <cmath>
+#include <utility>
+
 #ifdef _DEBUG
 #define BC7ENC_CHECK_OVERALL_ERROR 1
 #else

@@ -27,10 +27,22 @@
 #ifndef HB_SUBSET_CFF_COMMON_HH
 #define HB_SUBSET_CFF_COMMON_HH
 
-#include "hb.hh"
+#include <stdint.h>
+#include <string.h>
+#include <new>
 
+#include "hb.hh"
 #include "hb-subset-plan.hh"
 #include "hb-cff-interp-cs-common.hh"
+#include "hb-bimap.hh"
+#include "hb-cff-interp-common.hh"
+#include "hb-cff-interp-dict-common.hh"
+#include "hb-open-type.hh"
+#include "hb-ot-cff-common.hh"
+#include "hb-serialize.hh"
+#include "hb-set.hh"
+#include "hb-subset.h"
+#include "hb.h"
 
 namespace CFF {
 

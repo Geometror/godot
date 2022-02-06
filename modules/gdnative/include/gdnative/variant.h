@@ -37,6 +37,7 @@ extern "C" {
 
 #include <gdnative/math_defs.h>
 #include <gdnative/variant_struct.h>
+#include <stdint.h>
 
 typedef enum godot_variant_type {
 	GODOT_VARIANT_TYPE_NIL,
@@ -188,7 +189,6 @@ typedef void (*godot_ptr_utility_function)(void *r_return, const void **p_argume
 #include <gdnative/variant.h>
 #include <gdnative/vector2.h>
 #include <gdnative/vector3.h>
-
 #include <gdnative/gdnative.h>
 
 // Memory.

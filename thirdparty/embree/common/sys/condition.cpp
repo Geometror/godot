@@ -3,6 +3,10 @@
 
 #include "condition.h"
 
+#include <assert.h>
+
+#include "common/sys/mutex.h"
+
 #if defined(__WIN32__) && !defined(PTHREADS_WIN32)
 
 #define WIN32_LEAN_AND_MEAN
@@ -35,6 +39,7 @@ namespace embree
 
 #if defined(__UNIX__) || defined(PTHREADS_WIN32)
 #include <pthread.h>
+
 namespace embree
 {
   struct ConditionImplementation

@@ -11,8 +11,10 @@
 */
 
 #include "uvectr32.h"
+
 #include "cmemory.h"
 #include "putilimp.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

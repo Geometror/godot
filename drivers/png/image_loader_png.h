@@ -31,7 +31,17 @@
 #ifndef IMAGE_LOADER_PNG_H
 #define IMAGE_LOADER_PNG_H
 
+#include <stdint.h>
+
 #include "core/io/image_loader.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+
+class FileAccess;
+class Image;
+class String;
 
 class ImageLoaderPNG : public ImageFormatLoader {
 private:

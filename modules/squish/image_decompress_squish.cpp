@@ -31,6 +31,12 @@
 #include "image_decompress_squish.h"
 
 #include <squish.h>
+#include <stdint.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 void image_decompress_squish(Image *p_image) {
 	int w = p_image->get_width();

@@ -31,12 +31,17 @@
 #ifndef NETWORKED_MULTIPLAYER_PEER_H
 #define NETWORKED_MULTIPLAYER_PEER_H
 
+#include <stdint.h>
+
 #include "core/io/packet_peer.h"
 #include "core/multiplayer/multiplayer.h"
-
 #include "core/object/gdvirtual.gen.inc"
 #include "core/object/script_language.h"
 #include "core/variant/native_ptr.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/variant/binder_common.h"
 
 class MultiplayerPeer : public PacketPeer {
 	GDCLASS(MultiplayerPeer, PacketPeer);

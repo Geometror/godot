@@ -13,7 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include "basisu_basis_file.h"
-#include "../transcoder/basisu_transcoder.h"
+
+#include <assert.h>
+#include <encoder/basisu_backend.h>
+#include <encoder/basisu_enc.h>
+#include <transcoder/basisu_file_headers.h>
+#include <transcoder/basisu_transcoder_internal.h>
 
 // The output file version. Keep in sync with BASISD_SUPPORTED_BASIS_VERSION.
 #define BASIS_FILE_VERSION (0x13)

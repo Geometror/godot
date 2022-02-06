@@ -34,6 +34,10 @@
 #include "core/io/image.h"
 #include "drivers/png/png_driver_common.h"
 #include "scene/resources/texture.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/variant/variant.h"
 
 Error ResourceSaverPNG::save(const String &p_path, const RES &p_resource, uint32_t p_flags) {
 	Ref<ImageTexture> texture = p_resource;

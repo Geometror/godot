@@ -33,6 +33,17 @@
 
 #include "core/object/class_db.h"
 #include "core/templates/safe_refcount.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "core/variant/type_info.h"
+#include "core/variant/variant.h"
+
+template <class T, typename = void> struct GetTypeInfo;
+template <class T> struct PtrToArg;
 
 class RefCounted : public Object {
 	GDCLASS(RefCounted, Object);

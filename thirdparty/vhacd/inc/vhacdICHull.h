@@ -15,10 +15,17 @@
 #pragma once
 #ifndef VHACD_ICHULL_H
 #define VHACD_ICHULL_H
+#include <stddef.h>
+#include <stdint.h>
+
 #include "vhacdManifoldMesh.h"
 #include "vhacdVector.h"
+#include "vhacdSArray.h"
+#include "vhacdVector.inl"
 
 namespace VHACD {
+template <typename T> class CircularListElement;
+
 //!    Incremental Convex Hull algorithm (cf. http://cs.smith.edu/~orourke/books/ftp.html ).
 enum ICHullError {
     ICHullErrorOK = 0,

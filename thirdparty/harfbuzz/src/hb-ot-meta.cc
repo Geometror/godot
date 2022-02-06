@@ -22,8 +22,11 @@
  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
  */
 
-#include "hb.hh"
-
+#include "hb-face.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
+#include "hb-ot.h"
+#include "hb.h"
 #ifndef HB_NO_META
 
 #include "hb-ot-meta-table.hh"

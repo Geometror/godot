@@ -23,20 +23,24 @@
  *  http://info.isl.ntt.co.jp/crypt/eng/camellia/dl/01espec.pdf
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_CAMELLIA_C)
 
+#include <string.h>
+
 #include "mbedtls/camellia.h"
 #include "mbedtls/platform_util.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_SELF_TEST)
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

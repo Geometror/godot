@@ -32,6 +32,11 @@
 #define CYLINDER_SHAPE_3D_H
 
 #include "scene/resources/shape_3d.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
+
+struct Vector3;
 
 class CylinderShape3D : public Shape3D {
 	GDCLASS(CylinderShape3D, Shape3D);

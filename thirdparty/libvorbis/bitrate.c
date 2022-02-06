@@ -14,15 +14,13 @@
 
  ********************************************************************/
 
-#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <ogg/ogg.h>
+
 #include "vorbis/codec.h"
-#include "codec_internal.h"
-#include "os.h"
-#include "misc.h"
 #include "bitrate.h"
+#include "backends.h"
 
 /* compute bitrate tracking setup  */
 void vorbis_bitrate_init(vorbis_info *vi,bitrate_manager_state *bm){

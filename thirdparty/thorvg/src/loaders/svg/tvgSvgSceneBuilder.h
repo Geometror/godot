@@ -23,7 +23,15 @@
 #ifndef _TVG_SVG_SCENE_BUILDER_H_
 #define _TVG_SVG_SCENE_BUILDER_H_
 
+#include <memory>
+#include <string>
+
 #include "tvgCommon.h"
+
+namespace tvg {
+class Scene;
+}  // namespace tvg
+struct SvgNode;
 
 unique_ptr<Scene> svgSceneBuild(SvgNode* node, float vx, float vy, float vw, float vh, float w, float h, bool preserveAspect, const string& svgPath);
 

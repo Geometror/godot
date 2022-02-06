@@ -76,6 +76,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdlib.h> /* strtol */
 #include <zlib.h>
+#include <string.h>
+#include <cstdint>
+#include <memory>
 
 #include "ByteSwapper.h"
 #include "FBXParseTools.h"
@@ -85,6 +88,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "core/math/transform_3d.h"
 #include "core/math/vector3.h"
 #include "core/string/print_string.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector2.h"
+#include "core/string/ustring.h"
+#include "zconf.h"
 
 using namespace FBXDocParser;
 namespace {

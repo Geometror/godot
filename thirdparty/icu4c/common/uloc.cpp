@@ -30,18 +30,17 @@
      l = lang, C = ctry, M = charmap, V = variant
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/bytestream.h"
-#include "unicode/errorcode.h"
 #include "unicode/stringpiece.h"
 #include "unicode/utypes.h"
-#include "unicode/ustring.h"
 #include "unicode/uloc.h"
-
 #include "bytesinkutil.h"
 #include "putilimp.h"
 #include "ustr_imp.h"
 #include "ulocimp.h"
-#include "umutex.h"
 #include "cstring.h"
 #include "cmemory.h"
 #include "locmap.h"
@@ -49,6 +48,12 @@
 #include "uenumimp.h"
 #include "uassert.h"
 #include "charstr.h"
+#include "unicode/localpointer.h"
+#include "unicode/platform.h"
+#include "unicode/uenum.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_USE
 

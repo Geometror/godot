@@ -19,6 +19,9 @@
 *   that then do not depend on resource bundle code and display name data.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/brkiter.h"
 #include "unicode/locid.h"
@@ -28,13 +31,19 @@
 #include "unicode/ustring.h"
 #include "bytesinkutil.h"
 #include "charstr.h"
-#include "cmemory.h"
 #include "cstring.h"
 #include "putilimp.h"
 #include "ulocimp.h"
 #include "uresimp.h"
 #include "ureslocs.h"
 #include "ustr_imp.h"
+#include "unicode/platform.h"
+#include "unicode/putil.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 // C++ API ----------------------------------------------------------------- ***
 

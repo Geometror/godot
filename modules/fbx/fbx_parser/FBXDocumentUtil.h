@@ -74,14 +74,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef FBX_DOCUMENT_UTIL_H
 #define FBX_DOCUMENT_UTIL_H
 
-#include "FBXDocument.h"
 #include <memory>
 #include <string>
+
+#include "FBXDocument.h"
+#include "core/error/error_macros.h"
+#include "fbx_parser/FBXParser.h"
 
 struct Token;
 struct Element;
 
 namespace FBXDocParser {
+class Token;
+
 namespace Util {
 
 // Parser errors

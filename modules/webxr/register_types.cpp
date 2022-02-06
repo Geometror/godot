@@ -30,8 +30,9 @@
 
 #include "register_types.h"
 
-#include "webxr_interface.h"
-#include "webxr_interface_js.h"
+#include "core/object/class_db.h"
+
+class WebXRInterface;
 
 #ifdef JAVASCRIPT_ENABLED
 Ref<WebXRInterfaceJS> webxr;

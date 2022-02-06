@@ -24,15 +24,14 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "hb.hh"
-
+#include "hb-face.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
 #ifndef HB_NO_VAR
 
 #include "hb-ot-var.h"
-
 #include "hb-ot-var-avar-table.hh"
 #include "hb-ot-var-fvar-table.hh"
-#include "hb-ot-var-mvar-table.hh"
 
 
 /**

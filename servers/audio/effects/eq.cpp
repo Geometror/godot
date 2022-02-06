@@ -31,9 +31,11 @@
 // Author: reduzio@gmail.com (C) 2006
 
 #include "eq.h"
+
+#include <cmath>
+
 #include "core/error/error_macros.h"
-#include "core/math/math_funcs.h"
-#include <math.h>
+#include "core/math/math_defs.h"
 
 #define POW2(v) ((v) * (v))
 

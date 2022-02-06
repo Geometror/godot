@@ -14,7 +14,9 @@
 *   created by: Markus W. Scherer
 */
 
+#include <bits/std_abs.h>
 #include <cstdlib>
+#include <utility>
 
 #include "unicode/utypes.h"
 #include "unicode/putil.h"
@@ -23,6 +25,8 @@
 #include "cstring.h"
 #include "uinvchar.h"
 #include "ustr_imp.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

@@ -11,9 +11,12 @@
 */
 
 #include "uvector.h"
+
 #include "cmemory.h"
 #include "uarrsort.h"
 #include "uelement.h"
+#include "uassert.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

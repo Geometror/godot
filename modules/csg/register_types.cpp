@@ -31,7 +31,18 @@
 #include "register_types.h"
 
 #include "csg_gizmos.h"
-#include "csg_shape.h"
+#include "core/object/class_db.h"
+#include "editor/editor_plugin.h"
+
+class CSGBox3D;
+class CSGCombiner3D;
+class CSGCylinder3D;
+class CSGMesh3D;
+class CSGPolygon3D;
+class CSGPrimitive3D;
+class CSGShape3D;
+class CSGSphere3D;
+class CSGTorus3D;
 
 void register_csg_types() {
 #ifndef _3D_DISABLED

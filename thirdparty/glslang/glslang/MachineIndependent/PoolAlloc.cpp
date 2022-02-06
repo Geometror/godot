@@ -32,9 +32,13 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
+#include <assert.h>
+#include <stddef.h>
+#include <memory>
+#include <new>
+
 #include "../Include/Common.h"
 #include "../Include/PoolAlloc.h"
-
 #include "../Include/InitializeGlobals.h"
 #include "../OSDependent/osinclude.h"
 

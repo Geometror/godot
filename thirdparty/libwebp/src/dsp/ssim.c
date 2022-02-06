@@ -13,8 +13,10 @@
 
 #include <assert.h>
 #include <stdlib.h>  // for abs()
+#include <stdint.h>
 
 #include "src/dsp/dsp.h"
+#include "webp/types.h"
 
 #if !defined(WEBP_REDUCE_SIZE)
 

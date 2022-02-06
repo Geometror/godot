@@ -26,14 +26,13 @@
 #define _POSIX_C_SOURCE 200112L
 #endif
 
-#include "common.h"
+#include <string.h>
 
 #include "mbedtls/platform_util.h"
-#include "mbedtls/platform.h"
-#include "mbedtls/threading.h"
+#include "mbedtls/config.h"
+#include "mbedtls/platform_time.h"
 
-#include <stddef.h>
-#include <string.h>
+struct tm;
 
 #if !defined(MBEDTLS_PLATFORM_ZEROIZE_ALT)
 /*

@@ -2,13 +2,30 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "primrefgen.h"
-#include "primrefgen_presplit.h"
 
-#include "../../common/algorithms/parallel_for_for.h"
+#include <functional>
+#include <utility>
+
 #include "../../common/algorithms/parallel_for_for_prefix_sum.h"
+#include "common/algorithms/parallel_for.h"
+#include "common/algorithms/parallel_prefix_sum.h"
+#include "common/algorithms/parallel_reduce.h"
+#include "common/math/constants.h"
+#include "common/math/range.h"
+#include "common/math/vec3fa.h"
+#include "common/sys/platform.h"
+#include "kernels/builders/bvh_builder_morton.h"
+#include "kernels/builders/priminfo.h"
+#include "kernels/common/builder.h"
+#include "kernels/common/default.h"
+#include "kernels/common/scene.h"
+#include "kernels/config.h"
 
 namespace embree
 {
+struct PrimRef;
+struct PrimRefMB;
+
   namespace isa
   {
     PrimInfo createPrimRefArray(Geometry* geometry, unsigned int geomID, const size_t numPrimRefs, mvector<PrimRef>& prims, BuildProgressMonitor& progressMonitor)

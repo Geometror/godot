@@ -12,10 +12,15 @@
 // Author: Skal (pascal.massimino@gmail.com)
 
 #include <stdlib.h>
+#include <assert.h>
+#include <stdint.h>
+#include <string.h>
 
-#include "src/dec/vp8i_dec.h"
 #include "src/dec/webpi_dec.h"
 #include "src/utils/utils.h"
+#include "utils/rescaler_utils.h"
+#include "webp/decode.h"
+#include "webp/types.h"
 
 //------------------------------------------------------------------------------
 // WebPDecBuffer

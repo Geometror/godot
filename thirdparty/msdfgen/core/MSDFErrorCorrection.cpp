@@ -1,17 +1,27 @@
 
 #include "MSDFErrorCorrection.h"
 
+#include <math.h>
 #include <cstring>
+#include <memory>
+#include <vector>
+
 #include "arithmetics.hpp"
 #include "equation-solver.h"
 #include "EdgeColor.h"
 #include "bitmap-interpolation.hpp"
-#include "edge-selectors.h"
-#include "contour-combiners.h"
 #include "ShapeDistanceFinder.h"
 #include "generator-config.h"
+#include "core/BitmapRef.hpp"
+#include "core/Contour.h"
+#include "core/EdgeHolder.h"
+#include "core/Projection.h"
+#include "core/Shape.h"
+#include "core/Vector2.h"
+#include "core/edge-segments.h"
 
 namespace msdfgen {
+class PseudoDistanceSelector;
 
 #define ARTIFACT_T_EPSILON .01
 #define PROTECTION_RADIUS_TOLERANCE 1.001

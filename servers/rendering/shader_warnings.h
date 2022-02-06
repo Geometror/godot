@@ -31,6 +31,10 @@
 #ifndef SHADER_WARNINGS
 #define SHADER_WARNINGS
 
+#include <stdint.h>
+
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 #ifdef DEBUG_ENABLED
 
 #include "core/string/string_name.h"

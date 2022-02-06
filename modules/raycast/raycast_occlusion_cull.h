@@ -31,6 +31,9 @@
 #ifndef OCCLUSION_CULL_RAYCASTER_H
 #define OCCLUSION_CULL_RAYCASTER_H
 
+#include <embree3/rtcore.h>
+#include <stdint.h>
+
 #include "core/io/image.h"
 #include "core/math/camera_matrix.h"
 #include "core/object/object.h"
@@ -39,8 +42,20 @@
 #include "core/templates/rid_owner.h"
 #include "scene/resources/mesh.h"
 #include "servers/rendering/renderer_scene_occlusion_cull.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
+#include "core/variant/variant.h"
+#include "embree3/rtcore_device.h"
+#include "embree3/rtcore_geometry.h"
+#include "embree3/rtcore_ray.h"
+#include "servers/rendering_server.h"
 
-#include <embree3/rtcore.h>
+class Thread;
+class ThreadWorkPool;
 
 class RaycastOcclusionCull : public RendererSceneOcclusionCull {
 	typedef RTCRayHit16 CameraRayTile;

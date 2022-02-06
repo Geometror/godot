@@ -23,15 +23,15 @@
  *  References below are based on rev. 1 (January 2012).
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
 #if defined(MBEDTLS_HMAC_DRBG_C)
+
+#include <string.h>
 
 #include "mbedtls/hmac_drbg.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_FS_IO)
 #include <stdio.h>
@@ -42,6 +42,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_SELF_TEST */
 #endif /* MBEDTLS_PLATFORM_C */

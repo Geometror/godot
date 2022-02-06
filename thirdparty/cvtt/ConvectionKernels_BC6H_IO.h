@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+
 #include "ConvectionKernels_BC6H_IO.h"
 
 namespace cvtt

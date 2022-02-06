@@ -21,8 +21,10 @@
   Note: Loops are unrolled for best performance.
   The iteration each instruction belongs to is marked in the comments as #i.*/
 #include <stddef.h>
+
 #include "x86int.h"
 #include "mmxfrag.h"
+#include "ogg/config_types.h"
 
 #if defined(OC_X86_ASM)
 

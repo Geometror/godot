@@ -15,13 +15,17 @@
 *******************************************************************************/
 
 #include <assert.h>
+#include <stdint.h>
 
 #include "mkldnn_thread.hpp"
 #include "mkldnn_types.h"
 #include "nstl.hpp"
 #include "utils.hpp"
-
 #include "cpu_reducer.hpp"
+#include "cpu_isa_traits.hpp"
+#include "jit_generator.hpp"
+#include "xbyak_mnemonic.h"
+#include "z_magic.hpp"
 
 namespace mkldnn {
 namespace impl {

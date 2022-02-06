@@ -31,9 +31,26 @@
 #ifndef RENDERING_SERVER_CANVAS_CULL_H
 #define RENDERING_SERVER_CANVAS_CULL_H
 
+#include <stdint.h>
+
 #include "core/templates/paged_allocator.h"
 #include "renderer_compositor.h"
 #include "renderer_viewport.h"
+#include "core/math/color.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/rid_owner.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "servers/rendering/renderer_canvas_render.h"
+#include "servers/rendering_server.h"
 
 class RendererCanvasCull {
 public:

@@ -11,12 +11,16 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "src/dsp/dsp.h"
+#include "webp/types.h"
 
 #if defined(WEBP_USE_SSE2) && !defined(WEBP_REDUCE_SIZE)
 #include <emmintrin.h>
-
 #include <assert.h>
+
 #include "src/utils/rescaler_utils.h"
 #include "src/utils/utils.h"
 

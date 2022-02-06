@@ -28,8 +28,9 @@
 #define HB_SUBSET_CFF2_HH
 
 #include "hb.hh"
-
 #include "hb-subset-plan.hh"
+
+struct hb_subset_context_t;
 
 HB_INTERNAL bool
 hb_subset_cff2 (hb_subset_context_t *c);

@@ -18,17 +18,22 @@
 #ifndef JIT_UNI_POOL_KERNEL_F32_HPP
 #define JIT_UNI_POOL_KERNEL_F32_HPP
 
+#include <assert.h>
 #include <cfloat>
 
 #include "c_types_map.hpp"
 #include "pooling_pd.hpp"
 #include "type_helpers.hpp"
-
 #include "jit_generator.hpp"
 #include "jit_primitive_conf.hpp"
+#include "cpu_isa_traits.hpp"
+#include "utils.hpp"
+#include "xbyak_mnemonic.h"
 
 namespace mkldnn {
 namespace impl {
+struct pooling_pd_t;
+
 namespace cpu {
 
 using namespace Xbyak;

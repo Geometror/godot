@@ -30,8 +30,20 @@
 
 #include "animation_blend_tree.h"
 
+#include <bits/std_abs.h>
+#include <stdlib.h>
+#include <cmath>
+
 #include "scene/resources/animation.h"
 #include "scene/scene_string_names.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "scene/animation/animation_player.h"
 
 void AnimationNodeAnimation::set_animation(const StringName &p_name) {
 	animation = p_name;

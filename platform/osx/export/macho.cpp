@@ -29,8 +29,12 @@
 /*************************************************************************/
 
 #include "modules/modules_enabled.gen.h" // For regex.
-
 #include "macho.h"
+#include "core/crypto/crypto_core.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
 
 #ifdef MODULE_REGEX_ENABLED
 

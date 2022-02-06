@@ -14,10 +14,15 @@
 
 #include <algorithm>      // For std::max()
 #include <mutex>
+#include <atomic>
+#include <condition_variable>
 
 #include "uassert.h"
 #include "uhash.h"
 #include "ucln_cmn.h"
+#include "cmemory.h"
+#include "umutex.h"
+#include "unicode/platform.h"
 
 static icu::UnifiedCache *gCache = NULL;
 static std::mutex *gCacheMutex = nullptr;

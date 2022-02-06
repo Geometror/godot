@@ -7,22 +7,22 @@
  *******************************************************************************
  */
 
+#include <stddef.h>
 #include <utility>
 
 #include "unicode/utypes.h"
+#include "unicode/localpointer.h"
+#include "unicode/normalizer2.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
-#include "brkeng.h"
 #include "dictbe.h"
 #include "unicode/uniset.h"
-#include "unicode/chariter.h"
-#include "unicode/ubrk.h"
 #include "utracimp.h"
 #include "uvectr32.h"
-#include "uvector.h"
 #include "uassert.h"
-#include "unicode/normlzr.h"
 #include "cmemory.h"
 #include "dictionarydata.h"
 

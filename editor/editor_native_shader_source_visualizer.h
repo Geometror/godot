@@ -33,6 +33,10 @@
 
 #include "scene/gui/dialogs.h"
 #include "scene/gui/tab_container.h"
+#include "core/object/object.h"
+
+class RID;
+class TabContainer;
 
 class EditorNativeShaderSourceVisualizer : public AcceptDialog {
 	GDCLASS(EditorNativeShaderSourceVisualizer, AcceptDialog)

@@ -13,10 +13,18 @@
 #ifndef ICU_UTIL_H
 #define ICU_UTIL_H
 
+#include <stdint.h>
+
 #include "charstr.h"
 #include "unicode/unistr.h"
 #include "unicode/uobject.h"
 #include "unicode/utypes.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class Replaceable;
+}  // namespace icu_70
 //--------------------------------------------------------------------
 // class ICU_Utility
 // i18n utility functions, scoped into the class ICU_Utility.

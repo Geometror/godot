@@ -17,24 +17,30 @@
  *  limitations under the License.
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
+#include "mbedtls/platform_time.h"
+#include "mbedtls/ssl.h"
 
 #if defined(MBEDTLS_SSL_TICKET_C)
 
 #if defined(MBEDTLS_PLATFORM_C)
-#include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free      free
 #endif
+
+#include <string.h>
 
 #include "mbedtls/ssl_internal.h"
 #include "mbedtls/ssl_ticket.h"
 #include "mbedtls/error.h"
 #include "mbedtls/platform_util.h"
-
-#include <string.h>
 
 /*
  * Initialze context

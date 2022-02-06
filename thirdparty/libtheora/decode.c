@@ -18,9 +18,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ogg/ogg.h>
+#include <stddef.h>
+
 #include "decint.h"
+#include "bitpack.h"
+#include "huffdec.h"
+#include "internal.h"
+#include "ocintrin.h"
+#include "ogg/config_types.h"
+#include "ogg/os_types.h"
+#include "quant.h"
+#include "theora/codec.h"
+#include "theora/theora.h"
+#include "theora/theoradec.h"
 #if defined(OC_DUMP_IMAGES)
 # include <stdio.h>
+
 # include "png.h"
 #endif
 #if defined(HAVE_CAIRO)

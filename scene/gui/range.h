@@ -32,6 +32,12 @@
 #define RANGE_H
 
 #include "scene/gui/control.h"
+#include "core/object/object.h"
+#include "core/templates/set.h"
+#include "core/variant/typed_array.h"
+
+class Node;
+class String;
 
 class Range : public Control {
 	GDCLASS(Range, Control);

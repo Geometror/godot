@@ -33,11 +33,33 @@
 
 #define CSGJS_HEADER_ONLY
 
+#include <stdint.h>
+
 #include "csg.h"
 #include "scene/3d/path_3d.h"
 #include "scene/3d/visual_instance_3d.h"
 #include "scene/resources/concave_polygon_shape_3d.h"
 #include "thirdparty/misc/mikktspace.h"
+#include "core/math/aabb.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/node_path.h"
+#include "core/templates/hashfuncs.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
+#include "scene/resources/material.h"
+#include "scene/resources/mesh.h"
+
+class ConcavePolygonShape3D;
+class Path3D;
+struct CSGBrush;
+struct Face3;
 
 class CSGShape3D : public GeometryInstance3D {
 	GDCLASS(CSGShape3D, GeometryInstance3D);

@@ -20,14 +20,17 @@
 /* Enable definition of getaddrinfo() even when compiling with -std=c99. Must
  * be set before config.h, which pulls in glibc's features.h indirectly.
  * Harmless on other platforms. */
+#include <bits/socket-constants.h>
+#include <sys/select.h>
+
+#include "mbedtls/config.h"
+#include "mbedtls/ssl.h"
 #ifndef _POSIX_C_SOURCE
 #define _POSIX_C_SOURCE 200112L
 #endif
 #ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE 600 /* sockaddr_storage */
 #endif
-
-#include "common.h"
 
 #if defined(MBEDTLS_NET_C)
 
@@ -38,15 +41,14 @@
 #endif
 
 #if defined(MBEDTLS_PLATFORM_C)
-#include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
 #endif
 
+#include <string.h>
+
 #include "mbedtls/net_sockets.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if (defined(_WIN32) || defined(_WIN32_WCE)) && !defined(EFIX64) && \
     !defined(EFI32)
@@ -59,7 +61,6 @@
 #endif
 
 #include <ws2tcpip.h>
-
 #include <winsock2.h>
 #include <windows.h>
 #if (_WIN32_WINNT < 0x0501)
@@ -82,11 +83,8 @@ static int wsa_init_done = 0;
 
 #else /* ( _WIN32 || _WIN32_WCE ) && !EFIX64 && !EFI32 */
 
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
-#include <sys/time.h>
 #include <unistd.h>
 #include <signal.h>
 #include <fcntl.h>
@@ -106,9 +104,6 @@ static int wsa_init_done = 0;
 #endif
 
 #include <stdio.h>
-
-#include <time.h>
-
 #include <stdint.h>
 
 /*

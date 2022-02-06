@@ -14,8 +14,12 @@
 // limitations under the License.                                           //
 // ======================================================================== //
 
+#include <utility>
+
 #include "exception.h"
 #include "tensor.h"
+#include "OpenImageDenoise/oidn.hpp"
+#include "common/platform.h"
 
 namespace oidn {
 

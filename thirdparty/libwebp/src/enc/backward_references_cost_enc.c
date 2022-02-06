@@ -15,12 +15,18 @@
 //
 
 #include <assert.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "src/enc/backward_references_enc.h"
 #include "src/enc/histogram_enc.h"
 #include "src/dsp/lossless_common.h"
 #include "src/utils/color_cache_utils.h"
 #include "src/utils/utils.h"
+#include "webp/format_constants.h"
+#include "webp/types.h"
+
+struct CostInterval;
 
 #define VALUES_IN_BYTE 256
 

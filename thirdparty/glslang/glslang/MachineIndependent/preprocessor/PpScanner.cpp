@@ -83,8 +83,17 @@ NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-#include <cstdlib>
+#include <assert.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/MachineIndependent/ParseHelper.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdio.h>
 #include <cstring>
+#include <memory>
+#include <sstream>
 
 #include "PpContext.h"
 #include "PpTokens.h"

@@ -1,10 +1,9 @@
+#include <stdint.h>
+#include <string.h>
+
 #include "Dither.hpp"
 #include "ForceInline.hpp"
 #include "ProcessDxtc.hpp"
-
-#include <assert.h>
-#include <stdint.h>
-#include <string.h>
 
 #ifdef __ARM_NEON
 #  include <arm_neon.h>

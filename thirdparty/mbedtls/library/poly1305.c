@@ -18,21 +18,25 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_POLY1305_C)
+
+#include <string.h>
 
 #include "mbedtls/poly1305.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_SELF_TEST)
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

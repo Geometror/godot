@@ -30,10 +30,25 @@
 
 #include "gdscript_language_protocol.h"
 
+#include <stddef.h>
+
 #include "core/config/project_settings.h"
 #include "editor/doc_tools.h"
 #include "editor/editor_log.h"
 #include "editor/editor_node.h"
+#include "core/doc_data.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "editor/editor_help.h"
+#include "editor/editor_settings.h"
+#include "modules/gdscript/language_server/gdscript_text_document.h"
+#include "modules/gdscript/language_server/gdscript_workspace.h"
+#include "modules/gdscript/language_server/lsp.hpp"
 
 GDScriptLanguageProtocol *GDScriptLanguageProtocol::singleton = nullptr;
 

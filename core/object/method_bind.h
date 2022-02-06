@@ -31,7 +31,20 @@
 #ifndef METHOD_BIND_H
 #define METHOD_BIND_H
 
+#include <stdint.h>
+
 #include "core/variant/binder_common.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/type_info.h"
+#include "core/variant/variant.h"
 
 enum MethodFlags {
 	METHOD_FLAG_NORMAL = 1,
@@ -229,6 +242,7 @@ MethodBind *create_vararg_method_bind(Variant (T::*p_method)(const Variant **, i
 
 #ifndef TYPED_METHOD_BIND
 class __UnexistingClass;
+
 #define MB_T __UnexistingClass
 #else
 #define MB_T T

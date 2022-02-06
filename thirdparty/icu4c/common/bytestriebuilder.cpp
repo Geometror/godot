@@ -14,16 +14,24 @@
 *   created by: Markus W. Scherer
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/bytestrie.h"
 #include "unicode/bytestriebuilder.h"
 #include "unicode/stringpiece.h"
 #include "charstr.h"
 #include "cmemory.h"
-#include "uhash.h"
 #include "uarrsort.h"
 #include "uassert.h"
 #include "ustr_imp.h"
+#include "unicode/platform.h"
+#include "unicode/stringtriebuilder.h"
+#include "unicode/umachine.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

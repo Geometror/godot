@@ -31,6 +31,8 @@
 #include "export.h"
 
 #include "export_plugin.h"
+#include "core/object/ref_counted.h"
+#include "editor/editor_export.h"
 
 void register_iphone_exporter() {
 	Ref<EditorExportPlatformIOS> platform;

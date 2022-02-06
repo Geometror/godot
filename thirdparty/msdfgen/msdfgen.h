@@ -34,6 +34,11 @@
 #include "core/save-tiff.h"
 #include "core/shape-description.h"
 
+namespace msdfgen {
+class Projection;
+class Shape;
+}  // namespace msdfgen
+
 #define MSDFGEN_VERSION "1.9"
 
 namespace msdfgen {

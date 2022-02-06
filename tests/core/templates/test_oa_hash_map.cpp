@@ -30,8 +30,13 @@
 
 #include "test_oa_hash_map.h"
 
+#include <stdint.h>
+
 #include "core/os/os.h"
 #include "core/templates/oa_hash_map.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/string/ustring.h"
 
 namespace TestOAHashMap {
 

@@ -51,6 +51,8 @@
 
 #include "deflate.h"
 
+#include <stdio.h>
+
 const char deflate_copyright[] =
    " deflate 1.2.11 Copyright 1995-2017 Jean-loup Gailly and Mark Adler ";
 /*

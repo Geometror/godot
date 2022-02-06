@@ -2,12 +2,29 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "acceln.h"
-#include "ray.h"
+
+#include <assert.h>
+#include <iostream>
+
 #include "../../include/embree3/rtcore_ray.h"
 #include "../../common/algorithms/parallel_for.h"
+#include "common/math/constants.h"
+#include "common/math/lbbox.h"
+#include "common/simd/varying.h"
+#include "common/simd/vboolf4_sse2.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "common/sys/platform.h"
+#include "kernels/common/accel.h"
+
+struct RTCRayHitN;
+struct RTCRayN;
 
 namespace embree
 {
+struct IntersectContext;
+struct PointQueryContext;
+
   AccelN::AccelN()
     : Accel(AccelData::TY_ACCELN), accels() {}
 

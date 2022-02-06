@@ -27,6 +27,13 @@
  */
 
 #include "hb.hh"
+#include "hb-aat.h"
+#include "hb-buffer.hh"
+#include "hb-font.hh"
+#include "hb-ot-layout.hh"
+#include "hb-shape-plan.hh"
+#include "hb-shaper.hh"
+#include "hb-unicode.hh"
 
 #ifndef HB_NO_OT_SHAPE
 
@@ -34,17 +41,11 @@
 #error "Cannot compile 'ot' shaper with HB_NO_OT_LAYOUT."
 #endif
 
-#include "hb-shaper-impl.hh"
-
 #include "hb-ot-shape.hh"
 #include "hb-ot-shape-complex.hh"
 #include "hb-ot-shape-fallback.hh"
 #include "hb-ot-shape-normalize.hh"
-
-#include "hb-ot-face.hh"
-
 #include "hb-set.hh"
-
 #include "hb-aat-layout.hh"
 
 

@@ -6,28 +6,25 @@
  * This software is subject to the conditions detailed in the
  * LICENCE file provided in this distribution. */
 
-#include <stdio.h>
-#include <string.h>
 #ifdef _WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #else /* _WIN32 */
-#include <unistd.h>
 #if defined(__amigaos__) && !defined(__amigaos4__)
 #define socklen_t int
 #else /* #if defined(__amigaos__) && !defined(__amigaos4__) */
-#include <sys/select.h>
 #endif /* #else defined(__amigaos__) && !defined(__amigaos4__) */
 #include <sys/socket.h>
-#include <netinet/in.h>
 #if !defined(__amigaos__) && !defined(__amigaos4__)
 #include <poll.h>
 #endif	/* !defined(__amigaos__) && !defined(__amigaos4__) */
 #include <errno.h>
+
 #define MINIUPNPC_IGNORE_EINTR
 #endif /* _WIN32 */
 
 #include "receivedata.h"
+#include "thirdparty/miniupnpc/src/miniupnpc_socketdef.h"
 
 int
 receivedata(SOCKET socket,

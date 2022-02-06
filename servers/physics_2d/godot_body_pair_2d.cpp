@@ -29,8 +29,16 @@
 /*************************************************************************/
 
 #include "godot_body_pair_2d.h"
+
 #include "godot_collision_solver_2d.h"
 #include "godot_space_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_2d.h"
+#include "servers/physics_2d/godot_body_2d.h"
+#include "servers/physics_2d/godot_constraint_2d.h"
+#include "servers/physics_2d/godot_shape_2d.h"
+#include "servers/physics_server_2d.h"
 
 #define ACCUMULATE_IMPULSES
 

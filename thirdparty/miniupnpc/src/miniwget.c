@@ -10,12 +10,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <asm/param.h>
 #ifdef _WIN32
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <io.h>
+
 #define MAXHOSTNAMELEN 64
 #include "win32_snprintf.h"
+
 #define socklen_t int
 #ifndef strncasecmp
 #if defined(_MSC_VER) && (_MSC_VER >= 1400)
@@ -30,13 +33,11 @@
 #if defined(__amigaos__) && !defined(__amigaos4__)
 #define socklen_t int
 #else /* #if defined(__amigaos__) && !defined(__amigaos4__) */
-#include <sys/select.h>
 #endif /* #else defined(__amigaos__) && !defined(__amigaos4__) */
 #include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
 #include <net/if.h>
 #include <netdb.h>
+
 #define closesocket close
 #include <strings.h>
 #endif /* #else _WIN32 */
@@ -53,6 +54,7 @@
 #include "miniwget.h"
 #include "connecthostport.h"
 #include "receivedata.h"
+#include "thirdparty/miniupnpc/src/miniupnpc_socketdef.h"
 
 #ifndef MAXHOSTNAMELEN
 #define MAXHOSTNAMELEN 64

@@ -30,6 +30,12 @@
 
 #include "websocket_server.h"
 
+#include "core/crypto/crypto.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/string/string_name.h"
+#include "core/variant/variant.h"
+
 GDCINULL(WebSocketServer);
 
 WebSocketServer::WebSocketServer() {

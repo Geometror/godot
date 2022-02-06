@@ -32,6 +32,14 @@
 #define NINE_PATCH_RECT_H
 
 #include "scene/gui/control.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/binder_common.h"
+
+class Texture2D;
 
 class NinePatchRect : public Control {
 	GDCLASS(NinePatchRect, Control);

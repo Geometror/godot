@@ -3,8 +3,14 @@
  @brief ENet peer management functions
 */
 #include <string.h>
+
 #define ENET_BUILDING_LIB 1
 #include "enet/enet.h"
+#include "enet/callbacks.h"
+#include "enet/godot.h"
+#include "enet/list.h"
+#include "enet/protocol.h"
+#include "enet/types.h"
 
 /** @defgroup peer ENet peer functions 
     @{

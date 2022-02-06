@@ -31,6 +31,13 @@
 #include "editor_debugger_plugin.h"
 
 #include "editor/debugger/script_editor_debugger.h"
+#include "core/error/error_macros.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/script_language.h"
+#include "core/variant/variant.h"
+
+class Array;
 
 void EditorDebuggerPlugin::_breaked(bool p_really_did, bool p_can_debug, String p_message, bool p_has_stackdump) {
 	if (p_really_did) {

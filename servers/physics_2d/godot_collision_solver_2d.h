@@ -32,6 +32,11 @@
 #define GODOT_COLLISION_SOLVER_2D_H
 
 #include "godot_shape_2d.h"
+#include "core/math/math_defs.h"
+
+class GodotShape2D;
+struct Transform2D;
+struct Vector2;
 
 class GodotCollisionSolver2D {
 public:

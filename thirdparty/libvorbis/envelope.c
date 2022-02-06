@@ -14,19 +14,17 @@
 
  ********************************************************************/
 
-#include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 #include <math.h>
-#include <ogg/ogg.h>
-#include "vorbis/codec.h"
-#include "codec_internal.h"
+#include <alloca.h>
 
+#include "vorbis/codec.h"
 #include "os.h"
 #include "scales.h"
 #include "envelope.h"
 #include "mdct.h"
-#include "misc.h"
+#include "backends.h"
+#include "ogg/os_types.h"
 
 void _ve_envelope_init(envelope_lookup *e,vorbis_info *vi){
   codec_setup_info *ci=vi->codec_setup;

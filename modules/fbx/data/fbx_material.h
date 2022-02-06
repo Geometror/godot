@@ -31,10 +31,19 @@
 #ifndef FBX_MATERIAL_H
 #define FBX_MATERIAL_H
 
-#include "tools/import_utils.h"
+#include <map>
+#include <string>
 
+#include "tools/import_utils.h"
 #include "core/object/ref_counted.h"
 #include "core/string/ustring.h"
+#include "scene/resources/material.h"
+
+namespace FBXDocParser {
+class Material;
+}  // namespace FBXDocParser
+struct ImportState;
+template <class T> class Vector;
 
 struct FBXMaterial : public RefCounted {
 	String material_name = String();

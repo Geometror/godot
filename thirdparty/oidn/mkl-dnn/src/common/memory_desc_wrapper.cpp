@@ -15,12 +15,10 @@
 *******************************************************************************/
 
 #include <assert.h>
-
 #include <initializer_list>
 
 #include "c_types_map.hpp"
 #include "memory_desc_wrapper.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
 
 namespace mkldnn {

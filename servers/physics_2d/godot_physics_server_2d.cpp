@@ -33,10 +33,22 @@
 #include "godot_body_direct_state_2d.h"
 #include "godot_broad_phase_2d_bvh.h"
 #include "godot_collision_solver_2d.h"
-
-#include "core/config/project_settings.h"
 #include "core/debugger/engine_debugger.h"
 #include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/os/memory.h"
+#include "core/templates/map.h"
+#include "core/templates/vset.h"
+#include "core/variant/array.h"
+#include "servers/physics_2d/godot_area_2d.h"
+#include "servers/physics_2d/godot_body_2d.h"
+#include "servers/physics_2d/godot_broad_phase_2d.h"
+#include "servers/physics_2d/godot_collision_object_2d.h"
+#include "servers/physics_2d/godot_joints_2d.h"
+#include "servers/physics_2d/godot_shape_2d.h"
+#include "servers/physics_2d/godot_space_2d.h"
+#include "servers/physics_2d/godot_step_2d.h"
 
 #define FLUSH_QUERY_CHECK(m_object) \
 	ERR_FAIL_COND_MSG(m_object->get_space() && flushing_queries, "Can't change this state while flushing queries. Use call_deferred() or set_deferred() to change monitoring state instead.");

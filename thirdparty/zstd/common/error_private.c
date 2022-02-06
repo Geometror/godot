@@ -12,6 +12,8 @@
 
 #include "error_private.h"
 
+#include "zstd_errors.h"
+
 const char* ERR_getErrorString(ERR_enum code)
 {
 #ifdef ZSTD_STRIP_ERROR_STRINGS

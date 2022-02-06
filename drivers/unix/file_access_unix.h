@@ -31,10 +31,13 @@
 #ifndef FILE_ACCESS_UNIX_H
 #define FILE_ACCESS_UNIX_H
 
+#include <stdio.h>
+#include <stdint.h>
+
 #include "core/io/file_access.h"
 #include "core/os/memory.h"
-
-#include <stdio.h>
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
 
 #if defined(UNIX_ENABLED) || defined(LIBC_FILEIO_ENABLED)
 

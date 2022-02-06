@@ -10,6 +10,10 @@
 
 #include "zstd_compress_internal.h"  /* ZSTD_hashPtr, ZSTD_count, ZSTD_storeSeq */
 #include "zstd_fast.h"
+#include "../common/zstd_internal.h"
+#include "compiler.h"
+#include "debug.h"
+#include "mem.h"
 
 
 void ZSTD_fillHashTable(ZSTD_matchState_t* ms,

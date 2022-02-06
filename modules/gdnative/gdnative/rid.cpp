@@ -30,8 +30,11 @@
 
 #include "gdnative/rid.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/os/memory.h"
 #include "core/templates/rid.h"
+#include "gdnative/gdnative.h"
 
 static_assert(sizeof(godot_rid) == sizeof(RID), "RID size mismatch");
 

@@ -27,10 +27,13 @@
 #ifndef HB_OT_SHAPE_HH
 #define HB_OT_SHAPE_HH
 
-#include "hb.hh"
+#include <string.h>
 
+#include "hb.hh"
 #include "hb-ot-map.hh"
 #include "hb-aat-map.hh"
+#include "hb-ot.h"
+#include "hb.h"
 
 
 struct hb_ot_shape_plan_key_t

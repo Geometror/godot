@@ -28,11 +28,11 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#include "modules/gdnative/gdnative.h"
-
 // Code by Paritosh97 with minor tweaks by Mux213
 // These entry points are only for the android platform and are simple stubs in all others.
 
+#include "android/godot_android.h"
+#include "gdnative/gdnative.h"
 #ifdef __ANDROID__
 #include "platform/android/java_godot_wrapper.h"
 #include "platform/android/os_android.h"

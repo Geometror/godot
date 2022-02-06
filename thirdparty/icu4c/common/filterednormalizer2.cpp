@@ -16,7 +16,20 @@
 *   created by: Markus W. Scherer
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/bytestream.h"
+#include "unicode/platform.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uchar.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unorm2.h"
+#include "unicode/urename.h"
+#include "unicode/uset.h"
+#include "unicode/uversion.h"
 
 #if !UCONFIG_NO_NORMALIZATION
 
@@ -25,7 +38,6 @@
 #include "unicode/stringoptions.h"
 #include "unicode/uniset.h"
 #include "unicode/unistr.h"
-#include "unicode/unorm.h"
 #include "cpputils.h"
 
 U_NAMESPACE_BEGIN

@@ -15,6 +15,8 @@
 #define __DTINTRV_H__
 
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/uversion.h"
 
 #if U_SHOW_CPLUSPLUS_API
 

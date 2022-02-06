@@ -20,6 +20,7 @@
 #include "vorbis/codec.h"
 #include "codec_internal.h"
 #include "os.h"
+#include "ogg/ogg.h"
 
 /* encode side bitrate tracking */
 typedef struct bitrate_manager_state {

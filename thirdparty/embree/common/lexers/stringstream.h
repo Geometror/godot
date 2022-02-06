@@ -3,7 +3,11 @@
 
 #pragma once
 
+#include <string>
+
 #include "stream.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
 
 namespace embree
 {

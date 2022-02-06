@@ -22,6 +22,15 @@
 #ifndef _TVG_RAW_LOADER_H_
 #define _TVG_RAW_LOADER_H_
 
+#include <stdint.h>
+#include <memory>
+
+#include "tvgLoadModule.h"
+
+namespace tvg {
+struct Surface;
+}  // namespace tvg
+
 class RawLoader : public LoadModule
 {
 public:

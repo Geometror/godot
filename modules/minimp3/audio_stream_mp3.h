@@ -31,12 +31,20 @@
 #ifndef AUDIO_STREAM_MP3_H
 #define AUDIO_STREAM_MP3_H
 
+#include <stdint.h>
+
 #include "core/io/resource_loader.h"
 #include "servers/audio/audio_stream.h"
-
 #include "minimp3_ex.h"
+#include "core/io/resource.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 class AudioStreamMP3;
+struct AudioFrame;
 
 class AudioStreamPlaybackMP3 : public AudioStreamPlaybackResampled {
 	GDCLASS(AudioStreamPlaybackMP3, AudioStreamPlaybackResampled);

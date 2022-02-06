@@ -24,6 +24,7 @@
  * Red Hat Author(s): Behdad Esfahbod
  */
 
+#include "hb-ot.h"
 #if !defined(HB_OT_H_IN) && !defined(HB_NO_SINGLE_HEADER_ERROR)
 #error "Include <hb-ot.h> instead."
 #endif
@@ -32,7 +33,6 @@
 #define HB_OT_LAYOUT_H
 
 #include "hb.h"
-
 #include "hb-ot-name.h"
 
 HB_BEGIN_DECLS

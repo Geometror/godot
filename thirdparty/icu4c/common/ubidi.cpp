@@ -17,6 +17,9 @@
 *
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "cmemory.h"
 #include "unicode/utypes.h"
 #include "unicode/ustring.h"
@@ -26,6 +29,9 @@
 #include "ubidi_props.h"
 #include "ubidiimp.h"
 #include "uassert.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 /*
  * General implementation notes:

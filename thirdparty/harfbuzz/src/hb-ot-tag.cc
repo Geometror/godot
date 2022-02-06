@@ -26,7 +26,12 @@
  * Google Author(s): Behdad Esfahbod, Roozbeh Pournader
  */
 
+#include <stdio.h>
+#include <string.h>
+
 #include "hb.hh"
+#include "hb-ot.h"
+#include "hb.h"
 
 #ifndef HB_NO_OT_TAG
 

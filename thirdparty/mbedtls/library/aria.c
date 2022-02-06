@@ -23,19 +23,18 @@
  * [2] https://tools.ietf.org/html/rfc5794
  */
 
-#include "common.h"
-
 #if defined(MBEDTLS_ARIA_C)
 
-#include "mbedtls/aria.h"
-
 #include <string.h>
+
+#include "mbedtls/aria.h"
 
 #if defined(MBEDTLS_SELF_TEST)
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

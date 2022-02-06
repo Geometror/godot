@@ -17,14 +17,17 @@
 #ifndef PRIMITIVE_DESC_HPP
 #define PRIMITIVE_DESC_HPP
 
-#include "mkldnn.h"
+#include <assert.h>
 
+#include "mkldnn.h"
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
 #include "nstl.hpp"
 #include "type_helpers.hpp"
 #include "primitive_attr.hpp"
 #include "verbose.hpp"
+#include "mkldnn_traits.hpp"
+#include "mkldnn_types.h"
 
 struct mkldnn_primitive_desc: public mkldnn::impl::c_compatible {
     using md_t = mkldnn::impl::memory_desc_t;

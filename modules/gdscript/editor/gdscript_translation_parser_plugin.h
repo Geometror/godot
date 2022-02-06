@@ -34,6 +34,13 @@
 #include "core/templates/set.h"
 #include "editor/editor_translation_parser.h"
 #include "modules/gdscript/gdscript_parser.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+
+template <class T> class Vector;
 
 class GDScriptEditorTranslationParserPlugin : public EditorTranslationParserPlugin {
 	GDCLASS(GDScriptEditorTranslationParserPlugin, EditorTranslationParserPlugin);

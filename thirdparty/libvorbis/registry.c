@@ -14,10 +14,7 @@
 
  ********************************************************************/
 
-#include "vorbis/codec.h"
-#include "codec_internal.h"
 #include "registry.h"
-#include "misc.h"
 /* seems like major overkill now; the backend numbers will grow into
    the infrastructure soon enough */
 

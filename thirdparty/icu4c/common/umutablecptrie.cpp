@@ -9,14 +9,22 @@
 #   include <stdio.h>
 #endif
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/ucptrie.h"
 #include "unicode/umutablecptrie.h"
 #include "unicode/uobject.h"
-#include "unicode/utf16.h"
 #include "cmemory.h"
 #include "uassert.h"
 #include "ucptrie_impl.h"
+#include "unicode/localpointer.h"
+#include "unicode/platform.h"
+#include "unicode/ucpmap.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 // ICU-20235 In case Microsoft math.h has defined this, undefine it.
 #ifdef OVERFLOW

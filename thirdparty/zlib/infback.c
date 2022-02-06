@@ -10,10 +10,13 @@
    inflate_fast() can be used with either inflate.c or infback.c.
  */
 
+#include <stdio.h>
+
 #include "zutil.h"
 #include "inftrees.h"
 #include "inflate.h"
 #include "inffast.h"
+#include "zconf.h"
 
 /* function prototypes */
 local void fixedtables OF((struct inflate_state FAR *state));

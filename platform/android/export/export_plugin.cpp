@@ -30,6 +30,42 @@
 
 #include "export_plugin.h"
 
+#include <string.h>
+
+#include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/io/config_file.h"
+#include "core/io/dir_access.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/io/image_loader.h"
+#include "core/io/json.h"
+#include "core/io/marshalls.h"
+#include "core/io/zip_io.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/os/memory.h"
+#include "core/string/char_utils.h"
+#include "core/string/print_string.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "core/version.h"
+#include "core/version_generated.gen.h"
+#include "drivers/png/png_driver_common.h"
+#include "editor/editor_log.h"
+#include "editor/editor_node.h"
+#include "editor/editor_paths.h"
+#include "editor/editor_settings.h"
+#include "main/splash.gen.h"
+#include "platform/android/export/godot_plugin_config.h"
+#include "platform/android/export/gradle_export_util.h"
+#include "platform/android/logo.gen.h"
+#include "platform/android/run_icon.gen.h"
+#include "scene/resources/texture.h"
+#include "servers/display_server.h"
+#include "thirdparty/minizip/ioapi.h"
+#include "thirdparty/minizip/unzip.h"
+
 static const char *android_perms[] = {
 	"ACCESS_CHECKIN_PROPERTIES",
 	"ACCESS_COARSE_LOCATION",

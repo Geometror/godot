@@ -31,6 +31,9 @@
 #include "godot_joints_2d.h"
 
 #include "godot_space_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "servers/physics_2d/godot_body_2d.h"
 
 //based on chipmunk joint constraints
 

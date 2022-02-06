@@ -31,15 +31,26 @@
 #ifndef GODOT_AREA_3D_H
 #define GODOT_AREA_3D_H
 
-#include "godot_collision_object_3d.h"
+#include <stdint.h>
 
+#include "godot_collision_object_3d.h"
 #include "core/templates/self_list.h"
 #include "servers/physics_server_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/object_id.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
 
 class GodotSpace3D;
 class GodotBody3D;
 class GodotSoftBody3D;
 class GodotConstraint3D;
+struct Transform3D;
 
 class GodotArea3D : public GodotCollisionObject3D {
 	PhysicsServer3D::AreaSpaceOverrideMode gravity_override_mode = PhysicsServer3D::AREA_SPACE_OVERRIDE_DISABLED;

@@ -46,6 +46,29 @@
 // even if no merging was done (i.e., the stage was only one compilation unit).
 //
 
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/ResourceLimits.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdint.h>
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <list>
+#include <map>
+#include <memory>
+#include <set>
+#include <string>
+#include <unordered_set>
+#include <vector>
+
 #include "localintermediate.h"
 #include "../Include/InfoSink.h"
 #include "SymbolTable.h"

@@ -30,9 +30,20 @@
 
 #include "rendering_server.h"
 
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "servers/rendering/rendering_server_globals.h"
 #include "servers/rendering/shader_language.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/rect2.h"
+#include "core/object/class_db.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
+#include "servers/rendering/renderer_thread_pool.h"
 
 RenderingServer *RenderingServer::singleton = nullptr;
 RenderingServer *(*RenderingServer::create_func)() = nullptr;

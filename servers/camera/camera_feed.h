@@ -35,6 +35,13 @@
 #include "core/math/transform_2d.h"
 #include "servers/camera_server.h"
 #include "servers/rendering_server.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/variant/binder_common.h"
+
+class Image;
 
 /**
 	The camera server is a singleton object that gives access to the various

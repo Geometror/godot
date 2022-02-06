@@ -32,10 +32,11 @@
 
 #include "core/io/resource_loader.h"
 #include "core/io/resource_saver.h"
-
 #include "nativescript.h"
-
-#include "core/os/os.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
 
 NativeScriptLanguage *native_script_language;
 

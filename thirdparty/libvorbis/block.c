@@ -18,17 +18,22 @@
  ********************************************************************/
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <ogg/ogg.h>
-#include "vorbis/codec.h"
-#include "codec_internal.h"
+#include <alloca.h>
 
+#include "vorbis/codec.h"
 #include "window.h"
 #include "mdct.h"
 #include "lpc.h"
 #include "registry.h"
 #include "misc.h"
+#include "backends.h"
+#include "bitrate.h"
+#include "codebook.h"
+#include "envelope.h"
+#include "ogg/os_types.h"
+#include "smallft.h"
 
 /* pcm accumulator examples (not exhaustive):
 

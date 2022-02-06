@@ -30,16 +30,24 @@
 
 #include "dir_access_unix.h"
 
-#if defined(UNIX_ENABLED) || defined(LIBC_FILEIO_ENABLED)
+#include <bits/struct_stat.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
-#include "core/os/memory.h"
-#include "core/string/print_string.h"
-#include "core/templates/list.h"
+#include "core/error/error_macros.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+
+#if defined(UNIX_ENABLED) || defined(LIBC_FILEIO_ENABLED)
 
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "core/os/memory.h"
+#include "core/templates/list.h"
 
 #ifndef ANDROID_ENABLED
 #include <sys/statvfs.h>

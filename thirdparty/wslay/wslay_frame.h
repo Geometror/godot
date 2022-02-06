@@ -30,6 +30,8 @@
 #endif /* HAVE_CONFIG_H */
 
 #include <wslay/wslay.h>
+#include <stddef.h>
+#include <stdint.h>
 
 enum wslay_frame_state {
   PREP_HEADER,

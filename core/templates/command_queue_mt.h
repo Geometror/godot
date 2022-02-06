@@ -31,6 +31,8 @@
 #ifndef COMMAND_QUEUE_MT_H
 #define COMMAND_QUEUE_MT_H
 
+#include <stdint.h>
+
 #include "core/os/memory.h"
 #include "core/os/mutex.h"
 #include "core/os/semaphore.h"
@@ -38,6 +40,11 @@
 #include "core/templates/local_vector.h"
 #include "core/templates/simple_type.h"
 #include "core/typedefs.h"
+#include "core/error/error_macros.h"
+
+class CommandQueueMT;
+struct CommandQueueMT::CommandBase;
+struct CommandQueueMT::SyncCommand;
 
 #define COMMA(N) _COMMA_##N
 #define _COMMA_0

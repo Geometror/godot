@@ -1,10 +1,21 @@
 
 #include "../msdfgen.h"
 
+#include <stddef.h>
 #include <vector>
+
 #include "edge-selectors.h"
 #include "contour-combiners.h"
 #include "ShapeDistanceFinder.h"
+#include "core/Contour.h"
+#include "core/EdgeColor.h"
+#include "core/EdgeHolder.h"
+#include "core/Projection.h"
+#include "core/Shape.h"
+#include "core/ShapeDistanceFinder.hpp"
+#include "core/SignedDistance.h"
+#include "core/edge-segments.h"
+#include "core/msdf-error-correction.h"
 
 namespace msdfgen {
 

@@ -38,6 +38,21 @@
 #include "scene/3d/mesh_instance_3d.h"
 #include "scene/gui/subviewport_container.h"
 #include "scene/resources/material.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "editor/editor_inspector.h"
+#include "scene/resources/mesh.h"
+
+class Camera3D;
+class DirectionalLight3D;
+class EditorNode;
+class InputEvent;
+class MeshInstance3D;
+class Node3D;
+class Node;
+class SubViewport;
+class TextureButton;
 
 class MeshEditor : public SubViewportContainer {
 	GDCLASS(MeshEditor, SubViewportContainer);

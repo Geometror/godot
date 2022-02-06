@@ -3,6 +3,10 @@
 
 #pragma once
 
+#include <assert.h>
+#include <emmintrin.h>
+#include <atomic>
+
 #include "platform.h"
 #include "intrinsics.h"
 #include "atomic.h"

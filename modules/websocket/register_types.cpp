@@ -29,8 +29,14 @@
 /*************************************************************************/
 
 #include "register_types.h"
-#include "core/config/project_settings.h"
-#include "core/error/error_macros.h"
+
+#include "core/object/class_db.h"
+#include "modules/websocket/websocket_client.h"
+#include "modules/websocket/websocket_peer.h"
+#include "modules/websocket/websocket_server.h"
+#include "modules/websocket/wsl_peer.h"
+
+class WebSocketMultiplayerPeer;
 #ifdef JAVASCRIPT_ENABLED
 #include "emscripten.h"
 #include "emws_client.h"

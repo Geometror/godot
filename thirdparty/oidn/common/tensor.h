@@ -16,9 +16,15 @@
 
 #pragma once
 
-#include "platform.h"
+#include <stddef.h>
 #include <vector>
 #include <map>
+#include <algorithm>
+#include <cstdint>
+#include <memory>
+#include <string>
+
+#include "platform.h"
 
 namespace oidn {
 

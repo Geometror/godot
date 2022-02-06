@@ -14,9 +14,11 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <assert.h>
+#include <stdint.h>
 
 #include "cpu_barrier.hpp"
+#include "cpu_isa_traits.hpp"
+#include "xbyak_mnemonic.h"
 
 namespace mkldnn {
 namespace impl {

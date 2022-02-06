@@ -8,8 +8,10 @@
 */
 
 #include "uvectr64.h"
+
 #include "cmemory.h"
 #include "putilimp.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

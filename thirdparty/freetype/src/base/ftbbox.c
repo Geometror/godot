@@ -24,13 +24,17 @@
    */
 
 
-#include <freetype/internal/ftdebug.h>
-
 #include <freetype/ftbbox.h>
 #include <freetype/ftimage.h>
 #include <freetype/ftoutln.h>
-#include <freetype/internal/ftcalc.h>
-#include <freetype/internal/ftobjs.h>
+#include <freetype/fterrors.h>
+
+#include "freetype/config/integer-types.h"
+#include "freetype/freetype.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftcalc.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
 
 
   typedef struct  TBBox_Rec_

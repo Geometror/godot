@@ -18,12 +18,14 @@
 #define MEMORY_DESC_WRAPPER_HPP
 
 #include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #include "c_types_map.hpp"
 #include "nstl.hpp"
 #include "utils.hpp"
-
 #include "type_helpers.hpp"
+#include "mkldnn_types.h"
 
 namespace mkldnn {
 namespace impl {

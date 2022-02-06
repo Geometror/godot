@@ -15,9 +15,12 @@
 */
 
 #include "spirv_reflect.h"
+
 #include <assert.h>
 #include <stdbool.h>
 #include <string.h>
+
+#include "thirdparty/spirv-reflect/include/spirv/unified1/spirv.h"
 
 #if defined(WIN32)
   #define _CRTDBG_MAP_ALLOC

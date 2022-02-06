@@ -16,10 +16,14 @@
 #define WEBP_UTILS_BIT_READER_UTILS_H_
 
 #include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
 #ifdef _MSC_VER
 #include <stdlib.h>  // _byteswap_ulong
 #endif
 #include "src/webp/types.h"
+
+struct VP8BitReader;
 
 // Warning! This macro triggers quite some MACRO wizardry around func signature!
 #if !defined(BITTRACE)

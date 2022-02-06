@@ -34,6 +34,10 @@
 #include "core/io/xml_parser.h"
 #include "core/templates/map.h"
 #include "core/variant/variant.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 struct ScriptMemberInfo {
 	PropertyInfo propinfo;

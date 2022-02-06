@@ -15,9 +15,10 @@
 #ifndef WEBP_DSP_LOSSLESS_H_
 #define WEBP_DSP_LOSSLESS_H_
 
+#include <stdint.h>
+
 #include "src/webp/types.h"
 #include "src/webp/decode.h"
-
 #include "src/enc/histogram_enc.h"
 #include "src/utils/utils.h"
 

@@ -36,9 +36,12 @@
 #include "core/templates/hash_map.h"
 #include "core/templates/set.h"
 #include "gdscript.h"
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
 
 class GDScriptAnalyzer;
 class GDScriptParser;
+class GDScript;
 
 class GDScriptParserRef : public RefCounted {
 public:

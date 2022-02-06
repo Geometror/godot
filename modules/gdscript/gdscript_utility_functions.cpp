@@ -30,6 +30,8 @@
 
 #include "gdscript_utility_functions.h"
 
+#include <stdint.h>
+
 #include "core/io/resource_loader.h"
 #include "core/object/class_db.h"
 #include "core/object/method_bind.h"
@@ -37,6 +39,24 @@
 #include "core/templates/oa_hash_map.h"
 #include "core/templates/vector.h"
 #include "gdscript.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/math/color.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/thread.h"
+#include "core/string/node_path.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+
+struct Vector2;
+struct Vector3;
 
 #ifdef DEBUG_ENABLED
 

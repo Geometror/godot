@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_H
 #define RENDERING_SERVER_H
 
+#include <stdint.h>
+
 #include "core/io/image.h"
 #include "core/math/geometry_3d.h"
 #include "core/math/transform_2d.h"
@@ -41,6 +43,31 @@
 #include "servers/display_server.h"
 #include "servers/rendering/renderer_thread_pool.h"
 #include "servers/rendering/rendering_device.h"
+#include "core/error/error_list.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+
+class ObjectID;
+class RendererThreadPool;
+struct Plane;
+struct Rect2;
 
 class RenderingServer : public Object {
 	GDCLASS(RenderingServer, Object);

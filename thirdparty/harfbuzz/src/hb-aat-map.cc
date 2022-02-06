@@ -27,11 +27,13 @@
  */
 
 #include "hb.hh"
+#include "hb-face.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
 
 #ifndef HB_NO_AAT_SHAPE
 
 #include "hb-aat-map.hh"
-
 #include "hb-aat-layout.hh"
 #include "hb-aat-layout-feat-table.hh"
 

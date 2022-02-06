@@ -27,8 +27,12 @@
  * http://tools.ietf.org/html/rfc6070 (Test vectors)
  */
 
-#include "common.h"
+#include <limits.h>
+#include <stdint.h>
 
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
+#include "mbedtls/platform_util.h"
 #if defined(MBEDTLS_PKCS5_C)
 
 #include "mbedtls/pkcs5.h"
@@ -46,6 +50,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif
 

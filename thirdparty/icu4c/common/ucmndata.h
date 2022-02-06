@@ -27,8 +27,14 @@
 #ifndef __UCMNDATA_H__
 #define __UCMNDATA_H__
 
+#include <stdint.h>
+
 #include "unicode/udata.h"
 #include "umapfile.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
 
 
 #define COMMON_DATA_NAME U_ICUDATA_NAME

@@ -18,8 +18,10 @@
  *
  */
 
-#include "common.h"
+#include <stddef.h>
+#include <stdint.h>
 
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_RSA_C)
 
 #include "mbedtls/rsa.h"

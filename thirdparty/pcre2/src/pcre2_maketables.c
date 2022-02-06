@@ -45,10 +45,11 @@ own as part of the PCRE2 library. It is also included in the compilation of
 pcre2_dftables.c as a freestanding program, in which case the macro
 PCRE2_DFTABLES is defined. */
 
+#include <ctype.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 #ifndef PCRE2_DFTABLES    /* Compiling the library */
-#  ifdef HAVE_CONFIG_H
-#  include "config.h"
-#  endif
 #  include "pcre2_internal.h"
 #endif
 

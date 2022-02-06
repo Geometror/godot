@@ -34,6 +34,10 @@
 //
 
 #include "SPVRemapper.h"
+
+#include <SPIRV/spvIR.h>
+#include <SPIRV/spirv.hpp>
+
 #include "doc.h"
 
 #if !defined (use_cpp11)
@@ -42,7 +46,6 @@
 
 #include <algorithm>
 #include <cassert>
-#include "../glslang/Include/Common.h"
 
 namespace spv {
 

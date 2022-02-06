@@ -13,6 +13,8 @@
  * You may select, at your option, one of the above-listed licenses.
 ****************************************************************** */
 
+#include <stddef.h>
+
 /* --- dependencies --- */
 #include "../common/zstd_deps.h"   /* size_t */
 

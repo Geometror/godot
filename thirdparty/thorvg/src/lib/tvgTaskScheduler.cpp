@@ -24,6 +24,8 @@
 #include <vector>
 #include <atomic>
 #include <condition_variable>
+#include <memory>
+
 #include "tvgTaskScheduler.h"
 
 /************************************************************************/

@@ -1,12 +1,12 @@
-#include "../public/VHACD.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdarg.h>
+#include <stdint.h>
 #include <thread>
 #include <atomic>
 #include <mutex>
 #include <string>
-#include <float.h>
+
+#include "../public/VHACD.h"
 
 #define ENABLE_ASYNC 1
 

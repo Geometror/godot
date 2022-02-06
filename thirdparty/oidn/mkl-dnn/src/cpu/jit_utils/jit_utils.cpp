@@ -14,9 +14,11 @@
 * limitations under the License.
 *******************************************************************************/
 
+#include <stdio.h>
 #include <mutex>
 
 #include "utils.hpp"
+#include "z_magic.hpp"
 
 #ifndef MKLDNN_ENABLE_JIT_PROFILING
 #define MKLDNN_ENABLE_JIT_PROFILING 1

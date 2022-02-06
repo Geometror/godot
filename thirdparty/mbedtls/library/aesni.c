@@ -22,8 +22,8 @@
  * [CLMUL-WP] http://software.intel.com/en-us/articles/intel-carry-less-multiplication-instruction-and-its-usage-for-computing-the-gcm-mode/
  */
 
-#include "common.h"
-
+#include "mbedtls/aes.h"
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_AESNI_C)
 
 #if defined(__has_feature)
@@ -32,9 +32,9 @@
 #endif
 #endif
 
-#include "mbedtls/aesni.h"
-
 #include <string.h>
+
+#include "mbedtls/aesni.h"
 
 #ifndef asm
 #define asm __asm

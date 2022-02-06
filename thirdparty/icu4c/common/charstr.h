@@ -14,10 +14,20 @@
 #ifndef CHARSTRING_H
 #define CHARSTRING_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/unistr.h"
 #include "unicode/uobject.h"
 #include "cmemory.h"
+#include "unicode/platform.h"
+#include "unicode/stringpiece.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class UnicodeString;
+}  // namespace icu_70
 
 U_NAMESPACE_BEGIN
 

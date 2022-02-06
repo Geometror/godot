@@ -37,6 +37,12 @@
 #include "scene/gui/check_button.h"
 #include "scene/gui/dialogs.h"
 #include "scene/gui/line_edit.h"
+#include "core/object/object.h"
+#include "core/templates/set.h"
+
+class CheckBox;
+class Node;
+class SceneTreeEditor;
 
 class ReparentDialog : public ConfirmationDialog {
 	GDCLASS(ReparentDialog, ConfirmationDialog);

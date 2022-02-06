@@ -33,6 +33,12 @@
 
 #include "scene/2d/node_2d.h"
 #include "scene/resources/multimesh.h"
+#include "core/math/rect2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+
+class MultiMesh;
+class Texture2D;
 
 class MultiMeshInstance2D : public Node2D {
 	GDCLASS(MultiMeshInstance2D, Node2D);

@@ -14,7 +14,13 @@
 #ifndef WEBP_UTILS_BIT_WRITER_UTILS_H_
 #define WEBP_UTILS_BIT_WRITER_UTILS_H_
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "src/webp/types.h"
+#include "utils/endian_inl_utils.h"
+
+struct VP8BitWriter;
 
 #ifdef __cplusplus
 extern "C" {

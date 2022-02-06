@@ -33,6 +33,16 @@
 
 #include "scene/2d/node_2d.h"
 #include "scene/resources/texture.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/dictionary.h"
+
+class Texture2D;
 
 class Sprite2D : public Node2D {
 	GDCLASS(Sprite2D, Node2D);

@@ -29,9 +29,13 @@
 /*************************************************************************/
 
 #include "lightmap_denoiser.h"
-#include "denoise_wrapper.h"
 
+#include <stdint.h>
+
+#include "denoise_wrapper.h"
 #include "core/io/image.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
 
 LightmapDenoiser *LightmapDenoiserOIDN::create_oidn_denoiser() {
 	return memnew(LightmapDenoiserOIDN);

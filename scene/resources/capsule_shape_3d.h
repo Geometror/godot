@@ -32,6 +32,11 @@
 #define CAPSULE_SHAPE_H
 
 #include "scene/resources/shape_3d.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
+
+struct Vector3;
 
 class CapsuleShape3D : public Shape3D {
 	GDCLASS(CapsuleShape3D, Shape3D);

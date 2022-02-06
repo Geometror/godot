@@ -14,9 +14,16 @@
 //          Urvang Joshi (urvang@google.com)
 //          Vincent Rabaud (vrabaud@google.com)
 
+#include <assert.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "src/dsp/lossless.h"
 #include "src/dsp/lossless_common.h"
 #include "src/enc/vp8li_enc.h"
+#include "webp/format_constants.h"
+#include "webp/types.h"
 
 #define MAX_DIFF_COST (1e30f)
 

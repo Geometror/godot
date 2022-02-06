@@ -28,13 +28,22 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-// Godot imports
-#include "core/config/project_settings.h"
-#include "core/io/file_access.h"
-#include "core/os/os.h"
+#include <gdnative/gdnative.h>
+
 // PluginScript imports
 #include "pluginscript_language.h"
 #include "pluginscript_script.h"
+#include "core/io/resource_loader.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/variant_struct.h"
+#include "modules/gdnative/pluginscript/pluginscript_loader.h"
+#include "pluginscript/godot_pluginscript.h"
 
 String PluginScriptLanguage::get_name() const {
 	return String(_desc.name);

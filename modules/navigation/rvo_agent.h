@@ -31,10 +31,14 @@
 #ifndef RVO_AGENT_H
 #define RVO_AGENT_H
 
+#include <Agent.h>
+#include <stdint.h>
+
 #include "core/object/class_db.h"
 #include "nav_rid.h"
-
-#include <Agent.h>
+#include "core/object/object_id.h"
+#include "core/string/string_name.h"
+#include "core/variant/variant.h"
 
 class NavMap;
 

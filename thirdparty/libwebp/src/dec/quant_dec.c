@@ -11,7 +11,13 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include <stdint.h>
+
 #include "src/dec/vp8i_dec.h"
+#include "dec/common_dec.h"
+#include "dec/vp8_dec.h"
+#include "utils/bit_reader_utils.h"
+#include "webp/types.h"
 
 static WEBP_INLINE int clip(int v, int M) {
   return v < 0 ? 0 : v > M ? M : v;

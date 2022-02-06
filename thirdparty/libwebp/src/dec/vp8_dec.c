@@ -12,13 +12,21 @@
 // Author: Skal (pascal.massimino@gmail.com)
 
 #include <stdlib.h>
+#include <assert.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "src/dec/alphai_dec.h"
 #include "src/dec/vp8i_dec.h"
-#include "src/dec/vp8li_dec.h"
-#include "src/dec/webpi_dec.h"
-#include "src/utils/bit_reader_inl_utils.h"
 #include "src/utils/utils.h"
+#include "dec/common_dec.h"
+#include "dec/vp8_dec.h"
+#include "dsp/dsp.h"
+#include "utils/bit_reader_utils.h"
+#include "utils/thread_utils.h"
+#include "webp/decode.h"
+#include "webp/format_constants.h"
+#include "webp/types.h"
 
 //------------------------------------------------------------------------------
 

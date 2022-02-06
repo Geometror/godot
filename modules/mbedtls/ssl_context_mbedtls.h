@@ -31,12 +31,6 @@
 #ifndef SSL_CONTEXT_MBED_TLS_H
 #define SSL_CONTEXT_MBED_TLS_H
 
-#include "crypto_mbedtls.h"
-
-#include "core/io/file_access.h"
-
-#include "core/object/ref_counted.h"
-
 #include <mbedtls/config.h>
 #include <mbedtls/ctr_drbg.h>
 #include <mbedtls/debug.h>
@@ -44,7 +38,14 @@
 #include <mbedtls/ssl.h>
 #include <mbedtls/ssl_cookie.h>
 
+#include "crypto_mbedtls.h"
+#include "core/io/file_access.h"
+#include "core/object/ref_counted.h"
+#include "core/error/error_list.h"
+
 class SSLContextMbedTLS;
+class CryptoKeyMbedTLS;
+class X509CertificateMbedTLS;
 
 class CookieContextMbedTLS : public RefCounted {
 	friend class SSLContextMbedTLS;

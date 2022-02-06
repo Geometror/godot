@@ -40,6 +40,26 @@
 #include "scene/gui/separator.h"
 #include "scene/gui/split_container.h"
 #include "scene/gui/tree.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+
+class Button;
+class EditorFileDialog;
+class EditorHelpBit;
+class HSplitContainer;
+class Label;
+class LineEdit;
+class OptionButton;
+class Timer;
+class Tree;
+class TreeItem;
+class VBoxContainer;
 
 class EditorFeatureProfile : public RefCounted {
 	GDCLASS(EditorFeatureProfile, RefCounted);

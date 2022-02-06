@@ -24,8 +24,12 @@
  * Igalia Author(s): Frédéric Wang
  */
 
-#include "hb.hh"
-
+#include "hb-face.hh"
+#include "hb-font.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
+#include "hb-ot.h"
+#include "hb.h"
 #ifndef HB_NO_MATH
 
 #include "hb-ot-math-table.hh"

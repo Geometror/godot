@@ -35,6 +35,9 @@
 #include "core/object/gdvirtual.gen.inc"
 #include "core/object/ref_counted.h"
 #include "core/object/script_language.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
 
 class MainLoop : public Object {
 	GDCLASS(MainLoop, Object);

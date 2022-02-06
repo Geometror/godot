@@ -31,6 +31,8 @@
 #ifndef CSG_H
 #define CSG_H
 
+#include <stdint.h>
+
 #include "core/math/aabb.h"
 #include "core/math/plane.h"
 #include "core/math/transform_3d.h"
@@ -42,6 +44,9 @@
 #include "core/templates/oa_hash_map.h"
 #include "core/templates/vector.h"
 #include "scene/resources/material.h"
+#include "core/math/math_defs.h"
+#include "core/templates/hashfuncs.h"
+#include "core/typedefs.h"
 
 struct CSGBrush {
 	struct Face {

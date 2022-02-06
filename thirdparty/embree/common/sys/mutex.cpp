@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "mutex.h"
-#include "regression.h"
+
+#include "common/sys/platform.h"
 
 #if defined(__WIN32__) && !defined(PTHREADS_WIN32)
 
@@ -21,6 +22,7 @@ namespace embree
 
 #if defined(__UNIX__) || defined(PTHREADS_WIN32)
 #include <pthread.h>
+
 namespace embree
 {
   /*! system mutex using pthreads */

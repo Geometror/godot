@@ -31,12 +31,18 @@
 #ifndef OGG_PACKET_SEQUENCE_H
 #define OGG_PACKET_SEQUENCE_H
 
+#include <stdint.h>
+
 #include "core/io/resource.h"
 #include "core/object/gdvirtual.gen.inc"
 #include "core/variant/native_ptr.h"
 #include "core/variant/typed_array.h"
 #include "core/variant/variant.h"
 #include "thirdparty/libogg/ogg/ogg.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
 
 class OGGPacketSequencePlayback;
 

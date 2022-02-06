@@ -34,6 +34,17 @@
 #ifndef FBX_DOCUMENT_H
 #define FBX_DOCUMENT_H
 
+#include <stdint.h>
+#include <numeric>
+#include <cstddef>
+#include <cstdint>
+#include <map>
+#include <memory>
+#include <string>
+#include <string_view>
+#include <tuple>
+#include <vector>
+
 #include "FBXCommon.h"
 #include "FBXParser.h"
 #include "FBXProperties.h"
@@ -41,8 +52,13 @@
 #include "core/math/vector2.h"
 #include "core/math/vector3.h"
 #include "core/string/print_string.h"
-#include <stdint.h>
-#include <numeric>
+#include "core/string/ustring.h"
+
+namespace FBXDocParser {
+class Camera;
+class FileGlobalSettings;
+class Light;
+}  // namespace FBXDocParser
 
 #define _AI_CONCAT(a, b) a##b
 #define AI_CONCAT(a, b) _AI_CONCAT(a, b)
@@ -53,21 +69,17 @@ class Parser;
 class Object;
 struct ImportSettings;
 class Connection;
-
 class PropertyTable;
 class Document;
 class Material;
 class ShapeGeometry;
 class LineGeometry;
 class Geometry;
-
 class Video;
-
 class AnimationCurve;
 class AnimationCurveNode;
 class AnimationLayer;
 class AnimationStack;
-
 class BlendShapeChannel;
 class BlendShape;
 class Skin;
@@ -204,6 +216,7 @@ private:
 	}
 
 class FbxPoseNode;
+
 class FbxPose : public Object {
 public:
 	FbxPose(uint64_t id, const ElementPtr element, const Document &doc, const std::string &name);

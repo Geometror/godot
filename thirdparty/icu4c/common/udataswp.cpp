@@ -21,6 +21,8 @@
 */
 
 #include <stdarg.h>
+#include <stddef.h>
+
 #include "unicode/utypes.h"
 #include "unicode/udata.h" /* UDataInfo */
 #include "ucmndata.h" /* DataHeader */

@@ -2,6 +2,9 @@
 #ifndef __CVTT_S3TC_H__
 #define __CVTT_S3TC_H__
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "ConvectionKernels_ParallelMath.h"
 
 namespace cvtt

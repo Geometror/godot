@@ -31,15 +31,25 @@
 #ifndef NET_SOCKET_UNIX_H
 #define NET_SOCKET_UNIX_H
 
+#include <stdint.h>
+
 #include "core/io/net_socket.h"
+#include "core/error/error_list.h"
+#include "core/io/ip.h"
+#include "core/io/ip_address.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
 
 #if defined(WINDOWS_ENABLED)
 #include <winsock2.h>
 #include <ws2tcpip.h>
+
 #define SOCKET_TYPE SOCKET
 
 #else
 #include <sys/socket.h>
+
 #define SOCKET_TYPE int
 
 #endif

@@ -30,7 +30,14 @@
 #endif
 // #define UCPTRIE_DEBUG
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utf.h"
 #ifdef UCPTRIE_DEBUG
 #include "unicode/ucptrie.h"
 #include "unicode/umutablecptrie.h"
@@ -39,7 +46,6 @@
 #include "cmemory.h"
 #include "utrie2.h"
 #include "utrie2_impl.h"
-
 #include "utrie.h"  // for utrie2_fromUTrie()
 
 /* Implementation notes ----------------------------------------------------- */

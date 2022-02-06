@@ -18,13 +18,17 @@
 *   Character conversion functions moved here from uresbund.c
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/putil.h"
 #include "unicode/ustring.h"
-#include "unicode/ucnv.h"
 #include "unicode/ures.h"
 #include "uinvchar.h"
-#include "ustr_cnv.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 U_CAPI UResourceBundle * U_EXPORT2
 ures_openU(const UChar *myPath, 

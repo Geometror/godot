@@ -25,6 +25,14 @@
  */
 
 #include "hb.hh"
+#include "hb-buffer.hh"
+#include "hb-font.hh"
+#include "hb-ot-layout.hh"
+#include "hb-ot-map.hh"
+#include "hb-ot-shape-complex-syllabic.hh"
+#include "hb-ot-shape-complex.hh"
+#include "hb-ot-shape-normalize.hh"
+#include "hb-ot-shape.hh"
 
 #ifndef HB_NO_OT_SHAPE
 

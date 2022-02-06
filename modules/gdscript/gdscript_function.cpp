@@ -31,6 +31,11 @@
 #include "gdscript_function.h"
 
 #include "gdscript.h"
+#include "core/debugger/engine_debugger.h"
+#include "core/object/method_bind.h"
+#include "core/os/mutex.h"
+#include "core/templates/pair.h"
+#include "modules/gdscript/gdscript_utility_functions.h"
 
 const int *GDScriptFunction::get_code() const {
 	return _code_ptr;

@@ -33,6 +33,9 @@
 
 #include "core/string/string_name.h"
 #include "core/variant/variant.h"
+#include "core/object/object.h"
+#include "core/templates/list.h"
+#include "core/variant/callable.h"
 
 class GDScriptUtilityFunctions {
 public:

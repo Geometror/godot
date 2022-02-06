@@ -45,9 +45,23 @@
     Device::setError(obj ? obj->getDevice() : nullptr, Error::Unknown, "unknown exception caught"); \
   }
 
+#include <stddef.h>
+#include <mutex>
+#include <exception>
+#include <memory>
+#include <new>
+
 #include "device.h"
 #include "filter.h"
-#include <mutex>
+#include "OpenImageDenoise/oidn.h"
+#include "OpenImageDenoise/oidn.hpp"
+#include "common/exception.h"
+#include "common/platform.h"
+#include "common/ref.h"
+#include "core/buffer.h"
+#include "core/image.h"
+#include "mkldnn.hpp"
+#include "mkldnn_types.h"
 
 namespace oidn {
 

@@ -30,11 +30,13 @@
 
 #include "image_loader_png.h"
 
-#include "core/os/os.h"
-#include "core/string/print_string.h"
-#include "drivers/png/png_driver_common.h"
-
 #include <string.h>
+
+#include "drivers/png/png_driver_common.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/string/ustring.h"
 
 Error ImageLoaderPNG::load_image(Ref<Image> p_image, FileAccess *f, bool p_force_linear, float p_scale) {
 	const uint64_t buffer_size = f->get_length();

@@ -30,12 +30,31 @@
 
 #include "fbx_material.h"
 
+#include <stdint.h>
+#include <typeinfo>
+
 // FIXME: Shouldn't depend on core_bind.h! Use DirAccessRef like the rest of
 // the engine instead of core_bind::Directory.
 #include "core/core_bind.h"
 #include "scene/resources/material.h"
 #include "scene/resources/texture.h"
 #include "tools/validation_tools.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/io/resource_loader.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector3.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "data/import_state.h"
+#include "fbx_parser/FBXDocument.h"
+#include "fbx_parser/FBXProperties.h"
+#include "tools/import_utils.h"
 
 String FBXMaterial::get_material_name() const {
 	return material_name;

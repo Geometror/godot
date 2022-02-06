@@ -20,6 +20,23 @@
 // THE SOFTWARE.
 //
 
+#include <stdio.h>
+#include <cstddef>
+#include <new>
+
+#include "vulkan/vk_platform.h"
+#include "vulkan/vulkan_core.h"
+
+class VmaBlockMetadata_Buddy;
+class VmaBlockMetadata_Generic;
+class VmaBlockMetadata_Linear;
+class VmaBlockVectorDefragmentationContext;
+class VmaDefragmentationAlgorithm_Fast;
+class VmaDefragmentationAlgorithm_Generic;
+struct VmaAllocator_T;
+struct VmaDefragmentationContext_T;
+struct VmaPool_T;
+struct VmaSuballocationItemSizeLess;
 #ifndef AMD_VULKAN_MEMORY_ALLOCATOR_H
 #define AMD_VULKAN_MEMORY_ALLOCATOR_H
 
@@ -4152,6 +4169,7 @@ remove them if not needed.
 
 #if defined(__ANDROID_API__) && (__ANDROID_API__ < 16)
 #include <cstdlib>
+
 static void* vma_aligned_alloc(size_t alignment, size_t size)
 {
     // alignment must be >= sizeof(void*)
@@ -4319,6 +4337,7 @@ static void vma_aligned_free(void* VMA_NULLABLE ptr)
     #if VMA_USE_STL_SHARED_MUTEX
         // Use std::shared_mutex from C++17.
         #include <shared_mutex>
+
         class VmaRWMutex
         {
         public:
@@ -4372,11 +4391,13 @@ If providing your own implementation, you need to implement a subset of std::ato
 */
 #ifndef VMA_ATOMIC_UINT32
     #include <atomic>
+
     #define VMA_ATOMIC_UINT32 std::atomic<uint32_t>
 #endif
 
 #ifndef VMA_ATOMIC_UINT64
     #include <atomic>
+
     #define VMA_ATOMIC_UINT64 std::atomic<uint64_t>
 #endif
 

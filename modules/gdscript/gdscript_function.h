@@ -31,6 +31,8 @@
 #ifndef GDSCRIPT_FUNCTION_H
 #define GDSCRIPT_FUNCTION_H
 
+#include <stdint.h>
+
 #include "core/object/ref_counted.h"
 #include "core/object/script_language.h"
 #include "core/os/thread.h"
@@ -39,9 +41,23 @@
 #include "core/templates/self_list.h"
 #include "core/variant/variant.h"
 #include "gdscript_utility_functions.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/class_db.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
 
 class GDScriptInstance;
 class GDScript;
+class MethodBind;
+template <class F, class S> struct Pair;
 
 class GDScriptDataType {
 private:

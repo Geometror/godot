@@ -11,7 +11,10 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include <stdint.h>
+
 #include "src/webp/encode.h"
+#include "dsp/dsp.h"
 
 #if !defined(WEBP_REDUCE_SIZE)
 

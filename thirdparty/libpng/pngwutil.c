@@ -11,7 +11,15 @@
  * and license in png.h
  */
 
+#include <string.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pngdebug.h"
+#include "pnglibconf.h"
+#include "pngstruct.h"
+#include "zconf.h"
+#include "zlib.h"
 
 #ifdef PNG_WRITE_SUPPORTED
 

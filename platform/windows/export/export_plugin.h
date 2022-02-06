@@ -37,6 +37,14 @@
 #include "editor/editor_node.h"
 #include "editor/editor_settings.h"
 #include "platform/windows/logo.gen.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+
+class StringName;
+class Variant;
 
 class EditorExportPlatformWindows : public EditorExportPlatformPC {
 	void _rcedit_add_data(const Ref<EditorExportPreset> &p_preset, const String &p_path);

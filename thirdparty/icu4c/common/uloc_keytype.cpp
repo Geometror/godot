@@ -6,12 +6,13 @@
 *   Corporation and others.  All Rights Reserved.
 **********************************************************************
 */
+#include <stddef.h>
+#include <stdint.h>
 #include <algorithm>
 
 #include "unicode/utypes.h"
 #include "unicode/unistr.h"
 #include "unicode/uobject.h"
-
 #include "charstr.h"
 #include "cmemory.h"
 #include "cstring.h"
@@ -19,9 +20,12 @@
 #include "ucln_cmn.h"
 #include "uhash.h"
 #include "umutex.h"
-#include "uresimp.h"
-#include "uvector.h"
 #include "udataswp.h" /* for InvChar functions */
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/ures.h"
+#include "unicode/uversion.h"
 
 static UHashtable* gLocExtKeyMap = NULL;
 static icu::UInitOnce gLocExtKeyMapInitOnce = U_INITONCE_INITIALIZER;

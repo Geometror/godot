@@ -30,16 +30,18 @@
 //                      the previous step.
 //
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/uniset.h"
 #include "uvector.h"
 #include "uassert.h"
-#include "cmemory.h"
 #include "cstring.h"
-
 #include "rbbisetb.h"
 #include "rbbinode.h"
 

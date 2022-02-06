@@ -32,6 +32,12 @@
 #define REMOTETRANSFORM_H
 
 #include "scene/3d/node_3d.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/string/node_path.h"
+#include "core/variant/typed_array.h"
+
+class String;
 
 class RemoteTransform3D : public Node3D {
 	GDCLASS(RemoteTransform3D, Node3D);

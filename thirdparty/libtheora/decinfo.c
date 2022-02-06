@@ -18,7 +18,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+
 #include "decint.h"
+#include "bitpack.h"
+#include "dequant.h"
+#include "huffdec.h"
+#include "internal.h"
+#include "ogg/config_types.h"
+#include "ogg/ogg.h"
+#include "ogg/os_types.h"
+#include "theora/codec.h"
+#include "theora/theoradec.h"
 
 
 

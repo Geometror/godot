@@ -30,7 +30,12 @@
 
 #include "nav_region.h"
 
+#include <stddef.h>
+#include <memory>
+
 #include "nav_map.h"
+#include "core/error/error_macros.h"
+#include "modules/navigation/nav_utils.h"
 
 void NavRegion::set_map(NavMap *p_map) {
 	map = p_map;

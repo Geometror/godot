@@ -10,12 +10,14 @@
 #include "unicode/ucptrie.h"
 #include "unicode/udata.h"
 #include "unicode/ustringtrie.h"
-#include "unicode/utf16.h"
 #include "emojiprops.h"
-#include "ucln.h"
 #include "ucln_cmn.h"
 #include "umutex.h"
 #include "uset_imp.h"
+#include "unicode/char16ptr.h"
+#include "unicode/ucpmap.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

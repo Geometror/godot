@@ -40,6 +40,17 @@
 #include "scene/gui/text_edit.h"
 #include "scene/main/timer.h"
 #include "servers/rendering/rendering_device_binds.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "servers/rendering/rendering_device.h"
+
+class Button;
+class EditorNode;
+class HBoxContainer;
+class ItemList;
+class RichTextLabel;
 
 class ShaderFileEditor : public PanelContainer {
 	GDCLASS(ShaderFileEditor, PanelContainer);

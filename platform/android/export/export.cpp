@@ -31,6 +31,14 @@
 #include "export.h"
 
 #include "export_plugin.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/os/os.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+#include "editor/editor_export.h"
+#include "editor/editor_settings.h"
 
 void register_android_exporter() {
 	String exe_ext;

@@ -24,19 +24,33 @@ Mozilla Public License (http://mozilla.org/MPL) or the GNU General Public
 License, as published by the Free Software Foundation, either version 2
 of the License or (at your option) any later version.
 */
+#include <stdio.h>
+#include <stdlib.h>
 #include <cstring>
-#include "graphite2/Segment.h"
+#include <new>
+#include <utility>
+
 #include "inc/CmapCache.h"
-#include "inc/debug.h"
 #include "inc/Decompressor.h"
 #include "inc/Endian.h"
 #include "inc/Face.h"
-#include "inc/FileFace.h"
 #include "inc/GlyphFace.h"
-#include "inc/json.h"
 #include "inc/Segment.h"
 #include "inc/NameTable.h"
 #include "inc/Error.h"
+#include "graphite2/Font.h"
+#include "graphite2/Types.h"
+#include "inc/FeatureMap.h"
+#include "inc/Font.h"
+#include "inc/GlyphCache.h"
+#include "inc/Main.h"
+#include "inc/Position.h"
+#include "inc/Silf.h"
+#include "inc/TtfUtil.h"
+
+namespace graphite2 {
+class FileFace;
+}  // namespace graphite2
 
 using namespace graphite2;
 

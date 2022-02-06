@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_STORAGE_RD_H
 #define RENDERING_SERVER_STORAGE_RD_H
 
+#include <stdint.h>
+
 #include "core/templates/list.h"
 #include "core/templates/local_vector.h"
 #include "core/templates/rid_owner.h"
@@ -44,6 +46,42 @@
 #include "servers/rendering/renderer_scene_render.h"
 #include "servers/rendering/rendering_device.h"
 #include "servers/rendering/shader_compiler.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/transform_2d.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/os/spin_lock.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/shader_language.h"
+#include "servers/rendering_server.h"
+
+class EffectsRD;
+struct PropertyInfo;
+
 class RendererStorageRD : public RendererStorage {
 public:
 	static _FORCE_INLINE_ void store_transform(const Transform3D &p_mtx, float *p_array) {

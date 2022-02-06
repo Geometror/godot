@@ -20,8 +20,18 @@
  * SOFTWARE.
  */
 
+#include <float.h>
+#include <stdint.h>
+#include <cmath>
+#include <memory>
+#include <utility>
+
 #include "tvgMath.h"
 #include "tvgShapeImpl.h"
+#include "thorvg.h"
+#include "tvgCommon.h"
+#include "tvgPaint.h"
+#include "tvgRender.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

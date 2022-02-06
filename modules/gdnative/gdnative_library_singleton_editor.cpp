@@ -30,9 +30,24 @@
 
 #ifdef TOOLS_ENABLED
 #include "gdnative_library_singleton_editor.h"
-#include "gdnative.h"
 
+#include "gdnative.h"
 #include "editor/editor_node.h"
+#include "core/config/project_settings.h"
+#include "core/io/resource_loader.h"
+#include "core/math/color.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/object/undo_redo.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+#include "editor/editor_file_system.h"
+#include "scene/gui/tree.h"
+#include "scene/main/canvas_item.h"
 
 Set<String> GDNativeLibrarySingletonEditor::_find_singletons_recursive(EditorFileSystemDirectory *p_dir) {
 	Set<String> file_paths;

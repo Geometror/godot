@@ -31,6 +31,14 @@
 #ifndef GD_NATIVE_LIBRARY_EDITOR_H
 #define GD_NATIVE_LIBRARY_EDITOR_H
 
+#include "core/object/object.h"
+#include "core/templates/set.h"
+#include "scene/gui/box_container.h"
+
+class EditorFileSystemDirectory;
+class String;
+class Tree;
+class UndoRedo;
 #ifdef TOOLS_ENABLED
 #include "editor/editor_file_system.h"
 #include "editor/project_settings_editor.h"

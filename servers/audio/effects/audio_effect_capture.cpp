@@ -30,6 +30,15 @@
 
 #include "audio_effect_capture.h"
 
+#include <stdint.h>
+
+#include "core/error/error_macros.h"
+#include "core/math/vector2.h"
+#include "core/object/class_db.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "servers/audio_server.h"
+
 bool AudioEffectCapture::can_get_buffer(int p_frames) const {
 	return buffer.data_left() >= p_frames;
 }

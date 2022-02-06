@@ -28,10 +28,38 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#include "modules/modules_enabled.gen.h" // For regex.
+#include <string.h>
 
+#include "modules/modules_enabled.gen.h" // For regex.
 #include "codesign.h"
 #include "export_plugin.h"
+#include "core/config/engine.h"
+#include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/io/dir_access.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/io/marshalls.h"
+#include "core/io/resource_loader.h"
+#include "core/io/resource_saver.h"
+#include "core/io/zip_io.h"
+#include "core/os/memory.h"
+#include "core/os/os.h"
+#include "core/string/print_string.h"
+#include "core/string/translation.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "editor/editor_node.h"
+#include "editor/editor_paths.h"
+#include "editor/editor_settings.h"
+#include "platform/osx/logo.gen.h"
+#include "thirdparty/minizip/ioapi.h"
+#include "thirdparty/minizip/unzip.h"
+#include "zconf.h"
+#include "zlib.h"
+
+class StringName;
 
 void EditorExportPlatformOSX::get_preset_features(const Ref<EditorExportPreset> &p_preset, List<String> *r_features) {
 	if (p_preset->get("texture_format/s3tc")) {

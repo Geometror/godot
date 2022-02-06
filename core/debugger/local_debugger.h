@@ -34,6 +34,13 @@
 #include "core/debugger/engine_debugger.h"
 #include "core/object/script_language.h"
 #include "core/templates/list.h"
+#include "core/error/error_macros.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+
+class Array;
+class Variant;
 
 class LocalDebugger : public EngineDebugger {
 private:

@@ -35,6 +35,21 @@
 #include "core/io/xml_parser.h"
 #include "core/templates/map.h"
 #include "scene/resources/material.h"
+#include "core/error/error_list.h"
+#include "core/math/color.h"
+#include "core/math/plane.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+
+class XMLParser;
 
 class Collada {
 public:

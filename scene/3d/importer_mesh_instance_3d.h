@@ -34,6 +34,12 @@
 #include "scene/3d/node_3d.h"
 #include "scene/resources/immediate_mesh.h"
 #include "scene/resources/skin.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/node_path.h"
+#include "core/templates/vector.h"
+#include "scene/resources/importer_mesh.h"
+#include "scene/resources/material.h"
 
 class ImporterMesh;
 

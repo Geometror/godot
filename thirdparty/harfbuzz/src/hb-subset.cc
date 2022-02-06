@@ -24,12 +24,10 @@
  * Google Author(s): Garret Rieger, Rod Sheeter, Behdad Esfahbod
  */
 
+#include <math.h>
+
 #include "hb.hh"
-#include "hb-open-type.hh"
-
 #include "hb-subset.hh"
-
-#include "hb-open-file.hh"
 #include "hb-ot-cmap-table.hh"
 #include "hb-ot-glyf-table.hh"
 #include "hb-ot-hdmx-table.hh"
@@ -42,7 +40,6 @@
 #include "hb-ot-color-cpal-table.hh"
 #include "hb-ot-os2-table.hh"
 #include "hb-ot-post-table.hh"
-#include "hb-ot-post-table-v2subset.hh"
 #include "hb-ot-cff1-table.hh"
 #include "hb-ot-cff2-table.hh"
 #include "hb-ot-vorg-table.hh"
@@ -54,6 +51,14 @@
 #include "hb-ot-var-hvar-table.hh"
 #include "hb-ot-math-table.hh"
 #include "hb-repacker.hh"
+#include "hb-blob.hh"
+#include "hb-face.hh"
+#include "hb-ot-layout-gdef-table.hh"
+#include "hb-ot.h"
+#include "hb-sanitize.hh"
+#include "hb-serialize.hh"
+#include "hb-set.hh"
+#include "hb-subset.h"
 
 /**
  * SECTION:hb-subset

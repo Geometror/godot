@@ -30,6 +30,18 @@
 
 #include "api_generator.h"
 
+#include <stdint.h>
+
+#include "core/error/error_macros.h"
+#include "core/object/method_bind.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+
 #ifdef TOOLS_ENABLED
 
 #include "core/config/engine.h"

@@ -33,10 +33,11 @@
 
 #include "gltf_document.h"
 #include "gltf_state.h"
-
-#include "scene/3d/node_3d.h"
-#include "scene/animation/animation_player.h"
 #include "scene/resources/animation.h"
+
+class Node;
+class StringName;
+class Variant;
 
 uint32_t EditorSceneFormatImporterGLTF::get_import_flags() const {
 	return ImportFlags::IMPORT_SCENE | ImportFlags::IMPORT_ANIMATION;

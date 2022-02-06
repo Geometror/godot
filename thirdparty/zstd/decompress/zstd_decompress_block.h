@@ -12,6 +12,8 @@
 #ifndef ZSTD_DEC_BLOCK_H
 #define ZSTD_DEC_BLOCK_H
 
+#include <stddef.h>
+
 /*-*******************************************************
  *  Dependencies
  *********************************************************/
@@ -19,6 +21,7 @@
 #include "../zstd.h"    /* DCtx, and some public functions */
 #include "../common/zstd_internal.h"  /* blockProperties_t, and some public functions */
 #include "zstd_decompress_internal.h"  /* ZSTD_seqSymbol */
+#include "mem.h"
 
 
 /* ===   Prototypes   === */

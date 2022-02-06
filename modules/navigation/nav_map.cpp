@@ -30,11 +30,26 @@
 
 #include "nav_map.h"
 
+#include <stddef.h>
+#include <algorithm>
+#include <memory>
+
 #include "core/os/threaded_array_processor.h"
 #include "nav_region.h"
 #include "rvo_agent.h"
-
-#include <algorithm>
+#include "Agent.h"
+#include "KdTree.h"
+#include "core/error/error_macros.h"
+#include "core/math/face3.h"
+#include "core/math/geometry_3d.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/navigation/nav_utils.h"
 
 #define THREE_POINTS_CROSS_PRODUCT(m_a, m_b, m_c) (((m_c) - (m_a)).cross((m_b) - (m_a)))
 

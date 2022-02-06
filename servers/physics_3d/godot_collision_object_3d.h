@@ -31,11 +31,22 @@
 #ifndef GODOT_COLLISION_OBJECT_3D_H
 #define GODOT_COLLISION_OBJECT_3D_H
 
+#include <stdint.h>
+
 #include "godot_broad_phase_3d.h"
 #include "godot_shape_3d.h"
-
 #include "core/templates/self_list.h"
 #include "servers/physics_server_3d.h"
+#include "core/error/error_macros.h"
+#include "core/math/aabb.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/object_id.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 #ifdef DEBUG_ENABLED
 #define MAX_OBJECT_DISTANCE 3.1622776601683791e+18

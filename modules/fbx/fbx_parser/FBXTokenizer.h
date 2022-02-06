@@ -76,12 +76,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef FBX_TOKENIZER_H
 #define FBX_TOKENIZER_H
 
-#include "FBXParseTools.h"
-#include "core/string/ustring.h"
+#include <stddef.h>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
+#include <algorithm>
+
+#include "FBXParseTools.h"
+#include "core/string/ustring.h"
 
 namespace FBXDocParser {
 /** Rough classification for text FBX tokens used for constructing the

@@ -30,9 +30,18 @@
 
 #include "resource_importer_mp3.h"
 
+#include <stdint.h>
+
 #include "core/io/file_access.h"
 #include "core/io/resource_saver.h"
-#include "scene/resources/texture.h"
+#include "core/error/error_macros.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/minimp3/audio_stream_mp3.h"
 
 String ResourceImporterMP3::get_importer_name() const {
 	return "mp3";

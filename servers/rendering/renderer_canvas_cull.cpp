@@ -30,10 +30,21 @@
 
 #include "renderer_canvas_cull.h"
 
+#include <alloca.h>
+#include <string.h>
+
 #include "core/math/geometry_2d.h"
 #include "renderer_viewport.h"
 #include "rendering_server_default.h"
 #include "rendering_server_globals.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/os/memory.h"
+#include "core/templates/map.h"
+#include "core/templates/sort_array.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_compositor.h"
+#include "servers/rendering/renderer_storage.h"
 
 static const int z_range = RS::CANVAS_ITEM_Z_MAX - RS::CANVAS_ITEM_Z_MIN + 1;
 

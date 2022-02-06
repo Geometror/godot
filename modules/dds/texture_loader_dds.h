@@ -33,6 +33,10 @@
 
 #include "core/io/resource_loader.h"
 #include "scene/resources/texture.h"
+#include "core/error/error_list.h"
+#include "core/io/resource.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
 
 class ResourceFormatDDS : public ResourceFormatLoader {
 public:

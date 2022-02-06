@@ -33,6 +33,7 @@
 
 #include "core/io/resource.h"
 #include "gltf_document.h"
+#include "core/object/object.h"
 
 class GLTFTexture : public Resource {
 	GDCLASS(GLTFTexture, Resource);

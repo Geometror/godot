@@ -13,11 +13,16 @@
 
 #include <string.h>
 #include <math.h>
+#include <assert.h>
+#include <stdint.h>
 
 #include "src/enc/cost_enc.h"
 #include "src/enc/vp8i_enc.h"
 #include "src/dsp/dsp.h"
 #include "src/webp/format_constants.h"  // RIFF constants
+#include "dec/common_dec.h"
+#include "utils/bit_writer_utils.h"
+#include "webp/encode.h"
 
 #define SEGMENT_VISU 0
 #define DEBUG_SEARCH 0    // useful to track search convergence

@@ -21,16 +21,12 @@
 
 #include "unicode/utypes.h"
 #include "unicode/unistr.h"
-#include "unicode/uset.h"
 #include "unicode/udata.h" /* UDataInfo */
 #include "unicode/utf16.h"
-#include "ucmndata.h" /* DataHeader */
-#include "udatamem.h"
-#include "umutex.h"
 #include "uassert.h"
-#include "cmemory.h"
 #include "utrie2.h"
 #include "ucase.h"
+#include "unicode/stringoptions.h"
 
 struct UCaseProps {
     UDataMemory *mem;

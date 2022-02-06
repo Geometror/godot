@@ -32,6 +32,9 @@
 
 #include "editor/editor_node.h"
 #include "editor_scene_importer_fbx.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "editor/import/resource_importer_scene.h"
 
 #ifdef TOOLS_ENABLED
 static void _editor_init() {

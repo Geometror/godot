@@ -31,7 +31,10 @@
 #ifndef POOL_ALLOCATOR_H
 #define POOL_ALLOCATOR_H
 
+#include <stdint.h>
+
 #include "core/typedefs.h"
+#include "core/error/error_list.h"
 
 /**
  * Generic Pool Allocator.

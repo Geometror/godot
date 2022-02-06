@@ -32,6 +32,20 @@
 #define VISUAL_SHADER_PARTICLE_NODES_H
 
 #include "scene/resources/visual_shader.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+#include "scene/resources/mesh.h"
+#include "scene/resources/shader.h"
+#include "scene/resources/texture.h"
+
+class StringName;
+struct Color;
+struct Vector2;
+struct Vector3;
 
 // Emit nodes
 

@@ -29,11 +29,16 @@
 /*************************************************************************/
 
 #include "gltf_document_extension_convert_importer_mesh.h"
+
 #include "core/error/error_macros.h"
 #include "scene/3d/mesh_instance_3d.h"
 #include "scene/resources/importer_mesh.h"
-
-#include <cstddef>
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "scene/3d/importer_mesh_instance_3d.h"
+#include "scene/main/node.h"
+#include "scene/resources/mesh.h"
 
 void GLTFDocumentExtensionConvertImporterMesh::_bind_methods() {
 }

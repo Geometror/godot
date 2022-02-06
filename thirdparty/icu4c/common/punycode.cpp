@@ -44,8 +44,6 @@ Disclaimer and license
  * - UTF-16 handling
  */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_IDNA
 
 #include "unicode/ustring.h"

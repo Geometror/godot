@@ -30,11 +30,37 @@
 
 #include "test_math.h"
 
+#include <stdint.h>
+#include <cmath>
+
 #include "core/math/camera_matrix.h"
 #include "core/math/delaunay_3d.h"
 #include "core/math/geometry_2d.h"
-#include "core/os/main_loop.h"
 #include "core/os/os.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/quaternion.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/class_db.h"
+#include "core/string/char_utils.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 namespace TestMath {
 

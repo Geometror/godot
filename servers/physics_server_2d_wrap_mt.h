@@ -31,11 +31,25 @@
 #ifndef PHYSICS_SERVER_2D_WRAP_MT_H
 #define PHYSICS_SERVER_2D_WRAP_MT_H
 
+#include <stdint.h>
+
 #include "core/config/project_settings.h"
 #include "core/os/thread.h"
 #include "core/templates/command_queue_mt.h"
 #include "core/templates/safe_refcount.h"
 #include "servers/physics_server_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/object/object_id.h"
+#include "core/os/mutex.h"
+#include "core/os/semaphore.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
 
 #ifdef DEBUG_SYNC
 #define SYNC_DEBUG print_line("sync on: " + String(__FUNCTION__));

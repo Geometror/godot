@@ -3,16 +3,34 @@
 
 #pragma once
 
+#include <assert.h>
+#include <stddef.h>
+
 #include "default.h"
 #include "builder.h"
 #include "geometry.h"
 #include "ray.h"
 #include "hit.h"
+#include "common/math/bbox.h"
+#include "common/math/lbbox.h"
+#include "common/math/range.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/varying.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
+#include "embree3/rtcore_geometry.h"
+#include "kernels/common/context.h"
+
+struct RTCBounds;
+struct RTCFilterFunctionNArguments;
+struct RTCRayHitN;
+struct RTCRayN;
 
 namespace embree
 {
   struct IntersectFunctionNArguments;
   struct OccludedFunctionNArguments;
+class Device;
   
   typedef void (*ReportIntersectionFunc) (IntersectFunctionNArguments* args, const RTCFilterFunctionNArguments* filter_args);
   typedef void (*ReportOcclusionFunc) (OccludedFunctionNArguments* args, const RTCFilterFunctionNArguments* filter_args);

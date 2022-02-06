@@ -74,10 +74,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  @brief Assimp::FBX::NodeAttribute (and subclasses) implementation
  */
 
+#include <stdint.h>
+#include <string>
+
 #include "FBXDocument.h"
 #include "FBXDocumentUtil.h"
 #include "FBXParser.h"
-#include <iostream>
+#include "fbx_parser/FBXTokenizer.h"
 
 namespace FBXDocParser {
 using namespace Util;

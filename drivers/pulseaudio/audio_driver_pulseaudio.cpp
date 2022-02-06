@@ -30,11 +30,24 @@
 
 #include "audio_driver_pulseaudio.h"
 
+#include <pulse/def.h>
+#include <pulse/operation.h>
+#include <pulse/sample.h>
+#include <string.h>
+#include <sys/param.h>
+
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/string/print_string.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "core/version_generated.gen.h"
+#include "drivers/pulseaudio/pulse-so_wrap.h"
+
 #ifdef PULSEAUDIO_ENABLED
 
 #include "core/config/project_settings.h"
 #include "core/os/os.h"
-#include "core/version.h"
 
 #ifdef ALSAMIDI_ENABLED
 #include "drivers/alsa/asound-so_wrap.h"

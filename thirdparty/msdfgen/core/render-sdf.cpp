@@ -4,6 +4,8 @@
 #include "arithmetics.hpp"
 #include "pixel-conversion.hpp"
 #include "bitmap-interpolation.hpp"
+#include "core/BitmapRef.hpp"
+#include "core/Vector2.h"
 
 namespace msdfgen {
 

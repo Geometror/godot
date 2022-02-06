@@ -31,9 +31,16 @@
 #ifndef ENET_PACKET_PEER_H
 #define ENET_PACKET_PEER_H
 
-#include "core/io/packet_peer.h"
-
 #include <enet/enet.h>
+#include <stdint.h>
+
+#include "core/io/packet_peer.h"
+#include "core/error/error_list.h"
+#include "core/io/ip_address.h"
+#include "core/object/object.h"
+#include "core/templates/list.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
 
 class ENetPacketPeer : public PacketPeer {
 	GDCLASS(ENetPacketPeer, PacketPeer);

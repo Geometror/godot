@@ -25,10 +25,11 @@ License, as published by the Free Software Foundation, either version 2
 of the License or (at your option) any later version.
 */
 
+#include <stdlib.h>
+
 #include "inc/Main.h"
 #include "inc/CmapCache.h"
 #include "inc/Face.h"
-#include "inc/TtfTypes.h"
 #include "inc/TtfUtil.h"
 
 

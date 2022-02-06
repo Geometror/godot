@@ -14,18 +14,12 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <assert.h>
-
 #include "cpu_engine.hpp"
-#include "cpu_primitive.hpp"
-#include "cpu_reorder_pd.hpp"
-#include "cpu_memory.hpp"
-#include "type_helpers.hpp"
-
 #include "cpu/jit_uni_reorder.hpp"
 #include "cpu/simple_reorder.hpp"
 #include "cpu/wino_reorder.hpp"
 #include "cpu/rnn/rnn_reorders.hpp"
+#include "c_types_map.hpp"
 
 namespace mkldnn {
 namespace impl {
@@ -94,27 +88,6 @@ static const rpd_create_f cpu_reorder_impl_list[] = {
      * faster creation time. This is tentative solution and should be removed
      * later (when we will cache jitted code?...). */
     REG_SR_DIRECT_COPY(f32, f32),
-#endif
-
-#ifdef __INTEL_COMPILER
-    /* direct copy for icc, which is faster than jitted code */
-    /*
-    REG_SR_DIRECT_COPY(f32, s32),
-    REG_SR_DIRECT_COPY(f32, s8),
-    REG_SR_DIRECT_COPY(f32, u8),
-    REG_SR_DIRECT_COPY(s32, f32),
-    REG_SR_DIRECT_COPY(s32, s32),
-    REG_SR_DIRECT_COPY(s32, s8),
-    REG_SR_DIRECT_COPY(s32, u8),
-    REG_SR_DIRECT_COPY(s8, f32),
-    REG_SR_DIRECT_COPY(s8, s32),
-    REG_SR_DIRECT_COPY(s8, s8),
-    REG_SR_DIRECT_COPY(s8, u8),
-    REG_SR_DIRECT_COPY(u8, f32),
-    REG_SR_DIRECT_COPY(u8, s32),
-    REG_SR_DIRECT_COPY(u8, s8),
-    REG_SR_DIRECT_COPY(u8, u8),
-    */
 #endif
 
     /* jit */

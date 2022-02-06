@@ -2,9 +2,19 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "taskschedulerinternal.h"
+
+#include <cstdio>
+#include <map>
+
 #include "../math/math.h"
 #include "../sys/sysinfo.h"
-#include <algorithm>
+#include "common/sys/atomic.h"
+#include "common/sys/condition.h"
+#include "common/sys/intrinsics.h"
+#include "common/sys/mutex.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
+#include "common/sys/thread.h"
 
 namespace embree
 {

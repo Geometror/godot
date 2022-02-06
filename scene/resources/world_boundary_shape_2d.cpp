@@ -33,6 +33,11 @@
 #include "core/math/geometry_2d.h"
 #include "servers/physics_server_2d.h"
 #include "servers/rendering_server.h"
+#include "core/object/class_db.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+
+class RID;
 
 bool WorldBoundaryShape2D::_edit_is_selected_on_click(const Point2 &p_point, double p_tolerance) const {
 	Vector2 point = get_distance() * get_normal();

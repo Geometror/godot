@@ -31,13 +31,23 @@
 #ifndef GODOT_COLLISION_OBJECT_2D_H
 #define GODOT_COLLISION_OBJECT_2D_H
 
+#include <stdint.h>
+
 #include "godot_broad_phase_2d.h"
 #include "godot_shape_2d.h"
-
 #include "core/templates/self_list.h"
 #include "servers/physics_server_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_2d.h"
+#include "core/object/object_id.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 class GodotSpace2D;
+struct Vector2;
 
 class GodotCollisionObject2D : public GodotShapeOwner2D {
 public:

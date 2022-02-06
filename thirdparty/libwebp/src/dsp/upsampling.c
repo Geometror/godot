@@ -11,10 +11,13 @@
 //
 // Author: somnath@google.com (Somnath Banerjee)
 
+#include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
+
 #include "src/dsp/dsp.h"
 #include "src/dsp/yuv.h"
-
-#include <assert.h>
+#include "webp/decode.h"
 
 //------------------------------------------------------------------------------
 // Fancy upsampler

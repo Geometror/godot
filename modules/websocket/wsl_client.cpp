@@ -31,8 +31,21 @@
 #ifndef JAVASCRIPT_ENABLED
 
 #include "wsl_client.h"
-#include "core/config/project_settings.h"
+
+#include <string.h>
+
 #include "core/io/ip.h"
+#include "core/crypto/crypto.h"
+#include "core/error/error_macros.h"
+#include "core/io/stream_peer.h"
+#include "core/io/stream_peer_ssl.h"
+#include "core/io/stream_peer_tcp.h"
+#include "core/templates/map.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/websocket/websocket_multiplayer_peer.h"
+#include "modules/websocket/websocket_peer.h"
+#include "modules/websocket/wsl_peer.h"
 
 void WSLClient::_do_handshake() {
 	if (_requested < _request.size() - 1) {

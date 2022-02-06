@@ -31,10 +31,16 @@
 #ifndef MARSHALLS_H
 #define MARSHALLS_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/math/math_defs.h"
 #include "core/object/ref_counted.h"
 #include "core/typedefs.h"
 #include "core/variant/variant.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
 
 // uintr_t is only for pairing with real_t, and we only need it in here.
 #ifdef REAL_T_IS_DOUBLE

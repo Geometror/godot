@@ -13,11 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #pragma once
+#include <stdint.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_containers.h>
+
 #include "../transcoder/basisu_file_headers.h"
 #include "basisu_backend.h"
 
 namespace basisu
 {
+struct basisu_backend_output;
+
 	class basisu_file
 	{
 		BASISU_NO_EQUALS_OR_COPY_CONSTRUCT(basisu_file);

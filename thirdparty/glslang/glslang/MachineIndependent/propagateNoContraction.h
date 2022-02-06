@@ -42,6 +42,7 @@
 #include "../Include/intermediate.h"
 
 namespace glslang {
+class TIntermediate;
 
 // Propagates the 'precise' qualifier for objects (objects marked with
 // 'noContraction' qualifier) from the shader source specified 'precise'

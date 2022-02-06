@@ -29,11 +29,25 @@
 /*************************************************************************/
 
 #include "renderer_scene_sky_rd.h"
+
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "core/math/math_defs.h"
 #include "renderer_scene_render_rd.h"
 #include "servers/rendering/renderer_rd/renderer_compositor_rd.h"
 #include "servers/rendering/rendering_server_default.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/color.h"
+#include "core/math/transform_3d.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "servers/rendering/renderer_rd/effects_rd.h"
+#include "servers/rendering/renderer_rd/renderer_scene_environment_rd.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // SKY SHADER

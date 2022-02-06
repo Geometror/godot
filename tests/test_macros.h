@@ -34,10 +34,40 @@
 #include "core/input/input_map.h"
 #include "core/object/message_queue.h"
 #include "core/variant/variant.h"
-
 // See documentation for doctest at:
 // https://github.com/onqtam/doctest/blob/master/doc/markdown/readme.md#reference
 #include "thirdparty/doctest/doctest.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/quaternion.h"
+#include "core/math/vector3.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/object.h"
+#include "core/string/node_path.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+
+class Dictionary;
+class RID;
+namespace doctest {
+template <typename T> struct StringMaker;
+}  // namespace doctest
+struct AABB;
+struct Plane;
+struct Rect2;
+struct Rect2i;
+struct Transform2D;
+struct Transform3D;
+struct Vector2;
+struct Vector2i;
+struct Vector3i;
 
 // The test is skipped with this, run pending tests with `--test --no-skip`.
 #define TEST_CASE_PENDING(name) TEST_CASE(name *doctest::skip())

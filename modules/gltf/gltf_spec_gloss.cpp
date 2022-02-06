@@ -30,6 +30,9 @@
 
 #include "gltf_spec_gloss.h"
 
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+
 void GLTFSpecGloss::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_diffuse_img"), &GLTFSpecGloss::get_diffuse_img);
 	ClassDB::bind_method(D_METHOD("set_diffuse_img", "diffuse_img"), &GLTFSpecGloss::set_diffuse_img);

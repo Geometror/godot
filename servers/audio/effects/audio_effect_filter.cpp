@@ -29,7 +29,11 @@
 /*************************************************************************/
 
 #include "audio_effect_filter.h"
+
 #include "servers/audio_server.h"
+#include "core/math/audio_frame.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
 
 template <int S>
 void AudioEffectFilterInstance::_process_filter(const AudioFrame *p_src_frames, AudioFrame *p_dst_frames, int p_frame_count) {

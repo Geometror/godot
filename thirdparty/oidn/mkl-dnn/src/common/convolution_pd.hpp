@@ -17,11 +17,17 @@
 #ifndef CONVOLUTION_PD_HPP
 #define CONVOLUTION_PD_HPP
 
-#include "mkldnn.h"
+#include <assert.h>
 
+#include "mkldnn.h"
 #include "c_types_map.hpp"
 #include "primitive_desc.hpp"
 #include "utils.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "mkldnn_traits.hpp"
+#include "mkldnn_types.h"
+#include "type_helpers.hpp"
+#include "verbose.hpp"
 
 namespace mkldnn {
 namespace impl {

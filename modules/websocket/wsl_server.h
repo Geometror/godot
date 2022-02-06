@@ -31,11 +31,24 @@
 #ifndef WSLSERVER_H
 #define WSLSERVER_H
 
+#include <stdint.h>
+
+#include "core/error/error_list.h"
+#include "core/io/ip_address.h"
+#include "core/io/stream_peer.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "modules/websocket/websocket_macros.h"
+
+class TCPServer;
+class WebSocketPeer;
 #ifndef JAVASCRIPT_ENABLED
 
 #include "websocket_server.h"
 #include "wsl_peer.h"
-
 #include "core/io/stream_peer_ssl.h"
 #include "core/io/stream_peer_tcp.h"
 #include "core/io/tcp_server.h"

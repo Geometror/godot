@@ -30,7 +30,15 @@
 
 #include "export_plugin.h"
 
+#include <string.h>
+
 #include "platform/uwp/logo.gen.h"
+#include "core/io/marshalls.h"
+#include "core/io/zip_io.h"
+#include "core/string/print_string.h"
+#include "platform/uwp/export/app_packager.h"
+#include "thirdparty/minizip/ioapi.h"
+#include "thirdparty/minizip/unzip.h"
 
 String EditorExportPlatformUWP::get_name() const {
 	return "UWP";

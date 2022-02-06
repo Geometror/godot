@@ -17,15 +17,26 @@
 #ifndef JIT_AVX512_COMMON_CONV_KERNEL_F32_HPP
 #define JIT_AVX512_COMMON_CONV_KERNEL_F32_HPP
 
+#include <assert.h>
+#include <stddef.h>
+
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
-
 #include "jit_generator.hpp"
 #include "jit_primitive_conf.hpp"
 #include "jit_uni_eltwise.hpp"
+#include "cpu_isa_traits.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "nstl.hpp"
+#include "utils.hpp"
+#include "xbyak_mnemonic.h"
 
 namespace mkldnn {
 namespace impl {
+namespace memory_tracking {
+struct registrar_t;
+}  // namespace memory_tracking
+
 namespace cpu {
 
 template<typename Vmm>

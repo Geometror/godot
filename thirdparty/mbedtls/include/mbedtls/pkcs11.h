@@ -32,9 +32,9 @@
 
 #if defined(MBEDTLS_PKCS11_C)
 
-#include "mbedtls/x509_crt.h"
-
 #include <pkcs11-helper-1.0/pkcs11h-certificate.h>
+
+#include "mbedtls/x509_crt.h"
 
 #if ( defined(__ARMCC_VERSION) || defined(_MSC_VER) ) && \
     !defined(inline) && !defined(__cplusplus)

@@ -31,9 +31,24 @@
 #ifndef RENDERING_DEVICE_H
 #define RENDERING_DEVICE_H
 
+#include <stdint.h>
+
 #include "core/object/class_db.h"
 #include "core/variant/typed_array.h"
 #include "servers/display_server.h"
+#include "core/error/error_list.h"
+#include "core/math/color.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
 
 class RDTextureFormat;
 class RDTextureView;

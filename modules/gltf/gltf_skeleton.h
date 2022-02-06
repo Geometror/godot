@@ -31,8 +31,20 @@
 #ifndef GLTF_SKELETON_H
 #define GLTF_SKELETON_H
 
+#include <stdint.h>
+
 #include "core/io/resource.h"
 #include "gltf_document.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+
+class BoneAttachment3D;
+class Skeleton3D;
 
 class GLTFSkeleton : public Resource {
 	GDCLASS(GLTFSkeleton, Resource);

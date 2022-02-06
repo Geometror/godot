@@ -33,6 +33,18 @@
 
 #include "core/templates/vset.h"
 #include "scene/2d/collision_object_2d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/string/string_name.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/typed_array.h"
+
+class Node2D;
+class Node;
 
 class Area2D : public CollisionObject2D {
 	GDCLASS(Area2D, CollisionObject2D);

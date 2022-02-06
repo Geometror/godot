@@ -29,12 +29,18 @@
 /*************************************************************************/
 
 #include "texture_loader_gles3.h"
+
+#include <stdint.h>
+
+#include "core/io/image.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "scene/resources/texture.h"
 #ifdef GLES3_ENABLED
 
-#include "core/io/file_access.h"
-#include "core/string/print_string.h"
 
-#include <string.h>
 
 RES ResourceFormatGLES2Texture::load(const String &p_path, const String &p_original_path, Error *r_error, bool p_use_sub_threads, float *r_progress, CacheMode p_cache_mode) {
 	unsigned int width = 8;

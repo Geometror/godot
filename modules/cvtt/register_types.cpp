@@ -30,6 +30,8 @@
 
 #include "register_types.h"
 
+#include "core/io/image.h"
+
 #ifdef TOOLS_ENABLED
 
 #include "image_compress_cvtt.h"

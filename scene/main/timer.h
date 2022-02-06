@@ -32,6 +32,11 @@
 #define TIMER_H
 
 #include "scene/main/node.h"
+#include "core/object/object.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/typed_array.h"
+
+class String;
 
 class Timer : public Node {
 	GDCLASS(Timer, Node);

@@ -32,6 +32,11 @@
 #define CONCAVE_POLYGON_SHAPE_3D_H
 
 #include "scene/resources/shape_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 class ConcavePolygonShape3D : public Shape3D {
 	GDCLASS(ConcavePolygonShape3D, Shape3D);

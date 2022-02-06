@@ -14,20 +14,21 @@
 
  ********************************************************************/
 
-#include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
 #include <math.h>
+#include <alloca.h>
 
 #include "vorbis/codec.h"
+#include "ogg/config_types.h"
+#include "ogg/ogg.h"
+#include "ogg/os_types.h"
 
 /* we don't need or want the static callback symbols here */
 #define OV_EXCLUDE_STATIC_CALLBACKS
 #include "vorbis/vorbisfile.h"
-
 #include "os.h"
-#include "misc.h"
 
 /* A 'chained bitstream' is a Vorbis bitstream that contains more than
    one logical bitstream arranged end to end (the only form of Ogg

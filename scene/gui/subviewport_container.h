@@ -32,6 +32,11 @@
 #define VIEWPORTCONTAINER_H
 
 #include "scene/gui/container.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+
+class InputEvent;
 
 class SubViewportContainer : public Container {
 	GDCLASS(SubViewportContainer, Container);

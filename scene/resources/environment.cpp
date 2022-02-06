@@ -30,10 +30,16 @@
 
 #include "environment.h"
 
-#include "core/config/project_settings.h"
 #include "core/core_string_names.h"
 #include "servers/rendering_server.h"
 #include "texture.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "scene/resources/sky.h"
 
 RID Environment::get_rid() const {
 	return environment;

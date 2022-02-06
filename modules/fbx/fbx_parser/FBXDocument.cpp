@@ -74,18 +74,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "FBXDocument.h"
+
+#include <stdint.h>
+#include <string.h>
+#include <algorithm>
+#include <functional>
+#include <map>
+#include <memory>
+#include <iterator>
+
 #include "FBXDocumentUtil.h"
-#include "FBXImportSettings.h"
 #include "FBXMeshGeometry.h"
 #include "FBXParser.h"
 #include "FBXProperties.h"
-#include "FBXUtil.h"
-
-#include <algorithm>
-#include <functional>
-#include <iostream>
-#include <map>
-#include <memory>
+#include "core/error/error_macros.h"
+#include "fbx_parser/FBXTokenizer.h"
 
 namespace FBXDocParser {
 

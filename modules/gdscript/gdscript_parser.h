@@ -31,6 +31,8 @@
 #ifndef GDSCRIPT_PARSER_H
 #define GDSCRIPT_PARSER_H
 
+#include <stdint.h>
+
 #include "core/io/resource.h"
 #include "core/multiplayer/multiplayer.h"
 #include "core/object/ref_counted.h"
@@ -44,6 +46,14 @@
 #include "core/variant/variant.h"
 #include "gdscript_cache.h"
 #include "gdscript_tokenizer.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/templates/pair.h"
+#include "core/templates/set.h"
+#include "core/typedefs.h"
 
 #ifdef DEBUG_ENABLED
 #include "core/string/string_builder.h"

@@ -12,7 +12,7 @@
 
 #include <assert.h>
 #include <float.h>
-#include <math.h>
+#include <string.h>
 
 #include "src/dsp/dsp.h"
 #include "src/dsp/lossless.h"
@@ -21,6 +21,9 @@
 #include "src/enc/histogram_enc.h"
 #include "src/utils/color_cache_utils.h"
 #include "src/utils/utils.h"
+#include "webp/encode.h"
+#include "webp/format_constants.h"
+#include "webp/types.h"
 
 #define MIN_BLOCK_SIZE 256  // minimum block size for backward references
 

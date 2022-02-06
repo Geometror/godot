@@ -19,11 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <memory.h>
+#include <stdlib.h>
+#include <string.h>
 #include <fstream>
-#include "tvgLoader.h"
+#include <utility>
+
 #include "tvgTvgLoader.h"
 #include "tvgLzw.h"
+#include "tvgBinaryDesc.h"
+#include "tvgCommon.h"
+#include "tvgTvgCommon.h"
 
 
 /************************************************************************/

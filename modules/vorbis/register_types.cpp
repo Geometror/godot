@@ -30,8 +30,14 @@
 
 #include "register_types.h"
 
-#include "audio_stream_ogg_vorbis.h"
 #include "resource_importer_ogg_vorbis.h"
+#include "core/config/engine.h"
+#include "core/io/resource_importer.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+
+class AudioStreamOGGVorbis;
+class AudioStreamPlaybackOGGVorbis;
 
 void register_vorbis_types() {
 #ifdef TOOLS_ENABLED

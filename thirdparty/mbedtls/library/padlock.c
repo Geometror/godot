@@ -23,13 +23,10 @@
  *  programming_guide.pdf
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_PADLOCK_C)
 
-#include "mbedtls/padlock.h"
 
-#include <string.h>
 
 #ifndef asm
 #define asm __asm

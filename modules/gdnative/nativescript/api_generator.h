@@ -33,6 +33,7 @@
 
 #include "core/string/ustring.h"
 #include "core/typedefs.h"
+#include "core/error/error_list.h"
 
 Error generate_c_api(const String &p_path);
 Error generate_c_builtin_api(const String &p_path);

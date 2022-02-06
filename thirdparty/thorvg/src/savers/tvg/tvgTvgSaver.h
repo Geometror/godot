@@ -22,12 +22,18 @@
 #ifndef _TVG_TVGSAVER_H_
 #define _TVG_TVGSAVER_H_
 
+#include <stdint.h>
+#include <string>
+
 #include "tvgArray.h"
 #include "tvgBinaryDesc.h"
 #include "tvgTaskScheduler.h"
+#include "thorvg.h"
+#include "tvgSaveModule.h"
 
 namespace tvg
 {
+struct Iterator;
 
 class TvgSaver : public SaveModule, public Task
 {

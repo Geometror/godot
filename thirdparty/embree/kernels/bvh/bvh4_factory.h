@@ -3,10 +3,21 @@
 
 #pragma once
 
+#include <stddef.h>
+
 #include "bvh_factory.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/default.h"
+#include "kernels/common/geometry.h"
+#include "kernels/common/isa.h"
 
 namespace embree
 {
+class Builder;
+class Scene;
+struct VirtualCurveIntersector;
+
   /*! BVH4 instantiations */
   class BVH4Factory : public BVHFactory
   {

@@ -22,9 +22,10 @@
  *
  */
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
 #include "unicode/udata.h"
-#include "cstring.h"
 #include "ucmndata.h"
 #include "udatamem.h"
 

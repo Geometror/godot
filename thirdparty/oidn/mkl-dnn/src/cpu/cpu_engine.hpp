@@ -18,9 +18,9 @@
 #define CPU_ENGINE_HPP
 
 #include <assert.h>
+#include <stddef.h>
 
 #include "mkldnn.h"
-
 #include "c_types_map.hpp"
 #include "../common/engine.hpp"
 

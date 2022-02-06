@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include "../sys/platform.h"
-
 #include <limits>
+
+#include "../sys/platform.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h> // using cmath causes issues under Windows

@@ -26,8 +26,8 @@
 #define HB_OT_SHAPE_COMPLEX_SYLLABIC_HH
 
 #include "hb.hh"
-
 #include "hb-ot-shape-complex.hh"
+#include "hb.h"
 
 
 HB_INTERNAL void

@@ -33,6 +33,10 @@
 
 #include "scene/2d/node_2d.h"
 #include "scene/main/window.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/variant/variant.h"
 
 class AudioListener2D : public Node2D {
 	GDCLASS(AudioListener2D, Node2D);

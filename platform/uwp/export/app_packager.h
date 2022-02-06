@@ -31,6 +31,10 @@
 #ifndef UWP_APP_PACKAGER_H
 #define UWP_APP_PACKAGER_H
 
+#include <zlib.h>
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/config/project_settings.h"
 #include "core/core_bind.h"
 #include "core/crypto/crypto_core.h"
@@ -42,11 +46,17 @@
 #include "core/version.h"
 #include "editor/editor_export.h"
 #include "editor/editor_node.h"
-
 #include "thirdparty/minizip/unzip.h"
 #include "thirdparty/minizip/zip.h"
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "thirdparty/minizip/ioapi.h"
+#include "zconf.h"
 
-#include <zlib.h>
+class FileAccess;
 
 class AppxPackager {
 	enum {

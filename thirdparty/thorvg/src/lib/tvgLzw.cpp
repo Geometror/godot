@@ -20,6 +20,9 @@
  * SOFTWARE.
  */
 
+#include <stdlib.h>
+#include <string.h>
+
 /*
  * Lempel–Ziv–Welch (LZW) encoder/decoder by Guilherme R. Lampert(guilherme.ronaldo.lampert@gmail.com)
 
@@ -61,8 +64,6 @@
 /* Internal Class Implementation                                        */
 /************************************************************************/
 
-#include <string>
-#include <memory.h>
 #include "tvgLzw.h"
 
 namespace {

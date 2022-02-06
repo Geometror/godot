@@ -15,6 +15,8 @@
 #include <math.h>    // for pow()
 #include <stdio.h>
 #include <stdlib.h>  // for abs()
+#include <stdint.h>
+#include <string.h>
 
 #include "src/mux/animi.h"
 #include "src/utils/utils.h"
@@ -22,6 +24,8 @@
 #include "src/webp/encode.h"
 #include "src/webp/format_constants.h"
 #include "src/webp/mux.h"
+#include "webp/mux_types.h"
+#include "webp/types.h"
 
 #if defined(_MSC_VER) && _MSC_VER < 1900
 #define snprintf _snprintf

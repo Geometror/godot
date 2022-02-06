@@ -13,11 +13,15 @@
 
 #include <assert.h>
 #include <stdlib.h>
-#include "src/dec/vp8i_dec.h"
+#include <stdint.h>
+#include <string.h>
+
 #include "src/dec/webpi_dec.h"
 #include "src/dsp/dsp.h"
-#include "src/dsp/yuv.h"
 #include "src/utils/utils.h"
+#include "dec/vp8_dec.h"
+#include "utils/rescaler_utils.h"
+#include "webp/decode.h"
 
 //------------------------------------------------------------------------------
 // Main YUV<->RGB conversion functions

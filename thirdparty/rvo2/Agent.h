@@ -37,12 +37,11 @@
 #ifndef RVO_AGENT_H_
 #define RVO_AGENT_H_
 
-#include "API.h"
-
 #include <cstddef>
 #include <utility>
 #include <vector>
 
+#include "API.h"
 #include "Vector3.h"
 
 // Note: Slightly modified to work better in Godot.

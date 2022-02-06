@@ -18,11 +18,18 @@
 #ifndef __RESDATA_H__
 #define __RESDATA_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/udata.h"
 #include "unicode/ures.h"
 #include "putilimp.h"
 #include "udataswp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 /**
  * Numeric constants for internal-only types of resource items.

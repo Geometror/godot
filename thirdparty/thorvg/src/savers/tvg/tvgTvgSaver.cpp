@@ -19,12 +19,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <float.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstring>
+#include <cmath>
+#include <memory>
+
 #include "tvgMath.h"
-#include "tvgSaveModule.h"
 #include "tvgTvgSaver.h"
 #include "tvgLzw.h"
-
-#include <cstring>
+#include "tvgCommon.h"
+#include "tvgPaint.h"
 
 #ifdef _WIN32
     #include <malloc.h>

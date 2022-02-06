@@ -11,6 +11,9 @@
 //
 // Author: Skal (pascal.massimino@gmail.com)
 
+#include <assert.h>
+#include <stdint.h>
+
 #include "src/dsp/dsp.h"
 
 #if defined(WEBP_USE_SSE2)

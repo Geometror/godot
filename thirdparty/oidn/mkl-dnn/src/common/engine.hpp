@@ -17,11 +17,21 @@
 #ifndef ENGINE_HPP
 #define ENGINE_HPP
 
-#include "mkldnn.h"
+#include <stddef.h>
 
+#include "mkldnn.h"
 #include "c_types_map.hpp"
 #include "primitive.hpp"
 #include "utils.hpp"
+#include "nstl.hpp"
+
+namespace mkldnn {
+namespace impl {
+struct concat_pd_t;
+struct reorder_pd_t;
+struct sum_pd_t;
+}  // namespace impl
+}  // namespace mkldnn
 
 /** \brief An abstraction of an execution unit with shared resources
  *

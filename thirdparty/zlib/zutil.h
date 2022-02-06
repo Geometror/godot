@@ -20,6 +20,7 @@
 #endif
 
 #include "zlib.h"
+#include "zconf.h"
 
 #if defined(STDC) && !defined(Z_SOLO)
 #  if !(defined(_WIN32_WCE) && defined(_MSC_VER))
@@ -236,6 +237,7 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
 /* Diagnostic functions */
 #ifdef ZLIB_DEBUG
 #  include <stdio.h>
+
    extern int ZLIB_INTERNAL z_verbose;
    extern void ZLIB_INTERNAL z_error OF((char *m));
 #  define Assert(cond,msg) {if(!(cond)) z_error(msg);}

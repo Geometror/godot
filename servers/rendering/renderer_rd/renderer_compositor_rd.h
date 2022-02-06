@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_COMPOSITOR_RD_H
 #define RENDERING_SERVER_COMPOSITOR_RD_H
 
+#include <stdint.h>
+
 #include "core/os/os.h"
 #include "core/templates/thread_work_pool.h"
 #include "servers/rendering/renderer_compositor.h"
@@ -39,6 +41,20 @@
 #include "servers/rendering/renderer_rd/renderer_canvas_render_rd.h"
 #include "servers/rendering/renderer_rd/renderer_storage_rd.h"
 #include "servers/rendering/renderer_rd/shaders/blit.glsl.gen.h"
+#include "core/error/error_list.h"
+#include "core/math/color.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/typedefs.h"
+#include "servers/display_server.h"
+#include "servers/rendering/renderer_rd/renderer_scene_render_rd.h"
+
+class Image;
+class RendererCanvasRender;
+class RendererSceneRender;
+class RendererStorage;
 
 class RendererCompositorRD : public RendererCompositor {
 protected:

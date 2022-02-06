@@ -30,11 +30,23 @@
 
 #ifdef TOOLS_ENABLED
 
+#include <embree3/rtcore.h>
+#include <stdint.h>
+
 #include "core/io/image.h"
 #include "core/object/object.h"
 #include "scene/3d/lightmapper.h"
+#include "core/math/vector2i.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "embree3/rtcore_device.h"
+#include "embree3/rtcore_geometry.h"
 
-#include <embree3/rtcore.h>
+class Image;
+struct Vector2;
+struct Vector3;
 
 class LightmapRaycasterEmbree : public LightmapRaycaster {
 	GDCLASS(LightmapRaycasterEmbree, LightmapRaycaster);

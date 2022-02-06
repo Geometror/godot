@@ -24,9 +24,12 @@
    -------------------------------------------------------------------------- */
 
 #include "rangefit.h"
+
+#include <cfloat>
+
 #include "colourset.h"
 #include "colourblock.h"
-#include <cfloat>
+#include "squish.h"
 
 namespace squish {
 

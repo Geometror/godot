@@ -16,11 +16,16 @@
 
 #pragma once
 
+#include <string>
+
 #include "common.h"
 #include "device.h"
 #include "image.h"
+#include "OpenImageDenoise/oidn.hpp"
+#include "common/ref.h"
 
 namespace oidn {
+struct Image;
 
   class Filter : public RefCount
   {

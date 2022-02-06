@@ -35,6 +35,15 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
+#include <assert.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/InfoSink.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <glslang/OSDependent/osinclude.h>
+#include <stdio.h>
 //
 // Implement the top-level of interface to the compiler/linker,
 // as defined in ShaderLang.h
@@ -42,9 +51,14 @@
 // and the shading language compiler/linker.
 //
 #include <cstring>
-#include <iostream>
-#include <sstream>
 #include <memory>
+#include <algorithm>
+#include <functional>
+#include <list>
+#include <string>
+#include <utility>
+#include <vector>
+
 #include "SymbolTable.h"
 #include "ParseHelper.h"
 #include "Scan.h"
@@ -58,7 +72,6 @@
 
 #include "../Include/ShHandle.h"
 #include "../../OGLCompilersDLL/InitializeDll.h"
-
 #include "preprocessor/PpContext.h"
 
 #define SH_EXPORTING
@@ -66,14 +79,14 @@
 #include "reflection.h"
 #include "iomapper.h"
 #include "Initialize.h"
-
 // TODO: this really shouldn't be here, it is only because of the trial addition
 // of printing pre-processed tokens, which requires knowing the string literal
 // token to print ", but none of that seems appropriate for this file.
 #include "preprocessor/PpTokens.h"
-
 // Build-time generated includes
 #include "glslang/build_info.h"
+
+struct TBuiltInResource;
 
 namespace { // anonymous namespace for file-local functions and symbols
 

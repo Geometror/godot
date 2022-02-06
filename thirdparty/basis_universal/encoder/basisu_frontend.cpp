@@ -17,10 +17,26 @@
 // This code originally supported full ETC1 and ETC1S, so there's some legacy stuff to be cleaned up in here.
 // Add endpoint tiling support (where we force adjacent blocks to use the same endpoints during quantization), for a ~10% or more increase in bitrate at same SSIM. The backend already supports this.
 //
-#include "../transcoder/basisu.h"
-#include "basisu_frontend.h"
+#include <encoder/basisu_enc.h>
+#include <encoder/basisu_etc.h>
+#include <encoder/basisu_global_selector_palette_helpers.h>
+#include <encoder/basisu_gpu_texture.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <transcoder/basisu_file_headers.h>
+#include <transcoder/basisu_transcoder.h>
+#include <transcoder/basisu_transcoder_internal.h>
 #include <unordered_set>
 #include <unordered_map>
+#include <algorithm>
+#include <cstdint>
+#include <thread>
+#include <type_traits>
+#include <utility>
+
+#include "../transcoder/basisu.h"
+#include "basisu_frontend.h"
 
 #if BASISU_SUPPORT_SSE
 #define CPPSPMD_NAME(a) a##_sse41

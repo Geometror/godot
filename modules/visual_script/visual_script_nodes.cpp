@@ -30,6 +30,8 @@
 
 #include "visual_script_nodes.h"
 
+#include <math.h>
+
 #include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/core_constants.h"
@@ -37,6 +39,20 @@
 #include "core/os/os.h"
 #include "scene/main/node.h"
 #include "scene/main/scene_tree.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource_loader.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/script_language.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "modules/visual_script/visual_script.h"
 
 //////////////////////////////////////////
 ////////////////FUNCTION//////////////////

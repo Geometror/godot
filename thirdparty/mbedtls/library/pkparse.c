@@ -17,9 +17,15 @@
  *  limitations under the License.
  */
 
-#include "common.h"
+#include <stdio.h>
 
+#include "mbedtls/bignum.h"
+#include "mbedtls/cipher.h"
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
 #if defined(MBEDTLS_PK_PARSE_C)
+
+#include <string.h>
 
 #include "mbedtls/pk.h"
 #include "mbedtls/asn1.h"
@@ -27,16 +33,11 @@
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
 
-#include <string.h>
-
 #if defined(MBEDTLS_RSA_C)
 #include "mbedtls/rsa.h"
 #endif
 #if defined(MBEDTLS_ECP_C)
 #include "mbedtls/ecp.h"
-#endif
-#if defined(MBEDTLS_ECDSA_C)
-#include "mbedtls/ecdsa.h"
 #endif
 #if defined(MBEDTLS_PEM_PARSE_C)
 #include "mbedtls/pem.h"
@@ -52,6 +53,7 @@
 #include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free
 #endif

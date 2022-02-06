@@ -20,9 +20,13 @@
  * SOFTWARE.
  */
 
-#include <memory.h>
-#include "tvgLoader.h"
+#include <stdlib.h>
+#include <string.h>
+
 #include "tvgJpgLoader.h"
+#include "thorvg.h"
+#include "tvgJpgd.h"
+#include "tvgRender.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

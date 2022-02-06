@@ -31,22 +31,23 @@
 #include "nativescript.h"
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "gdnative/gdnative.h"
-
-#include "core/config/project_settings.h"
-#include "core/core_constants.h"
 #include "core/core_string_names.h"
-#include "core/io/file_access.h"
-#include "core/io/file_access_encrypted.h"
 #include "core/os/os.h"
-
 #include "main/main.h"
-
-#include "scene/main/scene_tree.h"
 #include "scene/resources/resource_format_text.h"
-
-#include <stdlib.h>
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "gdnative/variant_struct.h"
+#include "nativescript/godot_nativescript.h"
 
 #ifndef NO_THREADS
 #include "core/os/thread.h"

@@ -36,6 +36,10 @@
 #ifndef _GLSLANG_SCAN_INCLUDED_
 #define _GLSLANG_SCAN_INCLUDED_
 
+#include <glslang/Include/Common.h>
+#include <stddef.h>
+#include <algorithm>
+
 #include "Versions.h"
 
 namespace glslang {

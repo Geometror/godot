@@ -33,8 +33,13 @@
 
 #include "servers/audio/audio_effect.h"
 #include "servers/audio/audio_filter_sw.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
 
 class AudioEffectFilter;
+struct AudioFrame;
 
 class AudioEffectFilterInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectFilterInstance, AudioEffectInstance);

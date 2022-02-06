@@ -3,9 +3,29 @@
 
 #include "scene.h"
 
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "../bvh/bvh4_factory.h"
-#include "../bvh/bvh8_factory.h"
 #include "../../common/algorithms/parallel_reduce.h"
+#include "common/algorithms/parallel_for.h"
+#include "common/math/range.h"
+#include "common/tasking/taskschedulerinternal.h"
+#include "kernels/bvh/bvh_factory.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/device.h"
+#include "kernels/common/geometry.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/scene_grid_mesh.h"
+#include "kernels/common/scene_quad_mesh.h"
+#include "kernels/common/scene_subdiv_mesh.h"
+#include "kernels/common/scene_triangle_mesh.h"
+#include "kernels/common/scene_user_geometry.h"
+#include "kernels/config.h"
  
 namespace embree
 {

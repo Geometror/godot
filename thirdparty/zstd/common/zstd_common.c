@@ -14,9 +14,12 @@
 *  Dependencies
 ***************************************/
 #define ZSTD_DEPS_NEED_MALLOC
+#include <stddef.h>
+
 #include "zstd_deps.h"   /* ZSTD_malloc, ZSTD_calloc, ZSTD_free, ZSTD_memset */
 #include "error_private.h"
 #include "zstd_internal.h"
+#include "zstd_errors.h"
 
 
 /*-****************************************

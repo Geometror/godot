@@ -35,6 +35,23 @@
 #include "core/io/file_access.h"
 #include "scene/resources/texture.h"
 #include "scene/resources/video_stream.h"
+#include "core/error/error_list.h"
+#include "core/io/resource.h"
+#include "core/io/resource_loader.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "videodecoder/godot_videodecoder.h"
+
+class FileAccess;
+class ImageTexture;
+class Texture2D;
 
 struct VideoDecoderGDNative {
 	const godot_videodecoder_interface_gdnative *interface = nullptr;

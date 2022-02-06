@@ -30,8 +30,16 @@
 
 #include "webrtc_multiplayer_peer.h"
 
-#include "core/io/marshalls.h"
-#include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "modules/webrtc/webrtc_peer_connection.h"
 
 void WebRTCMultiplayerPeer::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("initialize", "peer_id", "server_compatibility", "channels_config"), &WebRTCMultiplayerPeer::initialize, DEFVAL(false), DEFVAL(Array()));

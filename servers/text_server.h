@@ -31,14 +31,32 @@
 #ifndef TEXT_SERVER_H
 #define TEXT_SERVER_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/object/ref_counted.h"
 #include "core/os/os.h"
 #include "core/templates/rid.h"
 #include "core/variant/native_ptr.h"
 #include "core/variant/variant.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/os/mutex.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/dictionary.h"
 
 struct Glyph;
 struct CaretInfo;
+class Image;
 
 class TextServer : public RefCounted {
 	GDCLASS(TextServer, RefCounted);

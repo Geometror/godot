@@ -2,7 +2,28 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh_intersector_stream_filters.h"
-#include "bvh_intersector_stream.h"
+
+#include <assert.h>
+
+#include "common/math/constants.h"
+#include "common/math/math.h"
+#include "common/math/vec3ba.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/varying.h"
+#include "common/simd/vboolf4_sse2.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vint4_sse2.h"
+#include "common/simd/vuint4_sse2.h"
+#include "common/sys/platform.h"
+#include "kernels/common/accel.h"
+#include "kernels/common/context.h"
+#include "kernels/common/ray.h"
+#include "kernels/common/scene.h"
+
+struct RTCRay;
+struct RTCRayHit;
+struct RTCRayHitNp;
+struct RTCRayNp;
 
 namespace embree
 {

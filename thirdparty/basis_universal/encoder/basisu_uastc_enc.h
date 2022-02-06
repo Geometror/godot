@@ -13,12 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #pragma once
-#include "basisu_etc.h"
+#include <encoder/basisu_enc.h>
+#include <stdint.h>
 
+#include "basisu_etc.h"
 #include "../transcoder/basisu_transcoder_uastc.h"
 
 namespace basisu
 {
+struct eac_a8_block;
+struct etc_block;
+
 	const uint32_t TOTAL_PACK_UASTC_LEVELS = 5;
 
 	enum

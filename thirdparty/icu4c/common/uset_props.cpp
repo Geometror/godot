@@ -19,13 +19,20 @@
 *   uniset_props.cpp, split off for modularization.
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
-#include "unicode/uobject.h"
 #include "unicode/uset.h"
 #include "unicode/uniset.h"
-#include "cmemory.h"
-#include "unicode/ustring.h"
 #include "unicode/parsepos.h"
+#include "unicode/char16ptr.h"
+#include "unicode/platform.h"
+#include "unicode/uchar.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_USE
 

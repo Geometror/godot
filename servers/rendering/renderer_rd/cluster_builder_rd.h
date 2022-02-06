@@ -31,10 +31,22 @@
 #ifndef CLUSTER_BUILDER_RD_H
 #define CLUSTER_BUILDER_RD_H
 
+#include <stdint.h>
+
 #include "servers/rendering/renderer_rd/renderer_storage_rd.h"
 #include "servers/rendering/renderer_rd/shaders/cluster_debug.glsl.gen.h"
 #include "servers/rendering/renderer_rd/shaders/cluster_render.glsl.gen.h"
 #include "servers/rendering/renderer_rd/shaders/cluster_store.glsl.gen.h"
+#include "core/math/basis.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/templates/rid.h"
+#include "core/typedefs.h"
 
 class ClusterBuilderSharedDataRD {
 	friend class ClusterBuilderRD;

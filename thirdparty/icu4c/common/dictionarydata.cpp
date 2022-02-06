@@ -12,10 +12,15 @@
 */
 
 #include "dictionarydata.h"
+
+#include <stddef.h>
+
 #include "unicode/ucharstrie.h"
 #include "unicode/bytestrie.h"
 #include "unicode/udata.h"
 #include "cmemory.h"
+#include "unicode/char16ptr.h"
+#include "unicode/ustringtrie.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 

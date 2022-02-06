@@ -33,11 +33,15 @@
 
 #include "core/math/transform_3d.h"
 #include "core/object/ref_counted.h"
-
 #include "model_abstraction.h"
-
 #include "fbx_parser/FBXDocument.h"
 #include "tools/import_utils.h"
+#include "core/math/math_defs.h"
+#include "core/math/quaternion.h"
+#include "core/math/vector3.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "fbx_parser/FBXCommon.h"
 
 enum TransformationComp {
 	TransformationComp_Translation,

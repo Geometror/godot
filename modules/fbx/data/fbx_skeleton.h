@@ -34,13 +34,14 @@
 #include "fbx_bone.h"
 #include "fbx_node.h"
 #include "model_abstraction.h"
-
 #include "core/object/ref_counted.h"
 #include "scene/3d/skeleton_3d.h"
+#include "core/templates/vector.h"
 
 struct FBXNode;
 struct ImportState;
 struct FBXBone;
+class Skeleton3D;
 
 struct FBXSkeleton : RefCounted {
 	Ref<FBXNode> fbx_node = Ref<FBXNode>();

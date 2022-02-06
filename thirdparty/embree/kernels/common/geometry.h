@@ -3,16 +3,38 @@
 
 #pragma once
 
+#include <assert.h>
+#include <stddef.h>
+
 #include "default.h"
 #include "device.h"
 #include "buffer.h"
 #include "../common/point_query.h"
 #include "../builders/priminfo.h"
+#include "common/math/affinespace.h"
+#include "common/math/bbox.h"
+#include "common/math/lbbox.h"
+#include "common/math/linearspace3.h"
+#include "common/math/range.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/varying.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
+#include "embree3/rtcore_buffer.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_geometry.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/vector.h"
 
 namespace embree
 {
   class Scene;
   class Geometry;
+class Buffer;
+class Device;
+struct PointQueryContext;
+struct PrimRef;
+struct PrimRefMB;
 
   struct GeometryCounts 
   {

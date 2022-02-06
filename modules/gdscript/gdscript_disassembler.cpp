@@ -31,9 +31,17 @@
 #ifdef DEBUG_ENABLED
 
 #include "gdscript_function.h"
-
 #include "core/string/string_builder.h"
 #include "gdscript.h"
+#include "core/object/method_bind.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 static String _get_variant_string(const Variant &p_variant) {
 	String txt;

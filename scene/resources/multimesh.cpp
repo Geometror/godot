@@ -31,6 +31,13 @@
 #include "multimesh.h"
 
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "scene/resources/mesh.h"
 
 #ifndef DISABLE_DEPRECATED
 // Kept for compatibility from 3.x to 4.0.

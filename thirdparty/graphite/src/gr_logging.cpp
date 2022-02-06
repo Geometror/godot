@@ -27,12 +27,8 @@ of the License or (at your option) any later version.
 #include <cstdio>
 
 #include "graphite2/Log.h"
-#include "inc/debug.h"
-#include "inc/CharInfo.h"
-#include "inc/Slot.h"
-#include "inc/Segment.h"
-#include "inc/json.h"
-#include "inc/Collider.h"
+#include "graphite2/Font.h"
+#include "inc/Main.h"
 
 #if defined _WIN32
 #include "windows.h"

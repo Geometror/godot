@@ -40,11 +40,9 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* This module contains functions for scanning a compiled pattern and
 collecting data (e.g. minimum matching length). */
-
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <limits.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #include "pcre2_internal.h"
 

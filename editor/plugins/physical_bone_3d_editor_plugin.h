@@ -32,6 +32,14 @@
 #define PHYSICAL_BONE_PLUGIN_H
 
 #include "editor/editor_node.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "editor/editor_plugin.h"
+
+class Button;
+class EditorNode;
+class HBoxContainer;
+class PhysicalBone3D;
 
 class PhysicalBone3DEditor : public Object {
 	GDCLASS(PhysicalBone3DEditor, Object);

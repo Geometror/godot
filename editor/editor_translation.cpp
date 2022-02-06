@@ -30,11 +30,16 @@
 
 #include "editor/editor_translation.h"
 
+#include <stdint.h>
+
 #include "core/io/compression.h"
 #include "core/io/file_access_memory.h"
 #include "core/io/translation_loader_po.h"
 #include "editor/doc_translations.gen.h"
 #include "editor/editor_translations.gen.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/translation.h"
 
 Vector<String> get_editor_locales() {
 	Vector<String> locales;

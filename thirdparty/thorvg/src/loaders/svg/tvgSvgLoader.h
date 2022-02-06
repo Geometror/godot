@@ -22,8 +22,18 @@
 #ifndef _TVG_SVG_LOADER_H_
 #define _TVG_SVG_LOADER_H_
 
+#include <stdint.h>
+#include <memory>
+#include <string>
+
 #include "tvgTaskScheduler.h"
 #include "tvgSvgLoaderCommon.h"
+#include "tvgLoadModule.h"
+
+namespace tvg {
+class Paint;
+class Scene;
+}  // namespace tvg
 
 class SvgLoader : public LoadModule, public Task
 {

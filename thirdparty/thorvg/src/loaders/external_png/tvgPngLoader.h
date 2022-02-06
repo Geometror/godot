@@ -23,6 +23,15 @@
 #define _TVG_PNG_LOADER_H_
 
 #include <png.h>
+#include <stdint.h>
+#include <memory>
+#include <string>
+
+#include "tvgLoadModule.h"
+
+namespace tvg {
+struct Surface;
+}  // namespace tvg
 
 class PngLoader : public LoadModule
 {

@@ -6,9 +6,13 @@
 // Copyright 2007 Google Inc. All Rights Reserved.
 // Author: sanjay@google.com (Sanjay Ghemawat)
 
-#include "unicode/utypes.h"
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/bytestream.h"
 #include "cmemory.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

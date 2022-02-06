@@ -33,6 +33,11 @@
 #include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "servers/physics_server_2d.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+
+struct Transform2D;
 
 RID Shape2D::get_rid() const {
 	return shape;

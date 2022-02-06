@@ -16,6 +16,12 @@
 
 #include "transfer_function.h"
 
+#include <assert.h>
+#include <stddef.h>
+#include <map>
+
+#include "core/image.h"
+
 namespace oidn {
 
   const float LogTransferFunction::xScale = 1.f / log(LogTransferFunction::yMax + 1.f);

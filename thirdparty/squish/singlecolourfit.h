@@ -28,6 +28,7 @@
 
 #include "squish.h"
 #include "colourfit.h"
+#include "maths.h"
 
 namespace squish {
 

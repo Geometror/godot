@@ -3,6 +3,9 @@
 
 #pragma once
 
+#include <iosfwd>
+#include <string>
+
 #include "platform.h"
 
 namespace embree

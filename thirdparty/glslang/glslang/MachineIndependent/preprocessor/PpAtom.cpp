@@ -80,9 +80,9 @@ NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-#include <cassert>
+#include <glslang/Include/Common.h>
+#include <glslang/MachineIndependent/Versions.h>
 #include <cstdlib>
-#include <cstring>
 
 #include "PpContext.h"
 #include "PpTokens.h"

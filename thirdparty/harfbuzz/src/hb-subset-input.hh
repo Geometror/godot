@@ -29,12 +29,11 @@
 
 
 #include "hb.hh"
-
 #include "hb-subset.h"
 #include "hb-map.hh"
 #include "hb-set.hh"
-
 #include "hb-font.hh"
+#include "hb.h"
 
 HB_MARK_AS_FLAG_T (hb_subset_flags_t);
 

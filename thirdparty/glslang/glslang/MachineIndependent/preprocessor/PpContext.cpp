@@ -77,12 +77,12 @@ TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHERWISE, EVEN IF
 NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \****************************************************************************/
 
-#include <cstdlib>
 #include <locale>
 
 #include "PpContext.h"
 
 namespace glslang {
+class TParseContextBase;
 
 TPpContext::TPpContext(TParseContextBase& pc, const std::string& rootFileName, TShader::Includer& inclr) :
     preamble(0), strings(0), previous_token('\n'), parseContext(pc), includer(inclr), inComment(false),

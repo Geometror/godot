@@ -48,15 +48,23 @@
 ******************************************************************************
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/resbund.h"
-
-#include "cmemory.h"
 #include "mutex.h"
-#include "uassert.h"
 #include "umutex.h"
-
 #include "uresimp.h"
+#include "unicode/char16ptr.h"
+#include "unicode/locid.h"
+#include "unicode/uloc.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/ures.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

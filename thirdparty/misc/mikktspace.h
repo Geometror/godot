@@ -25,6 +25,7 @@
 #define __MIKKTSPACE_H__
 
 
+struct SMikkTSpaceContext;
 #ifdef __cplusplus
 extern "C" {
 #endif

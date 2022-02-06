@@ -30,6 +30,9 @@
 
 #include "gltf_light.h"
 
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+
 void GLTFLight::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_color"), &GLTFLight::get_color);
 	ClassDB::bind_method(D_METHOD("set_color", "color"), &GLTFLight::set_color);

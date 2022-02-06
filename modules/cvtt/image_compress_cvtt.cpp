@@ -30,12 +30,15 @@
 
 #include "image_compress_cvtt.h"
 
-#include "core/os/os.h"
-#include "core/os/thread.h"
-#include "core/string/print_string.h"
-#include "core/templates/safe_refcount.h"
-
 #include <ConvectionKernels.h>
+#include <string.h>
+#include <cstdint>
+
+#include "core/os/thread.h"
+#include "core/templates/safe_refcount.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 struct CVTTCompressionJobParams {
 	bool is_hdr = false;

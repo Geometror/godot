@@ -16,13 +16,20 @@
  */
 
 
-#include <freetype/internal/ftdebug.h>
 
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/services/svbdf.h>
 
 
   /* documentation is in ftbdf.h */
+
+#include <freetype/fterrors.h>
+#include <stddef.h>
+
+#include "freetype/freetype.h"
+#include "freetype/ftbdf.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/services/svbdf.h"
 
   FT_EXPORT_DEF( FT_Error )
   FT_Get_BDF_Charset_ID( FT_Face       face,

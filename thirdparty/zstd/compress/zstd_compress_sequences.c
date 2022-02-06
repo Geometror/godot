@@ -13,6 +13,14 @@
  ***************************************/
 #include "zstd_compress_sequences.h"
 
+#include "bitstream.h"
+#include "compiler.h"
+#include "debug.h"
+#include "error_private.h"
+#include "zstd_deps.h"
+#include "zstd_errors.h"
+#include "zstd_internal.h"
+
 /**
  * -log2(x / 256) lookup table for x in [0, 256).
  * If x == 0: Return 0

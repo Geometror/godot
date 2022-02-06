@@ -32,8 +32,16 @@
 
 #include <miniwget.h>
 #include <upnpcommands.h>
-
 #include <stdlib.h>
+#include <string.h>
+
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "igd_desc_parse.h"
+#include "miniupnpc.h"
+#include "modules/upnp/upnp_device.h"
+#include "upnpdev.h"
 
 bool UPNP::is_common_device(const String &dev) const {
 	return dev.is_empty() ||

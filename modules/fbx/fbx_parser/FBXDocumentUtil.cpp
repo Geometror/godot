@@ -74,11 +74,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include "FBXDocumentUtil.h"
-#include "FBXDocument.h"
+
 #include "FBXParser.h"
-#include "FBXProperties.h"
-#include "FBXUtil.h"
 #include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "fbx_parser/FBXTokenizer.h"
 
 namespace FBXDocParser {
 namespace Util {

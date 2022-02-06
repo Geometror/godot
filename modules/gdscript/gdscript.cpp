@@ -31,19 +31,30 @@
 #include "gdscript.h"
 
 #include <stdint.h>
+#include <math.h>
 
 #include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/core_constants.h"
 #include "core/core_string_names.h"
 #include "core/io/file_access.h"
-#include "core/io/file_access_encrypted.h"
-#include "core/os/os.h"
 #include "gdscript_analyzer.h"
 #include "gdscript_cache.h"
 #include "gdscript_compiler.h"
 #include "gdscript_parser.h"
 #include "gdscript_warning.h"
+#include "core/math/math_defs.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/templates/hash_map.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant_internal.h"
+#include "modules/gdscript/gdscript_function.h"
+#include "modules/gdscript/gdscript_utility_functions.h"
 
 #ifdef TESTS_ENABLED
 #include "tests/gdscript_test_runner.h"

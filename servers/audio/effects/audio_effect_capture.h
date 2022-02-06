@@ -31,6 +31,8 @@
 #ifndef AUDIO_EFFECT_CAPTURE_H
 #define AUDIO_EFFECT_CAPTURE_H
 
+#include <cstdint>
+
 #include "core/config/engine.h"
 #include "core/math/audio_frame.h"
 #include "core/object/ref_counted.h"
@@ -38,6 +40,9 @@
 #include "core/templates/vector.h"
 #include "servers/audio/audio_effect.h"
 #include "servers/audio_server.h"
+#include "core/object/object.h"
+#include "core/templates/safe_refcount.h"
+#include "core/variant/variant.h"
 
 class AudioEffectCapture;
 

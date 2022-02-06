@@ -16,8 +16,6 @@
 
 #include "mkldnn.h"
 #include "engine.hpp"
-#include "nstl.hpp"
-
 #include "c_types_map.hpp"
 #include "../cpu/cpu_engine.hpp"
 

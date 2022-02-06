@@ -3,10 +3,32 @@
 
 #pragma once
 
+#include <assert.h>
+#include <stddef.h>
+#include <sys/types.h>
+#include <atomic>
+#include <iomanip>
+#include <iostream>
+#include <memory>
+#include <new>
+#include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
+
 #include "default.h"
 #include "device.h"
 #include "scene.h"
 #include "primref.h"
+#include "common/math/math.h"
+#include "common/sys/alloc.h"
+#include "common/sys/atomic.h"
+#include "common/sys/mutex.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
+#include "common/tasking/taskschedulerinternal.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/vector.h"
 
 namespace embree
 {
@@ -26,6 +48,7 @@ namespace embree
   public:
 
     struct ThreadLocal2;
+
     enum AllocationType { ALIGNED_MALLOC, OS_MALLOC, SHARED, ANY_TYPE };
 
     /*! Per thread structure holding the current memory block. */

@@ -32,6 +32,8 @@
 #define CANVASGROUP_H
 
 #include "scene/2d/node_2d.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
 
 class CanvasGroup : public Node2D {
 	GDCLASS(CanvasGroup, Node2D)

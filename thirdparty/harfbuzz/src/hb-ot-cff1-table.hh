@@ -27,13 +27,30 @@
 #ifndef HB_OT_CFF1_TABLE_HH
 #define HB_OT_CFF1_TABLE_HH
 
+#include <assert.h>
+#include <stdint.h>
+#include <string.h>
+#include <new>
+
 #include "hb-ot-cff-common.hh"
 #include "hb-subset-cff1.hh"
 #include "hb-draw.hh"
+#include "hb-bimap.hh"
+#include "hb-cff-interp-common.hh"
+#include "hb-cff-interp-dict-common.hh"
+#include "hb-machinery.hh"
+#include "hb-open-type.hh"
+#include "hb-sanitize.hh"
+#include "hb-serialize.hh"
+#include "hb.h"
+#include "hb.hh"
 
 #define HB_STRING_ARRAY_NAME cff1_std_strings
 #define HB_STRING_ARRAY_LIST "hb-ot-cff1-std-str.hh"
 #include "hb-string-array.hh"
+
+struct hb_subset_context_t;
+
 #undef HB_STRING_ARRAY_LIST
 #undef HB_STRING_ARRAY_NAME
 

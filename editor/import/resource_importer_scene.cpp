@@ -40,7 +40,6 @@
 #include "scene/3d/mesh_instance_3d.h"
 #include "scene/3d/navigation_region_3d.h"
 #include "scene/3d/physics_body_3d.h"
-#include "scene/3d/vehicle_body_3d.h"
 #include "scene/animation/animation_player.h"
 #include "scene/resources/animation.h"
 #include "scene/resources/box_shape_3d.h"
@@ -49,8 +48,29 @@
 #include "scene/resources/resource_format_text.h"
 #include "scene/resources/separation_ray_shape_3d.h"
 #include "scene/resources/sphere_shape_3d.h"
-#include "scene/resources/surface_tool.h"
 #include "scene/resources/world_boundary_shape_3d.h"
+#include "core/io/file_access.h"
+#include "core/io/resource_loader.h"
+#include "core/math/quaternion.h"
+#include "core/object/class_db.h"
+#include "core/object/object_id.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/string/char_utils.h"
+#include "core/string/node_path.h"
+#include "core/string/print_string.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "scene/3d/collision_object_3d.h"
+#include "scene/3d/node_3d.h"
+#include "scene/3d/skeleton_3d.h"
+#include "scene/3d/visual_instance_3d.h"
+#include "scene/main/node.h"
+#include "scene/resources/material.h"
+
+class NavigationMesh;
 
 uint32_t EditorSceneFormatImporter::get_import_flags() const {
 	int ret;

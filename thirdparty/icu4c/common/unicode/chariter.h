@@ -12,7 +12,15 @@
 #ifndef CHARITER_H
 #define CHARITER_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class UnicodeString;
+}  // namespace icu_70
 
 #if U_SHOW_CPLUSPLUS_API
 

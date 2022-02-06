@@ -35,6 +35,11 @@
 #include "godot_body_3d.h"
 #include "godot_constraint_3d.h"
 #include "godot_soft_body_3d.h"
+#include "core/math/math_defs.h"
+
+class GodotArea3D;
+class GodotBody3D;
+class GodotSoftBody3D;
 
 class GodotAreaPair3D : public GodotConstraint3D {
 	GodotBody3D *body;

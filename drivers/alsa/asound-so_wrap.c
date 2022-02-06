@@ -4,6 +4,21 @@
 // flags: /home/hp/Projects/godot/pulse/generate-wrapper.py --include /usr/include/alsa/asoundlib.h --sys-include <alsa/asoundlib.h> --soname libasound.so.2 --init-name asound --omit-prefix snd_pcm_sw_params_set_tstamp_type --omit-prefix snd_pcm_status_get_audio_htstamp_report --omit-prefix snd_pcm_sw_params_get_tstamp_type --omit-prefix snd_pcm_status_set_audio_htstamp_config --output-header asound-so_wrap.h --output-implementation asound-so_wrap.c
 //
 #include <stdint.h>
+#include <alsa/conf.h>
+#include <alsa/control.h>
+#include <alsa/error.h>
+#include <alsa/global.h>
+#include <alsa/hwdep.h>
+#include <alsa/input.h>
+#include <alsa/mixer.h>
+#include <alsa/output.h>
+#include <alsa/pcm.h>
+#include <alsa/rawmidi.h>
+#include <alsa/seq.h>
+#include <alsa/seq_event.h>
+#include <alsa/seq_midi_event.h>
+#include <alsa/timer.h>
+#include <sys/types.h>
 
 #define snd_asoundlib_version snd_asoundlib_version_dylibloader_orig_asound
 #define snd_dlpath snd_dlpath_dylibloader_orig_asound
@@ -1284,7 +1299,6 @@
 #define snd_midi_event_encode snd_midi_event_encode_dylibloader_orig_asound
 #define snd_midi_event_encode_byte snd_midi_event_encode_byte_dylibloader_orig_asound
 #define snd_midi_event_decode snd_midi_event_decode_dylibloader_orig_asound
-#include <alsa/asoundlib.h>
 #undef snd_asoundlib_version
 #undef snd_dlpath
 #undef snd_dlopen
@@ -2566,6 +2580,10 @@
 #undef snd_midi_event_decode
 #include <dlfcn.h>
 #include <stdio.h>
+
+struct pollfd;
+struct snd_shm_area;
+
 const char* (*snd_asoundlib_version_dylibloader_wrapper_asound)( void);
 int (*snd_dlpath_dylibloader_wrapper_asound)( char*, size_t,const char*);
 void* (*snd_dlopen_dylibloader_wrapper_asound)(const char*, int, char*, size_t);

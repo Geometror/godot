@@ -15,13 +15,21 @@
  *
  */
 
-#include <freetype/internal/ftdebug.h>
 
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/services/svpfr.h>
 
 
   /* check the format */
+#include <freetype/fterrors.h>
+#include <stddef.h>
+
+#include "freetype/freetype.h"
+#include "freetype/ftimage.h"
+#include "freetype/ftpfr.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/services/svpfr.h"
+
   static FT_Service_PfrMetrics
   ft_pfr_check( FT_Face  face )
   {

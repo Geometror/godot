@@ -31,9 +31,27 @@
 #ifndef RSSR_SCENE_SHADER_FC_H
 #define RSSR_SCENE_SHADER_FC_H
 
+#include <stdint.h>
+
 #include "servers/rendering/renderer_rd/renderer_scene_render_rd.h"
 #include "servers/rendering/renderer_rd/renderer_storage_rd.h"
 #include "servers/rendering/renderer_rd/shaders/scene_forward_clustered.glsl.gen.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_rd/pipeline_cache_rd.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/rendering_device.h"
+#include "servers/rendering/shader_compiler.h"
+#include "servers/rendering/shader_language.h"
+#include "servers/rendering_server.h"
+
+struct PropertyInfo;
 
 namespace RendererSceneRenderImplementation {
 

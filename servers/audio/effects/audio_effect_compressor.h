@@ -32,8 +32,12 @@
 #define AUDIOEFFECTCOMPRESSOR_H
 
 #include "servers/audio/audio_effect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
 
 class AudioEffectCompressor;
+struct AudioFrame;
 
 class AudioEffectCompressorInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectCompressorInstance, AudioEffectInstance);

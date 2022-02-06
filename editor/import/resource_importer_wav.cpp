@@ -34,6 +34,12 @@
 #include "core/io/marshalls.h"
 #include "core/io/resource_saver.h"
 #include "scene/resources/audio_stream_sample.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/variant/variant.h"
 
 const float TRIM_DB_LIMIT = -50;
 const int TRIM_FADE_OUT_FRAMES = 500;

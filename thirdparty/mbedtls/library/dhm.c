@@ -25,15 +25,19 @@
  *
  */
 
+#include <stdio.h>
+
 #include "common.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_DHM_C)
+
+#include <string.h>
 
 #include "mbedtls/dhm.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_PEM_PARSE_C)
 #include "mbedtls/pem.h"
@@ -48,6 +52,7 @@
 #else
 #include <stdlib.h>
 #include <stdio.h>
+
 #define mbedtls_printf     printf
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free

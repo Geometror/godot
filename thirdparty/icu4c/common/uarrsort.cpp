@@ -18,6 +18,7 @@
 *   Internal function for sorting arrays.
 */
 
+#include <__stddef_max_align_t.h>
 #include <cstddef>
 
 #include "unicode/utypes.h"

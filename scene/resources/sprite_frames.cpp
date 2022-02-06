@@ -31,6 +31,10 @@
 #include "sprite_frames.h"
 
 #include "scene/scene_string_names.h"
+#include "core/object/class_db.h"
+#include "core/templates/pair.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 void SpriteFrames::add_frame(const StringName &p_anim, const Ref<Texture2D> &p_frame, int p_at_pos) {
 	Map<StringName, Anim>::Element *E = animations.find(p_anim);

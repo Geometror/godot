@@ -17,6 +17,8 @@
 
 #include "threading.h"
 
+#include "debug.h"
+
 /* create fake symbol to avoid empty translation unit warning */
 int g_ZSTD_threading_useless_symbol;
 

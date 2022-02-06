@@ -30,6 +30,8 @@
 
 #include "validation_tools.h"
 
+#include "core/typedefs.h"
+
 #ifdef TOOLS_ENABLED
 
 #include "core/string/print_string.h"

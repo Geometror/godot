@@ -19,11 +19,13 @@
  *
  *----------------------------------------------------------------------------------*/
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
 #include "cmemory.h"
 #include "unicode/udata.h"
-
 #include "udatamem.h"
+#include "umapfile.h"
 
 U_CFUNC void UDataMemory_init(UDataMemory *This) {
     uprv_memset(This, 0, sizeof(UDataMemory));

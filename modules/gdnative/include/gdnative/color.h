@@ -36,6 +36,7 @@ extern "C" {
 #endif
 
 #include <gdnative/math_defs.h>
+#include <stdint.h>
 
 // Colors should always use 32-bit floats, so don't use real_t here.
 #define GODOT_COLOR_SIZE (sizeof(float) * 4)

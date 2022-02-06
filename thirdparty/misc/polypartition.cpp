@@ -23,9 +23,9 @@
 
 #include "polypartition.h"
 
-#include <math.h>
 #include <string.h>
 #include <algorithm>
+#include <cmath>
 
 TPPLPoly::TPPLPoly() {
   hole = false;

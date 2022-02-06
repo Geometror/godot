@@ -22,11 +22,15 @@
 #ifndef _TVG_RENDER_H_
 #define _TVG_RENDER_H_
 
+#include <stdint.h>
+
 #include "tvgCommon.h"
 #include "tvgArray.h"
+#include "thorvg.h"
 
 namespace tvg
 {
+template <class T> struct Array;
 
 enum RenderUpdateFlag {None = 0, Path = 1, Color = 2, Gradient = 4, Stroke = 8, Transform = 16, Image = 32, GradientStroke = 64, All = 255};
 

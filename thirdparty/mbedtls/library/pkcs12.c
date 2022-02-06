@@ -24,8 +24,12 @@
  */
 
 #include "common.h"
+#include "mbedtls/config.h"
+#include "mbedtls/md.h"
 
 #if defined(MBEDTLS_PKCS12_C)
+
+#include <string.h>
 
 #include "mbedtls/pkcs12.h"
 #include "mbedtls/asn1.h"
@@ -33,14 +37,8 @@
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
 
-#include <string.h>
-
 #if defined(MBEDTLS_ARC4_C)
 #include "mbedtls/arc4.h"
-#endif
-
-#if defined(MBEDTLS_DES_C)
-#include "mbedtls/des.h"
 #endif
 
 #if defined(MBEDTLS_ASN1_PARSE_C)

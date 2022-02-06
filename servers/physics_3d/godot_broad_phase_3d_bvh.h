@@ -31,9 +31,14 @@
 #ifndef GODOT_BROAD_PHASE_3D_BVH_H
 #define GODOT_BROAD_PHASE_3D_BVH_H
 
-#include "godot_broad_phase_3d.h"
+#include <stdint.h>
 
+#include "godot_broad_phase_3d.h"
 #include "core/math/bvh.h"
+#include "core/math/aabb.h"
+#include "core/math/vector3.h"
+
+class GodotCollisionObject3D;
 
 class GodotBroadPhase3DBVH : public GodotBroadPhase3D {
 	BVH_Manager<GodotCollisionObject3D, true, 128> bvh;

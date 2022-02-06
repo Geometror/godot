@@ -1,12 +1,22 @@
 // Copyright 2009-2021 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 
+#include <stddef.h>
+
 #include "bvh.h"
 #include "../builders/bvh_builder_sah.h"
 #include "../builders/bvh_builder_msmblur.h"
+#include "common/math/bbox.h"
+#include "common/math/range.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/builders/priminfo.h"
+#include "kernels/common/alloc.h"
 
 namespace embree
 {
+struct BuildProgressMonitor;
+struct PrimRef;
+
   namespace isa
   {
     /************************************************************************************/
@@ -28,6 +38,7 @@ namespace embree
 
         template<typename CreateLeafFunc>
         struct BVHNBuilderT : public BVHNBuilderV
+
         {
           BVHNBuilderT (CreateLeafFunc createLeafFunc)
             : createLeafFunc(createLeafFunc) {}
@@ -60,6 +71,7 @@ namespace embree
 
         template<typename CreateLeafFunc>
         struct BVHNBuilderT : public BVHNBuilderV
+
         {
           BVHNBuilderT (CreateLeafFunc createLeafFunc)
             : createLeafFunc(createLeafFunc) {}
@@ -94,6 +106,7 @@ namespace embree
 
         template<typename CreateLeafFunc>
         struct BVHNBuilderT : public BVHNBuilderV
+
         {
           BVHNBuilderT (CreateLeafFunc createLeafFunc)
             : createLeafFunc(createLeafFunc) {}

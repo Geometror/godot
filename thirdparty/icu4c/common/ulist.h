@@ -10,10 +10,16 @@
 #ifndef ULIST_H
 #define ULIST_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uenum.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 struct UList;
+
 typedef struct UList UList;
 
 U_CAPI UList * U_EXPORT2 ulist_createEmptyList(UErrorCode *status);

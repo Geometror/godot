@@ -14,11 +14,26 @@
 // limitations under the License.                                           //
 // ======================================================================== //
 
+#include <assert.h>
+// -- GODOT start --
+#include <cstring>
+#include <algorithm>
+#include <iostream>
+
 #include "upsample.h"
 #include "weights_reorder.h"
 #include "network.h"
-// -- GODOT start -- 
-#include <cstring>
+#include "common/exception.h"
+#include "common/platform.h"
+#include "core/common.h"
+#include "core/image.h"
+#include "core/input_reorder.h"
+#include "core/math.h"
+#include "core/node.h"
+#include "core/output_reorder.h"
+#include "core/transfer_function.h"
+#include "mkldnn_types.h"
+#include "z_magic.hpp"
 // -- GODOT end --
 
 namespace oidn {

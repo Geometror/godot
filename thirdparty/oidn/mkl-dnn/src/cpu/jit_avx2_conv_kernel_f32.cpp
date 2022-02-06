@@ -15,13 +15,19 @@
 * limitations under the License.
 *******************************************************************************/
 
+#include <assert.h>
+#include <stddef.h>
+#include <initializer_list>
+
 #include "c_types_map.hpp"
 #include "nstl.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
-#include "cpu_memory.hpp"
-
 #include "jit_avx2_conv_kernel_f32.hpp"
+#include "memory_tracking.hpp"
+#include "mkldnn_types.h"
+#include "primitive_attr.hpp"
+#include "xbyak_mnemonic.h"
+#include "z_magic.hpp"
 
 #define GET_OFF(field) offsetof(jit_conv_call_s, field)
 

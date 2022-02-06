@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "geometry.h"
-#include "scene.h"
+
+#include "kernels/common/context.h"
+#include "kernels/common/device.h"
+#include "kernels/common/point_query.h"
 
 namespace embree
 {

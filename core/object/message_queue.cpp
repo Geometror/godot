@@ -30,9 +30,18 @@
 
 #include "message_queue.h"
 
+#include <alloca.h>
+
 #include "core/config/project_settings.h"
 #include "core/core_string_names.h"
-#include "core/object/script_language.h"
+#include "core/error/error_macros.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
 
 MessageQueue *MessageQueue::singleton = nullptr;
 

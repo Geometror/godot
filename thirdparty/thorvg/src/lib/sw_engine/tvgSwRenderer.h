@@ -22,7 +22,11 @@
 #ifndef _TVG_SW_RENDERER_H_
 #define _TVG_SW_RENDERER_H_
 
+#include <stdint.h>
+
 #include "tvgRender.h"
+#include "thorvg.h"
+#include "tvgArray.h"
 
 struct SwSurface;
 struct SwTask;

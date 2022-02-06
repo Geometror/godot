@@ -37,6 +37,14 @@
 #include "scene/gui/option_button.h"
 #include "scene/gui/text_edit.h"
 #include "scene/gui/texture_rect.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+
+class CheckBox;
+class LineEdit;
+class OptionButton;
+class TextEdit;
+class TextureRect;
 
 class PluginConfigDialog : public ConfirmationDialog {
 	GDCLASS(PluginConfigDialog, ConfirmationDialog);

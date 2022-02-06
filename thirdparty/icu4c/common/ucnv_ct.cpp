@@ -14,8 +14,7 @@
 *   created by: Michael Ow
 */
 
-#include "unicode/utypes.h"
-
+#include "unicode/uconfig.h"
 #if !UCONFIG_NO_CONVERSION && !UCONFIG_NO_LEGACY_CONVERSION && !UCONFIG_ONLY_HTML_CONVERSION
 
 #include "unicode/ucnv.h"

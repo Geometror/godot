@@ -89,10 +89,13 @@ NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define snprintf sprintf_s
 #endif
 
-#include <cassert>
+#include <glslang/Include/Common.h>
+#include <glslang/MachineIndependent/ParseHelper.h>
+#include <glslang/MachineIndependent/Scan.h>
+#include <glslang/MachineIndependent/Versions.h>
 #include <cstdlib>
-#include <cstring>
-#include <cctype>
+#include <memory>
+#include <vector>
 
 #include "PpContext.h"
 #include "PpTokens.h"

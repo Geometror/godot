@@ -18,8 +18,17 @@
 #include "mkldnn_thread.hpp"
 #include "nstl.hpp"
 #include "utils.hpp"
-
 #include "jit_uni_eltwise.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "mkldnn_types.h"
+
+namespace mkldnn {
+namespace impl {
+namespace cpu {
+struct jit_args;
+}  // namespace cpu
+}  // namespace impl
+}  // namespace mkldnn
 
 #define GET_OFF(field) offsetof(jit_args, field)
 

@@ -18,6 +18,7 @@
 #define CPU_REDUCER_HPP
 
 #include <assert.h>
+#include <stddef.h>
 
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
@@ -25,8 +26,8 @@
 #include "mkldnn_types.h"
 #include "nstl.hpp"
 #include "type_helpers.hpp"
-
 #include "cpu_barrier.hpp"
+#include "mkldnn_traits.hpp"
 
 namespace mkldnn {
 namespace impl {

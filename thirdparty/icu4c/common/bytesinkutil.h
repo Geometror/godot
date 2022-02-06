@@ -4,11 +4,15 @@
 // bytesinkutil.h
 // created: 2017sep14 Markus W. Scherer
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/bytestream.h"
 #include "unicode/edits.h"
 #include "cmemory.h"
 #include "uassert.h"
+#include "unicode/umachine.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

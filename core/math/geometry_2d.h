@@ -39,6 +39,11 @@
 #include "core/math/vector3.h"
 #include "core/math/vector3i.h"
 #include "core/templates/vector.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/typedefs.h"
+
+struct Vector3i;
 
 class Geometry2D {
 public:

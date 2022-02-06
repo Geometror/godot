@@ -39,8 +39,24 @@
 #include "scene/gui/box_container.h"
 #include "scene/gui/button.h"
 #include "scene/gui/control.h"
+#include "core/io/resource.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
 
 class EditorNode;
+class AcceptDialog;
+class Button;
+class ConfirmationDialog;
+class Container;
+class CreateDialog;
+class EditorData;
+class EditorFileDialog;
+class EditorInspector;
+class EditorPath;
+class LineEdit;
+class MenuButton;
+class Tree;
 
 class InspectorDock : public VBoxContainer {
 	GDCLASS(InspectorDock, VBoxContainer);

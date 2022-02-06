@@ -28,6 +28,7 @@
 #define HB_OT_SHAPE_NORMALIZE_HH
 
 #include "hb.hh"
+#include "hb.h"
 
 
 /* buffer var allocations, used during the normalization process */

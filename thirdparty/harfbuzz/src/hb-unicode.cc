@@ -29,7 +29,6 @@
  */
 
 #include "hb.hh"
-
 #include "hb-unicode.hh"
 
 
@@ -133,9 +132,6 @@ hb_unicode_decompose_compatibility_nil (hb_unicode_funcs_t *ufuncs     HB_UNUSED
 
 #if !defined(HB_NO_UNICODE_FUNCS) && defined(HAVE_GLIB)
 #include "hb-glib.h"
-#endif
-#if !defined(HB_NO_UNICODE_FUNCS) && defined(HAVE_ICU) && defined(HAVE_ICU_BUILTIN)
-#include "hb-icu.h"
 #endif
 
 /**

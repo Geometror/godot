@@ -30,7 +30,17 @@
 
 #include "open_simplex_noise.h"
 
-#include "core/core_string_names.h"
+#include <stdint.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "open-simplex-noise.h"
 
 OpenSimplexNoise::OpenSimplexNoise() {
 	_init_seeds();

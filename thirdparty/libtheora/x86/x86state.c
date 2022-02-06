@@ -16,6 +16,8 @@
  ********************************************************************/
 
 #include "x86int.h"
+#include "cpu.h"
+#include "internal.h"
 
 #if defined(OC_X86_ASM)
 

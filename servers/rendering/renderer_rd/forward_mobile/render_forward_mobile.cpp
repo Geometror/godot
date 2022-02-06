@@ -29,9 +29,26 @@
 /*************************************************************************/
 
 #include "render_forward_mobile.h"
+
+#include <string.h>
+#include <initializer_list>
+
 #include "core/config/project_settings.h"
 #include "servers/rendering/rendering_device.h"
-#include "servers/rendering/rendering_server_default.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/vector3.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/paged_array.h"
+#include "core/templates/thread_work_pool.h"
+#include "servers/rendering/renderer_rd/pipeline_cache_rd.h"
+#include "servers/rendering/renderer_rd/renderer_scene_environment_rd.h"
+#include "servers/rendering/renderer_rd/renderer_scene_sky_rd.h"
+#include "servers/rendering/renderer_rd/renderer_storage_rd.h"
+#include "servers/rendering/renderer_thread_pool.h"
+
+struct Vector3i;
 
 using namespace RendererSceneRenderImplementation;
 

@@ -19,9 +19,10 @@
 
 #include "c_types_map.hpp"
 #include "cpu_memory.hpp"
-
 #include "jit_generator.hpp"
 #include "jit_primitive_conf.hpp"
+#include "cpu_isa_traits.hpp"
+#include "memory_desc_wrapper.hpp"
 
 namespace mkldnn {
 namespace impl {

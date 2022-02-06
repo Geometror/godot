@@ -18,12 +18,14 @@
 #define CPU_MEMORY_HPP
 
 #include <assert.h>
+#include <stddef.h>
 
 #include "c_types_map.hpp"
 #include "memory.hpp"
 #include "memory_desc_wrapper.hpp"
-
 #include "cpu_engine.hpp"
+#include "mkldnn_types.h"
+#include "nstl.hpp"
 
 namespace mkldnn {
 namespace impl {

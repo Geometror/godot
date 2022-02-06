@@ -33,6 +33,9 @@
 #include "godot_body_3d.h"
 #include "godot_soft_body_3d.h"
 #include "godot_space_3d.h"
+#include "core/error/error_macros.h"
+#include "core/math/transform_3d.h"
+#include "servers/physics_3d/godot_collision_object_3d.h"
 
 GodotArea3D::BodyKey::BodyKey(GodotSoftBody3D *p_body, uint32_t p_body_shape, uint32_t p_area_shape) {
 	rid = p_body->get_self();

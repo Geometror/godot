@@ -32,6 +32,9 @@
 
 #include "image_loader_tinyexr.h"
 #include "image_saver_tinyexr.h"
+#include "core/io/image.h"
+#include "core/io/image_loader.h"
+#include "core/os/memory.h"
 
 static ImageLoaderTinyEXR *image_loader_tinyexr = nullptr;
 

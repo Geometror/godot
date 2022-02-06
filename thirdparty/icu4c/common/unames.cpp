@@ -16,12 +16,14 @@
 *   created by: Markus W. Scherer
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/putil.h"
 #include "unicode/uchar.h"
 #include "unicode/udata.h"
 #include "unicode/utf.h"
-#include "unicode/utf16.h"
 #include "uassert.h"
 #include "ustr_imp.h"
 #include "umutex.h"
@@ -30,6 +32,11 @@
 #include "ucln_cmn.h"
 #include "udataswp.h"
 #include "uprops.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
+#include "uset_imp.h"
 
 U_NAMESPACE_BEGIN
 

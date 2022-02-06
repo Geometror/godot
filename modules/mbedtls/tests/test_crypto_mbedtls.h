@@ -32,8 +32,9 @@
 #define TEST_CRYPTO_MBEDTLS_H
 
 #include "core/crypto/hashing_context.h"
-
 #include "tests/test_macros.h"
+#include "core/string/ustring.h"
+#include "thirdparty/doctest/doctest.h"
 
 namespace TestCryptoMbedTLS {
 

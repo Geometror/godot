@@ -29,16 +29,24 @@
  *  [SIRO] https://cabforum.org/wp-content/uploads/Chunghwatelecom201503cabforumV4.pdf
  */
 
-#include "common.h"
+#include <limits.h>
+#include <stdint.h>
 
+#include "mbedtls/asn1.h"
+#include "mbedtls/config.h"
+#include "mbedtls/ecp.h"
+#include "mbedtls/md.h"
+#include "mbedtls/pk.h"
+#include "mbedtls/x509.h"
+#include "mbedtls/x509_crl.h"
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
+
+#include <string.h>
 
 #include "mbedtls/x509_crt.h"
 #include "mbedtls/error.h"
 #include "mbedtls/oid.h"
 #include "mbedtls/platform_util.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_PEM_PARSE_C)
 #include "mbedtls/pem.h"
@@ -54,6 +62,7 @@
 #else
 #include <stdio.h>
 #include <stdlib.h>
+
 #define mbedtls_free       free
 #define mbedtls_calloc    calloc
 #define mbedtls_snprintf   snprintf
@@ -79,13 +88,11 @@
 #pragma warning( pop )
 #endif
 #else
-#include <time.h>
 #endif
 
 #if defined(MBEDTLS_FS_IO)
 #include <stdio.h>
 #if !defined(_WIN32) || defined(EFIX64) || defined(EFI32)
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
 #endif /* !_WIN32 || EFIX64 || EFI32 */

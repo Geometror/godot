@@ -30,7 +30,9 @@
 
 #include "gltf_buffer_view.h"
 
-#include "gltf_document_extension.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "modules/gltf/gltf_document.h"
 
 void GLTFBufferView::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_buffer"), &GLTFBufferView::get_buffer);

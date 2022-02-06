@@ -30,10 +30,20 @@
 
 #include "enet_connection.h"
 
-#include "enet_packet_peer.h"
+#include <string.h>
 
+#include "enet_packet_peer.h"
 #include "core/io/compression.h"
 #include "core/io/ip.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+#include "enet/enet.h"
+#include "enet/godot_ext.h"
+#include "enet/protocol.h"
+
+class CryptoKey;
+class X509Certificate;
 
 void ENetConnection::broadcast(enet_uint8 p_channel, ENetPacket *p_packet) {
 	ERR_FAIL_COND_MSG(!host, "The ENetConnection instance isn't currently active.");

@@ -13,15 +13,21 @@
 ****************************************************************** */
 
 
+#include <stddef.h>
+
 /* **************************************************************
 *  Includes
 ****************************************************************/
 #include "debug.h"      /* assert */
 #include "bitstream.h"
 #include "compiler.h"
+#include "mem.h"
+#include "zstd_errors.h"
+
 #define FSE_STATIC_LINKING_ONLY
 #include "fse.h"
 #include "error_private.h"
+
 #define ZSTD_DEPS_NEED_MALLOC
 #include "zstd_deps.h"
 

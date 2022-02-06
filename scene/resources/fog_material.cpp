@@ -31,6 +31,12 @@
 #include "fog_material.h"
 
 #include "core/version.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "core/version_generated.gen.h"
+#include "scene/resources/texture.h"
+#include "servers/rendering_server.h"
 
 Mutex FogMaterial::shader_mutex;
 RID FogMaterial::shader;

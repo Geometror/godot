@@ -11,7 +11,20 @@
  * and license in png.h
  */
 
+#include <float.h>
+#include <math.h>
+#include <setjmp.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pngdebug.h"
+#include "pnglibconf.h"
+#include "pngstruct.h"
+#include "zconf.h"
+#include "zlib.h"
 
 /* Generate a compiler error if there is an old png.h in the search path. */
 typedef png_libpng_version_1_6_37 Your_png_h_is_not_version_1_6_37;

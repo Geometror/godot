@@ -31,12 +31,25 @@
 #ifndef XR_INTERFACE_H
 #define XR_INTERFACE_H
 
+#include <stdint.h>
+
 #include "core/math/camera_matrix.h"
 #include "core/os/thread_safe.h"
 #include "servers/xr_server.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
 
 // forward declaration
 struct BlitToScreen;
+struct Rect2;
 
 /**
 	The XR interface is a template class on top of which we build interface to different AR, VR and tracking SDKs.

@@ -29,6 +29,13 @@
 /*************************************************************************/
 
 #include "godot_plugin_config.h"
+
+#include "core/config/project_settings.h"
+#include "core/error/error_list.h"
+#include "core/io/config_file.h"
+#include "core/io/file_access.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 /*
  * Set of prebuilt plugins.
  * Currently unused, this is just for future reference:

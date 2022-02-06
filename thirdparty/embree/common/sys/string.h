@@ -3,6 +3,9 @@
 
 #pragma once
 
+#include <iosfwd>
+#include <string>
+
 #include "platform.h"
 #include "../math/vec2.h"
 #include "../math/vec3.h"

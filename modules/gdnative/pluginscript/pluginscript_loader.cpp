@@ -34,6 +34,10 @@
 #include "pluginscript_language.h"
 #include "pluginscript_loader.h"
 #include "pluginscript_script.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
 
 ResourceFormatLoaderPluginScript::ResourceFormatLoaderPluginScript(PluginScriptLanguage *language) {
 	_language = language;

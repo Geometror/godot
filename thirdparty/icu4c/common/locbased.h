@@ -15,6 +15,9 @@
 
 #include "unicode/locid.h"
 #include "unicode/uobject.h"
+#include "unicode/uloc.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 /**
  * Macro to declare a locale LocaleBased wrapper object for the given

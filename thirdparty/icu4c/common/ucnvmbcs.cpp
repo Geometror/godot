@@ -42,8 +42,7 @@
 *                             macros to ucnvmbcs.h file
 */
 
-#include "unicode/utypes.h"
-
+#include "unicode/uconfig.h"
 #if !UCONFIG_NO_CONVERSION && !UCONFIG_NO_LEGACY_CONVERSION
 
 #include "unicode/ucnv.h"

@@ -32,6 +32,11 @@
 
 #include "fbx_node.h"
 #include "import_state.h"
+#include "core/error/error_macros.h"
+#include "core/string/print_string.h"
+#include "core/templates/map.h"
+#include "core/typedefs.h"
+#include "fbx_parser/FBXDocument.h"
 
 Ref<FBXNode> FBXSkinDeformer::get_link(const ImportState &state) const {
 	print_verbose("bone name: " + bone->bone_name);

@@ -43,6 +43,7 @@
 #include "spirv.hpp"
 #include "GlslangToSpv.h"
 #include "SpvBuilder.h"
+
 namespace spv {
     #include "GLSL.std.450.h"
     #include "GLSL.ext.KHR.h"
@@ -52,21 +53,38 @@ namespace spv {
     #include "NonSemanticDebugPrintf.h"
 }
 
-// Glslang includes
-#include "../glslang/MachineIndependent/localintermediate.h"
-#include "../glslang/MachineIndependent/SymbolTable.h"
-#include "../glslang/Include/Common.h"
-
-// Build-time generated includes
-#include "glslang/build_info.h"
-
+#include <SPIRV/Logger.h>
+#include <SPIRV/SpvTools.h>
+#include <SPIRV/spvIR.h>
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/SpirvIntrinsics.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdio.h>
 #include <fstream>
 #include <iomanip>
-#include <list>
 #include <map>
 #include <stack>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <memory>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+
+// Glslang includes
+#include "../glslang/MachineIndependent/localintermediate.h"
+#include "../glslang/Include/Common.h"
+// Build-time generated includes
+#include "glslang/build_info.h"
 
 namespace {
 

@@ -31,12 +31,28 @@
 #ifndef ENET_CONNECTION_H
 #define ENET_CONNECTION_H
 
-#include "core/object/ref_counted.h"
+#include <enet/enet.h>
+#include <stddef.h>
+#include <stdint.h>
 
+#include "core/object/ref_counted.h"
 #include "core/crypto/crypto.h"
 #include "enet_packet_peer.h"
+#include "core/error/error_list.h"
+#include "core/io/ip_address.h"
+#include "core/object/object.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
+#include "enet/godot.h"
+#include "enet/types.h"
 
-#include <enet/enet.h>
+class CryptoKey;
+class X509Certificate;
 
 class ENetConnection : public RefCounted {
 	GDCLASS(ENetConnection, RefCounted);

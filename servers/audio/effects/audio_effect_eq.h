@@ -33,8 +33,17 @@
 
 #include "servers/audio/audio_effect.h"
 #include "servers/audio/effects/eq.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 class AudioEffectEQ;
+struct AudioFrame;
 
 class AudioEffectEQInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectEQInstance, AudioEffectInstance);

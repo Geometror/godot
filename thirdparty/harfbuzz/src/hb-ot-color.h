@@ -26,6 +26,7 @@
  * Google Author(s): Sascha Brawer, Behdad Esfahbod
  */
 
+#include "hb-ot.h"
 #if !defined(HB_OT_H_IN) && !defined(HB_NO_SINGLE_HEADER_ERROR)
 #error "Include <hb-ot.h> instead."
 #endif

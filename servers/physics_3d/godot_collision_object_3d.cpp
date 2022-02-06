@@ -32,6 +32,9 @@
 
 #include "godot_physics_server_3d.h"
 #include "godot_space_3d.h"
+#include "core/math/basis.h"
+#include "servers/physics_3d/godot_broad_phase_3d.h"
+#include "servers/physics_3d/godot_shape_3d.h"
 
 void GodotCollisionObject3D::add_shape(GodotShape3D *p_shape, const Transform3D &p_transform, bool p_disabled) {
 	Shape s;

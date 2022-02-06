@@ -32,6 +32,17 @@
 
 #include "scene/2d/collision_shape_2d.h"
 #include "servers/navigation_server_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "scene/2d/node_2d.h"
+#include "scene/resources/shape_2d.h"
+#include "scene/resources/world_2d.h"
 
 void NavigationObstacle2D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_estimate_radius", "estimate_radius"), &NavigationObstacle2D::set_estimate_radius);

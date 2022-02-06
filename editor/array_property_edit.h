@@ -32,6 +32,15 @@
 #define ARRAY_PROPERTY_EDIT_H
 
 #include "scene/main/node.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/variant.h"
+
+class Node;
 
 class ArrayPropertyEdit : public RefCounted {
 	GDCLASS(ArrayPropertyEdit, RefCounted);

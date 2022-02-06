@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <string.h>
 
 #include "Dither.hpp"

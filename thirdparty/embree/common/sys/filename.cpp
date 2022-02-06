@@ -2,6 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "filename.h"
+
+#include <stdlib.h>
+
 #include "sysinfo.h"
 
 namespace embree

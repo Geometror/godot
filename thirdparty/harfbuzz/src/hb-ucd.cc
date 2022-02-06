@@ -14,11 +14,13 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <stdint.h>
+
 #include "hb.hh"
 #include "hb-unicode.hh"
 #include "hb-machinery.hh"
-
 #include "hb-ucd-table.hh"
+#include "hb.h"
 
 static hb_unicode_combining_class_t
 hb_ucd_combining_class (hb_unicode_funcs_t *ufuncs HB_UNUSED,

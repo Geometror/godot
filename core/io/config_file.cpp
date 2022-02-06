@@ -31,8 +31,12 @@
 #include "config_file.h"
 
 #include "core/io/file_access_encrypted.h"
-#include "core/os/keyboard.h"
 #include "core/variant/variant_parser.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/templates/map.h"
 
 PackedStringArray ConfigFile::_get_sections() const {
 	List<String> s;

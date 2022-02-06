@@ -16,14 +16,13 @@
 
 #include <assert.h>
 #include <stddef.h>
-#include <stdint.h>
 
 #include "mkldnn.h"
-
 #include "c_types_map.hpp"
-#include "engine.hpp"
 #include "type_helpers.hpp"
 #include "utils.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "mkldnn_types.h"
 
 using namespace mkldnn::impl;
 using namespace mkldnn::impl::utils;

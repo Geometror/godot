@@ -26,9 +26,12 @@
 
 #include <stddef.h>
 #include <string.h>
-#include <assert.h>
+#include <netinet/in.h>
+#include <stdlib.h>
+#include <sys/types.h>
 
 #include "wslay_net.h"
+#include "wslay/wslay.h"
 
 #define wslay_min(A, B) (((A) < (B)) ? (A) : (B))
 

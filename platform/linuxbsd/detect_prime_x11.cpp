@@ -31,23 +31,20 @@
 #ifdef X11_ENABLED
 #if defined(GLES3_ENABLED)
 
+#include <X11/X.h>
 #include "detect_prime_x11.h"
 
-#include "core/string/print_string.h"
-#include "core/string/ustring.h"
-
 #include <stdlib.h>
-
 #include <GL/gl.h>
 #include <GL/glx.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-
-#include <cstring>
-
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <cstring>
+
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
 
 #define GLX_CONTEXT_MAJOR_VERSION_ARB 0x2091
 #define GLX_CONTEXT_MINOR_VERSION_ARB 0x2092

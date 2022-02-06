@@ -30,6 +30,26 @@
 
 #include "rasterizer_gles3.h"
 
+#include <string.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/os/thread.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/rid_owner.h"
+#include "drivers/gles3/rasterizer_canvas_gles3.h"
+#include "drivers/gles3/rasterizer_storage_gles3.h"
+#include "glad/glad.h"
+#include "servers/rendering/rendering_device.h"
+#include "servers/rendering_server.h"
+
 #ifdef GLES3_ENABLED
 
 #include "core/config/project_settings.h"
@@ -77,7 +97,6 @@
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
 #include <GLES3/gl3platform.h>
-
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #endif

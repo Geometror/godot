@@ -10,7 +10,12 @@
 * This file contains platform independent math.
 */
 
+#include <stdint.h>
+
 #include "putilimp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 U_CAPI int32_t U_EXPORT2
 uprv_max(int32_t x, int32_t y)

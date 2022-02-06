@@ -36,6 +36,7 @@ extern "C" {
 #endif
 
 #include <gdnative/math_defs.h>
+#include <stdint.h>
 
 #define GODOT_VECTOR3_SIZE (sizeof(godot_real_t) * 3)
 

@@ -37,13 +37,21 @@
 #ifndef _INITIALIZE_INCLUDED_
 #define _INITIALIZE_INCLUDED_
 
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Public/ShaderLang.h>
+
 #include "../Include/ResourceLimits.h"
 #include "../Include/Common.h"
 #include "../Include/ShHandle.h"
 #include "SymbolTable.h"
 #include "Versions.h"
 
+struct TBuiltInResource;
+
 namespace glslang {
+class TSymbolTable;
 
 //
 // This is made to hold parseable strings for almost all the built-in

@@ -34,9 +34,14 @@
 #ifndef __RBBIDATA_H__
 #define __RBBIDATA_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/udata.h"
 #include "udataswp.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 /**
  * Swap RBBI data. See udataswp.h.

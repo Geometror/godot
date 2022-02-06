@@ -14,13 +14,18 @@
 *   created by: Markus W. Scherer
 */
 
-#include "unicode/utypes.h"
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/appendable.h"
 #include "unicode/ucharstrie.h"
-#include "unicode/uobject.h"
 #include "unicode/utf16.h"
 #include "cmemory.h"
-#include "uassert.h"
+#include "unicode/char16ptr.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/ustringtrie.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

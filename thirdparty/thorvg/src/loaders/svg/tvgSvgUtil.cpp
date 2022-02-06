@@ -20,9 +20,11 @@
  * SOFTWARE.
  */
 
-#include <cstring>
 #include <math.h>
-#include <memory.h>
+#include <ctype.h>
+#include <stdint.h>
+#include <cstring>
+
 #include "tvgSvgUtil.h"
 
 /************************************************************************/

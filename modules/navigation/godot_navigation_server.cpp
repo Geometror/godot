@@ -30,7 +30,42 @@
 
 #include "godot_navigation_server.h"
 
+#include <stddef.h>
+
 #include "core/os/mutex.h"
+#include "Agent.h"
+#include "Vector3.h"
+#include "core/error/error_macros.h"
+#include "core/math/transform_3d.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "modules/navigation/nav_map.h"
+#include "modules/navigation/nav_region.h"
+#include "modules/navigation/rvo_agent.h"
+#include "scene/resources/navigation_mesh.h"
+
+class Node;
+struct agent_set_callback_command;
+struct agent_set_ignore_y_command;
+struct agent_set_map_command;
+struct agent_set_max_neighbors_command;
+struct agent_set_max_speed_command;
+struct agent_set_neighbor_dist_command;
+struct agent_set_position_command;
+struct agent_set_radius_command;
+struct agent_set_target_velocity_command;
+struct agent_set_time_horizon_command;
+struct agent_set_velocity_command;
+struct free_command;
+struct map_set_active_command;
+struct map_set_cell_size_command;
+struct map_set_edge_connection_margin_command;
+struct map_set_up_command;
+struct region_set_layers_command;
+struct region_set_map_command;
+struct region_set_navmesh_command;
+struct region_set_transform_command;
 
 #ifndef _3D_DISABLED
 #include "navigation_mesh_generator.h"

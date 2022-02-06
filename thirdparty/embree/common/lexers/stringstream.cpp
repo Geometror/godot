@@ -3,6 +3,13 @@
 
 #include "stringstream.h"
 
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+
+#include "common/lexers/stream.h"
+
 namespace embree
 {
   static const std::string stringChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 _.,+-=:/*\\";

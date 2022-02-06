@@ -19,13 +19,11 @@
 #endif
 
 #include "mkldnn_types.h"
-
 #include "c_types_map.hpp"
 #include "mkldnn_thread.hpp"
-#include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "jit_avx512_common_convolution_winograd.hpp"
+#include "primitive_attr.hpp"
 
 #ifndef _MSC_VER
 #define pragma_unroll _Pragma("unroll")

@@ -31,10 +31,15 @@
 #ifndef GDSCRIPT_LAMBDA_CALLABLE
 #define GDSCRIPT_LAMBDA_CALLABLE
 
+#include <stdint.h>
+
 #include "core/object/ref_counted.h"
 #include "core/templates/vector.h"
 #include "core/variant/callable.h"
 #include "core/variant/variant.h"
+#include "core/object/object_id.h"
+#include "core/string/ustring.h"
+#include "modules/gdscript/gdscript.h"
 
 class GDScript;
 class GDScriptFunction;

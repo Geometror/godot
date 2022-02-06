@@ -30,7 +30,18 @@
 
 #include "texture_loader_dds.h"
 
+#include <stdint.h>
+#include <stdio.h>
+
 #include "core/io/file_access.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "scene/resources/texture.h"
 
 #define PF_FOURCC(s) ((uint32_t)(((s)[3] << 24U) | ((s)[2] << 16U) | ((s)[1] << 8U) | ((s)[0])))
 

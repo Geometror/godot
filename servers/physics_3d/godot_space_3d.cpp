@@ -32,8 +32,25 @@
 
 #include "godot_collision_solver_3d.h"
 #include "godot_physics_server_3d.h"
-
 #include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_3d.h"
+#include "core/object/object_id.h"
+#include "core/os/memory.h"
+#include "core/templates/rid_owner.h"
+#include "core/variant/variant.h"
+#include "servers/physics_3d/godot_area_3d.h"
+#include "servers/physics_3d/godot_area_pair_3d.h"
+#include "servers/physics_3d/godot_body_3d.h"
+#include "servers/physics_3d/godot_body_pair_3d.h"
+#include "servers/physics_3d/godot_broad_phase_3d.h"
+#include "servers/physics_3d/godot_collision_object_3d.h"
+#include "servers/physics_3d/godot_constraint_3d.h"
+#include "servers/physics_3d/godot_shape_3d.h"
+#include "servers/physics_3d/godot_soft_body_3d.h"
 
 #define TEST_MOTION_MARGIN_MIN_VALUE 0.0001
 #define TEST_MOTION_MIN_CONTACT_DEPTH_FACTOR 0.05

@@ -12,9 +12,24 @@
 //                   class RuleBasedBreakIterator
 //
 
-#include "utypeinfo.h"  // for 'typeid' to work
+#include <stddef.h>
+#include <typeinfo>
 
 #include "unicode/utypes.h"
+#include "unicode/brkiter.h"
+#include "unicode/chariter.h"
+#include "unicode/parseerr.h"
+#include "unicode/platform.h"
+#include "unicode/ubrk.h"
+#include "unicode/uconfig.h"
+#include "unicode/ucptrie.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/utext.h"
+#include "unicode/uversion.h"
+#include "uvector.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -22,21 +37,15 @@
 
 #include "unicode/rbbi.h"
 #include "unicode/schriter.h"
-#include "unicode/uchriter.h"
-#include "unicode/uclean.h"
 #include "unicode/udata.h"
-
 #include "brkeng.h"
 #include "ucln_cmn.h"
 #include "cmemory.h"
-#include "cstring.h"
-#include "localsvc.h"
 #include "rbbidata.h"
 #include "rbbi_cache.h"
 #include "rbbirb.h"
 #include "uassert.h"
 #include "umutex.h"
-#include "uvectr32.h"
 
 #ifdef RBBI_DEBUG
 static UBool gTrace = FALSE;

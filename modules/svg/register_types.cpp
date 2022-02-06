@@ -30,9 +30,11 @@
 
 #include "register_types.h"
 
-#include "image_loader_svg.h"
-
 #include <thorvg.h>
+
+#include "image_loader_svg.h"
+#include "core/io/image_loader.h"
+#include "core/os/memory.h"
 
 static ImageLoaderSVG *image_loader_svg = nullptr;
 

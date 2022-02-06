@@ -24,20 +24,25 @@
  * Google Author(s): Behdad Esfahbod
  */
 
-#include "hb.hh"
+#include <stdint.h>
 
+#include "hb.hh"
 #include "hb-open-type.hh"
 #include "hb-face.hh"
-
-#include "hb-aat-layout-common.hh"
 #include "hb-aat-layout-feat-table.hh"
 #include "hb-ot-layout-common.hh"
 #include "hb-ot-cmap-table.hh"
 #include "hb-ot-head-table.hh"
 #include "hb-ot-maxp-table.hh"
+#include "hb-atomic.hh"
+#include "hb-blob.hh"
+#include "hb-machinery.hh"
+#include "hb-mutex.hh"
+#include "hb-ot-face.hh"
+#include "hb-sanitize.hh"
+#include "hb.h"
 
 #ifndef HB_NO_VISIBILITY
-#include "hb-ot-name-language-static.hh"
 
 uint64_t const _hb_NullPool[(HB_NULL_POOL_SIZE + sizeof (uint64_t) - 1) / sizeof (uint64_t)] = {};
 /*thread_local*/ uint64_t _hb_CrapPool[(HB_NULL_POOL_SIZE + sizeof (uint64_t) - 1) / sizeof (uint64_t)] = {};

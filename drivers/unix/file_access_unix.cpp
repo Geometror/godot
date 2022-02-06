@@ -30,22 +30,20 @@
 
 #include "file_access_unix.h"
 
+#include <bits/struct_stat.h>
+
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+
 #if defined(UNIX_ENABLED) || defined(LIBC_FILEIO_ENABLED)
 
-#include "core/os/os.h"
-#include "core/string/print_string.h"
-
 #include <sys/stat.h>
-#include <sys/types.h>
-
 #include <errno.h>
+
+#include "core/string/print_string.h"
 
 #if defined(UNIX_ENABLED)
 #include <unistd.h>
-#endif
-
-#ifndef ANDROID_ENABLED
-#include <sys/statvfs.h>
 #endif
 
 #ifdef MSVC

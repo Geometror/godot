@@ -30,8 +30,19 @@
 
 #include "video_stream_gdnative.h"
 
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "core/config/project_settings.h"
-#include "servers/audio_server.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/math_defs.h"
+#include "scene/resources/texture.h"
 
 VideoDecoderServer *VideoDecoderServer::instance = nullptr;
 

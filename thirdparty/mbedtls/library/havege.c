@@ -24,16 +24,14 @@
  *  Contact: seznec(at)irisa_dot_fr - orocheco(at)irisa_dot_fr
  */
 
-#include "common.h"
-
 #if defined(MBEDTLS_HAVEGE_C)
+
+#include <stdint.h>
+#include <string.h>
 
 #include "mbedtls/havege.h"
 #include "mbedtls/timing.h"
 #include "mbedtls/platform_util.h"
-
-#include <stdint.h>
-#include <string.h>
 
 /* ------------------------------------------------------------------------
  * On average, one iteration accesses two 8-word blocks in the havege WALK

@@ -34,6 +34,13 @@
 #include "core/input/input.h"
 #include "core/os/keyboard.h"
 #include "core/os/os.h"
+#include "core/error/error_macros.h"
+#include "core/input/input_enums.h"
+#include "core/object/class_db.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 InputMap *InputMap::singleton = nullptr;
 

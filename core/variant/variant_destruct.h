@@ -32,8 +32,22 @@
 #define VARIANT_DESTRUCT_H
 
 #include "core/variant/variant.h"
-
 #include "core/object/class_db.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/transform_2d.h"
+#include "core/math/transform_3d.h"
+#include "core/string/node_path.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/type_info.h"
+
+template <class T> struct VariantDestruct;
 
 template <class T>
 struct VariantDestruct {};

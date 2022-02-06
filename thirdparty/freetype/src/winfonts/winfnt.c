@@ -19,15 +19,23 @@
 
 
 #include <freetype/ftwinfnt.h>
-#include <freetype/internal/ftdebug.h>
 #include <freetype/internal/ftstream.h>
-#include <freetype/internal/ftobjs.h>
 #include <freetype/ttnameid.h>
+#include <freetype/fterrors.h>
+#include <stddef.h>
 
 #include "winfnt.h"
-#include "fnterrs.h"
-#include <freetype/internal/services/svwinfnt.h>
-#include <freetype/internal/services/svfntfmt.h>
+#include "freetype/config/ftstdlib.h"
+#include "freetype/config/integer-types.h"
+#include "freetype/config/public-macros.h"
+#include "freetype/ftimage.h"
+#include "freetype/ftmodapi.h"
+#include "freetype/ftsystem.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/ftstream.h"
+#include "freetype/internal/services/svfntfmt.h"
+#include "freetype/internal/services/svwinfnt.h"
 
   /**************************************************************************
    *

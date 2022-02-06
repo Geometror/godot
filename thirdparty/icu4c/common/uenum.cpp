@@ -16,9 +16,17 @@
 *   created by: Vladimir Weinstein
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/putil.h"
 #include "uenumimp.h"
 #include "cmemory.h"
+#include "unicode/platform.h"
+#include "unicode/uenum.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
 
 /* Layout of the baseContext buffer. */
 typedef struct {

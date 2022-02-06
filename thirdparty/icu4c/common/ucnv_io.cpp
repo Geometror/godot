@@ -29,13 +29,10 @@
 *******************************************************************************
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_CONVERSION
 
 #include "unicode/ucnv.h"
 #include "unicode/udata.h"
-
 #include "umutex.h"
 #include "uarrsort.h"
 #include "uassert.h"

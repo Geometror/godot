@@ -32,6 +32,11 @@
 #define XR_POSE_H
 
 #include "core/object/ref_counted.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/variant/binder_common.h"
 
 class XRPose : public RefCounted {
 	GDCLASS(XRPose, RefCounted);

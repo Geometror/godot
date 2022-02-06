@@ -31,11 +31,23 @@
 #include "visual_script_func_nodes.h"
 
 #include "core/config/engine.h"
-#include "core/io/resource_loader.h"
 #include "core/os/os.h"
 #include "scene/main/node.h"
 #include "scene/main/scene_tree.h"
-#include "visual_script_nodes.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "modules/visual_script/visual_script.h"
 
 //////////////////////////////////////////
 ////////////////CALL//////////////////////

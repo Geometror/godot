@@ -19,7 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <stdint.h>
+#include <memory>
+#include <utility>
+
 #include "tvgCanvasImpl.h"
+#include "thorvg.h"
+#include "tvgArray.h"
+
+namespace tvg {
+class RenderMethod;
+}  // namespace tvg
 
 /************************************************************************/
 /* External Class Implementation                                        */

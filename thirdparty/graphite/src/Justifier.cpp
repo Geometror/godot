@@ -25,13 +25,24 @@ License, as published by the Free Software Foundation, either version 2
 of the License or (at your option) any later version.
 */
 
+#include <bits/std_abs.h>
+#include <stddef.h>
+#include <utility>
+
 #include "inc/Segment.h"
-#include "graphite2/Font.h"
-#include "inc/debug.h"
 #include "inc/CharInfo.h"
 #include "inc/Slot.h"
 #include "inc/Main.h"
-#include <cmath>
+#include "inc/Face.h"
+#include "inc/Font.h"
+#include "inc/GlyphCache.h"
+#include "inc/List.h"
+#include "inc/Position.h"
+#include "inc/Silf.h"
+
+namespace graphite2 {
+class GlyphFace;
+}  // namespace graphite2
 
 using namespace graphite2;
 

@@ -28,8 +28,7 @@
 *   10/31/2000  Ram     Implemented offsets logic functions
 */
 
-#include "unicode/utypes.h"
-
+#include "unicode/uconfig.h"
 #if !UCONFIG_NO_CONVERSION && !UCONFIG_NO_LEGACY_CONVERSION
 
 #include "unicode/ucnv.h"
@@ -44,38 +43,6 @@
 #include "cstring.h"
 #include "cmemory.h"
 #include "uassert.h"
-
-#ifdef U_ENABLE_GENERIC_ISO_2022
-/*
- * I am disabling the generic ISO-2022 converter after proposing to do so on
- * the icu mailing list two days ago.
- *
- * Reasons:
- * 1. It does not fully support the ISO-2022/ECMA-35 specification with all of
- *    its designation sequences, single shifts with return to the previous state,
- *    switch-with-no-return to UTF-16BE or similar, etc.
- *    This is unlike the language-specific variants like ISO-2022-JP which
- *    require a much smaller repertoire of ISO-2022 features.
- *    These variants continue to be supported.
- * 2. I believe that no one is really using the generic ISO-2022 converter
- *    but rather always one of the language-specific variants.
- *    Note that ICU's generic ISO-2022 converter has always output one escape
- *    sequence followed by UTF-8 for the whole stream.
- * 3. Switching between subcharsets is extremely slow, because each time
- *    the previous converter is closed and a new one opened,
- *    without any kind of caching, least-recently-used list, etc.
- * 4. The code is currently buggy, and given the above it does not seem
- *    reasonable to spend the time on maintenance.
- * 5. ISO-2022 subcharsets should normally be used with 7-bit byte encodings.
- *    This means, for example, that when ISO-8859-7 is designated, the following
- *    ISO-2022 bytes 00..7f should be interpreted as ISO-8859-7 bytes 80..ff.
- *    The ICU ISO-2022 converter does not handle this - and has no information
- *    about which subconverter would have to be shifted vs. which is designed
- *    for 7-bit ISO-2022.
- *
- * Markus Scherer 2003-dec-03
- */
-#endif
 
 #if !UCONFIG_ONLY_HTML_CONVERSION
 static const char SHIFT_IN_STR[]  = "\x0F";
@@ -309,25 +276,6 @@ static const int8_t normalize_esq_chars_2022[256] = {
         ,0     ,0      ,0      ,0      ,0      ,0      ,0      ,0      ,0      ,0
         ,0     ,0      ,0      ,0      ,0      ,0
 };
-
-#ifdef U_ENABLE_GENERIC_ISO_2022
-/*
- * When the generic ISO-2022 converter is completely removed, not just disabled
- * per #ifdef, then the following state table and the associated tables that are
- * dimensioned with MAX_STATES_2022 should be trimmed.
- *
- * Especially, VALID_MAYBE_TERMINAL_2022 will not be used any more, and all of
- * the associated escape sequences starting with ESC ( B should be removed.
- * This includes the ones with key values 1097 and all of the ones above 1000000.
- *
- * For the latter, the tables can simply be truncated.
- * For the former, since the tables must be kept parallel, it is probably best
- * to simply duplicate an adjacent table cell, parallel in all tables.
- *
- * It may make sense to restructure the tables, especially by using small search
- * tables for the variants instead of indexing them parallel to the table here.
- */
-#endif
 
 #define MAX_STATES_2022 74
 static const int32_t escSeqStateTable_Key_2022[MAX_STATES_2022] = {

@@ -17,9 +17,8 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
 #include "mbedtls/error.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_ERROR_C) || defined(MBEDTLS_ERROR_STRERROR_DUMMY)
 
@@ -106,10 +105,6 @@
 #include "mbedtls/entropy.h"
 #endif
 
-#if defined(MBEDTLS_ERROR_C)
-#include "mbedtls/error.h"
-#endif
-
 #if defined(MBEDTLS_GCM_C)
 #include "mbedtls/gcm.h"
 #endif
@@ -164,10 +159,6 @@
 
 #if defined(MBEDTLS_PKCS5_C)
 #include "mbedtls/pkcs5.h"
-#endif
-
-#if defined(MBEDTLS_PLATFORM_C)
-#include "mbedtls/platform.h"
 #endif
 
 #if defined(MBEDTLS_POLY1305_C)

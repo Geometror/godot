@@ -25,17 +25,29 @@
 * 2009-nov..2010-jan  Markus Scherer  total rewrite, new Normalizer2 API & code
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/normalizer2.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/utf16.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class UnicodeSet;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_NORMALIZATION
 
-#include "unicode/udata.h"
-#include "unicode/ustring.h"
 #include "unicode/uiter.h"
 #include "unicode/unorm.h"
 #include "unicode/unorm2.h"
 #include "normalizer2impl.h"
-#include "unormimp.h"
 #include "uprops.h"
 #include "ustr_imp.h"
 

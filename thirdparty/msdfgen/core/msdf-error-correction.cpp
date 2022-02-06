@@ -1,13 +1,22 @@
 
 #include "msdf-error-correction.h"
 
+#include <math.h>
 #include <vector>
+#include <utility>
+
 #include "arithmetics.hpp"
 #include "Bitmap.h"
 #include "contour-combiners.h"
 #include "MSDFErrorCorrection.h"
+#include "core/Bitmap.hpp"
+#include "core/BitmapRef.hpp"
+#include "core/Vector2.h"
+#include "core/generator-config.h"
 
 namespace msdfgen {
+class Projection;
+class Shape;
 
 template <int N>
 static void msdfErrorCorrectionInner(const BitmapRef<float, N> &sdf, const Shape &shape, const Projection &projection, double range, const MSDFGeneratorConfig &config) {

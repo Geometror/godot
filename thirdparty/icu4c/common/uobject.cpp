@@ -17,7 +17,10 @@
 */
 
 #include "unicode/uobject.h"
+
 #include "cmemory.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

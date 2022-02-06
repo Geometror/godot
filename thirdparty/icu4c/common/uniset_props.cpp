@@ -18,6 +18,9 @@
 *   Character property dependent functions moved here from uniset.cpp
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uniset.h"
 #include "unicode/parsepos.h"
@@ -25,25 +28,25 @@
 #include "unicode/uscript.h"
 #include "unicode/symtable.h"
 #include "unicode/uset.h"
-#include "unicode/locid.h"
-#include "unicode/brkiter.h"
-#include "uset_imp.h"
 #include "ruleiter.h"
 #include "cmemory.h"
 #include "ucln_cmn.h"
 #include "util.h"
-#include "uvector.h"
 #include "uprops.h"
 #include "propname.h"
-#include "normalizer2impl.h"
 #include "uinvchar.h"
-#include "uprops.h"
 #include "charstr.h"
 #include "cstring.h"
-#include "mutex.h"
 #include "umutex.h"
 #include "uassert.h"
-#include "hash.h"
+#include "unicode/char16ptr.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/unifilt.h"
+#include "unicode/unifunct.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_USE
 

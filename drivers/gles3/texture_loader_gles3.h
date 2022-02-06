@@ -31,6 +31,10 @@
 #ifndef TEXTURE_LOADER_OPENGL_H
 #define TEXTURE_LOADER_OPENGL_H
 
+#include "core/error/error_list.h"
+#include "core/io/resource.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
 #ifdef GLES3_ENABLED
 
 #include "core/io/resource_loader.h"

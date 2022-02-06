@@ -32,6 +32,16 @@
 
 #include "core/debugger/engine_debugger.h"
 #include "gdscript.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "modules/gdscript/gdscript_codegen.h"
+#include "modules/gdscript/gdscript_function.h"
+#include "modules/gdscript/gdscript_utility_functions.h"
 
 uint32_t GDScriptByteCodeGenerator::add_parameter(const StringName &p_name, bool p_is_optional, const GDScriptDataType &p_type) {
 #ifdef TOOLS_ENABLED

@@ -55,6 +55,12 @@ April 04, 2008
 
 #include "godot_slider_joint_3d.h"
 
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
+#include "servers/physics_3d/godot_body_3d.h"
+
 //-----------------------------------------------------------------------------
 
 static _FORCE_INLINE_ real_t atan2fast(real_t y, real_t x) {

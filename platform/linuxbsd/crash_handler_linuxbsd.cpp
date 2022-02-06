@@ -30,11 +30,17 @@
 
 #include "crash_handler_linuxbsd.h"
 
+#include <stdio.h>
+
 #include "core/config/project_settings.h"
 #include "core/os/os.h"
 #include "core/version.h"
 #include "core/version_hash.gen.h"
-#include "main/main.h"
+#include "core/error/error_list.h"
+#include "core/os/main_loop.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/variant.h"
 
 #ifdef DEBUG_ENABLED
 #define CRASH_HANDLER_ENABLED 1

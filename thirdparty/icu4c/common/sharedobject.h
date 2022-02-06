@@ -12,8 +12,14 @@
 #define __SHAREDOBJECT_H__
 
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/uobject.h"
 #include "umutex.h"
+#include "unicode/umachine.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

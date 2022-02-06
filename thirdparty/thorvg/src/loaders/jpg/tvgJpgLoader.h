@@ -22,8 +22,18 @@
 #ifndef _TVG_JPG_LOADER_H_
 #define _TVG_JPG_LOADER_H_
 
+#include <stdint.h>
+#include <memory>
+#include <string>
+
 #include "tvgTaskScheduler.h"
 #include "tvgJpgd.h"
+#include "tvgLoadModule.h"
+
+class jpeg_decoder;
+namespace tvg {
+struct Surface;
+}  // namespace tvg
 
 class JpgLoader : public LoadModule, public Task
 {

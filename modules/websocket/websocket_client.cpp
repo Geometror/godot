@@ -30,6 +30,14 @@
 
 #include "websocket_client.h"
 
+#include "core/crypto/crypto.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer_peer.h"
+#include "core/object/class_db.h"
+#include "core/string/string_name.h"
+#include "core/variant/variant.h"
+#include "modules/websocket/websocket_peer.h"
+
 GDCINULL(WebSocketClient);
 
 WebSocketClient::WebSocketClient() {

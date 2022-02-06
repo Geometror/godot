@@ -4,7 +4,21 @@
 #ifndef LSTMBE_H
 #define LSTMBE_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uscript.h"
+#include "unicode/uversion.h"
+
+namespace icu_70 {
+class LanguageBreakEngine;
+class UVector32;
+class UnicodeSet;
+}  // namespace icu_70
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -12,7 +26,6 @@
 #include "unicode/ures.h"
 #include "unicode/utext.h"
 #include "unicode/utypes.h"
-
 #include "brkeng.h"
 #include "dictbe.h"
 #include "uvectr32.h"

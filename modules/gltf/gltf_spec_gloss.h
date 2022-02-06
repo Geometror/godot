@@ -33,6 +33,9 @@
 
 #include "core/io/image.h"
 #include "core/io/resource.h"
+#include "core/math/color.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class GLTFSpecGloss : public Resource {
 	GDCLASS(GLTFSpecGloss, Resource);

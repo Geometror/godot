@@ -15,6 +15,7 @@
 #define WEBP_UTILS_QUANT_LEVELS_UTILS_H_
 
 #include <stdlib.h>
+#include <stdint.h>
 
 #include "src/webp/types.h"
 

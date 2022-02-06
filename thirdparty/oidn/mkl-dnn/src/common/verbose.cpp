@@ -14,30 +14,37 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <stdlib.h>
 #ifndef _WIN32
 #include <sys/time.h>
 #endif
+
+#include <stdio.h>
 
 #include "mkldnn.h"
 #include "mkldnn_version.h"
 #include "c_types_map.hpp"
 #include "verbose.hpp"
 #include "cpu/cpu_isa_traits.hpp"
+#include "mkldnn_types.h"
+#include "z_magic.hpp"
 
-#include "batch_normalization_pd.hpp"
-#include "pooling_pd.hpp"
-#include "concat_pd.hpp"
-#include "reorder_pd.hpp"
-#include "convolution_pd.hpp"
-#include "rnn_pd.hpp"
-#include "deconvolution_pd.hpp"
-#include "shuffle_pd.hpp"
-#include "eltwise_pd.hpp"
-#include "softmax_pd.hpp"
-#include "inner_product_pd.hpp"
-#include "sum_pd.hpp"
-#include "lrn_pd.hpp"
+namespace mkldnn {
+namespace impl {
+struct batch_normalization_pd_t;
+struct concat_pd_t;
+struct convolution_pd_t;
+struct deconvolution_pd_t;
+struct eltwise_pd_t;
+struct inner_product_pd_t;
+struct lrn_pd_t;
+struct pooling_pd_t;
+struct reorder_pd_t;
+struct rnn_pd_t;
+struct shuffle_pd_t;
+struct softmax_pd_t;
+struct sum_pd_t;
+}  // namespace impl
+}  // namespace mkldnn
 
 /* MKL-DNN CPU ISA info */
 #define ISA_ANY "No instruction set specific optimizations"

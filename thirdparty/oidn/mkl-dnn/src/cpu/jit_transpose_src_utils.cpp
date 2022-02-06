@@ -14,14 +14,15 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include "c_types_map.hpp"
-#include "type_helpers.hpp"
+#include <stdint.h>
+
 #include "nstl.hpp"
 #include "utils.hpp"
 #include "jit_generator.hpp"
 #include "cpu_barrier.hpp"
-
 #include "jit_transpose_src_utils.hpp"
+#include "jit_primitive_conf.hpp"
+#include "xbyak_mnemonic.h"
 
 namespace mkldnn {
 namespace impl {

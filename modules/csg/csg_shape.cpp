@@ -31,6 +31,28 @@
 #include "csg_shape.h"
 
 #include "core/math/geometry_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/face3.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_3d.h"
+#include "core/math/triangulate.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/oa_hash_map.h"
+#include "core/variant/variant.h"
+#include "modules/csg/csg.h"
+#include "scene/3d/node_3d.h"
+#include "scene/3d/path_3d.h"
+#include "scene/main/node.h"
+#include "scene/resources/concave_polygon_shape_3d.h"
+#include "scene/resources/curve.h"
+#include "scene/resources/world_3d.h"
+#include "servers/physics_server_3d.h"
 
 void CSGShape3D::set_use_collision(bool p_enable) {
 	if (use_collision == p_enable) {

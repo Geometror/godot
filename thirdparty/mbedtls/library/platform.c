@@ -17,13 +17,10 @@
  *  limitations under the License.
  */
 
-#include "common.h"
-
+#include "mbedtls/config.h"
 #if defined(MBEDTLS_PLATFORM_C)
 
 #include "mbedtls/platform.h"
-#include "mbedtls/platform_util.h"
-#include "mbedtls/error.h"
 
 /* The compile time configuration of memory allocation via the macros
  * MBEDTLS_PLATFORM_{FREE/CALLOC}_MACRO takes precedence over the runtime
@@ -79,6 +76,7 @@ int mbedtls_platform_set_calloc_free( void * (*calloc_func)( size_t, size_t ),
 
 #if defined(MBEDTLS_PLATFORM_HAS_NON_CONFORMING_SNPRINTF)
 #include <stdarg.h>
+
 int mbedtls_platform_win32_snprintf( char *s, size_t n, const char *fmt, ... )
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -124,6 +122,7 @@ int mbedtls_platform_set_snprintf( int (*snprintf_func)( char * s, size_t n,
 
 #if defined(MBEDTLS_PLATFORM_HAS_NON_CONFORMING_VSNPRINTF)
 #include <stdarg.h>
+
 int mbedtls_platform_win32_vsnprintf( char *s, size_t n, const char *fmt, va_list arg )
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

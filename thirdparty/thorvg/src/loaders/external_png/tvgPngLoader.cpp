@@ -20,8 +20,13 @@
  * SOFTWARE.
  */
 
-#include "tvgLoader.h"
+#include <stdlib.h>
+
 #include "tvgPngLoader.h"
+#include "png.h"
+#include "pngconf.h"
+#include "thorvg.h"
+#include "tvgRender.h"
 
 static inline uint32_t PREMULTIPLY(uint32_t c)
 {

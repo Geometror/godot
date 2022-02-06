@@ -30,12 +30,22 @@
 
 #include "audio_driver_alsa.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "core/error/error_macros.h"
+#include "core/string/print_string.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "drivers/alsa/asound-so_wrap.h"
+
 #ifdef ALSA_ENABLED
+
+#include <errno.h>
 
 #include "core/config/project_settings.h"
 #include "core/os/os.h"
-
-#include <errno.h>
 
 #ifdef PULSEAUDIO_ENABLED
 extern "C" {

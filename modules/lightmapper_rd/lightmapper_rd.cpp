@@ -29,12 +29,26 @@
 /*************************************************************************/
 
 #include "lightmapper_rd.h"
+
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "core/math/geometry_2d.h"
 #include "lm_blendseams.glsl.gen.h"
 #include "lm_compute.glsl.gen.h"
 #include "lm_raster.glsl.gen.h"
 #include "servers/rendering/rendering_device_binds.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/aabb.h"
+#include "core/math/geometry_3d.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector3i.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/rid.h"
+#include "servers/rendering/rendering_device.h"
 
 //uncomment this if you want to see textures from all the process saved
 //#define DEBUG_TEXTURES

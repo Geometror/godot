@@ -3,7 +3,10 @@
  @brief ENet callback functions
 */
 #define ENET_BUILDING_LIB 1
+#include <stdlib.h>
+
 #include "enet/enet.h"
+#include "enet/callbacks.h"
 
 static ENetCallbacks callbacks = { malloc, free, abort };
 

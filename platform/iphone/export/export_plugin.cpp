@@ -30,6 +30,24 @@
 
 #include "export_plugin.h"
 
+#include <sys/stat.h>
+
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/io/image_loader.h"
+#include "core/io/zip_io.h"
+#include "core/math/color.h"
+#include "core/templates/hash_map.h"
+#include "core/variant/dictionary.h"
+#include "editor/editor_node.h"
+#include "main/splash.gen.h"
+#include "platform/iphone/export/godot_plugin_config.h"
+#include "platform/iphone/logo.gen.h"
+#include "servers/display_server.h"
+#include "thirdparty/minizip/ioapi.h"
+#include "thirdparty/minizip/unzip.h"
+
 void EditorExportPlatformIOS::get_preset_features(const Ref<EditorExportPreset> &p_preset, List<String> *r_features) {
 	String driver = ProjectSettings::get_singleton()->get("rendering/driver/driver_name");
 	// Vulkan and OpenGL ES 3.0 both mandate ETC2 support.

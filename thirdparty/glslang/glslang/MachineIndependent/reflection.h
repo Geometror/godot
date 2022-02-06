@@ -35,14 +35,20 @@
 
 #if !defined(GLSLANG_WEB) && !defined(GLSLANG_ANGLE)
 
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <algorithm>
+#include <map>
+#include <string>
+#include <vector>
 #ifndef _REFLECTION_INCLUDED
 #define _REFLECTION_INCLUDED
 
-#include "../Public/ShaderLang.h"
-#include "../Include/Types.h"
-
 #include <list>
 #include <set>
+
+#include "../Public/ShaderLang.h"
+#include "../Include/Types.h"
 
 //
 // A reflection database and its interface, consistent with the OpenGL API reflection queries.

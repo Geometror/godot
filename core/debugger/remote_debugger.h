@@ -38,6 +38,16 @@
 #include "core/string/string_name.h"
 #include "core/string/ustring.h"
 #include "core/variant/array.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/object/ref_counted.h"
+#include "core/os/mutex.h"
+#include "core/os/thread.h"
+#include "core/string/print_string.h"
+#include "core/templates/list.h"
+
+class Array;
+class Variant;
 
 class RemoteDebugger : public EngineDebugger {
 public:

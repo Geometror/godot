@@ -31,6 +31,8 @@
 #ifndef GODOT_SPACE_3D_H
 #define GODOT_SPACE_3D_H
 
+#include <stdint.h>
+
 #include "godot_area_3d.h"
 #include "godot_area_pair_3d.h"
 #include "godot_body_3d.h"
@@ -38,10 +40,25 @@
 #include "godot_broad_phase_3d.h"
 #include "godot_collision_object_3d.h"
 #include "godot_soft_body_3d.h"
-
 #include "core/config/project_settings.h"
 #include "core/templates/hash_map.h"
 #include "core/typedefs.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "servers/physics_server_3d.h"
+
+class GodotArea3D;
+class GodotBody3D;
+class GodotBroadPhase3D;
+class GodotCollisionObject3D;
+class GodotSoftBody3D;
+class GodotSpace3D;
+struct AABB;
 
 class GodotPhysicsDirectSpaceState3D : public PhysicsDirectSpaceState3D {
 	GDCLASS(GodotPhysicsDirectSpaceState3D, PhysicsDirectSpaceState3D);

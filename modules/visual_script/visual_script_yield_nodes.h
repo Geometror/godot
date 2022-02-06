@@ -32,6 +32,13 @@
 #define VISUAL_SCRIPT_YIELD_NODES_H
 
 #include "visual_script.h"
+#include "core/object/object.h"
+#include "core/string/node_path.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
+
+class Node;
 
 class VisualScriptYield : public VisualScriptNode {
 	GDCLASS(VisualScriptYield, VisualScriptNode);

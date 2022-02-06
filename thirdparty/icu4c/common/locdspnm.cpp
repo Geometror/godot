@@ -7,9 +7,9 @@
 *******************************************************************************
 */
 
-#include "unicode/utypes.h"
-
 #if !UCONFIG_NO_FORMATTING
+
+#include <stdarg.h>
 
 #include "unicode/locdspnm.h"
 #include "unicode/simpleformatter.h"
@@ -25,8 +25,6 @@
 #include "umutex.h"
 #include "ureslocs.h"
 #include "uresimp.h"
-
-#include <stdarg.h>
 
 /**
  * Concatenate a number of null-terminated strings to buffer, leaving a

@@ -27,11 +27,16 @@
 #ifndef CSTRING_H
 #define CSTRING_H 1
 
-#include "unicode/utypes.h"
-#include "cmemory.h"
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdint.h>
+
+#include "unicode/utypes.h"
+#include "cmemory.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 #define uprv_strcpy(dst, src) U_STANDARD_CPP_NAMESPACE  strcpy(dst, src)
 #define uprv_strlen(str) U_STANDARD_CPP_NAMESPACE strlen(str)

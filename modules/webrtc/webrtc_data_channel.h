@@ -32,6 +32,10 @@
 #define WEBRTC_DATA_CHANNEL_H
 
 #include "core/io/packet_peer.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
 
 #define WRTC_IN_BUF "network/limits/webrtc/max_channel_in_buffer_kb"
 

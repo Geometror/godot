@@ -17,21 +17,17 @@
 //         Code using it is expected to directly access fields much of the time.
 //
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
+#include "unicode/uconfig.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/unistr.h"
 #include "unicode/uniset.h"
-#include "unicode/uchar.h"
-#include "unicode/parsepos.h"
-
-#include "cstr.h"
 #include "uvector.h"
-
-#include "rbbirb.h"
 #include "rbbinode.h"
-
 #include "uassert.h"
 
 

@@ -37,10 +37,13 @@
 #ifndef _ATTRIBUTE_INCLUDED_
 #define _ATTRIBUTE_INCLUDED_
 
+#include <glslang/Include/BaseTypes.h>
+
 #include "../Include/Common.h"
 #include "../Include/ConstantUnion.h"
 
 namespace glslang {
+class TConstUnion;
 
     enum TAttributeType {
         EatNone,

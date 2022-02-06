@@ -39,10 +39,10 @@
 // SpvBuilder.h.
 //
 
+#include <SPIRV/spvIR.h>
+#include <string.h>
+#include <SPIRV/spirv.hpp>
 #include <cassert>
-#include <cstdlib>
-
-#include <unordered_set>
 #include <algorithm>
 
 #include "SpvBuilder.h"
@@ -51,11 +51,8 @@
 #include "hex_float.h"
 #endif
 
-#ifndef _WIN32
-    #include <cstdio>
-#endif
-
 namespace spv {
+class SpvBuildLogger;
 
 Builder::Builder(unsigned int spvVersion, unsigned int magicNumber, SpvBuildLogger* buildLogger) :
     spvVersion(spvVersion),

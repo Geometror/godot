@@ -19,6 +19,9 @@
 # define _huffdec_H (1)
 # include "huffman.h"
 # include "bitpack.h"
+#include "theora/codec.h"
+
+struct oc_huff_node;
 
 
 

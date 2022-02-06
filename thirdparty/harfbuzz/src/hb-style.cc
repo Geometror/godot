@@ -22,12 +22,19 @@
  * PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
  */
 
+#include <math.h>
+
 #include "hb.hh"
+#include "hb-blob.hh"
+#include "hb-face.hh"
+#include "hb-font.hh"
+#include "hb-machinery.hh"
+#include "hb-open-type.hh"
+#include "hb-ot.h"
+#include "hb.h"
 
 #ifndef HB_NO_STYLE
 
-#include "hb-ot-var-avar-table.hh"
-#include "hb-ot-var-fvar-table.hh"
 #include "hb-ot-stat-table.hh"
 #include "hb-ot-os2-table.hh"
 #include "hb-ot-head-table.hh"

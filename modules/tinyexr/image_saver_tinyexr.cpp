@@ -29,11 +29,17 @@
 /*************************************************************************/
 
 #include "image_saver_tinyexr.h"
+
+#include <stdint.h>
+#include <stdlib.h>
+
 #include "core/math/math_funcs.h"
-
-#include <zlib.h> // Should come before including tinyexr.
-
 #include "thirdparty/tinyexr/tinyexr.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/string/print_string.h"
+#include "core/variant/variant.h"
 
 static bool is_supported_format(Image::Format p_format) {
 	// This is checked before anything else.

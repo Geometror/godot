@@ -31,7 +31,17 @@
 #ifndef NAVIGATION_MESH_H
 #define NAVIGATION_MESH_H
 
+#include <stdint.h>
+
 #include "scene/resources/mesh.h"
+#include "core/io/resource.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
 
 class Mesh;
 

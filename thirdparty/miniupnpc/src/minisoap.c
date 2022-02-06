@@ -13,17 +13,17 @@
 #ifdef _WIN32
 #include <io.h>
 #include <winsock2.h>
+
 #include "win32_snprintf.h"
 #else
-#include <unistd.h>
-#include <sys/types.h>
 #include <sys/socket.h>
 #endif
-#include "minisoap.h"
-#include "miniupnpcstrings.h"
-
 /* only for malloc */
 #include <stdlib.h>
+
+#include "minisoap.h"
+#include "miniupnpcstrings.h"
+#include "thirdparty/miniupnpc/src/miniupnpc_socketdef.h"
 
 /* httpWrite sends the headers and the body to the socket
  * and returns the number of bytes sent */

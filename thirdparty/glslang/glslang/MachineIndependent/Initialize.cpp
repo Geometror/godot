@@ -51,6 +51,17 @@
 //                                                including identifying what extensions are needed if a version does not allow a symbol
 //
 
+#include <assert.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ResourceLimits.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/MachineIndependent/SymbolTable.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <stdio.h>
+#include <string.h>
+#include <memory>
+#include <vector>
+
 #include "../Include/intermediate.h"
 #include "Initialize.h"
 

@@ -27,7 +27,11 @@
 #ifndef HB_AAT_MAP_HH
 #define HB_AAT_MAP_HH
 
+#include <string.h>
+
 #include "hb.hh"
+#include "hb-aat.h"
+#include "hb.h"
 
 
 struct hb_aat_map_t

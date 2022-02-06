@@ -25,6 +25,7 @@
 
 #include "mkldnn.h"
 #include "utils.hpp"
+#include "mkldnn_types.h"
 
 namespace mkldnn {
 namespace impl {

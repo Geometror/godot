@@ -30,7 +30,12 @@
 
 #include "gdnative/quaternion.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/math/quaternion.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/math_defs.h"
 
 static_assert(sizeof(godot_quaternion) == sizeof(Quaternion), "Quaternion size mismatch");
 

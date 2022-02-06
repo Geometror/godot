@@ -37,6 +37,14 @@
 #include "core/string/print_string.h"
 #include "core/string/translation.h"
 #include "core/variant/variant_parser.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/os/rw_lock.h"
+#include "core/os/semaphore.h"
+#include "core/templates/pair.h"
+#include "core/variant/array.h"
 
 #ifdef DEBUG_LOAD_THREADED
 #define print_lt(m_text) print_line(m_text)

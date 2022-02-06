@@ -30,6 +30,9 @@
 
 #include "core_bind.h"
 
+#include <stddef.h>
+#include <initializer_list>
+
 #include "core/config/project_settings.h"
 #include "core/crypto/crypto_core.h"
 #include "core/debugger/engine_debugger.h"
@@ -40,6 +43,25 @@
 #include "core/math/geometry_3d.h"
 #include "core/os/keyboard.h"
 #include "core/os/os.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/io/dir_access.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/io/resource_loader.h"
+#include "core/io/resource_saver.h"
+#include "core/math/vector2i.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/object/object_id.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/templates/list.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+
+struct Plane;
 
 namespace core_bind {
 

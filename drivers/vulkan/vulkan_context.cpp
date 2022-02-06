@@ -30,18 +30,24 @@
 
 #include "vulkan_context.h"
 
+#include <stdlib.h>
+#include <string.h>
+#include <alloca.h>
+#include <initializer_list>
+
 #include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/string/ustring.h"
 #include "core/templates/local_vector.h"
-#include "core/version.h"
 #include "servers/rendering/rendering_device.h"
-
 #include "vk_enum_string_helper.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "core/error/error_macros.h"
+#include "core/string/print_string.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "core/version_generated.gen.h"
+#include "volk.h"
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define APP_SHORT_NAME "GodotEngine"

@@ -40,6 +40,29 @@
 #include "scene/gui/graph_edit.h"
 #include "scene/gui/popup.h"
 #include "scene/gui/tree.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "scene/animation/animation_tree.h"
+
+class Button;
+class Control;
+class EditorFileDialog;
+class HBoxContainer;
+class HScrollBar;
+class InputEvent;
+class Label;
+class LineEdit;
+class OptionButton;
+class PanelContainer;
+class Popup;
+class PopupMenu;
+class UndoRedo;
+class VScrollBar;
 
 class AnimationNodeStateMachineEditor : public AnimationTreeNodeEditorPlugin {
 	GDCLASS(AnimationNodeStateMachineEditor, AnimationTreeNodeEditorPlugin);

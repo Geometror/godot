@@ -31,13 +31,27 @@
 #ifndef PLUGINSCRIPT_INSTANCE_H
 #define PLUGINSCRIPT_INSTANCE_H
 
-// Godot imports
-#include "core/object/script_language.h"
-
 // PluginScript imports
 #include <pluginscript/godot_pluginscript.h>
 
+// Godot imports
+#include "core/object/script_language.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+
 class PluginScript;
+class Object;
+namespace Multiplayer {
+struct RPCConfig;
+}  // namespace Multiplayer
+struct MethodInfo;
+struct PropertyInfo;
 
 class PluginScriptInstance : public ScriptInstance {
 	friend class PluginScript;

@@ -31,6 +31,12 @@
 #include "concave_polygon_shape_3d.h"
 
 #include "servers/physics_server_3d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/object/class_db.h"
+#include "core/templates/set.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 Vector<Vector3> ConcavePolygonShape3D::get_debug_mesh_lines() const {
 	Set<DrawEdge> edges;

@@ -17,7 +17,13 @@
  * identify the replacement functions.
  */
 
+#include <limits.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "pngpriv.h"
+#include "pngconf.h"
+#include "pnglibconf.h"
 
 #if defined(PNG_READ_SUPPORTED) || defined(PNG_WRITE_SUPPORTED)
 /* Free a png_struct */

@@ -30,16 +30,24 @@
 
 #include "rendering_device_vulkan.h"
 
+#include <alloca.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "core/io/compression.h"
-#include "core/io/file_access.h"
 #include "core/io/marshalls.h"
 #include "core/os/os.h"
-#include "core/templates/hashfuncs.h"
 #include "drivers/vulkan/vulkan_context.h"
-
 #include "thirdparty/misc/smolv.h"
 #include "thirdparty/spirv-reflect/spirv_reflect.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "core/variant/variant.h"
+#include "thirdparty/spirv-reflect/include/spirv/unified1/spirv.h"
+#include "volk.h"
 
 //#define FORCE_FULL_BARRIER
 

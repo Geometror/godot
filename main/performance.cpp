@@ -38,6 +38,12 @@
 #include "servers/physics_server_2d.h"
 #include "servers/physics_server_3d.h"
 #include "servers/rendering_server.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/object/class_db.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
 
 Performance *Performance::singleton = nullptr;
 

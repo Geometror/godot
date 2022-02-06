@@ -13,14 +13,21 @@
 #ifndef __UNIFIED_CACHE_H__
 #define __UNIFIED_CACHE_H__
 
-#include "utypeinfo.h"  // for 'typeid' to work
+#include <stddef.h>
+#include <stdint.h>
+#include <typeinfo>
 
+#include "utypeinfo.h"  // for 'typeid' to work
 #include "unicode/uobject.h"
 #include "unicode/locid.h"
 #include "sharedobject.h"
 #include "unicode/unistr.h"
 #include "cstring.h"
 #include "ustr_imp.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
+#include "unicode/uversion.h"
 
 struct UHashtable;
 struct UHashElement;

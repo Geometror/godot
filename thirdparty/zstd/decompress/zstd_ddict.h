@@ -12,11 +12,14 @@
 #ifndef ZSTD_DDICT_H
 #define ZSTD_DDICT_H
 
+#include <stddef.h>
+
 /*-*******************************************************
  *  Dependencies
  *********************************************************/
 #include "../common/zstd_deps.h"   /* size_t */
 #include "../zstd.h"     /* ZSTD_DDict, and several public functions */
+#include "../common/zstd_internal.h"
 
 
 /*-*******************************************************

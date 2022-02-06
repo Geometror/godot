@@ -29,9 +29,24 @@
 /*************************************************************************/
 
 #include "shader_language.h"
-#include "core/os/os.h"
-#include "core/string/print_string.h"
+
+#include <initializer_list>
+
 #include "servers/rendering_server.h"
+#include "core/config/engine.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/plane.h"
+#include "core/math/transform_2d.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/script_language.h"
+#include "core/string/char_utils.h"
+#include "core/templates/pair.h"
+#include "servers/rendering/rendering_device.h"
+#include "servers/rendering/shader_warnings.h"
 
 #define HAS_WARNING(flag) (warning_flags & flag)
 

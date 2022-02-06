@@ -29,9 +29,23 @@
 /*************************************************************************/
 
 #include "api.h"
+
+#include <stdint.h>
+
 #include "core/config/engine.h"
 #include "javascript_singleton.h"
 #include "javascript_tools_editor_plugin.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
 
 static JavaScript *javascript_eval;
 

@@ -30,13 +30,22 @@
 
 #include "pluginscript_instance.h"
 
-// Godot imports
-#include "core/os/os.h"
-#include "core/variant/variant.h"
+#include <gdnative/gdnative.h>
 
+#include "core/variant/variant.h"
 // PluginScript imports
 #include "pluginscript_language.h"
 #include "pluginscript_script.h"
+#include "core/error/error_macros.h"
+#include "core/object/object.h"
+#include "core/templates/set.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/variant_struct.h"
+#include "pluginscript/godot_pluginscript.h"
+
+namespace Multiplayer {
+struct RPCConfig;
+}  // namespace Multiplayer
 
 bool PluginScriptInstance::set(const StringName &p_name, const Variant &p_value) {
 	return _desc->set_prop(_data, (const godot_string_name *)&p_name, (const godot_variant *)&p_value);

@@ -2,7 +2,13 @@
 #include "rasterization.h"
 
 #include <vector>
+
 #include "arithmetics.hpp"
+#include "core/BitmapRef.hpp"
+#include "core/Projection.h"
+#include "core/Scanline.h"
+#include "core/Shape.h"
+#include "core/Vector2.h"
 
 namespace msdfgen {
 

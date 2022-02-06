@@ -32,8 +32,11 @@
 #define AUDIOEFFECTPANNER_H
 
 #include "servers/audio/audio_effect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class AudioEffectPanner;
+struct AudioFrame;
 
 class AudioEffectPannerInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectPannerInstance, AudioEffectInstance);

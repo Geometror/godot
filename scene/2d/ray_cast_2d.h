@@ -31,7 +31,14 @@
 #ifndef RAY_CAST_2D_H
 #define RAY_CAST_2D_H
 
+#include <stdint.h>
+
 #include "scene/2d/node_2d.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
 
 class CollisionObject2D;
 

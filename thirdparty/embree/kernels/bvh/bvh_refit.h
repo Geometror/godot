@@ -3,7 +3,15 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <memory>
+
 #include "../bvh/bvh.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/sys/platform.h"
+#include "common/sys/sysinfo.h"
+#include "kernels/common/builder.h"
 
 namespace embree
 {

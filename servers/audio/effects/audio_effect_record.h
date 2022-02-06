@@ -39,8 +39,12 @@
 #include "scene/resources/audio_stream_sample.h"
 #include "servers/audio/audio_effect.h"
 #include "servers/audio_server.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
 
 class AudioEffectRecord;
+struct AudioFrame;
 
 class AudioEffectRecordInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectRecordInstance, AudioEffectInstance);

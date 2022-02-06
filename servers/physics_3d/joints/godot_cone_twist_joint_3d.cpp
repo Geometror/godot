@@ -51,6 +51,13 @@ Written by: Marcus Hennix
 
 #include "godot_cone_twist_joint_3d.h"
 
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/math/quaternion.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
+#include "servers/physics_3d/godot_body_3d.h"
+
 static void plane_space(const Vector3 &n, Vector3 &p, Vector3 &q) {
 	if (Math::abs(n.z) > Math_SQRT12) {
 		// choose p in y-z plane

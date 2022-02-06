@@ -30,6 +30,9 @@
 
 #include "sprite_2d_editor_plugin.h"
 
+#include <stdint.h>
+#include <memory>
+
 #include "canvas_item_editor_plugin.h"
 #include "core/math/geometry_2d.h"
 #include "editor/editor_scale.h"
@@ -39,6 +42,37 @@
 #include "scene/2d/polygon_2d.h"
 #include "scene/gui/box_container.h"
 #include "thirdparty/misc/clipper.hpp"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/math/color.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector2i.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/object/undo_redo.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+#include "editor/editor_node.h"
+#include "editor/scene_tree_dock.h"
+#include "scene/2d/node_2d.h"
+#include "scene/2d/sprite_2d.h"
+#include "scene/gui/button.h"
+#include "scene/gui/dialogs.h"
+#include "scene/gui/label.h"
+#include "scene/gui/menu_button.h"
+#include "scene/gui/popup_menu.h"
+#include "scene/gui/scroll_container.h"
+#include "scene/gui/spin_box.h"
+#include "scene/main/node.h"
+#include "scene/main/scene_tree.h"
+#include "scene/resources/bit_map.h"
+#include "scene/resources/mesh.h"
+#include "scene/resources/texture.h"
 
 void Sprite2DEditor::_node_removed(Node *p_node) {
 	if (p_node == node) {

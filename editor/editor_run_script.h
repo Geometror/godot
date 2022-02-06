@@ -33,7 +33,14 @@
 
 #include "core/object/ref_counted.h"
 #include "editor_plugin.h"
+#include "core/object/gdvirtual.gen.inc"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+
 class EditorNode;
+class EditorInterface;
+class Node;
+
 class EditorScript : public RefCounted {
 	GDCLASS(EditorScript, RefCounted);
 

@@ -14,11 +14,20 @@
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #include "src/dec/alphai_dec.h"
 #include "src/dec/webpi_dec.h"
 #include "src/dec/vp8i_dec.h"
 #include "src/utils/utils.h"
+#include "dec/vp8_dec.h"
+#include "dec/vp8li_dec.h"
+#include "utils/bit_reader_utils.h"
+#include "utils/thread_utils.h"
+#include "webp/decode.h"
+#include "webp/format_constants.h"
+#include "webp/types.h"
 
 // In append mode, buffer allocations increase as multiples of this value.
 // Needs to be a power of 2.

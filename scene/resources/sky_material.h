@@ -30,6 +30,13 @@
 
 #include "core/templates/rid.h"
 #include "scene/resources/material.h"
+#include "core/math/color.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/mutex.h"
+#include "scene/resources/shader.h"
+
+class Texture2D;
 
 #ifndef SKY_MATERIAL_H
 #define SKY_MATERIAL_H

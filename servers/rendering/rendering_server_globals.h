@@ -38,6 +38,9 @@
 class RendererCanvasCull;
 class RendererViewport;
 class RendererScene;
+class RendererCanvasRender;
+class RendererCompositor;
+class RendererStorage;
 
 class RenderingServerGlobals {
 public:

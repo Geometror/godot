@@ -19,9 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "tvgCommon.h"
 #include "tvgTaskScheduler.h"
 #include "tvgLoader.h"
+#include "config.h"
+#include "thorvg.h"
 
 #ifdef _WIN32
     #include <cstring>

@@ -34,6 +34,10 @@
 #include "godot_area_2d.h"
 #include "godot_body_2d.h"
 #include "godot_constraint_2d.h"
+#include "core/math/math_defs.h"
+
+class GodotArea2D;
+class GodotBody2D;
 
 class GodotAreaPair2D : public GodotConstraint2D {
 	GodotBody2D *body = nullptr;

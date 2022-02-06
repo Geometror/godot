@@ -34,6 +34,16 @@
 #include "../gdscript_parser.h"
 #include "core/variant/variant.h"
 #include "lsp.hpp"
+#include "core/error/error_list.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+
+struct Vector2i;
 
 #ifndef LINE_NUMBER_TO_INDEX
 #define LINE_NUMBER_TO_INDEX(p_line) ((p_line)-1)

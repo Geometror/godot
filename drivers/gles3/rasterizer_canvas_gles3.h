@@ -31,13 +31,29 @@
 #ifndef RASTERIZER_CANVAS_OPENGL_H
 #define RASTERIZER_CANVAS_OPENGL_H
 
+#include <stdint.h>
+
+#include "core/math/color.h"
+#include "core/math/transform_2d.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/local_vector.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "glad/glad.h"
+#include "servers/rendering_server.h"
+
+struct CameraMatrix;
+struct Rect2;
 #ifdef GLES3_ENABLED
 
 #include "rasterizer_scene_gles3.h"
 #include "rasterizer_storage_gles3.h"
 #include "servers/rendering/renderer_canvas_render.h"
 #include "servers/rendering/renderer_compositor.h"
-
 #include "shaders/canvas.glsl.gen.h"
 
 class RasterizerSceneGLES3;

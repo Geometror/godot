@@ -31,8 +31,14 @@
 #ifndef PIPELINE_CACHE_RD_H
 #define PIPELINE_CACHE_RD_H
 
+#include <stdint.h>
+
 #include "core/os/spin_lock.h"
 #include "servers/rendering/rendering_device.h"
+#include "core/error/error_macros.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 class PipelineCacheRD {
 	SpinLock spin_lock;

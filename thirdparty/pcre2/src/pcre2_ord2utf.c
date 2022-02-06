@@ -41,11 +41,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* This file contains a function that converts a Unicode character code point
 into a UTF string. The behaviour is different for each code unit width. */
-
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <stdint.h>
 
 #include "pcre2_internal.h"
 

@@ -31,6 +31,12 @@
 #include "godot_area_pair_3d.h"
 
 #include "godot_collision_solver_3d.h"
+#include "core/math/transform_3d.h"
+#include "core/variant/variant.h"
+#include "servers/physics_3d/godot_area_3d.h"
+#include "servers/physics_3d/godot_body_3d.h"
+#include "servers/physics_3d/godot_soft_body_3d.h"
+#include "servers/physics_server_3d.h"
 
 bool GodotAreaPair3D::setup(real_t p_step) {
 	bool result = false;

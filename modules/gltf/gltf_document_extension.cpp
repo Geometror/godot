@@ -30,7 +30,7 @@
 
 #include "gltf_document_extension.h"
 
-#include "gltf_document.h"
+#include "core/object/class_db.h"
 
 void GLTFDocumentExtension::_bind_methods() {
 	// Import

@@ -15,7 +15,17 @@
 // ======================================================================== //
 
 #include "device.h"
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
 #include "autoencoder.h"
+#include "OpenImageDenoise/version.h"
+#include "common/exception.h"
+#include "core/buffer.h"
+#include "core/filter.h"
+#include "cpu_isa_traits.hpp"
 
 namespace oidn {
 

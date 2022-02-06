@@ -31,9 +31,13 @@
 #ifndef EDITOR_SCENE_EXPORTER_GLTF_PLUGIN_H
 #define EDITOR_SCENE_EXPORTER_GLTF_PLUGIN_H
 
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+
+class EditorFileDialog;
+class EditorNode;
 #if TOOLS_ENABLED
 #include "editor/editor_plugin.h"
-
 #include "editor_scene_importer_gltf.h"
 
 class SceneExporterGLTFPlugin : public EditorPlugin {

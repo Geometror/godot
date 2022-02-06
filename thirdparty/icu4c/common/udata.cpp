@@ -16,15 +16,11 @@
 *   created by: Markus W. Scherer
 */
 
+#include <stdint.h>
+#include <string.h>
+#include <atomic>
+
 #include "unicode/utypes.h"  /* U_PLATFORM etc. */
-
-#ifdef __GNUC__
-/* if gcc
-#define ATTRIBUTE_WEAK __attribute__ ((weak))
-might have to #include some other header
-*/
-#endif
-
 #include "unicode/putil.h"
 #include "unicode/udata.h"
 #include "unicode/uversion.h"
@@ -41,6 +37,10 @@ might have to #include some other header
 #include "uhash.h"
 #include "umapfile.h"
 #include "umutex.h"
+#include "unicode/platform.h"
+#include "unicode/stringpiece.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 /***********************************************************************
 *

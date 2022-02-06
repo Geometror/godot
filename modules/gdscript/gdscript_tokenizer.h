@@ -36,6 +36,9 @@
 #include "core/templates/set.h"
 #include "core/templates/vector.h"
 #include "core/variant/variant.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
 
 class GDScriptTokenizer {
 public:

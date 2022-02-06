@@ -17,16 +17,25 @@
 #include <assert.h>
 
 #include "c_types_map.hpp"
-#include "memory_desc_wrapper.hpp"
-#include "mkldnn_debug.h"
 #include "nstl.hpp"
 #include "type_helpers.hpp"
-
 #include "cpu_primitive.hpp"
 #include "cpu_reorder_pd.hpp"
 #include "jit_uni_reorder.hpp"
-
 #include "jit_generator.hpp"
+#include "cpu_isa_traits.hpp"
+#include "mkldnn_thread.hpp"
+#include "primitive_attr.hpp"
+#include "primitive_desc.hpp"
+#include "primitive_exec_types.hpp"
+#include "utils.hpp"
+#include "xbyak_mnemonic.h"
+
+namespace mkldnn {
+namespace impl {
+struct reorder_pd_t;
+}  // namespace impl
+}  // namespace mkldnn
 
 // #define TR_DEBUG
 #if defined(TR_DEBUG)

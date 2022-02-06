@@ -29,7 +29,13 @@
 /*************************************************************************/
 
 #include "audio_effect_eq.h"
+
 #include "servers/audio_server.h"
+#include "core/error/error_macros.h"
+#include "core/math/audio_frame.h"
+#include "core/math/math_funcs.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
 
 void AudioEffectEQInstance::process(const AudioFrame *p_src_frames, AudioFrame *p_dst_frames, int p_frame_count) {
 	int band_count = bands[0].size();

@@ -32,6 +32,7 @@
 #define POSITION_3D_H
 
 #include "scene/3d/node_3d.h"
+#include "core/object/object.h"
 
 class Position3D : public Node3D {
 	GDCLASS(Position3D, Node3D);

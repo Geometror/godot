@@ -8,6 +8,8 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
+#include <stddef.h>
+
 /*-*************************************
 *  Dependencies
 ***************************************/
@@ -15,8 +17,19 @@
 #include "../common/cpu.h"
 #include "../common/mem.h"
 #include "hist.h"           /* HIST_countFast_wksp */
+#include "../common/zstd_internal.h"
+#include "bitstream.h"
+#include "compiler.h"
+#include "compress/zstd_cwksp.h"
+#include "debug.h"
+#include "error_private.h"
+#include "zstd_errors.h"
+#include "zstd_internal.h"
+#include "zstd_trace.h"
+
 #define FSE_STATIC_LINKING_ONLY   /* FSE_encodeSymbol */
 #include "../common/fse.h"
+
 #define HUF_STATIC_LINKING_ONLY
 #include "../common/huf.h"
 #include "zstd_compress_internal.h"

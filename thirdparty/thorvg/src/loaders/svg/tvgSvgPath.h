@@ -25,6 +25,12 @@
 
 #include <tvgCommon.h>
 
+#include "thorvg.h"
+
+namespace tvg {
+template <class T> struct Array;
+}  // namespace tvg
+
 bool svgPathToTvgPath(const char* svgPath, Array<PathCommand>& cmds, Array<Point>& pts);
 
 #endif //_TVG_SVG_PATH_H_

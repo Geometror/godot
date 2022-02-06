@@ -16,10 +16,13 @@
 
 #include <assert.h>
 #include <string.h>
+#include <stdint.h>
 
 #include "src/utils/utils.h"
 #include "src/webp/decode.h"
 #include "src/webp/demux.h"
+#include "webp/mux_types.h"
+#include "webp/types.h"
 
 #define NUM_CHANNELS 4
 

@@ -37,10 +37,23 @@
 #ifndef GLSLANG_WEB
 
 #include "attribute.h"
+
+#include <ctype.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <glslang/Public/ShaderLang.h>
+#include <algorithm>
+#include <list>
+#include <string>
+#include <vector>
+
 #include "../Include/intermediate.h"
 #include "ParseHelper.h"
 
 namespace glslang {
+class TFunction;
 
 // extract integers out of attribute arguments stored in attribute aggregate
 bool TAttributeArgs::getInt(int& value, int argNum) const 

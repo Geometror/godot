@@ -31,6 +31,9 @@
 #include "xr_pose.h"
 
 #include "servers/xr_server.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
 
 void XRPose::_bind_methods() {
 	BIND_ENUM_CONSTANT(XR_TRACKING_CONFIDENCE_NONE);

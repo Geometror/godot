@@ -33,12 +33,10 @@
    correct it. */
 
 #include <math.h>
-#include <string.h>
 #include <stdlib.h>
+#include <alloca.h>
+
 #include "lsp.h"
-#include "os.h"
-#include "misc.h"
-#include "lookup.h"
 #include "scales.h"
 
 /* three possible LSP to f curve functions; the exact computation
@@ -58,6 +56,7 @@
 
 #ifdef FLOAT_LOOKUP
 #include "lookup.c" /* catch this in the build system; we #include for
+
                        compilers (like gcc) that can't inline across
                        modules */
 
@@ -116,6 +115,7 @@ void vorbis_lsp_to_curve(float *curve,int *map,int n,int ln,float *lsp,int m,
 
 #ifdef INT_LOOKUP
 #include "lookup.c" /* catch this in the build system; we #include for
+
                        compilers (like gcc) that can't inline across
                        modules */
 

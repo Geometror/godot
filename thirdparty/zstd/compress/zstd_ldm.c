@@ -11,10 +11,14 @@
 #include "zstd_ldm.h"
 
 #include "../common/debug.h"
-#include "../common/xxhash.h"
 #include "zstd_fast.h"          /* ZSTD_fillHashTable() */
 #include "zstd_double_fast.h"   /* ZSTD_fillDoubleHashTable() */
 #include "zstd_ldm_geartab.h"
+#include "compiler.h"
+#include "compress/zstd_compress_internal.h"
+#include "compress/zstd_cwksp.h"
+#include "error_private.h"
+#include "zstd_errors.h"
 
 #define LDM_BUCKET_SIZE_LOG 3
 #define LDM_MIN_MATCH_LENGTH 64

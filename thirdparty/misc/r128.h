@@ -58,6 +58,7 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#include <immintrin.h>
 #ifndef H_R128_H
 #define H_R128_H
 
@@ -74,6 +75,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #  define R128_LIT_U64(x) x##ui64
 #else
 #  include <stdint.h>
+
 #  define R128_S32 int32_t
 #  define R128_U32 uint32_t
 #  define R128_S64 long long
@@ -273,6 +275,7 @@ extern char R128_decimal;        // decimal point character used by r128From/ToS
 }
 
 #include <limits>
+
 namespace std {
 template<>
 struct numeric_limits<R128>
@@ -605,6 +608,7 @@ static inline bool operator!=(const R128 &lhs, const R128 &rhs)
 
 #ifndef R128_ASSERT
 #  include <assert.h>
+
 #  define R128_ASSERT(x) assert(x)
 #endif
 

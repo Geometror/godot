@@ -35,6 +35,22 @@
 #include "editor/editor_spin_slider.h"
 #include "editor/filesystem_dock.h"
 #include "scene/gui/button.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+
+class Button;
+class Control;
+class EditorSpinSlider;
+class HBoxContainer;
+class InputEvent;
+class ObjectID;
+class PopupMenu;
+class VBoxContainer;
 
 class EditorPropertyArrayObject : public RefCounted {
 	GDCLASS(EditorPropertyArrayObject, RefCounted);

@@ -3,7 +3,11 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <atomic>
+
 #include "default.h"
+#include "common/sys/platform.h"
 
 /* Macros to gather statistics */
 #ifdef EMBREE_STAT_COUNTERS

@@ -32,15 +32,32 @@
  @brief ENet Godot specific functions
 */
 
+#include <stdint.h>
+#include <string.h>
+
 #include "core/io/dtls_server.h"
 #include "core/io/ip.h"
 #include "core/io/net_socket.h"
 #include "core/io/packet_peer_dtls.h"
 #include "core/io/udp_server.h"
 #include "core/os/os.h"
-
 // This must be last for windows to compile (tested with MinGW)
 #include "enet/enet.h"
+#include "core/crypto/crypto.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/ip_address.h"
+#include "core/io/packet_peer_udp.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "enet/godot.h"
+#include "enet/godot_ext.h"
+#include "enet/types.h"
 
 /// Abstract ENet interface for UDP/DTLS.
 class ENetGodotSocket {
@@ -55,9 +72,6 @@ public:
 	virtual bool can_upgrade() { return false; } /* Only true in ENetUDP */
 	virtual ~ENetGodotSocket() {}
 };
-
-class ENetDTLSClient;
-class ENetDTLSServer;
 
 /// NetSocket interface
 class ENetUDP : public ENetGodotSocket {

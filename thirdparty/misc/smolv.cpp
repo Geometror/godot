@@ -4,11 +4,14 @@
 // See end of file for license information.
 
 #include "smolv.h"
+
 #include <stdint.h>
-#include <vector>
 #include <algorithm>
 #include <cstdio>
 #include <cstring>
+#include <map>
+
+struct OpData;
 
 #if !defined(_MSC_VER) && __cplusplus < 201103L
 #define static_assert(x,y)

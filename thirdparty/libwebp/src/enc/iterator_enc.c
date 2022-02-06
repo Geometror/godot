@@ -12,8 +12,14 @@
 // Author: Skal (pascal.massimino@gmail.com)
 
 #include <string.h>
+#include <stdint.h>
 
 #include "src/enc/vp8i_enc.h"
+#include "dsp/dsp.h"
+#include "utils/bit_writer_utils.h"
+#include "utils/utils.h"
+#include "webp/encode.h"
+#include "webp/types.h"
 
 //------------------------------------------------------------------------------
 // VP8Iterator

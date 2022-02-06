@@ -3,14 +3,38 @@
 
 #define RTC_EXPORT_API
 
-#include "default.h"
-#include "device.h"
-#include "scene.h"
-#include "context.h"
-#include "alloc.h"
+#include <stddef.h>
+#include <algorithm>
+#include <atomic>
+#include <utility>
 
+#include "device.h"
+#include "alloc.h"
 #include "../builders/bvh_builder_sah.h"
 #include "../builders/bvh_builder_morton.h"
+#include "common/algorithms/parallel_for.h"
+#include "common/algorithms/parallel_reduce.h"
+#include "common/math/bbox.h"
+#include "common/math/constants.h"
+#include "common/math/math.h"
+#include "common/math/range.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/vuint4_sse2.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
+#include "common/sys/sysinfo.h"
+#include "embree3/rtcore_builder.h"
+#include "embree3/rtcore_common.h"
+#include "embree3/rtcore_config.h"
+#include "embree3/rtcore_device.h"
+#include "embree3/rtcore_scene.h"
+#include "kernels/builders/heuristic_binning_array_aligned.h"
+#include "kernels/builders/heuristic_spatial.h"
+#include "kernels/builders/heuristic_spatial_array.h"
+#include "kernels/builders/priminfo.h"
+#include "kernels/common/primref.h"
+#include "kernels/common/rtcore.h"
+#include "kernels/common/vector.h"
 
 namespace embree
 { 

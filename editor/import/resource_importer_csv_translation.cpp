@@ -34,6 +34,13 @@
 #include "core/io/resource_saver.h"
 #include "core/string/optimized_translation.h"
 #include "core/string/translation.h"
+#include "core/error/error_macros.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
 String ResourceImporterCSVTranslation::get_importer_name() const {
 	return "csv_translation";

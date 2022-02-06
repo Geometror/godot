@@ -45,8 +45,21 @@
 #ifndef _PARSER_HELPER_INCLUDED_
 #define _PARSER_HELPER_INCLUDED_
 
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/InfoSink.h>
+#include <glslang/Include/ResourceLimits.h>
+#include <glslang/Include/SpirvIntrinsics.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/Versions.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stddef.h>
 #include <cstdarg>
 #include <functional>
+#include <map>
+#include <set>
+#include <string>
 
 #include "parseVersions.h"
 #include "../Include/ShHandle.h"
@@ -56,6 +69,9 @@
 #include "attribute.h"
 
 namespace glslang {
+class TInputScanner;
+struct TArraySize;
+struct TArraySizes;
 
 struct TPragma {
     TPragma(bool o, bool d) : optimize(o), debug(d) { }

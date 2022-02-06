@@ -34,6 +34,14 @@
 #include "scene/main/scene_tree.h"
 #include "scene/resources/mesh.h"
 #include "servers/physics_server_3d.h"
+#include "core/error/error_macros.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/class_db.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
 
 void Shape3D::add_vertices_to_array(Vector<Vector3> &array, const Transform3D &p_xform) {
 	Vector<Vector3> toadd = get_debug_mesh_lines();

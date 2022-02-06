@@ -20,9 +20,8 @@
  * SOFTWARE.
  */
 
-#include <cstring>
 #include <ctype.h>
-#include <string>
+#include <cstring>
 
 #ifdef _WIN32
     #include <malloc.h>
@@ -31,6 +30,7 @@
 #endif
 
 #include "tvgXmlParser.h"
+#include "tvgCommon.h"
 
 /************************************************************************/
 /* Internal Class Implementation                                        */

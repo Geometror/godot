@@ -33,8 +33,11 @@
 
 #include "servers/audio/audio_effect.h"
 #include "servers/audio/effects/reverb.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class AudioEffectReverb;
+struct AudioFrame;
 
 class AudioEffectReverbInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectReverbInstance, AudioEffectInstance);

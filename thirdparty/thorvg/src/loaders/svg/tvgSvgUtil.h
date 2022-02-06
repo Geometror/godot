@@ -23,6 +23,8 @@
 #ifndef _TVG_SVG_UTIL_H_
 #define _TVG_SVG_UTIL_H_
 
+#include <string>
+
 #include "tvgCommon.h"
 
 float svgUtilStrtof(const char *nPtr, char **endPtr);

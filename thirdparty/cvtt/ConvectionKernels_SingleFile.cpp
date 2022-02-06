@@ -30,7 +30,6 @@ Licensed under the MIT License.
 
 http://go.microsoft.com/fwlink/?LinkId=248926
 */
-#include "ConvectionKernels_Config.h"
 
 #if defined(CVTT_SINGLE_FILE)
 #define CVTT_SINGLE_FILE_IMPL

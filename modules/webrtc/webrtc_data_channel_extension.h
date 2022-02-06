@@ -31,11 +31,16 @@
 #ifndef WEBRTC_DATA_CHANNEL_EXTENSION_H
 #define WEBRTC_DATA_CHANNEL_EXTENSION_H
 
-#include "webrtc_data_channel.h"
+#include <stdint.h>
 
+#include "webrtc_data_channel.h"
 #include "core/object/gdvirtual.gen.inc"
 #include "core/object/script_language.h"
 #include "core/variant/native_ptr.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
 
 class WebRTCDataChannelExtension : public WebRTCDataChannel {
 	GDCLASS(WebRTCDataChannelExtension, WebRTCDataChannel);

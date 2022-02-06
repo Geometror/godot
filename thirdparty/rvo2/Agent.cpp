@@ -34,6 +34,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <memory>
 
 #include "Definitions.h"
 #include "KdTree.h"

@@ -17,15 +17,19 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
+#include <stdio.h>
+#include <stdint.h>
+#include <fstream>
+#include <string>
+
 #include "btConvexHullComputer.h"
 #include "vhacdMesh.h"
 #include "FloatMath.h"
-#include <fstream>
-#include <iosfwd>
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
+#include "btAlignedObjectArray.h"
+#include "btVector3.h"
+#include "vhacdSArray.h"
+#include "vhacdVector.h"
+#include "vhacdVector.inl"
 
 namespace VHACD {
 Mesh::Mesh()

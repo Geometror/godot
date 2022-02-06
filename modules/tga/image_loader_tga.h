@@ -31,7 +31,17 @@
 #ifndef IMAGE_LOADER_TGA_H
 #define IMAGE_LOADER_TGA_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/io/image_loader.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/list.h"
+
+class FileAccess;
+class Image;
+class String;
 
 class ImageLoaderTGA : public ImageFormatLoader {
 	enum tga_type_e {

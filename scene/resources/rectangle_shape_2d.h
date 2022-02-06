@@ -32,6 +32,15 @@
 #define RECTANGLE_SHAPE_2D_H
 
 #include "scene/resources/shape_2d.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/string/string_name.h"
+#include "core/variant/variant.h"
+
+class RID;
 
 class RectangleShape2D : public Shape2D {
 	GDCLASS(RectangleShape2D, Shape2D);

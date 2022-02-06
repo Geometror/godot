@@ -26,7 +26,11 @@
 #ifndef LOCMAP_H
 #define LOCMAP_H
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 #define LANGUAGE_LCID(hostID) (uint16_t)(0x03FF & hostID)
 

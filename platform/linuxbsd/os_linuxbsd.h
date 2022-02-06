@@ -41,6 +41,12 @@
 #include "servers/audio_server.h"
 #include "servers/rendering/renderer_compositor.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_list.h"
+#include "core/os/os.h"
+#include "core/string/ustring.h"
+
+class JoypadLinux;
+class MainLoop;
 
 class OS_LinuxBSD : public OS_Unix {
 	virtual void delete_main_loop() override;

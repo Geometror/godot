@@ -31,13 +31,36 @@
 #ifndef GODOT_PHYSICS_SERVER_3D_H
 #define GODOT_PHYSICS_SERVER_3D_H
 
+#include <stdint.h>
+
 #include "godot_joint_3d.h"
 #include "godot_shape_3d.h"
 #include "godot_space_3d.h"
 #include "godot_step_3d.h"
-
 #include "core/templates/rid_owner.h"
 #include "servers/physics_server_3d.h"
+#include "core/math/aabb.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+
+class GodotArea3D;
+class GodotBody3D;
+class GodotCollisionObject3D;
+class GodotJoint3D;
+class GodotShape3D;
+class GodotSoftBody3D;
+class GodotSpace3D;
+class GodotStep3D;
 
 class GodotPhysicsServer3D : public PhysicsServer3D {
 	GDCLASS(GodotPhysicsServer3D, PhysicsServer3D);

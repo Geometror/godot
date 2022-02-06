@@ -32,6 +32,8 @@
 #define MARGIN_CONTAINER_H
 
 #include "scene/gui/container.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
 
 class MarginContainer : public Container {
 	GDCLASS(MarginContainer, Container);

@@ -75,10 +75,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *         Assimp::FBX::AnimationLayer, Assimp::FBX::AnimationStack
  */
 
-#include "FBXCommon.h"
+#include <string.h>
+#include <cstdint>
+#include <map>
+#include <string>
+#include <utility>
+#include <vector>
+
 #include "FBXDocument.h"
 #include "FBXDocumentUtil.h"
 #include "FBXParser.h"
+#include "core/error/error_macros.h"
 
 namespace FBXDocParser {
 

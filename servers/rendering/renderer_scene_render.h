@@ -31,10 +31,28 @@
 #ifndef RENDERINGSERVERSCENERENDER_H
 #define RENDERINGSERVERSCENERENDER_H
 
+#include <stdint.h>
+
 #include "core/math/camera_matrix.h"
 #include "core/templates/paged_array.h"
 #include "servers/rendering/renderer_scene.h"
 #include "servers/rendering/renderer_storage.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/color.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/typed_array.h"
+#include "servers/rendering_server.h"
+
+class Image;
+struct Rect2;
+struct Rect2i;
+struct Vector2;
 
 class RendererSceneRender {
 public:

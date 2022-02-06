@@ -7,6 +7,18 @@
 // a quaternion is a 'float *' to 4 floats representing a quaternion x,y,z,w
 //
 
+#include <assert.h>
+#include <float.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <cmath>
+#include <memory>
+#include <new>
+#include <vector>
+
+#include "FloatMath.h"
 #ifdef _MSC_VER
 #pragma warning(disable:4996)
 #endif

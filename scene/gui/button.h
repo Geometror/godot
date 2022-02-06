@@ -33,6 +33,19 @@
 
 #include "scene/gui/base_button.h"
 #include "scene/resources/text_paragraph.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+#include "scene/gui/control.h"
+
+class TextParagraph;
+class Texture2D;
 
 class Button : public BaseButton {
 	GDCLASS(Button, BaseButton);

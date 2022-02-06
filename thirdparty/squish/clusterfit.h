@@ -31,8 +31,10 @@
 #include "maths.h"
 #include "simd.h"
 #include "colourfit.h"
+#include "simd_sse.h"
 
 namespace squish {
+class ColourSet;
 
 class ClusterFit : public ColourFit
 {

@@ -31,6 +31,9 @@
 #ifndef OSX_EXPORT_PLUGIN_H
 #define OSX_EXPORT_PLUGIN_H
 
+#include <sys/stat.h>
+#include <stdint.h>
+
 #include "core/config/project_settings.h"
 #include "core/io/dir_access.h"
 #include "core/io/file_access.h"
@@ -43,8 +46,22 @@
 #include "editor/editor_node.h"
 #include "editor/editor_settings.h"
 #include "platform/osx/logo.gen.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/char_utils.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/variant/variant.h"
+#include "scene/resources/texture.h"
+#include "thirdparty/minizip/zip.h"
 
-#include <sys/stat.h>
+class Image;
+class StringName;
+struct DirAccessRef;
+template <class T> class Vector;
 
 class EditorExportPlatformOSX : public EditorExportPlatform {
 	GDCLASS(EditorExportPlatformOSX, EditorExportPlatform);

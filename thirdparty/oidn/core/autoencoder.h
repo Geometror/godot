@@ -16,11 +16,22 @@
 
 #pragma once
 
+#include <limits>
+#include <memory>
+#include <string>
+
 #include "filter.h"
 #include "network.h"
 #include "transfer_function.h"
+#include "common/ref.h"
+#include "core/image.h"
+#include "core/math.h"
 
 namespace oidn {
+class Device;
+class Executable;
+class Node;
+class TransferFunction;
 
   // --------------------------------------------------------------------------
   // AutoencoderFilter - Direct-predicting autoencoder

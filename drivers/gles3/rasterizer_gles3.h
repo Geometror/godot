@@ -31,6 +31,19 @@
 #ifndef RASTERIZER_OPENGL_H
 #define RASTERIZER_OPENGL_H
 
+#include <stdint.h>
+
+#include "core/math/color.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "servers/display_server.h"
+
+class Image;
+class RID;
+class RendererCanvasRender;
+class RendererSceneRender;
+class RendererStorage;
+struct Rect2;
 #ifdef GLES3_ENABLED
 
 #include "rasterizer_canvas_gles3.h"

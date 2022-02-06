@@ -30,6 +30,18 @@
 
 #include "ssl_context_mbedtls.h"
 
+#include <stdio.h>
+
+#include "core/crypto/crypto.h"
+#include "core/error/error_macros.h"
+#include "core/string/ustring.h"
+#include "mbedtls/ctr_drbg.h"
+#include "mbedtls/entropy.h"
+#include "mbedtls/ssl.h"
+#include "mbedtls/ssl_cookie.h"
+#include "mbedtls/x509_crt.h"
+#include "modules/mbedtls/crypto_mbedtls.h"
+
 static void my_debug(void *ctx, int level,
 		const char *file, int line,
 		const char *str) {

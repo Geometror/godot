@@ -31,11 +31,28 @@
 #ifndef NAVIGATION_MESH_GENERATOR_H
 #define NAVIGATION_MESH_GENERATOR_H
 
+#include <stdint.h>
+
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/variant.h"
+#include "scene/resources/navigation_mesh.h"
+
+class Mesh;
+class Node;
+struct Transform3D;
+struct rcCompactHeightfield;
+struct rcContourSet;
+struct rcHeightfield;
+struct rcPolyMesh;
+struct rcPolyMeshDetail;
+template <class T> class Vector;
 #ifndef _3D_DISABLED
 
-#include "scene/3d/navigation_region_3d.h"
-
 #include <Recast.h>
+
+#include "scene/3d/navigation_region_3d.h"
 
 #ifdef TOOLS_ENABLED
 struct EditorProgress;

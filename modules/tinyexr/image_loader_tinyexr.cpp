@@ -30,12 +30,17 @@
 
 #include "image_loader_tinyexr.h"
 
-#include "core/os/os.h"
-#include "core/string/print_string.h"
-
-#include <zlib.h> // Should come before including tinyexr.
+#include <stdint.h>
+#include <string.h>
 
 #include "thirdparty/tinyexr/tinyexr.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/math/color.h"
+#include "core/math/math_funcs.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
 
 Error ImageLoaderTinyEXR::load_image(Ref<Image> p_image, FileAccess *f, bool p_force_linear, float p_scale) {
 	Vector<uint8_t> src_image;

@@ -29,8 +29,12 @@
 /*************************************************************************/
 
 #include "denoise_wrapper.h"
-#include "thirdparty/oidn/include/OpenImageDenoise/oidn.h"
+
 #include <stdio.h>
+
+#include "thirdparty/oidn/include/OpenImageDenoise/oidn.h"
+
+struct OIDNDeviceImpl;
 
 void *oidn_denoiser_init() {
 	OIDNDeviceImpl *device = oidnNewDevice(OIDN_DEVICE_TYPE_CPU);

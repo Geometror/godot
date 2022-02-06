@@ -38,11 +38,15 @@ of the License or (at your option) any later version.
 
 
 #include <cassert>
-#include <cstring>
+
 #include "inc/Machine.h"
-#include "inc/Segment.h"
 #include "inc/Slot.h"
 #include "inc/Rule.h"
+#include "inc/Main.h"
+
+namespace graphite2 {
+class Segment;
+}  // namespace graphite2
 
 #define STARTOP(name)           name: {
 #define ENDOP                   }; goto *((sp - sb)/Machine::STACK_MAX ? &&end : *++ip);
@@ -88,6 +92,7 @@ const void * direct_run(const bool          get_table_mode,
     // We need to define and return to opcode table from within this function
     // other inorder to take the addresses of the instruction bodies.
     #include "inc/opcode_table.h"
+
     if (get_table_mode)
         return opcode_table;
 

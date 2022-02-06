@@ -29,7 +29,15 @@
 /*************************************************************************/
 
 #include "servers/text_server.h"
+
 #include "servers/rendering_server.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/object/class_db.h"
+#include "core/os/main_loop.h"
+#include "core/os/os.h"
+#include "core/string/print_string.h"
+#include "core/string/string_name.h"
 
 TextServerManager *TextServerManager::singleton = nullptr;
 

@@ -34,6 +34,14 @@
 #include "core/io/resource_importer.h"
 #include "scene/resources/font.h"
 #include "servers/text_server.h"
+#include "core/error/error_list.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+
+class StringName;
+class Variant;
 
 class ResourceImporterBMFont : public ResourceImporter {
 	GDCLASS(ResourceImporterBMFont, ResourceImporter);

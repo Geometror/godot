@@ -36,6 +36,13 @@
 #include "core/templates/set.h"
 #include "gdscript_cache.h"
 #include "gdscript_parser.h"
+#include "core/error/error_list.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/hash_map.h"
+#include "core/templates/list.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
 
 class GDScriptAnalyzer {
 	GDScriptParser *parser = nullptr;

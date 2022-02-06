@@ -41,14 +41,10 @@ POSSIBILITY OF SUCH DAMAGE.
 /* This module contains an internal function that is used to match an extended
 class. It is used by pcre2_auto_possessify() and by both pcre2_match() and
 pcre2_def_match(). */
-
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
+#include <stdint.h>
 
 #include "pcre2_internal.h"
+#include "pcre2_ucp.h"
 
 /*************************************************
 *       Match character against an XCLASS        *

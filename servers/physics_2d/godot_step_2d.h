@@ -31,10 +31,16 @@
 #ifndef GODOT_STEP_2D_H
 #define GODOT_STEP_2D_H
 
-#include "godot_space_2d.h"
+#include <stdint.h>
 
+#include "godot_space_2d.h"
 #include "core/templates/local_vector.h"
 #include "core/templates/thread_work_pool.h"
+#include "core/math/math_defs.h"
+
+class GodotBody2D;
+class GodotConstraint2D;
+class GodotSpace2D;
 
 class GodotStep2D {
 	uint64_t _step = 1;

@@ -31,6 +31,8 @@
 #include "register_types.h"
 
 #include "image_loader_webp.h"
+#include "core/io/image_loader.h"
+#include "core/os/memory.h"
 
 static ImageLoaderWEBP *image_loader_webp = nullptr;
 

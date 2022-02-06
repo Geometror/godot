@@ -32,6 +32,10 @@
 #define CONVEX_POLYGON_SHAPE_H
 
 #include "scene/resources/shape_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
 
 class ConvexPolygonShape3D : public Shape3D {
 	GDCLASS(ConvexPolygonShape3D, Shape3D);

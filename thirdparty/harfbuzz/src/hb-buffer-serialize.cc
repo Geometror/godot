@@ -24,7 +24,13 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <assert.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "hb.hh"
+#include "hb.h"
 
 #ifndef HB_NO_BUFFER_SERIALIZE
 

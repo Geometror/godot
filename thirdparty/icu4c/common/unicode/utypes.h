@@ -35,10 +35,15 @@
 #define UTYPES_H
 
 
+#include <float.h>
+#include <stddef.h>
+
 #include "unicode/umachine.h"
 #include "unicode/uversion.h"
 #include "unicode/uconfig.h"
-#include <float.h>
+#include "unicode/platform.h"
+#include "unicode/urename.h"
+#include "unicode/uvernum.h"
 
 #if !U_NO_DEFAULT_INCLUDE_UTF_HEADERS
 #   include "unicode/utf.h"

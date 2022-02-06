@@ -23,7 +23,12 @@
 #define __UTRACE_H__
 
 #include <stdarg.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 /**
  * \file

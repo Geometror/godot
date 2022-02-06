@@ -30,12 +30,23 @@
 
 #include "visual_script_builtin_funcs.h"
 
+#include <stdint.h>
+
 #include "core/io/marshalls.h"
 #include "core/math/math_funcs.h"
 #include "core/object/class_db.h"
 #include "core/object/ref_counted.h"
 #include "core/os/os.h"
 #include "core/variant/variant_parser.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_defs.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+#include "modules/visual_script/visual_script.h"
 
 const char *VisualScriptBuiltinFunc::func_name[VisualScriptBuiltinFunc::FUNC_MAX] = {
 	"sin",

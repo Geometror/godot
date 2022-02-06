@@ -6,6 +6,7 @@
 #include "edge-segments.h"
 
 namespace msdfgen {
+class EdgeSegment;
 
 struct MultiDistance {
     double r, g, b;

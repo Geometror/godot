@@ -21,11 +21,16 @@
 #ifndef __UBIDI_PROPS_H__
 #define __UBIDI_PROPS_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uset.h"
 #include "putilimp.h"
 #include "uset_imp.h"
 #include "udataswp.h"
+#include "unicode/uchar.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 U_CDECL_BEGIN
 

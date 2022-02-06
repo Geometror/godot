@@ -26,8 +26,15 @@
  * Google Author(s): Behdad Esfahbod
  */
 
+#include <assert.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "hb.hh"
-#include "hb-machinery.hh"
+#include "hb-atomic.hh"
+#include "hb.h"
 
 #if !defined(HB_NO_SETLOCALE) && (!defined(HAVE_NEWLOCALE) || !defined(HAVE_USELOCALE))
 #define HB_NO_SETLOCALE 1
@@ -1209,5 +1216,6 @@ uint8_t
 #ifdef HB_NO_VISIBILITY
 #undef HB_NO_VISIBILITY
 #include "hb-static.cc"
+
 #define HB_NO_VISIBILITY 1
 #endif

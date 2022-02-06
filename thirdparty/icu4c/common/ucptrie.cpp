@@ -9,14 +9,18 @@
 #   include <stdio.h>
 #endif
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/ucptrie.h"
-#include "unicode/utf.h"
 #include "unicode/utf8.h"
-#include "unicode/utf16.h"
 #include "cmemory.h"
 #include "uassert.h"
 #include "ucptrie_impl.h"
+#include "unicode/platform.h"
+#include "unicode/ucpmap.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 U_CAPI UCPTrie * U_EXPORT2
 ucptrie_openFromBinary(UCPTrieType type, UCPTrieValueWidth valueWidth,

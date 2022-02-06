@@ -24,19 +24,13 @@ Mozilla Public License (http://mozilla.org/MPL) or the GNU General Public
 License, as published by the Free Software Foundation, either version 2
 of the License or (at your option) any later version.
 */
-#include <algorithm>
-#include <cmath>
+#include <stddef.h>
 #include <limits>
 
 #include "inc/Intervals.h"
-#include "inc/Segment.h"
-#include "inc/Slot.h"
-#include "inc/debug.h"
-#include "inc/bits.h"
+#include "inc/Main.h"
 
 using namespace graphite2;
-
-#include <cmath>
 
 inline
 Zones::Exclusion  Zones::Exclusion::split_at(float p) {

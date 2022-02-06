@@ -18,6 +18,8 @@
 # define _bitpack_H (1)
 # include <limits.h>
 
+struct oc_pack_buf;
+
 
 
 typedef unsigned long      oc_pb_window;

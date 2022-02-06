@@ -31,7 +31,41 @@
 #ifndef RENDERING_DEVICE_BINDS_H
 #define RENDERING_DEVICE_BINDS_H
 
+#include <stdint.h>
+
 #include "servers/rendering/rendering_device.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/math/color.h"
+#include "core/object/class_db.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/typed_array.h"
+#include "core/variant/variant.h"
+
+class RDAttachmentFormat;
+class RDFramebufferPass;
+class RDPipelineColorBlendState;
+class RDPipelineColorBlendStateAttachment;
+class RDPipelineDepthStencilState;
+class RDPipelineMultisampleState;
+class RDPipelineRasterizationState;
+class RDSamplerState;
+class RDTextureFormat;
+class RDTextureView;
+class RDUniform;
+class RDVertexAttribute;
 
 #define RD_SETGET(m_type, m_member)                                            \
 	void set_##m_member(m_type p_##m_member) { base.m_member = p_##m_member; } \

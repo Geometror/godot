@@ -36,22 +36,24 @@
 // Post-processing for SPIR-V IR, in internal form, not standard binary form.
 //
 
+#include <SPIRV/spvIR.h>
+#include <glslang/Public/ShaderLang.h>
 #include <cassert>
 #include <cstdlib>
-
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
+#include <map>
+#include <memory>
+#include <set>
+#include <vector>
 
 #include "SpvBuilder.h"
-
 #include "spirv.hpp"
-#include "GlslangToSpv.h"
-#include "SpvBuilder.h"
+
 namespace spv {
     #include "GLSL.std.450.h"
     #include "GLSL.ext.KHR.h"
-    #include "GLSL.ext.EXT.h"
     #include "GLSL.ext.AMD.h"
     #include "GLSL.ext.NV.h"
 }

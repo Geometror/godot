@@ -30,9 +30,18 @@
 
 #include "godot_body_2d.h"
 
+#include <cmath>
+
 #include "godot_area_2d.h"
 #include "godot_body_direct_state_2d.h"
 #include "godot_space_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/os/memory.h"
+#include "servers/physics_2d/godot_collision_object_2d.h"
+#include "servers/physics_2d/godot_constraint_2d.h"
+#include "servers/physics_2d/godot_shape_2d.h"
 
 void GodotBody2D::_mass_properties_changed() {
 	if (get_space() && !mass_properties_update_list.in_list() && (calculate_inertia || calculate_center_of_mass)) {

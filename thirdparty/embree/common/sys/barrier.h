@@ -3,9 +3,13 @@
 
 #pragma once
 
+#include <stddef.h>
+#include <atomic>
+
 #include "intrinsics.h"
 #include "sysinfo.h"
 #include "atomic.h"
+#include "common/sys/platform.h"
 
 namespace embree
 {

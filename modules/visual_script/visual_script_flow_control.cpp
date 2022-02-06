@@ -30,9 +30,15 @@
 
 #include "visual_script_flow_control.h"
 
-#include "core/config/project_settings.h"
 #include "core/io/resource_loader.h"
-#include "core/os/keyboard.h"
+#include "core/error/error_macros.h"
+#include "core/io/resource.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/variant/callable.h"
+#include "modules/visual_script/visual_script.h"
 
 //////////////////////////////////////////
 ////////////////RETURN////////////////////

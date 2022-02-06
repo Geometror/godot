@@ -30,15 +30,21 @@
 
 #include "register_types.h"
 
-#include "core/io/dir_access.h"
-#include "core/io/file_access.h"
-#include "core/io/file_access_encrypted.h"
 #include "core/io/resource_loader.h"
 #include "gdscript.h"
-#include "gdscript_analyzer.h"
 #include "gdscript_cache.h"
-#include "gdscript_tokenizer.h"
 #include "gdscript_utility_functions.h"
+#include "core/io/resource_saver.h"
+#include "core/object/class_db.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/set.h"
+#include "editor/plugins/script_editor_plugin.h"
+#include "modules/gdscript/gdscript_parser.h"
+#include "modules/gdscript/language_server/gdscript_language_protocol.h"
 
 #ifdef TESTS_ENABLED
 #include "tests/test_gdscript.h"
@@ -54,7 +60,6 @@ GDScriptCache *gdscript_cache = nullptr;
 
 #include "editor/editor_export.h"
 #include "editor/editor_node.h"
-#include "editor/editor_settings.h"
 #include "editor/editor_translation_parser.h"
 #include "editor/gdscript_highlighter.h"
 #include "editor/gdscript_translation_parser_plugin.h"

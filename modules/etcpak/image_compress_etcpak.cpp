@@ -30,11 +30,16 @@
 
 #include "image_compress_etcpak.h"
 
+#include <stdint.h>
+
 #include "core/os/os.h"
 #include "core/string/print_string.h"
-
 #include "thirdparty/etcpak/ProcessDxtc.hpp"
 #include "thirdparty/etcpak/ProcessRGB.hpp"
+#include "core/error/error_macros.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 EtcpakType _determine_etc_type(Image::UsedChannels p_channels) {
 	switch (p_channels) {

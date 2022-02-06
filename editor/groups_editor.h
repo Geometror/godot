@@ -39,6 +39,18 @@
 #include "scene/gui/line_edit.h"
 #include "scene/gui/popup.h"
 #include "scene/gui/tree.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "scene/gui/box_container.h"
+
+class Button;
+class Label;
+class LineEdit;
+class Node;
+class SceneTree;
+class Tree;
+class TreeItem;
+class UndoRedo;
 
 class GroupDialog : public AcceptDialog {
 	GDCLASS(GroupDialog, AcceptDialog);

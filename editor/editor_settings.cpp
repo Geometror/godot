@@ -30,6 +30,8 @@
 
 #include "editor_settings.h"
 
+#include <stdint.h>
+
 #include "core/config/project_settings.h"
 #include "core/input/input_map.h"
 #include "core/io/certs_compressed.gen.h"
@@ -41,12 +43,31 @@
 #include "core/io/resource_saver.h"
 #include "core/os/keyboard.h"
 #include "core/os/os.h"
-#include "core/version.h"
-#include "editor/editor_node.h"
 #include "editor/editor_translation.h"
 #include "scene/main/node.h"
 #include "scene/main/scene_tree.h"
 #include "scene/main/window.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/ip_address.h"
+#include "core/math/color.h"
+#include "core/math/math_funcs.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/class_db.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/translation.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/templates/pair.h"
+#include "core/templates/set.h"
+#include "core/typedefs.h"
+#include "core/variant/dictionary.h"
+#include "core/version_generated.gen.h"
+#include "editor/editor_paths.h"
+#include "servers/display_server.h"
+#include "servers/text_server.h"
 
 // PRIVATE METHODS
 

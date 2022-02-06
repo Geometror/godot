@@ -33,6 +33,13 @@
 #include "godot_area_3d.h"
 #include "godot_body_direct_state_3d.h"
 #include "godot_space_3d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
+#include "servers/physics_3d/godot_collision_object_3d.h"
+#include "servers/physics_3d/godot_constraint_3d.h"
+#include "servers/physics_3d/godot_shape_3d.h"
 
 void GodotBody3D::_mass_properties_changed() {
 	if (get_space() && !mass_properties_update_list.in_list() && (calculate_inertia || calculate_center_of_mass)) {

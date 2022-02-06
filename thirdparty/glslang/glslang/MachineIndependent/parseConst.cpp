@@ -37,7 +37,11 @@
 // It should only be used when the whole tree is known to be constant.
 //
 
-#include "ParseHelper.h"
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/intermediate.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <vector>
 
 namespace glslang {
 

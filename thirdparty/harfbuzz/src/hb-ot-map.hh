@@ -29,7 +29,13 @@
 #ifndef HB_OT_MAP_HH
 #define HB_OT_MAP_HH
 
+#include <limits.h>
+#include <string.h>
+
 #include "hb-buffer.hh"
+#include "hb-ot.h"
+#include "hb.h"
+#include "hb.hh"
 
 
 #define HB_OT_MAP_MAX_BITS 8u

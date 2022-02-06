@@ -18,15 +18,21 @@
 #define CPU_JIT_UNI_ELTWISE_HPP
 
 #include <assert.h>
+#include <stddef.h>
 
 #include "c_types_map.hpp"
 #include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "cpu_eltwise_pd.hpp"
 #include "cpu_primitive.hpp"
-
 #include "jit_generator.hpp"
+#include "cpu_isa_traits.hpp"
+#include "math_utils.hpp"
+#include "mkldnn_traits.hpp"
+#include "primitive_attr.hpp"
+#include "primitive_desc.hpp"
+#include "primitive_exec_types.hpp"
+#include "xbyak_mnemonic.h"
 
 namespace mkldnn {
 namespace impl {

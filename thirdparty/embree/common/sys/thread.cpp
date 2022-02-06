@@ -2,10 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "thread.h"
-#include "sysinfo.h"
-#include "string.h"
 
-#include <iostream>
+#include <assert.h>
+#include <string>
+#include <vector>
+
+#include "common/sys/mutex.h"
+#include "common/sys/platform.h"
 #if defined(__ARM_NEON)
 #include "../simd/arm/emulation.h"
 #else
@@ -163,7 +166,6 @@ namespace embree
 // -- GODOT end --
 
 #include <fstream>
-#include <sstream>
 #include <algorithm>
 
 namespace embree

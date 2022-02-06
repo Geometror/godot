@@ -32,6 +32,8 @@
 #define CENTER_CONTAINER_H
 
 #include "scene/gui/container.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
 
 class CenterContainer : public Container {
 	GDCLASS(CenterContainer, Container);

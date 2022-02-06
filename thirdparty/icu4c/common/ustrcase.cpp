@@ -20,13 +20,15 @@
 *   to the Unicode Character Database (uprops.dat).
 */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/brkiter.h"
 #include "unicode/casemap.h"
 #include "unicode/edits.h"
 #include "unicode/stringoptions.h"
 #include "unicode/ustring.h"
-#include "unicode/ucasemap.h"
 #include "unicode/ubrk.h"
 #include "unicode/utf.h"
 #include "unicode/utf16.h"
@@ -35,6 +37,13 @@
 #include "ucasemap_imp.h"
 #include "ustr_imp.h"
 #include "uassert.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
+#include "utrie2.h"
 
 U_NAMESPACE_BEGIN
 

@@ -39,14 +39,15 @@
 *******************************************************************************/
 
 #include "clipper.hpp"
+
 #include <cmath>
 #include <vector>
 #include <algorithm>
-#include <stdexcept>
 #include <cstring>
 #include <cstdlib>
 #include <ostream>
-#include <functional>
+#include <memory>
+#include <utility>
 
 //Explicitly disables exceptions handling for target platform
 //#define CLIPPER_NOEXCEPTION

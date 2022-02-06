@@ -33,6 +33,15 @@
 
 #include "editor/plugins/abstract_polygon_2d_editor.h"
 #include "scene/2d/light_occluder_2d.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/variant.h"
+
+class EditorNode;
+class LightOccluder2D;
+class Node2D;
+class Node;
+class OccluderPolygon2D;
 
 class LightOccluder2DEditor : public AbstractPolygon2DEditor {
 	GDCLASS(LightOccluder2DEditor, AbstractPolygon2DEditor);

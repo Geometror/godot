@@ -44,11 +44,8 @@ until it finds a capturing bracket with the given number, or, if the number is
 negative, an instance of OP_REVERSE for a lookbehind. The function is called
 from pcre2_compile.c and also from pcre2_study.c when finding the minimum
 matching length. */
-
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <stddef.h>
+#include <stdint.h>
 
 #include "pcre2_internal.h"
 

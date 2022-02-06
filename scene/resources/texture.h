@@ -31,6 +31,8 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
+#include <stdint.h>
+
 #include "core/io/file_access.h"
 #include "core/io/resource.h"
 #include "core/io/resource_loader.h"
@@ -42,6 +44,26 @@
 #include "scene/resources/gradient.h"
 #include "servers/camera_server.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_list.h"
+#include "core/io/image.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/typed_array.h"
+#include "core/variant/variant.h"
+
+class Curve;
+class FileAccess;
+class Gradient;
 
 class Texture : public Resource {
 	GDCLASS(Texture, Resource);

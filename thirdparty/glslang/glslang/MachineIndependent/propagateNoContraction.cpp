@@ -41,13 +41,23 @@
 
 #include "propagateNoContraction.h"
 
+#include <assert.h>
+#include <glslang/Include/BaseTypes.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/Types.h>
+#include <glslang/Include/intermediate.h>
 #include <cstdlib>
 #include <string>
 #include <tuple>
 #include <unordered_map>
 #include <unordered_set>
+#include <type_traits>
+#include <utility>
+#include <vector>
 
 #include "localintermediate.h"
+
 namespace {
 
 // Use a string to hold the access chain information, as in most cases the

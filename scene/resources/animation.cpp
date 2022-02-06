@@ -30,9 +30,22 @@
 
 #include "animation.h"
 
+#include <bits/std_abs.h>
+#include <math.h>
+#include <string.h>
+
 #include "core/io/marshalls.h"
 #include "core/math/geometry_3d.h"
 #include "scene/scene_string_names.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_2d.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
 
 bool Animation::_set(const StringName &p_name, const Variant &p_value) {
 	String name = p_name;

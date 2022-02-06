@@ -2,10 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "accelset.h"
-#include "scene.h"
+
+#include "kernels/common/geometry.h"
 
 namespace embree
 {
+class Device;
+
   AccelSet::AccelSet (Device* device, Geometry::GType gtype, size_t numItems, size_t numTimeSteps) 
     : Geometry(device,gtype,(unsigned int)numItems,(unsigned int)numTimeSteps), boundsFunc(nullptr) {}
 

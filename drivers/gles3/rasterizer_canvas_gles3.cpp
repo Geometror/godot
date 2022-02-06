@@ -30,13 +30,29 @@
 
 #include "rasterizer_canvas_gles3.h"
 
+#include <string.h>
+
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/math/rect2.h"
+#include "core/math/rect2i.h"
+#include "core/math/vector3.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/pair.h"
+#include "core/templates/rid_owner.h"
+#include "drivers/gles3/shaders/canvas.glsl.gen.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering/shader_compiler.h"
+#include "servers/rendering/shader_language.h"
+
+struct CameraMatrix;
+
 #ifdef GLES3_ENABLED
 
-#include "core/os/os.h"
-#include "rasterizer_scene_gles3.h"
 #include "rasterizer_storage_gles3.h"
-
-#include "core/config/project_settings.h"
 #include "servers/rendering/rendering_server_default.h"
 
 #ifndef GLES_OVER_GL

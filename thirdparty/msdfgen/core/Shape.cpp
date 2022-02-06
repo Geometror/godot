@@ -1,8 +1,17 @@
 
 #include "Shape.h"
 
+#include <math.h>
+#include <stdlib.h>
 #include <algorithm>
+#include <memory>
+
 #include "arithmetics.hpp"
+#include "core/Contour.h"
+#include "core/EdgeHolder.h"
+#include "core/Scanline.h"
+#include "core/Vector2.h"
+#include "core/edge-segments.h"
 
 namespace msdfgen {
 

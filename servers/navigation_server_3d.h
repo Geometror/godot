@@ -31,9 +31,22 @@
 #ifndef NAVIGATION_SERVER_3D_H
 #define NAVIGATION_SERVER_3D_H
 
+#include <stdint.h>
+
 #include "core/object/class_db.h"
 #include "core/templates/rid.h"
 #include "scene/3d/navigation_region_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+
+class NavigationMesh;
+class Node;
+struct Transform3D;
 
 /// This server uses the concept of internal mutability.
 /// All the constant functions can be called in multithread because internally

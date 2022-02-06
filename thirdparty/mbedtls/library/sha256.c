@@ -22,15 +22,20 @@
  *  http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/config.h"
+
+struct mbedtls_internal_sha256_process::;
 
 #if defined(MBEDTLS_SHA256_C)
+
+#include <string.h>
 
 #include "mbedtls/sha256.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_SELF_TEST)
 #if defined(MBEDTLS_PLATFORM_C)
@@ -38,6 +43,7 @@
 #else
 #include <stdio.h>
 #include <stdlib.h>
+
 #define mbedtls_printf printf
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free

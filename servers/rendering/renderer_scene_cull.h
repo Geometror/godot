@@ -31,10 +31,11 @@
 #ifndef RENDERING_SERVER_SCENE_CULL_H
 #define RENDERING_SERVER_SCENE_CULL_H
 
+#include <stdint.h>
+
 #include "core/templates/bin_sorted_array.h"
 #include "core/templates/pass_func.h"
 #include "servers/rendering/renderer_compositor.h"
-
 #include "core/math/dynamic_bvh.h"
 #include "core/math/geometry_3d.h"
 #include "core/math/octree.h"
@@ -49,6 +50,36 @@
 #include "servers/rendering/renderer_scene_occlusion_cull.h"
 #include "servers/rendering/renderer_scene_render.h"
 #include "servers/xr/xr_interface.h"
+#include "core/math/aabb.h"
+#include "core/math/basis.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/plane.h"
+#include "core/math/rect2.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/os/spin_lock.h"
+#include "core/string/string_name.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/rid.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/typed_array.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_storage.h"
+#include "servers/rendering_server.h"
+
+class Image;
+class XRInterface;
 
 class RendererSceneCull : public RendererScene {
 public:

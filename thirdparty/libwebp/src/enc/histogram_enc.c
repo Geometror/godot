@@ -13,13 +13,17 @@
 #include "src/webp/config.h"
 #endif
 
-#include <math.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "src/enc/backward_references_enc.h"
 #include "src/enc/histogram_enc.h"
 #include "src/dsp/lossless.h"
 #include "src/dsp/lossless_common.h"
 #include "src/utils/utils.h"
+#include "webp/format_constants.h"
+#include "webp/types.h"
 
 #define MAX_COST 1.e38
 

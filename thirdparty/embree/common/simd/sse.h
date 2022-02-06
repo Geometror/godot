@@ -3,6 +3,9 @@
 
 #pragma once
 
+#include <emmintrin.h>
+#include <xmmintrin.h>
+
 #include "../sys/platform.h"
 #include "../sys/intrinsics.h"
 #include "../sys/alloc.h"

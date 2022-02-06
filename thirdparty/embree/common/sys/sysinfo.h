@@ -12,6 +12,9 @@
 #define PAGE_SIZE_2M (2*1024*1024)
 #define PAGE_SIZE_4K (4*1024)
 
+#include <stddef.h>
+#include <string>
+
 #include "platform.h"
 
 /* define isa namespace and ISA bitvector */

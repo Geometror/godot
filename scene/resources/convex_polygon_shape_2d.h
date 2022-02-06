@@ -32,6 +32,14 @@
 #define CONVEX_POLYGON_SHAPE_2D_H
 
 #include "scene/resources/shape_2d.h"
+#include "core/math/color.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/templates/vector.h"
+
+class RID;
 
 class ConvexPolygonShape2D : public Shape2D {
 	GDCLASS(ConvexPolygonShape2D, Shape2D);

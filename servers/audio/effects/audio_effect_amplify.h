@@ -32,8 +32,11 @@
 #define AUDIOEFFECTAMPLIFY_H
 
 #include "servers/audio/audio_effect.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
 
 class AudioEffectAmplify;
+struct AudioFrame;
 
 class AudioEffectAmplifyInstance : public AudioEffectInstance {
 	GDCLASS(AudioEffectAmplifyInstance, AudioEffectInstance);

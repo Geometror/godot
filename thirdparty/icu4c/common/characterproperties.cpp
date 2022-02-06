@@ -4,6 +4,8 @@
 // characterproperties.cpp
 // created: 2018sep03 Markus W. Scherer
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "unicode/localpointer.h"
 #include "unicode/uchar.h"
@@ -12,7 +14,6 @@
 #include "unicode/umutablecptrie.h"
 #include "unicode/uniset.h"
 #include "unicode/uscript.h"
-#include "unicode/uset.h"
 #include "cmemory.h"
 #include "emojiprops.h"
 #include "mutex.h"
@@ -23,6 +24,13 @@
 #include "ucln_cmn.h"
 #include "umutex.h"
 #include "uprops.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
+#include "uset_imp.h"
 
 using icu::LocalPointer;
 #if !UCONFIG_NO_NORMALIZATION

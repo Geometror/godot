@@ -32,6 +32,9 @@
 #define VISUAL_SHADER_SDF_NODES_H
 
 #include "scene/resources/visual_shader.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "scene/resources/shader.h"
 
 class VisualShaderNodeSDFToScreenUV : public VisualShaderNode {
 	GDCLASS(VisualShaderNodeSDFToScreenUV, VisualShaderNode);

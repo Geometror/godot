@@ -30,9 +30,16 @@ Licensed under the MIT License.
 
 http://go.microsoft.com/fwlink/?LinkId=248926
 */
-#include "ConvectionKernels_Config.h"
 
+#include <assert.h>
+#include <float.h>
+#include <stddef.h>
+#include <algorithm>
+#include <new>
+#include <utility>
 #if !defined(CVTT_SINGLE_FILE) || defined(CVTT_SINGLE_FILE_IMPL)
+
+#include <cmath>
 
 #include "ConvectionKernels.h"
 #include "ConvectionKernels_ETC.h"
@@ -41,8 +48,6 @@ http://go.microsoft.com/fwlink/?LinkId=248926
 #include "ConvectionKernels_ETC2_Rounding.h"
 #include "ConvectionKernels_ParallelMath.h"
 #include "ConvectionKernels_FakeBT709_Rounding.h"
-
-#include <cmath>
 
 const int cvtt::Internal::ETCComputer::g_flipTables[2][2][8] =
 {

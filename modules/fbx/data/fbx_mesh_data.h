@@ -31,6 +31,9 @@
 #ifndef FBX_MESH_DATA_H
 #define FBX_MESH_DATA_H
 
+#include <stdint.h>
+#include <vector>
+
 #include "core/templates/hash_map.h"
 #include "core/templates/local_vector.h"
 #include "core/templates/ordered_hash_map.h"
@@ -38,16 +41,28 @@
 #include "scene/3d/importer_mesh_instance_3d.h"
 #include "scene/3d/mesh_instance_3d.h"
 #include "scene/resources/surface_tool.h"
-
 #include "fbx_bone.h"
 #include "fbx_parser/FBXMeshGeometry.h"
 #include "import_state.h"
 #include "tools/import_utils.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "scene/resources/material.h"
 
 struct FBXNode;
 struct FBXMeshData;
 struct FBXBone;
 struct ImportState;
+class ImporterMeshInstance3D;
+class String;
+namespace FBXDocParser {
+class Model;
+}  // namespace FBXDocParser
+struct Color;
+struct Vector2;
 
 typedef int Vertex;
 typedef int SurfaceId;

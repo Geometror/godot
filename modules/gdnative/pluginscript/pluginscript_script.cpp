@@ -28,13 +28,26 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
+#include <stdint.h>
+#include <gdnative/gdnative.h>
+
 // Godot imports
 #include "core/io/file_access.h"
 // PluginScript imports
 #include "pluginscript_instance.h"
 #include "pluginscript_script.h"
-
-#include <stdint.h>
+#include "core/error/error_macros.h"
+#include "core/io/resource_loader.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "gdnative/gdnative.h"
+#include "modules/gdnative/pluginscript/pluginscript_language.h"
+#include "pluginscript/godot_pluginscript.h"
 
 #ifdef DEBUG_ENABLED
 #define __ASSERT_SCRIPT_REASON "Cannot retrieve PluginScript class for this script, is your code correct?"
@@ -448,9 +461,6 @@ Error PluginScript::load_source_code(const String &p_path) {
 	}
 
 	_source = s;
-#ifdef TOOLS_ENABLED
-// source_changed_cache=true;
-#endif
 	_path = p_path;
 	return OK;
 }

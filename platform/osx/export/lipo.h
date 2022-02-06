@@ -33,11 +33,18 @@
 #ifndef LIPO_H
 #define LIPO_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/io/file_access.h"
 #include "core/object/ref_counted.h"
 #include "modules/modules_enabled.gen.h" // For regex.
-
 #include "macho.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+
+class FileAccess;
 
 #ifdef MODULE_REGEX_ENABLED
 

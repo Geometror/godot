@@ -31,6 +31,10 @@
 #include "jsonrpc.h"
 
 #include "core/io/json.h"
+#include "core/error/error_list.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
 
 JSONRPC::JSONRPC() {
 }

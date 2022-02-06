@@ -31,6 +31,10 @@
 #ifndef VIDEO_STREAM_THEORA_H
 #define VIDEO_STREAM_THEORA_H
 
+#include <theora/theoradec.h>
+#include <vorbis/codec.h>
+#include <stdint.h>
+
 #include "core/io/file_access.h"
 #include "core/io/resource_loader.h"
 #include "core/os/semaphore.h"
@@ -39,9 +43,22 @@
 #include "core/templates/safe_refcount.h"
 #include "scene/resources/video_stream.h"
 #include "servers/audio_server.h"
+#include "core/error/error_list.h"
+#include "core/io/image.h"
+#include "core/io/resource.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "ogg/ogg.h"
+#include "theora/codec.h"
 
-#include <theora/theoradec.h>
-#include <vorbis/codec.h>
+class FileAccess;
+class ImageTexture;
+class Texture2D;
 
 //#define THEORA_USE_THREAD_STREAMING
 

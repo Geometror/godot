@@ -33,6 +33,10 @@
 
 #include "core/io/resource_loader.h"
 #include "core/io/resource_saver.h"
+#include "core/error/error_list.h"
+#include "core/io/resource.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
 
 class TextFile : public Resource {
 	GDCLASS(TextFile, Resource);

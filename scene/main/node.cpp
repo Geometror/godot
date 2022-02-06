@@ -30,6 +30,9 @@
 
 #include "node.h"
 
+#include <stdint.h>
+#include <alloca.h>
+
 #include "core/core_string_names.h"
 #include "core/io/resource_loader.h"
 #include "core/multiplayer/multiplayer_api.h"
@@ -41,8 +44,17 @@
 #include "scene/resources/packed_scene.h"
 #include "scene/scene_string_names.h"
 #include "viewport.h"
-
-#include <stdint.h>
+#include "core/config/engine.h"
+#include "core/config/project_settings.h"
+#include "core/input/input_event.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/object/object_id.h"
+#include "core/object/script_language.h"
+#include "core/os/memory.h"
+#include "core/string/char_utils.h"
+#include "core/templates/pair.h"
+#include "core/templates/safe_refcount.h"
 
 VARIANT_ENUM_CAST(Node::ProcessMode);
 VARIANT_ENUM_CAST(Node::InternalMode);

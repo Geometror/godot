@@ -19,15 +19,13 @@
  *  This file is part of Mbed TLS (https://tls.mbed.org)
  */
 
-#include "common.h"
-
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3_EXPERIMENTAL)
+
+#include <string.h>
 
 #include "mps_reader.h"
 #include "mps_common.h"
 #include "mps_trace.h"
-
-#include <string.h>
 
 #if ( defined(__ARMCC_VERSION) || defined(_MSC_VER) ) && \
     !defined(inline) && !defined(__cplusplus)

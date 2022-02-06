@@ -29,7 +29,13 @@
 /*************************************************************************/
 
 #include "godot_broad_phase_2d_bvh.h"
+
 #include "godot_collision_object_2d.h"
+#include "bvh_tree.h"
+#include "core/error/error_macros.h"
+#include "core/math/bvh_tree.h"
+#include "core/os/memory.h"
+#include "servers/physics_2d/godot_broad_phase_2d.h"
 
 GodotBroadPhase2D::ID GodotBroadPhase2DBVH::create(GodotCollisionObject2D *p_object, int p_subindex, const Rect2 &p_aabb, bool p_static) {
 	ID oid = bvh.create(p_object, true, p_aabb, p_subindex, !p_static, 1 << p_object->get_type(), p_static ? 0 : 0xFFFFF); // Pair everything, don't care?

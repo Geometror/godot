@@ -31,6 +31,8 @@
 #ifndef VISUAL_SHADER_EDITOR_PLUGIN_H
 #define VISUAL_SHADER_EDITOR_PLUGIN_H
 
+#include <stdint.h>
+
 #include "editor/editor_node.h"
 #include "editor/editor_plugin.h"
 #include "editor/plugins/curve_editor_plugin.h"
@@ -40,6 +42,49 @@
 #include "scene/gui/popup.h"
 #include "scene/gui/tree.h"
 #include "scene/resources/visual_shader.h"
+#include "core/io/resource.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/object/gdvirtual.gen.inc"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/object/script_language.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "editor/editor_inspector.h"
+#include "scene/gui/box_container.h"
+#include "scene/gui/control.h"
+#include "scene/resources/syntax_highlighter.h"
+
+class AcceptDialog;
+class Button;
+class CheckBox;
+class CodeEdit;
+class ConfirmationDialog;
+class CurveEditor;
+class EditorNode;
+class GraphEdit;
+class GraphNode;
+class InputEvent;
+class Label;
+class LineEdit;
+class MenuButton;
+class OptionButton;
+class PanelContainer;
+class PopupMenu;
+class PopupPanel;
+class RichTextLabel;
+class TextEdit;
+class TextureButton;
+class Tree;
+class UndoRedo;
+class Window;
 
 class VisualShaderNodePlugin : public RefCounted {
 	GDCLASS(VisualShaderNodePlugin, RefCounted);

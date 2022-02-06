@@ -30,6 +30,11 @@
 
 #include "enet_packet_peer.h"
 
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "enet/enet.h"
+#include "enet/godot.h"
+
 void ENetPacketPeer::peer_disconnect(int p_data) {
 	ERR_FAIL_COND(!peer);
 	enet_peer_disconnect(peer, p_data);

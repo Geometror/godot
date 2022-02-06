@@ -29,9 +29,20 @@
 /*************************************************************************/
 
 #include "gdscript_highlighter.h"
+
 #include "../gdscript.h"
 #include "../gdscript_tokenizer.h"
 #include "editor/editor_settings.h"
+#include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/object/script_language.h"
+#include "core/string/char_utils.h"
+#include "core/templates/list.h"
+#include "core/templates/ordered_hash_map.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "scene/gui/text_edit.h"
 
 Dictionary GDScriptSyntaxHighlighter::_get_line_syntax_highlighting_impl(int p_line) {
 	Dictionary color_map;

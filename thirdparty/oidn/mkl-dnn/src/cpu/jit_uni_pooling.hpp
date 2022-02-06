@@ -22,11 +22,16 @@
 #include "c_types_map.hpp"
 #include "type_helpers.hpp"
 #include "utils.hpp"
-
 #include "cpu_pooling_pd.hpp"
 #include "cpu_primitive.hpp"
-
 #include "jit_uni_pool_kernel_f32.hpp"
+#include "cpu_isa_traits.hpp"
+#include "jit_primitive_conf.hpp"
+#include "mkldnn_traits.hpp"
+#include "mkldnn_types.h"
+#include "pooling_pd.hpp"
+#include "primitive_desc.hpp"
+#include "primitive_exec_types.hpp"
 
 namespace mkldnn {
 namespace impl {

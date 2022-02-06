@@ -30,7 +30,12 @@
 
 #include "gdnative/basis.h"
 
+#include <gdnative/gdnative.h>
+
 #include "core/math/basis.h"
+#include "core/os/memory.h"
+#include "gdnative/gdnative.h"
+#include "gdnative/math_defs.h"
 
 static_assert(sizeof(godot_basis) == sizeof(Basis), "Basis size mismatch");
 

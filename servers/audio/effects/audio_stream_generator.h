@@ -33,6 +33,13 @@
 
 #include "core/templates/ring_buffer.h"
 #include "servers/audio/audio_stream.h"
+#include "core/math/audio_frame.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/variant/variant.h"
+
+struct Vector2;
 
 class AudioStreamGenerator : public AudioStream {
 	GDCLASS(AudioStreamGenerator, AudioStream);

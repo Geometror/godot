@@ -31,7 +31,15 @@
 #ifndef PNG_DRIVER_COMMON_H
 #define PNG_DRIVER_COMMON_H
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include "core/io/image.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+
+class Image;
+template <class T> class Vector;
 
 namespace PNGDriverCommon {
 

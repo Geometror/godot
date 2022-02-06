@@ -31,6 +31,13 @@
 #ifndef OS_UNIX_H
 #define OS_UNIX_H
 
+#include <stdint.h>
+
+#include "core/error/error_list.h"
+#include "core/io/logger.h"
+#include "core/os/mutex.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
 #ifdef UNIX_ENABLED
 
 #include "core/os/os.h"

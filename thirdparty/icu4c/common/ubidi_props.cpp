@@ -18,16 +18,13 @@
 *   Low-level Unicode bidi/shaping properties access.
 */
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
-#include "unicode/uset.h"
 #include "unicode/udata.h" /* UDataInfo */
-#include "ucmndata.h" /* DataHeader */
-#include "udatamem.h"
-#include "uassert.h"
-#include "cmemory.h"
 #include "utrie2.h"
 #include "ubidi_props.h"
-#include "ucln_cmn.h"
+#include "unicode/platform.h"
 
 struct UBiDiProps {
     UDataMemory *mem;

@@ -30,10 +30,10 @@
 
 #include "register_types.h"
 
-#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
 
-#include "upnp.h"
-#include "upnp_device.h"
+class UPNP;
+class UPNPDevice;
 
 void register_upnp_types() {
 	GDREGISTER_CLASS(UPNP);

@@ -24,17 +24,17 @@ Mozilla Public License (http://mozilla.org/MPL) or the GNU General Public
 License, as published by the Free Software Foundation, either version 2
 of the License or (at your option) any later version.
 */
-#include <cstring>
+#include <cstdlib>
+#include <new>
 
 #include "inc/Main.h"
 #include "inc/bits.h"
 #include "inc/Endian.h"
 #include "inc/FeatureMap.h"
 #include "inc/FeatureVal.h"
-#include "graphite2/Font.h"
 #include "inc/TtfUtil.h"
-#include <cstdlib>
 #include "inc/Face.h"
+#include "inc/List.h"
 
 
 using namespace graphite2;

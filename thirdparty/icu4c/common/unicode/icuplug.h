@@ -108,6 +108,7 @@
 #define ICUPLUG_H
 
 #include "unicode/utypes.h"
+#include "unicode/uconfig.h"
 
 
 #if UCONFIG_ENABLE_PLUGINS || defined(U_IN_DOXYGEN)

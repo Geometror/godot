@@ -12,13 +12,18 @@
  * You may select, at your option, one of the above-listed licenses.
 ****************************************************************** */
 
+#include <stddef.h>
+
 /* **************************************************************
 *  Dependencies
 ****************************************************************/
 #include "../common/zstd_deps.h"  /* ZSTD_memcpy, ZSTD_memset */
 #include "../common/compiler.h"
 #include "../common/bitstream.h"  /* BIT_* */
-#include "../common/fse.h"        /* to compress headers */
+#include "debug.h"
+#include "mem.h"
+#include "zstd_errors.h"
+
 #define HUF_STATIC_LINKING_ONLY
 #include "../common/huf.h"
 #include "../common/error_private.h"

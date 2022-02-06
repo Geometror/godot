@@ -30,12 +30,32 @@
 
 #include "fbx_mesh_data.h"
 
+#include <stddef.h>
+#include <algorithm>
+#include <string>
+
 #include "core/templates/local_vector.h"
 #include "scene/resources/importer_mesh.h"
 #include "scene/resources/mesh.h"
 #include "scene/resources/surface_tool.h"
-
 #include "thirdparty/misc/polypartition.h"
+#include "core/error/error_macros.h"
+#include "core/math/color.h"
+#include "core/math/vector2.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/map.h"
+#include "core/typedefs.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
+#include "data/fbx_bone.h"
+#include "data/import_state.h"
+#include "fbx_parser/FBXDocument.h"
+#include "scene/3d/importer_mesh_instance_3d.h"
+#include "servers/rendering_server.h"
+#include "tools/import_utils.h"
 
 template <class T>
 T collect_first(const Vector<VertexData<T>> *p_data, T p_fall_back) {

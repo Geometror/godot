@@ -12,10 +12,13 @@
 // Author: Skal (pascal.massimino@gmail.com)
 
 #include <assert.h>
+#include <stdint.h>
+#include <string.h>
 
 #include "src/dsp/dsp.h"
-#include "src/dec/vp8i_dec.h"
 #include "src/utils/utils.h"
+#include "dec/common_dec.h"
+#include "webp/types.h"
 
 //------------------------------------------------------------------------------
 

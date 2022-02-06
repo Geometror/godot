@@ -30,6 +30,9 @@
 
 #include "gltf_camera.h"
 
+#include "core/object/class_db.h"
+#include "core/variant/variant.h"
+
 void GLTFCamera::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_perspective"), &GLTFCamera::get_perspective);
 	ClassDB::bind_method(D_METHOD("set_perspective", "perspective"), &GLTFCamera::set_perspective);

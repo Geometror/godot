@@ -30,10 +30,19 @@
 
 #include "export.h"
 
+#include <stdint.h>
+#include <string.h>
+
 #include "core/io/file_access.h"
 #include "editor/editor_export.h"
 #include "platform/linuxbsd/logo.gen.h"
 #include "scene/resources/texture.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/image.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
 
 static Error fixup_embedded_pck(const String &p_path, int64_t p_embedded_start, int64_t p_embedded_size);
 

@@ -26,6 +26,8 @@
 #define HB_OT_METRICS_HH
 
 #include "hb.hh"
+#include "hb-ot.h"
+#include "hb.h"
 
 HB_INTERNAL bool
 _hb_ot_metrics_get_position_common (hb_font_t           *font,

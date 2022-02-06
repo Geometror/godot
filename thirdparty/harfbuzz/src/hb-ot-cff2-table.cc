@@ -24,13 +24,16 @@
  * Adobe Author(s): Michiharu Ariza
  */
 
+#include <limits.h>
+
 #include "hb.hh"
+#include "hb-cff-interp-cs-common.hh"
+#include "hb-font.hh"
 
 #ifndef HB_NO_OT_FONT_CFF
 
 #include "hb-ot-cff2-table.hh"
 #include "hb-cff2-interp-cs.hh"
-#include "hb-draw.hh"
 
 using namespace CFF;
 

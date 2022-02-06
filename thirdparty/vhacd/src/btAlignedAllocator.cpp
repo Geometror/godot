@@ -15,6 +15,10 @@ subject to the following restrictions:
 
 #include "btAlignedAllocator.h"
 
+#include <stdlib.h>
+
+#include "btScalar.h"
+
 // -- GODOT start --
 namespace VHACD {
 // -- GODOT end --
@@ -42,6 +46,7 @@ static btFreeFunc* sFreeFunc = btFreeDefault;
 
 #if defined(BT_HAS_ALIGNED_ALLOCATOR)
 #include <malloc.h>
+
 static void* btAlignedAllocDefault(size_t size, int32_t alignment)
 {
     return _aligned_malloc(size, (size_t)alignment);

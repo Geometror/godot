@@ -11,15 +11,19 @@
 //
 // Author: Christian Duvivier (cduvivier@google.com)
 
+#include <stdint.h>
+#include <string.h>
+#include <xmmintrin.h>
+
 #include "src/dsp/dsp.h"
+#include "utils/utils.h"
+#include "webp/types.h"
 
 #if defined(WEBP_USE_SSE2)
-#include <assert.h>
 #include <stdlib.h>  // for abs()
 #include <emmintrin.h>
 
 #include "src/dsp/common_sse2.h"
-#include "src/enc/cost_enc.h"
 #include "src/enc/vp8i_enc.h"
 
 //------------------------------------------------------------------------------

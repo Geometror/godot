@@ -17,15 +17,22 @@
 #ifndef CPU_JIT_AVX2_CONVOLUTION_HPP
 #define CPU_JIT_AVX2_CONVOLUTION_HPP
 
+#include <stddef.h>
+
 #include "c_types_map.hpp"
 #include "memory_tracking.hpp"
 #include "mkldnn_thread.hpp"
 #include "utils.hpp"
-
 #include "cpu_convolution_pd.hpp"
 #include "cpu_reducer.hpp"
-
 #include "jit_avx2_conv_kernel_f32.hpp"
+#include "convolution_pd.hpp"
+#include "cpu_isa_traits.hpp"
+#include "cpu_primitive.hpp"
+#include "jit_primitive_conf.hpp"
+#include "mkldnn_traits.hpp"
+#include "primitive_desc.hpp"
+#include "primitive_exec_types.hpp"
 
 namespace mkldnn {
 namespace impl {

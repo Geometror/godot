@@ -24,8 +24,7 @@
 
 
 #include <stdlib.h>
-#include <stdio.h>
-#include "unicode/utypes.h"
+
 #include "cmemory.h"
 #include "cstring.h"
 #include "uassert.h"

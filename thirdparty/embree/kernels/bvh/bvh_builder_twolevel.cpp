@@ -2,11 +2,29 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "bvh_builder_twolevel.h"
-#include "bvh_statistics.h"
+
+#include <algorithm>
+#include <queue>
+#include <string>
+
 #include "../builders/bvh_builder_sah.h"
-#include "../common/scene_line_segments.h"
 #include "../common/scene_triangle_mesh.h"
-#include "../common/scene_quad_mesh.h"
+#include "common/algorithms/parallel_for.h"
+#include "common/math/constants.h"
+#include "common/math/lbbox.h"
+#include "common/math/vec3.h"
+#include "common/math/vec3fa.h"
+#include "common/simd/vfloat4_sse2.h"
+#include "common/simd/vuint4_sse2.h"
+#include "common/sys/intrinsics.h"
+#include "kernels/builders/priminfo.h"
+#include "kernels/bvh/bvh.h"
+#include "kernels/common/alloc.h"
+#include "kernels/common/primref.h"
+#include "kernels/config.h"
+#include "kernels/geometry/triangle.h"
+#include "kernels/geometry/trianglei.h"
+#include "kernels/geometry/trianglev.h"
 
 #define PROFILE 0
 

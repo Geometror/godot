@@ -31,6 +31,21 @@
 #ifndef WSLCLIENT_H
 #define WSLCLIENT_H
 
+#include <stdint.h>
+
+#include "core/io/ip.h"
+#include "core/io/ip_address.h"
+#include "core/multiplayer/multiplayer_peer.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "modules/websocket/websocket_macros.h"
+
+class StreamPeer;
+class StreamPeerTCP;
+class WebSocketPeer;
 #ifndef JAVASCRIPT_ENABLED
 
 #include "core/error/error_list.h"

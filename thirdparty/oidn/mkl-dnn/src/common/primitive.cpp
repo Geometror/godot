@@ -14,15 +14,19 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include <assert.h>
+#include <stdio.h>
+#include <unordered_map>
+#include <utility>
 
 #include "c_types_map.hpp"
-#include "engine.hpp"
-#include "primitive_desc.hpp"
 #include "primitive.hpp"
 #include "type_helpers.hpp"
-#include "stream.hpp"
 #include "utils.hpp"
+#include "memory.hpp"
+#include "memory_desc_wrapper.hpp"
+#include "mkldnn.h"
+#include "mkldnn_types.h"
+#include "verbose.hpp"
 
 using namespace mkldnn::impl;
 using namespace mkldnn::impl::status;

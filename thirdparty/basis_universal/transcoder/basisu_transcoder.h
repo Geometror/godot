@@ -32,6 +32,12 @@
 	#define BASISU_FORCE_DEVEL_MESSAGES 0
 #endif
 
+#include <stdint.h>
+#include <string.h>
+#include <transcoder/basisu.h>
+#include <transcoder/basisu_containers.h>
+#include <string>
+
 #include "basisu_transcoder_internal.h"
 #include "basisu_transcoder_uastc.h"
 #include "basisu_global_selector_palette.h"
@@ -39,6 +45,8 @@
 
 namespace basist
 {
+class etc1_global_selector_codebook;
+
 	// High-level composite texture formats supported by the transcoder.
 	// Each of these texture formats directly correspond to OpenGL/D3D/Vulkan etc. texture formats.
 	// Notes:

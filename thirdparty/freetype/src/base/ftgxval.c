@@ -25,13 +25,20 @@
  */
 
 
-#include <freetype/internal/ftdebug.h>
 
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/services/svgxval.h>
 
 
   /* documentation is in ftgxval.h */
+
+#include <freetype/fterrors.h>
+
+#include "freetype/freetype.h"
+#include "freetype/ftgxval.h"
+#include "freetype/ftsystem.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/services/svgxval.h"
 
   FT_EXPORT_DEF( FT_Error )
   FT_TrueTypeGX_Validate( FT_Face   face,

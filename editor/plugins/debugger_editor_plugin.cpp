@@ -37,6 +37,14 @@
 #include "editor/editor_scale.h"
 #include "editor/fileserver/editor_file_server.h"
 #include "scene/gui/menu_button.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/os/memory.h"
+#include "core/variant/variant.h"
+#include "editor/editor_settings.h"
+#include "editor/plugins/script_editor_plugin.h"
+#include "scene/gui/button.h"
+#include "scene/gui/popup_menu.h"
+#include "scene/main/node.h"
 
 DebuggerEditorPlugin::DebuggerEditorPlugin(EditorNode *p_editor, MenuButton *p_debug_menu) {
 	EditorDebuggerServer::initialize();

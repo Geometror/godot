@@ -30,14 +30,23 @@
 
 #include "image_loader_webp.h"
 
-#include "core/config/project_settings.h"
-#include "core/io/marshalls.h"
-#include "core/os/os.h"
-#include "core/string/print_string.h"
-
 #include <stdlib.h>
 #include <webp/decode.h>
 #include <webp/encode.h>
+#include <stdint.h>
+#include <string.h>
+
+#include "core/config/project_settings.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/math/vector2.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "core/variant/variant.h"
+#include "webp/types.h"
 
 static Vector<uint8_t> _webp_lossy_pack(const Ref<Image> &p_image, float p_quality) {
 	ERR_FAIL_COND_V(p_image.is_null() || p_image->is_empty(), Vector<uint8_t>());

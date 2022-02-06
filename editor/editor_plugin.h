@@ -42,6 +42,21 @@
 #include "scene/3d/camera_3d.h"
 #include "scene/main/node.h"
 #include "scene/resources/texture.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/object/gdvirtual.gen.inc"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/callable.h"
+#include "core/variant/dictionary.h"
+#include "core/variant/variant.h"
 
 class EditorNode;
 class Node3D;
@@ -59,6 +74,23 @@ class EditorToolAddons;
 class EditorPaths;
 class FileSystemDock;
 class ScriptEditor;
+class Button;
+class ConfigFile;
+class Control;
+class EditorInspector;
+class EditorInspectorPlugin;
+class EditorSceneFormatImporter;
+class EditorScenePostImportPlugin;
+class EditorTranslationParserPlugin;
+class InputEvent;
+class Mesh;
+class PopupMenu;
+class Resource;
+class Script;
+class ScriptCreateDialog;
+class Texture2D;
+class UndoRedo;
+struct Transform3D;
 
 class EditorInterface : public Node {
 	GDCLASS(EditorInterface, Node);

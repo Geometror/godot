@@ -56,6 +56,12 @@ http://gimpact.sf.net
 
 #include "godot_generic_6dof_joint_3d.h"
 
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/math_funcs.h"
+#include "core/os/memory.h"
+#include "servers/physics_3d/godot_body_3d.h"
+
 #define GENERIC_D6_DISABLE_WARMSTARTING 1
 
 //////////////////////////// GodotG6DOFRotationalLimitMotor3D ////////////////////////////////////

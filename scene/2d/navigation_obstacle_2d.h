@@ -33,6 +33,13 @@
 
 #include "scene/2d/node_2d.h"
 #include "scene/main/node.h"
+#include "core/math/math_defs.h"
+#include "core/object/object.h"
+#include "core/templates/rid.h"
+#include "core/variant/typed_array.h"
+
+class Node2D;
+class String;
 
 class NavigationObstacle2D : public Node {
 	GDCLASS(NavigationObstacle2D, Node);

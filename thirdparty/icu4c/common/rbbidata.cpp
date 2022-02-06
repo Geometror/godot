@@ -7,19 +7,21 @@
 ***************************************************************************
 */
 
+#include <stddef.h>
+#include <atomic>
+
 #include "unicode/utypes.h"
+#include "ucmndata.h"
+#include "unicode/stringpiece.h"
+#include "unicode/uconfig.h"
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
 #include "unicode/ucptrie.h"
-#include "unicode/utypes.h"
 #include "rbbidata.h"
-#include "rbbirb.h"
 #include "udatamem.h"
 #include "cmemory.h"
-#include "cstring.h"
 #include "umutex.h"
-
 #include "uassert.h"
 
 

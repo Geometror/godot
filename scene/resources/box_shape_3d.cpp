@@ -29,7 +29,10 @@
 /*************************************************************************/
 
 #include "box_shape_3d.h"
+
 #include "servers/physics_server_3d.h"
+#include "core/math/aabb.h"
+#include "core/object/class_db.h"
 
 Vector<Vector3> BoxShape3D::get_debug_mesh_lines() const {
 	Vector<Vector3> lines;

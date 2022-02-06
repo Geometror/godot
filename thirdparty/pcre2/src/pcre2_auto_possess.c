@@ -40,14 +40,11 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* This module contains functions that scan a compiled pattern and change
 repeats into possessive repeats where possible. */
-
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
+#include <stddef.h>
+#include <stdint.h>
 
 #include "pcre2_internal.h"
+#include "pcre2_ucp.h"
 
 
 /*************************************************

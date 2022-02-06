@@ -36,6 +36,8 @@
 #include "core/templates/map.h"
 #include "core/templates/set.h"
 #include "core/templates/vector.h"
+#include "core/error/error_macros.h"
+#include "core/string/ustring.h"
 
 class ScriptDebugger {
 	typedef ScriptLanguage::StackInfo StackInfo;

@@ -33,6 +33,7 @@
 
 #include "core/object/class_db.h"
 #include "core/string/ustring.h"
+#include "core/object/object.h"
 
 class EditorPaths : public Object {
 	GDCLASS(EditorPaths, Object)

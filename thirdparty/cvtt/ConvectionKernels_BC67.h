@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 #include "ConvectionKernels_ParallelMath.h"
 
 
@@ -29,6 +31,9 @@ namespace cvtt
 
 namespace cvtt
 {
+struct BC7EncodingPlan;
+struct PixelBlockF16;
+
     namespace Internal
     {
         class BC7Computer

@@ -37,6 +37,22 @@
 #include "scene/gui/line_edit.h"
 #include "scene/gui/option_button.h"
 #include "scene/gui/tree.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/binder_common.h"
+
+class Button;
+class DirAccess;
+class HBoxContainer;
+class InputEvent;
+class Label;
+class LineEdit;
+class OptionButton;
+class Texture2D;
+class Tree;
+class VBoxContainer;
 
 class FileDialog : public ConfirmationDialog {
 	GDCLASS(FileDialog, ConfirmationDialog);

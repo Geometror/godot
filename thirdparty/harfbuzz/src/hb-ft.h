@@ -29,9 +29,11 @@
 #ifndef HB_FT_H
 #define HB_FT_H
 
-#include "hb.h"
-
 #include <ft2build.h>
+
+#include "hb.h"
+#include "freetype/config/ftheader.h"
+
 #include FT_FREETYPE_H
 
 HB_BEGIN_DECLS

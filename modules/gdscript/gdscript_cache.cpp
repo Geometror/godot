@@ -30,11 +30,15 @@
 
 #include "gdscript_cache.h"
 
+#include <stdint.h>
+
 #include "core/io/file_access.h"
 #include "core/templates/vector.h"
 #include "gdscript.h"
 #include "gdscript_analyzer.h"
 #include "gdscript_parser.h"
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
 
 bool GDScriptParserRef::is_valid() const {
 	return parser != nullptr;

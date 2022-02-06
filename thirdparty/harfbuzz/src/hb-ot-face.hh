@@ -30,8 +30,8 @@
 #define HB_OT_FACE_HH
 
 #include "hb.hh"
-
 #include "hb-machinery.hh"
+#include "hb.h"
 
 
 /*
@@ -42,6 +42,7 @@
 #define HB_OT_TABLE(Namespace, Type) namespace Namespace { struct Type; }
 #define HB_OT_ACCELERATOR(Namespace, Type) HB_OT_TABLE (Namespace, Type##_accelerator_t)
 #include "hb-ot-face-table-list.hh"
+
 #undef HB_OT_ACCELERATOR
 #undef HB_OT_TABLE
 
@@ -57,6 +58,7 @@ struct hb_ot_face_t
     ORDER_ZERO,
 #define HB_OT_TABLE(Namespace, Type) HB_OT_TABLE_ORDER (Namespace, Type),
 #include "hb-ot-face-table-list.hh"
+
 #undef HB_OT_TABLE
   };
 
@@ -66,6 +68,7 @@ struct hb_ot_face_t
 #define HB_OT_ACCELERATOR(Namespace, Type) \
   hb_face_lazy_loader_t<Namespace::Type##_accelerator_t, HB_OT_TABLE_ORDER (Namespace, Type)> Type;
 #include "hb-ot-face-table-list.hh"
+
 #undef HB_OT_ACCELERATOR
 #undef HB_OT_TABLE
 };

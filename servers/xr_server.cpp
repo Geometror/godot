@@ -29,9 +29,14 @@
 /*************************************************************************/
 
 #include "xr_server.h"
-#include "core/config/project_settings.h"
+
 #include "xr/xr_interface.h"
 #include "xr/xr_positional_tracker.h"
+#include "core/error/error_macros.h"
+#include "core/math/basis.h"
+#include "core/math/vector3.h"
+#include "core/object/class_db.h"
+#include "core/string/print_string.h"
 
 XRServer *XRServer::singleton = nullptr;
 

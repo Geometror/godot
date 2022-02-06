@@ -14,11 +14,7 @@
 
  ********************************************************************/
 
-#include <math.h>
 #include "lookup.h"
-#include "lookup_data.h"
-#include "os.h"
-#include "misc.h"
 
 #ifdef FLOAT_LOOKUP
 
@@ -43,6 +39,7 @@ float vorbis_invsq2explook(int a){
 }
 
 #include <stdio.h>
+
 /* interpolated lookup based fromdB function, domain -140dB to 0dB only */
 float vorbis_fromdBlook(float a){
   int i=vorbis_ftoi(a*((float)(-(1<<FROMdB2_SHIFT)))-.5f);

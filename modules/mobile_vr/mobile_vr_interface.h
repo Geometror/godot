@@ -31,8 +31,26 @@
 #ifndef MOBILE_VR_INTERFACE_H
 #define MOBILE_VR_INTERFACE_H
 
+#include <stdint.h>
+#include <cmath>
+
 #include "servers/xr/xr_interface.h"
 #include "servers/xr/xr_positional_tracker.h"
+#include "core/math/basis.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/templates/vector.h"
+#include "servers/xr/xr_pose.h"
+
+class RID;
+class XRPositionalTracker;
+struct BlitToScreen;
+struct Rect2;
 
 /**
 	The mobile interface is a native VR interface that can be used on Android and iOS phones.

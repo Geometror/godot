@@ -6,6 +6,7 @@
  * copyright (c) 2005-2021 Thomas Bernard
  * This software is subjet to the conditions detailed in the
  * provided LICENSE file. */
+#include <stdint.h>
 #ifdef _WIN32
 /* Win32 Specific includes and defines */
 #include <winsock2.h>
@@ -16,7 +17,6 @@
 typedef unsigned long uint32_t;
 #endif /* !defined(_MSC_VER) */
 #else /* _WIN32 */
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>

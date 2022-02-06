@@ -3,8 +3,17 @@
 
 #pragma once
 
-#include "bvh.h"
+#include <stddef.h>
 #include <sstream>
+#include <iomanip>
+#include <string>
+
+#include "bvh.h"
+#include "common/math/bbox.h"
+#include "common/math/lbbox.h"
+#include "common/math/math.h"
+#include "common/math/vec3fa.h"
+#include "common/sys/platform.h"
 
 namespace embree
 {
@@ -25,6 +34,7 @@ namespace embree
     {
       template<typename Node>
         struct NodeStat
+
       {
         NodeStat ( double nodeSAH = 0,
                    size_t numNodes = 0, 

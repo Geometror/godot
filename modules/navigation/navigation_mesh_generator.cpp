@@ -32,8 +32,9 @@
 
 #include "navigation_mesh_generator.h"
 
+#include <string.h>
+
 #include "core/math/convex_hull.h"
-#include "core/os/thread.h"
 #include "scene/3d/collision_shape_3d.h"
 #include "scene/3d/mesh_instance_3d.h"
 #include "scene/3d/multimesh_instance_3d.h"
@@ -46,11 +47,31 @@
 #include "scene/resources/primitive_meshes.h"
 #include "scene/resources/shape_3d.h"
 #include "scene/resources/sphere_shape_3d.h"
-#include "scene/resources/world_boundary_shape_3d.h"
+#include "Recast.h"
+#include "core/config/engine.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/geometry_3d.h"
+#include "core/math/math_defs.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_3d.h"
+#include "core/object/class_db.h"
+#include "core/os/memory.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "scene/3d/node_3d.h"
+#include "scene/main/node.h"
+#include "scene/main/scene_tree.h"
+#include "scene/resources/mesh.h"
+#include "scene/resources/multimesh.h"
+#include "servers/physics_server_3d.h"
 
 #ifdef TOOLS_ENABLED
 #include "editor/editor_node.h"
-#include "editor/editor_settings.h"
 #endif
 
 #include "modules/modules_enabled.gen.h" // For csg, gridmap.

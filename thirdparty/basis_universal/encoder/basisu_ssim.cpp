@@ -14,6 +14,12 @@
 // limitations under the License.
 #include "basisu_ssim.h"
 
+#include <assert.h>
+#include <encoder/basisu_enc.h>
+#include <math.h>
+#include <stdio.h>
+#include <transcoder/basisu.h>
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif

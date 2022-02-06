@@ -34,9 +34,14 @@
 #include "core/config/project_settings.h"
 #include "debug_adapter_protocol.h"
 #include "debug_adapter_types.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+#include "core/variant/dictionary.h"
 
 struct DAPeer;
 class DebugAdapterProtocol;
+class Array;
 
 class DebugAdapterParser : public Object {
 	GDCLASS(DebugAdapterParser, Object);

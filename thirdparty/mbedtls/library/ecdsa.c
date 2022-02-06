@@ -23,23 +23,26 @@
  * SEC1 http://www.secg.org/index.php?action=secg,docs_secg
  */
 
-#include "common.h"
-
+#include "mbedtls/asn1.h"
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
+#include "mbedtls/ecp.h"
+#include "mbedtls/md.h"
 #if defined(MBEDTLS_ECDSA_C)
+
+#include <string.h>
 
 #include "mbedtls/ecdsa.h"
 #include "mbedtls/asn1write.h"
-
-#include <string.h>
 
 #if defined(MBEDTLS_ECDSA_DETERMINISTIC)
 #include "mbedtls/hmac_drbg.h"
 #endif
 
 #if defined(MBEDTLS_PLATFORM_C)
-#include "mbedtls/platform.h"
 #else
 #include <stdlib.h>
+
 #define mbedtls_calloc    calloc
 #define mbedtls_free       free
 #endif

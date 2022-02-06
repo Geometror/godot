@@ -7,12 +7,20 @@
 ******************************************************************************
 */
 
-#include "utypeinfo.h"  // for 'typeid' to work
+#include <stdint.h>
+#include <typeinfo>
 
 #include "unicode/uchriter.h"
 #include "unicode/ustring.h"
 #include "unicode/utf16.h"
 #include "ustr_imp.h"
+#include "unicode/char16ptr.h"
+#include "unicode/chariter.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/urename.h"
+#include "unicode/uversion.h"
 
 U_NAMESPACE_BEGIN
 

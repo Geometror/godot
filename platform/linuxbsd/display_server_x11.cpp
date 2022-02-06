@@ -30,6 +30,32 @@
 
 #include "display_server_x11.h"
 
+#include <X11/extensions/XI2.h>
+#include <X11/extensions/XKB.h>
+#include <X11/extensions/XKBstr.h>
+#include <X11/extensions/shapeconst.h>
+#include <errno.h>
+#include <sys/param.h>
+#include <sys/select.h>
+#include <cmath>
+
+#include "core/error/error_macros.h"
+#include "core/input/input.h"
+#include "core/input/input_event.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/math/color.h"
+#include "core/math/rect2.h"
+#include "core/os/main_loop.h"
+#include "core/os/memory.h"
+#include "core/os/os.h"
+#include "core/string/char_utils.h"
+#include "core/templates/pair.h"
+#include "core/typedefs.h"
+#include "drivers/vulkan/rendering_device_vulkan.h"
+#include "gl_manager_x11.h"
+#include "vulkan_context_x11.h"
+
 #ifdef X11_ENABLED
 
 #include "core/config/project_settings.h"
@@ -52,7 +78,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <X11/Xatom.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/Xinerama.h>
@@ -66,9 +91,6 @@
 #define _NET_WM_STATE_ADD 1L // add/set property
 
 #include <dlfcn.h>
-#include <fcntl.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include <unistd.h>
 
 //stupid linux.h
@@ -3449,12 +3471,6 @@ void DisplayServerX11::process_events() {
 								GrabModeAsync, GrabModeAsync, E.value.x11_window, None, CurrentTime);
 					}
 				}
-#ifdef TOUCH_ENABLED
-				// Grab touch devices to avoid OS gesture interference
-				/*for (int i = 0; i < xi.touch_devices.size(); ++i) {
-					XIGrabDevice(x11_display, xi.touch_devices[i], x11_window, CurrentTime, None, XIGrabModeAsync, XIGrabModeAsync, False, &xi.touch_event_mask);
-				}*/
-#endif
 
 				if (!app_focused) {
 					if (OS::get_singleton()->get_main_loop()) {
@@ -3888,15 +3904,9 @@ void DisplayServerX11::process_events() {
 }
 
 void DisplayServerX11::release_rendering_thread() {
-#if defined(GLES3_ENABLED)
-//	gl_manager->release_current();
-#endif
 }
 
 void DisplayServerX11::make_rendering_thread() {
-#if defined(GLES3_ENABLED)
-//	gl_manager->make_current();
-#endif
 }
 
 void DisplayServerX11::swap_buffers() {

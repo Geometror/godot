@@ -16,13 +16,12 @@
 *   created by: Markus W. Scherer
 */
 
-#include "unicode/utypes.h"
-#include "unicode/uniset.h"
 #include "unicode/utf8.h"
 #include "unicode/utf16.h"
 #include "cmemory.h"
 #include "bmpset.h"
 #include "uassert.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 

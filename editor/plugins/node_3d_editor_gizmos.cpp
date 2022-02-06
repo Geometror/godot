@@ -30,6 +30,8 @@
 
 #include "node_3d_editor_gizmos.h"
 
+#include <initializer_list>
+
 #include "core/math/convex_hull.h"
 #include "core/math/geometry_2d.h"
 #include "core/math/geometry_3d.h"
@@ -71,6 +73,39 @@
 #include "scene/resources/sphere_shape_3d.h"
 #include "scene/resources/surface_tool.h"
 #include "scene/resources/world_boundary_shape_3d.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/math/aabb.h"
+#include "core/math/face3.h"
+#include "core/math/math_funcs.h"
+#include "core/math/plane.h"
+#include "core/math/rect2.h"
+#include "core/math/triangle_mesh.h"
+#include "core/math/vector2i.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/script_language.h"
+#include "core/object/undo_redo.h"
+#include "core/os/memory.h"
+#include "core/string/node_path.h"
+#include "core/templates/map.h"
+#include "core/templates/pair.h"
+#include "core/templates/set.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
+#include "editor/editor_node.h"
+#include "editor/editor_settings.h"
+#include "scene/3d/collision_object_3d.h"
+#include "scene/3d/physics_body_3d.h"
+#include "scene/gui/control.h"
+#include "scene/main/scene_tree.h"
+#include "scene/main/timer.h"
+#include "scene/main/viewport.h"
+#include "scene/resources/navigation_mesh.h"
+#include "scene/resources/shape_3d.h"
+#include "scene/resources/world_3d.h"
+#include "servers/rendering_server.h"
 
 #define HANDLE_HALF_SIZE 9.5
 

@@ -34,8 +34,15 @@
 #include "core/io/image.h"
 #include "core/object/ref_counted.h"
 #include "scene/resources/texture.h"
-
 #include "thirdparty/misc/open-simplex-noise.h"
+#include "core/io/resource.h"
+#include "core/math/vector2.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/typedefs.h"
+
+class Image;
 
 class OpenSimplexNoise : public Resource {
 	GDCLASS(OpenSimplexNoise, Resource);

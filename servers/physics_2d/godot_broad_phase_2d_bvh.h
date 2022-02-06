@@ -31,11 +31,14 @@
 #ifndef GODOT_BROAD_PHASE_2D_BVH_H
 #define GODOT_BROAD_PHASE_2D_BVH_H
 
-#include "godot_broad_phase_2d.h"
+#include <stdint.h>
 
+#include "godot_broad_phase_2d.h"
 #include "core/math/bvh.h"
 #include "core/math/rect2.h"
 #include "core/math/vector2.h"
+
+class GodotCollisionObject2D;
 
 class GodotBroadPhase2DBVH : public GodotBroadPhase2D {
 	BVH_Manager<GodotCollisionObject2D, true, 128, Rect2, Vector2> bvh;

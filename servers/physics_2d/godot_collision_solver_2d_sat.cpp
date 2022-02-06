@@ -31,6 +31,15 @@
 #include "godot_collision_solver_2d_sat.h"
 
 #include "core/math/geometry_2d.h"
+#include "core/error/error_macros.h"
+#include "core/math/math_funcs.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/templates/sort_array.h"
+#include "core/typedefs.h"
+#include "servers/physics_2d/godot_collision_solver_2d.h"
+#include "servers/physics_2d/godot_shape_2d.h"
+#include "servers/physics_server_2d.h"
 
 struct _CollectorCallback2D {
 	GodotCollisionSolver2D::CallbackResult callback;

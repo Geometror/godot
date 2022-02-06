@@ -10,7 +10,8 @@
 * Since: ICU 2.4
 **********************************************************************
 */
-#include "utypeinfo.h"  // for 'typeid' to work 
+#include <stddef.h>
+#include <typeinfo>
 
 #include "unicode/ustring.h"
 #include "unicode/strenum.h"
@@ -20,6 +21,9 @@
 #include "cstring.h"
 #include "cmemory.h"
 #include "uassert.h"
+#include "unicode/umachine.h"
+#include "unicode/unistr.h"
+#include "unicode/urename.h"
 
 U_NAMESPACE_BEGIN
 // StringEnumeration implementation ---------------------------------------- ***

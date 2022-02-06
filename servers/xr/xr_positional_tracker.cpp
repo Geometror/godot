@@ -30,7 +30,11 @@
 
 #include "xr_positional_tracker.h"
 
-#include "core/input/input.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "core/typedefs.h"
+
+struct Transform3D;
 
 void XRPositionalTracker::_bind_methods() {
 	BIND_ENUM_CONSTANT(TRACKER_HAND_UNKNOWN);

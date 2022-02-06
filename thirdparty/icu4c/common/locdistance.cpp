@@ -7,9 +7,6 @@
 #include "unicode/utypes.h"
 #include "unicode/bytestrie.h"
 #include "unicode/localematcher.h"
-#include "unicode/locid.h"
-#include "unicode/uobject.h"
-#include "unicode/ures.h"
 #include "cstring.h"
 #include "locdistance.h"
 #include "loclikelysubtags.h"
@@ -17,6 +14,10 @@
 #include "ucln_cmn.h"
 #include "uinvchar.h"
 #include "umutex.h"
+#include "unicode/platform.h"
+#include "unicode/uconfig.h"
+#include "unicode/urename.h"
+#include "unicode/ustringtrie.h"
 
 U_NAMESPACE_BEGIN
 

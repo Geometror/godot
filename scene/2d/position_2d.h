@@ -32,6 +32,9 @@
 #define POSITION_2D_H
 
 #include "scene/2d/node_2d.h"
+#include "core/math/math_defs.h"
+#include "core/math/rect2.h"
+#include "core/object/object.h"
 
 class Position2D : public Node2D {
 	GDCLASS(Position2D, Node2D);

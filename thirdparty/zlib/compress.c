@@ -7,6 +7,7 @@
 
 #define ZLIB_INTERNAL
 #include "zlib.h"
+#include "zconf.h"
 
 /* ===========================================================================
      Compresses the source buffer into the destination buffer. The level

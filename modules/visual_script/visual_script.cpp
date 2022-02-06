@@ -30,11 +30,19 @@
 
 #include "visual_script.h"
 
+#include <alloca.h>
+#include <string.h>
+
 #include "core/config/project_settings.h"
 #include "core/core_string_names.h"
-#include "core/os/os.h"
-#include "scene/main/node.h"
 #include "visual_script_nodes.h"
+#include "core/error/error_macros.h"
+#include "core/multiplayer/multiplayer.h"
+#include "core/object/callable_method_pointer.h"
+#include "core/object/class_db.h"
+#include "core/object/method_bind.h"
+#include "core/os/memory.h"
+#include "core/templates/pair.h"
 
 // Used by editor, this is not really saved.
 void VisualScriptNode::set_breakpoint(bool p_breakpoint) {

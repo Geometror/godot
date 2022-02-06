@@ -35,6 +35,17 @@
 #include "scene/resources/mesh.h"
 #include "servers/xr/xr_pose.h"
 #include "servers/xr_server.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/variant/binder_common.h"
+#include "core/variant/variant.h"
+
+struct Transform3D;
 
 /**
 	The positional tracker object as an object that represents the position and orientation of a tracked object like a controller or headset.

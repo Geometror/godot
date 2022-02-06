@@ -21,9 +21,14 @@
 #ifndef __UPROPSVEC_H__
 #define __UPROPSVEC_H__
 
+#include <stdint.h>
+
 #include "unicode/utypes.h"
 #include "utrie.h"
 #include "utrie2.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
 
 U_CDECL_BEGIN
 
@@ -50,6 +55,7 @@ U_CDECL_BEGIN
  * but self-contained rows allow to later sort them by contents.
  */
 struct UPropsVectors;
+
 typedef struct UPropsVectors UPropsVectors;
 
 /*

@@ -31,10 +31,20 @@
 #ifndef NOISE_TEXTURE_H
 #define NOISE_TEXTURE_H
 
-#include "open_simplex_noise.h"
+#include <stdint.h>
 
+#include "open_simplex_noise.h"
 #include "core/io/image.h"
 #include "core/object/ref_counted.h"
+#include "core/math/vector2.h"
+#include "core/math/vector2i.h"
+#include "core/object/object.h"
+#include "core/os/thread.h"
+#include "core/templates/rid.h"
+#include "scene/resources/texture.h"
+
+class Image;
+class OpenSimplexNoise;
 
 class NoiseTexture : public Texture2D {
 	GDCLASS(NoiseTexture, Texture2D);

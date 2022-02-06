@@ -35,6 +35,12 @@
 #include "core/object/class_db.h"
 #include "core/object/object.h"
 #include "core/templates/ordered_hash_map.h"
+#include "core/object/ref_counted.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/typedefs.h"
+#include "core/variant/array.h"
 
 class InputMap : public Object {
 	GDCLASS(InputMap, Object);

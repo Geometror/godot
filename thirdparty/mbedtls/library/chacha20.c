@@ -21,22 +21,26 @@
  *  limitations under the License.
  */
 
+#include <stdint.h>
+
 #include "common.h"
+#include "mbedtls/config.h"
 
 #if defined(MBEDTLS_CHACHA20_C)
+
+#include <stddef.h>
+#include <string.h>
 
 #include "mbedtls/chacha20.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <stddef.h>
-#include <string.h>
 
 #if defined(MBEDTLS_SELF_TEST)
 #if defined(MBEDTLS_PLATFORM_C)
 #include "mbedtls/platform.h"
 #else
 #include <stdio.h>
+
 #define mbedtls_printf printf
 #endif /* MBEDTLS_PLATFORM_C */
 #endif /* MBEDTLS_SELF_TEST */

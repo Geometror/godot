@@ -33,6 +33,13 @@
 
 #include "core/io/dtls_server.h"
 #include "ssl_context_mbedtls.h"
+#include "core/crypto/crypto.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+
+class CookieContextMbedTLS;
+class PacketPeerDTLS;
+class PacketPeerUDP;
 
 class DTLSServerMbedTLS : public DTLSServer {
 private:

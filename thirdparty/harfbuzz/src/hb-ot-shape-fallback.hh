@@ -28,8 +28,10 @@
 #define HB_OT_SHAPE_FALLBACK_HH
 
 #include "hb.hh"
-
 #include "hb-ot-shape.hh"
+#include "hb.h"
+
+struct hb_ot_shape_plan_t;
 
 
 HB_INTERNAL void _hb_ot_shape_fallback_mark_position (const hb_ot_shape_plan_t *plan,

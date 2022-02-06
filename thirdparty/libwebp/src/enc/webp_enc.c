@@ -15,11 +15,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdint.h>
 
-#include "src/enc/cost_enc.h"
 #include "src/enc/vp8i_enc.h"
 #include "src/enc/vp8li_enc.h"
 #include "src/utils/utils.h"
+#include "dec/common_dec.h"
+#include "dsp/dsp.h"
+#include "webp/encode.h"
 
 // #define PRINT_MEMORY_INFO
 

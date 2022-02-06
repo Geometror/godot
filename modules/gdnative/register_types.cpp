@@ -31,18 +31,29 @@
 #include "register_types.h"
 
 #include "gdnative/gdnative.h"
-
 #include "gdnative.h"
-
 #include "nativescript/register_types.h"
 #include "pluginscript/register_types.h"
 #include "videodecoder/register_types.h"
-
-#include "core/config/engine.h"
 #include "core/config/project_settings.h"
 #include "core/io/resource_loader.h"
 #include "core/io/resource_saver.h"
-#include "core/os/os.h"
+#include "core/error/error_list.h"
+#include "core/error/error_macros.h"
+#include "core/io/config_file.h"
+#include "core/object/class_db.h"
+#include "core/object/ref_counted.h"
+#include "core/os/memory.h"
+#include "core/string/print_string.h"
+#include "core/string/ustring.h"
+#include "core/templates/list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/array.h"
+#include "core/variant/variant.h"
+#include "editor/project_settings_editor.h"
+#include "gdnative/variant_struct.h"
+#include "scene/gui/tab_container.h"
 
 #ifdef TOOLS_ENABLED
 #include "editor/editor_export.h"

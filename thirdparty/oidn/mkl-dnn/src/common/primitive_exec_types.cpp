@@ -14,9 +14,12 @@
 * limitations under the License.
 *******************************************************************************/
 
-#include "memory.hpp"
-#include "primitive.hpp"
+#include <assert.h>
+
 #include "primitive_exec_types.hpp"
+#include "type_helpers.hpp"
+#include "utils.hpp"
+#include "z_magic.hpp"
 
 namespace mkldnn {
 namespace impl {

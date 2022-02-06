@@ -30,6 +30,16 @@
 
 #include "script_iterator.h"
 
+#include "core/error/error_macros.h"
+#include "core/os/memory.h"
+#include "core/typedefs.h"
+#include "hb-icu.h"
+#include "unicode/uchar.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/uscript.h"
+#include "unicode/utypes.h"
+
 // This implementation is derived from ICU: icu4c/source/extra/scrptrun/scrptrun.cpp
 
 bool ScriptIterator::same_script(int32_t p_script_one, int32_t p_script_two) {

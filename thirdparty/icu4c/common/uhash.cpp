@@ -13,6 +13,9 @@
 */
 
 #include "uhash.h"
+
+#include <stddef.h>
+
 #include "unicode/ustring.h"
 #include "cstring.h"
 #include "cmemory.h"

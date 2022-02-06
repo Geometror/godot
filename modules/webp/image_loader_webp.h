@@ -32,6 +32,13 @@
 #define IMAGE_LOADER_WEBP_H
 
 #include "core/io/image_loader.h"
+#include "core/error/error_list.h"
+#include "core/object/ref_counted.h"
+#include "core/templates/list.h"
+
+class FileAccess;
+class Image;
+class String;
 
 class ImageLoaderWEBP : public ImageFormatLoader {
 public:

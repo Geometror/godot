@@ -13,6 +13,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #include "src/enc/vp8i_enc.h"
 #include "src/dsp/dsp.h"
@@ -20,6 +21,9 @@
 #include "src/utils/quant_levels_utils.h"
 #include "src/utils/utils.h"
 #include "src/webp/format_constants.h"
+#include "utils/bit_writer_utils.h"
+#include "utils/thread_utils.h"
+#include "webp/encode.h"
 
 // -----------------------------------------------------------------------------
 // Encodes the given alpha data via specified compression method 'method'.

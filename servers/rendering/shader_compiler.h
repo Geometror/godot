@@ -31,9 +31,18 @@
 #ifndef SHADER_COMPILER_H
 #define SHADER_COMPILER_H
 
+#include <stdint.h>
+
 #include "core/templates/pair.h"
 #include "servers/rendering/shader_language.h"
 #include "servers/rendering_server.h"
+#include "core/error/error_list.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/map.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
 
 class ShaderCompiler {
 public:

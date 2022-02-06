@@ -13,6 +13,7 @@
 // Author: Skal (pascal.massimino@gmail.com)
 
 #include <assert.h>
+#include <stdlib.h>
 
 #include "src/utils/quant_levels_utils.h"
 

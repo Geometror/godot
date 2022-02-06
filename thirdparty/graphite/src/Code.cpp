@@ -33,6 +33,8 @@ of the License or (at your option) any later version.
 #include <cstddef>
 #include <cstdlib>
 #include <cstring>
+#include <new>
+
 #include "graphite2/Segment.h"
 #include "inc/Code.h"
 #include "inc/Face.h"
@@ -41,8 +43,8 @@ of the License or (at your option) any later version.
 #include "inc/Machine.h"
 #include "inc/Rule.h"
 #include "inc/Silf.h"
-
-#include <cstdio>
+#include "inc/Main.h"
+#include "inc/Slot.h"
 
 #ifdef NDEBUG
 #ifdef __GNUC__
@@ -81,6 +83,7 @@ class Machine::Code::decoder
 {
 public:
     struct limits;
+
     static const int NUMCONTEXTS = 256;
 
     decoder(limits & lims, Code &code, enum passtype pt) throw();

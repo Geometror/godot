@@ -16,10 +16,14 @@
  */
 
 
-#include <freetype/internal/ftdebug.h>
 #include <freetype/ftwinfnt.h>
-#include <freetype/internal/ftobjs.h>
-#include <freetype/internal/services/svwinfnt.h>
+#include <freetype/fterrors.h>
+
+#include "freetype/freetype.h"
+#include "freetype/fttypes.h"
+#include "freetype/internal/ftdebug.h"
+#include "freetype/internal/ftobjs.h"
+#include "freetype/internal/services/svwinfnt.h"
 
 
   /* documentation is in ftwinfnt.h */

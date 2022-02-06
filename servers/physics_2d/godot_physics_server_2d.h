@@ -31,13 +31,34 @@
 #ifndef GODOT_PHYSICS_SERVER_2D_H
 #define GODOT_PHYSICS_SERVER_2D_H
 
+#include <stdint.h>
+
 #include "godot_joints_2d.h"
 #include "godot_shape_2d.h"
 #include "godot_space_2d.h"
 #include "godot_step_2d.h"
-
 #include "core/templates/rid_owner.h"
 #include "servers/physics_server_2d.h"
+#include "core/math/math_defs.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/object/object.h"
+#include "core/object/object_id.h"
+#include "core/templates/list.h"
+#include "core/templates/rid.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "core/templates/vector.h"
+#include "core/variant/callable.h"
+#include "core/variant/variant.h"
+
+class GodotArea2D;
+class GodotBody2D;
+class GodotCollisionObject2D;
+class GodotJoint2D;
+class GodotShape2D;
+class GodotSpace2D;
+class GodotStep2D;
 
 class GodotPhysicsServer2D : public PhysicsServer2D {
 	GDCLASS(GodotPhysicsServer2D, PhysicsServer2D);

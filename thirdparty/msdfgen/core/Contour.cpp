@@ -1,7 +1,12 @@
 
 #include "Contour.h"
 
+#include <math.h>
+
 #include "arithmetics.hpp"
+#include "core/EdgeHolder.h"
+#include "core/Vector2.h"
+#include "core/edge-segments.h"
 
 namespace msdfgen {
 

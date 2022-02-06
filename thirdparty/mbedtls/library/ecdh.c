@@ -24,15 +24,16 @@
  * RFC 4492
  */
 
-#include "common.h"
-
+#include "mbedtls/bignum.h"
+#include "mbedtls/config.h"
+#include "mbedtls/ecp.h"
 #if defined(MBEDTLS_ECDH_C)
+
+#include <string.h>
 
 #include "mbedtls/ecdh.h"
 #include "mbedtls/platform_util.h"
 #include "mbedtls/error.h"
-
-#include <string.h>
 
 /* Parameter validation macros based on platform_util.h */
 #define ECDH_VALIDATE_RET( cond )    \

@@ -79,9 +79,22 @@ NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef PPCONTEXT_H
 #define PPCONTEXT_H
 
+#include <assert.h>
+#include <glslang/Include/Common.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/MachineIndependent/Scan.h>
+#include <glslang/Public/ShaderLang.h>
+#include <stdio.h>
+#include <string.h>
 #include <stack>
 #include <unordered_map>
 #include <sstream>
+#include <functional>
+#include <map>
+#include <memory>
+#include <string>
+#include <type_traits>
+#include <vector>
 
 #include "../ParseHelper.h"
 #include "PpTokens.h"

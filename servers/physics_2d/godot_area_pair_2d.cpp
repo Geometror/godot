@@ -29,7 +29,14 @@
 /*************************************************************************/
 
 #include "godot_area_pair_2d.h"
+
 #include "godot_collision_solver_2d.h"
+#include "core/math/transform_2d.h"
+#include "core/math/vector2.h"
+#include "core/variant/variant.h"
+#include "servers/physics_2d/godot_area_2d.h"
+#include "servers/physics_2d/godot_body_2d.h"
+#include "servers/physics_server_2d.h"
 
 bool GodotAreaPair2D::setup(real_t p_step) {
 	bool result = false;

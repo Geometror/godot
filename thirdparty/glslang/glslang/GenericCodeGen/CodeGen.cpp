@@ -32,9 +32,13 @@
 // POSSIBILITY OF SUCH DAMAGE.
 //
 
-#include "../Include/Common.h"
+#include <glslang/Include/InfoSink.h>
+#include <glslang/Public/ShaderLang.h>
+
 #include "../Include/ShHandle.h"
 #include "../MachineIndependent/Versions.h"
+
+class TIntermNode;
 
 //
 // Here is where real machine specific high-level data would be defined.

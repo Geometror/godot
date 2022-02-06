@@ -30,6 +30,9 @@
 
 #include "websocket_peer.h"
 
+#include "core/object/class_db.h"
+#include "modules/websocket/websocket_macros.h"
+
 GDCINULL(WebSocketPeer);
 
 WebSocketPeer::WebSocketPeer() {

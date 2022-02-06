@@ -3,6 +3,8 @@
 
 #include "stat.h"
 
+#include <ostream>
+
 namespace embree
 {
   Stat Stat::instance; 

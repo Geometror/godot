@@ -34,8 +34,14 @@
 #include "godot_body_3d.h"
 #include "godot_constraint_3d.h"
 #include "godot_soft_body_3d.h"
-
 #include "core/templates/local_vector.h"
+#include "core/math/math_defs.h"
+#include "core/math/vector3.h"
+
+class GodotBody3D;
+class GodotSoftBody3D;
+class GodotSpace3D;
+struct Transform3D;
 
 class GodotBodyContact3D : public GodotConstraint3D {
 protected:

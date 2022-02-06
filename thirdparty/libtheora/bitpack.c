@@ -15,7 +15,7 @@
 
  ********************************************************************/
 #include <string.h>
-#include <stdlib.h>
+
 #include "bitpack.h"
 
 /*We're 'MSb' endian; if we write a word but read individual bits,

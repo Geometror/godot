@@ -14,8 +14,20 @@
 // limitations under the License.
 
 #include "basisu_transcoder.h"
+
 #include <limits.h>
-#include "basisu_containers_impl.h"
+#include <assert.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <transcoder/basisu_file_headers.h>
+#include <transcoder/basisu_global_selector_palette.h>
+#include <transcoder/basisu_transcoder_internal.h>
+#include <transcoder/basisu_transcoder_uastc.h>
+#include <algorithm>
+#include <cmath>
+#include <cstdint>
+#include <utility>
 
 #ifndef BASISD_IS_BIG_ENDIAN
 // TODO: This doesn't work on OSX. How can this be so difficult?
@@ -226,7 +238,6 @@ namespace basist
 	}
 
 	const uint32_t g_global_selector_cb[] =
-#include "basisu_global_selector_cb.h"
 		;
 
 	const uint32_t g_global_selector_cb_size = sizeof(g_global_selector_cb) / sizeof(g_global_selector_cb[0]);
@@ -1040,11 +1051,9 @@ namespace basist
 	static uint8_t g_etc1_to_dxt1_selector_mappings_raw_dxt1_inv_256[NUM_ETC1_TO_DXT1_SELECTOR_MAPPINGS][256];
 
 	static const etc1_to_dxt1_56_solution g_etc1_to_dxt_6[32 * 8 * NUM_ETC1_TO_DXT1_SELECTOR_MAPPINGS * NUM_ETC1_TO_DXT1_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_dxt1_6.inc"
 	};
 
 	static const etc1_to_dxt1_56_solution g_etc1_to_dxt_5[32 * 8 * NUM_ETC1_TO_DXT1_SELECTOR_MAPPINGS * NUM_ETC1_TO_DXT1_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_dxt1_5.inc"
 	};
 #endif // BASISD_SUPPORT_DXT1
 
@@ -3801,7 +3810,6 @@ namespace basist
 	};
 		
 	static const etc1_to_bc7_m5_solution g_etc1_to_bc7_m5_color[32 * 8 * NUM_ETC1_TO_BC7_M5_SELECTOR_MAPPINGS * NUM_ETC1_TO_BC7_M5_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_bc7_m5_color.inc"
 	};
 	
 	static dxt_selector_range g_etc1_to_bc7_m5a_selector_ranges[] =
@@ -3826,7 +3834,6 @@ namespace basist
 
 	static etc1_g_to_bc7_m5a_conversion g_etc1_g_to_bc7_m5a[8 * 32 * NUM_ETC1_TO_BC7_M5A_SELECTOR_RANGES] =
 	{
-		#include "basisu_transcoder_tables_bc7_m5_alpha.inc"
 	};
 	
 	static inline uint32_t set_block_bits(uint8_t* pBytes, uint32_t val, uint32_t num_bits, uint32_t cur_ofs)
@@ -4865,7 +4872,6 @@ namespace basist
 	};
 
 	static const etc1_to_astc_solution g_etc1_to_astc[32 * 8 * NUM_ETC1_TO_ASTC_SELECTOR_MAPPINGS * NUM_ETC1_TO_ASTC_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_astc.inc"
 	};
 
 	// The best selector mapping to use given a base base+inten table and used selector range for converting grayscale data.
@@ -4873,7 +4879,6 @@ namespace basist
 	
 #if BASISD_SUPPORT_ASTC_HIGHER_OPAQUE_QUALITY
 	static const etc1_to_astc_solution g_etc1_to_astc_0_255[32 * 8 * NUM_ETC1_TO_ASTC_SELECTOR_MAPPINGS * NUM_ETC1_TO_ASTC_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_astc_0_255.inc"
 	};
 	static uint8_t g_etc1_to_astc_best_grayscale_mapping_0_255[32][8][NUM_ETC1_TO_ASTC_SELECTOR_RANGES];
 #endif
@@ -6009,7 +6014,6 @@ namespace basist
 
 #if BASISD_SUPPORT_PVRTC2
 	static const etc1s_to_atc_solution g_etc1s_to_pvrtc2_45[32 * 8 * NUM_ETC1S_TO_ATC_SELECTOR_MAPPINGS * NUM_ETC1S_TO_ATC_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_pvrtc2_45.inc"
 	};
 
 #if 0
@@ -6021,11 +6025,9 @@ namespace basist
 #endif
 
 	static const etc1s_to_atc_solution g_etc1s_to_atc_55[32 * 8 * NUM_ETC1S_TO_ATC_SELECTOR_MAPPINGS * NUM_ETC1S_TO_ATC_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_atc_55.inc"
 	};
 
 	static const etc1s_to_atc_solution g_etc1s_to_atc_56[32 * 8 * NUM_ETC1S_TO_ATC_SELECTOR_MAPPINGS * NUM_ETC1S_TO_ATC_SELECTOR_RANGES] = {
-#include "basisu_transcoder_tables_atc_56.inc"
 	};
 
 	struct atc_match_entry

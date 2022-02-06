@@ -23,6 +23,8 @@
 *   including those for normalization and case mappings.
 */
 
+#include <stddef.h>
+
 #include "unicode/utypes.h"
 #include "unicode/uchar.h"
 #include "unicode/ucptrie.h"
@@ -31,9 +33,7 @@
 #include "unicode/uscript.h"
 #include "unicode/ustring.h"
 #include "unicode/utf16.h"
-#include "cstring.h"
 #include "emojiprops.h"
-#include "mutex.h"
 #include "normalizer2impl.h"
 #include "umutex.h"
 #include "ubidi_props.h"
@@ -42,6 +42,13 @@
 #include "ucln_cmn.h"
 #include "ulayout_props.h"
 #include "ustr_imp.h"
+#include "cmemory.h"
+#include "unicode/normalizer2.h"
+#include "unicode/stringoptions.h"
+#include "unicode/uconfig.h"
+#include "unicode/ucpmap.h"
+#include "unicode/unistr.h"
+#include "unicode/unorm.h"
 
 U_NAMESPACE_USE
 

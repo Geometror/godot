@@ -31,6 +31,15 @@
 #include "godot_step_2d.h"
 
 #include "core/os/os.h"
+#include "core/templates/list.h"
+#include "core/templates/pair.h"
+#include "core/templates/self_list.h"
+#include "core/templates/set.h"
+#include "servers/physics_2d/godot_area_2d.h"
+#include "servers/physics_2d/godot_body_2d.h"
+#include "servers/physics_2d/godot_constraint_2d.h"
+#include "servers/physics_2d/godot_space_2d.h"
+#include "servers/physics_server_2d.h"
 
 #define BODY_ISLAND_COUNT_RESERVE 128
 #define BODY_ISLAND_SIZE_RESERVE 512

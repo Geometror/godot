@@ -31,6 +31,8 @@
 #ifndef RENDERING_SERVER_SCENE_GI_RD_H
 #define RENDERING_SERVER_SCENE_GI_RD_H
 
+#include <stdint.h>
+
 #include "core/templates/local_vector.h"
 #include "core/templates/rid_owner.h"
 #include "servers/rendering/renderer_compositor.h"
@@ -47,10 +49,24 @@
 #include "servers/rendering/renderer_rd/shaders/voxel_gi_debug.glsl.gen.h"
 #include "servers/rendering/renderer_scene_render.h"
 #include "servers/rendering/rendering_device.h"
+#include "core/error/error_macros.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector3.h"
+#include "core/math/vector3i.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/typedefs.h"
+#include "servers/rendering/renderer_rd/pipeline_cache_rd.h"
+#include "servers/rendering_server.h"
 
 // Forward declare RenderDataRD and RendererSceneRenderRD so we can pass it into some of our methods, these classes are pretty tightly bound
 struct RenderDataRD;
 class RendererSceneRenderRD;
+class RendererSceneEnvironmentRD;
+class RendererStorageRD;
+struct AABB;
+template <class T> class PagedArray;
 
 class RendererSceneGIRD {
 private:

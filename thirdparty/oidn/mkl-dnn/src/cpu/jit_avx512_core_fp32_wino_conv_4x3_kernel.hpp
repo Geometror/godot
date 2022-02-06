@@ -18,11 +18,11 @@
 #define JIT_AVX512_CORE_FP32_WINO_CONV_4x3_KERNEL_HPP
 
 #include "c_types_map.hpp"
-
 #include "jit_generator.hpp"
 #include "jit_primitive_conf.hpp"
-
 #include "jit_avx512_common_conv_winograd_kernel_f32.hpp"
+#include "cpu_isa_traits.hpp"
+#include "memory_desc_wrapper.hpp"
 
 namespace mkldnn {
 namespace impl {

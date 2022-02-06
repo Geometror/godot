@@ -12,11 +12,16 @@
 // Author: Skal (pascal.massimino@gmail.com)
 
 #include <assert.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #include "src/utils/utils.h"
 #include "src/webp/format_constants.h"  // RIFF constants
 #include "src/webp/mux_types.h"         // ALPHA_FLAG
 #include "src/enc/vp8i_enc.h"
+#include "dec/common_dec.h"
+#include "utils/bit_writer_utils.h"
+#include "webp/encode.h"
 
 //------------------------------------------------------------------------------
 // Helper functions

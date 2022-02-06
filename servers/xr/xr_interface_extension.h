@@ -31,7 +31,24 @@
 #ifndef XR_INTERFACE_EXTENSION_H
 #define XR_INTERFACE_EXTENSION_H
 
+#include <stdint.h>
+
 #include "servers/xr/xr_interface.h"
+#include "core/math/camera_matrix.h"
+#include "core/math/transform_3d.h"
+#include "core/math/vector2.h"
+#include "core/object/gdvirtual.gen.inc"
+#include "core/object/object.h"
+#include "core/os/thread_safe.h"
+#include "core/string/string_name.h"
+#include "core/string/ustring.h"
+#include "core/templates/rid.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
+#include "servers/rendering/renderer_compositor.h"
+
+struct Rect2;
+struct Rect2i;
 
 class XRInterfaceExtension : public XRInterface {
 	GDCLASS(XRInterfaceExtension, XRInterface);

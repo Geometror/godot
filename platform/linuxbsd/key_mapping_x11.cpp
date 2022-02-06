@@ -30,6 +30,9 @@
 
 #include "key_mapping_x11.h"
 
+#include <X11/XF86keysym.h>
+#include <X11/keysymdef.h>
+
 /***** SCAN CODE CONVERSION ******/
 
 struct _XTranslatePair {

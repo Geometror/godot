@@ -3,12 +3,18 @@
 
 #pragma once
 
-#include "stream.h"
 #include <string>
 #include <vector>
+#include <ostream>
+
+#include "stream.h"
+#include "common/sys/platform.h"
+#include "common/sys/ref.h"
 
 namespace embree
 {
+union Token::;
+
   /*! token class */
   class Token
   {

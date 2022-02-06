@@ -38,11 +38,20 @@
 //
 
 #include "ParseHelper.h"
-#include "Scan.h"
 
-#include "../OSDependent/osinclude.h"
+#include <assert.h>
+#include <ctype.h>
+#include <glslang/Include/ConstantUnion.h>
+#include <glslang/Include/PoolAlloc.h>
+#include <glslang/Include/arrays.h>
+#include <glslang/MachineIndependent/SymbolTable.h>
+#include <glslang/MachineIndependent/localintermediate.h>
+#include <string.h>
 #include <algorithm>
+#include <memory>
+#include <vector>
 
+#include "Scan.h"
 #include "preprocessor/PpContext.h"
 
 extern int yyparse(glslang::TParseContext*);

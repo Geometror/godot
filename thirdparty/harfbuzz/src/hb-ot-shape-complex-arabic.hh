@@ -30,11 +30,11 @@
 #define HB_OT_SHAPE_COMPLEX_ARABIC_HH
 
 #include "hb.hh"
-
 #include "hb-ot-shape-complex.hh"
-
+#include "hb.h"
 
 struct arabic_shape_plan_t;
+struct hb_ot_shape_plan_t;
 
 HB_INTERNAL void *
 data_create_arabic (const hb_ot_shape_plan_t *plan);

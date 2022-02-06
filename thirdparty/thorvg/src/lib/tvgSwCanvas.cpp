@@ -19,7 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <stdint.h>
+#include <memory>
+
 #include "tvgCanvasImpl.h"
+#include "config.h"
+#include "thorvg.h"
+#include "tvgArray.h"
 
 #ifdef THORVG_SW_RASTER_SUPPORT
     #include "tvgSwRenderer.h"

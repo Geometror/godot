@@ -19,12 +19,15 @@
 
 #include "c_types_map.hpp"
 #include "utils.hpp"
-
 #include "cpu_convolution_pd.hpp"
 #include "cpu_primitive.hpp"
-
 #include "jit_primitive_conf.hpp"
 #include "jit_sse42_conv_kernel_f32.hpp"
+#include "convolution_pd.hpp"
+#include "cpu_isa_traits.hpp"
+#include "mkldnn_traits.hpp"
+#include "primitive_desc.hpp"
+#include "primitive_exec_types.hpp"
 
 namespace mkldnn {
 namespace impl {

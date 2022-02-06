@@ -30,7 +30,15 @@
 
 #include "image_loader_bmp.h"
 
+#include <stddef.h>
+
 #include "core/io/file_access_memory.h"
+#include "core/error/error_macros.h"
+#include "core/io/file_access.h"
+#include "core/io/image.h"
+#include "core/string/ustring.h"
+#include "core/templates/vector.h"
+#include "core/variant/variant.h"
 
 Error ImageLoaderBMP::convert_to_image(Ref<Image> p_image,
 		const uint8_t *p_buffer,

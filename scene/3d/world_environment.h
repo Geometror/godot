@@ -34,6 +34,11 @@
 #include "scene/main/node.h"
 #include "scene/resources/camera_effects.h"
 #include "scene/resources/environment.h"
+#include "core/object/object.h"
+#include "core/object/ref_counted.h"
+#include "core/variant/typed_array.h"
+
+class String;
 
 class WorldEnvironment : public Node {
 	GDCLASS(WorldEnvironment, Node);

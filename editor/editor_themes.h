@@ -33,6 +33,9 @@
 
 #include "scene/resources/texture.h"
 #include "scene/resources/theme.h"
+#include "core/object/ref_counted.h"
+
+class ImageTexture;
 
 Ref<Theme> create_editor_theme(Ref<Theme> p_theme = nullptr);
 

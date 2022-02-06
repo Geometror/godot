@@ -21,8 +21,14 @@
 #ifndef __UDATAMEM_H__
 #define __UDATAMEM_H__
 
+#include <stdint.h>
+
 #include "unicode/udata.h"
 #include "ucmndata.h"
+#include "unicode/platform.h"
+#include "unicode/umachine.h"
+#include "unicode/urename.h"
+#include "unicode/utypes.h"
 
 struct UDataMemory {
     const commonDataFuncs  *vFuncs;      /* Function Pointers for accessing TOC             */

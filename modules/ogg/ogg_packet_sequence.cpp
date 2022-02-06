@@ -29,7 +29,11 @@
 /*************************************************************************/
 
 #include "ogg_packet_sequence.h"
+
 #include "core/variant/typed_array.h"
+#include "core/error/error_macros.h"
+#include "core/object/class_db.h"
+#include "ogg/ogg.h"
 
 void OGGPacketSequence::push_page(int64_t p_granule_pos, const Vector<PackedByteArray> &p_data) {
 	Vector<PackedByteArray> data_stored;

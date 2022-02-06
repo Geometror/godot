@@ -31,9 +31,15 @@
 #ifndef WEBSOCKETPEER_H
 #define WEBSOCKETPEER_H
 
+#include <stdint.h>
+
 #include "core/error/error_list.h"
 #include "core/io/packet_peer.h"
 #include "websocket_macros.h"
+#include "core/io/ip_address.h"
+#include "core/object/object.h"
+#include "core/string/ustring.h"
+#include "core/variant/binder_common.h"
 
 class WebSocketPeer : public PacketPeer {
 	GDCLASS(WebSocketPeer, PacketPeer);

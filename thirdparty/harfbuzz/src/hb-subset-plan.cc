@@ -24,10 +24,12 @@
  * Google Author(s): Garret Rieger, Roderick Sheeter
  */
 
+#include <new>
+#include <utility>
+
 #include "hb-subset-plan.hh"
 #include "hb-map.hh"
 #include "hb-set.hh"
-
 #include "hb-ot-cmap-table.hh"
 #include "hb-ot-glyf-table.hh"
 #include "hb-ot-layout-gdef-table.hh"
@@ -35,10 +37,17 @@
 #include "hb-ot-layout-gsub-table.hh"
 #include "hb-ot-cff1-table.hh"
 #include "hb-ot-color-colr-table.hh"
-#include "hb-ot-color-colrv1-closure.hh"
 #include "hb-ot-var-fvar-table.hh"
 #include "hb-ot-stat-table.hh"
 #include "hb-ot-math-table.hh"
+#include "hb-bit-set-invertible.hh"
+#include "hb-blob.hh"
+#include "hb-machinery.hh"
+#include "hb-ot-face.hh"
+#include "hb-ot-layout-common.hh"
+#include "hb-ot.h"
+#include "hb-sanitize.hh"
+#include "hb-subset-input.hh"
 
 
 typedef hb_hashmap_t<unsigned, hb_set_t *> script_langsys_map;

@@ -14,7 +14,9 @@
 *   created by: George Rhoten
 */
 
-#include "unicode/utypes.h"
+#include <stddef.h>
+#include <stdint.h>
+
 #include "unicode/uclean.h"
 #include "cmemory.h"
 #include "mutex.h"
@@ -23,10 +25,10 @@
 #include "ucln_cmn.h"
 #include "utracimp.h"
 #include "umutex.h"
+#include "unicode/uconfig.h"
 
 /**  Auto-client for UCLN_COMMON **/
 #define UCLN_TYPE_IS_COMMON
-#include "ucln_imp.h"
 
 static cleanupFunc *gCommonCleanupFunctions[UCLN_COMMON_COUNT];
 static cleanupFunc *gLibCleanupFunctions[UCLN_COMMON];

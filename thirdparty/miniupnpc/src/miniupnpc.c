@@ -9,13 +9,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <asm/param.h>
 #ifdef _WIN32
 /* Win32 Specific includes and defines */
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <io.h>
 #include <iphlpapi.h>
+
 #include "win32_snprintf.h"
+
 #define strdup _strdup
 #ifndef strncasecmp
 #if defined(_MSC_VER) && (_MSC_VER >= 1400)
@@ -32,20 +35,9 @@
 /* Amiga OS 3 specific stuff */
 #define socklen_t int
 #else
-#include <sys/select.h>
 #endif
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <sys/param.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
 #include <net/if.h>
-#if !defined(__amigaos__) && !defined(__amigaos4__)
-#include <poll.h>
-#endif
-#include <strings.h>
-#include <errno.h>
+
 #define closesocket close
 #endif /* #else _WIN32 */
 #ifdef __GNU__
@@ -62,6 +54,9 @@
 #include "upnpcommands.h"
 #include "connecthostport.h"
 #include "addr_is_reserved.h"
+#include "igd_desc_parse.h"
+#include "thirdparty/miniupnpc/src/miniupnpc_socketdef.h"
+#include "upnpdev.h"
 
 /* compare the beginning of a string with a constant string */
 #define COMPARE(str, cstr) (0==strncmp(str, cstr, sizeof(cstr) - 1))
