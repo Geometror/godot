@@ -72,6 +72,9 @@ public:
 	void set_collapsed(bool p_collapsed);
 	bool is_collapsed() const;
 
+	virtual void set_orientation(Orientation p_orientation);
+	virtual Orientation get_orientation();
+
 	void set_dragger_visibility(DraggerVisibility p_visibility);
 	DraggerVisibility get_dragger_visibility() const;
 
@@ -90,17 +93,25 @@ VARIANT_ENUM_CAST(SplitContainer::DraggerVisibility);
 class HSplitContainer : public SplitContainer {
 	GDCLASS(HSplitContainer, SplitContainer);
 
+protected:
+	virtual void _validate_property(PropertyInfo &property) const override;
+
 public:
 	HSplitContainer() :
 			SplitContainer(false) {}
+	virtual void set_orientation(Orientation p_orientation) override;
 };
 
 class VSplitContainer : public SplitContainer {
 	GDCLASS(VSplitContainer, SplitContainer);
 
+protected:
+	virtual void _validate_property(PropertyInfo &property) const override;
+
 public:
 	VSplitContainer() :
 			SplitContainer(true) {}
+	virtual void set_orientation(Orientation p_orientation) override;
 };
 
 #endif // SPLIT_CONTAINER_H

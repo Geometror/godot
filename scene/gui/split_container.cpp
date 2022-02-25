@@ -76,8 +76,8 @@ void SplitContainer::_resort() {
 	bool second_expanded = (vertical ? second->get_v_size_flags() : second->get_h_size_flags()) & SIZE_EXPAND;
 
 	// Determine the separation between items
-	Ref<Texture2D> g = get_theme_icon(SNAME("grabber"));
-	int sep = get_theme_constant(SNAME("separation"));
+	Ref<Texture2D> g = get_theme_icon(SNAME("grabber"), (vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer")));
+	int sep = get_theme_constant(SNAME("separation"), (vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer")));
 	sep = (dragger_visibility != DRAGGER_HIDDEN_COLLAPSED) ? MAX(sep, vertical ? g->get_height() : g->get_width()) : 0;
 
 	// Compute the minimum size
@@ -131,8 +131,8 @@ Size2 SplitContainer::get_minimum_size() const {
 	/* Calculate MINIMUM SIZE */
 
 	Size2i minimum;
-	Ref<Texture2D> g = get_theme_icon(SNAME("grabber"));
-	int sep = get_theme_constant(SNAME("separation"));
+	Ref<Texture2D> g = get_theme_icon(SNAME("grabber"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer"));
+	int sep = get_theme_constant(SNAME("separation"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer"));
 	sep = (dragger_visibility != DRAGGER_HIDDEN_COLLAPSED) ? MAX(sep, vertical ? g->get_height() : g->get_width()) : 0;
 
 	for (int i = 0; i < 2; i++) {
@@ -175,7 +175,7 @@ void SplitContainer::_notification(int p_what) {
 
 		case NOTIFICATION_MOUSE_EXIT: {
 			mouse_inside = false;
-			if (get_theme_constant(SNAME("autohide"))) {
+			if (get_theme_constant(SNAME("autohide"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer"))) {
 				update();
 			}
 		} break;
@@ -185,7 +185,7 @@ void SplitContainer::_notification(int p_what) {
 				return;
 			}
 
-			if (collapsed || (!dragging && !mouse_inside && get_theme_constant(SNAME("autohide")))) {
+			if (collapsed || (!dragging && !mouse_inside && get_theme_constant(SNAME("autohide"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer")))) {
 				return;
 			}
 
@@ -193,8 +193,9 @@ void SplitContainer::_notification(int p_what) {
 				return;
 			}
 
-			int sep = dragger_visibility != DRAGGER_HIDDEN_COLLAPSED ? get_theme_constant(SNAME("separation")) : 0;
-			Ref<Texture2D> tex = get_theme_icon(SNAME("grabber"));
+			int sep = dragger_visibility != DRAGGER_HIDDEN_COLLAPSED ? get_theme_constant(SNAME("separation"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer")) : 0;
+			Ref<Texture2D> tex = get_theme_icon(SNAME("grabber"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer"));
+
 			Size2 size = get_size();
 
 			if (vertical) {
@@ -217,13 +218,13 @@ void SplitContainer::gui_input(const Ref<InputEvent> &p_event) {
 		return;
 	}
 
+	int sep = get_theme_constant(SNAME("separation"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer"));
+
 	Ref<InputEventMouseButton> mb = p_event;
 
 	if (mb.is_valid()) {
 		if (mb->get_button_index() == MouseButton::LEFT) {
 			if (mb->is_pressed()) {
-				int sep = get_theme_constant(SNAME("separation"));
-
 				if (vertical) {
 					if (mb->get_position().y > middle_sep && mb->get_position().y < middle_sep + sep) {
 						dragging = true;
@@ -248,14 +249,14 @@ void SplitContainer::gui_input(const Ref<InputEvent> &p_event) {
 	if (mm.is_valid()) {
 		bool mouse_inside_state = false;
 		if (vertical) {
-			mouse_inside_state = mm->get_position().y > middle_sep && mm->get_position().y < middle_sep + get_theme_constant(SNAME("separation"));
+			mouse_inside_state = mm->get_position().y > middle_sep && mm->get_position().y < middle_sep + sep;
 		} else {
-			mouse_inside_state = mm->get_position().x > middle_sep && mm->get_position().x < middle_sep + get_theme_constant(SNAME("separation"));
+			mouse_inside_state = mm->get_position().x > middle_sep && mm->get_position().x < middle_sep + sep;
 		}
 
 		if (mouse_inside != mouse_inside_state) {
 			mouse_inside = mouse_inside_state;
-			if (get_theme_constant(SNAME("autohide"))) {
+			if (get_theme_constant(SNAME("autohide"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer"))) {
 				update();
 			}
 		}
@@ -281,7 +282,7 @@ Control::CursorShape SplitContainer::get_cursor_shape(const Point2 &p_pos) const
 	}
 
 	if (!collapsed && _getch(0) && _getch(1) && dragger_visibility == DRAGGER_VISIBLE) {
-		int sep = get_theme_constant(SNAME("separation"));
+		int sep = get_theme_constant(SNAME("separation"), vertical ? SNAME("VSplitContainer") : SNAME("HSplitContainer"));
 
 		if (vertical) {
 			if (p_pos.y > middle_sep && p_pos.y < middle_sep + sep) {
@@ -340,6 +341,15 @@ bool SplitContainer::is_collapsed() const {
 	return collapsed;
 }
 
+void SplitContainer::set_orientation(Orientation p_orientation) {
+	vertical = (p_orientation == VERTICAL);
+	queue_sort();
+}
+
+Orientation SplitContainer::get_orientation() {
+	return vertical ? Orientation::VERTICAL : Orientation::HORIZONTAL;
+}
+
 Vector<int> SplitContainer::get_allowed_size_flags_horizontal() const {
 	Vector<int> flags;
 	flags.append(SIZE_FILL);
@@ -372,6 +382,9 @@ void SplitContainer::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_collapsed", "collapsed"), &SplitContainer::set_collapsed);
 	ClassDB::bind_method(D_METHOD("is_collapsed"), &SplitContainer::is_collapsed);
 
+	ClassDB::bind_method(D_METHOD("set_orientation", "orientation"), &SplitContainer::set_orientation);
+	ClassDB::bind_method(D_METHOD("get_orientation"), &SplitContainer::get_orientation);
+
 	ClassDB::bind_method(D_METHOD("set_dragger_visibility", "mode"), &SplitContainer::set_dragger_visibility);
 	ClassDB::bind_method(D_METHOD("get_dragger_visibility"), &SplitContainer::get_dragger_visibility);
 
@@ -379,6 +392,7 @@ void SplitContainer::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "split_offset", PROPERTY_HINT_NONE, "suffix:px"), "set_split_offset", "get_split_offset");
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "collapsed"), "set_collapsed", "is_collapsed");
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "orientation", PROPERTY_HINT_ENUM, "Horizontal,Vertical"), "set_orientation", "get_orientation");
 	ADD_PROPERTY(PropertyInfo(Variant::INT, "dragger_visibility", PROPERTY_HINT_ENUM, "Visible,Hidden,Hidden and Collapsed"), "set_dragger_visibility", "get_dragger_visibility");
 
 	BIND_ENUM_CONSTANT(DRAGGER_VISIBLE);
@@ -388,4 +402,24 @@ void SplitContainer::_bind_methods() {
 
 SplitContainer::SplitContainer(bool p_vertical) {
 	vertical = p_vertical;
+}
+
+void HSplitContainer::_validate_property(PropertyInfo &property) const {
+	if (property.name == "orientation") {
+		property.usage = PROPERTY_USAGE_NO_EDITOR;
+	}
+}
+
+void HSplitContainer::set_orientation(Orientation p_orientation) {
+	WARN_PRINT("This SplitContainer has a locked orientation. Setting its orientation is not supported.");
+}
+
+void VSplitContainer::_validate_property(PropertyInfo &property) const {
+	if (property.name == "orientation") {
+		property.usage = PROPERTY_USAGE_NO_EDITOR;
+	}
+}
+
+void VSplitContainer::set_orientation(Orientation p_orientation) {
+	WARN_PRINT("This SplitContainer has a locked orientation. Setting its orientation is not supported.");
 }

@@ -402,7 +402,8 @@ void register_scene_types() {
 
 	GDREGISTER_CLASS(MarginContainer);
 	GDREGISTER_CLASS(SubViewportContainer);
-	GDREGISTER_ABSTRACT_CLASS(SplitContainer);
+
+	GDREGISTER_CLASS(SplitContainer);
 	GDREGISTER_CLASS(HSplitContainer);
 	GDREGISTER_CLASS(VSplitContainer);
 
