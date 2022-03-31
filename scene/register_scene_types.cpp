@@ -225,6 +225,7 @@
 #include "scene/3d/gpu_particles_collision_3d.h"
 #include "scene/3d/importer_mesh_instance_3d.h"
 #include "scene/3d/joint_3d.h"
+#include "scene/3d/label_3d.h"
 #include "scene/3d/light_3d.h"
 #include "scene/3d/lightmap_gi.h"
 #include "scene/3d/lightmap_probe.h"
@@ -479,8 +480,8 @@ void register_scene_types() {
 	GDREGISTER_ABSTRACT_CLASS(SpriteBase3D);
 	GDREGISTER_CLASS(Sprite3D);
 	GDREGISTER_CLASS(AnimatedSprite3D);
-	GDREGISTER_ABSTRACT_CLASS(Light3D);
-	GDREGISTER_CLASS(DirectionalLight3D);
+	GDREGISTER_ABSTRACT_CLASS(Label3DBase);
+	GDREGISTER_CLASS(Label3D);
 	GDREGISTER_CLASS(OmniLight3D);
 	GDREGISTER_CLASS(SpotLight3D);
 	GDREGISTER_CLASS(ReflectionProbe);
