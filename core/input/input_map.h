@@ -34,7 +34,7 @@
 #include "core/input/input_event.h"
 #include "core/object/class_db.h"
 #include "core/object/object.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 
 class InputMap : public Object {
 	GDCLASS(InputMap, Object);

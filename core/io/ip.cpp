@@ -32,7 +32,7 @@
 
 #include "core/os/semaphore.h"
 #include "core/os/thread.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 
 VARIANT_ENUM_CAST(IP::ResolverStatus);
 

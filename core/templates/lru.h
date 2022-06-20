@@ -32,7 +32,7 @@
 #define LRU_H
 
 #include "core/math/math_funcs.h"
-#include "hash_map.h"
+#include "hash_map_u.h"
 #include "list.h"
 
 template <class TKey, class TData>

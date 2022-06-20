@@ -33,7 +33,7 @@
 
 #include "core/error/error_macros.h"
 #include "core/math/camera_matrix.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/rid.h"
 
 #include "thirdparty/openxr/src/common/xr_linear.h"

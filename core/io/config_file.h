@@ -33,7 +33,7 @@
 
 #include "core/io/file_access.h"
 #include "core/object/ref_counted.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/variant/variant_parser.h"
 
 class ConfigFile : public RefCounted {

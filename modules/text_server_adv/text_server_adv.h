@@ -66,7 +66,7 @@
 #include <godot_cpp/classes/image_texture.hpp>
 #include <godot_cpp/classes/ref.hpp>
 
-#include <godot_cpp/templates/hash_map.hpp>
+#include <godot_cpp/templates/hash_map_u.hpp>
 #include <godot_cpp/templates/hash_set.hpp>
 #include <godot_cpp/templates/rid_owner.hpp>
 #include <godot_cpp/templates/thread_work_pool.hpp>
@@ -77,7 +77,7 @@ using namespace godot;
 #else
 // Headers for building as built-in module.
 
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/rid_owner.h"
 #include "core/templates/thread_work_pool.h"
 #include "scene/resources/texture.h"

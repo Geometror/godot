@@ -33,7 +33,7 @@
 
 #include "core/object/ref_counted.h"
 #include "core/os/mutex.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/hash_set.h"
 #include "gdscript.h"
 

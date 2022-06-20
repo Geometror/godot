@@ -37,7 +37,7 @@
 #include "core/object/script_language.h"
 #include "core/string/string_name.h"
 #include "core/string/ustring.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/list.h"
 #include "core/templates/rb_map.h"
 #include "core/templates/vector.h"
@@ -1406,23 +1406,39 @@ private:
 
 public:
 	Error parse(const String &p_source_code, const String &p_script_path, bool p_for_completion);
-	ClassNode *get_tree() const { return head; }
-	bool is_tool() const { return _is_tool; }
+	ClassNode *get_tree() const {
+		return head;
+	}
+	bool is_tool() const {
+		return _is_tool;
+	}
 	static Variant::Type get_builtin_type(const StringName &p_type);
 
-	CompletionContext get_completion_context() const { return completion_context; }
-	CompletionCall get_completion_call() const { return completion_call; }
+	CompletionContext get_completion_context() const {
+		return completion_context;
+	}
+	CompletionCall get_completion_call() const {
+		return completion_call;
+	}
 	void get_annotation_list(List<MethodInfo> *r_annotations) const;
 
-	const List<ParserError> &get_errors() const { return errors; }
+	const List<ParserError> &get_errors() const {
+		return errors;
+	}
 	const List<String> get_dependencies() const {
 		// TODO: Keep track of deps.
 		return List<String>();
 	}
 #ifdef DEBUG_ENABLED
-	const List<GDScriptWarning> &get_warnings() const { return warnings; }
-	const HashSet<int> &get_unsafe_lines() const { return unsafe_lines; }
-	int get_last_line_number() const { return current.end_line; }
+	const List<GDScriptWarning> &get_warnings() const {
+		return warnings;
+	}
+	const HashSet<int> &get_unsafe_lines() const {
+		return unsafe_lines;
+	}
+	int get_last_line_number() const {
+		return current.end_line;
+	}
 #endif
 
 	GDScriptParser();

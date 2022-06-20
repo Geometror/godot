@@ -36,7 +36,7 @@
 #include "core/io/resource_loader.h"
 #include "core/math/math_funcs.h"
 #include "core/string/print_string.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/variant/dictionary.h"
 
 #include <stdio.h>

@@ -33,7 +33,7 @@
 
 #include "core/math/octree.h"
 #include "core/templates/command_queue_mt.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "renderer_canvas_cull.h"
 #include "renderer_scene_cull.h"
 #include "renderer_viewport.h"

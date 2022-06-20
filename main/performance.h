@@ -32,7 +32,7 @@
 #define PERFORMANCE_H
 
 #include "core/object/class_db.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 
 #define PERF_WARN_OFFLINE_FUNCTION
 #define PERF_WARN_PROCESS_SYNC

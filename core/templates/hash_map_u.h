@@ -1,5 +1,5 @@
 /*************************************************************************/
-/*  hash_map.h                                                           */
+/*  hash_map_unmod.h                                                           */
 /*************************************************************************/
 /*                       This file is part of:                           */
 /*                           GODOT ENGINE                                */
@@ -28,8 +28,8 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 
-#ifndef HASH_MAP_H
-#define HASH_MAP_H
+#ifndef HASH_MAP_U_H
+#define HASH_MAP_U_H
 
 #include "core/math/math_funcs.h"
 #include "core/os/memory.h"
@@ -38,7 +38,7 @@
 #include "core/templates/pair.h"
 
 /**
- * A HashMapN implementation that uses open addressing with Robin Hood hashing.
+ * A HashMap implementation that uses open addressing with Robin Hood hashing.
  * Robin Hood hashing swaps out entries that have a smaller probing distance
  * than the to-be-inserted entry, that evens out the average probing distance
  * and enables faster lookups. Backward shift deletion is employed to further
@@ -52,22 +52,20 @@
  */
 
 template <class TKey, class TValue>
-struct HashMapElementN {
-	//uint32_t probe_sequence_length = 0;
-	HashMapElementN *next = nullptr;
-	HashMapElementN *prev = nullptr;
+struct HashMapElement {
+	HashMapElement *next = nullptr;
+	HashMapElement *prev = nullptr;
 	KeyValue<TKey, TValue> data;
-
-	HashMapElementN() {}
-	HashMapElementN(const TKey &p_key, const TValue &p_value) :
+	HashMapElement() {}
+	HashMapElement(const TKey &p_key, const TValue &p_value) :
 			data(p_key, p_value) {}
 };
 
 template <class TKey, class TValue,
 		class Hasher = HashMapHasherDefault,
 		class Comparator = HashMapComparatorDefault<TKey>,
-		class Allocator = DefaultTypedAllocator<HashMapElementN<TKey, TValue>>>
-class HashMapN {
+		class Allocator = DefaultTypedAllocator<HashMapElement<TKey, TValue>>>
+class HashMap {
 public:
 	const uint32_t MIN_CAPACITY_INDEX = 2; // Use a prime.
 	const float MAX_OCCUPANCY = 0.75;
@@ -75,34 +73,13 @@ public:
 
 private:
 	Allocator element_alloc;
-	HashMapElementN<TKey, TValue> **elements = nullptr;
+	HashMapElement<TKey, TValue> **elements = nullptr;
 	uint32_t *hashes = nullptr;
-	// uint32_t *probe_seq_lengths = nullptr;
-	HashMapElementN<TKey, TValue> *head_element = nullptr;
-	HashMapElementN<TKey, TValue> *tail_element = nullptr;
+	HashMapElement<TKey, TValue> *head_element = nullptr;
+	HashMapElement<TKey, TValue> *tail_element = nullptr;
 
 	uint32_t capacity_index = 0;
 	uint32_t num_elements = 0;
-	// uint32_t poverty = 0;
-	// real_t avg_psl = 0;
-
-#if defined(_MSC_VER)
-	static inline uint64_t get_remainder(uint64_t fractional, uint32_t d) {
-		// use fancy msvc instrinsic when available instead of using `>> 64`
-		return __umulh(fractional, d);
-	}
-#else
-	static inline uint64_t get_remainder(uint64_t fractional, uint32_t d) {
-		__extension__ typedef unsigned __int128 uint128;
-		return static_cast<uint64_t>(((uint128)fractional * d) >> 64);
-	}
-#endif /* defined(_MSC_VER) */
-
-	// fastmod computes ( n mod d ) given precomputed c
-	static _FORCE_INLINE_ uint32_t fastmod(const uint32_t n, const uint64_t c, const uint32_t d) {
-		uint64_t lowbits = c * n;
-		return (uint32_t)(get_remainder(lowbits, d));
-	}
 
 	_FORCE_INLINE_ uint32_t _hash(const TKey &p_key) const {
 		uint32_t hash = Hasher::hash(p_key);
@@ -114,9 +91,9 @@ private:
 		return hash;
 	}
 
-	static _FORCE_INLINE_ uint32_t _get_probe_length(const uint32_t p_pos, const uint32_t p_hash, const uint32_t p_capacity, const uint64_t p_capacity_inv) {
-		const uint32_t original_pos = fastmod(p_hash, p_capacity_inv, p_capacity);
-		return fastmod(p_pos - original_pos + p_capacity, p_capacity_inv, p_capacity);
+	_FORCE_INLINE_ uint32_t _get_probe_length(uint32_t p_pos, uint32_t p_hash, uint32_t p_capacity) const {
+		uint32_t original_pos = p_hash % p_capacity;
+		return (p_pos - original_pos + p_capacity) % p_capacity;
 	}
 
 	bool _lookup_pos(const TKey &p_key, uint32_t &r_pos) const {
@@ -124,10 +101,9 @@ private:
 			return false; // Failed lookups, no elements
 		}
 
-		const uint32_t capacity = hash_table_size_primes[capacity_index];
-		const uint64_t capacity_inv = hash_table_size_primes_inv[capacity_index];
+		uint32_t capacity = hash_table_size_primes[capacity_index];
 		uint32_t hash = _hash(p_key);
-		uint32_t pos = fastmod(hash, capacity_inv, capacity);
+		uint32_t pos = hash % capacity;
 		uint32_t distance = 0;
 
 		while (true) {
@@ -135,7 +111,7 @@ private:
 				return false;
 			}
 
-			if (distance > _get_probe_length(pos, hashes[pos], capacity, capacity_inv)) {
+			if (distance > _get_probe_length(pos, hashes[pos], capacity)) {
 				return false;
 			}
 
@@ -144,44 +120,37 @@ private:
 				return true;
 			}
 
-			pos = fastmod((pos + 1), capacity_inv, capacity);
+			pos = (pos + 1) % capacity;
 			distance++;
 		}
 	}
 
-	void _insert_with_hash(uint32_t p_hash, HashMapElementN<TKey, TValue> *p_value) {
-		const uint32_t capacity = hash_table_size_primes[capacity_index];
-		const uint64_t capacity_inv = hash_table_size_primes_inv[capacity_index];
+	void _insert_with_hash(uint32_t p_hash, HashMapElement<TKey, TValue> *p_value) {
+		uint32_t capacity = hash_table_size_primes[capacity_index];
 		uint32_t hash = p_hash;
-		HashMapElementN<TKey, TValue> *value = p_value;
-		// uint32_t psl = p_psl;
+		HashMapElement<TKey, TValue> *value = p_value;
 		uint32_t distance = 0;
-		uint32_t pos = fastmod(hash, capacity_inv, capacity);
+		uint32_t pos = hash % capacity;
 
 		while (true) {
 			if (hashes[pos] == EMPTY_HASH) {
 				elements[pos] = value;
 				hashes[pos] = hash;
-				// probe_seq_lengths[pos] = psl;
 
 				num_elements++;
+
 				return;
 			}
 
 			// Not an empty slot, let's check the probing length of the existing one.
-			// NO CALC HERE
-			uint32_t existing_probe_len = _get_probe_length(pos, hashes[pos], capacity, capacity_inv);
+			uint32_t existing_probe_len = _get_probe_length(pos, hashes[pos], capacity);
 			if (existing_probe_len < distance) {
 				SWAP(hash, hashes[pos]);
 				SWAP(value, elements[pos]);
-				// SWAP(psl, probe_seq_lengths[pos]);
 				distance = existing_probe_len;
 			}
 
-			// psl++;
-			//poverty++;
-			//avg_psl = poverty / (real_t)num_elements;
-			pos = fastmod((pos + 1), capacity_inv, capacity);
+			pos = (pos + 1) % capacity;
 			distance++;
 		}
 	}
@@ -194,26 +163,23 @@ private:
 
 		uint32_t capacity = hash_table_size_primes[capacity_index];
 
-		HashMapElementN<TKey, TValue> **old_elements = elements;
+		HashMapElement<TKey, TValue> **old_elements = elements;
 		uint32_t *old_hashes = hashes;
-		// uint32_t *old_probe_seq_lengths = probe_seq_lengths;
 
 		num_elements = 0;
 		hashes = reinterpret_cast<uint32_t *>(Memory::alloc_static(sizeof(uint32_t) * capacity));
-		// probe_seq_lengths = reinterpret_cast<uint32_t *>(Memory::alloc_static(sizeof(uint32_t) * capacity));
-		elements = reinterpret_cast<HashMapElementN<TKey, TValue> **>(Memory::alloc_static(sizeof(HashMapElementN<TKey, TValue> *) * capacity));
+		elements = reinterpret_cast<HashMapElement<TKey, TValue> **>(Memory::alloc_static(sizeof(HashMapElement<TKey, TValue> *) * capacity));
 
 		for (uint32_t i = 0; i < capacity; i++) {
 			hashes[i] = 0;
 			elements[i] = nullptr;
-			// probe_seq_lengths[i] = 0;
 		}
 
 		if (old_capacity == 0) {
 			// Nothing to do.
 			return;
 		}
-		// poverty = 0;
+
 		for (uint32_t i = 0; i < old_capacity; i++) {
 			if (old_hashes[i] == EMPTY_HASH) {
 				continue;
@@ -224,17 +190,15 @@ private:
 
 		Memory::free_static(old_elements);
 		Memory::free_static(old_hashes);
-		// Memory::free_static(old_probe_seq_lengths);
 	}
 
-	_FORCE_INLINE_ HashMapElementN<TKey, TValue> *_insert(const TKey &p_key, const TValue &p_value, bool p_front_insert = false) {
+	_FORCE_INLINE_ HashMapElement<TKey, TValue> *_insert(const TKey &p_key, const TValue &p_value, bool p_front_insert = false) {
 		uint32_t capacity = hash_table_size_primes[capacity_index];
 		if (unlikely(elements == nullptr)) {
 			// Allocate on demand to save memory.
 
 			hashes = reinterpret_cast<uint32_t *>(Memory::alloc_static(sizeof(uint32_t) * capacity));
-			// probe_seq_lengths = reinterpret_cast<uint32_t *>(Memory::alloc_static(sizeof(uint32_t) * capacity));
-			elements = reinterpret_cast<HashMapElementN<TKey, TValue> **>(Memory::alloc_static(sizeof(HashMapElementN<TKey, TValue> *) * capacity));
+			elements = reinterpret_cast<HashMapElement<TKey, TValue> **>(Memory::alloc_static(sizeof(HashMapElement<TKey, TValue> *) * capacity));
 
 			for (uint32_t i = 0; i < capacity; i++) {
 				hashes[i] = EMPTY_HASH;
@@ -254,7 +218,7 @@ private:
 				_resize_and_rehash(capacity_index + 1);
 			}
 
-			HashMapElementN<TKey, TValue> *elem = element_alloc.new_allocation(HashMapElementN<TKey, TValue>(p_key, p_value));
+			HashMapElement<TKey, TValue> *elem = element_alloc.new_allocation(HashMapElement<TKey, TValue>(p_key, p_value));
 
 			if (tail_element == nullptr) {
 				head_element = elem;
@@ -276,12 +240,8 @@ private:
 	}
 
 public:
-	_FORCE_INLINE_ uint32_t get_capacity() const {
-		return hash_table_size_primes[capacity_index];
-	}
-	_FORCE_INLINE_ uint32_t size() const {
-		return num_elements;
-	}
+	_FORCE_INLINE_ uint32_t get_capacity() const { return hash_table_size_primes[capacity_index]; }
+	_FORCE_INLINE_ uint32_t size() const { return num_elements; }
 
 	/* Standard Godot Container API */
 
@@ -300,7 +260,6 @@ public:
 			}
 
 			hashes[i] = EMPTY_HASH;
-			// probe_seq_lengths[i] = 0;
 			element_alloc.delete_allocation(elements[i]);
 			elements[i] = nullptr;
 		}
@@ -313,14 +272,14 @@ public:
 	TValue &get(const TKey &p_key) {
 		uint32_t pos = 0;
 		bool exists = _lookup_pos(p_key, pos);
-		CRASH_COND_MSG(!exists, "HashMapN key not found.");
+		CRASH_COND_MSG(!exists, "HashMap key not found.");
 		return elements[pos]->data.value;
 	}
 
 	const TValue &get(const TKey &p_key) const {
 		uint32_t pos = 0;
 		bool exists = _lookup_pos(p_key, pos);
-		CRASH_COND_MSG(!exists, "HashMapN key not found.");
+		CRASH_COND_MSG(!exists, "HashMap key not found.");
 		return elements[pos]->data.value;
 	}
 
@@ -357,21 +316,13 @@ public:
 			return false;
 		}
 
-		const uint32_t capacity = hash_table_size_primes[capacity_index];
-		const uint64_t capacity_inv = hash_table_size_primes_inv[capacity_index];
-		uint32_t next_pos = fastmod((pos + 1), capacity_inv, capacity);
-		while (hashes[next_pos] != EMPTY_HASH && _get_probe_length(next_pos, hashes[next_pos], capacity, capacity_inv) != 0) {
-			// try here:
-			// probe_seq_lengths[next_pos]--;
-			//poverty--;
-			//avg_psl = poverty / (real_t)num_elements;
-
+		uint32_t capacity = hash_table_size_primes[capacity_index];
+		uint32_t next_pos = (pos + 1) % capacity;
+		while (hashes[next_pos] != EMPTY_HASH && _get_probe_length(next_pos, hashes[next_pos], capacity) != 0) {
 			SWAP(hashes[next_pos], hashes[pos]);
-			// SWAP(probe_seq_lengths[next_pos], probe_seq_lengths[pos]);
 			SWAP(elements[next_pos], elements[pos]);
-			// elements[pos]->probe_sequence_length--;
 			pos = next_pos;
-			next_pos = fastmod((pos + 1), capacity_inv, capacity);
+			next_pos = (pos + 1) % capacity;
 		}
 
 		hashes[pos] = EMPTY_HASH;
@@ -447,7 +398,7 @@ public:
 			return E != nullptr;
 		}
 
-		_FORCE_INLINE_ ConstIterator(const HashMapElementN<TKey, TValue> *p_E) { E = p_E; }
+		_FORCE_INLINE_ ConstIterator(const HashMapElement<TKey, TValue> *p_E) { E = p_E; }
 		_FORCE_INLINE_ ConstIterator() {}
 		_FORCE_INLINE_ ConstIterator(const ConstIterator &p_it) { E = p_it.E; }
 		_FORCE_INLINE_ void operator=(const ConstIterator &p_it) {
@@ -455,7 +406,7 @@ public:
 		}
 
 	private:
-		const HashMapElementN<TKey, TValue> *E = nullptr;
+		const HashMapElement<TKey, TValue> *E = nullptr;
 	};
 
 	struct Iterator {
@@ -483,7 +434,7 @@ public:
 			return E != nullptr;
 		}
 
-		_FORCE_INLINE_ Iterator(HashMapElementN<TKey, TValue> *p_E) { E = p_E; }
+		_FORCE_INLINE_ Iterator(HashMapElement<TKey, TValue> *p_E) { E = p_E; }
 		_FORCE_INLINE_ Iterator() {}
 		_FORCE_INLINE_ Iterator(const Iterator &p_it) { E = p_it.E; }
 		_FORCE_INLINE_ void operator=(const Iterator &p_it) {
@@ -495,7 +446,7 @@ public:
 		}
 
 	private:
-		HashMapElementN<TKey, TValue> *E = nullptr;
+		HashMapElement<TKey, TValue> *E = nullptr;
 	};
 
 	_FORCE_INLINE_ Iterator begin() {
@@ -510,7 +461,6 @@ public:
 
 	_FORCE_INLINE_ Iterator find(const TKey &p_key) {
 		uint32_t pos = 0;
-
 		bool exists = _lookup_pos(p_key, pos);
 		if (!exists) {
 			return end();
@@ -570,7 +520,7 @@ public:
 
 	/* Constructors */
 
-	HashMapN(const HashMapN &p_other) {
+	HashMap(const HashMap &p_other) {
 		reserve(hash_table_size_primes[p_other.capacity_index]);
 
 		if (p_other.num_elements == 0) {
@@ -582,7 +532,7 @@ public:
 		}
 	}
 
-	void operator=(const HashMapN &p_other) {
+	void operator=(const HashMap &p_other) {
 		if (this == &p_other) {
 			return; // Ignore self assignment.
 		}
@@ -601,12 +551,12 @@ public:
 		}
 	}
 
-	HashMapN(uint32_t p_initial_capacity) {
+	HashMap(uint32_t p_initial_capacity) {
 		// Capacity can't be 0.
 		capacity_index = 0;
 		reserve(p_initial_capacity);
 	}
-	HashMapN() {
+	HashMap() {
 		capacity_index = MIN_CAPACITY_INDEX;
 	}
 
@@ -625,15 +575,14 @@ public:
 		return Iterator(elements[p_index]);
 	}
 
-	~HashMapN() {
+	~HashMap() {
 		clear();
 
 		if (elements != nullptr) {
 			Memory::free_static(elements);
 			Memory::free_static(hashes);
-			// Memory::free_static(probe_seq_lengths);
 		}
 	}
 };
 
-#endif // HASH_MAP_H
+#endif // HASH_MAP_U_H

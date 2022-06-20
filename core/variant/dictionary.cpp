@@ -30,7 +30,7 @@
 
 #include "dictionary.h"
 
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/safe_refcount.h"
 #include "core/variant/variant.h"
 // required in this order by VariantInternal, do not remove this comment.

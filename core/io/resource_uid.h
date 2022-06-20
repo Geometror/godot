@@ -33,7 +33,7 @@
 
 #include "core/object/ref_counted.h"
 #include "core/string/string_name.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 
 class ResourceUID : public Object {
 	GDCLASS(ResourceUID, Object)

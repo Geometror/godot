@@ -437,4 +437,78 @@ const uint32_t hash_table_size_primes[HASH_TABLE_SIZE_MAX] = {
 	1610612741,
 };
 
+const uint64_t hash_table_size_primes_inv[HASH_TABLE_SIZE_MAX] = {
+	3689348814741910324,
+	1418980313362273202,
+	802032351030850071,
+	392483916461905354,
+	190172619316593316,
+	95578984837873325,
+	47420935922132524,
+	23987963684927896,
+	11955116055547344,
+	5991147799191151,
+	2998982941588287,
+	1501077717772769,
+	750081082979285,
+	375261795343686,
+	187625172388393,
+	93822606204624,
+	46909513691883,
+	23456218233098,
+	11728086747027,
+	5864041509391,
+	2932024948977,
+	1466014921160,
+	733007198436,
+	366503839517,
+	183251896093,
+	91625960335,
+	45812983922,
+	22906489714,
+	11453246088
+};
+
+// template <class T>
+// std::size_t prime_fmod_size<T>::sizes[] = {
+// 	BOOST_PP_SEQ_ENUM(BOOST_UNORDERED_PRIME_FMOD_SIZES)
+// };
+
+// template <class T>
+// std::size_t const prime_fmod_size<T>::sizes_len = BOOST_PP_SEQ_SIZE(
+// 		BOOST_UNORDERED_PRIME_FMOD_SIZES);
+
+// template <class T>
+// uint64_t prime_fmod_size<T>::hash_table_size_primes_inverse[] = {
+// 	(boost::ulong_long_type(330382099ul) << 32) + boost::ulong_long_type(2973438898ul) /* = 1418980313362273202 */,
+// 	(boost::ulong_long_type(148102320ul) << 32) + boost::ulong_long_type(2369637129ul) /* = 636094623231363849 */,
+// 	(boost::ulong_long_type(81037118ul) << 32) + boost::ulong_long_type(3403558990ul) /* = 348051774975651918 */,
+// 	(boost::ulong_long_type(44278013ul) << 32) + boost::ulong_long_type(1549730468ul) /* = 190172619316593316 */,
+// 	(boost::ulong_long_type(22253716ul) << 32) + boost::ulong_long_type(2403401389ul) /* = 95578984837873325 */,
+// 	(boost::ulong_long_type(11041047ul) << 32) + boost::ulong_long_type(143533612ul) /* = 47420935922132524 */,
+// 	(boost::ulong_long_type(5585133ul) << 32) + boost::ulong_long_type(106117528ul) /* = 23987963684927896 */,
+// 	(boost::ulong_long_type(2783517ul) << 32) + boost::ulong_long_type(1572687312ul) /* = 11955116055547344 */,
+// 	(boost::ulong_long_type(1394922ul) << 32) + boost::ulong_long_type(3428720239ul) /* = 5991147799191151 */,
+// 	(boost::ulong_long_type(698255ul) << 32) + boost::ulong_long_type(552319807ul) /* = 2998982941588287 */,
+// 	(boost::ulong_long_type(349496ul) << 32) + boost::ulong_long_type(3827689953ul) /* = 1501077717772769 */,
+// 	(boost::ulong_long_type(174641ul) << 32) + boost::ulong_long_type(3699438549ul) /* = 750081082979285 */,
+// 	(boost::ulong_long_type(87372ul) << 32) + boost::ulong_long_type(1912757574ul) /* = 375261795343686 */,
+// 	(boost::ulong_long_type(43684ul) << 32) + boost::ulong_long_type(3821029929ul) /* = 187625172388393 */,
+// 	(boost::ulong_long_type(21844ul) << 32) + boost::ulong_long_type(3340590800ul) /* = 93822606204624 */,
+// 	(boost::ulong_long_type(10921ul) << 32) + boost::ulong_long_type(4175852267ul) /* = 46909513691883 */,
+// 	(boost::ulong_long_type(5461ul) << 32) + boost::ulong_long_type(1401829642ul) /* = 23456218233098 */,
+// 	(boost::ulong_long_type(2730ul) << 32) + boost::ulong_long_type(2826028947ul) /* = 11728086747027 */,
+// 	(boost::ulong_long_type(1365ul) << 32) + boost::ulong_long_type(1411150351ul) /* = 5864041509391 */,
+// 	(boost::ulong_long_type(682ul) << 32) + boost::ulong_long_type(2857253105ul) /* = 2932024948977 */,
+// 	(boost::ulong_long_type(341ul) << 32) + boost::ulong_long_type(1431073224ul) /* = 1466014921160 */,
+// 	(boost::ulong_long_type(170ul) << 32) + boost::ulong_long_type(2862758116ul) /* = 733007198436 */,
+// 	(boost::ulong_long_type(85ul) << 32) + boost::ulong_long_type(1431619357ul) /* = 366503839517 */,
+// 	(boost::ulong_long_type(42ul) << 32) + boost::ulong_long_type(2863269661ul) /* = 183251896093 */,
+// 	(boost::ulong_long_type(21ul) << 32) + boost::ulong_long_type(1431647119ul) /* = 91625960335 */,
+// 	(boost::ulong_long_type(10ul) << 32) + boost::ulong_long_type(2863310962ul) /* = 45812983922 */,
+// 	(boost::ulong_long_type(5ul) << 32) + boost::ulong_long_type(1431653234ul) /* = 22906489714 */,
+// 	(boost::ulong_long_type(2ul) << 32) + boost::ulong_long_type(2863311496ul) /* = 11453246088 */,
+// 	(boost::ulong_long_type(1ul) << 32) + boost::ulong_long_type(1431655764ul) /* = 5726623060 */,
+// };
+
 #endif // HASHFUNCS_H

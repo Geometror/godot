@@ -36,7 +36,7 @@
 #include "core/io/resource_loader.h"
 #include "core/object/class_db.h"
 #include "core/object/script_language.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "gdscript.h"
 #include "gdscript_utility_functions.h"
 

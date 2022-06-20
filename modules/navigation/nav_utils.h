@@ -32,7 +32,7 @@
 #define NAV_UTILS_H
 
 #include "core/math/vector3.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/hashfuncs.h"
 #include "core/templates/vector.h"
 #include <vector>

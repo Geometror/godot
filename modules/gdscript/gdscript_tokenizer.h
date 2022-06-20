@@ -31,7 +31,7 @@
 #ifndef GDSCRIPT_TOKENIZER_H
 #define GDSCRIPT_TOKENIZER_H
 
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/hash_set.h"
 #include "core/templates/list.h"
 #include "core/templates/vector.h"
@@ -229,10 +229,18 @@ private:
 	HashMap<int, CommentData> comments;
 #endif // TOOLS_ENABLED
 
-	_FORCE_INLINE_ bool _is_at_end() { return position >= length; }
-	_FORCE_INLINE_ char32_t _peek(int p_offset = 0) { return position + p_offset >= 0 && position + p_offset < length ? _current[p_offset] : '\0'; }
-	int indent_level() const { return indent_stack.size(); }
-	bool has_error() const { return !error_stack.is_empty(); }
+	_FORCE_INLINE_ bool _is_at_end() {
+		return position >= length;
+	}
+	_FORCE_INLINE_ char32_t _peek(int p_offset = 0) {
+		return position + p_offset >= 0 && position + p_offset < length ? _current[p_offset] : '\0';
+	}
+	int indent_level() const {
+		return indent_stack.size();
+	}
+	bool has_error() const {
+		return !error_stack.is_empty();
+	}
 	Token pop_error();
 	char32_t _advance();
 	String _get_indent_char_name(char32_t ch);

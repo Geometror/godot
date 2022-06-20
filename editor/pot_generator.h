@@ -32,7 +32,7 @@
 #define POT_GENERATOR_H
 
 #include "core/io/file_access.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/hash_set.h"
 
 //#define DEBUG_POT

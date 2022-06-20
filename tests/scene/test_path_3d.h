@@ -35,6 +35,8 @@
 
 #include "tests/test_macros.h"
 
+#ifndef _3D_DISABLED
+
 namespace TestPath3D {
 
 TEST_CASE("[Path3D] Initialization") {
@@ -80,5 +82,7 @@ TEST_CASE("[Path3D] Curve setter and getter") {
 }
 
 } // namespace TestPath3D
+
+#endif // _3D_DISABLED
 
 #endif // TEST_PATH_3D

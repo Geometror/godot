@@ -39,7 +39,7 @@
 #include "godot_collision_object_2d.h"
 
 #include "core/config/project_settings.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/typedefs.h"
 
 class GodotPhysicsDirectSpaceState2D : public PhysicsDirectSpaceState2D {

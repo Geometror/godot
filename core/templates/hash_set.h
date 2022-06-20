@@ -33,7 +33,7 @@
 
 #include "core/math/math_funcs.h"
 #include "core/os/memory.h"
-#include "core/templates/hash_map.h"
+#include "core/templates/hash_map_u.h"
 #include "core/templates/hashfuncs.h"
 #include "core/templates/paged_allocator.h"
 
