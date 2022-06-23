@@ -143,191 +143,193 @@ struct BenchmarkResult {
 BenchmarkResult test_hash_map_vec2i() {
 	print_line("| Vector2i-key |");
 	Vector<Vector2i> keys;
-	for (int x = -2000; x < 2000; x++) {
-		for (int y = -2000; y < 2000; y++) {
-			keys.push_back(Vector2i(x, y * 2));
+	for (int x = -250; x < 250; x++) {
+		for (int y = -200; y < 200; y++) {
+			keys.push_back(Vector2i(x, y));
 		}
 	}
 
 	BenchmarkResult result;
-	const size_t ITER_COUNT = 10;
 
-	HashMap<Vector2i, int> map;
-	HashMapN<Vector2i, int> new_map;
-
-	// INSERTION
+	const size_t ITER_COUNT = 200;
 
 	for (int i = 0; i < ITER_COUNT; i++) {
-		uint64_t stime = OS::get_singleton()->get_ticks_usec();
-		for (const Vector2i &key : keys) {
-			map.insert(key, 0);
+		HashMap<Vector2i, int> map;
+		HashMapN<Vector2i, int> new_map;
+
+		// INSERTION
+
+		{
+			uint64_t stime = OS::get_singleton()->get_ticks_usec();
+			for (const Vector2i &key : keys) {
+				map.insert(key, 0);
+			}
+			uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
+
+			result.old.insert_time += delta;
+
+			stime = OS::get_singleton()->get_ticks_usec();
+			for (const Vector2i &key : keys) {
+				new_map.insert(key, 0);
+			}
+			delta = OS::get_singleton()->get_ticks_usec() - stime;
+
+			result.current.insert_time += delta;
 		}
-		uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
 
-		result.old.insert_time += delta;
+		// FIND
 
-		stime = OS::get_singleton()->get_ticks_usec();
-		for (const Vector2i &key : keys) {
-			new_map.insert(key, 0);
+		{
+			uint64_t stime = OS::get_singleton()->get_ticks_usec();
+			int val = 0;
+			for (const Vector2i &key : keys) {
+				val = map.get(key);
+			}
+			uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.old.find_time += delta;
+
+			val = 0;
+			stime = OS::get_singleton()->get_ticks_usec();
+			for (const Vector2i &key : keys) {
+				val = new_map.get(key);
+			}
+			delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.current.find_time += delta;
 		}
-		delta = OS::get_singleton()->get_ticks_usec() - stime;
 
-		result.current.insert_time += delta;
+		// ERASE
+
+		{
+			uint64_t stime = OS::get_singleton()->get_ticks_usec();
+			for (const Vector2i &key : keys) {
+				map.erase(key);
+			}
+			uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.old.erase_time += delta;
+
+			stime = OS::get_singleton()->get_ticks_usec();
+			for (const Vector2i &key : keys) {
+				new_map.erase(key);
+			}
+			delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.current.erase_time += delta;
+		}
 	}
 
 	result.old.insert_time = result.old.insert_time / (1000.0 * ITER_COUNT);
 	result.current.insert_time = result.current.insert_time / (1000.0 * ITER_COUNT);
 
-	print_line("HashMap insert: " + String::num(result.old.insert_time) + "ms");
-	print_line("HashMapN insert: " + String::num(result.current.insert_time) + "ms");
-
-	// FIND
-	for (int i = 0; i < ITER_COUNT; i++) {
-		uint64_t stime = OS::get_singleton()->get_ticks_usec();
-		int sum = 0;
-		for (const Vector2i &key : keys) {
-			sum += map.get(key);
-		}
-		uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.old.find_time += delta;
-
-		sum = 0;
-		stime = OS::get_singleton()->get_ticks_usec();
-		for (const Vector2i &key : keys) {
-			sum += new_map.get(key);
-		}
-		delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.current.find_time += delta;
-	}
-
 	result.old.find_time = result.old.find_time / (1000.0 * ITER_COUNT);
 	result.current.find_time = result.current.find_time / (1000.0 * ITER_COUNT);
-
-	print_line("-------------------------------------------------------");
-	print_line("HashMap find: " + String::num(result.old.find_time) + "ms");
-	print_line("HashMapN find: " + String::num(result.current.find_time) + "ms");
-
-	// ERASE
-
-	for (int i = 0; i < ITER_COUNT; i++) {
-		uint64_t stime = OS::get_singleton()->get_ticks_usec();
-		for (const Vector2i &key : keys) {
-			map.erase(key);
-		}
-		uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.old.erase_time += delta;
-
-		stime = OS::get_singleton()->get_ticks_usec();
-		for (const Vector2i &key : keys) {
-			new_map.erase(key);
-		}
-		delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.current.erase_time += delta;
-	}
 
 	result.old.erase_time = result.old.erase_time / (1000.0 * ITER_COUNT);
 	result.current.erase_time = result.current.erase_time / (1000.0 * ITER_COUNT);
 
-	print_line("-------------------------------------------------------");
-	print_line("HashMap erase: " + String::num(result.old.erase_time) + "ms");
-	print_line("HashMapN erase: " + String::num(result.current.erase_time) + "ms");
 	return result;
 }
 
 BenchmarkResult test_hash_map_int() {
-	print_line("| int-key |");
-
 	Vector<int> keysi;
 	for (int x = -100000; x < 100000; x++) {
-		keysi.push_back(x * 13);
+		keysi.push_back(x * 7);
 	}
 
 	BenchmarkResult result;
-	const size_t ITER_COUNT = 10;
 
-	HashMap<int, int> int_map;
-	HashMapN<int, int> new_int_map;
+	const size_t ITER_COUNT = 200;
 
-	// INSERTION
 	for (int i = 0; i < ITER_COUNT; i++) {
-		uint64_t stime = OS::get_singleton()->get_ticks_usec();
-		for (int x : keysi) {
-			int_map.insert(x, 0);
-		}
-		uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.old.insert_time += delta;
+		HashMap<int, int> int_map;
+		HashMapN<int, int> new_int_map;
 
-		stime = OS::get_singleton()->get_ticks_usec();
-		for (int x : keysi) {
-			new_int_map.insert(x, 0);
+		// INSERTION
+
+		{
+			uint64_t stime = OS::get_singleton()->get_ticks_usec();
+			for (int x : keysi) {
+				int_map.insert(x, 0);
+			}
+			uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.old.insert_time += delta;
+
+			stime = OS::get_singleton()->get_ticks_usec();
+			for (int x : keysi) {
+				new_int_map.insert(x, 0);
+			}
+			delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.current.insert_time += delta;
 		}
-		delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.current.insert_time += delta;
+
+		// FIND
+
+		{
+			int val = 0;
+			uint64_t stime = OS::get_singleton()->get_ticks_usec();
+			for (int key : keysi) {
+				val = int_map.get(key);
+			}
+			uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.old.find_time += delta;
+
+			val = 0;
+			stime = OS::get_singleton()->get_ticks_usec();
+			for (int key : keysi) {
+				val = new_int_map.get(key);
+			}
+			delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.current.find_time += delta;
+		}
+
+		// ERASE
+
+		{
+			uint64_t stime = OS::get_singleton()->get_ticks_usec();
+			for (int key : keysi) {
+				int_map.erase(key);
+			}
+			uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.old.erase_time += delta;
+
+			stime = OS::get_singleton()->get_ticks_usec();
+			for (int key : keysi) {
+				new_int_map.erase(key);
+			}
+			delta = OS::get_singleton()->get_ticks_usec() - stime;
+			result.current.erase_time += delta;
+		}
 	}
 
 	result.old.insert_time = result.old.insert_time / (1000.0 * ITER_COUNT);
 	result.current.insert_time = result.current.insert_time / (1000.0 * ITER_COUNT);
 
-	print_line("HashMap insert: " + String::num(result.old.insert_time) + "ms");
-	print_line("HashMapN insert: " + String::num(result.current.insert_time) + "ms");
-
-	// FIND
-
-	for (int i = 0; i < ITER_COUNT; i++) {
-		int sum = 0;
-		uint64_t stime = OS::get_singleton()->get_ticks_usec();
-		for (int key : keysi) {
-			sum += int_map.get(key);
-		}
-		uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.old.find_time += delta;
-
-		sum = 0;
-		stime = OS::get_singleton()->get_ticks_usec();
-		for (int key : keysi) {
-			sum += new_int_map.get(key);
-		}
-		delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.current.find_time += delta;
-	}
-
 	result.old.find_time = result.old.find_time / (1000.0 * ITER_COUNT);
 	result.current.find_time = result.current.find_time / (1000.0 * ITER_COUNT);
-
-	print_line("-------------------------------------------------------");
-	print_line("HashMap find: " + String::num(result.old.find_time) + "ms");
-	print_line("HashMapN find: " + String::num(result.current.find_time) + "ms");
-
-	// ERASE
-	for (int i = 0; i < ITER_COUNT; i++) {
-		uint64_t stime = OS::get_singleton()->get_ticks_usec();
-		for (int key : keysi) {
-			int_map.erase(key);
-		}
-		uint64_t delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.old.erase_time += delta;
-
-		stime = OS::get_singleton()->get_ticks_usec();
-		for (int key : keysi) {
-			new_int_map.erase(key);
-		}
-		delta = OS::get_singleton()->get_ticks_usec() - stime;
-		result.current.erase_time += delta;
-	}
 
 	result.old.erase_time = result.old.erase_time / (1000.0 * ITER_COUNT);
 	result.current.erase_time = result.current.erase_time / (1000.0 * ITER_COUNT);
 
-	print_line("-------------------------------------------------------");
-	print_line("HashMap erase: " + String::num(result.old.erase_time) + "ms");
-	print_line("HashMapN erase: " + String::num(result.current.erase_time) + "ms");
+	print_line("**int key**");
 
 	return result;
 }
 
+String to_ms_str(double ms) {
+	return String::num(ms, 4) + "ms |";
+}
+
+void print_result(String keytype_string, BenchmarkResult result) {
+	print_line("|" + keytype_string + "|insert|find|erase|");
+	print_line("|---|---|---|---|");
+	print_line("|HashMap| " + to_ms_str(result.old.insert_time) + to_ms_str(result.old.find_time) + to_ms_str(result.old.erase_time));
+	print_line("|HashMap (fastmod) |" + to_ms_str(result.current.insert_time) + to_ms_str(result.current.find_time) + to_ms_str(result.current.erase_time));
+	print_line("");
+}
+
 TEST_CASE("[HashMap] Speed") {
 	BenchmarkResult r1 = test_hash_map_int();
+	print_result("int key", r1);
 	BenchmarkResult r2 = test_hash_map_vec2i();
+	print_result("Vector2i key", r2);
 }
 
 } // namespace TestHashMap

@@ -53,7 +53,6 @@
 
 template <class TKey, class TValue>
 struct HashMapElementN {
-	//uint32_t probe_sequence_length = 0;
 	HashMapElementN *next = nullptr;
 	HashMapElementN *prev = nullptr;
 	KeyValue<TKey, TValue> data;
@@ -77,32 +76,11 @@ private:
 	Allocator element_alloc;
 	HashMapElementN<TKey, TValue> **elements = nullptr;
 	uint32_t *hashes = nullptr;
-	// uint32_t *probe_seq_lengths = nullptr;
 	HashMapElementN<TKey, TValue> *head_element = nullptr;
 	HashMapElementN<TKey, TValue> *tail_element = nullptr;
 
 	uint32_t capacity_index = 0;
 	uint32_t num_elements = 0;
-	// uint32_t poverty = 0;
-	// real_t avg_psl = 0;
-
-#if defined(_MSC_VER)
-	static inline uint64_t get_remainder(uint64_t fractional, uint32_t d) {
-		// use fancy msvc instrinsic when available instead of using `>> 64`
-		return __umulh(fractional, d);
-	}
-#else
-	static inline uint64_t get_remainder(uint64_t fractional, uint32_t d) {
-		__extension__ typedef unsigned __int128 uint128;
-		return static_cast<uint64_t>(((uint128)fractional * d) >> 64);
-	}
-#endif /* defined(_MSC_VER) */
-
-	// fastmod computes ( n mod d ) given precomputed c
-	static _FORCE_INLINE_ uint32_t fastmod(const uint32_t n, const uint64_t c, const uint32_t d) {
-		uint64_t lowbits = c * n;
-		return (uint32_t)(get_remainder(lowbits, d));
-	}
 
 	_FORCE_INLINE_ uint32_t _hash(const TKey &p_key) const {
 		uint32_t hash = Hasher::hash(p_key);
@@ -112,6 +90,31 @@ private:
 		}
 
 		return hash;
+	}
+
+	/**
+	 * Fastmod computes ( n mod d ) given the precomputed c much faster than n % d.
+	 * Implementation of fastmod is based on the following paper:
+	 * Faster Remainder by Direct Computation: Applications to Compilers and
+	 * Software Libraries
+	 * https://arxiv.org/abs/1902.01961
+	 */
+	static _FORCE_INLINE_ uint32_t fastmod(const uint32_t n, const uint64_t c, const uint32_t d) {
+		uint64_t lowbits = c * n;
+#if defined(_MSC_VER)
+		// Returns the upper 64 bits of the product of two 64-bit unsigned integers.
+		// This intrinsic function is required since MSVC does not support unsigned 128-bit integers.
+		return __umulh(lowbits, d);
+#else
+#ifdef __SIZEOF_INT128__
+		// Prevent compiler warning, because we know what we are doing.
+		__extension__ typedef unsigned __int128 uint128;
+		return static_cast<uint64_t>(((uint128)lowbits * d) >> 64);
+#else
+		// Fallback to the slower method if no 128-bit unsigned integer type is available.
+		return n % d;
+#endif
+#endif /* defined(_MSC_VER) */
 	}
 
 	static _FORCE_INLINE_ uint32_t _get_probe_length(const uint32_t p_pos, const uint32_t p_hash, const uint32_t p_capacity, const uint64_t p_capacity_inv) {
@@ -300,7 +303,6 @@ public:
 			}
 
 			hashes[i] = EMPTY_HASH;
-			// probe_seq_lengths[i] = 0;
 			element_alloc.delete_allocation(elements[i]);
 			elements[i] = nullptr;
 		}
