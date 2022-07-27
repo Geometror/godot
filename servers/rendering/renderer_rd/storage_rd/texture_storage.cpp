@@ -2094,6 +2094,10 @@ void TextureStorage::_clear_render_target(RenderTarget *rt) {
 		RD::get_singleton()->free(rt->color);
 	}
 
+	if (rt->color_multisample.is_valid()) {
+		RD::get_singleton()->free(rt->color_multisample);
+	}
+
 	if (rt->backbuffer.is_valid()) {
 		RD::get_singleton()->free(rt->backbuffer);
 		rt->backbuffer = RID();
@@ -2105,6 +2109,7 @@ void TextureStorage::_clear_render_target(RenderTarget *rt) {
 
 	rt->framebuffer = RID();
 	rt->color = RID();
+	rt->color_multisample = RID();
 }
 
 void TextureStorage::_update_render_target(RenderTarget *rt) {
@@ -2126,30 +2131,55 @@ void TextureStorage::_update_render_target(RenderTarget *rt) {
 	rt->color_format_srgb = RD::DATA_FORMAT_R8G8B8A8_SRGB;
 	rt->image_format = rt->is_transparent ? Image::FORMAT_RGBA8 : Image::FORMAT_RGB8;
 
-	RD::TextureFormat rd_format;
+	RD::TextureFormat rd_color_format;
 	RD::TextureView rd_view;
 	{ //attempt register
-		rd_format.format = rt->color_format;
-		rd_format.width = rt->size.width;
-		rd_format.height = rt->size.height;
-		rd_format.depth = 1;
-		rd_format.array_layers = rt->view_count; // for stereo we create two (or more) layers, need to see if we can make fallback work like this too if we don't have multiview
-		rd_format.mipmaps = 1;
-		if (rd_format.array_layers > 1) { // why are we not using rt->texture_type ??
-			rd_format.texture_type = RD::TEXTURE_TYPE_2D_ARRAY;
+		rd_color_format.format = rt->color_format;
+		rd_color_format.width = rt->size.width;
+		rd_color_format.height = rt->size.height;
+		rd_color_format.depth = 1;
+		rd_color_format.array_layers = rt->view_count; // for stereo we create two (or more) layers, need to see if we can make fallback work like this too if we don't have multiview
+		rd_color_format.mipmaps = 1;
+		if (rd_color_format.array_layers > 1) { // why are we not using rt->texture_type ??
+			rd_color_format.texture_type = RD::TEXTURE_TYPE_2D_ARRAY;
 		} else {
-			rd_format.texture_type = RD::TEXTURE_TYPE_2D;
+			rd_color_format.texture_type = RD::TEXTURE_TYPE_2D;
 		}
-		rd_format.samples = RD::TEXTURE_SAMPLES_1;
-		rd_format.usage_bits = RD::TEXTURE_USAGE_SAMPLING_BIT | RD::TEXTURE_USAGE_COLOR_ATTACHMENT_BIT | RD::TEXTURE_USAGE_CAN_COPY_FROM_BIT;
-		rd_format.shareable_formats.push_back(rt->color_format);
-		rd_format.shareable_formats.push_back(rt->color_format_srgb);
+		rd_color_format.samples = RD::TEXTURE_SAMPLES_1;
+		rd_color_format.usage_bits = RD::TEXTURE_USAGE_SAMPLING_BIT | RD::TEXTURE_USAGE_COLOR_ATTACHMENT_BIT | RD::TEXTURE_USAGE_CAN_COPY_FROM_BIT;
+		rd_color_format.shareable_formats.push_back(rt->color_format);
+		rd_color_format.shareable_formats.push_back(rt->color_format_srgb);
+		if (rt->msaa != RS::VIEWPORT_MSAA_DISABLED) {
+			rd_color_format.usage_bits = RD::TEXTURE_USAGE_SAMPLING_BIT | RD::TEXTURE_USAGE_COLOR_ATTACHMENT_BIT | RD::TEXTURE_USAGE_CAN_COPY_FROM_BIT;
+			rd_color_format.is_resolve_buffer = true;
+		}
 	}
 
-	rt->color = RD::get_singleton()->texture_create(rd_format, rd_view);
+	rt->color = RD::get_singleton()->texture_create(rd_color_format, rd_view);
 	ERR_FAIL_COND(rt->color.is_null());
 
 	Vector<RID> fb_textures;
+
+	if (rt->msaa != RS::VIEWPORT_MSAA_DISABLED) {
+		RD::TextureFormat rd_color_multisample_format = rd_color_format;
+		const RD::TextureSamples texture_samples[RS::VIEWPORT_MSAA_MAX] = {
+			RD::TEXTURE_SAMPLES_1,
+			RD::TEXTURE_SAMPLES_2,
+			RD::TEXTURE_SAMPLES_4,
+			RD::TEXTURE_SAMPLES_8,
+		};
+		rd_color_multisample_format.samples = texture_samples[rt->msaa];
+		RD::TextureView rd_view_multisample;
+		rd_color_multisample_format.is_resolve_buffer = false;
+		// Reuse the texture format of the color attachment for the color resolve buffer.
+
+		//TODO: @Geometror Can be removed, as they are the same.
+		rd_color_multisample_format.usage_bits = RD::TEXTURE_USAGE_STORAGE_BIT | RD::TEXTURE_USAGE_COLOR_ATTACHMENT_BIT | RD::TEXTURE_USAGE_CAN_COPY_FROM_BIT;
+
+		rt->color_multisample = RD::get_singleton()->texture_create(rd_color_multisample_format, rd_view_multisample);
+		fb_textures.push_back(rt->color_multisample);
+		ERR_FAIL_COND(rt->color_multisample.is_null());
+	}
 	fb_textures.push_back(rt->color);
 	rt->framebuffer = RD::get_singleton()->framebuffer_create(fb_textures, RenderingDevice::INVALID_ID, rt->view_count);
 	if (rt->framebuffer.is_null()) {
@@ -2179,10 +2209,12 @@ void TextureStorage::_update_render_target(RenderTarget *rt) {
 		if (!rt->is_transparent) {
 			view.swizzle_a = RD::TEXTURE_SWIZZLE_ONE;
 		}
-		tex->rd_texture = RD::get_singleton()->texture_create_shared(view, rt->color);
+		RID texture_to_share = rt->color;
+
+		tex->rd_texture = RD::get_singleton()->texture_create_shared(view, texture_to_share);
 		if (rt->color_format_srgb != RD::DATA_FORMAT_MAX) {
 			view.format_override = rt->color_format_srgb;
-			tex->rd_texture_srgb = RD::get_singleton()->texture_create_shared(view, rt->color);
+			tex->rd_texture_srgb = RD::get_singleton()->texture_create_shared(view, texture_to_share);
 		}
 		tex->rd_view = view;
 		tex->width = rt->size.width;
@@ -2306,6 +2338,17 @@ void TextureStorage::render_target_set_as_unused(RID p_render_target) {
 	RenderTarget *rt = render_target_owner.get_or_null(p_render_target);
 	ERR_FAIL_COND(!rt);
 	rt->was_used = false;
+}
+
+void TextureStorage::render_target_set_msaa(RID p_render_target, RS::ViewportMSAA p_msaa) {
+	RenderTarget *rt = render_target_owner.get_or_null(p_render_target);
+	ERR_FAIL_COND(!rt);
+	if (p_msaa == rt->msaa) {
+		return;
+	}
+
+	rt->msaa = p_msaa;
+	_update_render_target(rt);
 }
 
 Size2 TextureStorage::render_target_get_size(RID p_render_target) {

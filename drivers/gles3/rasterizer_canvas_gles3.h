@@ -229,6 +229,7 @@ public:
 	void update() override;
 
 	void _bind_canvas_texture(RID p_texture, RS::CanvasItemTextureFilter p_base_filter, RS::CanvasItemTextureRepeat p_base_repeat, uint32_t &r_index);
+	void _resolve_multisampled_fbo(RID p_render_target);
 
 	struct PolygonBuffers {
 		GLuint vertex_buffer;

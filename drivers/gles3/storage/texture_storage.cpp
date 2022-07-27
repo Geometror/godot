@@ -1207,27 +1207,71 @@ void TextureStorage::_update_render_target(RenderTarget *rt) {
 
 		// color
 		glGenTextures(1, &rt->color);
-		glBindTexture(GL_TEXTURE_2D, rt->color);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, rt->color_internal_format, rt->size.x, rt->size.y, 0, rt->color_format, rt->color_type, nullptr);
+		if (rt->msaa != RS::VIEWPORT_MSAA_DISABLED) {
+#ifndef JAVASCRIPT_ENABLED
+			// Fails to compile with javascript because GL_TEXTURE_2D_MULTISAMPLE is not defined.
+			const int texture_samples[RS::VIEWPORT_MSAA_MAX] = {
+				1, 2, 4, 8
+			};
+			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, rt->color);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, texture_samples[rt->msaa], rt->color_internal_format, rt->size.x, rt->size.y, GL_TRUE);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rt->color, 0);
+			glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, rt->color, 0);
+#endif
+		} else {
+			glBindTexture(GL_TEXTURE_2D, rt->color);
+
+			glTexImage2D(GL_TEXTURE_2D, 0, rt->color_internal_format, rt->size.x, rt->size.y, 0, rt->color_format, rt->color_type, nullptr);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rt->color, 0);
+		}
 
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 
+		// color resolve
+		if (rt->msaa != RS::VIEWPORT_MSAA_DISABLED && status == GL_FRAMEBUFFER_COMPLETE) {
+			// MSAA resolve framebuffer
+			glGenFramebuffers(1, &rt->fbo_resolve);
+			glBindFramebuffer(GL_FRAMEBUFFER, rt->fbo_resolve);
+
+			glGenTextures(1, &rt->color_resolve);
+			glBindTexture(GL_TEXTURE_2D, rt->color_resolve);
+			glTexImage2D(GL_TEXTURE_2D, 0, rt->color_internal_format, rt->size.x, rt->size.y, 0, rt->color_format, rt->color_type, nullptr);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, rt->color_resolve, 0);
+
+			status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+		}
+
 		if (status != GL_FRAMEBUFFER_COMPLETE) {
 			glDeleteFramebuffers(1, &rt->fbo);
+			glDeleteFramebuffers(1, &rt->fbo_resolve);
 			glDeleteTextures(1, &rt->color);
+			glDeleteTextures(1, &rt->color_resolve);
 			rt->fbo = 0;
 			rt->size.x = 0;
 			rt->size.y = 0;
 			rt->color = 0;
+			rt->color_resolve = 0;
 			texture->tex_id = 0;
 			texture->active = false;
 			WARN_PRINT("Could not create render target, status: " + get_framebuffer_error(status));
@@ -1241,7 +1285,11 @@ void TextureStorage::_update_render_target(RenderTarget *rt) {
 		texture->gl_format_cache = rt->color_format;
 		texture->gl_type_cache = GL_UNSIGNED_BYTE;
 		texture->gl_internal_format_cache = rt->color_internal_format;
-		texture->tex_id = rt->color;
+		if (rt->msaa != RS::VIEWPORT_MSAA_DISABLED) {
+			texture->tex_id = rt->color_resolve;
+		} else {
+			texture->tex_id = rt->color;
+		}
 		texture->width = rt->size.x;
 		texture->alloc_width = rt->size.x;
 		texture->height = rt->size.y;
@@ -1315,8 +1363,11 @@ void TextureStorage::_clear_render_target(RenderTarget *rt) {
 	if (rt->fbo) {
 		glDeleteFramebuffers(1, &rt->fbo);
 		glDeleteTextures(1, &rt->color);
+		glDeleteTextures(1, &rt->color_resolve);
 		rt->fbo = 0;
+		rt->fbo_resolve = 0;
 		rt->color = 0;
+		rt->color_resolve = 0;
 	}
 	/*
 	if (rt->external.fbo != 0) {
@@ -1553,6 +1604,20 @@ void TextureStorage::render_target_clear_used(RID p_render_target) {
 	rt->used_in_frame = false;
 }
 
+void TextureStorage::render_target_set_msaa(RID p_render_target, RS::ViewportMSAA p_msaa) {
+	RenderTarget *rt = render_target_owner.get_or_null(p_render_target);
+	ERR_FAIL_COND(!rt);
+	if (p_msaa == rt->msaa) {
+		return;
+	}
+
+#ifndef JAVASCRIPT_ENABLED
+	_clear_render_target(rt);
+	rt->msaa = p_msaa;
+	_update_render_target(rt);
+#endif
+}
+
 void TextureStorage::render_target_request_clear(RID p_render_target, const Color &p_clear_color) {
 	RenderTarget *rt = render_target_owner.get_or_null(p_render_target);
 	ERR_FAIL_COND(!rt);
@@ -1621,7 +1686,11 @@ void TextureStorage::render_target_copy_to_back_buffer(RID p_render_target, cons
 	//single texture copy for backbuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, rt->backbuffer_fbo);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, rt->color);
+	if (rt->msaa != RS::VIEWPORT_MSAA_DISABLED) {
+		glBindTexture(GL_TEXTURE_2D, rt->color_resolve);
+	} else {
+		glBindTexture(GL_TEXTURE_2D, rt->color);
+	}
 	GLES3::CopyEffects::get_singleton()->copy_screen();
 
 	if (p_gen_mipmaps) {

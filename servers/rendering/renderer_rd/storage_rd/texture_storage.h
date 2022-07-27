@@ -201,27 +201,29 @@ struct Decal {
 struct RenderTarget {
 	Size2i size;
 	uint32_t view_count;
-	RID framebuffer;
-	RID color;
 
-	//used for retrieving from CPU
+	RID framebuffer;
+
+	RID color;
+	RID color_multisample; // Needed when MSAA is enabled.
+
+	RS::ViewportMSAA msaa = RS::VIEWPORT_MSAA_DISABLED;
+
+	// Used for retrieving texture from CPU.
 	RD::DataFormat color_format = RD::DATA_FORMAT_R4G4_UNORM_PACK8;
 	RD::DataFormat color_format_srgb = RD::DATA_FORMAT_R4G4_UNORM_PACK8;
 	Image::Format image_format = Image::FORMAT_L8;
-
 	bool is_transparent = false;
 
-	bool sdf_enabled = false;
-
-	RID backbuffer; //used for effects
+	RID backbuffer; // Used for effects.
 	RID backbuffer_fb;
 	RID backbuffer_mipmap0;
-
 	Vector<RID> backbuffer_mipmaps;
 
 	RID framebuffer_uniform_set;
 	RID backbuffer_uniform_set;
 
+	bool sdf_enabled = false;
 	RID sdf_buffer_write;
 	RID sdf_buffer_write_fb;
 	RID sdf_buffer_process[2];
@@ -235,11 +237,11 @@ struct RenderTarget {
 	RS::ViewportVRSMode vrs_mode = RS::VIEWPORT_VRS_DISABLED;
 	RID vrs_texture;
 
-	//texture generated for this owner (nor RD).
+	// Texture generated for this owner (nor RD).
 	RID texture;
 	bool was_used;
 
-	//clear request
+	// Clear request.
 	bool clear_requested;
 	Color clear_color;
 };
@@ -535,6 +537,7 @@ public:
 	virtual void render_target_set_direct_to_screen(RID p_render_target, bool p_direct_to_screen) override;
 	virtual bool render_target_was_used(RID p_render_target) override;
 	virtual void render_target_set_as_unused(RID p_render_target) override;
+	virtual void render_target_set_msaa(RID p_render_target, RS::ViewportMSAA p_msaa) override;
 
 	void render_target_copy_to_back_buffer(RID p_render_target, const Rect2i &p_region, bool p_gen_mipmaps);
 	void render_target_clear_back_buffer(RID p_render_target, const Rect2i &p_region, const Color &p_color);

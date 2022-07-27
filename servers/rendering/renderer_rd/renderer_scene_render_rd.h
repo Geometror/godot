@@ -467,7 +467,7 @@ private:
 		int width = 0;
 		int height = 0;
 		float fsr_sharpness = 0.2f;
-		RS::ViewportMSAA msaa = RS::VIEWPORT_MSAA_DISABLED;
+		RS::ViewportMSAA msaa_3d = RS::VIEWPORT_MSAA_DISABLED;
 		RS::ViewportScreenSpaceAA screen_space_aa = RS::VIEWPORT_SCREEN_SPACE_AA_DISABLED;
 		bool use_taa = false;
 		bool use_debanding = false;
@@ -1161,7 +1161,9 @@ public:
 	virtual void voxel_gi_instance_set_transform_to_data(RID p_probe, const Transform3D &p_xform) override;
 	virtual bool voxel_gi_needs_update(RID p_probe) const override;
 	virtual void voxel_gi_update(RID p_probe, bool p_update_light_instances, const Vector<RID> &p_light_instances, const PagedArray<RendererSceneRender::GeometryInstance *> &p_dynamic_objects) override;
-	virtual void voxel_gi_set_quality(RS::VoxelGIQuality p_quality) override { gi.voxel_gi_quality = p_quality; }
+	virtual void voxel_gi_set_quality(RS::VoxelGIQuality p_quality) override {
+		gi.voxel_gi_quality = p_quality;
+	}
 
 	/* render buffers */
 
@@ -1231,23 +1233,51 @@ public:
 	virtual void decals_set_filter(RS::DecalFilter p_filter) override;
 	virtual void light_projectors_set_filter(RS::LightProjectorFilter p_filter) override;
 
-	_FORCE_INLINE_ RS::ShadowQuality shadows_quality_get() const { return shadows_quality; }
-	_FORCE_INLINE_ RS::ShadowQuality directional_shadow_quality_get() const { return directional_shadow_quality; }
-	_FORCE_INLINE_ float shadows_quality_radius_get() const { return shadows_quality_radius; }
-	_FORCE_INLINE_ float directional_shadow_quality_radius_get() const { return directional_shadow_quality_radius; }
+	_FORCE_INLINE_ RS::ShadowQuality shadows_quality_get() const {
+		return shadows_quality;
+	}
+	_FORCE_INLINE_ RS::ShadowQuality directional_shadow_quality_get() const {
+		return directional_shadow_quality;
+	}
+	_FORCE_INLINE_ float shadows_quality_radius_get() const {
+		return shadows_quality_radius;
+	}
+	_FORCE_INLINE_ float directional_shadow_quality_radius_get() const {
+		return directional_shadow_quality_radius;
+	}
 
-	_FORCE_INLINE_ float *directional_penumbra_shadow_kernel_get() { return directional_penumbra_shadow_kernel; }
-	_FORCE_INLINE_ float *directional_soft_shadow_kernel_get() { return directional_soft_shadow_kernel; }
-	_FORCE_INLINE_ float *penumbra_shadow_kernel_get() { return penumbra_shadow_kernel; }
-	_FORCE_INLINE_ float *soft_shadow_kernel_get() { return soft_shadow_kernel; }
+	_FORCE_INLINE_ float *directional_penumbra_shadow_kernel_get() {
+		return directional_penumbra_shadow_kernel;
+	}
+	_FORCE_INLINE_ float *directional_soft_shadow_kernel_get() {
+		return directional_soft_shadow_kernel;
+	}
+	_FORCE_INLINE_ float *penumbra_shadow_kernel_get() {
+		return penumbra_shadow_kernel;
+	}
+	_FORCE_INLINE_ float *soft_shadow_kernel_get() {
+		return soft_shadow_kernel;
+	}
 
-	_FORCE_INLINE_ int directional_penumbra_shadow_samples_get() const { return directional_penumbra_shadow_samples; }
-	_FORCE_INLINE_ int directional_soft_shadow_samples_get() const { return directional_soft_shadow_samples; }
-	_FORCE_INLINE_ int penumbra_shadow_samples_get() const { return penumbra_shadow_samples; }
-	_FORCE_INLINE_ int soft_shadow_samples_get() const { return soft_shadow_samples; }
+	_FORCE_INLINE_ int directional_penumbra_shadow_samples_get() const {
+		return directional_penumbra_shadow_samples;
+	}
+	_FORCE_INLINE_ int directional_soft_shadow_samples_get() const {
+		return directional_soft_shadow_samples;
+	}
+	_FORCE_INLINE_ int penumbra_shadow_samples_get() const {
+		return penumbra_shadow_samples;
+	}
+	_FORCE_INLINE_ int soft_shadow_samples_get() const {
+		return soft_shadow_samples;
+	}
 
-	_FORCE_INLINE_ RS::LightProjectorFilter light_projectors_get_filter() const { return light_projectors_filter; }
-	_FORCE_INLINE_ RS::DecalFilter decals_get_filter() const { return decals_filter; }
+	_FORCE_INLINE_ RS::LightProjectorFilter light_projectors_get_filter() const {
+		return light_projectors_filter;
+	}
+	_FORCE_INLINE_ RS::DecalFilter decals_get_filter() const {
+		return decals_filter;
+	}
 
 	int get_roughness_layers() const;
 	bool is_using_radiance_cubemap_array() const;

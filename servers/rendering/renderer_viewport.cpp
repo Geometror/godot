@@ -138,7 +138,7 @@ void RendererViewport::_configure_3d_render_buffers(Viewport *p_viewport) {
 
 			p_viewport->internal_size = Size2(render_width, render_height);
 
-			RSG::scene->render_buffers_configure(p_viewport->render_buffers, p_viewport->render_target, render_width, render_height, width, height, p_viewport->fsr_sharpness, p_viewport->fsr_mipmap_bias, p_viewport->msaa, p_viewport->screen_space_aa, p_viewport->use_taa, p_viewport->use_debanding, p_viewport->get_view_count());
+			RSG::scene->render_buffers_configure(p_viewport->render_buffers, p_viewport->render_target, render_width, render_height, width, height, p_viewport->fsr_sharpness, p_viewport->fsr_mipmap_bias, p_viewport->msaa_3d, p_viewport->screen_space_aa, p_viewport->use_taa, p_viewport->use_debanding, p_viewport->get_view_count());
 		}
 	}
 }
@@ -1033,14 +1033,25 @@ void RendererViewport::viewport_set_positional_shadow_atlas_quadrant_subdivision
 	RSG::scene->shadow_atlas_set_quadrant_subdivision(viewport->shadow_atlas, p_quadrant, p_subdiv);
 }
 
-void RendererViewport::viewport_set_msaa(RID p_viewport, RS::ViewportMSAA p_msaa) {
+void RendererViewport::viewport_set_msaa_2d(RID p_viewport, RS::ViewportMSAA p_msaa) {
 	Viewport *viewport = viewport_owner.get_or_null(p_viewport);
 	ERR_FAIL_COND(!viewport);
 
-	if (viewport->msaa == p_msaa) {
+	if (viewport->msaa_2d == p_msaa) {
 		return;
 	}
-	viewport->msaa = p_msaa;
+	viewport->msaa_2d = p_msaa;
+	RSG::texture_storage->render_target_set_msaa(viewport->render_target, p_msaa);
+}
+
+void RendererViewport::viewport_set_msaa_3d(RID p_viewport, RS::ViewportMSAA p_msaa) {
+	Viewport *viewport = viewport_owner.get_or_null(p_viewport);
+	ERR_FAIL_COND(!viewport);
+
+	if (viewport->msaa_3d == p_msaa) {
+		return;
+	}
+	viewport->msaa_3d = p_msaa;
 	_configure_3d_render_buffers(viewport);
 }
 

@@ -247,6 +247,8 @@ void RasterizerCanvasGLES3::canvas_render_items(RID p_to_render_target, Item *p_
 				Rect2i group_rect = ci->canvas_group_owner->global_rect_cache;
 
 				if (ci->canvas_group_owner->canvas_group->mode == RS::CANVAS_GROUP_MODE_OPAQUE) {
+					// Resolve the multisampled framebuffer before copying to the back buffer.
+					_resolve_multisampled_fbo(p_to_render_target);
 					texture_storage->render_target_copy_to_back_buffer(p_to_render_target, group_rect, false);
 				} else if (!backbuffer_cleared) {
 					texture_storage->render_target_clear_back_buffer(p_to_render_target, Rect2i(), Color(0, 0, 0, 0));
@@ -281,7 +283,8 @@ void RasterizerCanvasGLES3::canvas_render_items(RID p_to_render_target, Item *p_
 
 			_render_items(p_to_render_target, item_count, canvas_transform_inverse, p_light_list);
 			item_count = 0;
-
+			// Resolve the multisampled framebuffer before copying to the back buffer.
+			_resolve_multisampled_fbo(p_to_render_target);
 			texture_storage->render_target_copy_to_back_buffer(p_to_render_target, back_buffer_rect, true);
 
 			backbuffer_copy = false;
@@ -303,7 +306,7 @@ void RasterizerCanvasGLES3::canvas_render_items(RID p_to_render_target, Item *p_
 	if (time_used) {
 		RenderingServerDefault::redraw_request();
 	}
-
+	_resolve_multisampled_fbo(p_to_render_target);
 	// Clear out state used in 2D pass
 	reset_canvas();
 }
@@ -1201,6 +1204,18 @@ void RasterizerCanvasGLES3::_bind_canvas_texture(RID p_texture, RS::CanvasItemTe
 
 	state.instance_data_array[r_index].color_texture_pixel_size[0] = state.current_pixel_size.x;
 	state.instance_data_array[r_index].color_texture_pixel_size[1] = state.current_pixel_size.y;
+}
+
+void RasterizerCanvasGLES3::_resolve_multisampled_fbo(RID p_render_target) {
+	GLES3::TextureStorage *texture_storage = GLES3::TextureStorage::get_singleton();
+	GLES3::RenderTarget *render_target = texture_storage->get_render_target(p_render_target);
+	if (render_target->msaa != RS::VIEWPORT_MSAA_DISABLED) {
+		Size2i size = render_target->size;
+		glBindFramebuffer(GL_READ_FRAMEBUFFER, render_target->fbo);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, render_target->fbo_resolve);
+		glBlitFramebuffer(0, 0, size.width, size.height, 0, 0, size.width, size.height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+		glBindFramebuffer(GL_FRAMEBUFFER, render_target->fbo_resolve);
+	}
 }
 
 void RasterizerCanvasGLES3::reset_canvas() {
