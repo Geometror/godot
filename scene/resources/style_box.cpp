@@ -601,7 +601,7 @@ inline void draw_ring(Vector<Vector2> &verts, Vector<int> &indices, Vector<Color
 	set_inner_corner_radius(style_rect, ring_rect, corner_radius, ring_corner_radius);
 
 	// Corner radius center points.
-	Vector<Point2> outer_points = {
+	Vector<Point2> outer_center_points = {
 		ring_rect.position + Vector2(ring_corner_radius[0], ring_corner_radius[0]), //tl
 		Point2(ring_rect.position.x + ring_rect.size.x - ring_corner_radius[1], ring_rect.position.y + ring_corner_radius[1]), //tr
 		ring_rect.position + ring_rect.size - Vector2(ring_corner_radius[2], ring_corner_radius[2]), //br
@@ -611,7 +611,7 @@ inline void draw_ring(Vector<Vector2> &verts, Vector<int> &indices, Vector<Color
 	real_t inner_corner_radius[4];
 	set_inner_corner_radius(style_rect, inner_rect, corner_radius, inner_corner_radius);
 
-	Vector<Point2> inner_points = {
+	Vector<Point2> inner_center_points = {
 		inner_rect.position + Vector2(inner_corner_radius[0], inner_corner_radius[0]), //tl
 		Point2(inner_rect.position.x + inner_rect.size.x - inner_corner_radius[1], inner_rect.position.y + inner_corner_radius[1]), //tr
 		inner_rect.position + inner_rect.size - Vector2(inner_corner_radius[2], inner_corner_radius[2]), //br
@@ -621,21 +621,23 @@ inline void draw_ring(Vector<Vector2> &verts, Vector<int> &indices, Vector<Color
 	for (int corner_index = 0; corner_index < 4; corner_index++) {
 		for (int detail = 0; detail <= adapted_corner_detail; detail++) {
 			for (int inner_outer = 0; inner_outer < 2; inner_outer++) {
-				real_t radius;
+				real_t radius_x;
+				real_t radius_y;
+
 				Color color;
 				Point2 corner_point;
 				if (inner_outer == 0) {
-					radius = inner_corner_radius[corner_index];
+					radius_x = radius_y = inner_corner_radius[corner_index];
 					color = inner_color;
-					corner_point = inner_points[corner_index];
+					corner_point = inner_center_points[corner_index];
 				} else {
-					radius = ring_corner_radius[corner_index];
+					radius_x = radius_y = ring_corner_radius[corner_index];
 					color = outer_color;
-					corner_point = outer_points[corner_index];
+					corner_point = outer_center_points[corner_index];
 				}
 
-				const real_t x = radius * (real_t)cos((corner_index + detail / (double)adapted_corner_detail) * (Math_TAU / 4.0) + Math_PI) + corner_point.x;
-				const real_t y = radius * (real_t)sin((corner_index + detail / (double)adapted_corner_detail) * (Math_TAU / 4.0) + Math_PI) + corner_point.y;
+				const real_t x = radius_x * (real_t)cos((corner_index + detail / (double)adapted_corner_detail) * (Math_TAU / 4.0) + Math_PI) + corner_point.x;
+				const real_t y = radius_y * (real_t)sin((corner_index + detail / (double)adapted_corner_detail) * (Math_TAU / 4.0) + Math_PI) + corner_point.y;
 				const float x_skew = -skew.x * (y - ring_rect.get_center().y);
 				const float y_skew = -skew.y * (x - ring_rect.get_center().x);
 				verts.push_back(Vector2(x + x_skew, y + y_skew));
