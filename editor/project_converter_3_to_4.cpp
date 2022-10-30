@@ -1144,7 +1144,7 @@ static const char *gdscript_properties_renames[][2] = {
 	{ "refuse_new_network_connections", "refuse_new_connections" }, // MultiplayerAPI
 	{ "region_filter_clip", "region_filter_clip_enabled" }, // Sprite2D
 	{ "reverb_bus_enable", "reverb_bus_enabled" }, // Area3D
-	{ "selectedframe", "selected_frame" }, // Theme
+	{ "selectedframe", "frame_selected" }, // Theme
 	{ "size_override_stretch", "size_2d_override_stretch" }, // SubViewport
 	{ "slips_on_slope", "slide_on_slope" }, // SeparationRayShape2D
 	{ "smoothing_enabled", "follow_smoothing_enabled" }, // Camera2D

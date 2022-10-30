@@ -426,11 +426,9 @@ void VisualShaderGraphPlugin::add_node(VisualShader::Type p_type, int p_id) {
 		node = gnode;
 	}
 
-	//TODO: @Geometror Solve with VSNode attribute?
 	// All nodes are closable except the output node.
 	if (p_id >= 2) {
 		vsnode->set_closable(true);
-		//TODO: @Geometror Readd close buttons.
 		node->connect("close_request", callable_mp(editor, &VisualShaderEditor::_delete_node_request).bind(p_type, p_id), CONNECT_DEFERRED);
 	}
 	graph->add_child(node);
