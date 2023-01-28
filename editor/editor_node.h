@@ -572,8 +572,8 @@ private:
 	void _node_renamed();
 	void _editor_select_next();
 	void _editor_select_prev();
-	void _set_scene_metadata(const String &p_file, int p_idx = -1);
-	void _get_scene_metadata(const String &p_file);
+	void _save_editor_states(const String &p_file, int p_idx = -1);
+	void _load_editor_states(const String &p_file);
 	void _update_title();
 	void _update_scene_tabs();
 	void _version_control_menu_option(int p_idx);
@@ -662,12 +662,15 @@ private:
 
 	int _get_current_main_editor();
 
-	void _save_docks();
-	void _load_docks();
+	void _save_editor_layout();
+	void _load_editor_layout();
 	void _save_docks_to_config(Ref<ConfigFile> p_layout, const String &p_section);
 	void _load_docks_from_config(Ref<ConfigFile> p_layout, const String &p_section);
 	void _update_dock_slots_visibility(bool p_keep_selected_tabs = false);
 	void _dock_tab_changed(int p_tab);
+
+	void _save_central_editor_layout_to_config(Ref<ConfigFile> p_layout, const String &p_section);
+	void _load_central_editor_layout_from_config(Ref<ConfigFile> p_layout, const String &p_section);
 
 	void _save_open_scenes_to_config(Ref<ConfigFile> p_layout, const String &p_section);
 	void _load_open_scenes_from_config(Ref<ConfigFile> p_layout, const String &p_section);

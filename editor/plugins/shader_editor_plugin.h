@@ -102,6 +102,9 @@ public:
 	TextShaderEditor *get_shader_editor(const Ref<Shader> &p_for_shader);
 	VisualShaderEditor *get_visual_shader_editor(const Ref<Shader> &p_for_shader);
 
+	virtual void set_window_layout(Ref<ConfigFile> p_layout) override;
+	virtual void get_window_layout(Ref<ConfigFile> p_layout) override;
+
 	virtual void save_external_data() override;
 	virtual void apply_changes() override;
 

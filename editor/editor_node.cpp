@@ -66,6 +66,7 @@
 
 #include "editor/audio_stream_preview.h"
 #include "editor/debugger/editor_debugger_node.h"
+#include "editor/debugger/script_editor_debugger.h"
 #include "editor/dependency_editor.h"
 #include "editor/editor_about.h"
 #include "editor/editor_audio_buses.h"
@@ -1020,7 +1021,7 @@ void EditorNode::_sources_changed(bool p_exist) {
 			EditorResourcePreview::get_singleton()->start();
 		}
 
-		_load_docks();
+		_load_editor_layout();
 
 		if (!defer_load_scene.is_empty()) {
 			Engine::get_singleton()->startup_benchmark_begin_measure("editor_load_scene");
@@ -1377,7 +1378,7 @@ void EditorNode::_dialog_display_load_error(String p_file, Error p_error) {
 	}
 }
 
-void EditorNode::_get_scene_metadata(const String &p_file) {
+void EditorNode::_load_editor_states(const String &p_file) {
 	Node *scene = editor_data.get_edited_scene_root();
 
 	if (!scene) {
@@ -1409,7 +1410,7 @@ void EditorNode::_get_scene_metadata(const String &p_file) {
 	editor_data.set_editor_states(md);
 }
 
-void EditorNode::_set_scene_metadata(const String &p_file, int p_idx) {
+void EditorNode::_save_editor_states(const String &p_file, int p_idx) {
 	Node *scene = editor_data.get_edited_scene_root(p_idx);
 
 	if (!scene) {
@@ -1727,7 +1728,7 @@ void EditorNode::_save_scene(String p_file, int idx) {
 	_reset_animation_players(scene, &anim_backups);
 	_save_default_environment();
 
-	_set_scene_metadata(p_file, idx);
+	_save_editor_states(p_file, idx);
 
 	Ref<PackedScene> sdata;
 
@@ -3202,7 +3203,7 @@ int EditorNode::_next_unsaved_scene(bool p_valid_filename, int p_start) {
 void EditorNode::_exit_editor(int p_exit_code) {
 	exiting = true;
 	resource_preview->stop(); // Stop early to avoid crashes.
-	_save_docks();
+	_save_editor_layout();
 
 	// Dim the editor window while it's quitting to make it clearer that it's busy.
 	dim_editor(true);
@@ -3908,7 +3909,7 @@ Error EditorNode::load_scene(const String &p_scene, bool p_ignore_broken_deps, b
 	new_scene->set_scene_instance_state(Ref<SceneState>());
 
 	set_edited_scene(new_scene);
-	_get_scene_metadata(p_scene);
+	_load_editor_states(p_scene);
 
 	_update_title();
 	_update_scene_tabs();
@@ -4755,7 +4756,7 @@ void EditorNode::_dock_select_input(const Ref<InputEvent> &p_input) {
 			_update_dock_containers();
 
 			_edit_current();
-			_save_docks();
+			_save_editor_layout();
 		}
 	}
 }
@@ -4781,7 +4782,7 @@ void EditorNode::_dock_move_left() {
 	dock_slot[dock_popup_selected_idx]->move_child(current_ctl, prev_ctl->get_index(false));
 	dock_select->queue_redraw();
 	_edit_current();
-	_save_docks();
+	_save_editor_layout();
 }
 
 void EditorNode::_dock_move_right() {
@@ -4793,7 +4794,7 @@ void EditorNode::_dock_move_right() {
 	dock_slot[dock_popup_selected_idx]->move_child(next_ctl, current_ctl->get_index(false));
 	dock_select->queue_redraw();
 	_edit_current();
-	_save_docks();
+	_save_editor_layout();
 }
 
 void EditorNode::_dock_select_draw() {
@@ -4882,7 +4883,7 @@ void EditorNode::_dock_select_draw() {
 	}
 }
 
-void EditorNode::_save_docks() {
+void EditorNode::_save_editor_layout() {
 	if (waiting_for_first_scan) {
 		return; // Scanning, do not touch docks.
 	}
@@ -4893,6 +4894,7 @@ void EditorNode::_save_docks() {
 
 	_save_docks_to_config(config, "docks");
 	_save_open_scenes_to_config(config, "EditorNode");
+	_save_central_editor_layout_to_config(config, "EditorNode");
 	editor_data.get_plugin_window_layout(config);
 
 	config->save(EditorPaths::get_singleton()->get_project_settings_dir().path_join("editor_layout.cfg"));
@@ -4917,6 +4919,11 @@ void EditorNode::_save_docks_to_config(Ref<ConfigFile> p_layout, const String &p
 
 		if (!names.is_empty()) {
 			p_layout->set_value(p_section, config_key, names);
+		}
+
+		int selected_tab_idx = dock_slot[i]->get_current_tab();
+		if (selected_tab_idx >= 0) {
+			p_layout->set_value(p_section, "dock_" + itos(i + 1) + "_selected_tab_idx", selected_tab_idx);
 		}
 	}
 
@@ -4946,6 +4953,12 @@ void EditorNode::_save_open_scenes_to_config(Ref<ConfigFile> p_layout, const Str
 		scenes.push_back(path);
 	}
 	p_layout->set_value(p_section, "open_scenes", scenes);
+
+	int currently_edited_scene_path = editor_data.get_edited_scene();
+	if (currently_edited_scene_path < 0) {
+		return; // Necessary?
+	}
+	p_layout->set_value(p_section, "current_scene_idx", currently_edited_scene_path);
 }
 
 void EditorNode::save_layout() {
@@ -4956,7 +4969,7 @@ void EditorNode::_dock_split_dragged(int ofs) {
 	dock_drag_timer->start();
 }
 
-void EditorNode::_load_docks() {
+void EditorNode::_load_editor_layout() {
 	Ref<ConfigFile> config;
 	config.instantiate();
 	Error err = config->load(EditorPaths::get_singleton()->get_project_settings_dir().path_join("editor_layout.cfg"));
@@ -4970,6 +4983,7 @@ void EditorNode::_load_docks() {
 
 	_load_docks_from_config(config, "docks");
 	_load_open_scenes_from_config(config, "EditorNode");
+	_load_central_editor_layout_from_config(config, "EditorNode");
 
 	editor_data.set_plugin_window_layout(config);
 }
@@ -5108,6 +5122,15 @@ void EditorNode::_load_docks_from_config(Ref<ConfigFile> p_layout, const String 
 			dock_slot[i]->move_child(node, 0);
 			dock_slot[i]->show();
 		}
+
+		if (!p_layout->has_section_key(p_section, "dock_" + itos(i + 1) + "_selected_tab_idx")) {
+			continue;
+		}
+
+		int selected_tab_idx = p_layout->get_value(p_section, "dock_" + itos(i + 1) + "_selected_tab_idx");
+		if (selected_tab_idx >= 0 && selected_tab_idx < dock_slot[i]->get_tab_count()) {
+			dock_slot[i]->call_deferred("set_current_tab", selected_tab_idx);
+		}
 	}
 
 	if (p_layout->has_section_key(p_section, "dock_filesystem_split")) {
@@ -5169,6 +5192,74 @@ void EditorNode::_load_docks_from_config(Ref<ConfigFile> p_layout, const String 
 	}
 }
 
+void EditorNode::_save_central_editor_layout_to_config(Ref<ConfigFile> p_layout, const String &p_section) {
+	// Bottom panel.
+
+	int center_split_offset = center_split->get_split_offset();
+	p_layout->set_value(p_section, "center_split_offset", center_split_offset);
+
+	int selected_bottom_panel_item_idx = -1;
+	for (int i = 0; i < bottom_panel_items.size(); i++) {
+		if (bottom_panel_items[i].button->is_pressed()) {
+			selected_bottom_panel_item_idx = i;
+			break;
+		}
+	}
+	if (selected_bottom_panel_item_idx != -1) {
+		p_layout->set_value(p_section, "selected_bottom_panel_item", selected_bottom_panel_item_idx);
+	}
+
+	// Debugger tab.
+
+	int selected_default_debugger_tab_idx = EditorDebuggerNode::get_singleton()->get_default_debugger()->get_current_debugger_tab();
+	p_layout->set_value(p_section, "selected_default_debugger_tab_idx", selected_default_debugger_tab_idx);
+
+	// Main editor (plugin).
+
+	int selected_main_editor_idx = -1;
+	for (int i = 0; i < main_editor_buttons.size(); i++) {
+		if (main_editor_buttons[i]->is_pressed()) {
+			selected_main_editor_idx = i;
+			break;
+		}
+	}
+	if (selected_main_editor_idx != -1) {
+		p_layout->set_value(p_section, "selected_main_editor_idx", selected_main_editor_idx);
+	}
+}
+
+void EditorNode::_load_central_editor_layout_from_config(Ref<ConfigFile> p_layout, const String &p_section) {
+	// Bottom panel.
+
+	if (p_layout->has_section_key(p_section, "center_split_offset")) {
+		int center_split_offset = p_layout->get_value(p_section, "center_split_offset");
+		center_split->set_split_offset(center_split_offset);
+	}
+
+	if (p_layout->has_section_key(p_section, "selected_bottom_panel_item")) {
+		int selected_bottom_panel_item_idx = p_layout->get_value(p_section, "selected_bottom_panel_item");
+		if (selected_bottom_panel_item_idx >= 0 && selected_bottom_panel_item_idx < bottom_panel_items.size()) {
+			_bottom_panel_switch(true, selected_bottom_panel_item_idx);
+		}
+	}
+
+	// Debugger tab.
+
+	if (p_layout->has_section_key(p_section, "selected_default_debugger_tab_idx")) {
+		int selected_default_debugger_tab_idx = p_layout->get_value(p_section, "selected_default_debugger_tab_idx");
+		EditorDebuggerNode::get_singleton()->get_default_debugger()->switch_to_debugger(selected_default_debugger_tab_idx);
+	}
+
+	// Main editor (plugin).
+
+	if (p_layout->has_section_key(p_section, "selected_main_editor_idx")) {
+		int selected_main_editor_idx = p_layout->get_value(p_section, "selected_main_editor_idx");
+		if (selected_main_editor_idx >= 0 && selected_main_editor_idx < main_editor_buttons.size()) {
+			callable_mp(this, &EditorNode::editor_select).call_deferred(selected_main_editor_idx);
+		}
+	}
+}
+
 void EditorNode::_load_open_scenes_from_config(Ref<ConfigFile> p_layout, const String &p_section) {
 	if (!bool(EDITOR_GET("interface/scene_tabs/restore_scenes_on_load"))) {
 		return;
@@ -5184,6 +5275,14 @@ void EditorNode::_load_open_scenes_from_config(Ref<ConfigFile> p_layout, const S
 	for (int i = 0; i < scenes.size(); i++) {
 		load_scene(scenes[i]);
 	}
+
+	if (p_layout->has_section_key(p_section, "current_scene_idx")) {
+		int current_scene_idx = p_layout->get_value(p_section, "current_scene_idx");
+		if (current_scene_idx >= 0 && current_scene_idx < editor_data.get_edited_scene_count()) {
+			set_current_scene(current_scene_idx);
+		}
+	}
+
 	save_layout();
 
 	restoring_scenes = false;
@@ -5367,7 +5466,7 @@ void EditorNode::_layout_menu_option(int p_id) {
 		} break;
 		case SETTINGS_LAYOUT_DEFAULT: {
 			_load_docks_from_config(default_layout, "docks");
-			_save_docks();
+			_save_editor_layout();
 		} break;
 		default: {
 			Ref<ConfigFile> config;
@@ -5378,7 +5477,7 @@ void EditorNode::_layout_menu_option(int p_id) {
 			}
 
 			_load_docks_from_config(config, editor_layouts->get_item_text(p_id));
-			_save_docks();
+			_save_editor_layout();
 		}
 	}
 }
@@ -5905,7 +6004,7 @@ void EditorNode::reload_scene(const String &p_path) {
 
 	if (current_tab == scene_idx) {
 		editor_data.apply_changes_in_editors();
-		_set_scene_metadata(p_path);
+		_save_editor_states(p_path);
 	}
 
 	// Reload scene.
@@ -6968,7 +7067,7 @@ EditorNode::EditorNode() {
 	add_child(dock_drag_timer);
 	dock_drag_timer->set_wait_time(0.5);
 	dock_drag_timer->set_one_shot(true);
-	dock_drag_timer->connect("timeout", callable_mp(this, &EditorNode::_save_docks));
+	dock_drag_timer->connect("timeout", callable_mp(this, &EditorNode::_save_editor_layout));
 
 	top_split = memnew(VSplitContainer);
 	center_split->add_child(top_split);
@@ -7537,7 +7636,7 @@ EditorNode::EditorNode() {
 	FileSystemDock *filesystem_dock = memnew(FileSystemDock);
 	filesystem_dock->connect("inherit", callable_mp(this, &EditorNode::_inherit_request));
 	filesystem_dock->connect("instantiate", callable_mp(this, &EditorNode::_instantiate_request));
-	filesystem_dock->connect("display_mode_changed", callable_mp(this, &EditorNode::_save_docks));
+	filesystem_dock->connect("display_mode_changed", callable_mp(this, &EditorNode::_save_editor_layout));
 	get_project_settings()->connect_filesystem_dock_signals(filesystem_dock);
 
 	history_dock = memnew(HistoryDock);

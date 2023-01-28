@@ -3365,7 +3365,7 @@ void Node3DEditorViewport::_menu_option(int p_option) {
 		case VIEW_DISPLAY_NORMAL:
 		case VIEW_DISPLAY_WIREFRAME:
 		case VIEW_DISPLAY_OVERDRAW:
-		case VIEW_DISPLAY_SHADELESS:
+		case VIEW_DISPLAY_UNSHADED:
 		case VIEW_DISPLAY_LIGHTING:
 		case VIEW_DISPLAY_NORMAL_BUFFER:
 		case VIEW_DISPLAY_DEBUG_SHADOW_ATLAS:
@@ -3392,7 +3392,7 @@ void Node3DEditorViewport::_menu_option(int p_option) {
 				VIEW_DISPLAY_NORMAL,
 				VIEW_DISPLAY_WIREFRAME,
 				VIEW_DISPLAY_OVERDRAW,
-				VIEW_DISPLAY_SHADELESS,
+				VIEW_DISPLAY_UNSHADED,
 				VIEW_DISPLAY_LIGHTING,
 				VIEW_DISPLAY_NORMAL_BUFFER,
 				VIEW_DISPLAY_WIREFRAME,
@@ -3757,6 +3757,10 @@ void Node3DEditorViewport::set_state(const Dictionary &p_state) {
 		view_type = ViewType(p_state["view_type"].operator int());
 		_update_name();
 	}
+	if (p_state.has("orthogonal")) {
+		orthogonal = p_state["orthogonal"];
+		_menu_option(orthogonal ? VIEW_PERSPECTIVE : VIEW_ORTHOGONAL);
+	}
 	if (p_state.has("auto_orthogonal")) {
 		auto_orthogonal = p_state["auto_orthogonal"];
 		_update_name();
@@ -3771,6 +3775,11 @@ void Node3DEditorViewport::set_state(const Dictionary &p_state) {
 		int idx = view_menu->get_popup()->get_item_index(display);
 		if (!view_menu->get_popup()->is_item_checked(idx)) {
 			_menu_option(display);
+		} else {
+			idx = display_submenu->get_item_index(display);
+			if (!display_submenu->is_item_checked(idx)) {
+				_menu_option(display);
+			}
 		}
 	}
 	if (p_state.has("lock_rotation")) {
@@ -3829,6 +3838,7 @@ void Node3DEditorViewport::set_state(const Dictionary &p_state) {
 
 		int idx = view_menu->get_popup()->get_item_index(VIEW_HALF_RESOLUTION);
 		view_menu->get_popup()->set_item_checked(idx, half_res);
+		_update_shrink();
 	}
 	if (p_state.has("cinematic_preview")) {
 		previewing_cinema = p_state["cinematic_preview"];
@@ -3863,17 +3873,26 @@ Dictionary Node3DEditorViewport::get_state() const {
 	d["use_environment"] = camera->get_environment().is_valid();
 	d["use_orthogonal"] = camera->get_projection() == Camera3D::PROJECTION_ORTHOGONAL;
 	d["view_type"] = view_type;
+	d["orthogonal"] = orthogonal;
 	d["auto_orthogonal"] = auto_orthogonal;
 	d["auto_orthogonal_enabled"] = view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(VIEW_AUTO_ORTHOGONAL));
-	if (view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(VIEW_DISPLAY_NORMAL))) {
-		d["display_mode"] = VIEW_DISPLAY_NORMAL;
-	} else if (view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(VIEW_DISPLAY_WIREFRAME))) {
-		d["display_mode"] = VIEW_DISPLAY_WIREFRAME;
-	} else if (view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(VIEW_DISPLAY_OVERDRAW))) {
-		d["display_mode"] = VIEW_DISPLAY_OVERDRAW;
-	} else if (view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(VIEW_DISPLAY_SHADELESS))) {
-		d["display_mode"] = VIEW_DISPLAY_SHADELESS;
+
+	// Find selected display mode.
+	int display_mode = VIEW_DISPLAY_NORMAL;
+	for (int i = VIEW_DISPLAY_NORMAL; i <= VIEW_DISPLAY_UNSHADED; i++) {
+		if (view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(i))) {
+			display_mode = i;
+			break;
+		}
 	}
+	for (int i = VIEW_DISPLAY_DEBUG_PSSM_SPLITS; i <= VIEW_DISPLAY_MOTION_VECTORS; i++) {
+		if (display_submenu->is_item_checked(display_submenu->get_item_index(i))) {
+			display_mode = i;
+			break;
+		}
+	}
+	d["display_mode"] = display_mode;
+
 	d["listener"] = viewport->is_audio_listener_3d();
 	d["doppler"] = view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(VIEW_AUDIO_DOPPLER));
 	d["gizmos"] = view_menu->get_popup()->is_item_checked(view_menu->get_popup()->get_item_index(VIEW_GIZMOS));
@@ -4964,7 +4983,7 @@ Node3DEditorViewport::Node3DEditorViewport(Node3DEditor *p_spatial_editor, int p
 	view_menu->get_popup()->add_radio_check_shortcut(ED_SHORTCUT("spatial_editor/view_display_wireframe", TTR("Display Wireframe")), VIEW_DISPLAY_WIREFRAME);
 	view_menu->get_popup()->add_radio_check_shortcut(ED_SHORTCUT("spatial_editor/view_display_overdraw", TTR("Display Overdraw")), VIEW_DISPLAY_OVERDRAW);
 	view_menu->get_popup()->add_radio_check_shortcut(ED_SHORTCUT("spatial_editor/view_display_lighting", TTR("Display Lighting")), VIEW_DISPLAY_LIGHTING);
-	view_menu->get_popup()->add_radio_check_shortcut(ED_SHORTCUT("spatial_editor/view_display_unshaded", TTR("Display Unshaded")), VIEW_DISPLAY_SHADELESS);
+	view_menu->get_popup()->add_radio_check_shortcut(ED_SHORTCUT("spatial_editor/view_display_unshaded", TTR("Display Unshaded")), VIEW_DISPLAY_UNSHADED);
 	view_menu->get_popup()->set_item_checked(view_menu->get_popup()->get_item_index(VIEW_DISPLAY_NORMAL), true);
 	display_submenu->set_hide_on_checkable_item_selection(false);
 	display_submenu->add_radio_check_item(TTR("Directional Shadow Splits"), VIEW_DISPLAY_DEBUG_PSSM_SPLITS);
@@ -5033,7 +5052,7 @@ Node3DEditorViewport::Node3DEditorViewport(Node3DEditor *p_spatial_editor, int p
 		const int normal_idx = view_menu->get_popup()->get_item_index(VIEW_DISPLAY_NORMAL);
 		const int wireframe_idx = view_menu->get_popup()->get_item_index(VIEW_DISPLAY_WIREFRAME);
 		const int overdraw_idx = view_menu->get_popup()->get_item_index(VIEW_DISPLAY_OVERDRAW);
-		const int shadeless_idx = view_menu->get_popup()->get_item_index(VIEW_DISPLAY_SHADELESS);
+		const int shadeless_idx = view_menu->get_popup()->get_item_index(VIEW_DISPLAY_UNSHADED);
 		const String unsupported_tooltip = TTR("Not available when using the OpenGL renderer.");
 
 		view_menu->get_popup()->set_item_disabled(normal_idx, true);

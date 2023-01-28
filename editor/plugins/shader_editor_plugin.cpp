@@ -196,6 +196,55 @@ VisualShaderEditor *ShaderEditorPlugin::get_visual_shader_editor(const Ref<Shade
 	return nullptr;
 }
 
+void ShaderEditorPlugin::set_window_layout(Ref<ConfigFile> p_layout) {
+	if (!p_layout->has_section("ShaderEditor")) {
+		return;
+	}
+
+	if (!p_layout->has_section_key("ShaderEditor", "open_shaders")) {
+		return;
+	}
+
+	Array shaders = p_layout->get_value("ShaderEditor", "open_shaders");
+	for (int i = 0; i < shaders.size(); i++) {
+		String path = shaders[i];
+		Ref<Resource> res = ResourceLoader::load(path);
+		if (res.is_valid()) {
+			edit(res.ptr());
+		}
+	}
+	if (p_layout->has_section_key("ShaderEditor", "current_tab_idx")) {
+		shader_tabs->set_current_tab(p_layout->get_value("ShaderEditor", "current_tab_idx"));
+	}
+
+	if (p_layout->has_section_key("ShaderEditor", "split_offset")) {
+		main_split->set_split_offset(p_layout->get_value("ShaderEditor", "split_offset"));
+	}
+
+	if (p_layout->has_section_key("ShaderEditor", "selected_shader_idx")) {
+		int selected_shader_idx = p_layout->get_value("ShaderEditor", "selected_shader_idx");
+
+		_shader_selected(selected_shader_idx);
+		_update_shader_list();
+	}
+}
+
+void ShaderEditorPlugin::get_window_layout(Ref<ConfigFile> p_layout) {
+	Array shaders;
+	for (EditedShader &edited_shader : edited_shaders) {
+		if (edited_shader.shader_editor || edited_shader.visual_shader_editor) {
+			shaders.push_back(edited_shader.shader->get_path());
+		}
+	}
+	p_layout->set_value("ShaderEditor", "open_shaders", shaders);
+	p_layout->set_value("ShaderEditor", "current_tab_idx", shader_tabs->get_current_tab());
+	p_layout->set_value("ShaderEditor", "split_offset", main_split->get_split_offset());
+	PackedInt32Array selected_shaders = shader_list->get_selected_items();
+	if (selected_shaders.size() > 0) {
+		p_layout->set_value("ShaderEditor", "selected_shader_idx", selected_shaders[0]);
+	}
+}
+
 void ShaderEditorPlugin::save_external_data() {
 	for (EditedShader &edited_shader : edited_shaders) {
 		if (edited_shader.shader_editor) {

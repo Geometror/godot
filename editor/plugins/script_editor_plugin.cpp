@@ -3161,6 +3161,14 @@ void ScriptEditor::set_window_layout(Ref<ConfigFile> p_layout) {
 		_help_class_open(path);
 	}
 
+	if (p_layout->has_section_key("ScriptEditor", "selected_script_idx")) {
+		int selected_script_idx = p_layout->get_value("ScriptEditor", "selected_script_idx");
+
+		script_list->select(selected_script_idx);
+		tab_container->set_current_tab(selected_script_idx);
+		ensure_select_current();
+	}
+
 	for (int i = 0; i < tab_container->get_tab_count(); i++) {
 		tab_container->get_tab_control(i)->set_meta("__editor_pass", Variant());
 	}
@@ -3222,6 +3230,10 @@ void ScriptEditor::get_window_layout(Ref<ConfigFile> p_layout) {
 	}
 
 	p_layout->set_value("ScriptEditor", "open_scripts", scripts);
+	PackedInt32Array selected_scripts = script_list->get_selected_items();
+	if (selected_scripts.size() > 0) {
+		p_layout->set_value("ScriptEditor", "selected_script_idx", selected_scripts[0]);
+	}
 	p_layout->set_value("ScriptEditor", "open_help", helps);
 	p_layout->set_value("ScriptEditor", "script_split_offset", script_split->get_split_offset());
 	p_layout->set_value("ScriptEditor", "list_split_offset", list_split->get_split_offset());
