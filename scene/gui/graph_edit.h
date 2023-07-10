@@ -195,7 +195,7 @@ private:
 	Point2 box_selecting_from;
 	Point2 box_selecting_to;
 	Rect2 box_selecting_rect;
-	List<GraphNode *> prev_selected;
+	List<GraphElement *> prev_selected;
 
 	bool setting_scroll_offset = false;
 	bool right_disconnects = false;
@@ -233,7 +233,7 @@ private:
 	void _graph_node_selected(Node *p_gn);
 	void _graph_node_deselected(Node *p_gn);
 	void _graph_node_move_to_front(Node *p_gn);
-	void _graph_node_resized(Vector2 p_new_minsize, Node *p_gn);
+	void _graph_element_resized(Vector2 p_new_minsize, Node *p_gn);
 	void _graph_node_moved(Node *p_gn);
 	void _graph_node_slot_updated(int p_index, Node *p_gn);
 

@@ -292,7 +292,7 @@ void GraphEdit::_update_scroll_offset() {
 	set_block_minimum_size_adjust(true);
 
 	for (int i = 0; i < get_child_count(); i++) {
-		GraphNode *graph_node = Object::cast_to<GraphNode>(get_child(i));
+		GraphElement *graph_node = Object::cast_to<GraphElement>(get_child(i));
 		if (!graph_node) {
 			continue;
 		}
@@ -325,7 +325,7 @@ void GraphEdit::_update_scroll() {
 
 	Rect2 screen_rect;
 	for (int i = 0; i < get_child_count(); i++) {
-		GraphNode *graph_node = Object::cast_to<GraphNode>(get_child(i));
+		GraphElement *graph_node = Object::cast_to<GraphElement>(get_child(i));
 		if (!graph_node) {
 			continue;
 		}
@@ -376,35 +376,35 @@ void GraphEdit::_update_scroll() {
 }
 
 void GraphEdit::_graph_node_move_to_front(Node *p_gn) {
-	GraphNode *graph_node = Object::cast_to<GraphNode>(p_gn);
+	GraphElement *graph_node = Object::cast_to<GraphElement>(p_gn);
 	ERR_FAIL_NULL(graph_node);
 
 	graph_node->move_to_front();
 }
 
 void GraphEdit::_graph_node_selected(Node *p_gn) {
-	GraphNode *gn = Object::cast_to<GraphNode>(p_gn);
+	GraphElement *gn = Object::cast_to<GraphElement>(p_gn);
 	ERR_FAIL_NULL(gn);
 
 	emit_signal(SNAME("node_selected"), gn);
 }
 
 void GraphEdit::_graph_node_deselected(Node *p_gn) {
-	GraphNode *gn = Object::cast_to<GraphNode>(p_gn);
+	GraphElement *gn = Object::cast_to<GraphElement>(p_gn);
 	ERR_FAIL_NULL(gn);
 
 	emit_signal(SNAME("node_deselected"), gn);
 }
 
-void GraphEdit::_graph_node_resized(Vector2 p_new_minsize, Node *p_gn) {
-	GraphNode *graph_node = Object::cast_to<GraphNode>(p_gn);
-	if (graph_node) {
-		graph_node->set_custom_minimum_size(p_new_minsize);
+void GraphEdit::_graph_element_resized(Vector2 p_new_minsize, Node *p_gn) {
+	GraphElement *graph_element = Object::cast_to<GraphElement>(p_gn);
+	if (graph_element) {
+		graph_element->set_custom_minimum_size(p_new_minsize);
 	}
 }
 
 void GraphEdit::_graph_node_moved(Node *p_gn) {
-	GraphNode *graph_node = Object::cast_to<GraphNode>(p_gn);
+	GraphElement *graph_node = Object::cast_to<GraphElement>(p_gn);
 	ERR_FAIL_NULL(graph_node);
 	top_layer->queue_redraw();
 	minimap->queue_redraw();
@@ -426,19 +426,24 @@ void GraphEdit::add_child_notify(Node *p_child) {
 
 	top_layer->call_deferred(SNAME("move_to_front")); // Keep the top layer always on top!
 
-	GraphNode *graph_node = Object::cast_to<GraphNode>(p_child);
-	if (graph_node) {
-		graph_node->set_scale(Vector2(zoom, zoom));
-		graph_node->connect("position_offset_changed", callable_mp(this, &GraphEdit::_graph_node_moved).bind(graph_node));
-		graph_node->connect("node_selected", callable_mp(this, &GraphEdit::_graph_node_selected).bind(graph_node));
-		graph_node->connect("node_deselected", callable_mp(this, &GraphEdit::_graph_node_deselected).bind(graph_node));
-		graph_node->connect("slot_updated", callable_mp(this, &GraphEdit::_graph_node_slot_updated).bind(graph_node));
-		graph_node->connect("raise_request", callable_mp(this, &GraphEdit::_graph_node_move_to_front).bind(graph_node));
-		graph_node->connect("resize_request", callable_mp(this, &GraphEdit::_graph_node_resized).bind(graph_node));
-		graph_node->connect("item_rect_changed", callable_mp((CanvasItem *)connections_layer, &CanvasItem::queue_redraw));
-		graph_node->connect("item_rect_changed", callable_mp((CanvasItem *)minimap, &GraphEditMinimap::queue_redraw));
-		_graph_node_moved(graph_node);
-		graph_node->set_mouse_filter(MOUSE_FILTER_PASS);
+	GraphElement *graph_element = Object::cast_to<GraphElement>(p_child);
+	if (graph_element) {
+		graph_element->set_scale(Vector2(zoom, zoom));
+		graph_element->connect("position_offset_changed", callable_mp(this, &GraphEdit::_graph_node_moved).bind(graph_element));
+		graph_element->connect("node_selected", callable_mp(this, &GraphEdit::_graph_node_selected).bind(graph_element));
+		graph_element->connect("node_deselected", callable_mp(this, &GraphEdit::_graph_node_deselected).bind(graph_element));
+
+		GraphNode *graph_node = Object::cast_to<GraphNode>(graph_element);
+		if (graph_node) {
+			graph_element->connect("slot_updated", callable_mp(this, &GraphEdit::_graph_node_slot_updated).bind(graph_element));
+		}
+
+		graph_element->connect("raise_request", callable_mp(this, &GraphEdit::_graph_node_move_to_front).bind(graph_element));
+		graph_element->connect("resize_request", callable_mp(this, &GraphEdit::_graph_element_resized).bind(graph_element));
+		graph_element->connect("item_rect_changed", callable_mp((CanvasItem *)connections_layer, &CanvasItem::queue_redraw));
+		graph_element->connect("item_rect_changed", callable_mp((CanvasItem *)minimap, &GraphEditMinimap::queue_redraw));
+		_graph_node_moved(graph_element);
+		graph_element->set_mouse_filter(MOUSE_FILTER_PASS);
 	}
 }
 
@@ -456,20 +461,25 @@ void GraphEdit::remove_child_notify(Node *p_child) {
 		top_layer->call_deferred(SNAME("move_to_front")); // Keep the top layer always on top!
 	}
 
-	GraphNode *graph_node = Object::cast_to<GraphNode>(p_child);
-	if (graph_node) {
-		graph_node->disconnect("position_offset_changed", callable_mp(this, &GraphEdit::_graph_node_moved));
-		graph_node->disconnect("node_selected", callable_mp(this, &GraphEdit::_graph_node_selected));
-		graph_node->disconnect("node_deselected", callable_mp(this, &GraphEdit::_graph_node_deselected));
-		graph_node->disconnect("slot_updated", callable_mp(this, &GraphEdit::_graph_node_slot_updated));
-		graph_node->disconnect("raise_request", callable_mp(this, &GraphEdit::_graph_node_move_to_front));
+	GraphElement *graph_element = Object::cast_to<GraphElement>(p_child);
+	if (graph_element) {
+		graph_element->disconnect("position_offset_changed", callable_mp(this, &GraphEdit::_graph_node_moved));
+		graph_element->disconnect("node_selected", callable_mp(this, &GraphEdit::_graph_node_selected));
+		graph_element->disconnect("node_deselected", callable_mp(this, &GraphEdit::_graph_node_deselected));
+
+		GraphNode *graph_node = Object::cast_to<GraphNode>(graph_element);
+		if (graph_node) {
+			graph_element->disconnect("slot_updated", callable_mp(this, &GraphEdit::_graph_node_slot_updated));
+		}
+
+		graph_element->disconnect("raise_request", callable_mp(this, &GraphEdit::_graph_node_move_to_front));
 
 		// In case of the whole GraphEdit being destroyed these references can already be freed.
 		if (connections_layer != nullptr && connections_layer->is_inside_tree()) {
-			graph_node->disconnect("item_rect_changed", callable_mp((CanvasItem *)connections_layer, &CanvasItem::queue_redraw));
+			graph_element->disconnect("item_rect_changed", callable_mp((CanvasItem *)connections_layer, &CanvasItem::queue_redraw));
 		}
 		if (minimap != nullptr && minimap->is_inside_tree()) {
-			graph_node->disconnect("item_rect_changed", callable_mp((CanvasItem *)minimap, &GraphEditMinimap::queue_redraw));
+			graph_element->disconnect("item_rect_changed", callable_mp((CanvasItem *)minimap, &GraphEditMinimap::queue_redraw));
 		}
 	}
 }
@@ -567,11 +577,11 @@ bool GraphEdit::_filter_input(const Point2 &p_point) {
 			continue;
 		}
 
-		for (int j = 0; j < graph_node->get_connection_input_count(); j++) {
+		for (int j = 0; j < graph_node->get_port_input_count(); j++) {
 			Vector2i port_size = Vector2i(port_icon->get_width(), port_icon->get_height());
 
 			// Determine slot height.
-			int slot_index = graph_node->get_connection_input_slot(j);
+			int slot_index = graph_node->get_port_input_slot(j);
 			Control *child = Object::cast_to<Control>(graph_node->get_child(slot_index));
 
 			port_size.height = MAX(port_size.height, child ? child->get_size().y : 0);
@@ -581,11 +591,11 @@ bool GraphEdit::_filter_input(const Point2 &p_point) {
 			}
 		}
 
-		for (int j = 0; j < graph_node->get_connection_output_count(); j++) {
+		for (int j = 0; j < graph_node->get_port_output_count(); j++) {
 			Vector2i port_size = Vector2i(port_icon->get_width(), port_icon->get_height());
 
 			// Determine slot height.
-			int slot_index = graph_node->get_connection_output_slot(j);
+			int slot_index = graph_node->get_port_output_slot(j);
 			Control *child = Object::cast_to<Control>(graph_node->get_child(slot_index));
 			port_size.height = MAX(port_size.height, child ? child->get_size().y : 0);
 
@@ -611,17 +621,17 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 				continue;
 			}
 
-			for (int j = 0; j < graph_node->get_connection_output_count(); j++) {
-				Vector2 pos = graph_node->get_connection_output_position(j) * zoom + graph_node->get_position();
+			for (int j = 0; j < graph_node->get_port_output_count(); j++) {
+				Vector2 pos = graph_node->get_port_output_position(j) * zoom + graph_node->get_position();
 				Vector2i port_size = Vector2i(port_icon->get_width(), port_icon->get_height());
 
 				// Determine slot height.
-				int slot_index = graph_node->get_connection_output_slot(j);
+				int slot_index = graph_node->get_port_output_slot(j);
 				Control *child = Object::cast_to<Control>(graph_node->get_child(slot_index));
 				port_size.height = MAX(port_size.height, child ? child->get_size().y : 0);
 
 				if (is_in_output_hotzone(graph_node, j, click_pos, port_size)) {
-					if (valid_left_disconnect_types.has(graph_node->get_connection_output_type(j))) {
+					if (valid_left_disconnect_types.has(graph_node->get_port_output_type(j))) {
 						// Check disconnect.
 						for (const Connection &E : connections) {
 							if (E.from_node == graph_node->get_name() && E.from_port == j) {
@@ -630,8 +640,8 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 									connecting_from = E.to_node;
 									connecting_index = E.to_port;
 									connecting_out = false;
-									connecting_type = Object::cast_to<GraphNode>(to)->get_connection_input_type(E.to_port);
-									connecting_color = Object::cast_to<GraphNode>(to)->get_connection_input_color(E.to_port);
+									connecting_type = Object::cast_to<GraphNode>(to)->get_port_input_type(E.to_port);
+									connecting_color = Object::cast_to<GraphNode>(to)->get_port_input_color(E.to_port);
 									connecting_target = false;
 									connecting_to = pos;
 
@@ -654,8 +664,8 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 					connecting_from = graph_node->get_name();
 					connecting_index = j;
 					connecting_out = true;
-					connecting_type = graph_node->get_connection_output_type(j);
-					connecting_color = graph_node->get_connection_output_color(j);
+					connecting_type = graph_node->get_port_output_type(j);
+					connecting_color = graph_node->get_port_output_color(j);
 					connecting_target = false;
 					connecting_to = pos;
 					if (connecting_type >= 0) {
@@ -667,18 +677,18 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 				}
 			}
 
-			for (int j = 0; j < graph_node->get_connection_input_count(); j++) {
-				Vector2 pos = graph_node->get_connection_input_position(j) + graph_node->get_position();
+			for (int j = 0; j < graph_node->get_port_input_count(); j++) {
+				Vector2 pos = graph_node->get_port_input_position(j) * zoom + graph_node->get_position();
 
 				Vector2i port_size = Vector2i(port_icon->get_width(), port_icon->get_height());
 
 				// Determine slot height.
-				int slot_index = graph_node->get_connection_input_slot(j);
+				int slot_index = graph_node->get_port_input_slot(j);
 				Control *child = Object::cast_to<Control>(graph_node->get_child(slot_index));
 				port_size.height = MAX(port_size.height, child ? child->get_size().y : 0);
 
 				if (is_in_input_hotzone(graph_node, j, click_pos, port_size)) {
-					if (right_disconnects || valid_right_disconnect_types.has(graph_node->get_connection_input_type(j))) {
+					if (right_disconnects || valid_right_disconnect_types.has(graph_node->get_port_input_type(j))) {
 						// Check disconnect.
 						for (const Connection &E : connections) {
 							if (E.to_node == graph_node->get_name() && E.to_port == j) {
@@ -687,8 +697,8 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 									connecting_from = E.from_node;
 									connecting_index = E.from_port;
 									connecting_out = true;
-									connecting_type = Object::cast_to<GraphNode>(fr)->get_connection_output_type(E.from_port);
-									connecting_color = Object::cast_to<GraphNode>(fr)->get_connection_output_color(E.from_port);
+									connecting_type = Object::cast_to<GraphNode>(fr)->get_port_output_type(E.from_port);
+									connecting_color = Object::cast_to<GraphNode>(fr)->get_port_output_color(E.from_port);
 									connecting_target = false;
 									connecting_to = pos;
 									just_disconnected = true;
@@ -710,8 +720,8 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 					connecting_from = graph_node->get_name();
 					connecting_index = j;
 					connecting_out = false;
-					connecting_type = graph_node->get_connection_input_type(j);
-					connecting_color = graph_node->get_connection_input_color(j);
+					connecting_type = graph_node->get_port_input_type(j);
+					connecting_color = graph_node->get_port_input_color(j);
 					connecting_target = false;
 					connecting_to = pos;
 					if (connecting_type >= 0) {
@@ -744,16 +754,16 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 				}
 
 				if (!connecting_out) {
-					for (int j = 0; j < graph_node->get_connection_output_count(); j++) {
-						Vector2 pos = graph_node->get_connection_output_position(j) + graph_node->get_position();
+					for (int j = 0; j < graph_node->get_port_output_count(); j++) {
+						Vector2 pos = graph_node->get_port_output_position(j) * zoom + graph_node->get_position();
 						Vector2i port_size = Vector2i(port_icon->get_width(), port_icon->get_height());
 
 						// Determine slot height.
-						int slot_index = graph_node->get_connection_output_slot(j);
+						int slot_index = graph_node->get_port_output_slot(j);
 						Control *child = Object::cast_to<Control>(graph_node->get_child(slot_index));
 						port_size.height = MAX(port_size.height, child ? child->get_size().y : 0);
 
-						int type = graph_node->get_connection_output_type(j);
+						int type = graph_node->get_port_output_type(j);
 						if ((type == connecting_type ||
 									valid_connection_types.has(ConnectionType(connecting_type, type))) &&
 								is_in_output_hotzone(graph_node, j, mpos, port_size)) {
@@ -768,16 +778,16 @@ void GraphEdit::_top_layer_input(const Ref<InputEvent> &p_ev) {
 						}
 					}
 				} else {
-					for (int j = 0; j < graph_node->get_connection_input_count(); j++) {
-						Vector2 pos = graph_node->get_connection_input_position(j) + graph_node->get_position();
+					for (int j = 0; j < graph_node->get_port_input_count(); j++) {
+						Vector2 pos = graph_node->get_port_input_position(j) * zoom + graph_node->get_position();
 						Vector2i port_size = Vector2i(port_icon->get_width(), port_icon->get_height());
 
 						// Determine slot height.
-						int slot_index = graph_node->get_connection_input_slot(j);
+						int slot_index = graph_node->get_port_input_slot(j);
 						Control *child = Object::cast_to<Control>(graph_node->get_child(slot_index));
 						port_size.height = MAX(port_size.height, child ? child->get_size().y : 0);
 
-						int type = graph_node->get_connection_input_type(j);
+						int type = graph_node->get_port_input_type(j);
 						if ((type == connecting_type || valid_connection_types.has(ConnectionType(connecting_type, type))) &&
 								is_in_input_hotzone(graph_node, j, mpos, port_size)) {
 							if (!is_node_hover_valid(connecting_from, connecting_index, graph_node->get_name(), j)) {
@@ -853,7 +863,7 @@ bool GraphEdit::is_in_input_hotzone(GraphNode *p_graph_node, int p_slot_index, c
 	if (GDVIRTUAL_CALL(_is_in_input_hotzone, p_graph_node, p_slot_index, p_mouse_pos, success)) {
 		return success;
 	} else {
-		Vector2 pos = p_graph_node->get_connection_input_position(p_slot_index) + p_graph_node->get_position();
+		Vector2 pos = p_graph_node->get_port_input_position(p_slot_index) * zoom + p_graph_node->get_position();
 		return is_in_port_hotzone(pos / zoom, p_mouse_pos, p_port_size, true);
 	}
 }
@@ -871,7 +881,7 @@ bool GraphEdit::is_in_output_hotzone(GraphNode *p_graph_node, int p_slot_index, 
 	if (GDVIRTUAL_CALL(_is_in_output_hotzone, p_graph_node, p_slot_index, p_mouse_pos, success)) {
 		return success;
 	} else {
-		Vector2 pos = p_graph_node->get_connection_output_position(p_slot_index) + p_graph_node->get_position();
+		Vector2 pos = p_graph_node->get_port_output_position(p_slot_index) * zoom + p_graph_node->get_position();
 		return is_in_port_hotzone(pos / zoom, p_mouse_pos, p_port_size, false);
 	}
 }
@@ -975,10 +985,10 @@ void GraphEdit::_connections_layer_draw() {
 			continue;
 		}
 
-		Vector2 frompos = gnode_from->get_connection_output_position(c.from_port) + gnode_from->get_position_offset() * zoom;
-		Color color = gnode_from->get_connection_output_color(c.from_port);
-		Vector2 topos = gnode_to->get_connection_input_position(c.to_port) + gnode_to->get_position_offset() * zoom;
-		Color tocolor = gnode_to->get_connection_input_color(c.to_port);
+		Vector2 frompos = gnode_from->get_port_output_position(c.from_port) * zoom + gnode_from->get_position_offset() * zoom;
+		Color color = gnode_from->get_port_output_color(c.from_port);
+		Vector2 topos = gnode_to->get_port_input_position(c.to_port) * zoom + gnode_to->get_position_offset() * zoom;
+		Color tocolor = gnode_to->get_port_input_color(c.to_port);
 
 		if (c.activity > 0) {
 			color = color.lerp(activity_color, c.activity);
@@ -1002,9 +1012,9 @@ void GraphEdit::_top_layer_draw() {
 		ERR_FAIL_NULL(graph_node_from);
 		Vector2 pos;
 		if (connecting_out) {
-			pos = graph_node_from->get_connection_output_position(connecting_index);
+			pos = graph_node_from->get_port_output_position(connecting_index) * zoom;
 		} else {
-			pos = graph_node_from->get_connection_input_position(connecting_index);
+			pos = graph_node_from->get_port_input_position(connecting_index) * zoom;
 		}
 		pos += graph_node_from->get_position();
 
@@ -1082,12 +1092,12 @@ void GraphEdit::_minimap_draw() {
 			continue;
 		}
 
-		Vector2 from_port_position = graph_node_from->get_position_offset() + graph_node_from->get_connection_output_position(E.from_port);
+		Vector2 from_port_position = graph_node_from->get_position_offset() * zoom + graph_node_from->get_port_output_position(E.from_port) * zoom;
 		Vector2 from_position = minimap->_convert_from_graph_position(from_port_position - graph_offset) + minimap_offset;
-		Color from_color = graph_node_from->get_connection_output_color(E.from_port);
-		Vector2 to_port_position = graph_node_to->get_position_offset() + graph_node_to->get_connection_input_position(E.to_port);
+		Color from_color = graph_node_from->get_port_output_color(E.from_port);
+		Vector2 to_port_position = graph_node_to->get_position_offset() * zoom + graph_node_to->get_port_input_position(E.to_port) * zoom;
 		Vector2 to_position = minimap->_convert_from_graph_position(to_port_position - graph_offset) + minimap_offset;
-		Color to_color = graph_node_to->get_connection_input_color(E.to_port);
+		Color to_color = graph_node_to->get_port_input_color(E.to_port);
 
 		if (E.activity > 0) {
 			from_color = from_color.lerp(activity_color, E.activity);
@@ -1134,7 +1144,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 		just_selected = true;
 		drag_accum += mm->get_relative();
 		for (int i = get_child_count() - 1; i >= 0; i--) {
-			GraphNode *graph_node = Object::cast_to<GraphNode>(get_child(i));
+			GraphElement *graph_node = Object::cast_to<GraphElement>(get_child(i));
 			if (graph_node && graph_node->is_selected() && graph_node->is_draggable()) {
 				Vector2 pos = (graph_node->get_drag_from() * zoom + drag_accum) / zoom;
 
@@ -1155,7 +1165,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 		box_selecting_rect = Rect2(box_selecting_from.min(box_selecting_to), (box_selecting_from - box_selecting_to).abs());
 
 		for (int i = get_child_count() - 1; i >= 0; i--) {
-			GraphNode *graph_node = Object::cast_to<GraphNode>(get_child(i));
+			GraphElement *graph_node = Object::cast_to<GraphElement>(get_child(i));
 			if (!graph_node) {
 				continue;
 			}
@@ -1180,7 +1190,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 			if (box_selecting) {
 				box_selecting = false;
 				for (int i = get_child_count() - 1; i >= 0; i--) {
-					GraphNode *graph_node = Object::cast_to<GraphNode>(get_child(i));
+					GraphElement *graph_node = Object::cast_to<GraphElement>(get_child(i));
 					if (!graph_node) {
 						continue;
 					}
@@ -1202,7 +1212,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 			if (!just_selected && drag_accum == Vector2() && Input::get_singleton()->is_key_pressed(Key::CTRL)) {
 				// Deselect current node.
 				for (int i = get_child_count() - 1; i >= 0; i--) {
-					GraphNode *graph_node = Object::cast_to<GraphNode>(get_child(i));
+					GraphElement *graph_node = Object::cast_to<GraphElement>(get_child(i));
 
 					if (graph_node) {
 						Rect2 r = graph_node->get_rect();
@@ -1215,7 +1225,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 
 			if (drag_accum != Vector2()) {
 				for (int i = get_child_count() - 1; i >= 0; i--) {
-					GraphNode *graph_node = Object::cast_to<GraphNode>(get_child(i));
+					GraphElement *graph_node = Object::cast_to<GraphElement>(get_child(i));
 					if (graph_node && graph_node->is_selected()) {
 						graph_node->set_drag(false);
 					}
@@ -1237,11 +1247,11 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 
 		// Node selection logic.
 		if (mb->get_button_index() == MouseButton::LEFT && mb->is_pressed()) {
-			GraphNode *graph_node = nullptr;
+			GraphElement *graph_node = nullptr;
 
 			// Find node which was clicked on.
 			for (int i = get_child_count() - 1; i >= 0; i--) {
-				GraphNode *selected_gcontrol = Object::cast_to<GraphNode>(get_child(i));
+				GraphElement *selected_gcontrol = Object::cast_to<GraphElement>(get_child(i));
 
 				if (!selected_gcontrol) {
 					continue;
@@ -1268,7 +1278,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 				just_selected = !graph_node->is_selected();
 				if (!graph_node->is_selected() && !Input::get_singleton()->is_key_pressed(Key::CTRL)) {
 					for (int i = 0; i < get_child_count(); i++) {
-						GraphNode *o_gn = Object::cast_to<GraphNode>(get_child(i));
+						GraphElement *o_gn = Object::cast_to<GraphElement>(get_child(i));
 						if (!o_gn) {
 							continue;
 						}
@@ -1279,7 +1289,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 
 				graph_node->set_selected(true);
 				for (int i = 0; i < get_child_count(); i++) {
-					GraphNode *o_gn = Object::cast_to<GraphNode>(get_child(i));
+					GraphElement *o_gn = Object::cast_to<GraphElement>(get_child(i));
 					if (!o_gn) {
 						continue;
 					}
@@ -1303,7 +1313,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 					box_selection_mode_additive = true;
 					prev_selected.clear();
 					for (int i = get_child_count() - 1; i >= 0; i--) {
-						GraphNode *gn2 = Object::cast_to<GraphNode>(get_child(i));
+						GraphElement *gn2 = Object::cast_to<GraphElement>(get_child(i));
 						if (!gn2 || !gn2->is_selected()) {
 							continue;
 						}
@@ -1314,7 +1324,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 					box_selection_mode_additive = false;
 					prev_selected.clear();
 					for (int i = get_child_count() - 1; i >= 0; i--) {
-						GraphNode *gn2 = Object::cast_to<GraphNode>(get_child(i));
+						GraphElement *gn2 = Object::cast_to<GraphElement>(get_child(i));
 						if (!gn2 || !gn2->is_selected()) {
 							continue;
 						}
@@ -1325,7 +1335,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 					box_selection_mode_additive = true;
 					prev_selected.clear();
 					for (int i = get_child_count() - 1; i >= 0; i--) {
-						GraphNode *gn2 = Object::cast_to<GraphNode>(get_child(i));
+						GraphElement *gn2 = Object::cast_to<GraphElement>(get_child(i));
 						if (!gn2) {
 							continue;
 						}

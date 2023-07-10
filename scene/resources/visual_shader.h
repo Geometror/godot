@@ -265,6 +265,7 @@ class VisualShaderNode : public Resource {
 protected:
 	bool simple_decl = true;
 	bool disabled = false;
+	bool closable = false;
 
 	static void _bind_methods();
 
@@ -329,6 +330,9 @@ public:
 
 	bool is_disabled() const;
 	void set_disabled(bool p_disabled = true);
+
+	bool is_deletable() const;
+	void set_deletable(bool p_closable = true);
 
 	virtual Vector<StringName> get_editable_properties() const;
 	virtual HashMap<StringName, String> get_editable_properties_names() const;
