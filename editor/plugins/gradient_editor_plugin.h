@@ -50,7 +50,7 @@ class GradientEdit : public Control {
 	ColorPicker *picker = nullptr;
 
 	bool snap_enabled = false;
-	float snap_count = 10;
+	int snap_count = 10;
 
 	enum GrabMode {
 		GRAB_NONE,
@@ -115,6 +115,7 @@ class GradientEditor : public VBoxContainer {
 
 	Button *reverse_button = nullptr;
 	Button *snap_button = nullptr;
+	Label *snap_count_label = nullptr;
 	EditorSpinSlider *snap_count_edit = nullptr;
 	GradientEdit *gradient_editor_rect = nullptr;
 

@@ -589,6 +589,7 @@ const int GradientEditor::DEFAULT_SNAP = 10;
 void GradientEditor::_set_snap_enabled(bool p_enabled) {
 	gradient_editor_rect->set_snap_enabled(p_enabled);
 	snap_count_edit->set_visible(p_enabled);
+	snap_count_label->set_visible(p_enabled);
 }
 
 void GradientEditor::_set_snap_count(int p_count) {
@@ -631,6 +632,12 @@ GradientEditor::GradientEditor() {
 	snap_button->set_toggle_mode(true);
 	toolbar->add_child(snap_button);
 	snap_button->connect("toggled", callable_mp(this, &GradientEditor::_set_snap_enabled));
+
+	snap_count_label = memnew(Label);
+	snap_count_label->set_text(TTR("Snap Count"));
+	snap_count_label->set_tooltip_text(TTR("Number of grid lines to snap to."));
+	snap_count_label->set_text_overrun_behavior(TextServer::OVERRUN_TRIM_ELLIPSIS);
+	toolbar->add_child(snap_count_label);
 
 	snap_count_edit = memnew(EditorSpinSlider);
 	snap_count_edit->set_min(2);
