@@ -55,7 +55,7 @@ public:
 	// Edit mode for the rotation.
 	// THIS MODE ONLY AFFECTS HOW DATA IS EDITED AND SAVED
 	// IT DOES _NOT_ AFFECT THE TRANSFORM LOGIC (see comment in TransformDirty).
-	enum RotationEditMode {
+	enum RotationEditMode : uint8_t {
 		ROTATION_EDIT_MODE_EULER,
 		ROTATION_EDIT_MODE_QUATERNION,
 		ROTATION_EDIT_MODE_BASIS,
@@ -78,7 +78,7 @@ private:
 	//
 	// NOTE: Again, RotationEditMode is _independent_ of this mechanism, it is only meant to expose the right set of properties for editing (editor) and saving
 	// (to scene, in order to keep the same values and avoid data loss on conversions). It has zero influence in the logic described above.
-	enum TransformDirty {
+	enum TransformDirty : uint8_t {
 		DIRTY_NONE = 0,
 		DIRTY_EULER_ROTATION_AND_SCALE = 1,
 		DIRTY_LOCAL_TRANSFORM = 2,
@@ -86,44 +86,44 @@ private:
 	};
 
 	mutable SelfList<Node> xform_change;
-
 	// This Data struct is to avoid namespace pollution in derived classes.
 
 	struct Data {
 		mutable Transform3D global_transform;
 		mutable Transform3D local_transform;
-		mutable EulerOrder euler_rotation_order = EulerOrder::YXZ;
 		mutable Vector3 euler_rotation;
 		mutable Vector3 scale = Vector3(1, 1, 1);
 		mutable RotationEditMode rotation_edit_mode = ROTATION_EDIT_MODE_EULER;
+		mutable EulerOrder euler_rotation_order = EulerOrder::YXZ;
 
 		mutable MTNumeric<uint32_t> dirty;
 
 		Viewport *viewport = nullptr;
 
-		bool top_level = false;
-		bool inside_world = false;
-
 		RID visibility_parent;
 
 		Node3D *parent = nullptr;
+		// TODO: Try vector here?
 		List<Node3D *> children;
 		List<Node3D *>::Element *C = nullptr;
+
+		bool top_level = false;
+		bool inside_world = false;
 
 		bool ignore_notification = false;
 		bool notify_local_transform = false;
 		bool notify_transform = false;
 
 		bool visible = true;
-		bool disable_scale = false;
 
+		bool disable_scale = false;
 #ifdef TOOLS_ENABLED
-		Vector<Ref<Node3DGizmo>> gizmos;
 		bool gizmos_disabled = false;
 		bool gizmos_dirty = false;
 		bool transform_gizmo_visible = true;
+		Vector<Ref<Node3DGizmo>> gizmos;
 #endif
-
+		// char _padding[252];
 	} data;
 
 	NodePath visibility_parent_path;
@@ -278,7 +278,10 @@ public:
 	NodePath get_visibility_parent() const;
 
 	Node3D();
+	static const size_t DATA_SIZE = sizeof(Data);
 };
+
+static const size_t NODE3D_SIZE = sizeof(Node3D);
 
 VARIANT_ENUM_CAST(Node3D::RotationEditMode)
 

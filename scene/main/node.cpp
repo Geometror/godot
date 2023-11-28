@@ -654,10 +654,13 @@ bool Node::is_multiplayer_authority() const {
 
 void Node::rpc_config(const StringName &p_method, const Variant &p_config) {
 	ERR_THREAD_GUARD
-	if (data.rpc_config.get_type() != Variant::DICTIONARY) {
-		data.rpc_config = Dictionary();
+	if (data.rpc_config == nullptr) {
+		data.rpc_config = memnew(Variant);
 	}
-	Dictionary node_config = data.rpc_config;
+	if (data.rpc_config->get_type() != Variant::DICTIONARY) {
+		*data.rpc_config = Dictionary();
+	}
+	Dictionary node_config = *data.rpc_config;
 	if (p_config.get_type() == Variant::NIL) {
 		node_config.erase(p_method);
 	} else {
@@ -667,7 +670,7 @@ void Node::rpc_config(const StringName &p_method, const Variant &p_config) {
 }
 
 const Variant Node::get_node_rpc_config() const {
-	return data.rpc_config;
+	return *data.rpc_config;
 }
 
 /***** RPC FUNCTIONS ********/
@@ -1209,7 +1212,20 @@ String Node::validate_child_name(Node *p_child) {
 	_generate_serial_child_name(p_child, name);
 	return name;
 }
+
+void Node::set_display_folded(bool p_folded) {
+	ERR_THREAD_GUARD
+	data.display_folded = p_folded;
+}
+
+bool Node::is_displayed_folded() const {
+	return data.display_folded;
+}
 #endif
+
+bool Node::is_ready() const {
+	return !data.ready_first;
+}
 
 String Node::adjust_name_casing(const String &p_name) {
 	switch (GLOBAL_GET("editor/naming/node_name_casing").operator int()) {
@@ -2291,6 +2307,7 @@ String Node::get_scene_file_path() const {
 	return data.scene_file_path;
 }
 
+#ifdef TOOLS_ENABLED
 void Node::set_editor_description(const String &p_editor_description) {
 	ERR_THREAD_GUARD
 	if (data.editor_description == p_editor_description) {
@@ -2350,7 +2367,6 @@ Node *Node::get_deepest_editable_node(Node *p_start_node) const {
 	return node;
 }
 
-#ifdef TOOLS_ENABLED
 void Node::set_property_pinned(const String &p_property, bool p_pinned) {
 	ERR_THREAD_GUARD
 	bool current_pinned = false;
@@ -2387,6 +2403,7 @@ bool Node::is_part_of_edited_scene() const {
 	return Engine::get_singleton()->is_editor_hint() && is_inside_tree() && get_tree()->get_edited_scene_root() &&
 			(get_tree()->get_edited_scene_root() == this || get_tree()->get_edited_scene_root()->is_ancestor_of(this));
 }
+
 #endif
 
 void Node::get_storable_properties(HashSet<StringName> &r_storable_properties) const {
@@ -3093,19 +3110,6 @@ bool Node::is_owned_by_parent() const {
 	return data.parent_owned;
 }
 
-void Node::set_display_folded(bool p_folded) {
-	ERR_THREAD_GUARD
-	data.display_folded = p_folded;
-}
-
-bool Node::is_displayed_folded() const {
-	return data.display_folded;
-}
-
-bool Node::is_ready() const {
-	return !data.ready_first;
-}
-
 void Node::request_ready() {
 	ERR_THREAD_GUARD
 	data.ready_first = true;
@@ -3334,9 +3338,6 @@ void Node::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_process_thread_group_order", "order"), &Node::set_process_thread_group_order);
 	ClassDB::bind_method(D_METHOD("get_process_thread_group_order"), &Node::get_process_thread_group_order);
 
-	ClassDB::bind_method(D_METHOD("set_display_folded", "fold"), &Node::set_display_folded);
-	ClassDB::bind_method(D_METHOD("is_displayed_folded"), &Node::is_displayed_folded);
-
 	ClassDB::bind_method(D_METHOD("set_process_internal", "enable"), &Node::set_process_internal);
 	ClassDB::bind_method(D_METHOD("is_processing_internal"), &Node::is_processing_internal);
 
@@ -3353,8 +3354,6 @@ void Node::_bind_methods() {
 
 	ClassDB::bind_method(D_METHOD("set_scene_instance_load_placeholder", "load_placeholder"), &Node::set_scene_instance_load_placeholder);
 	ClassDB::bind_method(D_METHOD("get_scene_instance_load_placeholder"), &Node::get_scene_instance_load_placeholder);
-	ClassDB::bind_method(D_METHOD("set_editable_instance", "node", "is_editable"), &Node::set_editable_instance);
-	ClassDB::bind_method(D_METHOD("is_editable_instance", "node"), &Node::is_editable_instance);
 
 	ClassDB::bind_method(D_METHOD("get_viewport"), &Node::get_viewport);
 
@@ -3371,9 +3370,6 @@ void Node::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_multiplayer"), &Node::get_multiplayer);
 	ClassDB::bind_method(D_METHOD("rpc_config", "method", "config"), &Node::rpc_config);
 
-	ClassDB::bind_method(D_METHOD("set_editor_description", "editor_description"), &Node::set_editor_description);
-	ClassDB::bind_method(D_METHOD("get_editor_description"), &Node::get_editor_description);
-
 	ClassDB::bind_method(D_METHOD("_set_import_path", "import_path"), &Node::set_import_path);
 	ClassDB::bind_method(D_METHOD("_get_import_path"), &Node::get_import_path);
 
@@ -3381,7 +3377,16 @@ void Node::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("is_unique_name_in_owner"), &Node::is_unique_name_in_owner);
 
 #ifdef TOOLS_ENABLED
+	ClassDB::bind_method(D_METHOD("set_editor_description", "editor_description"), &Node::set_editor_description);
+	ClassDB::bind_method(D_METHOD("get_editor_description"), &Node::get_editor_description);
+
 	ClassDB::bind_method(D_METHOD("_set_property_pinned", "property", "pinned"), &Node::set_property_pinned);
+
+	ClassDB::bind_method(D_METHOD("set_display_folded", "fold"), &Node::set_display_folded);
+	ClassDB::bind_method(D_METHOD("is_displayed_folded"), &Node::is_displayed_folded);
+
+	ClassDB::bind_method(D_METHOD("set_editable_instance", "node", "is_editable"), &Node::set_editable_instance);
+	ClassDB::bind_method(D_METHOD("is_editable_instance", "node"), &Node::is_editable_instance);
 #endif
 
 	ADD_PROPERTY(PropertyInfo(Variant::NODE_PATH, "_import_path", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NO_EDITOR | PROPERTY_USAGE_INTERNAL), "_set_import_path", "_get_import_path");

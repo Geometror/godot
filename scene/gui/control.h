@@ -636,6 +636,8 @@ public:
 	~Control();
 };
 
+const size_t CONTROL_SIZE = sizeof(Control);
+
 VARIANT_ENUM_CAST(Control::FocusMode);
 VARIANT_BITFIELD_CAST(Control::SizeFlags);
 VARIANT_ENUM_CAST(Control::CursorShape);

@@ -877,14 +877,14 @@ void Object::set_script_and_instance(const Variant &p_script, ScriptInstance *p_
 	//this function is not meant to be used in any of these ways
 	ERR_FAIL_COND(p_script.is_null());
 	ERR_FAIL_NULL(p_instance);
-	ERR_FAIL_COND(script_instance != nullptr || !script.is_null());
+	ERR_FAIL_COND(script_instance != nullptr || !script->is_null());
 
-	script = p_script;
+	*script = p_script;
 	script_instance = p_instance;
 }
 
 void Object::set_script(const Variant &p_script) {
-	if (script == p_script) {
+	if (*script == p_script) {
 		return;
 	}
 
@@ -894,7 +894,7 @@ void Object::set_script(const Variant &p_script) {
 		ERR_FAIL_COND_MSG(s->is_abstract(), vformat("Cannot set object script. Script '%s' should not be abstract.", s->get_path()));
 	}
 
-	script = p_script;
+	*script = p_script;
 
 	if (script_instance) {
 		memdelete(script_instance);
@@ -927,14 +927,14 @@ void Object::set_script_instance(ScriptInstance *p_instance) {
 	script_instance = p_instance;
 
 	if (p_instance) {
-		script = p_instance->get_script();
+		*script = p_instance->get_script();
 	} else {
-		script = Variant();
+		*script = Variant();
 	}
 }
 
 Variant Object::get_script() const {
-	return script;
+	return *script;
 }
 
 bool Object::has_meta(const StringName &p_name) const {
@@ -1023,19 +1023,24 @@ void Object::get_meta_list(List<StringName> *p_list) const {
 }
 
 void Object::add_user_signal(const MethodInfo &p_signal) {
+	if (!signal_map) {
+		signal_map = memnew((HashMap<StringName, SignalData>));
+	}
+
 	ERR_FAIL_COND_MSG(p_signal.name.is_empty(), "Signal name cannot be empty.");
 	ERR_FAIL_COND_MSG(ClassDB::has_signal(get_class_name(), p_signal.name), "User signal's name conflicts with a built-in signal of '" + get_class_name() + "'.");
-	ERR_FAIL_COND_MSG(signal_map.has(p_signal.name), "Trying to add already existing signal '" + p_signal.name + "'.");
+	ERR_FAIL_COND_MSG(signal_map->has(p_signal.name), "Trying to add already existing signal '" + p_signal.name + "'.");
 	SignalData s;
 	s.user = p_signal;
-	signal_map[p_signal.name] = s;
+
+	(*signal_map)[p_signal.name] = s;
 }
 
 bool Object::_has_user_signal(const StringName &p_name) const {
-	if (!signal_map.has(p_name)) {
+	if (!signal_map || !signal_map->has(p_name)) {
 		return false;
 	}
-	return signal_map[p_name].user.name.length() > 0;
+	return (*signal_map)[p_name].user.name.length() > 0;
 }
 
 struct _ObjectSignalDisconnectData {
@@ -1076,12 +1081,12 @@ Error Object::emit_signalp(const StringName &p_name, const Variant **p_args, int
 		return ERR_CANT_ACQUIRE_RESOURCE; //no emit, signals blocked
 	}
 
-	SignalData *s = signal_map.getptr(p_name);
+	SignalData *s = signal_map ? signal_map->getptr(p_name) : nullptr;
 	if (!s) {
 #ifdef DEBUG_ENABLED
 		bool signal_is_valid = ClassDB::has_signal(get_class_name(), p_name);
 		//check in script
-		ERR_FAIL_COND_V_MSG(!signal_is_valid && !script.is_null() && !Ref<Script>(script)->has_script_signal(p_name), ERR_UNAVAILABLE, "Can't emit non-existing signal " + String("\"") + p_name + "\".");
+		ERR_FAIL_COND_V_MSG(!signal_is_valid && !script->is_null() && !Ref<Script>(*script)->has_script_signal(p_name), ERR_UNAVAILABLE, "Can't emit non-existing signal " + String("\"") + p_name + "\".");
 #endif
 		//not connected? just return
 		return ERR_UNAVAILABLE;
@@ -1129,7 +1134,7 @@ Error Object::emit_signalp(const StringName &p_name, const Variant **p_args, int
 
 			if (ce.error != Callable::CallError::CALL_OK) {
 #ifdef DEBUG_ENABLED
-				if (c.flags & CONNECT_PERSIST && Engine::get_singleton()->is_editor_hint() && (script.is_null() || !Ref<Script>(script)->is_tool())) {
+				if (c.flags & CONNECT_PERSIST && Engine::get_singleton()->is_editor_hint() && (!script->is_null() || !Ref<Script>(*script)->is_tool())) {
 					continue;
 				}
 #endif
@@ -1231,8 +1236,8 @@ TypedArray<Dictionary> Object::_get_incoming_connections() const {
 }
 
 bool Object::has_signal(const StringName &p_name) const {
-	if (!script.is_null()) {
-		Ref<Script> scr = script;
+	if (!script->is_null()) {
+		Ref<Script> scr = *script;
 		if (scr.is_valid() && scr->has_script_signal(p_name)) {
 			return true;
 		}
@@ -1250,8 +1255,8 @@ bool Object::has_signal(const StringName &p_name) const {
 }
 
 void Object::get_signal_list(List<MethodInfo> *p_signals) const {
-	if (!script.is_null()) {
-		Ref<Script> scr = script;
+	if (!script->is_null()) {
+		Ref<Script> scr = *script;
 		if (scr.is_valid()) {
 			scr->get_script_signal_list(p_signals);
 		}
@@ -1260,7 +1265,11 @@ void Object::get_signal_list(List<MethodInfo> *p_signals) const {
 	ClassDB::get_signal_list(get_class_name(), p_signals);
 	//find maybe usersignals?
 
-	for (const KeyValue<StringName, SignalData> &E : signal_map) {
+	if (!signal_map) {
+		return;
+	}
+
+	for (const KeyValue<StringName, SignalData> &E : *signal_map) {
 		if (!E.value.user.name.is_empty()) {
 			//user signal
 			p_signals->push_back(E.value.user);
@@ -1269,7 +1278,11 @@ void Object::get_signal_list(List<MethodInfo> *p_signals) const {
 }
 
 void Object::get_all_signal_connections(List<Connection> *p_connections) const {
-	for (const KeyValue<StringName, SignalData> &E : signal_map) {
+	if (!signal_map) {
+		return;
+	}
+
+	for (const KeyValue<StringName, SignalData> &E : *signal_map) {
 		const SignalData *s = &E.value;
 
 		for (const KeyValue<Callable, SignalData::Slot> &slot_kv : s->slot_map) {
@@ -1279,7 +1292,7 @@ void Object::get_all_signal_connections(List<Connection> *p_connections) const {
 }
 
 void Object::get_signal_connection_list(const StringName &p_signal, List<Connection> *p_connections) const {
-	const SignalData *s = signal_map.getptr(p_signal);
+	const SignalData *s = signal_map ? signal_map->getptr(p_signal) : nullptr;
 	if (!s) {
 		return; //nothing
 	}
@@ -1292,7 +1305,11 @@ void Object::get_signal_connection_list(const StringName &p_signal, List<Connect
 int Object::get_persistent_signal_connection_count() const {
 	int count = 0;
 
-	for (const KeyValue<StringName, SignalData> &E : signal_map) {
+	if (!signal_map) {
+		return count;
+	}
+
+	for (const KeyValue<StringName, SignalData> &E : *signal_map) {
 		const SignalData *s = &E.value;
 
 		for (const KeyValue<Callable, SignalData::Slot> &slot_kv : s->slot_map) {
@@ -1323,18 +1340,18 @@ Error Object::connect(const StringName &p_signal, const Callable &p_callable, ui
 		ERR_FAIL_COND_V_MSG(!p_callable.is_valid(), ERR_INVALID_PARAMETER, "Cannot connect to '" + p_signal + "': the provided callable is not valid: " + p_callable);
 	}
 
-	SignalData *s = signal_map.getptr(p_signal);
+	SignalData *s = signal_map ? signal_map->getptr(p_signal) : nullptr;
 	if (!s) {
 		bool signal_is_valid = ClassDB::has_signal(get_class_name(), p_signal);
 		//check in script
-		if (!signal_is_valid && !script.is_null()) {
-			if (Ref<Script>(script)->has_script_signal(p_signal)) {
+		if (!signal_is_valid && !script->is_null()) {
+			if (Ref<Script>(*script)->has_script_signal(p_signal)) {
 				signal_is_valid = true;
 			}
 #ifdef TOOLS_ENABLED
 			else {
 				//allow connecting signals anyway if script is invalid, see issue #17070
-				if (!Ref<Script>(script)->is_valid()) {
+				if (!Ref<Script>(*script)->is_valid()) {
 					signal_is_valid = true;
 				}
 			}
@@ -1343,8 +1360,12 @@ Error Object::connect(const StringName &p_signal, const Callable &p_callable, ui
 
 		ERR_FAIL_COND_V_MSG(!signal_is_valid, ERR_INVALID_PARAMETER, "In Object of type '" + String(get_class()) + "': Attempt to connect nonexistent signal '" + p_signal + "' to callable '" + p_callable + "'.");
 
-		signal_map[p_signal] = SignalData();
-		s = &signal_map[p_signal];
+		if (!signal_map) {
+			signal_map = memnew((HashMap<StringName, SignalData>));
+		}
+
+		(*signal_map)[p_signal] = SignalData();
+		s = &(*signal_map)[p_signal];
 	}
 
 	Callable target = p_callable;
@@ -1383,14 +1404,14 @@ Error Object::connect(const StringName &p_signal, const Callable &p_callable, ui
 
 bool Object::is_connected(const StringName &p_signal, const Callable &p_callable) const {
 	ERR_FAIL_COND_V_MSG(p_callable.is_null(), false, "Cannot determine if connected to '" + p_signal + "': the provided callable is null.");
-	const SignalData *s = signal_map.getptr(p_signal);
+	const SignalData *s = signal_map ? signal_map->getptr(p_signal) : nullptr;
 	if (!s) {
 		bool signal_is_valid = ClassDB::has_signal(get_class_name(), p_signal);
 		if (signal_is_valid) {
 			return false;
 		}
 
-		if (!script.is_null() && Ref<Script>(script)->has_script_signal(p_signal)) {
+		if (!script->is_null() && Ref<Script>(*script)->has_script_signal(p_signal)) {
 			return false;
 		}
 
@@ -1409,10 +1430,10 @@ void Object::disconnect(const StringName &p_signal, const Callable &p_callable) 
 bool Object::_disconnect(const StringName &p_signal, const Callable &p_callable, bool p_force) {
 	ERR_FAIL_COND_V_MSG(p_callable.is_null(), false, "Cannot disconnect from '" + p_signal + "': the provided callable is null.");
 
-	SignalData *s = signal_map.getptr(p_signal);
+	SignalData *s = signal_map ? signal_map->getptr(p_signal) : nullptr;
 	if (!s) {
 		bool signal_is_valid = ClassDB::has_signal(get_class_name(), p_signal) ||
-				(!script.is_null() && Ref<Script>(script)->has_script_signal(p_signal));
+				(!script->is_null() && Ref<Script>(*script)->has_script_signal(p_signal));
 		ERR_FAIL_COND_V_MSG(signal_is_valid, false, "Attempt to disconnect a nonexistent connection from '" + to_string() + "'. Signal: '" + p_signal + "', callable: '" + p_callable + "'.");
 	}
 	ERR_FAIL_NULL_V_MSG(s, false, vformat("Disconnecting nonexistent signal '%s' in %s.", p_signal, to_string()));
@@ -1439,7 +1460,7 @@ bool Object::_disconnect(const StringName &p_signal, const Callable &p_callable,
 
 	if (s->slot_map.is_empty() && ClassDB::has_signal(get_class_name(), p_signal)) {
 		//not user signal, delete
-		signal_map.erase(p_signal);
+		signal_map->erase(p_signal);
 	}
 
 	return true;
@@ -1544,15 +1565,19 @@ void Object::_clear_internal_resource_paths(const Variant &p_var) {
 #ifdef TOOLS_ENABLED
 void Object::editor_set_section_unfold(const String &p_section, bool p_unfolded) {
 	set_edited(true);
+	if (!editor_section_folding) {
+		editor_section_folding = memnew(HashSet<String>());
+	}
+
 	if (p_unfolded) {
-		editor_section_folding.insert(p_section);
+		editor_section_folding->insert(p_section);
 	} else {
-		editor_section_folding.erase(p_section);
+		editor_section_folding->erase(p_section);
 	}
 }
 
 bool Object::editor_is_section_unfolded(const String &p_section) {
-	return editor_section_folding.has(p_section);
+	return editor_section_folding ? editor_section_folding->has(p_section) : false;
 }
 
 #endif
@@ -1775,10 +1800,6 @@ Variant::Type Object::get_static_property_type_indexed(const Vector<StringName> 
 	return check.get_type();
 }
 
-bool Object::is_queued_for_deletion() const {
-	return _is_queued_for_deletion;
-}
-
 #ifdef TOOLS_ENABLED
 void Object::set_edited(bool p_edited) {
 	_edited = p_edited;
@@ -1834,7 +1855,7 @@ void Object::set_instance_binding(void *p_token, void *p_binding, const GDExtens
 
 void *Object::get_instance_binding(void *p_token, const GDExtensionInstanceBindingCallbacks *p_callbacks) {
 	void *binding = nullptr;
-	_instance_binding_mutex.lock();
+	_instance_binding_mutex->lock();
 	for (uint32_t i = 0; i < _instance_binding_count; i++) {
 		if (_instance_bindings[i].token == p_token) {
 			binding = _instance_bindings[i].binding;
@@ -1865,14 +1886,14 @@ void *Object::get_instance_binding(void *p_token, const GDExtensionInstanceBindi
 		_instance_binding_count++;
 	}
 
-	_instance_binding_mutex.unlock();
+	_instance_binding_mutex->unlock();
 
 	return binding;
 }
 
 bool Object::has_instance_binding(void *p_token) {
 	bool found = false;
-	_instance_binding_mutex.lock();
+	_instance_binding_mutex->lock();
 	for (uint32_t i = 0; i < _instance_binding_count; i++) {
 		if (_instance_bindings[i].token == p_token) {
 			found = true;
@@ -1880,14 +1901,14 @@ bool Object::has_instance_binding(void *p_token) {
 		}
 	}
 
-	_instance_binding_mutex.unlock();
+	_instance_binding_mutex->unlock();
 
 	return found;
 }
 
 void Object::free_instance_binding(void *p_token) {
 	bool found = false;
-	_instance_binding_mutex.lock();
+	_instance_binding_mutex->lock();
 	for (uint32_t i = 0; i < _instance_binding_count; i++) {
 		if (!found && _instance_bindings[i].token == p_token) {
 			if (_instance_bindings[i].free_callback) {
@@ -1906,7 +1927,7 @@ void Object::free_instance_binding(void *p_token) {
 	if (found) {
 		_instance_binding_count--;
 	}
-	_instance_binding_mutex.unlock();
+	_instance_binding_mutex->unlock();
 }
 
 #ifdef TOOLS_ENABLED
@@ -1921,7 +1942,7 @@ void Object::clear_internal_extension() {
 	_extension_instance = nullptr;
 
 	// Clear the instance bindings.
-	_instance_binding_mutex.lock();
+	_instance_binding_mutex->lock();
 	if (_instance_bindings[0].free_callback) {
 		_instance_bindings[0].free_callback(_instance_bindings[0].token, this, _instance_bindings[0].binding);
 	}
@@ -1929,7 +1950,7 @@ void Object::clear_internal_extension() {
 	_instance_bindings[0].token = nullptr;
 	_instance_bindings[0].free_callback = nullptr;
 	_instance_bindings[0].reference_callback = nullptr;
-	_instance_binding_mutex.unlock();
+	_instance_binding_mutex->unlock();
 
 	// Clear the virtual methods.
 	while (virtual_method_list) {
@@ -1951,8 +1972,10 @@ void Object::reset_internal_extension(ObjectGDExtension *p_extension) {
 #endif
 
 void Object::_construct_object(bool p_reference) {
+	_instance_binding_mutex = memnew(BinaryMutex);
 	type_is_reference = p_reference;
 	_instance_id = ObjectDB::add_instance(this);
+	script = memnew(Variant());
 
 #ifdef DEBUG_ENABLED
 	_lock_index.init(1);
@@ -1979,7 +2002,7 @@ Object::~Object() {
 		memdelete(script_instance);
 	}
 	script_instance = nullptr;
-
+	memdelete(script);
 	if (_extension) {
 #ifdef TOOLS_ENABLED
 		if (_extension->untrack_instance) {
@@ -2006,9 +2029,9 @@ Object::~Object() {
 	}
 
 	// Drop all connections to the signals of this object.
-	while (signal_map.size()) {
+	while (signal_map && signal_map->size()) {
 		// Avoid regular iteration so erasing is safe.
-		KeyValue<StringName, SignalData> &E = *signal_map.begin();
+		KeyValue<StringName, SignalData> &E = *signal_map->begin();
 		SignalData *s = &E.value;
 
 		for (const KeyValue<Callable, SignalData::Slot> &slot_kv : s->slot_map) {
@@ -2018,7 +2041,7 @@ Object::~Object() {
 			}
 		}
 
-		signal_map.erase(E.key);
+		signal_map->erase(E.key);
 	}
 
 	// Disconnect signals that connect to this object.

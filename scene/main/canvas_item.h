@@ -47,7 +47,7 @@ class CanvasItem : public Node {
 	friend class CanvasLayer;
 
 public:
-	enum TextureFilter {
+	enum TextureFilter : uint8_t {
 		TEXTURE_FILTER_PARENT_NODE,
 		TEXTURE_FILTER_NEAREST,
 		TEXTURE_FILTER_LINEAR,
@@ -58,7 +58,7 @@ public:
 		TEXTURE_FILTER_MAX
 	};
 
-	enum TextureRepeat {
+	enum TextureRepeat : uint8_t {
 		TEXTURE_REPEAT_PARENT_NODE,
 		TEXTURE_REPEAT_DISABLED,
 		TEXTURE_REPEAT_ENABLED,
@@ -66,7 +66,7 @@ public:
 		TEXTURE_REPEAT_MAX,
 	};
 
-	enum ClipChildrenMode {
+	enum ClipChildrenMode : uint8_t {
 		CLIP_CHILDREN_DISABLED,
 		CLIP_CHILDREN_ONLY,
 		CLIP_CHILDREN_AND_DRAW,
@@ -88,6 +88,8 @@ private:
 	List<CanvasItem *> children_items;
 	List<CanvasItem *>::Element *C = nullptr;
 
+	Window *window = nullptr;
+
 	int light_mask = 1;
 	uint32_t visibility_layer = 1;
 
@@ -95,7 +97,6 @@ private:
 	bool z_relative = true;
 	bool y_sort_enabled = false;
 
-	Window *window = nullptr;
 	bool visible = true;
 	bool parent_visible_in_tree = false;
 	bool pending_update = false;
@@ -110,10 +111,11 @@ private:
 
 	ClipChildrenMode clip_children_mode = CLIP_CHILDREN_DISABLED;
 
-	mutable RS::CanvasItemTextureFilter texture_filter_cache = RS::CANVAS_ITEM_TEXTURE_FILTER_LINEAR;
-	mutable RS::CanvasItemTextureRepeat texture_repeat_cache = RS::CANVAS_ITEM_TEXTURE_REPEAT_DISABLED;
 	TextureFilter texture_filter = TEXTURE_FILTER_PARENT_NODE;
 	TextureRepeat texture_repeat = TEXTURE_REPEAT_PARENT_NODE;
+
+	mutable RS::CanvasItemTextureFilter texture_filter_cache = RS::CANVAS_ITEM_TEXTURE_FILTER_LINEAR;
+	mutable RS::CanvasItemTextureRepeat texture_repeat_cache = RS::CANVAS_ITEM_TEXTURE_REPEAT_DISABLED;
 
 	Ref<Material> material;
 
@@ -425,5 +427,7 @@ public:
 	CanvasTexture();
 	~CanvasTexture();
 };
+
+const size_t CANVAS_ITEM_SIZE = sizeof(CanvasItem);
 
 #endif // CANVAS_ITEM_H

@@ -556,12 +556,14 @@ Node *SceneState::instantiate(GenEditState p_edit_state) const {
 		stray_instances.pop_front();
 	}
 
+#ifdef TOOLS_ENABLED
 	for (int i = 0; i < editable_instances.size(); i++) {
 		Node *ei = ret_nodes[0]->get_node_or_null(editable_instances[i]);
 		if (ei) {
 			ret_nodes[0]->set_editable_instance(ei, true);
 		}
 	}
+#endif
 
 	return ret_nodes[0];
 }
@@ -587,17 +589,23 @@ static int _vm_get_variant(const Variant &p_variant, HashMap<Variant, int, Varia
 }
 
 Error SceneState::_parse_node(Node *p_owner, Node *p_node, int p_parent_idx, HashMap<StringName, int> &name_map, HashMap<Variant, int, VariantHasher, VariantComparator> &variant_map, HashMap<Node *, int> &node_map, HashMap<Node *, int> &nodepath_map) {
-	// this function handles all the work related to properly packing scenes, be it
+	// This function handles all the work related to properly packing scenes, be it
 	// instantiated or inherited.
-	// given the complexity of this process, an attempt will be made to properly
-	// document it. if you fail to understand something, please ask!
+	// Given the complexity of this process, an attempt will be made to properly
+	// document it. If you fail to understand something, please ask!
 
-	//discard nodes that do not belong to be processed
-	if (p_node != p_owner && p_node->get_owner() != p_owner && !p_owner->is_editable_instance(p_node->get_owner())) {
+	// Discard nodes that do not belong to be processed
+	if (p_node != p_owner && p_node->get_owner() != p_owner
+#ifdef TOOLS_ENABLED
+			&& !p_owner->is_editable_instance(p_node->get_owner())
+#endif
+	) {
 		return OK;
 	}
 
 	bool is_editable_instance = false;
+
+#ifdef TOOLS_ENABLED
 
 	// save the child instantiated scenes that are chosen as editable, so they can be restored
 	// upon load back
@@ -609,6 +617,7 @@ Error SceneState::_parse_node(Node *p_owner, Node *p_node, int p_parent_idx, Has
 		// Node is part of an editable instance.
 		is_editable_instance = true;
 	}
+#endif
 
 	NodeData nd;
 
@@ -852,7 +861,11 @@ Error SceneState::_parse_node(Node *p_owner, Node *p_node, int p_parent_idx, Has
 }
 
 Error SceneState::_parse_connections(Node *p_owner, Node *p_node, HashMap<StringName, int> &name_map, HashMap<Variant, int, VariantHasher, VariantComparator> &variant_map, HashMap<Node *, int> &node_map, HashMap<Node *, int> &nodepath_map) {
-	if (p_node != p_owner && p_node->get_owner() && p_node->get_owner() != p_owner && !p_owner->is_editable_instance(p_node->get_owner())) {
+	if (p_node != p_owner && p_node->get_owner() && p_node->get_owner() != p_owner
+#ifdef TOOLS_ENABLED
+			&& !p_owner->is_editable_instance(p_node->get_owner())
+#endif
+	) {
 		return OK;
 	}
 
@@ -1126,7 +1139,9 @@ void SceneState::clear() {
 	connections.clear();
 	node_path_cache.clear();
 	node_paths.clear();
+#ifdef TOOLS_ENABLED
 	editable_instances.clear();
+#endif
 	base_scene_idx = -1;
 }
 
@@ -1153,9 +1168,11 @@ Error SceneState::copy_from(const Ref<SceneState> &p_scene_state) {
 	for (const NodePath &E : p_scene_state->node_paths) {
 		node_paths.append(E);
 	}
+#ifdef TOOLS_ENABLED
 	for (const NodePath &E : p_scene_state->editable_instances) {
 		editable_instances.append(E);
 	}
+#endif
 	base_scene_idx = p_scene_state->base_scene_idx;
 
 	return OK;
@@ -1431,11 +1448,12 @@ void SceneState::set_bundled_scene(const Dictionary &p_dictionary) {
 	if (p_dictionary.has("base_scene")) {
 		base_scene_idx = p_dictionary["base_scene"];
 	}
-
+#ifdef TOOLS_ENABLED
 	editable_instances.resize(ei.size());
 	for (int i = 0; i < editable_instances.size(); i++) {
 		editable_instances.write[i] = ei[i];
 	}
+#endif
 
 	//path=p_dictionary["path"];
 }
@@ -1509,12 +1527,15 @@ Dictionary SceneState::get_bundled_scene() const {
 	}
 	d["node_paths"] = rnode_paths;
 
+#ifdef TOOLS_ENABLED
 	Array reditable_instances;
 	reditable_instances.resize(editable_instances.size());
 	for (int i = 0; i < editable_instances.size(); i++) {
 		reditable_instances[i] = editable_instances[i];
 	}
 	d["editable_instances"] = reditable_instances;
+#endif
+
 	if (base_scene_idx >= 0) {
 		d["base_scene"] = base_scene_idx;
 	}
@@ -1767,9 +1788,16 @@ bool SceneState::has_connection(const NodePath &p_node_from, const StringName &p
 	return false;
 }
 
+#ifdef TOOLS_ENABLED
+
+void SceneState::add_editable_instance(const NodePath &p_path) {
+	editable_instances.push_back(p_path);
+}
+
 Vector<NodePath> SceneState::get_editable_instances() const {
 	return editable_instances;
 }
+#endif
 
 //add
 
@@ -1843,10 +1871,6 @@ void SceneState::add_connection(int p_from, int p_to, int p_signal, int p_method
 	c.unbinds = p_unbinds;
 	c.binds = p_binds;
 	connections.push_back(c);
-}
-
-void SceneState::add_editable_instance(const NodePath &p_path) {
-	editable_instances.push_back(p_path);
 }
 
 Vector<String> SceneState::_get_node_groups(int p_idx) const {

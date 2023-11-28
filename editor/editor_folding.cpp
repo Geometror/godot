@@ -37,11 +37,15 @@
 
 Vector<String> EditorFolding::_get_unfolds(const Object *p_object) {
 	Vector<String> sections;
-	sections.resize(p_object->editor_get_section_folding().size());
+	const HashSet<String> *section_folding = p_object->editor_get_section_folding();
+	if (!section_folding) {
+		return sections;
+	}
+	sections.resize(section_folding->size());
 	if (sections.size()) {
 		String *w = sections.ptrw();
 		int idx = 0;
-		for (const String &E : p_object->editor_get_section_folding()) {
+		for (const String &E : *section_folding) {
 			w[idx++] = E;
 		}
 	}

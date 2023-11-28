@@ -1108,7 +1108,7 @@ void SceneTree::_add_process_group(Node *p_node) {
 	_THREAD_SAFE_METHOD_
 	ERR_FAIL_NULL(p_node);
 
-	ProcessGroup *pg = memnew(ProcessGroup);
+	ProcessGroup *pg = group_allocator.alloc();
 
 	pg->owner = p_node;
 	p_node->data.process_group = pg;
@@ -1351,7 +1351,7 @@ void SceneTree::_flush_delete_queue() {
 void SceneTree::queue_delete(Object *p_object) {
 	_THREAD_SAFE_METHOD_
 	ERR_FAIL_NULL(p_object);
-	p_object->_is_queued_for_deletion = true;
+	p_object->set_queued_for_deletion(true);
 	delete_queue.push_back(p_object->get_instance_id());
 }
 

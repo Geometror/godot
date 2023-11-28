@@ -51,6 +51,39 @@ void RefCounted::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_reference_count"), &RefCounted::get_reference_count);
 }
 
+int LightRefCounted::get_reference_count() const {
+	return refcount.get();
+}
+
+bool LightRefCounted::reference() {
+	uint32_t rc_val = refcount.refval();
+	bool success = rc_val != 0;
+	return success;
+}
+
+bool LightRefCounted::unreference() {
+	uint32_t rc_val = refcount.unrefval();
+	bool die = rc_val == 0;
+	return die;
+}
+
+LightRefCounted::LightRefCounted() {
+	refcount.init();
+	refcount_init.init();
+}
+
+bool LightRefCounted::init_ref() {
+	if (reference()) {
+		if (!is_referenced() && refcount_init.unref()) {
+			unreference(); // first referencing is already 1, so compensate for the ref above
+		}
+
+		return true;
+	} else {
+		return false;
+	}
+}
+
 int RefCounted::get_reference_count() const {
 	return refcount.get();
 }

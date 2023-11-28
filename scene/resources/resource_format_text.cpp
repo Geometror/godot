@@ -379,8 +379,9 @@ Ref<PackedScene> ResourceLoaderText::_parse_node_tag(VariantParser::ResourcePars
 
 			NodePath path = next_tag.fields["path"];
 
+#ifdef TOOLS_ENABLED
 			packed_scene->get_state()->add_editable_instance(path.simplified());
-
+#endif
 			error = VariantParser::parse_tag(&stream, lines, error_text, next_tag, &parser);
 
 			if (error) {
@@ -2315,6 +2316,7 @@ Error ResourceFormatSaverTextInstance::save(const String &p_path, const Ref<Reso
 			f->store_line("]");
 		}
 
+#ifdef TOOLS_ENABLED
 		Vector<NodePath> editable_instances = state->get_editable_instances();
 		for (int i = 0; i < editable_instances.size(); i++) {
 			if (i == 0) {
@@ -2322,6 +2324,7 @@ Error ResourceFormatSaverTextInstance::save(const String &p_path, const Ref<Reso
 			}
 			f->store_line("[editable path=\"" + editable_instances[i].operator String() + "\"]");
 		}
+#endif
 	}
 
 	if (f->get_error() != OK && f->get_error() != ERR_FILE_EOF) {

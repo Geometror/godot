@@ -66,7 +66,7 @@ protected:
 	};
 
 public:
-	enum ProcessMode {
+	enum ProcessMode : uint8_t {
 		PROCESS_MODE_INHERIT, // same as parent node
 		PROCESS_MODE_PAUSABLE, // process only if not paused
 		PROCESS_MODE_WHEN_PAUSED, // process only if paused
@@ -74,13 +74,13 @@ public:
 		PROCESS_MODE_DISABLED, // never process
 	};
 
-	enum ProcessThreadGroup {
+	enum ProcessThreadGroup : uint8_t {
 		PROCESS_THREAD_GROUP_INHERIT,
 		PROCESS_THREAD_GROUP_MAIN_THREAD,
 		PROCESS_THREAD_GROUP_SUB_THREAD,
 	};
 
-	enum ProcessThreadMessages {
+	enum ProcessThreadMessages : uint8_t {
 		FLAG_PROCESS_THREAD_MESSAGES = 1,
 		FLAG_PROCESS_THREAD_MESSAGES_PHYSICS = 2,
 		FLAG_PROCESS_THREAD_MESSAGES_ALL = 3,
@@ -96,13 +96,13 @@ public:
 #endif
 	};
 
-	enum NameCasing {
+	enum NameCasing : uint8_t {
 		NAME_CASING_PASCAL_CASE,
 		NAME_CASING_CAMEL_CASE,
 		NAME_CASING_SNAKE_CASE
 	};
 
-	enum InternalMode {
+	enum InternalMode : uint8_t {
 		INTERNAL_MODE_DISABLED,
 		INTERNAL_MODE_FRONT,
 		INTERNAL_MODE_BACK,
@@ -144,6 +144,7 @@ private:
 
 	// This Data struct is to avoid namespace pollution in derived classes.
 	struct Data {
+		// TODO: Pack this in a struct and add pointer
 		String scene_file_path;
 		Ref<SceneState> instance_state;
 		Ref<SceneState> inherited_state;
@@ -151,10 +152,9 @@ private:
 		Node *parent = nullptr;
 		Node *owner = nullptr;
 		HashMap<StringName, Node *> children;
-		mutable bool children_cache_dirty = true;
-		mutable LocalVector<Node *> children_cache;
 		HashMap<StringName, Node *> owned_unique_nodes;
-		bool unique_name_in_owner = false;
+		mutable LocalVector<Node *> children_cache;
+		mutable bool children_cache_dirty = true;
 		InternalMode internal_mode = INTERNAL_MODE_DISABLED;
 		mutable int internal_children_front_count_cache = 0;
 		mutable int internal_children_back_count_cache = 0;
@@ -162,39 +162,40 @@ private:
 		mutable int index = -1; // relative to front, normal or back.
 		int depth = -1;
 		int blocked = 0; // Safeguard that throws an error when attempting to modify the tree in a harmful way while being traversed.
-		StringName name;
-		SceneTree *tree = nullptr;
 		bool inside_tree = false;
 		bool ready_notified = false; // This is a small hack, so if a node is added during _ready() to the tree, it correctly gets the _ready() notification.
 		bool ready_first = true;
+		bool unique_name_in_owner = false;
+		StringName name;
+		SceneTree *tree = nullptr;
 #ifdef TOOLS_ENABLED
 		NodePath import_path; // Path used when imported, used by scene editors to keep tracking.
-#endif
 		String editor_description;
-
+#endif
 		Viewport *viewport = nullptr;
 
+		//TODO: Try another data structure here (maybe vector)
 		HashMap<StringName, GroupData> grouped;
 		List<Node *>::Element *OW = nullptr; // Owned element.
 		List<Node *> owned;
 
-		ProcessMode process_mode = PROCESS_MODE_INHERIT;
 		Node *process_owner = nullptr;
-		ProcessThreadGroup process_thread_group = PROCESS_THREAD_GROUP_INHERIT;
 		Node *process_thread_group_owner = nullptr;
+		ProcessThreadGroup process_thread_group = PROCESS_THREAD_GROUP_INHERIT;
+		ProcessMode process_mode = PROCESS_MODE_INHERIT;
 		int process_thread_group_order = 0;
-		BitField<ProcessThreadMessages> process_thread_messages;
 		void *process_group = nullptr; // to avoid cyclic dependency
+		BitField<ProcessThreadMessages> process_thread_messages;
 
 		int multiplayer_authority = 1; // Server by default.
-		Variant rpc_config;
+		Variant *rpc_config = nullptr;
 
 		// Variables used to properly sort the node when processing, ignored otherwise.
 		// TODO: Should move all the stuff below to bits.
-		bool physics_process = false;
-		bool process = false;
 		int process_priority = 0;
 		int physics_process_priority = 0;
+		bool physics_process = false;
+		bool process = false;
 
 		bool physics_process_internal = false;
 		bool process_internal = false;
@@ -214,7 +215,7 @@ private:
 		mutable NodePath *path_cache = nullptr;
 
 	} data;
-
+	// const int size = sizeof(LocalVector<Node *>);
 	Ref<MultiplayerAPI> multiplayer;
 
 	String _get_tree_string_pretty(const String &p_prefix, bool p_last);
@@ -481,6 +482,7 @@ public:
 	void set_scene_file_path(const String &p_scene_file_path);
 	String get_scene_file_path() const;
 
+#ifdef TOOLS_ENABLED
 	void set_editor_description(const String &p_editor_description);
 	String get_editor_description() const;
 
@@ -488,12 +490,12 @@ public:
 	bool is_editable_instance(const Node *p_node) const;
 	Node *get_deepest_editable_node(Node *p_start_node) const;
 
-#ifdef TOOLS_ENABLED
 	void set_property_pinned(const String &p_property, bool p_pinned);
 	bool is_property_pinned(const StringName &p_property) const;
 	virtual StringName get_property_store_alias(const StringName &p_property) const;
 	bool is_part_of_edited_scene() const;
 #endif
+
 	void get_storable_properties(HashSet<StringName> &r_storable_properties) const;
 
 	virtual String to_string() override;
@@ -612,6 +614,9 @@ public:
 
 #ifdef TOOLS_ENABLED
 	String validate_child_name(Node *p_child);
+
+	void set_display_folded(bool p_folded);
+	bool is_displayed_folded() const;
 #endif
 	static String adjust_name_casing(const String &p_name);
 
@@ -638,8 +643,6 @@ public:
 
 	void update_configuration_warnings();
 
-	void set_display_folded(bool p_folded);
-	bool is_displayed_folded() const;
 	/* NETWORK */
 
 	virtual void set_multiplayer_authority(int p_peer_id, bool p_recursive = true);
@@ -712,6 +715,8 @@ public:
 	Node();
 	~Node();
 };
+
+const size_t NODE_SIZE = sizeof(Node);
 
 VARIANT_ENUM_CAST(Node::DuplicateFlags);
 VARIANT_ENUM_CAST(Node::ProcessMode);

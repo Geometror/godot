@@ -804,7 +804,7 @@ public:
 
 	/* VIEWPORT API */
 
-	enum CanvasItemTextureFilter {
+	enum CanvasItemTextureFilter : uint8_t {
 		CANVAS_ITEM_TEXTURE_FILTER_DEFAULT, // Uses canvas item setting for draw command, uses global setting for canvas item.
 		CANVAS_ITEM_TEXTURE_FILTER_NEAREST,
 		CANVAS_ITEM_TEXTURE_FILTER_LINEAR,
@@ -815,7 +815,7 @@ public:
 		CANVAS_ITEM_TEXTURE_FILTER_MAX
 	};
 
-	enum CanvasItemTextureRepeat {
+	enum CanvasItemTextureRepeat : uint8_t {
 		CANVAS_ITEM_TEXTURE_REPEAT_DEFAULT, // Uses canvas item setting for draw command, uses global setting for canvas item.
 		CANVAS_ITEM_TEXTURE_REPEAT_DISABLED,
 		CANVAS_ITEM_TEXTURE_REPEAT_ENABLED,

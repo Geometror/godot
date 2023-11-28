@@ -583,6 +583,14 @@ public:
 		CONNECT_INHERITED = 16, // Used in editor builds.
 	};
 
+	enum {
+		NOTIFICATION_POSTINITIALIZE = 0,
+		NOTIFICATION_PREDELETE = 1,
+		NOTIFICATION_EXTENSION_RELOADED = 2,
+		// Internal notification to send after NOTIFICATION_PREDELETE, not bound to scripting.
+		NOTIFICATION_PREDELETE_CLEANUP = 3,
+	};
+
 	struct Connection {
 		::Signal signal;
 		Callable callable;
@@ -597,14 +605,13 @@ public:
 	};
 
 private:
+	friend class RefCounted;
+	friend class ClassDB;
 #ifdef DEBUG_ENABLED
 	friend struct _ObjectDebugLock;
 #endif
 	friend bool predelete_handler(Object *);
 	friend void postinitialize_handler(Object *);
-
-	ObjectGDExtension *_extension = nullptr;
-	GDExtensionClassInstancePtr _extension_instance = nullptr;
 
 	struct SignalData {
 		struct Slot {
@@ -617,29 +624,50 @@ private:
 		HashMap<Callable, Slot, HashableHasher<Callable>> slot_map;
 	};
 
-	HashMap<StringName, SignalData> signal_map;
+	HashMap<StringName, SignalData> *signal_map = nullptr;
 	List<Connection> connections;
+
+	ObjectGDExtension *_extension = nullptr;
+	GDExtensionClassInstancePtr _extension_instance = nullptr;
+
 #ifdef DEBUG_ENABLED
 	SafeRefCount _lock_index;
 #endif
-	bool _block_signals = false;
-	int _predelete_ok = 0;
 	ObjectID _instance_id;
-	bool _predelete();
-	void _postinitialize();
+	uint8_t _predelete_ok = 0;
+
+	bool _block_signals = false;
 	bool _can_translate = true;
 	bool _emitting = false;
+	bool _is_queued_for_deletion = false;
+	bool type_is_reference = false;
 #ifdef TOOLS_ENABLED
 	bool _edited = false;
 	uint32_t _edited_version = 0;
-	HashSet<String> editor_section_folding;
+	HashSet<String> *editor_section_folding = nullptr;
 #endif
 	ScriptInstance *script_instance = nullptr;
-	Variant script; // Reference does not exist yet, store it in a Variant.
+	Variant *script; // Reference does not exist yet, store it in a Variant.
+
 	HashMap<StringName, Variant> metadata;
 	HashMap<StringName, Variant *> metadata_properties;
+
+	// mutable StringName _class_name;
 	mutable const StringName *_class_name_ptr = nullptr;
 
+	BinaryMutex *_instance_binding_mutex = nullptr;
+	struct InstanceBinding {
+		void *binding = nullptr;
+		void *token = nullptr;
+		GDExtensionInstanceBindingFreeCallback free_callback = nullptr;
+		GDExtensionInstanceBindingReferenceCallback reference_callback = nullptr;
+	};
+	InstanceBinding *_instance_bindings = nullptr;
+	uint32_t _instance_binding_count = 0;
+
+	_FORCE_INLINE_ void _construct_object(bool p_reference);
+	bool _predelete();
+	void _postinitialize();
 	void _add_user_signal(const String &p_name, const Array &p_args = Array());
 	bool _has_user_signal(const StringName &p_name) const;
 	Error _emit_signal(const Variant **p_args, int p_argcount, Callable::CallError &r_error);
@@ -651,28 +679,13 @@ private:
 	void _set_indexed_bind(const NodePath &p_name, const Variant &p_value);
 	Variant _get_indexed_bind(const NodePath &p_name) const;
 
-	_FORCE_INLINE_ void _construct_object(bool p_reference);
-
-	friend class RefCounted;
-	bool type_is_reference = false;
-
-	BinaryMutex _instance_binding_mutex;
-	struct InstanceBinding {
-		void *binding = nullptr;
-		void *token = nullptr;
-		GDExtensionInstanceBindingFreeCallback free_callback = nullptr;
-		GDExtensionInstanceBindingReferenceCallback reference_callback = nullptr;
-	};
-	InstanceBinding *_instance_bindings = nullptr;
-	uint32_t _instance_binding_count = 0;
-
 	Object(bool p_reference);
 
 protected:
 	_FORCE_INLINE_ bool _instance_binding_reference(bool p_reference) {
 		bool can_die = true;
 		if (_instance_bindings) {
-			_instance_binding_mutex.lock();
+			_instance_binding_mutex->lock();
 			for (uint32_t i = 0; i < _instance_binding_count; i++) {
 				if (_instance_bindings[i].reference_callback) {
 					if (!_instance_bindings[i].reference_callback(_instance_bindings[i].token, _instance_bindings[i].binding, p_reference)) {
@@ -680,7 +693,7 @@ protected:
 					}
 				}
 			}
-			_instance_binding_mutex.unlock();
+			_instance_binding_mutex->unlock();
 		}
 		return can_die;
 	}
@@ -699,6 +712,10 @@ protected:
 
 	static void _bind_methods();
 	static void _bind_compatibility_methods() {}
+
+	static void get_valid_parents_static(List<String> *p_parents);
+	static void _get_valid_parents_static(List<String> *p_parents);
+
 	bool _set(const StringName &p_name, const Variant &p_property) { return false; };
 	bool _get(const StringName &p_name, Variant &r_property) const { return false; };
 	void _get_property_list(List<PropertyInfo> *p_list) const {};
@@ -734,8 +751,6 @@ protected:
 	_FORCE_INLINE_ void (Object::*_get_notification() const)(int) {
 		return &Object::_notification;
 	}
-	static void get_valid_parents_static(List<String> *p_parents);
-	static void _get_valid_parents_static(List<String> *p_parents);
 
 	Variant _call_bind(const Variant **p_args, int p_argcount, Callable::CallError &r_error);
 	Variant _call_deferred_bind(const Variant **p_args, int p_argcount, Callable::CallError &r_error);
@@ -754,8 +769,6 @@ protected:
 
 	void _clear_internal_resource_paths(const Variant &p_var);
 
-	friend class ClassDB;
-
 	bool _disconnect(const StringName &p_signal, const Callable &p_callable, bool p_force = false);
 
 #ifdef TOOLS_ENABLED
@@ -772,7 +785,6 @@ public: // Should be protected, but bug in clang++.
 	static void initialize_class();
 	_FORCE_INLINE_ static void register_custom_data_to_otdb() {}
 
-public:
 	static constexpr bool _class_is_enabled = true;
 
 	void notify_property_list_changed();
@@ -796,14 +808,6 @@ public:
 	static const T *cast_to(const Object *p_object) {
 		return dynamic_cast<const T *>(p_object);
 	}
-
-	enum {
-		NOTIFICATION_POSTINITIALIZE = 0,
-		NOTIFICATION_PREDELETE = 1,
-		NOTIFICATION_EXTENSION_RELOADED = 2,
-		// Internal notification to send after NOTIFICATION_PREDELETE, not bound to scripting.
-		NOTIFICATION_PREDELETE_CLEANUP = 3,
-	};
 
 	/* TYPE API */
 	static void get_inheritance_list_static(List<String> *p_inheritance_list) { p_inheritance_list->push_back("Object"); }
@@ -953,8 +957,8 @@ public:
 	String tr(const StringName &p_message, const StringName &p_context = "") const;
 	String tr_n(const StringName &p_message, const StringName &p_message_plural, int p_n, const StringName &p_context = "") const;
 
-	bool _is_queued_for_deletion = false; // Set to true by SceneTree::queue_delete().
-	bool is_queued_for_deletion() const;
+	_FORCE_INLINE_ void set_queued_for_deletion(bool p_is_queued_for_deletion) { _is_queued_for_deletion = p_is_queued_for_deletion; }
+	_FORCE_INLINE_ bool is_queued_for_deletion() const { return _is_queued_for_deletion; }
 
 	_FORCE_INLINE_ void set_message_translation(bool p_enable) { _can_translate = p_enable; }
 	_FORCE_INLINE_ bool can_translate_messages() const { return _can_translate; }
@@ -962,8 +966,16 @@ public:
 #ifdef TOOLS_ENABLED
 	void editor_set_section_unfold(const String &p_section, bool p_unfolded);
 	bool editor_is_section_unfolded(const String &p_section);
-	const HashSet<String> &editor_get_section_folding() const { return editor_section_folding; }
-	void editor_clear_section_folding() { editor_section_folding.clear(); }
+	const HashSet<String> *editor_get_section_folding() const {
+		return editor_section_folding;
+	}
+	void editor_clear_section_folding() {
+		if (!editor_section_folding) {
+			return;
+		}
+
+		editor_section_folding->clear();
+	}
 
 #endif
 
@@ -1050,5 +1062,7 @@ public:
 	static void debug_objects(DebugFunc p_func);
 	static int get_object_count();
 };
+
+const size_t OBJECT_SIZE = sizeof(Object);
 
 #endif // OBJECT_H

@@ -40,7 +40,9 @@ class SceneState : public RefCounted {
 	Vector<StringName> names;
 	Vector<Variant> variants;
 	Vector<NodePath> node_paths;
+#ifdef TOOLS_ENABLED
 	Vector<NodePath> editable_instances;
+#endif
 	mutable HashMap<NodePath, int> node_path_cache;
 	mutable HashMap<int, int> base_scene_node_remap;
 
@@ -190,8 +192,6 @@ public:
 
 	bool has_connection(const NodePath &p_node_from, const StringName &p_signal, const NodePath &p_node_to, const StringName &p_method, bool p_no_inheritance = false);
 
-	Vector<NodePath> get_editable_instances() const;
-
 	//build API
 
 	int add_name(const StringName &p_name);
@@ -202,15 +202,17 @@ public:
 	void add_node_group(int p_node, int p_group);
 	void set_base_scene(int p_idx);
 	void add_connection(int p_from, int p_to, int p_signal, int p_method, int p_flags, int p_unbinds, const Vector<int> &p_binds);
-	void add_editable_instance(const NodePath &p_path);
-
-	virtual void set_last_modified_time(uint64_t p_time) { last_modified_time = p_time; }
-	uint64_t get_last_modified_time() const { return last_modified_time; }
 
 	// Used when saving pointers (saves a path property instead).
 	static String get_meta_pointer_property(const String &p_property);
 
 #ifdef TOOLS_ENABLED
+	virtual void set_last_modified_time(uint64_t p_time) { last_modified_time = p_time; }
+	uint64_t get_last_modified_time() const { return last_modified_time; }
+
+	void add_editable_instance(const NodePath &p_path);
+	Vector<NodePath> get_editable_instances() const;
+
 	static void set_instantiation_warning_notify_func(InstantiationWarningNotify p_warn_notify) { instantiation_warn_notify = p_warn_notify; }
 #endif
 

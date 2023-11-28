@@ -41,6 +41,7 @@ class Node2D : public CanvasItem {
 	mutable real_t rotation = 0.0;
 	mutable Size2 scale = Vector2(1, 1);
 	mutable real_t skew = 0.0;
+	// char padding[228];
 
 	Transform2D transform;
 
@@ -119,5 +120,7 @@ public:
 
 	Node2D() {}
 };
+
+const size_t NODE2D_SIZE = sizeof(Node2D);
 
 #endif // NODE_2D_H
