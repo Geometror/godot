@@ -32,8 +32,10 @@
 #define GRAPH_EDIT_H
 
 #include "scene/gui/box_container.h"
+#include "scene/gui/graph_edit_arranger.h"
 #include "scene/gui/graph_frame.h"
 #include "scene/gui/graph_node.h"
+#include "scene/gui/view_panner.h"
 
 class Button;
 class GraphEdit;
