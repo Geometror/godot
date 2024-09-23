@@ -3671,6 +3671,7 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 	bool is_curve_xyz = (Object::cast_to<VisualShaderNodeCurveXYZTexture>(vsnode.ptr()) != nullptr);
 	bool is_parameter = (Object::cast_to<VisualShaderNodeParameter>(vsnode.ptr()) != nullptr);
 	bool is_mesh_emitter = (Object::cast_to<VisualShaderNodeParticleMeshEmitter>(vsnode.ptr()) != nullptr);
+	bool is_expression = (Object::cast_to<VisualShaderNodeExpression>(vsnode.ptr()) != nullptr);
 
 	Point2 position = graph->get_scroll_offset();
 
@@ -3888,6 +3889,12 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 
 		if (is_mesh_emitter) {
 			undo_redo->add_do_method(vsnode.ptr(), "set_mesh", ResourceLoader::load(p_resource_path));
+			return;
+		}
+
+		if (is_expression) {
+			Ref<VisualShaderNodeExpression> expr_node = ResourceLoader::load(p_resource_path);
+			undo_redo->add_do_method(vsnode.ptr(), "set_expression", expr_node->get_expression());
 			return;
 		}
 	}
@@ -4691,6 +4698,13 @@ void VisualShaderEditor::_node_selected(Object *p_node) {
 
 	Ref<VisualShaderNode> vsnode = visual_shader->get_node(type, id);
 	ERR_FAIL_COND(!vsnode.is_valid());
+
+	// TODO: Make this toggleable
+	// TODO: Add getter for box selection
+	// Only update the inspector for the first selected node.
+	if (!graph->is_box_selecting() && graph->get_selected_elements().size() == 1) {
+		EditorNode::get_singleton()->edit_resource(vsnode);
+	}
 }
 
 void VisualShaderEditor::_graph_gui_input(const Ref<InputEvent> &p_event) {
@@ -5164,6 +5178,8 @@ void VisualShaderEditor::_notification(int p_what) {
 		} break;
 
 		case NOTIFICATION_DRAG_END: {
+			print_line("NOTIFICATION DRAG END");
+
 			members->set_drop_mode_flags(0);
 		} break;
 	}
@@ -6082,6 +6098,10 @@ void VisualShaderEditor::drop_data_fw(const Point2 &p_point, const Variant &p_da
 						saved_node_pos = p_point + Vector2(0, i * 250 * EDSCALE);
 						saved_node_pos_dirty = true;
 						_add_node(mesh_emitter_option_idx, {}, arr[i], i);
+					} else if (type == "VisualShaderNodeExpression") {
+						saved_node_pos = p_point + Vector2(0, i * 250 * EDSCALE);
+						saved_node_pos_dirty = true;
+						_add_node(expression_node_option_idx, {}, arr[i], i);
 					}
 				}
 			}
@@ -7410,6 +7430,7 @@ VisualShaderEditor::VisualShaderEditor() {
 
 	// SPECIAL
 	add_options.push_back(AddOption("Frame", "Special", "VisualShaderNodeFrame", TTR("A rectangular area with a description string for better graph organization.")));
+	expression_node_option_idx = add_options.size();
 	add_options.push_back(AddOption("Expression", "Special", "VisualShaderNodeExpression", TTR("Custom Godot Shader Language expression, with custom amount of input and output ports. This is a direct injection of code into the vertex/fragment/light function, do not use it to write the function declarations inside.")));
 	add_options.push_back(AddOption("GlobalExpression", "Special", "VisualShaderNodeGlobalExpression", TTR("Custom Godot Shader Language expression, which is placed on top of the resulted shader. You can place various function definitions inside and call it later in the Expressions. You can also declare varyings, parameters and constants.")));
 	add_options.push_back(AddOption("ParameterRef", "Special", "VisualShaderNodeParameterRef", TTR("A reference to an existing parameter.")));

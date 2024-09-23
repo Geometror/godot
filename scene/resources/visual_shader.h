@@ -117,6 +117,7 @@ public:
 private:
 	Type current_type;
 
+	// Just an acceleration structure
 	struct Node {
 		Ref<VisualShaderNode> node;
 		Vector2 position;
@@ -126,7 +127,7 @@ private:
 
 	struct Graph {
 		RBMap<int, Node> nodes;
-		List<Connection> connections;
+		List<Connection> connections; // Why is this a list? It should be a vector (likely inside GraphEdit as well).
 	} graph[TYPE_MAX];
 
 	Shader::Mode shader_mode = Shader::MODE_SPATIAL;

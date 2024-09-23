@@ -1763,7 +1763,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 			if (should_be_selected) {
 				graph_element->set_selected(box_selection_mode_additive);
 			} else {
-				graph_element->set_selected(prev_selected.find(graph_element) != nullptr);
+				graph_element->set_selected(prev_selected.find(graph_element) != -1);
 			}
 		}
 
@@ -1775,6 +1775,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 	if (mb.is_valid()) {
 		if (mb->get_button_index() == MouseButton::RIGHT && mb->is_pressed()) {
 			if (box_selecting) {
+				// Box selection was cancelled.
 				box_selecting = false;
 				for (int i = get_child_count() - 1; i >= 0; i--) {
 					GraphElement *graph_element = Object::cast_to<GraphElement>(get_child(i));
@@ -1782,7 +1783,7 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 						continue;
 					}
 
-					graph_element->set_selected(prev_selected.find(graph_element) != nullptr);
+					graph_element->set_selected(prev_selected.find(graph_element) != -1);
 				}
 				top_layer->queue_redraw();
 				minimap->queue_redraw();
@@ -1947,26 +1948,10 @@ void GraphEdit::gui_input(const Ref<InputEvent> &p_ev) {
 				box_selecting_from = mb->get_position();
 				if (mb->is_command_or_control_pressed()) {
 					box_selection_mode_additive = true;
-					prev_selected.clear();
-					for (int i = get_child_count() - 1; i >= 0; i--) {
-						GraphElement *child_element = Object::cast_to<GraphElement>(get_child(i));
-						if (!child_element || !child_element->is_selected()) {
-							continue;
-						}
-
-						prev_selected.push_back(child_element);
-					}
+					prev_selected = get_selected_elements();
 				} else if (mb->is_shift_pressed()) {
 					box_selection_mode_additive = false;
-					prev_selected.clear();
-					for (int i = get_child_count() - 1; i >= 0; i--) {
-						GraphElement *child_element = Object::cast_to<GraphElement>(get_child(i));
-						if (!child_element || !child_element->is_selected()) {
-							continue;
-						}
-
-						prev_selected.push_back(child_element);
-					}
+					prev_selected = get_selected_elements();
 				} else {
 					box_selection_mode_additive = true;
 					prev_selected.clear();
@@ -2589,6 +2574,21 @@ void GraphEdit::set_warped_panning(bool p_warped) {
 
 void GraphEdit::arrange_nodes() {
 	arranger->arrange_nodes();
+}
+
+const Vector<GraphElement *> GraphEdit::get_selected_elements() const {
+	Vector<GraphElement *> selected_elements;
+	for (int i = 0; i < get_child_count(); i++) {
+		GraphElement *graph_element = Object::cast_to<GraphElement>(get_child(i));
+		if (graph_element && graph_element->is_selected()) {
+			selected_elements.push_back(graph_element);
+		}
+	}
+	return selected_elements;
+}
+
+bool GraphEdit::is_box_selecting() const {
+	return box_selecting;
 }
 
 void GraphEdit::_bind_methods() {

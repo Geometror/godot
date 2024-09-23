@@ -231,7 +231,7 @@ private:
 	Point2 box_selecting_from;
 	Point2 box_selecting_to;
 	Rect2 box_selecting_rect;
-	List<GraphElement *> prev_selected;
+	Vector<GraphElement *> prev_selected;
 
 	bool setting_scroll_offset = false;
 	bool right_disconnects = false;
@@ -505,6 +505,9 @@ public:
 	void set_warped_panning(bool p_warped);
 
 	void arrange_nodes();
+
+	const Vector<GraphElement *> get_selected_elements() const;
+	bool is_box_selecting() const;
 
 	GraphEdit();
 };
