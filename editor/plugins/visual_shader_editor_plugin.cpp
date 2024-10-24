@@ -1526,7 +1526,7 @@ void VisualShaderEditor::edit_shader(const Ref<Shader> &p_shader) {
 		graph_plugin->register_shader(visual_shader.ptr());
 
 		visual_shader->connect_changed(callable_mp(this, &VisualShaderEditor::_update_preview));
-		visual_shader->set_graph_offset(graph->get_scroll_offset() / EDSCALE);
+		// EditorSettings::get_singleton()->set_project_metadata("visual_shader", visual_shader->get_path(), graph->get_scroll_offset() / EDSCALE);
 		_set_mode(visual_shader->get_mode());
 
 		preview_material->set_shader(visual_shader);
@@ -2491,7 +2491,8 @@ void VisualShaderEditor::_update_graph() {
 		return;
 	}
 
-	graph->set_scroll_offset(visual_shader->get_graph_offset() * EDSCALE);
+	// graph->set_scroll_offset(visual_shader->get_graph_offset() * EDSCALE);
+	graph->set_scroll_offset(EditorSettings::get_singleton()->get_project_metadata("visual_shader", visual_shader->get_path(), Vector2(0, 0)));
 
 	VisualShader::Type type = get_current_shader_type();
 
@@ -5183,7 +5184,8 @@ void VisualShaderEditor::_scroll_changed(const Vector2 &p_scroll) {
 		return;
 	}
 	updating = true;
-	visual_shader->set_graph_offset(p_scroll / EDSCALE);
+	// visual_shader->set_graph_offset(p_scroll / EDSCALE);
+	EditorSettings::get_singleton()->set_project_metadata("visual_shader", visual_shader->get_path(), p_scroll / EDSCALE);
 	updating = false;
 }
 

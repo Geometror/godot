@@ -134,8 +134,6 @@ private:
 
 	TypedArray<Dictionary> _get_node_connections(Type p_type) const;
 
-	Vector2 graph_offset;
-
 	HashMap<String, int> modes;
 	HashSet<StringName> flags;
 
@@ -245,9 +243,6 @@ public: // internal methods
 	virtual Mode get_mode() const override;
 
 	virtual bool is_text_shader() const override;
-
-	void set_graph_offset(const Vector2 &p_offset);
-	Vector2 get_graph_offset() const;
 
 	String generate_preview_shader(Type p_type, int p_node, int p_port, Vector<DefaultTextureParam> &r_default_tex_params) const;
 
