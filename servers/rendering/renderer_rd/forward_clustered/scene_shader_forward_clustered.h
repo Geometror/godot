@@ -43,21 +43,8 @@ public:
 		// static const char _fragment_code[];
 		// static const char *_compute_code = nullptr;
 		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file("./shaders/forward_clustered/scene_forward_clustered.glsl");
-		const char *vertex_code = nullptr;
-		const char *fragment_code = nullptr;
-		const char *compute_code = nullptr;
 
-		if (!res.vertex_code.is_empty()) {
-			vertex_code = res.vertex_code.utf8().get_data();
-		}
-		if (!res.fragment_code.is_empty()) {
-			fragment_code = res.fragment_code.utf8().get_data();
-		}
-		if (!res.compute_code.is_empty()) {
-			compute_code = res.compute_code.utf8().get_data();
-		}
-
-		setup(vertex_code, fragment_code, compute_code, "SceneForwardClusteredShaderRD");
+		setup(res.vertex_code, res.fragment_code, res.compute_code, "SceneForwardClusteredShaderRD");
 	}
 };
 

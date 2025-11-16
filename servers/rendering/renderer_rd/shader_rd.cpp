@@ -39,7 +39,7 @@
 
 #define ENABLE_SHADER_CACHE 1
 
-void ShaderRD::_add_stage(const char *p_code, StageType p_stage_type) {
+void ShaderRD::_add_stage(const String &p_code, StageType p_stage_type) {
 	Vector<String> lines = String(p_code).split("\n");
 
 	String text;
@@ -131,18 +131,18 @@ void ShaderRD::_add_stage(const char *p_code, StageType p_stage_type) {
 	}
 }
 
-void ShaderRD::setup(const char *p_vertex_code, const char *p_fragment_code, const char *p_compute_code, const char *p_name) {
+void ShaderRD::setup(const String &p_vertex_code, const String &p_fragment_code, const String &p_compute_code, const char *p_name) {
 	name = p_name;
 
-	if (p_compute_code) {
+	if (!p_compute_code.is_empty()) {
 		_add_stage(p_compute_code, STAGE_TYPE_COMPUTE);
 		is_compute = true;
 	} else {
 		is_compute = false;
-		if (p_vertex_code) {
+		if (!p_vertex_code.is_empty()) {
 			_add_stage(p_vertex_code, STAGE_TYPE_VERTEX);
 		}
-		if (p_fragment_code) {
+		if (!p_fragment_code.is_empty()) {
 			_add_stage(p_fragment_code, STAGE_TYPE_FRAGMENT);
 		}
 	}
@@ -153,11 +153,11 @@ void ShaderRD::setup(const char *p_vertex_code, const char *p_fragment_code, con
 	tohash.append("[GodotVersionHash]");
 	tohash.append(GODOT_VERSION_HASH);
 	tohash.append("[Vertex]");
-	tohash.append(p_vertex_code ? p_vertex_code : "");
+	tohash.append(p_vertex_code);
 	tohash.append("[Fragment]");
-	tohash.append(p_fragment_code ? p_fragment_code : "");
+	tohash.append(p_fragment_code);
 	tohash.append("[Compute]");
-	tohash.append(p_compute_code ? p_compute_code : "");
+	tohash.append(p_compute_code);
 	tohash.append("[DebugInfo]");
 	tohash.append(Engine::get_singleton()->is_generate_spirv_debug_info_enabled() ? "1" : "0");
 

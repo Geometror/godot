@@ -63,10 +63,10 @@ static void _include_shader_file(const String &p_path, Vector<String> &r_lines, 
 		String line = file->get_line();
 
 		// Note: Keep comments as they might be useful for the LLM.
-		// int comment_pos = line.find("//");
-		// if (comment_pos != -1) {
-		// 	line = line.substr(0, comment_pos);
-		// }
+		int comment_pos = line.find("//");
+		if (comment_pos != -1) {
+			line = line.substr(0, comment_pos);
+		}
 
 		// Check for #include directive.
 		int include_pos = line.find("#include ");
@@ -112,10 +112,10 @@ static void _process_shader_file(const String &p_path, Vector<String> &r_vertex_
 		String line = file->get_line();
 
 		// Note: Keep comments as they might be useful for the LLM.
-		// int comment_pos = line.find("//");
-		// if (comment_pos != -1) {
-		// 	line = line.substr(0, comment_pos);
-		// }
+		int comment_pos = line.find("//");
+		if (comment_pos != -1) {
+			line = line.substr(0, comment_pos);
+		}
 
 		// Check for section markers
 		if (line.find("#[vertex]") != -1) {
@@ -184,6 +184,14 @@ ShaderLoaderRD::ShaderLoadResult ShaderLoaderRD::load_shader_file(const String &
 	result.vertex_code = String("\n").join(vertex_lines);
 	result.fragment_code = String("\n").join(fragment_lines);
 	result.compute_code = String("\n").join(compute_lines);
+
+	// DEBUG: Write to separate files.
+	// Ref<FileAccess> file_vertex = FileAccess::open("vertex_out.glsl", FileAccess::WRITE);
+	// file_vertex->store_string(result.vertex_code);
+	// Ref<FileAccess> file_fragment = FileAccess::open("fragment_out.glsl", FileAccess::WRITE);
+	// file_fragment->store_string(result.fragment_code);
+	// Ref<FileAccess> file_compute = FileAccess::open("compute_out.glsl", FileAccess::WRITE);
+	// file_compute->store_string(result.compute_code);
 
 	// Add final newline if there's content.
 	if (!result.vertex_code.is_empty()) {
