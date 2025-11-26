@@ -43,6 +43,7 @@ public:
 		String fragment_code;
 		String vertex_code;
 		String compute_code;
+		bool error = false;
 	};
 
 	ShaderLoadResult load_shader_file(const String &p_path);

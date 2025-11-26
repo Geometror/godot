@@ -47,15 +47,18 @@ ShaderLoaderRD::~ShaderLoaderRD() {
 	singleton = nullptr;
 }
 
-static void _process_shader_file(const String &p_path, Vector<String> &r_vertex_lines, Vector<String> &r_fragment_lines, Vector<String> &r_compute_lines, HashSet<String> &r_vertex_included, HashSet<String> &r_fragment_included, HashSet<String> &r_compute_included, int p_depth);
+static bool _process_shader_file(const String &p_path, Vector<String> &r_vertex_lines, Vector<String> &r_fragment_lines, Vector<String> &r_compute_lines, HashSet<String> &r_vertex_included, HashSet<String> &r_fragment_included, HashSet<String> &r_compute_included, int p_depth);
 
-static void _include_shader_file(const String &p_path, Vector<String> &r_lines, HashSet<String> &r_included_files, int p_depth) {
+static bool _include_shader_file(const String &p_path, Vector<String> &r_lines, HashSet<String> &r_included_files, int p_depth) {
 	if (r_included_files.has(p_path)) {
-		return;
+		return true;
 	}
 
 	Ref<FileAccess> file = FileAccess::open(p_path, FileAccess::READ);
-	ERR_FAIL_COND_MSG(file.is_null(), vformat("Shader include file does not exist: %s", p_path));
+	if (file.is_null()) {
+		ERR_PRINT(vformat("Shader include file does not exist: %s", p_path));
+		return false;
+	}
 
 	r_included_files.insert(p_path);
 
@@ -81,21 +84,28 @@ static void _include_shader_file(const String &p_path, Vector<String> &r_lines, 
 				if (include_file.begins_with("thirdparty/")) {
 					resolved_path = include_file;
 				} else {
-					String base_dir = p_path.get_base_dir();
-					resolved_path = base_dir.path_join(include_file).simplify_path();
-				}
+				String base_dir = p_path.get_base_dir();
+				resolved_path = base_dir.path_join(include_file).simplify_path();
+			}
 
-				_include_shader_file(resolved_path, r_lines, r_included_files, p_depth + 1);
+			if (!_include_shader_file(resolved_path, r_lines, r_included_files, p_depth + 1)) {
+				return false;
+			}
 			}
 		} else {
 			r_lines.push_back(line);
 		}
 	}
+
+	return true;
 }
 
-static void _process_shader_file(const String &p_path, Vector<String> &r_vertex_lines, Vector<String> &r_fragment_lines, Vector<String> &r_compute_lines, HashSet<String> &r_vertex_included, HashSet<String> &r_fragment_included, HashSet<String> &r_compute_included, int p_depth) {
+static bool _process_shader_file(const String &p_path, Vector<String> &r_vertex_lines, Vector<String> &r_fragment_lines, Vector<String> &r_compute_lines, HashSet<String> &r_vertex_included, HashSet<String> &r_fragment_included, HashSet<String> &r_compute_included, int p_depth) {
 	Ref<FileAccess> file = FileAccess::open(p_path, FileAccess::READ);
-	ERR_FAIL_COND_MSG(file.is_null(), vformat("Shader file does not exist: %s", p_path));
+	if (file.is_null()) {
+		ERR_PRINT(vformat("Shader file does not exist: %s", p_path));
+		return false;
+	}
 
 	enum Section {
 		SECTION_NONE,
@@ -155,7 +165,9 @@ static void _process_shader_file(const String &p_path, Vector<String> &r_vertex_
 
 					// Only include if not already included in this section
 					if (!current_included->has(resolved_path)) {
-						_include_shader_file(resolved_path, *current_lines, *current_included, p_depth + 1);
+						if (!_include_shader_file(resolved_path, *current_lines, *current_included, p_depth + 1)) {
+							return false;
+						}
 					}
 				}
 			} else {
@@ -163,6 +175,8 @@ static void _process_shader_file(const String &p_path, Vector<String> &r_vertex_
 			}
 		}
 	}
+
+	return true;
 }
 
 ShaderLoaderRD::ShaderLoadResult ShaderLoaderRD::load_shader_file(const String &p_path) {
@@ -177,9 +191,18 @@ ShaderLoaderRD::ShaderLoadResult ShaderLoaderRD::load_shader_file(const String &
 	HashSet<String> compute_included;
 
 	Ref<DirAccess> dir = DirAccess::open(p_path.get_base_dir());
+	if (dir.is_null()) {
+		ERR_PRINT(vformat("Failed to open directory for shader file: %s", p_path));
+		result.error = true;
+		return result;
+	}
+
 	String s = dir->get_full_path(p_path, DirAccess::ACCESS_FILESYSTEM);
 
-	_process_shader_file(p_path, vertex_lines, fragment_lines, compute_lines, vertex_included, fragment_included, compute_included, 0);
+	if (!_process_shader_file(p_path, vertex_lines, fragment_lines, compute_lines, vertex_included, fragment_included, compute_included, 0)) {
+		result.error = true;
+		return result;
+	}
 
 	result.vertex_code = String("\n").join(vertex_lines);
 	result.fragment_code = String("\n").join(fragment_lines);
