@@ -39,9 +39,6 @@
 class SceneForwardClusteredShaderRD : public ShaderRD {
 public:
 	SceneForwardClusteredShaderRD() {
-		// static const char _vertex_code[];
-		// static const char _fragment_code[];
-		// static const char *_compute_code = nullptr;
 		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file("./shaders/forward_clustered/scene_forward_clustered.glsl");
 		if (res.error) {
 			CRASH_NOW_MSG("Failed to load shader file: ./shaders/forward_clustered/scene_forward_clustered.glsl");
