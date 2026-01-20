@@ -31,6 +31,17 @@
 #pragma once
 
 #include "core/string/ustring.h"
+#include "core/os/os.h"
+
+static String _get_shader_base_dir() {
+	List<String> cmdargs = OS::get_singleton()->get_cmdline_args();
+	for (const String &arg : cmdargs) {
+		if (arg.begins_with("--shader-dir=")) {
+			return arg.split("=")[1];
+		}
+	}
+	return "./shaders";
+}
 
 class ShaderLoaderRD {
 	static ShaderLoaderRD *singleton;

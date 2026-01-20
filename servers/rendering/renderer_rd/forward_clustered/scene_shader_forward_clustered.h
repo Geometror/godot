@@ -31,6 +31,7 @@
 #pragma once
 
 #include "../storage_rd/material_storage.h"
+#include "core/os/os.h"
 #include "core/string/ustring.h"
 #include "servers/rendering/renderer_rd/pipeline_hash_map_rd.h"
 #include "servers/rendering/renderer_rd/shader_loader_rd.h"
@@ -39,9 +40,10 @@
 class SceneForwardClusteredShaderRD : public ShaderRD {
 public:
 	SceneForwardClusteredShaderRD() {
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file("./shaders/forward_clustered/scene_forward_clustered.glsl");
+		String shader_path = _get_shader_base_dir() + "/forward_clustered/scene_forward_clustered.glsl";
+		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
 		if (res.error) {
-			CRASH_NOW_MSG("Failed to load shader file: ./shaders/forward_clustered/scene_forward_clustered.glsl");
+			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
 		}
 
 		setup(res.vertex_code, res.fragment_code, res.compute_code, "SceneForwardClusteredShaderRD");
