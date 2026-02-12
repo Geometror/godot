@@ -42,6 +42,7 @@
 #include "scene/gui/item_list.h"
 #include "scene/gui/line_edit.h"
 #include "scene/gui/option_button.h"
+#include "scene/main/node.h"
 #include "scene/resources/visual_shader.h"
 #include "visual_shader_particle_nodes.h"
 
@@ -1069,7 +1070,7 @@ void VisualShaderGroupPortsDialog::_on_dialog_about_to_popup() {
 
 void VisualShaderGroupPortsDialog::_notification(int p_what) {
 	switch (p_what) {
-		case NOTIFICATION_ENTER_TREE: {
+		case NOTIFICATION_READY: {
 			connect("about_to_popup", callable_mp(this, &VisualShaderGroupPortsDialog::_on_dialog_about_to_popup));
 		} break;
 	}
