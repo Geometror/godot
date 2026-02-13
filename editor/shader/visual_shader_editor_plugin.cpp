@@ -4720,7 +4720,7 @@ void VisualShaderEditor::_delete_nodes(int p_type, const List<int> &p_nodes) {
 	for (const int &F : p_nodes) {
 		Ref<VisualShaderNode> node = editing_shader_graph->get_node(F);
 		if (visual_shader.is_valid() && group_edit_stack.is_empty()) {
-			undo_redo->add_undo_method(visual_shader.ptr(), "add_node", type, node, editing_shader_graph->get_node_position(F));
+			undo_redo->add_undo_method(visual_shader.ptr(), "add_node", type, node, editing_shader_graph->get_node_position(F), F);
 		} else {
 			undo_redo->add_undo_method(editing_shader_graph.ptr(), "add_node", node, editing_shader_graph->get_node_position(F), F);
 		}
