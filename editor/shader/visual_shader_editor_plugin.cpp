@@ -2681,6 +2681,27 @@ void VisualShaderEditor::_exit_group() {
 		editing_shader_graph = group->get_graph().ptr();
 	}
 
+	// Remove stale connections which reference non-existent ports on group nodes.
+	// Port additions/removals inside a group don't update external connections,
+	// so we need to clean up the invalid ones before updating the visual graph.
+	List<ShaderGraph::Connection> conns;
+	editing_shader_graph->get_node_connections(&conns);
+	for (const ShaderGraph::Connection &c : conns) {
+		Ref<VisualShaderNodeGroup> from_group = editing_shader_graph->get_node(c.from_node);
+		if (from_group.is_valid() && from_group->get_group().is_valid()) {
+			if (c.from_port >= from_group->get_output_port_count()) {
+				editing_shader_graph->disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+				continue;
+			}
+		}
+		Ref<VisualShaderNodeGroup> to_group = editing_shader_graph->get_node(c.to_node);
+		if (to_group.is_valid() && to_group->get_group().is_valid()) {
+			if (c.to_port >= to_group->get_input_port_count()) {
+				editing_shader_graph->disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+			}
+		}
+	}
+
 	_update_graph();
 }
 
@@ -2702,8 +2723,31 @@ void VisualShaderEditor::_update_group_related_nodes(const Ref<VisualShaderGroup
 		}
 	}
 
+	// Rebuild connections in case of port count/order changes.
+	// GraphEdit does not automatically remove connections when nodes are replaced.
+	for (const Ref<GraphEdit::Connection> &gc : graph->get_connections()) {
+		for (const int node_id : nodes_to_update) {
+			const StringName node_name = itos(node_id);
+			if (gc->from_node == node_name || gc->to_node == node_name) {
+				graph->disconnect_node(gc->from_node, gc->from_port, gc->to_node, gc->to_port);
+				break;
+			}
+		}
+	}
+
 	for (const int node_to_update : nodes_to_update) {
 		graph_plugin->update_node(get_current_shader_type(), node_to_update);
+	}
+
+	List<ShaderGraph::Connection> connections;
+	editing_shader_graph->get_node_connections(&connections);
+	for (const ShaderGraph::Connection &c : connections) {
+		for (const int node_id : nodes_to_update) {
+			if (c.from_node == node_id || c.to_node == node_id) {
+				graph->connect_node(itos(c.from_node), c.from_port, itos(c.to_node), c.to_port);
+				break;
+			}
+		}
 	}
 }
 

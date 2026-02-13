@@ -45,9 +45,8 @@ public:
 private:
 	String group_name;
 
-	// TODO: Why does this need to be a HashMap? (copied from Expression node)
-	HashMap<int, Port> input_ports;
-	HashMap<int, Port> output_ports;
+	Vector<Port> input_ports;
+	Vector<Port> output_ports;
 
 	Ref<ShaderGraph> graph;
 

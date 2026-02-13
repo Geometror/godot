@@ -270,7 +270,7 @@ bool VisualShaderGroup::_set(const StringName &p_name, const Variant &p_value) {
 			Port p;
 			p.type = (VisualShaderNode::PortType)(int)port["type"];
 			p.name = port["name"];
-			input_ports[port["id"]] = p;
+			input_ports.push_back(p);
 		}
 		emit_changed();
 		return true;
@@ -282,7 +282,7 @@ bool VisualShaderGroup::_set(const StringName &p_name, const Variant &p_value) {
 			Port p;
 			p.type = (VisualShaderNode::PortType)(int)port["type"];
 			p.name = port["name"];
-			output_ports[port["id"]] = p;
+			output_ports.push_back(p);
 		}
 		emit_changed();
 		return true;
@@ -293,22 +293,22 @@ bool VisualShaderGroup::_set(const StringName &p_name, const Variant &p_value) {
 bool VisualShaderGroup::_get(const StringName &p_name, Variant &r_ret) const {
 	if (p_name == "input_ports") {
 		Array ports;
-		for (const KeyValue<int, Port> &E : input_ports) {
+		for (int i = 0; i < input_ports.size(); i++) {
 			Dictionary port;
-			port["id"] = E.key;
-			port["type"] = E.value.type;
-			port["name"] = E.value.name;
+			port["id"] = i;
+			port["type"] = input_ports[i].type;
+			port["name"] = input_ports[i].name;
 			ports.push_back(port);
 		}
 		r_ret = ports;
 		return true;
 	} else if (p_name == "output_ports") {
 		Array ports;
-		for (const KeyValue<int, Port> &E : output_ports) {
+		for (int i = 0; i < output_ports.size(); i++) {
 			Dictionary port;
-			port["id"] = E.key;
-			port["type"] = E.value.type;
-			port["name"] = E.value.name;
+			port["id"] = i;
+			port["type"] = output_ports[i].type;
+			port["name"] = output_ports[i].name;
 			ports.push_back(port);
 		}
 		r_ret = ports;
@@ -358,114 +358,164 @@ String VisualShaderGroup::get_group_name() const {
 }
 
 void VisualShaderGroup::add_input_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name) {
-	const String valid_name = _validate_port_name(p_name, p_id, false);
+	ERR_FAIL_INDEX(p_id, input_ports.size() + 1);
 
+	const String valid_name = _validate_port_name(p_name, p_id, false);
 	if (valid_name.is_empty()) {
 		return;
 	}
 
-	input_ports[p_id] = Port{ p_type, valid_name };
+	// Shift connections above upward.
+	if (p_id < input_ports.size()) {
+		List<ShaderGraph::Connection> connections;
+		get_node_connections(&connections);
+		for (const ShaderGraph::Connection &c : connections) {
+			if (c.from_node == ShaderGraph::NODE_ID_INPUT && c.from_port >= p_id) {
+				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+				connect_nodes_forced(c.from_node, c.from_port + 1, c.to_node, c.to_port);
+			}
+		}
+	}
+
+	input_ports.insert(p_id, Port{ p_type, valid_name });
+	_queue_update();
 	emit_changed();
 }
 
 void VisualShaderGroup::set_input_port_name(int p_id, const String &p_name) {
-	ERR_FAIL_COND(!input_ports.has(p_id));
+	ERR_FAIL_INDEX(p_id, input_ports.size());
 
 	const String valid_name = _validate_port_name(p_name, p_id, false);
-
 	if (valid_name.is_empty()) {
 		return;
 	}
 
-	input_ports[p_id].name = valid_name;
+	input_ports.write[p_id].name = valid_name;
 	_queue_update();
 	emit_changed();
 }
 
 void VisualShaderGroup::set_input_port_type(int p_id, VisualShaderNode::PortType p_type) {
-	ERR_FAIL_COND(!input_ports.has(p_id));
+	ERR_FAIL_INDEX(p_id, input_ports.size());
 
 	if (input_ports[p_id].type == p_type) {
 		return;
 	}
 
-	input_ports[p_id].type = p_type;
+	input_ports.write[p_id].type = p_type;
 	_queue_update();
 	emit_changed();
 }
 
 VisualShaderGroup::Port VisualShaderGroup::get_input_port(int p_id) const {
-	ERR_FAIL_COND_V(!input_ports.has(p_id), (VisualShaderGroup::Port){});
+	ERR_FAIL_INDEX_V(p_id, input_ports.size(), Port{});
 	return input_ports[p_id];
 }
 
 Vector<VisualShaderGroup::Port> VisualShaderGroup::get_input_ports() const {
-	Vector<Port> ports;
-	for (const KeyValue<int, Port> &E : input_ports) {
-		ports.push_back(E.value);
-	}
-	return ports;
+	return input_ports;
 }
 
 void VisualShaderGroup::remove_input_port(int p_id) {
-	input_ports.erase(p_id);
+	ERR_FAIL_INDEX(p_id, input_ports.size());
+
+	// Shift connections above downward.
+	List<ShaderGraph::Connection> connections;
+	get_node_connections(&connections);
+	for (const ShaderGraph::Connection &c : connections) {
+		if (c.from_node == ShaderGraph::NODE_ID_INPUT) {
+			if (c.from_port == p_id) {
+				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+			} else if (c.from_port > p_id) {
+				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+				connect_nodes_forced(c.from_node, c.from_port - 1, c.to_node, c.to_port);
+			}
+		}
+	}
+
+	input_ports.remove_at(p_id);
 	_queue_update();
 	emit_changed();
 }
 
 void VisualShaderGroup::add_output_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name) {
-	const String valid_name = _validate_port_name(p_name, p_id, true);
+	ERR_FAIL_INDEX(p_id, output_ports.size() + 1);
 
+	const String valid_name = _validate_port_name(p_name, p_id, true);
 	if (valid_name.is_empty()) {
 		return;
 	}
 
-	output_ports[p_id] = Port{ p_type, valid_name };
+	// Shift connections above upward.
+	if (p_id < output_ports.size()) {
+		List<ShaderGraph::Connection> connections;
+		get_node_connections(&connections);
+		for (const ShaderGraph::Connection &c : connections) {
+			if (c.to_node == ShaderGraph::NODE_ID_OUTPUT && c.to_port >= p_id) {
+				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+				connect_nodes_forced(c.from_node, c.from_port, c.to_node, c.to_port + 1);
+			}
+		}
+	}
+
+	output_ports.insert(p_id, Port{ p_type, valid_name });
 	_queue_update();
 	emit_changed();
 }
 
 void VisualShaderGroup::set_output_port_name(int p_id, const String &p_name) {
-	ERR_FAIL_COND(!output_ports.has(p_id));
+	ERR_FAIL_INDEX(p_id, output_ports.size());
 
 	const String valid_name = _validate_port_name(p_name, p_id, true);
-
 	if (valid_name.is_empty()) {
 		return;
 	}
 
-	output_ports[p_id].name = valid_name;
+	output_ports.write[p_id].name = valid_name;
 	_queue_update();
 	emit_changed();
 }
 
 void VisualShaderGroup::set_output_port_type(int p_id, VisualShaderNode::PortType p_type) {
-	ERR_FAIL_COND(!output_ports.has(p_id));
+	ERR_FAIL_INDEX(p_id, output_ports.size());
 
 	if (output_ports[p_id].type == p_type) {
 		return;
 	}
 
-	output_ports[p_id].type = p_type;
+	output_ports.write[p_id].type = p_type;
 	_queue_update();
 	emit_changed();
 }
 
 VisualShaderGroup::Port VisualShaderGroup::get_output_port(int p_id) const {
-	ERR_FAIL_COND_V(!output_ports.has(p_id), (VisualShaderGroup::Port){});
+	ERR_FAIL_INDEX_V(p_id, output_ports.size(), Port{});
 	return output_ports[p_id];
 }
 
 Vector<VisualShaderGroup::Port> VisualShaderGroup::get_output_ports() const {
-	Vector<Port> ports;
-	for (const KeyValue<int, Port> &E : output_ports) {
-		ports.push_back(E.value);
-	}
-	return ports;
+	return output_ports;
 }
 
 void VisualShaderGroup::remove_output_port(int p_id) {
-	output_ports.erase(p_id);
+	ERR_FAIL_INDEX(p_id, output_ports.size());
+
+	// Shift connections above downward.
+	List<ShaderGraph::Connection> connections;
+	get_node_connections(&connections);
+	for (const ShaderGraph::Connection &c : connections) {
+		if (c.to_node == ShaderGraph::NODE_ID_OUTPUT) {
+			if (c.to_port == p_id) {
+				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+			} else if (c.to_port > p_id) {
+				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
+				connect_nodes_forced(c.from_node, c.from_port, c.to_node, c.to_port - 1);
+			}
+		}
+	}
+
+	output_ports.remove_at(p_id);
+	_queue_update();
 	emit_changed();
 }
 
@@ -1011,13 +1061,16 @@ void VisualShaderGroupPortsDialog::_remove_port() {
 	// Update the item list.
 	port_item_list->remove_item(selected_idx);
 
-	// Select the next port.
+	// Select the next port or hide editing controls if none remain.
 	if (selected_idx < port_item_list->get_item_count()) {
 		port_item_list->select(selected_idx);
 		_update_dialog_for_port(selected_idx);
+	} else if (port_item_list->get_item_count() > 0) {
+		port_item_list->select(port_item_list->get_item_count() - 1);
+		_update_dialog_for_port(port_item_list->get_item_count() - 1);
+	} else {
+		_update_dialog_for_port(-1);
 	}
-
-	_update_dialog_for_port(-1);
 }
 
 void VisualShaderGroupPortsDialog::_on_port_item_selected(int p_index) {
