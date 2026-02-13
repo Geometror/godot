@@ -2762,7 +2762,9 @@ void VisualShaderEditor::_edit_group_ports_pressed(int p_group_input_node_id, Bu
 
 	group_ports_dialog->set_dialog_mode(is_input);
 	group_ports_dialog->set_group(group);
-	group_ports_dialog->set_position(p_button->get_global_position());
+
+	Point2 mouse_position_on_screen = get_screen_position() + get_local_mouse_position();
+	group_ports_dialog->set_position(mouse_position_on_screen);
 	group_ports_dialog->popup();
 }
 
