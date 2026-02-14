@@ -808,7 +808,7 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 
 	code += "void group_" + valid_group_name + "(";
 
-	// Add all inputs/outputs as function parameters.
+	// Add all inputs/outputs as function parameters prefixed with "p_" (to prevent redefining builtins like UV, etc.).
 	const Vector<VisualShaderGroup::Port> input_ports = group->get_input_ports();
 	for (int i = 0; i < input_ports.size(); i++) {
 		if (i == 0) {
@@ -817,14 +817,14 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 			code += ", in ";
 		}
 		code += VisualShaderNode::get_port_type_shader_string(input_ports[i].type) + " ";
-		code += input_ports[i].name;
+		code += "p_" + input_ports[i].name;
 	}
 
 	const Vector<VisualShaderGroup::Port> output_ports = group->get_output_ports();
 	for (int i = 0; i < output_ports.size(); i++) {
 		code += ", out ";
 		code += VisualShaderNode::get_port_type_shader_string(output_ports[i].type) + " ";
-		code += output_ports[i].name;
+		code += "p_" + output_ports[i].name;
 	}
 
 	code += ") {\n";
@@ -906,7 +906,7 @@ String VisualShaderNodeGroupInput::generate_code(Shader::Mode p_mode, VisualShad
 			// TODO: Maybe we find a way to use the inputs of the VisualShaderNodeGroup that was used to open the node group? (or maybe this is not a good idea?)
 			code += p_output_vars[i] + " = " + VisualShaderNode::get_port_type_default_value_shader_string(group->get_input_port(i).type) + ";\n";
 		} else {
-			code += p_output_vars[i] + " = " + group->get_input_port(i).name + ";\n";
+			code += p_output_vars[i] + " = " + "p_" + group->get_input_port(i).name + ";\n";
 		}
 	}
 	return code;
@@ -965,11 +965,6 @@ String VisualShaderNodeGroupOutput::get_output_port_name(int p_port) const {
 	return String();
 }
 
-bool VisualShaderNodeGroupOutput::is_port_separator(int p_index) const {
-	// TODO: Remove this?
-	return false;
-}
-
 String VisualShaderNodeGroupOutput::get_caption() const {
 	return "Group Output";
 }
@@ -982,7 +977,7 @@ String VisualShaderNodeGroupOutput::generate_code(Shader::Mode p_mode, VisualSha
 		if (p_input_vars[i].is_empty()) {
 			continue;
 		};
-		code += group->get_output_port(i).name + " = " + p_input_vars[i] + ";\n";
+		code += "p_" + group->get_output_port(i).name + " = " + p_input_vars[i] + ";\n";
 	}
 	return code;
 }
