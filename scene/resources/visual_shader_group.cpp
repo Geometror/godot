@@ -630,10 +630,11 @@ VisualShaderGroup::VisualShaderGroup() {
 ////////////// Group
 
 void VisualShaderNodeGroup::_emit_changed() {
-	// Check for input port changes.
 	for (int i = 0; i < get_input_port_count(); i++) {
-		const PortType type = get_input_port_type(i);
-		set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
+		if (!default_input_values.has(i)) {
+			const PortType type = get_input_port_type(i);
+			set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
+		}
 	}
 
 	emit_changed();
@@ -898,8 +899,10 @@ VisualShaderNodeGroupInput::VisualShaderNodeGroupInput() {
 
 void VisualShaderNodeGroupOutput::_group_changed() {
 	for (int i = 0; i < get_input_port_count(); i++) {
-		const PortType type = get_input_port_type(i);
-		set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
+		if (!default_input_values.has(i)) {
+			const PortType type = get_input_port_type(i);
+			set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
+		}
 	}
 
 	emit_changed();
