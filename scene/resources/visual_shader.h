@@ -453,6 +453,7 @@ protected:
 public:
 	static String get_port_type_shader_string(PortType p_type);
 	static String get_port_type_default_value_shader_string(PortType p_type);
+	static Variant get_port_type_default_value_variant(PortType p_type);
 
 	bool is_simple_decl() const;
 

@@ -30,6 +30,8 @@
 
 #include "visual_shader.h"
 
+#include "core/math/transform_3d.h"
+#include "core/math/vector4.h"
 #include "core/templates/rb_map.h"
 #include "core/variant/variant_utility.h"
 #include "scene/resources/visual_shader_group.h"
@@ -1387,6 +1389,29 @@ String VisualShaderNode::get_port_type_default_value_shader_string(PortType p_ty
 			return "mat4(1.0)";
 		default:
 			return "0.0";
+	}
+}
+
+Variant VisualShaderNode::get_port_type_default_value_variant(PortType p_type) {
+	switch (p_type) {
+		case PORT_TYPE_SCALAR:
+			return 0.0;
+		case PORT_TYPE_SCALAR_INT:
+			return 0;
+		case PORT_TYPE_SCALAR_UINT:
+			return 0u;
+		case PORT_TYPE_VECTOR_2D:
+			return Vector2();
+		case PORT_TYPE_VECTOR_3D:
+			return Vector3();
+		case PORT_TYPE_VECTOR_4D:
+			return Vector4();
+		case PORT_TYPE_BOOLEAN:
+			return false;
+		case PORT_TYPE_TRANSFORM:
+			return Transform3D();
+		default:
+			return Variant();
 	}
 }
 

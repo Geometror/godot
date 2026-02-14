@@ -138,7 +138,6 @@ class VisualShaderNodeGroup : public VisualShaderNode {
 	ShaderGraph::Type shader_type = ShaderGraph::Type::TYPE_MAX; // TYPE_MAX when used in a VisualShaderGroup itself.
 	Shader::Mode shader_mode = Shader::Mode::MODE_MAX; // MODE_MAX when used in a VisualShaderGroup itself.
 
-	Variant _get_default_variant(VisualShaderNode::PortType p_type);
 	void _emit_changed();
 
 protected:
@@ -229,6 +228,8 @@ class VisualShaderNodeGroupOutput : public VisualShaderNode {
 	// TODO: Possibly dangerous, but it is necessary for now since we don't have a proper weak reference.
 	VisualShaderGroup *group = nullptr;
 
+	void _group_changed();
+
 	// struct Port {
 	// 	PortType type = PortType::PORT_TYPE_MAX;
 	// 	const char *name;
@@ -244,7 +245,6 @@ public:
 	virtual int get_input_port_count() const override;
 	virtual PortType get_input_port_type(int p_port) const override;
 	virtual String get_input_port_name(int p_port) const override;
-	Variant get_input_port_default_value(int p_port) const;
 
 	virtual int get_output_port_count() const override;
 	virtual PortType get_output_port_type(int p_port) const override;

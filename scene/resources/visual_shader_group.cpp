@@ -31,8 +31,6 @@
 #include "visual_shader_group.h"
 
 #include "core/error/error_macros.h"
-#include "core/math/transform_3d.h"
-#include "core/math/vector4.h"
 #include "core/object/callable_method_pointer.h"
 #include "core/string/ustring.h"
 #include "core/templates/hash_set.h"
@@ -631,34 +629,11 @@ VisualShaderGroup::VisualShaderGroup() {
 
 ////////////// Group
 
-Variant VisualShaderNodeGroup::_get_default_variant(VisualShaderNode::PortType p_type) {
-	switch (p_type) {
-		case VisualShaderNode::PORT_TYPE_SCALAR:
-			return 0.0;
-		case VisualShaderNode::PORT_TYPE_SCALAR_INT:
-			return 0;
-		case VisualShaderNode::PORT_TYPE_SCALAR_UINT:
-			return 0u;
-		case VisualShaderNode::PORT_TYPE_VECTOR_2D:
-			return Vector2();
-		case VisualShaderNode::PORT_TYPE_VECTOR_3D:
-			return Vector3();
-		case VisualShaderNode::PORT_TYPE_VECTOR_4D:
-			return Vector4();
-		case VisualShaderNode::PORT_TYPE_BOOLEAN:
-			return false;
-		case VisualShaderNode::PORT_TYPE_TRANSFORM:
-			return Transform3D();
-		default:
-			return Variant();
-	}
-}
-
 void VisualShaderNodeGroup::_emit_changed() {
 	// Check for input port changes.
 	for (int i = 0; i < get_input_port_count(); i++) {
 		const PortType type = get_input_port_type(i);
-		set_input_port_default_value(i, _get_default_variant(type));
+		set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
 	}
 
 	emit_changed();
@@ -739,7 +714,9 @@ void VisualShaderNodeGroup::set_group(const Ref<VisualShaderGroup> &p_group) {
 		return;
 	}
 	group = p_group;
-	group->connect_changed(callable_mp(this, &VisualShaderNodeGroup::_emit_changed));
+	if (group.is_valid()) {
+		group->connect_changed(callable_mp(this, &VisualShaderNodeGroup::_emit_changed));
+	}
 	emit_changed();
 }
 
@@ -919,8 +896,22 @@ Vector<StringName> VisualShaderNodeGroupInput::get_editable_properties() const {
 VisualShaderNodeGroupInput::VisualShaderNodeGroupInput() {
 }
 
+void VisualShaderNodeGroupOutput::_group_changed() {
+	for (int i = 0; i < get_input_port_count(); i++) {
+		const PortType type = get_input_port_type(i);
+		set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
+	}
+
+	emit_changed();
+}
+
 void VisualShaderNodeGroupOutput::set_group(VisualShaderGroup *p_group) {
 	group = p_group;
+
+	if (group) {
+		group->connect_changed(callable_mp(this, &VisualShaderNodeGroupOutput::_group_changed));
+	}
+	emit_changed();
 }
 
 VisualShaderGroup *VisualShaderNodeGroupOutput::get_group() const {
@@ -946,11 +937,6 @@ String VisualShaderNodeGroupOutput::get_input_port_name(int p_port) const {
 		return String();
 	}
 	return group->get_output_port(p_port).name;
-}
-
-Variant VisualShaderNodeGroupOutput::get_input_port_default_value(int p_port) const {
-	// TODO: Implement.
-	return Variant();
 }
 
 int VisualShaderNodeGroupOutput::get_output_port_count() const {
