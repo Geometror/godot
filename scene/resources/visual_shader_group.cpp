@@ -236,12 +236,20 @@ void VisualShaderGroup::_update_group() {
 		input_connections.insert(to_key, E);
 	}
 
-	Error err = graph->_write_node(&global_code_builder, &global_code_per_node_builder, &global_code_per_func_builder, group_code, default_tex_params, input_connections, output_connections, ShaderGraph::NODE_ID_OUTPUT, processed, false, classes);
-	ERR_FAIL_COND(err != OK);
+	// Write code starting from each the first output node that is active.
+	// Note: Right now that is just the first one.
+	for (const KeyValue<int, ShaderGraph::Node> &E : graph->nodes) {
+		Ref<VisualShaderNodeGroupOutput> group_output = E.value.node;
+		if (group_output.is_valid()) {
+			const Error err = graph->_write_node(&global_code_builder, &global_code_per_node_builder, &global_code_per_func_builder, group_code, default_tex_params, input_connections, output_connections, E.key, processed, false, classes);
+			ERR_FAIL_COND(err != OK);
+			break;
+		}
+	}
 
 	// TODO: Figure out why this needs to be separately.
 	for (int &E : emitters) {
-		err = graph->_write_node(&global_code_builder, &global_code_per_node_builder, &global_code_per_func_builder, group_code, default_tex_params, input_connections, output_connections, E, processed, false, classes);
+		const Error err = graph->_write_node(&global_code_builder, &global_code_per_node_builder, &global_code_per_func_builder, group_code, default_tex_params, input_connections, output_connections, E, processed, false, classes);
 		ERR_FAIL_COND(err != OK);
 	}
 
@@ -285,7 +293,28 @@ bool VisualShaderGroup::_set(const StringName &p_name, const Variant &p_value) {
 		emit_changed();
 		return true;
 	}
-	return graph->_set(p_name, p_value);
+
+	bool result = graph->_set(p_name, p_value);
+
+	// Fix up group pointers for deserialized group input/output nodes.
+	const String prop_name_str = p_name;
+	if (result && prop_name_str.begins_with("nodes/")) {
+		const String index = prop_name_str.get_slicec('/', 1);
+		const String node_info = prop_name_str.get_slicec('/', 2);
+		if (node_info == "node") {
+			const int id = index.to_int();
+			Ref<VisualShaderNodeGroupInput> input = graph->get_node_unchecked(id);
+			if (input.is_valid()) {
+				input->set_group(this);
+			}
+			Ref<VisualShaderNodeGroupOutput> output = graph->get_node_unchecked(id);
+			if (output.is_valid()) {
+				output->set_group(this);
+			}
+		}
+	}
+
+	return result;
 }
 
 bool VisualShaderGroup::_get(const StringName &p_name, Variant &r_ret) const {
@@ -368,7 +397,8 @@ void VisualShaderGroup::add_input_port(int p_id, VisualShaderNode::PortType p_ty
 		List<ShaderGraph::Connection> connections;
 		get_node_connections(&connections);
 		for (const ShaderGraph::Connection &c : connections) {
-			if (c.from_node == ShaderGraph::NODE_ID_INPUT && c.from_port >= p_id) {
+			Ref<VisualShaderNodeGroupInput> group_input = graph->get_node(c.from_node);
+			if (group_input.is_valid() && c.from_port >= p_id) {
 				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
 				connect_nodes_forced(c.from_node, c.from_port + 1, c.to_node, c.to_port);
 			}
@@ -421,7 +451,8 @@ void VisualShaderGroup::remove_input_port(int p_id) {
 	List<ShaderGraph::Connection> connections;
 	get_node_connections(&connections);
 	for (const ShaderGraph::Connection &c : connections) {
-		if (c.from_node == ShaderGraph::NODE_ID_INPUT) {
+		Ref<VisualShaderNodeGroupInput> group_input = graph->get_node(c.from_node);
+		if (group_input.is_valid()) {
 			if (c.from_port == p_id) {
 				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
 			} else if (c.from_port > p_id) {
@@ -449,7 +480,8 @@ void VisualShaderGroup::add_output_port(int p_id, VisualShaderNode::PortType p_t
 		List<ShaderGraph::Connection> connections;
 		get_node_connections(&connections);
 		for (const ShaderGraph::Connection &c : connections) {
-			if (c.to_node == ShaderGraph::NODE_ID_OUTPUT && c.to_port >= p_id) {
+			Ref<VisualShaderNodeGroupOutput> group_output = graph->get_node(c.to_node);
+			if (group_output.is_valid() && c.to_port >= p_id) {
 				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
 				connect_nodes_forced(c.from_node, c.from_port, c.to_node, c.to_port + 1);
 			}
@@ -502,7 +534,8 @@ void VisualShaderGroup::remove_output_port(int p_id) {
 	List<ShaderGraph::Connection> connections;
 	get_node_connections(&connections);
 	for (const ShaderGraph::Connection &c : connections) {
-		if (c.to_node == ShaderGraph::NODE_ID_OUTPUT) {
+		Ref<VisualShaderNodeGroupOutput> group_output = graph->get_node(c.to_node);
+		if (group_output.is_valid()) {
 			if (c.to_port == p_id) {
 				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
 			} else if (c.to_port > p_id) {
@@ -606,23 +639,25 @@ String VisualShaderGroup::validate_parameter_name(const String &p_name, const Re
 	return String();
 }
 
-VisualShaderGroup::VisualShaderGroup() {
-	dirty.set();
-
-	graph.instantiate(2); // A node group has two reserved node IDs, one input and one output node.
-	graph->connect("graph_changed", callable_mp(this, &VisualShaderGroup::_queue_update));
+void VisualShaderGroup::create_default_nodes_if_empty() {
+	if (!graph->nodes.is_empty()) {
+		return;
+	}
 
 	Ref<VisualShaderNodeGroupInput> input_node;
 	input_node.instantiate();
 	input_node->set_group(this);
-	graph->nodes[ShaderGraph::NODE_ID_INPUT].node = input_node;
-	graph->nodes[ShaderGraph::NODE_ID_INPUT].position = Vector2(0, 150);
+	graph->add_node(input_node, Vector2(0, 150), graph->get_valid_node_id());
 
 	Ref<VisualShaderNodeGroupOutput> output_node;
 	output_node.instantiate();
 	output_node->set_group(this);
-	graph->nodes[ShaderGraph::NODE_ID_OUTPUT].node = output_node;
-	graph->nodes[ShaderGraph::NODE_ID_OUTPUT].position = Vector2(400, 150);
+	graph->add_node(output_node, Vector2(400, 150), graph->get_valid_node_id());
+}
+
+VisualShaderGroup::VisualShaderGroup() {
+	graph.instantiate(0); // No reserved node IDs; input/output are regular nodes.
+	graph->connect("graph_changed", callable_mp(this, &VisualShaderGroup::_queue_update));
 
 	group_name = TTR("Node group");
 }
@@ -716,6 +751,7 @@ void VisualShaderNodeGroup::set_group(const Ref<VisualShaderGroup> &p_group) {
 	}
 	group = p_group;
 	if (group.is_valid()) {
+		group->create_default_nodes_if_empty();
 		group->connect_changed(callable_mp(this, &VisualShaderNodeGroup::_emit_changed));
 	}
 	emit_changed();
@@ -898,14 +934,15 @@ VisualShaderNodeGroupInput::VisualShaderNodeGroupInput() {
 }
 
 void VisualShaderNodeGroupOutput::_group_changed() {
+	// Set default values if they don't exist or if the type doesn't match the port type anymore.
 	for (int i = 0; i < get_input_port_count(); i++) {
-		if (!default_input_values.has(i)) {
-			const PortType type = get_input_port_type(i);
-			set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
+		const PortType type = get_input_port_type(i);
+		const Variant default_value_variant = VisualShaderNode::get_port_type_default_value_variant(type);
+		if (!default_input_values.has(i) ||
+				default_value_variant.get_type() != default_input_values[i].get_type()) {
+			set_input_port_default_value(i, default_value_variant);
 		}
 	}
-
-	emit_changed();
 }
 
 void VisualShaderNodeGroupOutput::set_group(VisualShaderGroup *p_group) {

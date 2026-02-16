@@ -96,13 +96,9 @@ public:
 		List<Ref<Texture>> params;
 	};
 
-	// TODO: Consider make these constants or one constant and one getter function to get the output node id.
-	// TODO: Maybe move them back to VS since we might need different ones here (GROUP_IN, GROUP_OUT).
-	enum {
-		NODE_ID_INVALID = -1,
-		NODE_ID_OUTPUT = 0,
-		NODE_ID_INPUT = 1
-	};
+	static constexpr int NODE_ID_INVALID = -1;
+	static constexpr int NODE_ID_OUTPUT = 0;
+
 	int reserved_node_ids = 1;
 
 	RBMap<int, Node> nodes; // TODO: Does order really matter here? Maybe for serialization?

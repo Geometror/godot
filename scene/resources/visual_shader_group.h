@@ -60,6 +60,9 @@ protected:
 	void _queue_update();
 	void _update_group();
 
+public:
+	void queue_update();
+
 	bool _set(const StringName &p_name, const Variant &p_value);
 	bool _get(const StringName &p_name, Variant &r_ret) const;
 	void _get_property_list(List<PropertyInfo> *p_list) const;
@@ -125,6 +128,8 @@ public:
 
 	// TODO: Implement?
 	String validate_parameter_name(const String &p_name, const Ref<VisualShaderNodeParameter> &p_parameter) const;
+
+	void create_default_nodes_if_empty();
 
 	VisualShaderGroup();
 };

@@ -723,8 +723,8 @@ void VisualShaderGraphPlugin::add_node(VisualShader::Type p_type, int p_id, bool
 	}
 	node->set_name(itos(p_id));
 
-	// All nodes are closable except the output node.
-	if (p_id >= 2) {
+	// All nodes are deletable except reserved nodes (e.g., the output node).
+	if (p_id >= sgraph->reserved_node_ids) {
 		vsnode->set_deletable(true);
 		node->connect("delete_request", callable_mp(editor, &VisualShaderEditor::_delete_node_request).bind(p_type, p_id), CONNECT_DEFERRED);
 	}
@@ -1648,9 +1648,47 @@ void VisualShaderEditor::save_external_data(const String &p_str) {
 		ResourceSaver::save(visual_shader_group, visual_shader_group->get_path());
 	}
 
-	for (Ref<VisualShaderGroup> edited_group : group_edit_stack) {
-		if (edited_group.is_valid()) {
-			ResourceSaver::save(edited_group, edited_group->get_path());
+	// Recursively save all groups contained in the shader.
+	HashSet<Ref<VisualShaderGroup>> saved_groups;
+	List<Ref<ShaderGraph>> graphs_to_process;
+
+	// Start with all top-level shader graphs and with visual_shader_group if a group is edited directly.
+	if (visual_shader.is_valid()) {
+		for (int i = 0; i < VisualShader::TYPE_MAX; i++) {
+			Ref<ShaderGraph> g = visual_shader->get_graph(i);
+			if (g.is_valid()) {
+				graphs_to_process.push_back(g);
+			}
+		}
+	}
+	if (visual_shader_group.is_valid()) {
+		saved_groups.insert(visual_shader_group);
+		const Ref<ShaderGraph> g = visual_shader_group->get_graph();
+		if (g.is_valid()) {
+			graphs_to_process.push_back(g);
+		}
+	}
+
+	// BFS through the shader graphs to find all (nested) groups and save them.
+	while (!graphs_to_process.is_empty()) {
+		const Ref<ShaderGraph> g = graphs_to_process.front()->get();
+		graphs_to_process.pop_front();
+
+		for (const int id : g->get_node_ids()) {
+			const Ref<VisualShaderNodeGroup> group_node = g->get_node(id);
+			if (group_node.is_null()) {
+				continue;
+			}
+
+			const Ref<VisualShaderGroup> group = group_node->get_group();
+			if (group.is_valid() && !saved_groups.has(group)) {
+				saved_groups.insert(group);
+				ResourceSaver::save(group, group->get_path());
+				Ref<ShaderGraph> group_graph = group->get_graph();
+				if (group_graph.is_valid()) {
+					graphs_to_process.push_back(group_graph);
+				}
+			}
 		}
 	}
 }
@@ -5770,6 +5808,19 @@ void VisualShaderEditor::_dup_paste_nodes(int p_type, List<CopyItem> &r_items, c
 		Ref<VisualShaderNodeExpression> expression = Object::cast_to<VisualShaderNodeExpression>(node.ptr());
 		if (expression.is_valid()) {
 			undo_redo->add_do_method(node.ptr(), "set_expression", item.expression);
+		}
+
+		// Set the group pointer for duplicated group input/output nodes.
+		if (!group_edit_stack.is_empty()) {
+			VisualShaderGroup *current_group = group_edit_stack.back()->get().ptr();
+			Ref<VisualShaderNodeGroupInput> group_input = Object::cast_to<VisualShaderNodeGroupInput>(node.ptr());
+			if (group_input.is_valid()) {
+				group_input->set_group(current_group);
+			}
+			Ref<VisualShaderNodeGroupOutput> group_output = Object::cast_to<VisualShaderNodeGroupOutput>(node.ptr());
+			if (group_output.is_valid()) {
+				group_output->set_group(current_group);
+			}
 		}
 
 		if (visual_shader.is_valid() && group_edit_stack.is_empty()) {

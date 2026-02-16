@@ -77,9 +77,9 @@ void ShaderGraph::_bind_methods() {
 }
 
 bool ShaderGraph::_set(const StringName &p_name, const Variant &p_value) {
-	const String prop_name = p_name;
-	if (prop_name.begins_with("nodes/")) {
-		String index = prop_name.get_slicec('/', 1);
+	const String prop_name_str = p_name;
+	if (prop_name_str.begins_with("nodes/")) {
+		String index = prop_name_str.get_slicec('/', 1);
 
 		if (index == "connections") {
 			Vector<int> conns = p_value;
@@ -92,7 +92,7 @@ bool ShaderGraph::_set(const StringName &p_name, const Variant &p_value) {
 		}
 
 		const int id = index.to_int();
-		const String node_info = prop_name.get_slicec('/', 2);
+		const String node_info = prop_name_str.get_slicec('/', 2);
 
 		if (node_info == "node") {
 			add_node(p_value, Vector2(), id);
@@ -829,7 +829,7 @@ bool ShaderGraph::_check_reroute_subgraph(int p_target_port_type, int p_reroute_
 
 void ShaderGraph::add_node(const Ref<VisualShaderNode> &p_node, const Vector2 &p_position, int p_id) {
 	ERR_FAIL_COND(p_node.is_null());
-	ERR_FAIL_COND(p_id < 2); // Reserved for the output node.
+	ERR_FAIL_COND(p_id < reserved_node_ids);
 	ERR_FAIL_COND(nodes.has(p_id));
 
 	ShaderGraph::Node n;
@@ -881,7 +881,7 @@ Vector<int> ShaderGraph::get_node_ids() const {
 }
 
 int ShaderGraph::get_valid_node_id() const {
-	return nodes.size() ? MAX(2, nodes.back()->key() + 1) : 2;
+	return nodes.size() ? MAX(reserved_node_ids, nodes.back()->key() + 1) : reserved_node_ids;
 }
 
 int ShaderGraph::find_node_id(const Ref<VisualShaderNode> &p_node) const {
@@ -903,10 +903,10 @@ void ShaderGraph::remove_node(int p_id) {
 		List<ShaderGraph::Connection>::Element *N = E->next();
 		const ShaderGraph::Connection &connection = E->get();
 		if (connection.from_node == p_id || connection.to_node == p_id) {
-			if (connection.from_node == p_id) {
+			if (connection.from_node == p_id && nodes.has(connection.to_node)) {
 				nodes[connection.to_node].prev_connected_nodes.erase(p_id);
 				nodes[connection.to_node].node->set_input_port_connected(connection.to_port, false);
-			} else if (connection.to_node == p_id) {
+			} else if (connection.to_node == p_id && nodes.has(connection.from_node)) {
 				nodes[connection.from_node].next_connected_nodes.erase(p_id);
 				nodes[connection.from_node].node->set_output_port_connected(connection.from_port, false);
 			}
@@ -1102,14 +1102,18 @@ void ShaderGraph::disconnect_nodes(int p_from_node, int p_from_port, int p_to_no
 	for (List<ShaderGraph::Connection>::Element *E = connections.front(); E; E = E->next()) {
 		if (E->get().from_node == p_from_node && E->get().from_port == p_from_port && E->get().to_node == p_to_node && E->get().to_port == p_to_port) {
 			connections.erase(E);
-			nodes[p_from_node].next_connected_nodes.erase(p_to_node);
-			nodes[p_to_node].prev_connected_nodes.erase(p_from_node);
-			nodes[p_from_node].node->set_output_port_connected(p_from_port, false);
-			nodes[p_to_node].node->set_input_port_connected(p_to_port, false);
+			if (nodes.has(p_from_node) && nodes[p_from_node].node.is_valid()) {
+				nodes[p_from_node].next_connected_nodes.erase(p_to_node);
+				nodes[p_from_node].node->set_output_port_connected(p_from_port, false);
+			}
+			if (nodes.has(p_to_node) && nodes[p_to_node].node.is_valid()) {
+				nodes[p_to_node].prev_connected_nodes.erase(p_from_node);
+				nodes[p_to_node].node->set_input_port_connected(p_to_port, false);
+			}
+			emit_signal("graph_changed");
 			return;
 		}
 	}
-	emit_signal("graph_changed");
 }
 
 void ShaderGraph::connect_nodes_forced(int p_from_node, int p_from_port, int p_to_node, int p_to_port) {
@@ -2389,7 +2393,7 @@ int VisualShader::find_node_id(Type p_type, const Ref<VisualShaderNode> &p_node)
 
 void VisualShader::remove_node(Type p_type, int p_id) {
 	ERR_FAIL_INDEX(p_type, TYPE_MAX);
-	ERR_FAIL_COND(p_id < 2);
+	ERR_FAIL_COND(p_id < graph[p_type]->reserved_node_ids);
 	Ref<ShaderGraph> g = graph[p_type];
 	ERR_FAIL_COND(!g->nodes.has(p_id));
 	g->nodes[p_id].node->disconnect_changed(callable_mp(this, &VisualShader::_queue_update));
@@ -2399,7 +2403,7 @@ void VisualShader::remove_node(Type p_type, int p_id) {
 
 void VisualShader::replace_node(Type p_type, int p_id, const StringName &p_new_class) {
 	ERR_FAIL_INDEX(p_type, TYPE_MAX);
-	ERR_FAIL_COND(p_id < 2);
+	ERR_FAIL_COND(p_id < graph[p_type]->reserved_node_ids);
 	Ref<ShaderGraph> g = graph[p_type];
 	g->replace_node(p_id, p_new_class);
 	g->nodes[p_id].node->connect_changed(callable_mp(this, &VisualShader::_queue_update));
