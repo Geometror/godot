@@ -1580,6 +1580,79 @@ Vector2 VisualShaderEditor::selection_center;
 List<VisualShaderEditor::CopyItem> VisualShaderEditor::copy_items_buffer;
 List<ShaderGraph::Connection> VisualShaderEditor::copy_connections_buffer;
 
+int VisualShaderEditor::_get_default_shader_type() const {
+	if (mode & MODE_FLAGS_PARTICLES) {
+		return VisualShader::TYPE_START;
+	} else if (mode & MODE_FLAGS_SKY) {
+		return VisualShader::TYPE_SKY;
+	} else if (mode & MODE_FLAGS_FOG) {
+		return VisualShader::TYPE_FOG;
+	} else if (mode & MODE_FLAGS_TEXTURE_BLIT) {
+		return VisualShader::TYPE_TEXTURE_BLIT;
+	}
+	return VisualShader::TYPE_VERTEX;
+}
+
+void VisualShaderEditor::_select_shader_type(VisualShader::Type p_type) {
+	int type_diff = p_type - _get_default_shader_type();
+	if (mode & MODE_FLAGS_PARTICLES && type_diff >= 3) {
+		edit_type->select(type_diff - 3);
+		custom_mode_box->set_pressed(true);
+	} else {
+		edit_type->select(type_diff);
+		if (mode & MODE_FLAGS_PARTICLES) {
+			custom_mode_box->set_pressed(false);
+		}
+	}
+}
+
+// This is called before every other do/undo method in each action in the visual shader editor.
+void VisualShaderEditor::_restore_graph_context(int p_shader_type, TypedArray<VisualShaderGroup> p_group_stack) {
+	// Restore shader type.
+	if (visual_shader.is_valid()) {
+		VisualShader::Type target_type = (VisualShader::Type)p_shader_type;
+		if (current_type != target_type) {
+			current_type = target_type;
+			_select_shader_type(target_type);
+		}
+	}
+
+	// Restore group edit stack.
+	group_edit_stack.clear();
+	for (int i = 0; i < p_group_stack.size(); i++) {
+		Ref<VisualShaderGroup> g = p_group_stack[i];
+		if (g.is_valid()) {
+			group_edit_stack.push_back(g);
+		}
+	}
+
+	// Set editing_shader_graph based on restored context.
+	if (!group_edit_stack.is_empty()) {
+		Ref<VisualShaderGroup> group = group_edit_stack.back()->get();
+		editing_shader_graph = group->get_graph();
+	} else if (visual_shader.is_valid()) {
+		editing_shader_graph = visual_shader->get_graph(current_type);
+	} else if (visual_shader_group.is_valid()) {
+		editing_shader_graph = visual_shader_group->get_graph();
+	}
+
+	_update_graph();
+}
+
+void VisualShaderEditor::_vs_create_action(const String &p_name, UndoRedo::MergeMode p_merge_mode) {
+	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
+	undo_redo->create_action_for_history(p_name, EditorUndoRedoManager::GLOBAL_HISTORY, p_merge_mode);
+	undo_redo->force_fixed_history();
+
+	// Capture current context so undo/redo restores the correct graph before applying.
+	TypedArray<VisualShaderGroup> group_stack_snapshot;
+	for (const Ref<VisualShaderGroup> &g : group_edit_stack) {
+		group_stack_snapshot.push_back(g);
+	}
+	undo_redo->add_do_method(this, "_restore_graph_context", (int)current_type, group_stack_snapshot);
+	undo_redo->add_undo_method(this, "_restore_graph_context", (int)current_type, group_stack_snapshot);
+}
+
 void VisualShaderEditor::edit_shader(const Ref<Shader> &p_shader) {
 	// TODO: Adapt to handle both VSs and VSGs.
 	shader_fully_loaded = false;
@@ -2194,7 +2267,7 @@ void VisualShaderEditor::_preview_tools_menu_option(int p_idx) {
 		case COPY_PARAMS_FROM_MATERIAL:
 			if (src_mat) {
 				EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-				undo_redo->create_action(TTR("Copy Preview Shader Parameters From Material"));
+				_vs_create_action(TTR("Copy Preview Shader Parameters From Material"));
 
 				List<PropertyInfo> params;
 				preview_material->get_shader()->get_shader_uniform_list(&params);
@@ -2209,7 +2282,7 @@ void VisualShaderEditor::_preview_tools_menu_option(int p_idx) {
 		case PASTE_PARAMS_TO_MATERIAL:
 			if (src_mat) {
 				EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-				undo_redo->create_action(TTR("Paste Preview Shader Parameters To Material"));
+				_vs_create_action(TTR("Paste Preview Shader Parameters To Material"));
 
 				List<PropertyInfo> params;
 				preview_material->get_shader()->get_shader_uniform_list(&params);
@@ -2659,19 +2732,15 @@ void VisualShaderEditor::_set_mode(int p_which) {
 
 	const String id_string = _get_cache_id_string();
 
-	int default_type = VisualShader::TYPE_VERTEX;
-	int upper_type = VisualShader::TYPE_START;
+	int default_type = _get_default_shader_type();
+	int upper_type = default_type + 3; // Spatial/CanvasItem: 3 types (Vertex, Fragment, Light).
 	if (mode & MODE_FLAGS_PARTICLES) {
-		default_type = VisualShader::TYPE_START;
-		upper_type = VisualShader::TYPE_SKY;
+		upper_type = VisualShader::TYPE_SKY; // Includes custom particle types.
 	} else if (mode & MODE_FLAGS_SKY) {
-		default_type = VisualShader::TYPE_SKY;
 		upper_type = VisualShader::TYPE_FOG;
 	} else if (mode & MODE_FLAGS_FOG) {
-		default_type = VisualShader::TYPE_FOG;
 		upper_type = VisualShader::TYPE_TEXTURE_BLIT;
 	} else if (mode & MODE_FLAGS_TEXTURE_BLIT) {
-		default_type = VisualShader::TYPE_TEXTURE_BLIT;
 		upper_type = VisualShader::TYPE_MAX;
 	}
 
@@ -2680,12 +2749,7 @@ void VisualShaderEditor::_set_mode(int p_which) {
 		saved_type = default_type;
 	}
 
-	if (mode & MODE_FLAGS_PARTICLES && saved_type - default_type >= 3) {
-		edit_type->select(saved_type - default_type - 3);
-		custom_mode_box->set_pressed(true);
-	} else {
-		edit_type->select(saved_type - default_type);
-	}
+	_select_shader_type((VisualShader::Type)saved_type);
 	set_current_shader_type((VisualShader::Type)saved_type);
 }
 
@@ -3010,7 +3074,7 @@ void VisualShaderEditor::_add_input_port(int p_node, int p_port, int p_port_type
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Add Input Port"));
+	_vs_create_action(TTR("Add Input Port"));
 	undo_redo->add_do_method(node.ptr(), "add_input_port", p_port, p_port_type, p_name);
 	undo_redo->add_undo_method(node.ptr(), "remove_input_port", p_port);
 	undo_redo->add_do_method(graph_plugin.ptr(), "update_node", type, p_node);
@@ -3026,7 +3090,7 @@ void VisualShaderEditor::_add_output_port(int p_node, int p_port, int p_port_typ
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Add Output Port"));
+	_vs_create_action(TTR("Add Output Port"));
 	undo_redo->add_do_method(node.ptr(), "add_output_port", p_port, p_port_type, p_name);
 	undo_redo->add_undo_method(node.ptr(), "remove_output_port", p_port);
 	undo_redo->add_do_method(graph_plugin.ptr(), "update_node", type, p_node);
@@ -3042,7 +3106,7 @@ void VisualShaderEditor::_change_input_port_type(int p_type, int p_node, int p_p
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Change Input Port Type"));
+	_vs_create_action(TTR("Change Input Port Type"));
 	undo_redo->add_do_method(node.ptr(), "set_input_port_type", p_port, p_type);
 	undo_redo->add_undo_method(node.ptr(), "set_input_port_type", p_port, node->get_input_port_type(p_port));
 	undo_redo->add_do_method(graph_plugin.ptr(), "update_node", type, p_node);
@@ -3058,7 +3122,7 @@ void VisualShaderEditor::_change_output_port_type(int p_type, int p_node, int p_
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Change Output Port Type"));
+	_vs_create_action(TTR("Change Output Port Type"));
 	undo_redo->add_do_method(node.ptr(), "set_output_port_type", p_port, p_type);
 	undo_redo->add_undo_method(node.ptr(), "set_output_port_type", p_port, node->get_output_port_type(p_port));
 	undo_redo->add_do_method(graph_plugin.ptr(), "update_node", type, p_node);
@@ -3085,7 +3149,7 @@ void VisualShaderEditor::_change_input_port_name(const String &p_text, Object *p
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Change Input Port Name"));
+	_vs_create_action(TTR("Change Input Port Name"));
 	undo_redo->add_do_method(node.ptr(), "set_input_port_name", p_port_id, validated_name);
 	undo_redo->add_undo_method(node.ptr(), "set_input_port_name", p_port_id, node->get_input_port_name(p_port_id));
 	undo_redo->commit_action();
@@ -3110,7 +3174,7 @@ void VisualShaderEditor::_change_output_port_name(const String &p_text, Object *
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Change Output Port Name"));
+	_vs_create_action(TTR("Change Output Port Name"));
 	undo_redo->add_do_method(node.ptr(), "set_output_port_name", p_port_id, validated_name);
 	undo_redo->add_undo_method(node.ptr(), "set_output_port_name", p_port_id, prev_name);
 	undo_redo->commit_action();
@@ -3124,9 +3188,9 @@ void VisualShaderEditor::_expand_output_port(int p_node, int p_port, bool p_expa
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 	if (p_expand) {
-		undo_redo->create_action(TTR("Expand Output Port"));
+		_vs_create_action(TTR("Expand Output Port"));
 	} else {
-		undo_redo->create_action(TTR("Shrink Output Port"));
+		_vs_create_action(TTR("Shrink Output Port"));
 	}
 
 	undo_redo->add_do_method(node.ptr(), "_set_output_port_expanded", p_port, p_expand);
@@ -3221,7 +3285,7 @@ void VisualShaderEditor::_remove_input_port(int p_node, int p_port) {
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Remove Input Port"));
+	_vs_create_action(TTR("Remove Input Port"));
 
 	List<ShaderGraph::Connection> conns;
 	editing_shader_graph->get_node_connections(&conns);
@@ -3271,7 +3335,7 @@ void VisualShaderEditor::_remove_output_port(int p_node, int p_port) {
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Remove Output Port"));
+	_vs_create_action(TTR("Remove Output Port"));
 
 	List<ShaderGraph::Connection> conns;
 	editing_shader_graph->get_node_connections(&conns);
@@ -3338,7 +3402,7 @@ void VisualShaderEditor::_expression_focus_out(Object *p_code_edit, int p_node) 
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Set VisualShader Expression"));
+	_vs_create_action(TTR("Set VisualShader Expression"));
 	undo_redo->add_do_method(node.ptr(), "set_expression", expression_box->get_text());
 	undo_redo->add_undo_method(node.ptr(), "set_expression", node->get_expression());
 	undo_redo->add_do_method(graph_plugin.ptr(), "set_expression", type, p_node, expression_box->get_text());
@@ -3399,7 +3463,7 @@ void VisualShaderEditor::_node_resized(const Vector2 &p_new_size, int p_type, in
 	Size2 size = graph_element->get_size();
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Resize VisualShader Node"));
+	_vs_create_action(TTR("Resize VisualShader Node"));
 	undo_redo->add_do_method(this, "_set_node_size", p_type, p_node, size);
 	undo_redo->add_undo_method(this, "_set_node_size", p_type, p_node, node->get_size());
 	undo_redo->commit_action();
@@ -3416,7 +3480,7 @@ void VisualShaderEditor::_preview_select_port(int p_node, int p_port) {
 		p_port = -1; //toggle it
 	}
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(p_port == -1 ? TTR("Hide Port Preview") : TTR("Show Port Preview"));
+	_vs_create_action(p_port == -1 ? TTR("Hide Port Preview") : TTR("Show Port Preview"));
 	undo_redo->add_do_method(node.ptr(), "set_output_port_for_preview", p_port);
 	undo_redo->add_undo_method(node.ptr(), "set_output_port_for_preview", prev_port);
 	undo_redo->add_do_method(graph_plugin.ptr(), "update_node", (int)type, p_node);
@@ -3464,7 +3528,7 @@ void VisualShaderEditor::_frame_title_popup_hide() {
 		return; // nothing changed - ignored
 	}
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Set Frame Title"));
+	_vs_create_action(TTR("Set Frame Title"));
 	undo_redo->add_do_method(node.ptr(), "set_title", frame_title_change_edit->get_text());
 	undo_redo->add_undo_method(node.ptr(), "set_title", node->get_title());
 	undo_redo->add_do_method(graph_plugin.ptr(), "update_node", (int)type, node_id);
@@ -3492,7 +3556,7 @@ void VisualShaderEditor::_frame_color_enabled_changed(int p_node_id) {
 	ERR_FAIL_COND(node.is_null());
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Toggle Frame Color"));
+	_vs_create_action(TTR("Toggle Frame Color"));
 	undo_redo->add_do_method(node.ptr(), "set_tint_color_enabled", tint_color_enabled);
 	undo_redo->add_undo_method(node.ptr(), "set_tint_color_enabled", node->is_tint_color_enabled());
 	undo_redo->add_do_method(graph_plugin.ptr(), "set_frame_color_enabled", (int)type, p_node_id, tint_color_enabled);
@@ -3539,7 +3603,7 @@ void VisualShaderEditor::_frame_color_popup_hide() {
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Set Frame Color"));
+	_vs_create_action(TTR("Set Frame Color"));
 	undo_redo->add_do_method(node.ptr(), "set_tint_color", frame_tint_color_picker->get_pick_color());
 	undo_redo->add_undo_method(node.ptr(), "set_tint_color", node->get_tint_color());
 	undo_redo->add_do_method(graph_plugin.ptr(), "set_frame_color", (int)type, node_id, frame_tint_color_picker->get_pick_color());
@@ -3560,7 +3624,7 @@ void VisualShaderEditor::_frame_autoshrink_enabled_changed(int p_node_id) {
 	ERR_FAIL_COND(node.is_null());
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Toggle Auto Shrink"));
+	_vs_create_action(TTR("Toggle Auto Shrink"));
 	undo_redo->add_do_method(node.ptr(), "set_autoshrink_enabled", !autoshrink_enabled);
 	undo_redo->add_undo_method(node.ptr(), "set_autoshrink_enabled", autoshrink_enabled);
 	undo_redo->add_do_method(graph_plugin.ptr(), "set_frame_autoshrink_enabled", (int)type, p_node_id, !autoshrink_enabled);
@@ -3583,7 +3647,7 @@ void VisualShaderEditor::_parameter_line_edit_changed(const String &p_text, int 
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Set Parameter Name"));
+	_vs_create_action(TTR("Set Parameter Name"));
 	undo_redo->add_do_method(node.ptr(), "set_parameter_name", validated_name);
 	undo_redo->add_undo_method(node.ptr(), "set_parameter_name", node->get_parameter_name());
 	undo_redo->add_do_method(graph_plugin.ptr(), "set_parameter_name", type, p_node_id, validated_name);
@@ -3619,7 +3683,7 @@ void VisualShaderEditor::_port_edited(const StringName &p_property, const Varian
 	ERR_FAIL_COND(vsn.is_null());
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Set Input Default Port"));
+	_vs_create_action(TTR("Set Input Default Port"));
 
 	Ref<VisualShaderNodeCustom> custom = Object::cast_to<VisualShaderNodeCustom>(vsn.ptr());
 	if (custom.is_valid()) {
@@ -3700,7 +3764,7 @@ void VisualShaderEditor::_set_custom_node_option(int p_index, int p_node, int p_
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Set Custom Node Option"));
+	_vs_create_action(TTR("Set Custom Node Option"));
 	undo_redo->add_do_method(node.ptr(), "_set_option_index", p_op, p_index);
 	undo_redo->add_undo_method(node.ptr(), "_set_option_index", p_op, node->get_option_index(p_op));
 	undo_redo->add_do_method(graph_plugin.ptr(), "update_node", type, p_node);
@@ -4139,7 +4203,7 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 	if (p_resource_path.is_empty()) {
-		undo_redo->create_action(TTR("Add Node to Visual Shader"));
+		_vs_create_action(TTR("Add Node to Visual Shader"));
 	} else {
 		id_to_use += p_node_idx;
 	}
@@ -4219,15 +4283,12 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 
 			if (output_port_type == VisualShaderNode::PORT_TYPE_SAMPLER) {
 				if (is_texture2d) {
-					undo_redo->force_fixed_history(); // vsnode is freshly created and has no path, so history can't be correctly determined.
 					undo_redo->add_do_method(vsnode.ptr(), "set_source", VisualShaderNodeTexture::SOURCE_PORT);
 				}
 				if (is_texture3d || is_texture2d_array) {
-					undo_redo->force_fixed_history();
 					undo_redo->add_do_method(vsnode.ptr(), "set_source", VisualShaderNodeSample3D::SOURCE_PORT);
 				}
 				if (is_cubemap) {
-					undo_redo->force_fixed_history();
 					undo_redo->add_do_method(vsnode.ptr(), "set_source", VisualShaderNodeCubemap::SOURCE_PORT);
 				}
 			}
@@ -4327,19 +4388,16 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 		//post-initialization
 
 		if (is_texture2d || is_texture3d || is_curve || is_curve_xyz) {
-			undo_redo->force_fixed_history();
 			undo_redo->add_do_method(vsnode.ptr(), "set_texture", ResourceLoader::load(p_resource_path));
 			return;
 		}
 
 		if (is_cubemap) {
-			undo_redo->force_fixed_history();
 			undo_redo->add_do_method(vsnode.ptr(), "set_cube_map", ResourceLoader::load(p_resource_path));
 			return;
 		}
 
 		if (is_texture2d_array) {
-			undo_redo->force_fixed_history();
 			undo_redo->add_do_method(vsnode.ptr(), "set_texture_array", ResourceLoader::load(p_resource_path));
 			return;
 		}
@@ -4354,7 +4412,7 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 void VisualShaderEditor::_add_varying(const String &p_name, VisualShader::VaryingMode p_mode, VisualShader::VaryingType p_type) {
 	// TODO: Forbid varying in node
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(vformat(TTR("Add Varying to Visual Shader: %s"), p_name));
+	_vs_create_action(vformat(TTR("Add Varying to Visual Shader: %s"), p_name));
 
 	undo_redo->add_do_method(visual_shader.ptr(), "add_varying", p_name, p_mode, p_type);
 	undo_redo->add_undo_method(visual_shader.ptr(), "remove_varying", p_name);
@@ -4390,7 +4448,7 @@ void VisualShaderEditor::_add_varying(const String &p_name, VisualShader::Varyin
 void VisualShaderEditor::_remove_varying(const String &p_name) {
 	// TODO: Forbid varying in node
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(vformat(TTR("Remove Varying from Visual Shader: %s"), p_name));
+	_vs_create_action(vformat(TTR("Remove Varying from Visual Shader: %s"), p_name));
 
 	VisualShader::VaryingMode var_mode = visual_shader->get_varying_mode(p_name);
 
@@ -4481,9 +4539,9 @@ void VisualShaderEditor::_nodes_dragged() {
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 	if (frame_node_id_to_link_to == -1) {
-		undo_redo->create_action(TTR("Move VisualShader Node(s)"));
+		_vs_create_action(TTR("Move VisualShader Node(s)"));
 	} else {
-		undo_redo->create_action(TTR("Move and Attach VisualShader Node(s) to parent frame"));
+		_vs_create_action(TTR("Move and Attach VisualShader Node(s) to parent frame"));
 	}
 
 	for (const DragOp &E : drag_buffer) {
@@ -4524,7 +4582,7 @@ void VisualShaderEditor::_connection_request(const String &p_from, int p_from_in
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Nodes Connected"));
+	_vs_create_action(TTR("Nodes Connected"));
 
 	List<ShaderGraph::Connection> conns;
 	editing_shader_graph->get_node_connections(&conns);
@@ -4575,7 +4633,7 @@ void VisualShaderEditor::_disconnection_request(const String &p_from, int p_from
 	info_label->show();
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Nodes Disconnected"));
+	_vs_create_action(TTR("Nodes Disconnected"));
 	undo_redo->add_do_method(editing_shader_graph.ptr(), "disconnect_nodes", from, p_from_index, to, p_to_index);
 	undo_redo->add_undo_method(editing_shader_graph.ptr(), "connect_nodes", from, p_from_index, to, p_to_index);
 	undo_redo->add_do_method(graph_plugin.ptr(), "disconnect_nodes", type, from, p_from_index, to, p_to_index);
@@ -4700,9 +4758,6 @@ bool VisualShaderEditor::_check_node_drop_on_connection(const Vector2 &p_positio
 }
 
 void VisualShaderEditor::_handle_node_drop_on_connection() {
-	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Insert node"));
-
 	// Check whether the dragged node was dropped over a connection.
 	Ref<GraphEdit::Connection> closest_connection;
 	int _from_port = -1;
@@ -4715,6 +4770,8 @@ void VisualShaderEditor::_handle_node_drop_on_connection() {
 	int selected_node_id = drag_buffer.front()->get().node;
 	Ref<VisualShaderNode> selected_vsnode = editing_shader_graph->get_node(selected_node_id);
 
+	_vs_create_action(TTR("Insert node"));
+	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 	VisualShader::Type shader_type = get_current_shader_type();
 
 	// Delete the old connection.
@@ -4882,9 +4939,9 @@ void VisualShaderEditor::_convert_constants_to_parameters(bool p_vice_versa) {
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 	if (!p_vice_versa) {
-		undo_redo->create_action(TTR("Convert Constant Node(s) To Parameter(s)"));
+		_vs_create_action(TTR("Convert Constant Node(s) To Parameter(s)"));
 	} else {
-		undo_redo->create_action(TTR("Convert Parameter Node(s) To Constant(s)"));
+		_vs_create_action(TTR("Convert Parameter Node(s) To Constant(s)"));
 	}
 
 	const HashSet<int> &current_set = p_vice_versa ? selected_parameters : selected_constants;
@@ -5109,7 +5166,7 @@ void VisualShaderEditor::_detach_nodes_from_frame_request() {
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Detach VisualShader Node(s) from Frame"));
+	_vs_create_action(TTR("Detach VisualShader Node(s) from Frame"));
 	_detach_nodes_from_frame(get_current_shader_type(), to_detach_node_ids);
 	undo_redo->commit_action();
 }
@@ -5124,7 +5181,7 @@ void VisualShaderEditor::_delete_node_request(int p_type, int p_node) {
 	to_erase.push_back(p_node);
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Delete VisualShader Node"));
+	_vs_create_action(TTR("Delete VisualShader Node"));
 	_delete_nodes(p_type, to_erase);
 	undo_redo->commit_action();
 }
@@ -5161,7 +5218,7 @@ void VisualShaderEditor::_delete_nodes_request(const TypedArray<StringName> &p_n
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Delete VisualShader Node(s)"));
+	_vs_create_action(TTR("Delete VisualShader Node(s)"));
 	_delete_nodes(get_current_shader_type(), to_erase);
 	undo_redo->commit_action();
 }
@@ -5470,7 +5527,7 @@ void VisualShaderEditor::_param_property_changed(const String &p_property, const
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 
-	undo_redo->create_action(vformat(TTR("Edit Preview Parameter: %s"), p_property));
+	_vs_create_action(vformat(TTR("Edit Preview Parameter: %s"), p_property));
 	undo_redo->add_do_method(visual_shader.ptr(), "_set_preview_shader_parameter", raw_prop_name, p_value);
 	undo_redo->add_undo_method(visual_shader.ptr(), "_set_preview_shader_parameter", raw_prop_name, preview_material->get(p_property));
 	undo_redo->add_do_method(this, "_update_current_param");
@@ -5755,7 +5812,7 @@ void VisualShaderEditor::_dup_copy_nodes(int p_type, List<CopyItem> &r_items, Li
 void VisualShaderEditor::_dup_paste_nodes(int p_type, List<CopyItem> &r_items, const List<ShaderGraph::Connection> &p_connections, const Vector2 &p_offset, bool p_duplicate) {
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 	if (p_duplicate) {
-		undo_redo->create_action(TTR("Duplicate VisualShader Node(s)"));
+		_vs_create_action(TTR("Duplicate VisualShader Node(s)"));
 	} else {
 		bool copy_buffer_empty = true;
 		for (const CopyItem &item : copy_items_buffer) {
@@ -5768,7 +5825,7 @@ void VisualShaderEditor::_dup_paste_nodes(int p_type, List<CopyItem> &r_items, c
 			return;
 		}
 
-		undo_redo->create_action(TTR("Paste VisualShader Node(s)"));
+		_vs_create_action(TTR("Paste VisualShader Node(s)"));
 	}
 
 	VisualShader::Type type = (VisualShader::Type)p_type;
@@ -5916,7 +5973,7 @@ void VisualShaderEditor::_copy_nodes(bool p_cut) {
 
 	if (p_cut) {
 		EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-		undo_redo->create_action(TTR("Cut VisualShader Node(s)"));
+		_vs_create_action(TTR("Cut VisualShader Node(s)"));
 
 		List<int> ids;
 		for (const CopyItem &E : copy_items_buffer) {
@@ -5949,9 +6006,8 @@ void VisualShaderEditor::_paste_nodes(bool p_use_custom_position, const Vector2 
 }
 
 void VisualShaderEditor::_type_selected(int p_id) {
-	int offset = VisualShader::TYPE_VERTEX;
+	int offset = _get_default_shader_type();
 	if (mode & MODE_FLAGS_PARTICLES) {
-		offset = VisualShader::TYPE_START;
 		if (p_id + offset > VisualShader::TYPE_PROCESS) {
 			custom_mode_box->set_visible(false);
 			custom_mode_enabled = false;
@@ -5962,12 +6018,6 @@ void VisualShaderEditor::_type_selected(int p_id) {
 				offset += 3;
 			}
 		}
-	} else if (mode & MODE_FLAGS_SKY) {
-		offset = VisualShader::TYPE_SKY;
-	} else if (mode & MODE_FLAGS_FOG) {
-		offset = VisualShader::TYPE_FOG;
-	} else if (mode & MODE_FLAGS_TEXTURE_BLIT) {
-		offset = VisualShader::TYPE_TEXTURE_BLIT;
 	}
 
 	set_current_shader_type(VisualShader::Type(p_id + offset));
@@ -6005,7 +6055,7 @@ void VisualShaderEditor::_input_select_item(Ref<VisualShaderNodeInput> p_input, 
 	bool type_changed = next_input_type != prev_input_type;
 
 	EditorUndoRedoManager *undo_redo_man = EditorUndoRedoManager::get_singleton();
-	undo_redo_man->create_action(TTR("Visual Shader Input Type Changed"));
+	_vs_create_action(TTR("Visual Shader Input Type Changed"));
 
 	undo_redo_man->add_do_method(p_input.ptr(), "set_input_name", p_name);
 	undo_redo_man->add_undo_method(p_input.ptr(), "set_input_name", prev_name);
@@ -6074,7 +6124,7 @@ void VisualShaderEditor::_parameter_ref_select_item(Ref<VisualShaderNodeParamete
 	bool type_changed = p_parameter_ref->get_parameter_type_by_name(p_name) != p_parameter_ref->get_parameter_type_by_name(prev_name);
 
 	EditorUndoRedoManager *undo_redo_man = EditorUndoRedoManager::get_singleton();
-	undo_redo_man->create_action(TTR("ParameterRef Name Changed"));
+	_vs_create_action(TTR("ParameterRef Name Changed"));
 
 	undo_redo_man->add_do_method(p_parameter_ref.ptr(), "set_parameter_name", p_name);
 	undo_redo_man->add_undo_method(p_parameter_ref.ptr(), "set_parameter_name", prev_name);
@@ -6118,7 +6168,7 @@ void VisualShaderEditor::_varying_select_item(Ref<VisualShaderNodeVarying> p_var
 	bool is_getter = Ref<VisualShaderNodeVaryingGetter>(p_varying.ptr()).is_valid();
 
 	EditorUndoRedoManager *undo_redo_man = EditorUndoRedoManager::get_singleton();
-	undo_redo_man->create_action(TTR("Varying Name Changed"));
+	_vs_create_action(TTR("Varying Name Changed"));
 
 	undo_redo_man->add_do_method(p_varying.ptr(), "set_varying_name", p_name);
 	undo_redo_man->add_undo_method(p_varying.ptr(), "set_varying_name", prev_name);
@@ -6188,7 +6238,7 @@ void VisualShaderEditor::_float_constant_selected(int p_which) {
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(vformat(TTR("Set Constant: %s"), float_constant_defs[p_which].name));
+	_vs_create_action(vformat(TTR("Set Constant: %s"), float_constant_defs[p_which].name));
 	undo_redo->add_do_method(node.ptr(), "set_constant", float_constant_defs[p_which].value);
 	undo_redo->add_undo_method(node.ptr(), "set_constant", node->get_constant());
 	undo_redo->commit_action();
@@ -6457,7 +6507,7 @@ void VisualShaderEditor::_connection_menu_id_pressed(int p_idx) {
 	switch (p_idx) {
 		case ConnectionMenuOptions::DISCONNECT: {
 			EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-			undo_redo->create_action(TTR("Disconnect"));
+			_vs_create_action(TTR("Disconnect"));
 			undo_redo->add_do_method(editing_shader_graph.ptr(), "disconnect_nodes", String(clicked_connection->from_node).to_int(), clicked_connection->from_port, String(clicked_connection->to_node).to_int(), clicked_connection->to_port);
 			undo_redo->add_undo_method(editing_shader_graph.ptr(), "connect_nodes", String(clicked_connection->from_node).to_int(), clicked_connection->from_port, String(clicked_connection->to_node).to_int(), clicked_connection->to_port);
 			undo_redo->add_do_method(graph_plugin.ptr(), "disconnect_nodes", get_current_shader_type(), String(clicked_connection->from_node).to_int(), clicked_connection->from_port, String(clicked_connection->to_node).to_int(), clicked_connection->to_port);
@@ -6567,7 +6617,7 @@ void VisualShaderEditor::drop_data_fw(const Point2 &p_point, const Variant &p_da
 			_add_node(idx, add_options[idx].ops);
 		} else if (d.has("files")) {
 			EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-			undo_redo->create_action(TTR("Add Node(s) to Visual Shader"));
+			_vs_create_action(TTR("Add Node(s) to Visual Shader"));
 
 			if (d["files"].get_type() == Variant::PACKED_STRING_ARRAY) {
 				PackedStringArray arr = d["files"];
@@ -6794,6 +6844,7 @@ void VisualShaderEditor::_bind_methods() {
 	ClassDB::bind_method("_update_varyings", &VisualShaderEditor::_update_varyings);
 	ClassDB::bind_method("_update_varying_tree", &VisualShaderEditor::_update_varying_tree);
 	ClassDB::bind_method("_set_mode", &VisualShaderEditor::_set_mode);
+	ClassDB::bind_method("_restore_graph_context", &VisualShaderEditor::_restore_graph_context);
 	ClassDB::bind_method("_update_constant", &VisualShaderEditor::_update_constant);
 	ClassDB::bind_method("_update_parameter", &VisualShaderEditor::_update_parameter);
 	ClassDB::bind_method("_update_next_previews", &VisualShaderEditor::_update_next_previews);
@@ -8324,7 +8375,7 @@ public:
 		EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
 
 		updating = true;
-		undo_redo->create_action(vformat(TTR("Edit Visual Property: %s"), p_property), UndoRedo::MERGE_ENDS);
+		editor->_vs_create_action(vformat(TTR("Edit Visual Property: %s"), p_property), UndoRedo::MERGE_ENDS);
 		undo_redo->add_do_property(node.ptr(), p_property, p_value);
 		undo_redo->add_undo_property(node.ptr(), p_property, node->get(p_property));
 
@@ -8560,7 +8611,7 @@ void EditorPropertyVisualShaderMode::_option_selected(int p_which) {
 	}
 
 	EditorUndoRedoManager *undo_redo = EditorUndoRedoManager::get_singleton();
-	undo_redo->create_action(TTR("Visual Shader Mode Changed"));
+	editor->_vs_create_action(TTR("Visual Shader Mode Changed"));
 	//do is easy
 	undo_redo->add_do_method(visual_shader.ptr(), "set_mode", p_which);
 	undo_redo->add_undo_method(visual_shader.ptr(), "set_mode", visual_shader->get_mode());

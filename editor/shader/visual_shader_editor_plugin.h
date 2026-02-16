@@ -30,6 +30,7 @@
 
 #pragma once
 
+#include "core/object/undo_redo.h"
 #include "editor/inspector/editor_properties.h"
 #include "editor/plugins/editor_plugin.h"
 #include "editor/plugins/editor_resource_conversion_plugin.h"
@@ -205,6 +206,8 @@ public:
 class VisualShaderEditor : public ShaderEditor {
 	GDCLASS(VisualShaderEditor, ShaderEditor);
 	friend class VisualShaderGraphPlugin;
+	friend class VisualShaderNodePluginDefaultEditor;
+	friend class EditorPropertyVisualShaderMode;
 
 	Ref<ShaderGraph> editing_shader_graph;
 	Ref<VisualShader> visual_shader; // Could be null (editing just a VisualShaderGroup).
@@ -393,6 +396,12 @@ class VisualShaderEditor : public ShaderEditor {
 	FilterLineEdit *node_filter = nullptr;
 	RichTextLabel *node_desc = nullptr;
 	Label *highend_label = nullptr;
+
+	void _vs_create_action(const String &p_name, UndoRedo::MergeMode p_merge_mode = UndoRedo::MERGE_DISABLE);
+	void _restore_graph_context(int p_shader_type, TypedArray<VisualShaderGroup> p_group_stack);
+
+	int _get_default_shader_type() const;
+	void _select_shader_type(VisualShader::Type p_type);
 
 	void _tools_menu_option(int p_idx);
 	void _show_members_dialog(bool at_mouse_pos, VisualShaderNode::PortType p_input_port_type = VisualShaderNode::PORT_TYPE_MAX, VisualShaderNode::PortType p_output_port_type = VisualShaderNode::PORT_TYPE_MAX);
