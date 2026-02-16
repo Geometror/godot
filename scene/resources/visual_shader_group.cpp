@@ -749,6 +749,10 @@ void VisualShaderNodeGroup::set_group(const Ref<VisualShaderGroup> &p_group) {
 	if (group == p_group) {
 		return;
 	}
+
+	if (group.is_valid()) {
+		group->disconnect_changed(callable_mp(this, &VisualShaderNodeGroup::_emit_changed));
+	}
 	group = p_group;
 	if (group.is_valid()) {
 		group->create_default_nodes_if_empty();

@@ -1608,21 +1608,40 @@ void VisualShaderEditor::_select_shader_type(VisualShader::Type p_type) {
 
 // This is called before every other do/undo method in each action in the visual shader editor.
 void VisualShaderEditor::_restore_graph_context(int p_shader_type, TypedArray<VisualShaderGroup> p_group_stack) {
+	bool context_changed = false;
+
 	// Restore shader type.
 	if (visual_shader.is_valid()) {
 		VisualShader::Type target_type = (VisualShader::Type)p_shader_type;
 		if (current_type != target_type) {
 			current_type = target_type;
 			_select_shader_type(target_type);
+			context_changed = true;
 		}
 	}
 
-	// Restore group edit stack.
-	group_edit_stack.clear();
-	for (int i = 0; i < p_group_stack.size(); i++) {
-		Ref<VisualShaderGroup> g = p_group_stack[i];
-		if (g.is_valid()) {
-			group_edit_stack.push_back(g);
+	// Check if group edit stack changed.
+	bool stack_changed = (int)group_edit_stack.size() != p_group_stack.size();
+	if (!stack_changed) {
+		int idx = 0;
+		for (const Ref<VisualShaderGroup> &g : group_edit_stack) {
+			if (g != Ref<VisualShaderGroup>(p_group_stack[idx])) {
+				stack_changed = true;
+				break;
+			}
+			idx++;
+		}
+	}
+
+	if (stack_changed) {
+		context_changed = true;
+		// Restore group edit stack.
+		group_edit_stack.clear();
+		for (int i = 0; i < p_group_stack.size(); i++) {
+			Ref<VisualShaderGroup> g = p_group_stack[i];
+			if (g.is_valid()) {
+				group_edit_stack.push_back(g);
+			}
 		}
 	}
 
@@ -1636,7 +1655,11 @@ void VisualShaderEditor::_restore_graph_context(int p_shader_type, TypedArray<Vi
 		editing_shader_graph = visual_shader_group->get_graph();
 	}
 
-	_update_graph();
+	// Only rebuild the graph if the context actually changed.
+	// This is important to prevent deleting objects while they emit signals.
+	if (context_changed) {
+		_update_graph();
+	}
 }
 
 void VisualShaderEditor::_vs_create_action(const String &p_name, UndoRedo::MergeMode p_merge_mode) {
