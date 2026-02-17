@@ -30,7 +30,6 @@
 
 #pragma once
 
-#include "scene/gui/dialogs.h"
 #include "scene/resources/visual_shader.h"
 
 class VisualShaderGroup : public Resource {
@@ -262,43 +261,4 @@ public:
 	virtual Category get_category() const override { return CATEGORY_OUTPUT; }
 
 	VisualShaderNodeGroupOutput();
-};
-
-class Button;
-class ItemList;
-class OptionButton;
-class LineEdit;
-
-class VisualShaderGroupPortsDialog : public AcceptDialog {
-	GDCLASS(VisualShaderGroupPortsDialog, AcceptDialog);
-
-	VisualShaderGroup *group = nullptr;
-	bool edit_inputs = false; // Determines whether the dialog is used for input or output ports.
-
-	Button *add_port_btn = nullptr;
-	Button *remove_port_btn = nullptr;
-
-	ItemList *port_item_list = nullptr;
-
-	LineEdit *name_edit = nullptr;
-	OptionButton *port_type_optbtn = nullptr;
-
-	void _add_port();
-	void _update_dialog_for_port(int p_idx);
-	void _remove_port();
-
-	void _on_port_item_selected(int p_idx);
-	void _on_port_name_changed(const String &p_name);
-	void _on_port_type_changed(int p_idx);
-	void _on_dialog_about_to_popup();
-
-	// TODO: Update graph on exit. (I think no longer necessary)
-protected:
-	void _notification(int p_what);
-
-public:
-	void set_dialog_mode(bool p_edit_inputs);
-	void set_group(VisualShaderGroup *p_group);
-
-	VisualShaderGroupPortsDialog();
 };
