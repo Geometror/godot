@@ -173,6 +173,8 @@ public:
 	String generate_group_function(Shader::Mode p_mode, VisualShader::Type p_type, int p_id) const;
 	virtual bool is_output_port_expandable(int p_port) const override;
 
+	virtual String get_warning(Shader::Mode p_mode, VisualShader::Type p_type) const override;
+
 	virtual Category get_category() const override { return CATEGORY_SPECIAL; }
 
 	VisualShaderNodeGroup();

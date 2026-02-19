@@ -387,9 +387,9 @@ void VisualShaderGroup::add_input_port(int p_id, VisualShaderNode::PortType p_ty
 
 	// Shift connections above upward.
 	if (p_id < input_ports.size()) {
-		List<ShaderGraph::Connection> connections;
-		get_node_connections(&connections);
-		for (const ShaderGraph::Connection &c : connections) {
+		List<ShaderGraph::Connection> conns;
+		get_node_connections(&conns);
+		for (const ShaderGraph::Connection &c : conns) {
 			Ref<VisualShaderNodeGroupInput> group_input = graph->get_node(c.from_node);
 			if (group_input.is_valid() && c.from_port >= p_id) {
 				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
@@ -441,9 +441,9 @@ void VisualShaderGroup::remove_input_port(int p_id) {
 	ERR_FAIL_INDEX(p_id, input_ports.size());
 
 	// Shift connections above downward.
-	List<ShaderGraph::Connection> connections;
-	get_node_connections(&connections);
-	for (const ShaderGraph::Connection &c : connections) {
+	List<ShaderGraph::Connection> conns;
+	get_node_connections(&conns);
+	for (const ShaderGraph::Connection &c : conns) {
 		Ref<VisualShaderNodeGroupInput> group_input = graph->get_node(c.from_node);
 		if (group_input.is_valid()) {
 			if (c.from_port == p_id) {
@@ -470,9 +470,9 @@ void VisualShaderGroup::add_output_port(int p_id, VisualShaderNode::PortType p_t
 
 	// Shift connections above upward.
 	if (p_id < output_ports.size()) {
-		List<ShaderGraph::Connection> connections;
-		get_node_connections(&connections);
-		for (const ShaderGraph::Connection &c : connections) {
+		List<ShaderGraph::Connection> conns;
+		get_node_connections(&conns);
+		for (const ShaderGraph::Connection &c : conns) {
 			Ref<VisualShaderNodeGroupOutput> group_output = graph->get_node(c.to_node);
 			if (group_output.is_valid() && c.to_port >= p_id) {
 				disconnect_nodes(c.from_node, c.from_port, c.to_node, c.to_port);
@@ -524,9 +524,9 @@ void VisualShaderGroup::remove_output_port(int p_id) {
 	ERR_FAIL_INDEX(p_id, output_ports.size());
 
 	// Shift connections above downward.
-	List<ShaderGraph::Connection> connections;
-	get_node_connections(&connections);
-	for (const ShaderGraph::Connection &c : connections) {
+	List<ShaderGraph::Connection> conns;
+	get_node_connections(&conns);
+	for (const ShaderGraph::Connection &c : conns) {
 		Ref<VisualShaderNodeGroupOutput> group_output = graph->get_node(c.to_node);
 		if (group_output.is_valid()) {
 			if (c.to_port == p_id) {
@@ -850,6 +850,54 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 bool VisualShaderNodeGroup::is_output_port_expandable(int p_port) const {
 	// TODO: Implement.
 	return false;
+}
+
+String VisualShaderNodeGroup::get_warning(Shader::Mode p_mode, VisualShader::Type p_type) const {
+	if (group.is_null()) {
+		return RTR("No group resource assigned.");
+	}
+
+	Vector<String> warnings;
+
+	// Check for missing output node.
+	Ref<ShaderGraph> sgraph = group->get_graph();
+	if (sgraph.is_valid()) {
+		bool has_output = false;
+		Vector<int> node_ids = sgraph->get_node_ids();
+		for (int id : node_ids) {
+			Ref<VisualShaderNodeGroupOutput> output_node = sgraph->get_node(id);
+			if (output_node.is_valid()) {
+				has_output = true;
+				break;
+			}
+		}
+		if (!has_output) {
+			warnings.push_back(RTR("Group is missing an output node."));
+		}
+
+		// Check for parameters and varyings.
+		// Note: For now they are just forbidden due to the additional complexity of supporting them.
+		for (const int id : node_ids) {
+			Ref<VisualShaderNodeParameter> param_node = sgraph->get_node(id);
+			if (param_node.is_valid()) {
+				warnings.push_back(RTR("Parameters are not supported inside groups."));
+				break;
+			}
+		}
+		for (const int id : node_ids) {
+			Ref<VisualShaderNodeVarying> varying_node = sgraph->get_node(id);
+			if (varying_node.is_valid()) {
+				warnings.push_back(RTR("Varyings are not supported inside groups."));
+				break;
+			}
+		}
+	}
+
+	String warning_str;
+	for (const String &warning : warnings) {
+		warning_str += warning + "\n";
+	}
+	return warning_str.trim_suffix("\n");
 }
 
 VisualShaderNodeGroup::VisualShaderNodeGroup() {
