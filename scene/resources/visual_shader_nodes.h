@@ -703,6 +703,7 @@ public:
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
 
 	virtual Category get_category() const override { return CATEGORY_TEXTURES; }
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL; }
 
 	VisualShaderNodeLinearSceneDepth();
 };
@@ -727,6 +728,7 @@ public:
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
 
 	virtual Category get_category() const override { return CATEGORY_TEXTURES; }
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL; }
 
 	VisualShaderNodeWorldPositionFromDepth();
 };
@@ -751,6 +753,7 @@ public:
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
 
 	virtual Category get_category() const override { return CATEGORY_TEXTURES; }
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL; }
 
 	VisualShaderNodeScreenNormalWorldSpace();
 };
@@ -2633,6 +2636,8 @@ public:
 	virtual String generate_global(Shader::Mode p_mode, VisualShader::Type p_type, int p_id) const override;
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
 
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL; }
+
 	VisualShaderNodeTextureParameterTriplanar();
 };
 
@@ -2995,6 +3000,7 @@ public:
 	virtual Vector<StringName> get_editable_properties() const override;
 
 	virtual Category get_category() const override { return CATEGORY_UTILITY; }
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL; }
 
 	VisualShaderNodeBillboard();
 };
@@ -3023,6 +3029,7 @@ public:
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
 
 	virtual Category get_category() const override { return CATEGORY_UTILITY; }
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL; }
 
 	VisualShaderNodeDistanceFade();
 };
@@ -3046,6 +3053,7 @@ public:
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
 
 	virtual Category get_category() const override { return CATEGORY_UTILITY; }
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL; }
 
 	VisualShaderNodeProximityFade();
 };

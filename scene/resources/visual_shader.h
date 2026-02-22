@@ -518,6 +518,7 @@ public:
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const = 0;
 
 	virtual String get_warning(Shader::Mode p_mode, VisualShader::Type p_type) const;
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const { return true; }
 
 	virtual Category get_category() const;
 
@@ -595,7 +596,7 @@ protected:
 protected:
 	void _set_input_port_default_value(int p_port, const Variant &p_value);
 
-	bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const;
+	bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override;
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
 	virtual String generate_global_per_node(Shader::Mode p_mode, int p_id) const override;
 	virtual String generate_global_per_func(Shader::Mode p_mode, VisualShader::Type p_type, int p_id) const override;
@@ -1099,6 +1100,8 @@ public:
 
 	void set_varying_type(VisualShader::VaryingType p_varying_type);
 	VisualShader::VaryingType get_varying_type() const;
+
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override { return p_mode == Shader::MODE_SPATIAL || p_mode == Shader::MODE_CANVAS_ITEM; }
 
 	VisualShaderNodeVarying();
 };

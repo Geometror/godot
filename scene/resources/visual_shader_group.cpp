@@ -668,6 +668,30 @@ void VisualShaderNodeGroup::_emit_changed() {
 	emit_changed();
 }
 
+bool VisualShaderNodeGroup::_has_incompatible_nodes(Shader::Mode p_mode, VisualShader::Type p_type) const {
+	if (group.is_null()) {
+		return false;
+	}
+
+	Ref<ShaderGraph> graph = group->get_graph();
+	if (graph.is_null()) {
+		return false;
+	}
+
+	for (const int id : graph->get_node_ids()) {
+		Ref<VisualShaderNode> node = graph->get_node(id);
+		if (node.is_null()) {
+			continue;
+		}
+
+		if (!node->is_available(p_mode, p_type)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void VisualShaderNodeGroup::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_group", "group"), &VisualShaderNodeGroup::set_group);
 	ClassDB::bind_method(D_METHOD("get_group"), &VisualShaderNodeGroup::get_group);
@@ -770,6 +794,20 @@ String VisualShaderNodeGroup::generate_code(Shader::Mode p_mode, VisualShader::T
 	if (group.is_null()) {
 		return String();
 	}
+
+	// If the group contains nodes incompatible with the current shader context,
+	// output default values instead of calling the group function.
+	if (_has_incompatible_nodes(p_mode, p_type)) {
+		String code = String("/* Group: ") + group->get_group_name() + " */\n";
+		const Vector<VisualShaderGroup::Port> output_ports = group->get_output_ports();
+		for (int i = 0; i < output_ports.size(); i++) {
+			if (!p_output_vars[i].is_empty()) {
+				code += "\t" + p_output_vars[i] + " = " + get_port_type_default_value_shader_string(output_ports[i].type) + ";\n";
+			}
+		}
+		return code;
+	}
+
 	// TODO:Validate name and append unique id.
 
 	// Generate the code for the group.
@@ -805,6 +843,11 @@ String VisualShaderNodeGroup::generate_code(Shader::Mode p_mode, VisualShader::T
 
 String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, VisualShader::Type p_type, int p_id) const {
 	if (group.is_null()) {
+		return String();
+	}
+
+	// Don't generate the function if the group contains incompatible nodes.
+	if (_has_incompatible_nodes(p_mode, p_type)) {
 		return String();
 	}
 
@@ -891,6 +934,11 @@ String VisualShaderNodeGroup::get_warning(Shader::Mode p_mode, VisualShader::Typ
 				break;
 			}
 		}
+
+		// Check for nodes incompatible with the current shader mode/type.
+		if (_has_incompatible_nodes(p_mode, p_type)) {
+			warnings.push_back(RTR("Group contains nodes incompatible with the current shader. Outputs will use default values."));
+		}
 	}
 
 	String warning_str;
@@ -898,6 +946,10 @@ String VisualShaderNodeGroup::get_warning(Shader::Mode p_mode, VisualShader::Typ
 		warning_str += warning + "\n";
 	}
 	return warning_str.trim_suffix("\n");
+}
+
+bool VisualShaderNodeGroup::is_available(Shader::Mode p_mode, VisualShader::Type p_type) const {
+	return !_has_incompatible_nodes(p_mode, p_type);
 }
 
 VisualShaderNodeGroup::VisualShaderNodeGroup() {

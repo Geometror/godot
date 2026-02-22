@@ -143,6 +143,7 @@ class VisualShaderNodeGroup : public VisualShaderNode {
 	Shader::Mode shader_mode = Shader::Mode::MODE_MAX; // MODE_MAX when used in a VisualShaderGroup itself.
 
 	void _emit_changed();
+	bool _has_incompatible_nodes(Shader::Mode p_mode, VisualShader::Type p_type) const;
 
 protected:
 	static void _bind_methods();
@@ -176,6 +177,7 @@ public:
 	virtual String get_warning(Shader::Mode p_mode, VisualShader::Type p_type) const override;
 
 	virtual Category get_category() const override { return CATEGORY_SPECIAL; }
+	virtual bool is_available(Shader::Mode p_mode, VisualShader::Type p_type) const override;
 
 	VisualShaderNodeGroup();
 };
