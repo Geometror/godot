@@ -99,6 +99,7 @@ public:
 	static constexpr int NODE_ID_INVALID = -1;
 	static constexpr int NODE_ID_OUTPUT = 0;
 
+	// TODO: I think this is no longer necessary.
 	int reserved_node_ids = 1;
 
 	RBMap<int, Node> nodes; // TODO: Does order really matter here? Maybe for serialization?
@@ -631,7 +632,7 @@ class VisualShaderNodeInput : public VisualShaderNode {
 	GDCLASS(VisualShaderNodeInput, VisualShaderNode);
 
 	friend class VisualShader;
-	VisualShader::Type shader_type = VisualShader::TYPE_MAX;
+	VisualShader::Type shader_type = VisualShader::TYPE_MAX; // TYPE_MAX when used in groups.
 	Shader::Mode shader_mode = Shader::MODE_MAX;
 
 	struct Port {
@@ -644,6 +645,11 @@ class VisualShaderNodeInput : public VisualShaderNode {
 
 	static const Port ports[];
 	static const Port preview_ports[];
+
+	static bool _is_global_built_in(Shader::Mode p_mode, const char *p_glsl_string);
+
+	LocalVector<int> _get_filtered_port_indices() const;
+	int _find_port_by_name(const String &p_name, const Port *p_port_array) const;
 
 	String input_name = "[None]";
 

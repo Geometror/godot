@@ -3246,6 +3246,18 @@ void VisualShaderEditor::_update_graph() {
 
 	Vector<int> nodes = editing_shader_graph->get_node_ids();
 
+	// Set shader context on Input nodes inside groups.
+	if (!group_edit_stack.is_empty()) {
+		const Shader::Mode mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
+		for (int node_idx = 0; node_idx < nodes.size(); node_idx++) {
+			Ref<VisualShaderNodeInput> input = editing_shader_graph->get_node(nodes[node_idx]);
+			if (input.is_valid()) {
+				input->set_shader_mode(mode);
+				input->set_shader_type(VisualShader::TYPE_MAX);
+			}
+		}
+	}
+
 	_update_parameters(false);
 	_update_varyings();
 
@@ -4424,6 +4436,16 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 			Ref<VisualShaderNodeGroupOutput> group_output = vsnode;
 			if (group_output.is_valid()) {
 				group_output->set_group(current_group);
+			}
+		}
+
+		// Set shader context on Input nodes inside groups.
+		if (!group_edit_stack.is_empty() || visual_shader_group.is_valid()) {
+			Ref<VisualShaderNodeInput> input_node = vsnode;
+			if (input_node.is_valid()) {
+				const Shader::Mode mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
+				input_node->set_shader_mode(mode);
+				input_node->set_shader_type(VisualShader::TYPE_MAX);
 			}
 		}
 	} else {
@@ -6241,6 +6263,16 @@ void VisualShaderEditor::_dup_paste_nodes(int p_type, List<CopyItem> &r_items, c
 			Ref<VisualShaderNodeGroupOutput> group_output = Object::cast_to<VisualShaderNodeGroupOutput>(node.ptr());
 			if (group_output.is_valid()) {
 				group_output->set_group(current_group);
+			}
+		}
+
+		// Set shader context on Input nodes inside groups.
+		if (!group_edit_stack.is_empty() || visual_shader_group.is_valid()) {
+			Ref<VisualShaderNodeInput> input_node = Object::cast_to<VisualShaderNodeInput>(node.ptr());
+			if (input_node.is_valid()) {
+				const Shader::Mode mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
+				input_node->set_shader_mode(mode);
+				input_node->set_shader_type(VisualShader::TYPE_MAX);
 			}
 		}
 

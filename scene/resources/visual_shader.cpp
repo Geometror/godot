@@ -4152,22 +4152,77 @@ bool VisualShaderNodeInput::is_output_port_expandable(int p_port) const {
 	return false;
 }
 
+bool VisualShaderNodeInput::_is_global_built_in(Shader::Mode p_mode, const char *p_glsl_string) {
+	ERR_FAIL_INDEX_V(p_mode, Shader::MODE_MAX, false);
+	const HashMap<StringName, ShaderLanguage::FunctionInfo> &functions = ShaderTypes::get_singleton()->get_functions(RenderingServer::ShaderMode(p_mode));
+	HashMap<StringName, ShaderLanguage::FunctionInfo>::ConstIterator it = functions.find("global");
+	return it != functions.end() && it->value.built_ins.has(p_glsl_string);
+}
+
+LocalVector<int> VisualShaderNodeInput::_get_filtered_port_indices() const {
+	LocalVector<int> filtered_indices;
+	int idx = 0;
+
+	// In groups show only global built-ins.
+	if (shader_mode != Shader::MODE_MAX && shader_type == VisualShader::TYPE_MAX) {
+		HashSet<String> seen_names; // ports[] can contain duplicate entries for the same builtin, e.g. TIME for frag and vert.
+		while (ports[idx].mode != Shader::MODE_MAX) {
+			if (ports[idx].mode == shader_mode && _is_global_built_in(shader_mode, ports[idx].string)) {
+				const String name(ports[idx].name);
+				if (!seen_names.has(name)) {
+					seen_names.insert(name);
+					filtered_indices.push_back(idx);
+				}
+			}
+			idx++;
+		}
+		return filtered_indices;
+	}
+
+	while (ports[idx].mode != Shader::MODE_MAX) {
+		if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type) {
+			filtered_indices.push_back(idx);
+		}
+		idx++;
+	}
+	return filtered_indices;
+}
+
+int VisualShaderNodeInput::_find_port_by_name(const String &p_name, const Port *p_port_array) const {
+	int idx = 0;
+
+	while (p_port_array[idx].mode != Shader::MODE_MAX) {
+		if (p_port_array[idx].mode == shader_mode && p_port_array[idx].shader_type == shader_type && p_port_array[idx].name == p_name) {
+			return idx;
+		}
+		idx++;
+	}
+
+	// Fallback for global builtins.
+	if (shader_mode != Shader::MODE_MAX && shader_type == VisualShader::TYPE_MAX) {
+		idx = 0;
+		while (p_port_array[idx].mode != Shader::MODE_MAX) {
+			if (p_port_array[idx].mode == shader_mode && p_port_array[idx].name == p_name) {
+				return idx;
+			}
+			idx++;
+		}
+	}
+
+	return -1;
+}
+
 String VisualShaderNodeInput::generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview) const {
 	if (get_output_port_type(0) == PORT_TYPE_SAMPLER) {
 		return "";
 	}
 
 	if (p_for_preview) {
-		int idx = 0;
-
 		String code;
 
-		while (preview_ports[idx].mode != Shader::MODE_MAX) {
-			if (preview_ports[idx].mode == shader_mode && preview_ports[idx].shader_type == shader_type && preview_ports[idx].name == input_name) {
-				code = "	" + p_output_vars[0] + " = " + preview_ports[idx].string + ";\n";
-				break;
-			}
-			idx++;
+		const int found = _find_port_by_name(input_name, preview_ports);
+		if (found != -1) {
+			code = "	" + p_output_vars[0] + " = " + preview_ports[found].string + ";\n";
 		}
 
 		if (code.is_empty()) {
@@ -4204,16 +4259,11 @@ String VisualShaderNodeInput::generate_code(Shader::Mode p_mode, VisualShader::T
 		return code;
 
 	} else {
-		int idx = 0;
-
 		String code;
 
-		while (ports[idx].mode != Shader::MODE_MAX) {
-			if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type && ports[idx].name == input_name) {
-				code = "	" + p_output_vars[0] + " = " + ports[idx].string + ";\n";
-				break;
-			}
-			idx++;
+		const int found = _find_port_by_name(input_name, ports);
+		if (found != -1) {
+			code = "	" + p_output_vars[0] + " = " + ports[found].string + ";\n";
 		}
 
 		if (code.is_empty()) {
@@ -4238,77 +4288,35 @@ String VisualShaderNodeInput::get_input_name() const {
 }
 
 String VisualShaderNodeInput::get_input_real_name() const {
-	int idx = 0;
-
-	while (ports[idx].mode != Shader::MODE_MAX) {
-		if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type && ports[idx].name == input_name) {
-			return String(ports[idx].string);
-		}
-		idx++;
+	const int idx = _find_port_by_name(input_name, ports);
+	if (idx != -1) {
+		return String(ports[idx].string);
 	}
-
 	return "";
 }
 
 VisualShaderNodeInput::PortType VisualShaderNodeInput::get_input_type_by_name(String p_name) const {
-	int idx = 0;
-
-	while (ports[idx].mode != Shader::MODE_MAX) {
-		if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type && ports[idx].name == p_name) {
-			return ports[idx].type;
-		}
-		idx++;
+	const int idx = _find_port_by_name(p_name, ports);
+	if (idx != -1) {
+		return ports[idx].type;
 	}
-
 	return PORT_TYPE_SCALAR;
 }
 
 int VisualShaderNodeInput::get_input_index_count() const {
-	int idx = 0;
-	int count = 0;
-
-	while (ports[idx].mode != Shader::MODE_MAX) {
-		if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type) {
-			count++;
-		}
-		idx++;
-	}
-
-	return count;
+	return _get_filtered_port_indices().size();
 }
 
 VisualShaderNodeInput::PortType VisualShaderNodeInput::get_input_index_type(int p_index) const {
-	int idx = 0;
-	int count = 0;
-
-	while (ports[idx].mode != Shader::MODE_MAX) {
-		if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type) {
-			if (count == p_index) {
-				return ports[idx].type;
-			}
-			count++;
-		}
-		idx++;
-	}
-
-	return PORT_TYPE_SCALAR;
+	const LocalVector<int> indices = _get_filtered_port_indices();
+	ERR_FAIL_INDEX_V(p_index, (int)indices.size(), PORT_TYPE_SCALAR);
+	return ports[indices[p_index]].type;
 }
 
 String VisualShaderNodeInput::get_input_index_name(int p_index) const {
-	int idx = 0;
-	int count = 0;
-
-	while (ports[idx].mode != Shader::MODE_MAX) {
-		if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type) {
-			if (count == p_index) {
-				return ports[idx].name;
-			}
-			count++;
-		}
-		idx++;
-	}
-
-	return "";
+	const LocalVector<int> indices = _get_filtered_port_indices();
+	ERR_FAIL_INDEX_V(p_index, (int)indices.size(), "");
+	return ports[indices[p_index]].name;
 }
 
 void VisualShaderNodeInput::_validate_property(PropertyInfo &p_property) const {
@@ -4318,16 +4326,12 @@ void VisualShaderNodeInput::_validate_property(PropertyInfo &p_property) const {
 	if (p_property.name == "input_name") {
 		String port_list;
 
-		int idx = 0;
-
-		while (ports[idx].mode != Shader::MODE_MAX) {
-			if (ports[idx].mode == shader_mode && ports[idx].shader_type == shader_type) {
-				if (!port_list.is_empty()) {
-					port_list += ",";
-				}
-				port_list += ports[idx].name;
+		const LocalVector<int> indices = _get_filtered_port_indices();
+		for (const int i : indices) {
+			if (!port_list.is_empty()) {
+				port_list += ",";
 			}
-			idx++;
+			port_list += ports[i].name;
 		}
 
 		if (port_list.is_empty()) {
