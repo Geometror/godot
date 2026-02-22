@@ -865,18 +865,20 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 	// Add all inputs/outputs as function parameters prefixed with "p_" (to prevent redefining builtins like UV, etc.).
 	const Vector<VisualShaderGroup::Port> input_ports = group->get_input_ports();
 	for (int i = 0; i < input_ports.size(); i++) {
-		if (i == 0) {
-			code += "in ";
-		} else {
-			code += ", in ";
+		if (i > 0) {
+			code += ", ";
 		}
+		code += "in ";
 		code += VisualShaderNode::get_port_type_shader_string(input_ports[i].type) + " ";
 		code += "p_" + input_ports[i].name;
 	}
 
 	const Vector<VisualShaderGroup::Port> output_ports = group->get_output_ports();
 	for (int i = 0; i < output_ports.size(); i++) {
-		code += ", out ";
+		if (i > 0) {
+			code += ", ";
+		}
+		code += "out ";
 		code += VisualShaderNode::get_port_type_shader_string(output_ports[i].type) + " ";
 		code += "p_" + output_ports[i].name;
 	}
