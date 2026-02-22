@@ -183,16 +183,8 @@ public:
 class VisualShaderNodeGroupInput : public VisualShaderNode {
 	GDCLASS(VisualShaderNodeGroupInput, VisualShaderNode);
 
-	// TODO: Possibly dangerous, but it is necessary for now since we don't have a proper weak reference.
+	// Not ideal, but it is necessary for now since we don't have a proper weak reference yet.
 	VisualShaderGroup *group = nullptr;
-
-	// struct Port {
-	// 	PortType type = PortType::PORT_TYPE_MAX;
-	// 	const char *name;
-	// 	const char *string;
-	// };
-
-	// static const Port preview_ports[];
 
 public:
 	void set_group(VisualShaderGroup *p_group);

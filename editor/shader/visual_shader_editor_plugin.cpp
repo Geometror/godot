@@ -1963,27 +1963,27 @@ void VisualShaderEditor::save_external_data(const String &p_str) {
 	// Start with all top-level shader graphs and with visual_shader_group if a group is edited directly.
 	if (visual_shader.is_valid()) {
 		for (int i = 0; i < VisualShader::TYPE_MAX; i++) {
-			Ref<ShaderGraph> g = visual_shader->get_graph(i);
-			if (g.is_valid()) {
-				graphs_to_process.push_back(g);
+			Ref<ShaderGraph> graph = visual_shader->get_graph(i);
+			if (graph.is_valid()) {
+				graphs_to_process.push_back(graph);
 			}
 		}
 	}
 	if (visual_shader_group.is_valid()) {
 		saved_groups.insert(visual_shader_group);
-		const Ref<ShaderGraph> g = visual_shader_group->get_graph();
-		if (g.is_valid()) {
-			graphs_to_process.push_back(g);
+		const Ref<ShaderGraph> graph = visual_shader_group->get_graph();
+		if (graph.is_valid()) {
+			graphs_to_process.push_back(graph);
 		}
 	}
 
 	// BFS through the shader graphs to find all (nested) groups and save them.
 	while (!graphs_to_process.is_empty()) {
-		const Ref<ShaderGraph> g = graphs_to_process.front()->get();
+		const Ref<ShaderGraph> graph = graphs_to_process.front()->get();
 		graphs_to_process.pop_front();
 
-		for (const int id : g->get_node_ids()) {
-			const Ref<VisualShaderNodeGroup> group_node = g->get_node(id);
+		for (const int id : graph->get_node_ids()) {
+			const Ref<VisualShaderNodeGroup> group_node = graph->get_node(id);
 			if (group_node.is_null()) {
 				continue;
 			}
@@ -2657,6 +2657,11 @@ void VisualShaderEditor::_update_nodes() {
 	// Disables not-supported copied items.
 	{
 		for (CopyItem &item : copy_items_buffer) {
+			if (_is_node_disallowed_in_context(item.node)) {
+				item.disabled = true;
+				continue;
+			}
+
 			Ref<VisualShaderNodeCustom> custom = Object::cast_to<VisualShaderNodeCustom>(item.node.ptr());
 
 			if (custom.is_valid()) {
@@ -2735,7 +2740,7 @@ void VisualShaderEditor::_update_options_menu() {
 
 	for (int i = 0; i < add_options.size(); i++) {
 		if (!use_filter || add_options[i].name.containsn(filter)) {
-			// port type filtering
+			// Port type filtering.
 			if (members_output_port_type != VisualShaderNode::PORT_TYPE_MAX || members_input_port_type != VisualShaderNode::PORT_TYPE_MAX) {
 				Ref<VisualShaderNode> vsn;
 				int check_result = 0;
@@ -2813,9 +2818,22 @@ void VisualShaderEditor::_update_options_menu() {
 					}
 				}
 			}
+
+			// Filter by context.
+
+			// Mode/function.
 			if ((add_options[i].func != current_func && add_options[i].func != -1) || !_is_available(add_options[i].mode)) {
 				continue;
 			}
+
+			// Groups.
+			if (!add_options[i].type.is_empty()) {
+				bool is_inside_group = !group_edit_stack.is_empty() || visual_shader_group.is_valid();
+				if (_is_type_disallowed_in_group_context(add_options[i].type, is_inside_group)) {
+					continue;
+				}
+			}
+
 			add_options[i].temp_idx = i; // save valid id
 			if (add_options[i].is_custom) {
 				custom_options.push_back(add_options[i]);
@@ -4390,6 +4408,24 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 		}
 
 		vsnode = Ref<VisualShaderNode>(vsn);
+
+		// Set the group pointer on group input/output nodes to the currently edited group.
+		VisualShaderGroup *current_group = nullptr;
+		if (!group_edit_stack.is_empty()) {
+			current_group = group_edit_stack.back()->get().ptr();
+		} else if (visual_shader_group.is_valid()) {
+			current_group = visual_shader_group.ptr();
+		}
+		if (current_group) {
+			Ref<VisualShaderNodeGroupInput> group_input = vsnode;
+			if (group_input.is_valid()) {
+				group_input->set_group(current_group);
+			}
+			Ref<VisualShaderNodeGroupOutput> group_output = vsnode;
+			if (group_output.is_valid()) {
+				group_output->set_group(current_group);
+			}
+		}
 	} else {
 		StringName base_type;
 		bool is_native = add_options[p_idx].is_native;
@@ -5983,6 +6019,99 @@ void VisualShaderEditor::_frame_rect_changed(const GraphFrame *p_frame, const Re
 	vsnode->set_size(p_new_rect.size / graph->get_zoom());
 }
 
+bool VisualShaderEditor::_is_type_disallowed_in_group_context(const StringName &p_type_name, bool p_is_inside_group) {
+	if (p_is_inside_group) {
+		// Varying, Parameter and global expression nodes are not allowed inside groups.
+		if (ClassDB::is_parent_class(p_type_name, VisualShaderNodeParameter::get_class_static()) ||
+				p_type_name == VisualShaderNodeParameterRef::get_class_static() ||
+				p_type_name == VisualShaderNodeVaryingGetter::get_class_static() ||
+				p_type_name == VisualShaderNodeVaryingSetter::get_class_static() ||
+				p_type_name == VisualShaderNodeGlobalExpression::get_class_static()) {
+			return true;
+		}
+	} else {
+		// GroupInput and GroupOutput nodes are only allowed inside groups.
+		if (p_type_name == VisualShaderNodeGroupInput::get_class_static() ||
+				p_type_name == VisualShaderNodeGroupOutput::get_class_static()) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool VisualShaderEditor::_group_would_create_cycle(const Ref<VisualShaderGroup> &p_pasted_group, const Ref<VisualShaderGroup> &p_target_group) {
+	if (p_pasted_group.is_null() || p_target_group.is_null()) {
+		return false;
+	}
+
+	if (p_pasted_group == p_target_group) {
+		return true;
+	}
+
+	// BFS to check whether p_target_group is reachable from p_pasted_group's graph.
+	HashSet<Ref<VisualShaderGroup>> visited;
+	List<Ref<VisualShaderGroup>> queue;
+
+	visited.insert(p_pasted_group);
+	queue.push_back(p_pasted_group);
+
+	while (!queue.is_empty()) {
+		Ref<VisualShaderGroup> current = queue.front()->get();
+		queue.pop_front();
+
+		Ref<ShaderGraph> graph = current->get_graph();
+		if (graph.is_null()) {
+			continue;
+		}
+
+		for (const int id : graph->get_node_ids()) {
+			Ref<VisualShaderNodeGroup> nested = graph->get_node(id);
+			if (nested.is_null() || nested->get_group().is_null()) {
+				continue;
+			}
+
+			const Ref<VisualShaderGroup> &nested_group = nested->get_group();
+			if (nested_group == p_target_group) {
+				return true;
+			}
+			if (!visited.has(nested_group)) {
+				visited.insert(nested_group);
+				queue.push_back(nested_group);
+			}
+		}
+	}
+
+	return false;
+}
+
+bool VisualShaderEditor::_is_node_disallowed_in_context(const Ref<VisualShaderNode> &p_node) const {
+	bool is_inside_group = !group_edit_stack.is_empty() || visual_shader_group.is_valid();
+
+	if (_is_type_disallowed_in_group_context(p_node->get_class_name(), is_inside_group)) {
+		return true;
+	}
+
+	// Check for cyclic group references (only relevant inside groups).
+	if (is_inside_group) {
+		Ref<VisualShaderNodeGroup> group_node = p_node;
+		if (group_node.is_valid() && group_node->get_group().is_valid()) {
+			Ref<VisualShaderGroup> target_group;
+			if (!group_edit_stack.is_empty()) {
+				target_group = group_edit_stack.back()->get();
+			} else if (visual_shader_group.is_valid()) {
+				target_group = visual_shader_group;
+			}
+			if (target_group.is_valid()) {
+				if (_group_would_create_cycle(group_node->get_group(), target_group)) {
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
 void VisualShaderEditor::_dup_copy_nodes(int p_type, List<CopyItem> &r_items, List<ShaderGraph::Connection> &r_connections) {
 	selection_center.x = 0.0f;
 	selection_center.y = 0.0f;
@@ -6072,7 +6201,7 @@ void VisualShaderEditor::_dup_paste_nodes(int p_type, List<CopyItem> &r_items, c
 	HashSet<int> added_set;
 
 	for (CopyItem &item : r_items) {
-		if (item.disabled) {
+		if (item.disabled || _is_node_disallowed_in_context(item.node)) {
 			unsupported_set.insert(item.id);
 			continue;
 		}
@@ -8357,6 +8486,8 @@ VisualShaderEditor::VisualShaderEditor() {
 	add_options.push_back(AddOption("Expression", "Special", "VisualShaderNodeExpression", TTR("Custom Godot Shader Language expression, with custom amount of input and output ports. This is a direct injection of code into the vertex/fragment/light function, do not use it to write the function declarations inside.")));
 	add_options.push_back(AddOption("Group", "Special", "VisualShaderNodeGroup", TTR("A node group/subgraph. Analogous to a function in textual shader languages.")));
 	add_options.push_back(AddOption("GlobalExpression", "Special", "VisualShaderNodeGlobalExpression", TTR("Custom Godot Shader Language expression, which is placed on top of the resulted shader. You can place various function definitions inside and call it later in the Expressions. You can also declare varyings, parameters and constants.")));
+	add_options.push_back(AddOption("GroupInput", "Special", "VisualShaderNodeGroupInput", TTR("Input node for the group. Represents the input ports of the group.")));
+	add_options.push_back(AddOption("GroupOutput", "Special", "VisualShaderNodeGroupOutput", TTR("Output node for the group. Represents the output ports of the group.")));
 	add_options.push_back(AddOption("ParameterRef", "Special", "VisualShaderNodeParameterRef", TTR("A reference to an existing parameter.")));
 	add_options.push_back(AddOption("VaryingGetter", "Special", "VisualShaderNodeVaryingGetter", TTR("Get varying parameter."), {}, -1, TYPE_FLAGS_FRAGMENT | TYPE_FLAGS_LIGHT, Shader::MODE_SPATIAL));
 	add_options.push_back(AddOption("VaryingSetter", "Special", "VisualShaderNodeVaryingSetter", TTR("Set varying parameter."), {}, -1, TYPE_FLAGS_VERTEX | TYPE_FLAGS_FRAGMENT, Shader::MODE_SPATIAL));

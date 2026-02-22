@@ -630,6 +630,10 @@ class VisualShaderEditor : public ShaderEditor {
 		bool disabled = false;
 	};
 
+	static bool _is_type_disallowed_in_group_context(const StringName &p_type_name, bool p_is_inside_group);
+	static bool _group_would_create_cycle(const Ref<VisualShaderGroup> &p_pasted_group, const Ref<VisualShaderGroup> &p_target_group);
+	bool _is_node_disallowed_in_context(const Ref<VisualShaderNode> &p_node) const;
+
 	void _dup_copy_nodes(int p_type, List<CopyItem> &r_nodes, List<ShaderGraph::Connection> &r_connections);
 	void _dup_paste_nodes(int p_type, List<CopyItem> &r_items, const List<ShaderGraph::Connection> &p_connections, const Vector2 &p_offset, bool p_duplicate);
 
