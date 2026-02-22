@@ -40,7 +40,7 @@
 #include "visual_shader_particle_nodes.h"
 
 String make_unique_id(VisualShader::Type p_type, int p_id, const String &p_name) {
-	static const char *typepf[VisualShader::TYPE_MAX] = { "vtx", "frg", "lgt", "start", "process", "collide", "start_custom", "process_custom", "sky", "fog", "texture_blit" };
+	static const char *typepf[VisualShader::TYPE_MAX + 1] = { "vtx", "frg", "lgt", "start", "process", "collide", "start_custom", "process_custom", "sky", "fog", "texture_blit", "group" };
 	return p_name + "_" + String(typepf[p_type]) + "_" + itos(p_id);
 }
 

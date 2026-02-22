@@ -52,6 +52,7 @@ private:
 	mutable SafeFlag dirty;
 	String code;
 	String global_code;
+	Vector<ShaderGraph::DefaultTextureParam> default_tex_params;
 
 protected:
 	static void _bind_methods();
@@ -70,6 +71,7 @@ public:
 	Ref<ShaderGraph> get_graph() const;
 	String get_code();
 	String get_global_code();
+	Vector<ShaderGraph::DefaultTextureParam> get_default_texture_params();
 
 	void set_group_name(const String &p_name);
 	String get_group_name() const;
@@ -170,6 +172,7 @@ public:
 	void set_shader_mode(Shader::Mode p_mode);
 
 	virtual String generate_code(Shader::Mode p_mode, VisualShader::Type p_type, int p_id, const String *p_input_vars, const String *p_output_vars, bool p_for_preview = false) const override;
+	virtual Vector<ShaderGraph::DefaultTextureParam> get_default_texture_parameters(VisualShader::Type p_type, int p_id) const override;
 	// virtual String generate_global(Shader::Mode p_mode, VisualShader::Type p_type, int p_id) const override;
 	String generate_group_function(Shader::Mode p_mode, VisualShader::Type p_type, int p_id) const;
 	virtual bool is_output_port_expandable(int p_port) const override;

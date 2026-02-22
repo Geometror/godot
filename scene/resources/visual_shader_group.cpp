@@ -158,7 +158,7 @@ void VisualShaderGroup::_update_group() {
 	StringBuilder global_code_per_node_builder;
 	HashMap<ShaderGraph::Type, StringBuilder> global_code_per_func_builder;
 	StringBuilder code_builder;
-	Vector<ShaderGraph::DefaultTextureParam> default_tex_params;
+	default_tex_params.clear();
 	// static const char *shader_mode_str[Shader::MODE_MAX] = { "spatial", "canvas_item", "particles", "sky", "fog" };
 
 	HashSet<StringName> classes;
@@ -360,6 +360,13 @@ String VisualShaderGroup::get_global_code() {
 		_update_group();
 	}
 	return global_code;
+}
+
+Vector<ShaderGraph::DefaultTextureParam> VisualShaderGroup::get_default_texture_params() {
+	if (dirty.is_set()) {
+		_update_group();
+	}
+	return default_tex_params;
 }
 
 void VisualShaderGroup::set_group_name(const String &p_name) {
@@ -841,6 +848,13 @@ String VisualShaderNodeGroup::generate_code(Shader::Mode p_mode, VisualShader::T
 	code += ");\n";
 
 	return code;
+}
+
+Vector<ShaderGraph::DefaultTextureParam> VisualShaderNodeGroup::get_default_texture_parameters(VisualShader::Type p_type, int p_id) const {
+	if (group.is_null()) {
+		return Vector<ShaderGraph::DefaultTextureParam>();
+	}
+	return group->get_default_texture_params();
 }
 
 String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, VisualShader::Type p_type, int p_id) const {
