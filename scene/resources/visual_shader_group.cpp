@@ -659,9 +659,11 @@ VisualShaderGroup::VisualShaderGroup() {
 
 void VisualShaderNodeGroup::_emit_changed() {
 	for (int i = 0; i < get_input_port_count(); i++) {
-		if (!default_input_values.has(i)) {
-			const PortType type = get_input_port_type(i);
-			set_input_port_default_value(i, VisualShaderNode::get_port_type_default_value_variant(type));
+		const PortType type = get_input_port_type(i);
+		const Variant default_value_variant = VisualShaderNode::get_port_type_default_value_variant(type);
+		if (!default_input_values.has(i) ||
+				default_value_variant.get_type() != default_input_values[i].get_type()) {
+			set_input_port_default_value(i, default_value_variant);
 		}
 	}
 
@@ -875,7 +877,7 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 
 	const Vector<VisualShaderGroup::Port> output_ports = group->get_output_ports();
 	for (int i = 0; i < output_ports.size(); i++) {
-		if (i > 0) {
+		if (i > 0 || !input_ports.is_empty()) {
 			code += ", ";
 		}
 		code += "out ";
