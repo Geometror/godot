@@ -128,9 +128,6 @@ public:
 
 	String generate_preview_shader(int p_node, int p_port, Vector<ShaderGraph::DefaultTextureParam> &r_default_tex_params) const;
 
-	// TODO: Implement?
-	String validate_parameter_name(const String &p_name, const Ref<VisualShaderNodeParameter> &p_parameter) const;
-
 	void create_default_nodes_if_empty();
 
 	VisualShaderGroup();

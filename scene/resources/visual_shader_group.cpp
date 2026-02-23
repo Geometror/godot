@@ -632,11 +632,6 @@ String VisualShaderGroup::generate_preview_shader(int p_node, int p_port, Vector
 	return graph->generate_preview_shader(p_node, p_port, r_default_tex_params);
 }
 
-String VisualShaderGroup::validate_parameter_name(const String &p_name, const Ref<VisualShaderNodeParameter> &p_parameter) const {
-	// TODO: Implement if we decide to support parameters inside node groups.
-	return String();
-}
-
 void VisualShaderGroup::create_default_nodes_if_empty() {
 	if (!graph->nodes.is_empty()) {
 		return;
@@ -902,7 +897,6 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 }
 
 bool VisualShaderNodeGroup::is_output_port_expandable(int p_port) const {
-	// TODO: Implement.
 	return false;
 }
 
@@ -1009,7 +1003,6 @@ String VisualShaderNodeGroupInput::get_output_port_name(int p_port) const {
 }
 
 bool VisualShaderNodeGroupInput::is_output_port_expandable(int p_port) const {
-	// TODO: Implement.
 	return false;
 }
 
