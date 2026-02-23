@@ -246,11 +246,15 @@ public:
 		}
 	};
 
+	static constexpr int NODE_ID_INVALID = -1;
+	static constexpr int NODE_ID_OUTPUT = 0;
+
 private:
 	// TODO: Make this a Vector and add graphs dynamically (maybe using a HM)
 	// Refactor idea: Make this Vector<ShaderGraph> with ShaderGraph containing type and graph.
 	// Keep access in constant time!
-	Ref<ShaderGraph> graph[TYPE_MAX];
+	Ref<ShaderGraph>
+			graph[TYPE_MAX];
 
 	Shader::Mode shader_mode = Shader::MODE_SPATIAL;
 	mutable String previous_code;
