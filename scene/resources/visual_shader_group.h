@@ -72,6 +72,7 @@ public:
 	String get_code();
 	String get_global_code();
 	Vector<ShaderGraph::DefaultTextureParam> get_default_texture_params();
+	String get_unique_func_name() const;
 
 	void set_group_name(const String &p_name);
 	String get_group_name() const;

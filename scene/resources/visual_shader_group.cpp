@@ -152,14 +152,11 @@ void VisualShaderGroup::_update_group() {
 
 	dirty.clear();
 
-	// TODO: Update group.
-
 	StringBuilder global_code_builder;
 	StringBuilder global_code_per_node_builder;
 	HashMap<ShaderGraph::Type, StringBuilder> global_code_per_func_builder;
 	StringBuilder code_builder;
 	default_tex_params.clear();
-	// static const char *shader_mode_str[Shader::MODE_MAX] = { "spatial", "canvas_item", "particles", "sky", "fog" };
 
 	HashSet<StringName> classes;
 	HashMap<int, int> insertion_pos;
@@ -196,17 +193,6 @@ void VisualShaderGroup::_update_group() {
 		}
 	}
 
-	// TODO: Forbid parameters.
-	// int idx = 0
-	// for (List<VisualShaderNodeParameter *>::Iterator itr = parameters.begin(); itr != parameters.end(); ++itr, ++idx) {
-	// 	VisualShaderNodeParameter *parameter = *itr;
-	// 	if (used_parameter_names.has(parameter->get_parameter_name())) {
-	// 		global_code += parameter->generate_global(get_mode(), Type(idx), -1);
-	// 		const_cast<VisualShaderNodeParameter *>(parameter)->set_global_code_generated(true);
-	// 	} else {
-	// 		const_cast<VisualShaderNodeParameter *>(parameter)->set_global_code_generated(false);
-	// 	}
-	// }
 	HashMap<int, String> code_map;
 	HashSet<int> empty_funcs;
 	HashMap<ShaderGraph::ConnectionKey, const List<ShaderGraph::Connection>::Element *> input_connections;
@@ -367,6 +353,18 @@ Vector<ShaderGraph::DefaultTextureParam> VisualShaderGroup::get_default_texture_
 		_update_group();
 	}
 	return default_tex_params;
+}
+
+String VisualShaderGroup::get_unique_func_name() const {
+	const String valid_name = _validate_group_name(group_name);
+	// Use the scene unique ID as suffix as it's stable and available for both external and embedded subresources.
+	// Stability is not strictly necessary right now, because the shader is regenerated at runtime (and not saved), but maybe this is changed in the future.
+	const String suid = get_scene_unique_id();
+	const String suffix = suid.is_empty() ? uitos(get_instance_id()) : suid; // Fallback to unstable instance ID.
+	if (valid_name.is_empty()) {
+		return "group_" + suffix;
+	}
+	return "group_" + valid_name + "_" + suffix;
 }
 
 void VisualShaderGroup::set_group_name(const String &p_name) {
@@ -817,14 +815,11 @@ String VisualShaderNodeGroup::generate_code(Shader::Mode p_mode, VisualShader::T
 		return code;
 	}
 
-	// TODO:Validate name and append unique id.
-
 	// Generate the code for the group.
 	String code = String("/* Group: ") + group->get_group_name() + " */\n";
 
-	const String valid_group_name = group->_validate_group_name(group->get_group_name());
-	ERR_FAIL_COND_V(valid_group_name.is_empty(), "");
-	code += "group_" + valid_group_name + "(";
+	const String func_name = group->get_unique_func_name();
+	code += func_name + "(";
 
 	const Vector<VisualShaderGroup::Port> input_ports = group->get_input_ports();
 	int param_idx = 0;
@@ -872,11 +867,9 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 
 	code += group->get_global_code();
 
-	// TODO: Don't use the type and id for the function name.
-	const String valid_group_name = group->_validate_group_name(group->get_group_name());
-	ERR_FAIL_COND_V(valid_group_name.is_empty(), "");
+	const String func_name = group->get_unique_func_name();
 
-	code += "void group_" + valid_group_name + "(";
+	code += "void " + func_name + "(";
 
 	// Add all inputs/outputs as function parameters prefixed with "p_" (to prevent redefining builtins like UV, etc.).
 	const Vector<VisualShaderGroup::Port> input_ports = group->get_input_ports();

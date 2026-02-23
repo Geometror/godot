@@ -285,12 +285,12 @@ Error ShaderGraph::_write_node(
 		// Generate node group functions only once globally.
 		Ref<VisualShaderNodeGroup> group = vsnode;
 		if (group.is_valid()) {
-			// TODO: Use UID for group function names.
-			if (!r_classes.has("GROUP_" + group->get_group()->get_group_name())) {
+			const String group_key = "GROUP_" + group->get_group()->get_unique_func_name();
+			if (!r_classes.has(group_key)) {
 				if (p_global_code_per_node) {
 					*p_global_code_per_node += group->generate_group_function(p_mode, (VisualShader::Type)p_type, p_node);
 				}
-				r_classes.insert("GROUP_" + group->get_group()->get_group_name());
+				r_classes.insert(group_key);
 			}
 		}
 	}
