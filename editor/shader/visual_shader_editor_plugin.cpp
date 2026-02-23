@@ -1604,8 +1604,10 @@ void VisualShaderGraphPlugin::add_node(VisualShader::Type p_type, int p_id, bool
 
 	bool has_relative_parameter_instances = false;
 	if (vsnode->get_output_port_for_preview() >= 0) {
-		// TODO: Handle this in VSG.
-		has_relative_parameter_instances = is_node_has_parameter_instances_relatively(p_type, p_id);
+		// Not needed in groups.
+		if (editor->group_edit_stack.is_empty()) {
+			has_relative_parameter_instances = is_node_has_parameter_instances_relatively(p_type, p_id);
+		}
 		show_port_preview(p_type, p_id, vsnode->get_output_port_for_preview(), !has_relative_parameter_instances);
 	} else if (!is_reroute) {
 		offset = memnew(Control);

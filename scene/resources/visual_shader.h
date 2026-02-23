@@ -338,13 +338,13 @@ public: // internal methods
 	Ref<VisualShaderNode> get_node(Type p_type, int p_id) const;
 
 	_FORCE_INLINE_ Ref<VisualShaderNode> get_node_unchecked(Type p_type, int p_id) const {
-		return graph[p_type]->nodes[p_id].node;
+		return graph[p_type]->get_node_unchecked(p_id);
 	}
 	_FORCE_INLINE_ const LocalVector<int> &get_next_connected_nodes(Type p_type, int p_id) const {
-		return graph[p_type]->nodes[p_id].next_connected_nodes;
+		return graph[p_type]->get_next_connected_node_ids(p_id);
 	}
 	_FORCE_INLINE_ const LocalVector<int> &get_prev_connected_nodes(Type p_type, int p_id) const {
-		return graph[p_type]->nodes[p_id].prev_connected_nodes;
+		return graph[p_type]->get_prev_connected_node_ids(p_id);
 	}
 
 	Vector<int> get_node_list(Type p_type) const;
