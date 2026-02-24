@@ -1873,6 +1873,7 @@ void VisualShaderEditor::_restore_graph_context(int p_shader_type, TypedArray<Vi
 	// This is important to prevent deleting objects while they emit signals.
 	if (context_changed) {
 		_update_graph();
+		_restore_editor_state();
 	}
 }
 
@@ -3021,6 +3022,8 @@ void VisualShaderEditor::_edit_group_in_graph(int p_idx) {
 	group_edit_stack.push_back(group_node->get_group());
 
 	_update_graph();
+
+	_restore_editor_state();
 }
 
 void VisualShaderEditor::_exit_group() {
@@ -3060,6 +3063,7 @@ void VisualShaderEditor::_exit_group() {
 	}
 
 	_update_graph();
+	_restore_editor_state();
 }
 
 void VisualShaderEditor::_update_group_related_nodes(const Ref<VisualShaderGroup> &p_group) {
@@ -3304,7 +3308,6 @@ void VisualShaderEditor::_update_graph() {
 }
 
 void VisualShaderEditor::_restore_editor_state() {
-	// TODO: Adjust for group resource.
 	const String id_string = _get_cache_id_string();
 
 	const String offset_cache_key = _get_cache_key("offset");
@@ -3320,15 +3323,33 @@ void VisualShaderEditor::_restore_editor_state() {
 }
 
 String VisualShaderEditor::_get_cache_id_string() const {
-	String id_string = visual_shader->get_path();
-	const ResourceUID::ID uid = EditorFileSystem::get_singleton()->get_file_uid(id_string);
-	if (uid != ResourceUID::INVALID_ID) {
-		id_string = ResourceUID::get_singleton()->id_to_text(uid);
+	// If a group is edited, try to use its UID.
+	if (!group_edit_stack.is_empty()) {
+		const Ref<VisualShaderGroup> &group = group_edit_stack.back()->get();
+		const ResourceUID::ID group_uid = EditorFileSystem::get_singleton()->get_file_uid(group->get_path());
+		if (group_uid != ResourceUID::INVALID_ID) {
+			return ResourceUID::get_singleton()->id_to_text(group_uid);
+		}
+		// Group resource is probably embedded, fall trough to VisualShader UID plus group scene unique id.
 	}
+
+	String id_string = visual_shader->get_path();
+	const ResourceUID::ID vs_uid = EditorFileSystem::get_singleton()->get_file_uid(id_string);
+	if (vs_uid != ResourceUID::INVALID_ID) {
+		id_string = ResourceUID::get_singleton()->id_to_text(vs_uid);
+	}
+
+	if (!group_edit_stack.is_empty()) {
+		id_string += ":" + group_edit_stack.back()->get()->get_scene_unique_id();
+	}
+
 	return id_string;
 }
 
 String VisualShaderEditor::_get_cache_key(const String &p_prop_name) const {
+	if (!group_edit_stack.is_empty()) {
+		return p_prop_name;
+	}
 	const int type = get_current_shader_type();
 	return "type" + itos(type) + ":" + p_prop_name;
 }
