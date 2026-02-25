@@ -54,6 +54,9 @@ private:
 	String global_code;
 	Vector<ShaderGraph::DefaultTextureParam> default_tex_params;
 
+	String _validate_port_name(const String &p_port_name, int p_port_id, bool p_output) const;
+	String _validate_group_name(const String &p_name) const;
+
 protected:
 	static void _bind_methods();
 
@@ -67,7 +70,6 @@ public:
 	bool _get(const StringName &p_name, Variant &r_ret) const;
 	void _get_property_list(List<PropertyInfo> *p_list) const;
 
-public:
 	Ref<ShaderGraph> get_graph() const;
 	String get_code();
 	String get_global_code();
@@ -77,15 +79,10 @@ public:
 	void set_group_name(const String &p_name);
 	String get_group_name() const;
 
-	// TODO: Make private?
-	String _validate_port_name(const String &p_port_name, int p_port_id, bool p_output) const;
-	String _validate_group_name(const String &p_name) const;
-
 	void add_input_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name);
 	void set_input_port_name(int p_id, const String &p_name);
 	void set_input_port_type(int p_id, VisualShaderNode::PortType p_type);
 	Port get_input_port(int p_id) const;
-	// TODO: Maybe replace this method with get_input_port_count(...)
 	Vector<Port> get_input_ports() const;
 	void remove_input_port(int p_id);
 
@@ -93,7 +90,6 @@ public:
 	void set_output_port_name(int p_id, const String &p_name);
 	void set_output_port_type(int p_id, VisualShaderNode::PortType p_type);
 	Port get_output_port(int p_id) const;
-	// TODO: Maybe replace this method with get_output_port_count(...)
 	Vector<Port> get_output_ports() const;
 	void remove_output_port(int p_id);
 
@@ -108,7 +104,6 @@ public:
 	void remove_node(int p_id);
 	void replace_node(int p_id, const StringName &p_new_class);
 
-	// TODO: Rename this method and evaluate whether it is necessary.
 	bool are_nodes_connected(int p_from_node, int p_from_port, int p_to_node, int p_to_port) const;
 
 	bool is_node_reachable(int p_from, int p_target) const;
@@ -123,7 +118,7 @@ public:
 
 	String get_reroute_parameter_name(int p_reroute_node) const;
 
-	// TODO: Maybe change this method to use a return type.
+	TypedArray<Dictionary> _get_node_connections() const;
 	void get_node_connections(List<ShaderGraph::Connection> *r_connections) const;
 
 	String generate_preview_shader(int p_node, int p_port, Vector<ShaderGraph::DefaultTextureParam> &r_default_tex_params) const;
@@ -186,7 +181,7 @@ public:
 class VisualShaderNodeGroupInput : public VisualShaderNode {
 	GDCLASS(VisualShaderNodeGroupInput, VisualShaderNode);
 
-	// Not ideal, but it is necessary for now since we don't have a proper weak reference yet.
+	// Raw pointer to avoid a Ref<> cycle (group owns graph which owns this node).
 	VisualShaderGroup *group = nullptr;
 
 public:
@@ -226,18 +221,10 @@ public:
 class VisualShaderNodeGroupOutput : public VisualShaderNode {
 	GDCLASS(VisualShaderNodeGroupOutput, VisualShaderNode);
 
-	// TODO: Possibly dangerous, but it is necessary for now since we don't have a proper weak reference.
+	// Raw pointer to avoid a Ref cycle (group owns graph which owns this node).
 	VisualShaderGroup *group = nullptr;
 
 	void _group_changed();
-
-	// struct Port {
-	// 	PortType type = PortType::PORT_TYPE_MAX;
-	// 	const char *name;
-	// 	const char *string;
-	// };
-
-	// static const Port ports[];
 
 public:
 	void set_group(VisualShaderGroup *p_group);

@@ -95,7 +95,6 @@ public:
 	static constexpr int NODE_ID_INVALID = -1;
 	static constexpr int NODE_ID_OUTPUT = 0;
 
-	// TODO: I think this is no longer necessary.
 	int reserved_node_ids = 1;
 
 	RBMap<int, Node> nodes;

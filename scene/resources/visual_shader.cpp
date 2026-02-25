@@ -2920,14 +2920,12 @@ bool VisualShader::_get(const StringName &p_name, Variant &r_ret) const {
 }
 
 void VisualShader::reset_state() {
-	// TODO: Everything needs to be cleared here. Evaluate this or implement it.
+	// TODO: Everything needs to be cleared here.
 	emit_changed();
 }
 
 void VisualShader::_get_property_list(List<PropertyInfo> *p_list) const {
-	//mode
 	p_list->push_back(PropertyInfo(Variant::INT, PNAME("mode"), PROPERTY_HINT_ENUM, "Spatial,CanvasItem,Particles,Sky,Fog,TextureBlit"));
-	//render modes
 
 	HashMap<String, String> blend_mode_enums;
 	HashSet<String> toggles;

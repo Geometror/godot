@@ -126,8 +126,7 @@ void VisualShaderGroup::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("disconnect_nodes", "from_node", "from_port", "to_node", "to_port"), &VisualShaderGroup::disconnect_nodes);
 	ClassDB::bind_method(D_METHOD("connect_nodes_forced", "from_node", "from_port", "to_node", "to_port"), &VisualShaderGroup::connect_nodes_forced);
 
-	// TODO: Re-add this method.
-	// ClassDB::bind_method(D_METHOD("get_node_connections", "type"), &VisualShaderGroup::get_node_connections);
+	ClassDB::bind_method(D_METHOD("get_node_connections"), &VisualShaderGroup::_get_node_connections);
 
 	ClassDB::bind_method(D_METHOD("attach_node_to_frame", "id", "frame"), &VisualShaderGroup::attach_node_to_frame);
 	ClassDB::bind_method(D_METHOD("detach_node_from_frame", "id"), &VisualShaderGroup::detach_node_from_frame);
@@ -226,13 +225,10 @@ void VisualShaderGroup::_update_group() {
 		}
 	}
 
-	// TODO: Figure out why this needs to be separately.
 	for (int &E : emitters) {
 		const Error err = graph->_write_node(&global_code_builder, &global_code_per_node_builder, &global_code_per_func_builder, group_code, default_tex_params, input_connections, output_connections, E, processed, false, classes);
 		ERR_FAIL_COND(err != OK);
 	}
-
-	// TODO: Use concept of previous code to determine whether to fire the changed signal?
 
 	code_builder += "// Group content: " + group_name + "\n";
 	code_builder += group_code;
@@ -240,7 +236,6 @@ void VisualShaderGroup::_update_group() {
 	global_code_builder.append(global_code_per_node_builder);
 	global_code_builder.append(global_expressions);
 	global_code = global_code_builder.as_string();
-	// TODO: Insert global code per func
 	code = code_builder.as_string();
 
 	emit_changed();
@@ -623,6 +618,19 @@ void VisualShaderGroup::detach_node_from_frame(int p_node) {
 
 String VisualShaderGroup::get_reroute_parameter_name(int p_reroute_node) const {
 	return graph->get_reroute_parameter_name(p_reroute_node);
+}
+
+TypedArray<Dictionary> VisualShaderGroup::_get_node_connections() const {
+	TypedArray<Dictionary> ret;
+	for (const ShaderGraph::Connection &E : graph->connections) {
+		Dictionary d;
+		d["from_node"] = E.from_node;
+		d["from_port"] = E.from_port;
+		d["to_node"] = E.to_node;
+		d["to_port"] = E.to_port;
+		ret.push_back(d);
+	}
+	return ret;
 }
 
 void VisualShaderGroup::get_node_connections(List<ShaderGraph::Connection> *r_connections) const {
