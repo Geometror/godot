@@ -176,8 +176,6 @@ public:
 	String generate_preview_shader(int p_node, int p_port, Vector<DefaultTextureParam> &r_default_tex_params, const String &p_additional_global_code = String()) const;
 
 	String validate_port_name(const String &p_port_name, VisualShaderNode *p_node, int p_port_id, bool p_output) const;
-	// TODO: Implement?
-	String validate_parameter_name(const String &p_name, const Ref<VisualShaderNodeParameter> &p_parameter) const;
 
 	ShaderGraph(int reserved_node_ids = 1);
 };

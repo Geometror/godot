@@ -834,12 +834,6 @@ void ShaderGraph::add_node(const Ref<VisualShaderNode> &p_node, const Vector2 &p
 	n.node = p_node;
 	n.position = p_position;
 
-	Ref<VisualShaderNodeParameter> parameter = n.node;
-	if (parameter.is_valid()) {
-		String valid_name = validate_parameter_name(parameter->get_parameter_name(), parameter);
-		parameter->set_parameter_name(valid_name);
-	}
-
 	Ref<VisualShaderNodeCustom> custom = n.node;
 	if (custom.is_valid()) {
 		custom->update_ports();
@@ -1332,11 +1326,6 @@ String ShaderGraph::validate_port_name(const String &p_port_name, VisualShaderNo
 	}
 
 	return port_name;
-}
-
-String ShaderGraph::validate_parameter_name(const String &p_name, const Ref<VisualShaderNodeParameter> &p_parameter) const {
-	// TODO: Implement?
-	return String();
 }
 
 ShaderGraph::ShaderGraph(int reserved_node_ids) :
@@ -2603,13 +2592,13 @@ String VisualShader::validate_port_name(const String &p_port_name, VisualShaderN
 }
 
 String VisualShader::validate_parameter_name(const String &p_name, const Ref<VisualShaderNodeParameter> &p_parameter) const {
-	String param_name = p_name; //validate name first
+	// Sanitize the name first.
+	String param_name = p_name;
 	while (param_name.length() && !is_ascii_alphabet_char(param_name[0])) {
 		param_name = param_name.substr(1);
 	}
 	if (!param_name.is_empty()) {
 		String valid_name;
-
 		for (int i = 0; i < param_name.length(); i++) {
 			if (is_ascii_identifier_char(param_name[i])) {
 				valid_name += String::chr(param_name[i]);
@@ -2625,14 +2614,14 @@ String VisualShader::validate_parameter_name(const String &p_name, const Ref<Vis
 		param_name = p_parameter->get_caption();
 	}
 
+	// Check for duplicates across all shader types.
 	int attempt = 1;
-
 	while (true) {
 		bool exists = false;
 		for (int i = 0; i < TYPE_MAX; i++) {
 			for (const KeyValue<int, ShaderGraph::Node> &E : graph[i]->nodes) {
 				Ref<VisualShaderNodeParameter> node = E.value.node;
-				if (node == p_parameter) { //do not test on self
+				if (node == p_parameter) {
 					continue;
 				}
 				if (node.is_valid() && node->get_parameter_name() == param_name) {
@@ -2646,7 +2635,7 @@ String VisualShader::validate_parameter_name(const String &p_name, const Ref<Vis
 		}
 
 		if (exists) {
-			//remove numbers, put new and try again
+			// Strip trailing digits, append an incremented number and try again.
 			attempt++;
 			while (param_name.length() && is_digit(param_name[param_name.length() - 1])) {
 				param_name = param_name.substr(0, param_name.length() - 1);
