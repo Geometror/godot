@@ -199,21 +199,17 @@ void VisualShaderGroupPortsDialog::_add_port() {
 
 	// Add a new port to the group.
 	const VisualShaderNode::PortType port_type = VisualShaderNode::PORT_TYPE_SCALAR;
-	String port_name = edit_inputs ? "new_in_port" : "new_out_port";
+	const String default_name = edit_inputs ? "new_in_port" : "new_out_port";
 
-	// Find a new valid name for the port.
-	int port_idx = 2;
-	String port_name_numerated = port_name;
-	while (group->_validate_port_name(port_name_numerated, -1, !edit_inputs).is_empty()) {
-		port_name_numerated = port_name + itos(port_idx);
-		port_idx++;
-	}
-	port_name = port_name_numerated;
-
+	String port_name;
 	if (edit_inputs) {
-		group->add_input_port(group->get_input_ports().size(), port_type, port_name);
+		port_name = group->insert_input_port(group->get_input_port_count(), port_type, default_name);
 	} else {
-		group->add_output_port(group->get_output_ports().size(), port_type, port_name);
+		port_name = group->insert_output_port(group->get_output_port_count(), port_type, default_name);
+	}
+
+	if (port_name.is_empty()) {
+		return;
 	}
 
 	// Update the item list.
@@ -242,11 +238,13 @@ void VisualShaderGroupPortsDialog::_update_dialog_for_port(int p_idx) {
 	port_type_optbtn->set_visible(true);
 
 	// Update the controls in the editor area of the dialog.
-	ERR_FAIL_INDEX(p_idx, edit_inputs ? group->get_input_ports().size() : group->get_output_ports().size());
-	const VisualShaderGroup::Port port = edit_inputs ? group->get_input_port(p_idx) : group->get_output_port(p_idx);
+	ERR_FAIL_INDEX(p_idx, edit_inputs ? group->get_input_port_count() : group->get_output_port_count());
 
-	name_edit->set_text(port.name);
-	port_type_optbtn->select(port.type);
+	const String port_name = edit_inputs ? group->get_input_port_name(p_idx) : group->get_output_port_name(p_idx);
+	const VisualShaderNode::PortType port_type = edit_inputs ? group->get_input_port_type(p_idx) : group->get_output_port_type(p_idx);
+
+	name_edit->set_text(port_name);
+	port_type_optbtn->select(port_type);
 }
 
 void VisualShaderGroupPortsDialog::_remove_port() {
@@ -346,13 +344,15 @@ void VisualShaderGroupPortsDialog::set_group(VisualShaderGroup *p_group) {
 
 	// Update the item list.
 	port_item_list->clear();
-	const Vector<VisualShaderGroup::Port> ports = edit_inputs ? group->get_input_ports() : group->get_output_ports();
+	const int port_count = edit_inputs ? group->get_input_port_count() : group->get_output_port_count();
 	const Vector<Color> port_colors = VisualShaderGraphPlugin::get_connection_type_colors();
 
 	Ref<Texture2D> port_icon = get_theme_icon(SNAME("port"), SNAME("GraphNode"));
-	for (int i = 0; i < ports.size(); i++) {
-		port_item_list->add_item(ports[i].name, port_icon);
-		port_item_list->set_item_icon_modulate(i, port_colors[ports[i].type]);
+	for (int i = 0; i < port_count; i++) {
+		const String name = edit_inputs ? group->get_input_port_name(i) : group->get_output_port_name(i);
+		const VisualShaderNode::PortType type = edit_inputs ? group->get_input_port_type(i) : group->get_output_port_type(i);
+		port_item_list->add_item(name, port_icon);
+		port_item_list->set_item_icon_modulate(i, port_colors[type]);
 	}
 }
 

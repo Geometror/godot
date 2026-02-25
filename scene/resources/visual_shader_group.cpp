@@ -64,23 +64,41 @@ String VisualShaderGroup::_validate_port_name(const String &p_port_name, int p_p
 		return String();
 	}
 
-	List<String> input_names;
-	List<String> output_names;
+	// Deduplication.
+	int attempt = 1;
+	while (true) {
+		bool exists = false;
+		for (int i = 0; i < get_input_port_count(); i++) {
+			if (!p_output && i == p_port_id) {
+				continue;
+			}
+			if (port_name == get_input_port_name(i)) {
+				exists = true;
+				break;
+			}
+		}
+		if (!exists) {
+			for (int i = 0; i < get_output_port_count(); i++) {
+				if (p_output && i == p_port_id) {
+					continue;
+				}
+				if (port_name == get_output_port_name(i)) {
+					exists = true;
+					break;
+				}
+			}
+		}
 
-	for (int i = 0; i < get_input_ports().size(); i++) {
-		if (!p_output && i == p_port_id) {
-			continue;
-		}
-		if (port_name == get_input_port(i).name) {
-			return String();
-		}
-	}
-	for (int i = 0; i < get_output_ports().size(); i++) {
-		if (p_output && i == p_port_id) {
-			continue;
-		}
-		if (port_name == get_output_port(i).name) {
-			return String();
+		if (exists) {
+			// Strip trailing digits, append an incremented number and try again.
+			attempt++;
+			while (port_name.length() && is_digit(port_name[port_name.length() - 1])) {
+				port_name = port_name.substr(0, port_name.length() - 1);
+			}
+			ERR_FAIL_COND_V(port_name.is_empty(), String());
+			port_name += itos(attempt);
+		} else {
+			break;
 		}
 	}
 
@@ -102,10 +120,24 @@ String VisualShaderGroup::_validate_group_name(const String &p_name) const {
 }
 
 void VisualShaderGroup::_bind_methods() {
-	// TODO: Bind setters/getters for input/output ports.
-
 	ClassDB::bind_method(D_METHOD("set_group_name", "name"), &VisualShaderGroup::set_group_name);
 	ClassDB::bind_method(D_METHOD("get_group_name"), &VisualShaderGroup::get_group_name);
+
+	ClassDB::bind_method(D_METHOD("insert_input_port", "id", "type", "name"), &VisualShaderGroup::insert_input_port);
+	ClassDB::bind_method(D_METHOD("remove_input_port", "id"), &VisualShaderGroup::remove_input_port);
+	ClassDB::bind_method(D_METHOD("set_input_port_name", "id", "name"), &VisualShaderGroup::set_input_port_name);
+	ClassDB::bind_method(D_METHOD("set_input_port_type", "id", "type"), &VisualShaderGroup::set_input_port_type);
+	ClassDB::bind_method(D_METHOD("get_input_port_count"), &VisualShaderGroup::get_input_port_count);
+	ClassDB::bind_method(D_METHOD("get_input_port_name", "id"), &VisualShaderGroup::get_input_port_name);
+	ClassDB::bind_method(D_METHOD("get_input_port_type", "id"), &VisualShaderGroup::get_input_port_type);
+
+	ClassDB::bind_method(D_METHOD("insert_output_port", "id", "type", "name"), &VisualShaderGroup::insert_output_port);
+	ClassDB::bind_method(D_METHOD("remove_output_port", "id"), &VisualShaderGroup::remove_output_port);
+	ClassDB::bind_method(D_METHOD("set_output_port_name", "id", "name"), &VisualShaderGroup::set_output_port_name);
+	ClassDB::bind_method(D_METHOD("set_output_port_type", "id", "type"), &VisualShaderGroup::set_output_port_type);
+	ClassDB::bind_method(D_METHOD("get_output_port_count"), &VisualShaderGroup::get_output_port_count);
+	ClassDB::bind_method(D_METHOD("get_output_port_name", "id"), &VisualShaderGroup::get_output_port_name);
+	ClassDB::bind_method(D_METHOD("get_output_port_type", "id"), &VisualShaderGroup::get_output_port_type);
 
 	ClassDB::bind_method(D_METHOD("add_node", "node", "position", "id"), &VisualShaderGroup::add_node);
 	ClassDB::bind_method(D_METHOD("get_node", "id"), &VisualShaderGroup::get_node);
@@ -378,12 +410,12 @@ String VisualShaderGroup::get_group_name() const {
 	return group_name;
 }
 
-void VisualShaderGroup::add_input_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name) {
-	ERR_FAIL_INDEX(p_id, input_ports.size() + 1);
+String VisualShaderGroup::insert_input_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name) {
+	ERR_FAIL_INDEX_V(p_id, input_ports.size() + 1, String());
 
 	const String valid_name = _validate_port_name(p_name, p_id, false);
 	if (valid_name.is_empty()) {
-		return;
+		return String();
 	}
 
 	// Shift connections above upward.
@@ -402,6 +434,7 @@ void VisualShaderGroup::add_input_port(int p_id, VisualShaderNode::PortType p_ty
 	input_ports.insert(p_id, Port{ p_type, valid_name });
 	_queue_update();
 	emit_changed();
+	return valid_name;
 }
 
 void VisualShaderGroup::set_input_port_name(int p_id, const String &p_name) {
@@ -429,13 +462,18 @@ void VisualShaderGroup::set_input_port_type(int p_id, VisualShaderNode::PortType
 	emit_changed();
 }
 
-VisualShaderGroup::Port VisualShaderGroup::get_input_port(int p_id) const {
-	ERR_FAIL_INDEX_V(p_id, input_ports.size(), Port{});
-	return input_ports[p_id];
+int VisualShaderGroup::get_input_port_count() const {
+	return input_ports.size();
 }
 
-Vector<VisualShaderGroup::Port> VisualShaderGroup::get_input_ports() const {
-	return input_ports;
+String VisualShaderGroup::get_input_port_name(int p_id) const {
+	ERR_FAIL_INDEX_V(p_id, input_ports.size(), String());
+	return input_ports[p_id].name;
+}
+
+VisualShaderNode::PortType VisualShaderGroup::get_input_port_type(int p_id) const {
+	ERR_FAIL_INDEX_V(p_id, input_ports.size(), VisualShaderNode::PORT_TYPE_SCALAR);
+	return input_ports[p_id].type;
 }
 
 void VisualShaderGroup::remove_input_port(int p_id) {
@@ -461,12 +499,12 @@ void VisualShaderGroup::remove_input_port(int p_id) {
 	emit_changed();
 }
 
-void VisualShaderGroup::add_output_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name) {
-	ERR_FAIL_INDEX(p_id, output_ports.size() + 1);
+String VisualShaderGroup::insert_output_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name) {
+	ERR_FAIL_INDEX_V(p_id, output_ports.size() + 1, String());
 
 	const String valid_name = _validate_port_name(p_name, p_id, true);
 	if (valid_name.is_empty()) {
-		return;
+		return String();
 	}
 
 	// Shift connections above upward.
@@ -485,6 +523,7 @@ void VisualShaderGroup::add_output_port(int p_id, VisualShaderNode::PortType p_t
 	output_ports.insert(p_id, Port{ p_type, valid_name });
 	_queue_update();
 	emit_changed();
+	return valid_name;
 }
 
 void VisualShaderGroup::set_output_port_name(int p_id, const String &p_name) {
@@ -512,13 +551,18 @@ void VisualShaderGroup::set_output_port_type(int p_id, VisualShaderNode::PortTyp
 	emit_changed();
 }
 
-VisualShaderGroup::Port VisualShaderGroup::get_output_port(int p_id) const {
-	ERR_FAIL_INDEX_V(p_id, output_ports.size(), Port{});
-	return output_ports[p_id];
+int VisualShaderGroup::get_output_port_count() const {
+	return output_ports.size();
 }
 
-Vector<VisualShaderGroup::Port> VisualShaderGroup::get_output_ports() const {
-	return output_ports;
+String VisualShaderGroup::get_output_port_name(int p_id) const {
+	ERR_FAIL_INDEX_V(p_id, output_ports.size(), String());
+	return output_ports[p_id].name;
+}
+
+VisualShaderNode::PortType VisualShaderGroup::get_output_port_type(int p_id) const {
+	ERR_FAIL_INDEX_V(p_id, output_ports.size(), VisualShaderNode::PORT_TYPE_SCALAR);
+	return output_ports[p_id].type;
 }
 
 void VisualShaderGroup::remove_output_port(int p_id) {
@@ -721,42 +765,42 @@ int VisualShaderNodeGroup::get_input_port_count() const {
 	if (group.is_null()) {
 		return 0;
 	}
-	return group->get_input_ports().size();
+	return group->get_input_port_count();
 }
 
 VisualShaderNode::PortType VisualShaderNodeGroup::get_input_port_type(int p_port) const {
-	if (group.is_null() || p_port < 0 || p_port >= group->get_input_ports().size()) {
+	if (group.is_null() || p_port < 0 || p_port >= group->get_input_port_count()) {
 		return PortType();
 	}
-	return group->get_input_port(p_port).type;
+	return group->get_input_port_type(p_port);
 }
 
 String VisualShaderNodeGroup::get_input_port_name(int p_port) const {
-	if (group.is_null() || p_port < 0 || p_port >= group->get_input_ports().size()) {
+	if (group.is_null() || p_port < 0 || p_port >= group->get_input_port_count()) {
 		return String();
 	}
-	return group->get_input_port(p_port).name;
+	return group->get_input_port_name(p_port);
 }
 
 int VisualShaderNodeGroup::get_output_port_count() const {
 	if (group.is_null()) {
 		return 0;
 	}
-	return group->get_output_ports().size();
+	return group->get_output_port_count();
 }
 
 VisualShaderNode::PortType VisualShaderNodeGroup::get_output_port_type(int p_port) const {
-	if (group.is_null() || p_port < 0 || p_port >= group->get_output_ports().size()) {
+	if (group.is_null() || p_port < 0 || p_port >= group->get_output_port_count()) {
 		return PortType();
 	}
-	return group->get_output_port(p_port).type;
+	return group->get_output_port_type(p_port);
 }
 
 String VisualShaderNodeGroup::get_output_port_name(int p_port) const {
-	if (group.is_null() || p_port < 0 || p_port >= group->get_output_ports().size()) {
+	if (group.is_null() || p_port < 0 || p_port >= group->get_output_port_count()) {
 		return String();
 	}
-	return group->get_output_port(p_port).name;
+	return group->get_output_port_name(p_port);
 }
 
 bool VisualShaderNodeGroup::is_show_prop_names() const {
@@ -810,10 +854,9 @@ String VisualShaderNodeGroup::generate_code(Shader::Mode p_mode, VisualShader::T
 	// output default values instead of calling the group function.
 	if (_has_incompatible_nodes(p_mode, p_type)) {
 		String code = String("/* Group: ") + group->get_group_name() + " */\n";
-		const Vector<VisualShaderGroup::Port> output_ports = group->get_output_ports();
-		for (int i = 0; i < output_ports.size(); i++) {
+		for (int i = 0; i < group->get_output_port_count(); i++) {
 			if (!p_output_vars[i].is_empty()) {
-				code += "\t" + p_output_vars[i] + " = " + get_port_type_default_value_shader_string(output_ports[i].type) + ";\n";
+				code += "\t" + p_output_vars[i] + " = " + get_port_type_default_value_shader_string(group->get_output_port_type(i)) + ";\n";
 			}
 		}
 		return code;
@@ -825,9 +868,8 @@ String VisualShaderNodeGroup::generate_code(Shader::Mode p_mode, VisualShader::T
 	const String func_name = group->get_unique_func_name();
 	code += func_name + "(";
 
-	const Vector<VisualShaderGroup::Port> input_ports = group->get_input_ports();
 	int param_idx = 0;
-	for (int i = 0; i < input_ports.size(); i++) {
+	for (int i = 0; i < group->get_input_port_count(); i++) {
 		if (i > 0) {
 			code += ",";
 		}
@@ -835,8 +877,7 @@ String VisualShaderNodeGroup::generate_code(Shader::Mode p_mode, VisualShader::T
 		param_idx++;
 	}
 
-	const Vector<VisualShaderGroup::Port> output_ports = group->get_output_ports();
-	for (int i = 0; i < output_ports.size(); i++) {
+	for (int i = 0; i < group->get_output_port_count(); i++) {
 		if (param_idx > 0) {
 			code += ",";
 		}
@@ -876,24 +917,22 @@ String VisualShaderNodeGroup::generate_group_function(Shader::Mode p_mode, Visua
 	code += "void " + func_name + "(";
 
 	// Add all inputs/outputs as function parameters prefixed with "p_" (to prevent redefining builtins like UV, etc.).
-	const Vector<VisualShaderGroup::Port> input_ports = group->get_input_ports();
-	for (int i = 0; i < input_ports.size(); i++) {
+	for (int i = 0; i < group->get_input_port_count(); i++) {
 		if (i > 0) {
 			code += ", ";
 		}
 		code += "in ";
-		code += VisualShaderNode::get_port_type_shader_string(input_ports[i].type) + " ";
-		code += "p_" + input_ports[i].name;
+		code += VisualShaderNode::get_port_type_shader_string(group->get_input_port_type(i)) + " ";
+		code += "p_" + group->get_input_port_name(i);
 	}
 
-	const Vector<VisualShaderGroup::Port> output_ports = group->get_output_ports();
-	for (int i = 0; i < output_ports.size(); i++) {
-		if (i > 0 || !input_ports.is_empty()) {
+	for (int i = 0; i < group->get_output_port_count(); i++) {
+		if (i > 0 || group->get_input_port_count() > 0) {
 			code += ", ";
 		}
 		code += "out ";
-		code += VisualShaderNode::get_port_type_shader_string(output_ports[i].type) + " ";
-		code += "p_" + output_ports[i].name;
+		code += VisualShaderNode::get_port_type_shader_string(group->get_output_port_type(i)) + " ";
+		code += "p_" + group->get_output_port_name(i);
 	}
 
 	code += ") {\n";
@@ -994,21 +1033,21 @@ int VisualShaderNodeGroupInput::get_output_port_count() const {
 	if (!group) {
 		return 0;
 	}
-	return group->get_input_ports().size();
+	return group->get_input_port_count();
 }
 
 VisualShaderNode::PortType VisualShaderNodeGroupInput::get_output_port_type(int p_port) const {
 	if (!group) {
 		return PortType();
 	}
-	return group->get_input_port(p_port).type;
+	return group->get_input_port_type(p_port);
 }
 
 String VisualShaderNodeGroupInput::get_output_port_name(int p_port) const {
 	if (!group) {
 		return String();
 	}
-	return group->get_input_port(p_port).name;
+	return group->get_input_port_name(p_port);
 }
 
 bool VisualShaderNodeGroupInput::is_output_port_expandable(int p_port) const {
@@ -1023,14 +1062,14 @@ String VisualShaderNodeGroupInput::generate_code(Shader::Mode p_mode, VisualShad
 	ERR_FAIL_NULL_V(group, "");
 
 	String code;
-	for (int i = 0; i < group->get_input_ports().size(); i++) {
+	for (int i = 0; i < group->get_input_port_count(); i++) {
 		if (p_for_preview) {
 			// When generating preview shaders, we use default values instead of the group input port names
 			// since the port names are not valid identifiers in the preview context.
 			// TODO: Maybe we find a way to use the inputs of the VisualShaderNodeGroup that was used to open the node group? (or maybe this is not a good idea?)
-			code += p_output_vars[i] + " = " + VisualShaderNode::get_port_type_default_value_shader_string(group->get_input_port(i).type) + ";\n";
+			code += p_output_vars[i] + " = " + VisualShaderNode::get_port_type_default_value_shader_string(group->get_input_port_type(i)) + ";\n";
 		} else {
-			code += p_output_vars[i] + " = " + "p_" + group->get_input_port(i).name + ";\n";
+			code += p_output_vars[i] + " = " + "p_" + group->get_input_port_name(i) + ";\n";
 		}
 	}
 	return code;
@@ -1072,21 +1111,21 @@ int VisualShaderNodeGroupOutput::get_input_port_count() const {
 	if (!group) {
 		return 0;
 	}
-	return group->get_output_ports().size();
+	return group->get_output_port_count();
 }
 
 VisualShaderNode::PortType VisualShaderNodeGroupOutput::get_input_port_type(int p_port) const {
 	if (!group) {
 		return PortType();
 	}
-	return group->get_output_port(p_port).type;
+	return group->get_output_port_type(p_port);
 }
 
 String VisualShaderNodeGroupOutput::get_input_port_name(int p_port) const {
 	if (!group) {
 		return String();
 	}
-	return group->get_output_port(p_port).name;
+	return group->get_output_port_name(p_port);
 }
 
 int VisualShaderNodeGroupOutput::get_output_port_count() const {
@@ -1109,11 +1148,11 @@ String VisualShaderNodeGroupOutput::generate_code(Shader::Mode p_mode, VisualSha
 	ERR_FAIL_NULL_V(group, String());
 
 	String code;
-	for (int i = 0; i < group->get_output_ports().size(); i++) {
+	for (int i = 0; i < group->get_output_port_count(); i++) {
 		if (p_input_vars[i].is_empty()) {
 			continue;
 		};
-		code += "p_" + group->get_output_port(i).name + " = " + p_input_vars[i] + ";\n";
+		code += "p_" + group->get_output_port_name(i) + " = " + p_input_vars[i] + ";\n";
 	}
 	return code;
 }

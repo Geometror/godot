@@ -79,18 +79,20 @@ public:
 	void set_group_name(const String &p_name);
 	String get_group_name() const;
 
-	void add_input_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name);
+	String insert_input_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name);
 	void set_input_port_name(int p_id, const String &p_name);
 	void set_input_port_type(int p_id, VisualShaderNode::PortType p_type);
-	Port get_input_port(int p_id) const;
-	Vector<Port> get_input_ports() const;
+	int get_input_port_count() const;
+	String get_input_port_name(int p_id) const;
+	VisualShaderNode::PortType get_input_port_type(int p_id) const;
 	void remove_input_port(int p_id);
 
-	void add_output_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name);
+	String insert_output_port(int p_id, VisualShaderNode::PortType p_type, const String &p_name);
 	void set_output_port_name(int p_id, const String &p_name);
 	void set_output_port_type(int p_id, VisualShaderNode::PortType p_type);
-	Port get_output_port(int p_id) const;
-	Vector<Port> get_output_ports() const;
+	int get_output_port_count() const;
+	String get_output_port_name(int p_id) const;
+	VisualShaderNode::PortType get_output_port_type(int p_id) const;
 	void remove_output_port(int p_id);
 
 	void add_node(const Ref<VisualShaderNode> &p_node, const Vector2 &p_position, int p_id);
