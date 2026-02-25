@@ -974,17 +974,17 @@ bool ShaderGraph::are_nodes_connected(int p_from_node, int p_from_port, int p_to
 	return false;
 }
 
-bool ShaderGraph::is_nodes_connected_relatively(int p_node, int p_target) const {
+bool ShaderGraph::is_node_reachable(int p_from, int p_target) const {
 	bool result = false;
 
-	const ShaderGraph::Node &node = nodes[p_node];
+	const ShaderGraph::Node &node = nodes[p_from];
 
 	for (const int &E : node.prev_connected_nodes) {
 		if (E == p_target) {
 			return true;
 		}
 
-		result = is_nodes_connected_relatively(E, p_target);
+		result = is_node_reachable(E, p_target);
 		if (result) {
 			break;
 		}
@@ -1031,7 +1031,7 @@ bool ShaderGraph::can_connect_nodes(int p_from_node, int p_from_port, int p_to_n
 		}
 	}
 
-	if (is_nodes_connected_relatively(p_from_node, p_to_node)) {
+	if (is_node_reachable(p_from_node, p_to_node)) {
 		return false;
 	}
 	return true;
@@ -2401,8 +2401,8 @@ bool VisualShader::is_node_connection(Type p_type, int p_from_node, int p_from_p
 	return g->are_nodes_connected(p_from_node, p_from_port, p_to_node, p_to_port);
 }
 
-bool VisualShader::is_nodes_connected_relatively(const ShaderGraph *p_graph, int p_node, int p_target) const {
-	return p_graph->is_nodes_connected_relatively(p_node, p_target);
+bool VisualShader::is_node_reachable(const ShaderGraph *p_graph, int p_from, int p_target) const {
+	return p_graph->is_node_reachable(p_from, p_target);
 }
 
 bool VisualShader::can_connect_nodes(Type p_type, int p_from_node, int p_from_port, int p_to_node, int p_to_port) const {
@@ -2488,8 +2488,8 @@ void VisualShader::set_mode(Mode p_mode) {
 	}
 
 	// Erase input/output connections.
-	modes.clear();
-	flags.clear();
+	render_modes.clear();
+	render_mode_flags.clear();
 	shader_mode = p_mode;
 	for (int i = 0; i < TYPE_MAX; i++) {
 		for (KeyValue<int, ShaderGraph::Node> &E : graph[i]->nodes) {
@@ -2673,9 +2673,9 @@ bool VisualShader::_set(const StringName &p_name, const Variant &p_value) {
 		StringName flag = prop_name.get_slicec('/', 1);
 		bool enable = p_value;
 		if (enable) {
-			flags.insert(flag);
+			render_mode_flags.insert(flag);
 		} else {
-			flags.erase(flag);
+			render_mode_flags.erase(flag);
 		}
 		_queue_update();
 		return true;
@@ -2683,9 +2683,9 @@ bool VisualShader::_set(const StringName &p_name, const Variant &p_value) {
 		String mode_name = prop_name.get_slicec('/', 1);
 		int value = p_value;
 		if (value == 0) {
-			modes.erase(mode_name); //means it's default anyway, so don't store it
+			render_modes.erase(mode_name); //means it's default anyway, so don't store it
 		} else {
-			modes[mode_name] = value;
+			render_modes[mode_name] = value;
 		}
 		_queue_update();
 		return true;
@@ -2809,12 +2809,12 @@ bool VisualShader::_get(const StringName &p_name, Variant &r_ret) const {
 		return true;
 	} else if (prop_name.begins_with("flags/")) {
 		StringName flag = prop_name.get_slicec('/', 1);
-		r_ret = flags.has(flag);
+		r_ret = render_mode_flags.has(flag);
 		return true;
 	} else if (prop_name.begins_with("modes/")) {
 		String mode_name = prop_name.get_slicec('/', 1);
-		if (modes.has(mode_name)) {
-			r_ret = modes[mode_name];
+		if (render_modes.has(mode_name)) {
+			r_ret = render_modes[mode_name];
 		} else {
 			r_ret = 0;
 		}
@@ -3082,7 +3082,7 @@ Error VisualShader::_write_node(
 	return graph[p_type]->_write_node(p_global_code, p_global_code_per_node, p_global_code_per_func, r_code, r_def_tex_params, p_input_connections, p_output_connections, p_node, r_processed, p_for_preview, r_classes, p_type, get_mode());
 }
 
-bool VisualShader::has_func_name(RenderingServer::ShaderMode p_mode, const String &p_func_name) const {
+bool VisualShader::_has_func_name(RenderingServer::ShaderMode p_mode, const String &p_func_name) const {
 	if (!ShaderTypes::get_singleton()->get_functions(p_mode).has(p_func_name)) {
 		if (p_mode == RenderingServer::ShaderMode::SHADER_PARTICLES) {
 			if (p_func_name == "start_custom" || p_func_name == "process_custom" || p_func_name == "collide") {
@@ -3126,14 +3126,14 @@ void VisualShader::_update_shader() const {
 
 			// Special handling for depth_test.
 			if (temp == "depth_test") {
-				if (flags.has("depth_test_disabled")) {
+				if (render_mode_flags.has("depth_test_disabled")) {
 					flag_names.push_back("depth_test_disabled");
 				} else {
 					if (!render_mode.is_empty()) {
 						render_mode += ", ";
 					}
-					if (modes.has(temp) && modes[temp] < info.options.size()) {
-						render_mode += temp + "_" + info.options[modes[temp]];
+					if (render_modes.has(temp) && render_modes[temp] < info.options.size()) {
+						render_mode += temp + "_" + info.options[render_modes[temp]];
 					} else {
 						render_mode += temp + "_" + info.options[0];
 					}
@@ -3148,13 +3148,13 @@ void VisualShader::_update_shader() const {
 				// Always write out a render_mode for the enumerated modes as having no render mode is not always
 				// the same as the default. i.e. for depth_draw_opaque, the render mode has to be declared for it
 				// to work properly, no render mode is an invalid option.
-				if (modes.has(temp) && modes[temp] < info.options.size()) {
-					render_mode += temp + "_" + info.options[modes[temp]];
+				if (render_modes.has(temp) && render_modes[temp] < info.options.size()) {
+					render_mode += temp + "_" + info.options[render_modes[temp]];
 				} else {
 					// Use the default.
 					render_mode += temp + "_" + info.options[0];
 				}
-			} else if (flags.has(temp)) {
+			} else if (render_mode_flags.has(temp)) {
 				flag_names.push_back(temp);
 			}
 		}
@@ -3228,7 +3228,7 @@ void VisualShader::_update_shader() const {
 	}
 
 	for (int i = 0, index = 0; i < TYPE_MAX; i++) {
-		if (!has_func_name(RenderingServer::ShaderMode(shader_mode), func_name[i])) {
+		if (!_has_func_name(RenderingServer::ShaderMode(shader_mode), func_name[i])) {
 			continue;
 		}
 
@@ -3327,7 +3327,7 @@ void VisualShader::_update_shader() const {
 	HashSet<int> empty_funcs;
 
 	for (int i = 0; i < TYPE_MAX; i++) {
-		if (!has_func_name(RenderingServer::ShaderMode(shader_mode), func_name[i])) {
+		if (!_has_func_name(RenderingServer::ShaderMode(shader_mode), func_name[i])) {
 			continue;
 		}
 
@@ -3568,7 +3568,7 @@ void VisualShader::_update_shader() const {
 	final_code += global_expressions;
 	String tcode = shader_code;
 	for (int i = 0; i < TYPE_MAX; i++) {
-		if (!has_func_name(RenderingServer::ShaderMode(shader_mode), func_name[i])) {
+		if (!_has_func_name(RenderingServer::ShaderMode(shader_mode), func_name[i])) {
 			continue;
 		}
 		String func_code = global_code_per_func[ShaderGraph::Type(i)].as_string();

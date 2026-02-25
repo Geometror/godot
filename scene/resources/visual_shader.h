@@ -41,12 +41,9 @@ class VisualShaderNode;
 class ShaderGraph : public RefCounted {
 	GDCLASS(ShaderGraph, RefCounted);
 
-	friend class VisualShaderGroup; // For _get,_set and _get_property_list.
+	friend class VisualShaderGroup;
 
 public:
-	// TODO: Unify this eventually, but for now this is too much work.
-	// TODO: Rename to ShaderFunction/ShaderStage and make it an enum class.
-	// Keep in sync with VisualShader::Type.
 	enum Type {
 		TYPE_VERTEX,
 		TYPE_FRAGMENT,
@@ -62,7 +59,6 @@ public:
 	};
 
 	struct Node {
-		// TODO: Rename to vsnode;
 		Ref<VisualShaderNode> node;
 		Vector2 position;
 		LocalVector<int> prev_connected_nodes;
@@ -102,8 +98,8 @@ public:
 	// TODO: I think this is no longer necessary.
 	int reserved_node_ids = 1;
 
-	RBMap<int, Node> nodes; // TODO: Does order really matter here? Maybe for serialization?
-	List<Connection> connections; // TODO: Evaluate whether this should be a LocalVector.
+	RBMap<int, Node> nodes;
+	List<Connection> connections;
 
 	void _node_changed();
 
@@ -153,12 +149,8 @@ public:
 	void remove_node(int p_id);
 	void replace_node(int p_id, const StringName &p_new_class);
 
-	// TODO: Rename this method and evaluate whether it is necessary.
 	bool are_nodes_connected(int p_from_node, int p_from_port, int p_to_node, int p_to_port) const;
-	// TODO: Rename to does_path_exist_in_graph(int p_src_id, int p_target_id)
-	// TODO: Rename to is_node_reachable(int p_src_id, int p_target_id)
-	// TODO: Or at least: Rename to are_nodes_connected_relatively(...)
-	bool is_nodes_connected_relatively(int p_node, int p_target) const;
+	bool is_node_reachable(int p_from, int p_target) const;
 	bool can_connect_nodes(int p_from_node, int p_from_port, int p_to_node, int p_to_port) const;
 	Error connect_nodes(int p_from_node, int p_from_port, int p_to_node, int p_to_port);
 	void disconnect_nodes(int p_from_node, int p_from_port, int p_to_node, int p_to_port);
@@ -170,7 +162,6 @@ public:
 
 	String get_reroute_parameter_name(int p_reroute_node) const;
 
-	// TODO: Maybe change this method to use a return type.
 	void get_node_connections(List<ShaderGraph::Connection> *r_connections) const;
 
 	String generate_preview_shader(int p_node, int p_port, Vector<DefaultTextureParam> &r_default_tex_params, const String &p_additional_global_code = String()) const;
@@ -199,7 +190,6 @@ public:
 		TYPE_MAX
 	};
 
-	// TODO: Move varying stuff out of here.
 	enum VaryingMode {
 		VARYING_MODE_VERTEX_TO_FRAG_LIGHT,
 		VARYING_MODE_FRAG_TO_LIGHT,
@@ -248,23 +238,14 @@ public:
 	static constexpr int NODE_ID_OUTPUT = 0;
 
 private:
-	// TODO: Make this a Vector and add graphs dynamically (maybe using a HM)
-	// Refactor idea: Make this Vector<ShaderGraph> with ShaderGraph containing type and graph.
-	// Keep access in constant time!
 	Ref<ShaderGraph>
 			graph[TYPE_MAX];
 
 	Shader::Mode shader_mode = Shader::MODE_SPATIAL;
 	mutable String previous_code;
 
-	// TODO: Move this method.
-	TypedArray<Dictionary> _get_node_connections(Type p_type) const;
-
-	// TODO: Rename to render modes (rename group too as that is not compat breaking)
-	HashMap<String, int> modes;
-	// TODO: Maybe rename this to render_flags or render_mode_flags (since they are also render modes in textual shaders)
-	// Consistency!!
-	HashSet<StringName> flags;
+	HashMap<String, int> render_modes;
+	HashSet<StringName> render_mode_flags;
 
 	bool stencil_enabled = false;
 	HashMap<String, int> stencil_modes;
@@ -276,9 +257,8 @@ private:
 #ifdef TOOLS_ENABLED
 	HashMap<String, Variant> preview_params;
 #endif
-	List<Varying> varyings_list; // TODO: Use vector?
+	List<Varying> varyings_list;
 
-	// TODO: Consider moving this to ShaderGraph too. Depends on how the shader code generation is solved for node groups.
 	mutable SafeFlag dirty;
 	void _queue_update();
 
@@ -298,8 +278,7 @@ private:
 			HashSet<StringName> &r_classes) const;
 
 	void _input_type_changed(Type p_type, int p_id);
-	// TODO: Check why we need this method. At least rename it (underscore).
-	bool has_func_name(RenderingServer::ShaderMode p_mode, const String &p_func_name) const;
+	bool _has_func_name(RenderingServer::ShaderMode p_mode, const String &p_func_name) const;
 
 protected:
 	virtual void _update_shader() const override;
@@ -312,8 +291,7 @@ protected:
 
 	virtual void reset_state() override;
 
-	// TODO: Internal methods?
-public: // internal methods
+public:
 	Ref<ShaderGraph> get_graph(int p_type);
 
 	void add_node(Type p_type, const Ref<VisualShaderNode> &p_vsnode, const Vector2 &p_position, int p_id);
@@ -356,11 +334,9 @@ public: // internal methods
 	void remove_node(Type p_type, int p_id);
 	void replace_node(Type p_type, int p_id, const StringName &p_new_class);
 
-	// TODO: Rename this method and evaluate whether it is necessary.
 	bool is_node_connection(Type p_type, int p_from_node, int p_from_port, int p_to_node, int p_to_port) const;
 
-	// TODO: Prefix(_) this method and make it private.
-	bool is_nodes_connected_relatively(const ShaderGraph *p_graph, int p_node, int p_target) const;
+	bool is_node_reachable(const ShaderGraph *p_graph, int p_from, int p_target) const;
 	bool can_connect_nodes(Type p_type, int p_from_node, int p_from_port, int p_to_node, int p_to_port) const;
 	Error connect_nodes(Type p_type, int p_from_node, int p_from_port, int p_to_node, int p_to_port);
 	void disconnect_nodes(Type p_type, int p_from_node, int p_from_port, int p_to_node, int p_to_port);
@@ -373,13 +349,13 @@ public: // internal methods
 	String get_reroute_parameter_name(Type p_type, int p_reroute_node) const;
 
 	void rebuild();
-	// TODO: Use vector here too.
+
+	TypedArray<Dictionary> _get_node_connections(Type p_type) const;
 	void get_node_connections(Type p_type, List<ShaderGraph::Connection> *r_connections) const;
 
 	void set_mode(Mode p_mode);
 	virtual Mode get_mode() const override;
 
-	// TODO: Move this method.
 	virtual bool is_text_shader() const override;
 
 #ifndef DISABLE_DEPRECATED
@@ -395,7 +371,6 @@ public: // internal methods
 	VisualShader();
 };
 
-// TODO: Uncomment before push (this is a temporary intellisense fix)
 VARIANT_ENUM_CAST(VisualShader::Type);
 VARIANT_ENUM_CAST(VisualShader::VaryingMode);
 VARIANT_ENUM_CAST(VisualShader::VaryingType);

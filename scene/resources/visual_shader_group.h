@@ -111,7 +111,7 @@ public:
 	// TODO: Rename this method and evaluate whether it is necessary.
 	bool are_nodes_connected(int p_from_node, int p_from_port, int p_to_node, int p_to_port) const;
 
-	bool is_nodes_connected_relatively(int p_node, int p_target) const;
+	bool is_node_reachable(int p_from, int p_target) const;
 	bool can_connect_nodes(int p_from_node, int p_from_port, int p_to_node, int p_to_port) const;
 	Error connect_nodes(int p_from_node, int p_from_port, int p_to_node, int p_to_port);
 	void disconnect_nodes(int p_from_node, int p_from_port, int p_to_node, int p_to_port);

@@ -589,8 +589,8 @@ bool VisualShaderGroup::are_nodes_connected(int p_from_node, int p_from_port, in
 	return graph->are_nodes_connected(p_from_node, p_from_port, p_to_node, p_to_port);
 }
 
-bool VisualShaderGroup::is_nodes_connected_relatively(int p_node, int p_target) const {
-	return graph->is_nodes_connected_relatively(p_node, p_target);
+bool VisualShaderGroup::is_node_reachable(int p_from, int p_target) const {
+	return graph->is_node_reachable(p_from, p_target);
 }
 
 bool VisualShaderGroup::can_connect_nodes(int p_from_node, int p_from_port, int p_to_node, int p_to_port) const {
