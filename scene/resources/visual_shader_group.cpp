@@ -396,13 +396,11 @@ String VisualShaderGroup::get_unique_func_name() const {
 }
 
 void VisualShaderGroup::set_group_name(const String &p_name) {
-	const String valid_name = _validate_group_name(p_name);
-
-	if (group_name == p_name || valid_name.is_empty()) {
+	if (group_name == p_name) {
 		return;
 	}
 
-	group_name = p_name; // Don't use valid_name here, since we want to keep the original name.
+	group_name = p_name;
 	emit_changed();
 }
 
