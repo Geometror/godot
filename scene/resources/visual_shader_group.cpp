@@ -324,10 +324,11 @@ bool VisualShaderGroup::_get(const StringName &p_name, Variant &r_ret) const {
 }
 
 void VisualShaderGroup::_get_property_list(List<PropertyInfo> *p_list) const {
-	graph->_get_property_list(p_list);
-	// TODO: Should these properties be added with their own getters/setters?
+	// Input/output ports must be added first so that group input/output nodes
+	// already know their ports before connections are loaded.
 	p_list->push_back(PropertyInfo(Variant::ARRAY, "input_ports", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NO_EDITOR));
 	p_list->push_back(PropertyInfo(Variant::ARRAY, "output_ports", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NO_EDITOR));
+	graph->_get_property_list(p_list);
 }
 
 Ref<ShaderGraph> VisualShaderGroup::get_graph() const {

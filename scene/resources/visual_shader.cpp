@@ -206,7 +206,6 @@ void ShaderGraph::_get_property_list(List<PropertyInfo> *p_list) const {
 	p_list->push_back(PropertyInfo(Variant::PACKED_INT32_ARRAY, "nodes/connections", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_NO_EDITOR));
 }
 
-// TODO: Refactor (simplify, rename and change comment style)
 Error ShaderGraph::_write_node(
 		StringBuilder *p_global_code,
 		StringBuilder *p_global_code_per_node,
@@ -571,7 +570,6 @@ Error ShaderGraph::_write_node(
 				bool err = false;
 				node_code += "	mat4 " + inputs[i] + " = " + String("mat4(vec4(%.5f, %.5f, %.5f, 0.0), vec4(%.5f, %.5f, %.5f, 0.0), vec4(%.5f, %.5f, %.5f, 0.0), vec4(%.5f, %.5f, %.5f, 1.0));\n").sprintf(values, &err);
 			} else {
-				// TODO: Cleanup
 				// Will go empty, node is expected to know what it is doing at this point and handle it.
 			}
 		}
@@ -1118,11 +1116,9 @@ void ShaderGraph::disconnect_nodes(int p_from_node, int p_from_port, int p_to_no
 
 void ShaderGraph::connect_nodes_forced(int p_from_node, int p_from_port, int p_to_node, int p_to_port) {
 	ERR_FAIL_COND(!nodes.has(p_from_node));
-	// ERR_FAIL_INDEX(p_from_port, nodes[p_from_node].node->get_expanded_output_port_count());
+	ERR_FAIL_INDEX(p_from_port, nodes[p_from_node].node->get_expanded_output_port_count());
 	ERR_FAIL_COND(!nodes.has(p_to_node));
-	// ERR_FAIL_INDEX(p_to_port, nodes[p_to_node].node->get_input_port_count());
-	// TODO: The above two checks need to be disabled because the group input/output nodes won't have their group set until the whole graph is loaded.
-	// TODO: A solution would be to cache the input/output ports in the group input/output nodes.
+	ERR_FAIL_INDEX(p_to_port, nodes[p_to_node].node->get_input_port_count());
 
 	for (const ShaderGraph::Connection &E : connections) {
 		if (E.from_node == p_from_node && E.from_port == p_from_port && E.to_node == p_to_node && E.to_port == p_to_port) {
@@ -2502,7 +2498,7 @@ void VisualShader::set_mode(Mode p_mode) {
 		return;
 	}
 
-	//erase input/output connections
+	// Erase input/output connections.
 	modes.clear();
 	flags.clear();
 	shader_mode = p_mode;
@@ -2511,14 +2507,13 @@ void VisualShader::set_mode(Mode p_mode) {
 			Ref<VisualShaderNodeInput> input = E.value.node;
 			if (input.is_valid()) {
 				input->shader_mode = shader_mode;
-				//input->input_index = 0;
 			}
 		}
 
 		Ref<VisualShaderNodeOutput> output = graph[i]->nodes[ShaderGraph::NODE_ID_OUTPUT].node;
 		output->shader_mode = shader_mode;
 
-		// clear connections since they are no longer valid
+		// Clear connections since they are no longer valid.
 		for (List<ShaderGraph::Connection>::Element *E = graph[i]->connections.front(); E;) {
 			bool keep = true;
 
@@ -3111,7 +3106,6 @@ bool VisualShader::has_func_name(RenderingServer::ShaderMode p_mode, const Strin
 	return true;
 }
 
-// TODO: Split this up and simplify.
 void VisualShader::_update_shader() const {
 	if (!dirty.is_set()) {
 		return;
@@ -3577,7 +3571,6 @@ void VisualShader::_update_shader() const {
 		global_compute_code += "}\n\n";
 	}
 
-	// TODO: Secretly?
 	//set code secretly
 	global_code += "\n\n";
 	String final_code = global_code;
@@ -5293,7 +5286,6 @@ String VisualShaderNodeGroupBase::get_outputs() const {
 	return outputs;
 }
 
-// TODO: Copy to VisualShaderNodeGroup.
 bool VisualShaderNodeGroupBase::is_valid_port_name(const String &p_name) const {
 	if (!p_name.is_valid_ascii_identifier()) {
 		return false;
