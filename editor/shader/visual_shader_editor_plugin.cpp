@@ -3330,7 +3330,7 @@ String VisualShaderEditor::_get_cache_id_string() const {
 		if (group_uid != ResourceUID::INVALID_ID) {
 			return ResourceUID::get_singleton()->id_to_text(group_uid);
 		}
-		// Group resource is probably embedded, fall trough to VisualShader UID plus group scene unique id.
+		// Group resource is probably embedded, fall through to VisualShader UID plus group scene unique id.
 	}
 
 	String id_string = visual_shader->get_path();
