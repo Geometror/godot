@@ -1966,27 +1966,27 @@ void VisualShaderEditor::save_external_data(const String &p_str) {
 	// Start with all top-level shader graphs and with visual_shader_group if a group is edited directly.
 	if (visual_shader.is_valid()) {
 		for (int i = 0; i < VisualShader::TYPE_MAX; i++) {
-			Ref<ShaderGraph> graph = visual_shader->get_graph(i);
-			if (graph.is_valid()) {
-				graphs_to_process.push_back(graph);
+			Ref<ShaderGraph> shader_graph = visual_shader->get_graph(i);
+			if (shader_graph.is_valid()) {
+				graphs_to_process.push_back(shader_graph);
 			}
 		}
 	}
 	if (visual_shader_group.is_valid()) {
 		saved_groups.insert(visual_shader_group);
-		const Ref<ShaderGraph> graph = visual_shader_group->get_graph();
-		if (graph.is_valid()) {
-			graphs_to_process.push_back(graph);
+		const Ref<ShaderGraph> shader_graph = visual_shader_group->get_graph();
+		if (shader_graph.is_valid()) {
+			graphs_to_process.push_back(shader_graph);
 		}
 	}
 
 	// BFS through the shader graphs to find all (nested) groups and save them.
 	while (!graphs_to_process.is_empty()) {
-		const Ref<ShaderGraph> graph = graphs_to_process.front()->get();
+		const Ref<ShaderGraph> shader_graph = graphs_to_process.front()->get();
 		graphs_to_process.pop_front();
 
-		for (const int id : graph->get_node_ids()) {
-			const Ref<VisualShaderNodeGroup> group_node = graph->get_node(id);
+		for (const int id : shader_graph->get_node_ids()) {
+			const Ref<VisualShaderNodeGroup> group_node = shader_graph->get_node(id);
 			if (group_node.is_null()) {
 				continue;
 			}
@@ -3254,11 +3254,11 @@ void VisualShaderEditor::_update_graph() {
 
 	// Set shader context on Input nodes inside groups.
 	if (!group_edit_stack.is_empty()) {
-		const Shader::Mode mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
+		const Shader::Mode current_mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
 		for (int node_idx = 0; node_idx < nodes.size(); node_idx++) {
 			Ref<VisualShaderNodeInput> input = editing_shader_graph->get_node(nodes[node_idx]);
 			if (input.is_valid()) {
-				input->set_shader_mode(mode);
+				input->set_shader_mode(current_mode);
 				input->set_shader_type(VisualShader::TYPE_MAX);
 			}
 		}
@@ -4466,8 +4466,8 @@ void VisualShaderEditor::_add_node(int p_idx, const Vector<Variant> &p_ops, cons
 		if (!group_edit_stack.is_empty() || visual_shader_group.is_valid()) {
 			Ref<VisualShaderNodeInput> input_node = vsnode;
 			if (input_node.is_valid()) {
-				const Shader::Mode mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
-				input_node->set_shader_mode(mode);
+				const Shader::Mode current_mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
+				input_node->set_shader_mode(current_mode);
 				input_node->set_shader_type(VisualShader::TYPE_MAX);
 			}
 		}
@@ -6293,8 +6293,8 @@ void VisualShaderEditor::_dup_paste_nodes(int p_type, List<CopyItem> &r_items, c
 		if (!group_edit_stack.is_empty() || visual_shader_group.is_valid()) {
 			Ref<VisualShaderNodeInput> input_node = Object::cast_to<VisualShaderNodeInput>(node.ptr());
 			if (input_node.is_valid()) {
-				const Shader::Mode mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
-				input_node->set_shader_mode(mode);
+				const Shader::Mode current_mode = visual_shader.is_valid() ? visual_shader->get_mode() : Shader::MODE_MAX;
+				input_node->set_shader_mode(current_mode);
 				input_node->set_shader_type(VisualShader::TYPE_MAX);
 			}
 		}
