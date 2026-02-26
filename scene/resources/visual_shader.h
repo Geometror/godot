@@ -648,6 +648,8 @@ public:
 	};
 
 private:
+	static RBMap<RID, List<Parameter>> parameters;
+
 	RID shader_rid;
 	String parameter_name = "[None]";
 	ParameterType param_type = ParameterType::PARAMETER_TYPE_FLOAT;

@@ -2856,12 +2856,12 @@ LocalVector<int> VisualShaderNodeInput::_get_filtered_port_indices() const {
 
 	// In groups show only global built-ins.
 	if (shader_mode != Shader::MODE_MAX && shader_type == VisualShader::TYPE_MAX) {
-		HashSet<String> seen_names; // ports[] can contain duplicate entries for the same builtin, e.g. TIME for frag and vert.
+		HashSet<String> seen_names; // ports[] can contain duplicate entries for the same builtin, e.g. TIME (fragment and vertex).
 		while (ports[idx].mode != Shader::MODE_MAX) {
 			if (ports[idx].mode == shader_mode && _is_global_built_in(shader_mode, ports[idx].string)) {
-				const String name(ports[idx].name);
-				if (!seen_names.has(name)) {
-					seen_names.insert(name);
+				const String port_name = ports[idx].name;
+				if (!seen_names.has(port_name)) {
+					seen_names.insert(port_name);
 					filtered_indices.push_back(idx);
 				}
 			}
@@ -3060,7 +3060,7 @@ VisualShaderNodeInput::VisualShaderNodeInput() {
 
 ////////////// ParameterRef
 
-RBMap<RID, List<VisualShaderNodeParameterRef::Parameter>> parameters;
+RBMap<RID, List<VisualShaderNodeParameterRef::Parameter>> VisualShaderNodeParameterRef::parameters;
 
 void VisualShaderNodeParameterRef::add_parameter(RID p_shader_rid, const String &p_name, ParameterType p_type) {
 	parameters[p_shader_rid].push_back({ p_name, p_type });
