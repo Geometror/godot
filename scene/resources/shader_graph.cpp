@@ -1324,6 +1324,6 @@ String ShaderGraph::validate_port_name(const String &p_port_name, VisualShaderNo
 	return port_name;
 }
 
-ShaderGraph::ShaderGraph(int reserved_node_ids) :
-		reserved_node_ids(reserved_node_ids) {
+ShaderGraph::ShaderGraph(int p_reserved_node_ids) :
+		reserved_node_ids(p_reserved_node_ids) {
 }
