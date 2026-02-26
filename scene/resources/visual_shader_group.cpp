@@ -703,7 +703,7 @@ VisualShaderGroup::VisualShaderGroup() {
 	graph.instantiate(0); // No reserved node IDs; input/output are regular nodes.
 	graph->connect("graph_changed", callable_mp(this, &VisualShaderGroup::_queue_update));
 
-	group_name = TTR("Node group");
+	group_name = RTR("Node group");
 }
 
 ////////////// Group
@@ -754,7 +754,7 @@ void VisualShaderNodeGroup::_bind_methods() {
 
 String VisualShaderNodeGroup::get_caption() const {
 	if (group.is_null()) {
-		return TTR("Node group");
+		return RTR("Node group");
 	}
 	return group->get_group_name();
 }
