@@ -35,6 +35,7 @@
 #include "core/math/transform_2d.h"
 #include "core/templates/rid.h"
 #include "core/variant/typed_array.h"
+#include "core/variant/typed_dictionary.h"
 #include "core/variant/variant.h"
 #include "servers/display/display_server.h"
 #include "servers/rendering/rendering_device.h"
@@ -1832,6 +1833,8 @@ public:
 	virtual void set_frame_profiling_enabled(bool p_enable) = 0;
 	virtual Vector<FrameProfileArea> get_frame_profile() = 0;
 	virtual uint64_t get_frame_profile_frame() = 0;
+
+	TypedDictionary<String, Dictionary> get_frame_profile_frame_data();
 
 	virtual double get_frame_setup_time_cpu() const = 0;
 

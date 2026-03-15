@@ -3568,6 +3568,9 @@ void RenderingServer::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_render_loop_enabled", "enabled"), &RenderingServer::set_render_loop_enabled);
 
 	ClassDB::bind_method(D_METHOD("get_frame_setup_time_cpu"), &RenderingServer::get_frame_setup_time_cpu);
+	ClassDB::bind_method(D_METHOD("set_frame_profiling_enabled", "enabled"), &RenderingServer::set_frame_profiling_enabled);
+	ClassDB::bind_method(D_METHOD("get_frame_profile_frame"), &RenderingServer::get_frame_profile_frame);
+	ClassDB::bind_method(D_METHOD("get_frame_profile_frame_data"), &RenderingServer::get_frame_profile_frame_data);
 
 	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "render_loop_enabled"), "set_render_loop_enabled", "is_render_loop_enabled");
 
@@ -3614,6 +3617,24 @@ void RenderingServer::_bind_methods() {
 	BIND_ENUM_CONSTANT(FEATURE_SHADERS);
 	BIND_ENUM_CONSTANT(FEATURE_MULTITHREADED);
 #endif
+}
+
+TypedDictionary<String, Dictionary> RenderingServer::get_frame_profile_frame_data() {
+	Vector<FrameProfileArea> areas = get_frame_profile();
+	TypedDictionary<String, Dictionary> result;
+	for (int i = 0; i < areas.size() - 1; i++) {
+		const String &name = areas[i].name;
+		if (name.begins_with("<") || name.begins_with(">")) {
+			continue;
+		}
+		double gpu_delta = areas[i + 1].gpu_msec - areas[i].gpu_msec;
+		double cpu_delta = areas[i + 1].cpu_msec - areas[i].cpu_msec;
+		Dictionary entry;
+		entry["gpu_msec"] = gpu_delta;
+		entry["cpu_msec"] = cpu_delta;
+		result[name] = entry;
+	}
+	return result;
 }
 
 void RenderingServer::mesh_add_surface_from_mesh_data(RID p_mesh, const Geometry3D::MeshData &p_mesh_data) {
