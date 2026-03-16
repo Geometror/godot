@@ -32,7 +32,6 @@
 
 #include "core/io/dir_access.h"
 #include "core/io/file_access.h"
-#include "core/io/json.h"
 #include "core/templates/hash_set.h"
 #include "core/templates/vector.h"
 
@@ -65,7 +64,7 @@ static bool _include_shader_file(const String &p_path, Vector<String> &r_lines, 
 	while (!file->eof_reached()) {
 		String line = file->get_line();
 
-		// Note: Keep comments as they might be useful for the LLM.
+		// Note: Keep comments in shaders as they might provide useful context for the LLM.
 		int comment_pos = line.find("//");
 		if (comment_pos != -1) {
 			line = line.substr(0, comment_pos);
@@ -121,13 +120,13 @@ static bool _process_shader_file(const String &p_path, Vector<String> &r_vertex_
 	while (!file->eof_reached()) {
 		String line = file->get_line();
 
-		// Note: Keep comments as they might be useful for the LLM.
+		// Note: Keep comments in shaders as they might provide useful context for the LLM.
 		int comment_pos = line.find("//");
 		if (comment_pos != -1) {
 			line = line.substr(0, comment_pos);
 		}
 
-		// Check for section markers
+		// Check for section markers.
 		if (line.find("#[vertex]") != -1) {
 			current_section = SECTION_VERTEX;
 			current_lines = &r_vertex_lines;
@@ -153,7 +152,7 @@ static bool _process_shader_file(const String &p_path, Vector<String> &r_vertex_
 				if (include_directive.length() >= 2 && include_directive[0] == '"' && include_directive[include_directive.length() - 1] == '"') {
 					String include_file = include_directive.substr(1, include_directive.length() - 2);
 
-					// Resolve the include path
+					// Resolve the include path.
 					// TODO: Handle this correctly
 					String resolved_path;
 					if (include_file.begins_with("thirdparty/")) {
@@ -163,7 +162,7 @@ static bool _process_shader_file(const String &p_path, Vector<String> &r_vertex_
 						resolved_path = base_dir.path_join(include_file).simplify_path();
 					}
 
-					// Only include if not already included in this section
+					// Only include if not already included in this section.
 					if (!current_included->has(resolved_path)) {
 						if (!_include_shader_file(resolved_path, *current_lines, *current_included, p_depth + 1)) {
 							return false;
