@@ -95,9 +95,18 @@ def build_rd_header(filename: str, shader: str) -> None:
     include_file_in_rd_header(shader, header_data := RDHeaderStruct(), 0)
     class_name = os.path.basename(shader).replace(".glsl", "").title().replace("_", "").replace(".", "") + "ShaderRD"
 
+    # Compute relative shader path for loading from disk.
+    stardardized_shader_path = shader.replace("\\", "/")
+    if "/shaders/" in stardardized_shader_path:
+        # Strip shaders directory since it can have a different name.
+        relative_shader_path = stardardized_shader_path.split("/shaders/", 1)[1]
+    else:
+        relative_shader_path = os.path.basename(shader)
+
     with generated_wrapper(filename) as file:
         file.write(f"""\
 #include "servers/rendering/renderer_rd/shader_rd.h"
+#include "servers/rendering/renderer_rd/shader_loader_rd.h"
 
 class {class_name} : public ShaderRD {{
 public:
@@ -124,6 +133,14 @@ public:
 """)
 
         file.write(f"""\
+		const String shader_path = _get_shader_base_dir() + "/{relative_shader_path}";
+		const ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
+		if (!res.error) {{
+			print_line(vformat("Loaded shader from disk: %s", shader_path));
+			setup(res.vertex_code, res.fragment_code, res.compute_code, "{class_name}");
+			return;
+		}}
+		print_line(vformat("Failed to load shader from disk: %s, using compiled-in version.", shader_path));
 		setup(_vertex_code, _fragment_code, _compute_code, "{class_name}");
 	}}
 }};

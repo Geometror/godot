@@ -31,204 +31,22 @@
 #pragma once
 
 #include "servers/rendering/renderer_rd/pipeline_deferred_rd.h"
-#include "servers/rendering/renderer_rd/shader_rd.h"
-#include "servers/rendering/renderer_rd/shader_loader_rd.h"
 #include "servers/rendering/rendering_server.h"
-
-class SsEffectsDownsampleShaderRD : public ShaderRD {
-public:
-	SsEffectsDownsampleShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ss_effects_downsample.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsEffectsDownsampleShaderRD");
-	}
-};
-
-class SsaoShaderRD : public ShaderRD {
-public:
-	SsaoShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssao.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsaoShaderRD");
-	}
-};
-
-class SsaoBlurShaderRD : public ShaderRD {
-public:
-	SsaoBlurShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssao_blur.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsaoBlurShaderRD");
-	}
-};
-
-class SsaoImportanceMapShaderRD : public ShaderRD {
-public:
-	SsaoImportanceMapShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssao_importance_map.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsaoImportanceMapShaderRD");
-	}
-};
-
-class SsaoInterleaveShaderRD : public ShaderRD {
-public:
-	SsaoInterleaveShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssao_interleave.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsaoInterleaveShaderRD");
-	}
-};
-
-class SsilShaderRD : public ShaderRD {
-public:
-	SsilShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssil.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsilShaderRD");
-	}
-};
-
-class SsilBlurShaderRD : public ShaderRD {
-public:
-	SsilBlurShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssil_blur.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsilBlurShaderRD");
-	}
-};
-
-class SsilImportanceMapShaderRD : public ShaderRD {
-public:
-	SsilImportanceMapShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssil_importance_map.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsilImportanceMapShaderRD");
-	}
-};
-
-class SsilInterleaveShaderRD : public ShaderRD {
-public:
-	SsilInterleaveShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/ssil_interleave.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SsilInterleaveShaderRD");
-	}
-};
-
-class SubsurfaceScatteringShaderRD : public ShaderRD {
-public:
-	SubsurfaceScatteringShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/subsurface_scattering.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "SubsurfaceScatteringShaderRD");
-	}
-};
-
-class ScreenSpaceReflectionDownsampleShaderRD : public ShaderRD {
-public:
-	ScreenSpaceReflectionDownsampleShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/screen_space_reflection_downsample.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "ScreenSpaceReflectionDownsampleShaderRD");
-	}
-};
-
-class ScreenSpaceReflectionHizShaderRD : public ShaderRD {
-public:
-	ScreenSpaceReflectionHizShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/screen_space_reflection_hiz.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "ScreenSpaceReflectionHizShaderRD");
-	}
-};
-
-class ScreenSpaceReflectionShaderRD : public ShaderRD {
-public:
-	ScreenSpaceReflectionShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/screen_space_reflection.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "ScreenSpaceReflectionShaderRD");
-	}
-};
-
-class ScreenSpaceReflectionFilterShaderRD : public ShaderRD {
-public:
-	ScreenSpaceReflectionFilterShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/screen_space_reflection_filter.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "ScreenSpaceReflectionFilterShaderRD");
-	}
-};
-
-class ScreenSpaceReflectionResolveShaderRD : public ShaderRD {
-public:
-	ScreenSpaceReflectionResolveShaderRD() {
-		String shader_path = _get_shader_base_dir() + "/effects/screen_space_reflection_resolve.glsl";
-		ShaderLoaderRD::ShaderLoadResult res = ShaderLoaderRD::get_singleton()->load_shader_file(shader_path);
-		if (res.error) {
-			CRASH_NOW_MSG(vformat("Failed to load shader file: %s", shader_path));
-		}
-
-		setup(res.vertex_code, res.fragment_code, res.compute_code, "ScreenSpaceReflectionResolveShaderRD");
-	}
-};
+#include "servers/rendering/renderer_rd/shaders/effects/screen_space_reflection.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/screen_space_reflection_downsample.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/screen_space_reflection_filter.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/screen_space_reflection_hiz.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/screen_space_reflection_resolve.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ss_effects_downsample.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssao.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssao_blur.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssao_importance_map.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssao_interleave.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssil.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssil_blur.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssil_importance_map.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/ssil_interleave.glsl.gen.h"
+#include "servers/rendering/renderer_rd/shaders/effects/subsurface_scattering.glsl.gen.h"
 
 #define RB_SCOPE_SSLF SNAME("rb_sslf")
 #define RB_SCOPE_SSDS SNAME("rb_ssds")
