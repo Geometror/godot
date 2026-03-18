@@ -1114,6 +1114,9 @@ public:
 
 	FUNC4S(set_boot_image_with_stretch, const Ref<Image> &, const Color &, RenderingServer::SplashStretchMode, bool)
 
+	FUNC1(set_shader_time_override, double)
+	FUNC0(clear_shader_time_override)
+
 	/* STATUS INFORMATION */
 
 #undef server_name

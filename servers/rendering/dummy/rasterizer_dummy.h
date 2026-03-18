@@ -86,6 +86,9 @@ public:
 		time += frame_step;
 	}
 
+	void set_shader_time_override(double p_time) override {}
+	void clear_shader_time_override() override {}
+
 	void blit_render_targets_to_screen(int p_screen, const BlitToScreen *p_render_targets, int p_amount) override {}
 
 	bool is_opengl() override { return false; }

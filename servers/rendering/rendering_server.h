@@ -1871,6 +1871,9 @@ public:
 	_ALWAYS_INLINE_ static SplashStretchMode map_scaling_option_to_stretch_mode(bool p_scale) {
 		return p_scale ? SplashStretchMode::SPLASH_STRETCH_MODE_KEEP : SplashStretchMode::SPLASH_STRETCH_MODE_DISABLED;
 	}
+	virtual void set_shader_time_override(double p_time) = 0;
+	virtual void clear_shader_time_override() = 0;
+
 	virtual Color get_default_clear_color() = 0;
 	virtual void set_default_clear_color(const Color &p_color) = 0;
 

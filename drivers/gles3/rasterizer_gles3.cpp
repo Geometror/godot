@@ -98,18 +98,33 @@ void RasterizerGLES3::begin_frame(double frame_step) {
 	frame++;
 	delta = frame_step;
 
-	time_total += frame_step;
+	if (shader_time_override_active) {
+		time_total = shader_time_override_value;
+		canvas->set_time(time_total);
+		scene->set_time(time_total, 0.0);
+	} else {
+		time_total += frame_step;
 
-	double time_roll_over = GLOBAL_GET_CACHED(double, "rendering/limits/time/time_rollover_secs");
-	time_total = Math::fmod(time_total, time_roll_over);
+		double time_roll_over = GLOBAL_GET_CACHED(double, "rendering/limits/time/time_rollover_secs");
+		time_total = Math::fmod(time_total, time_roll_over);
 
-	canvas->set_time(time_total);
-	scene->set_time(time_total, frame_step);
+		canvas->set_time(time_total);
+		scene->set_time(time_total, frame_step);
+	}
 
 	GLES3::Utilities *utils = GLES3::Utilities::get_singleton();
 	utils->_capture_timestamps_begin();
 
 	//scene->iteration();
+}
+
+void RasterizerGLES3::set_shader_time_override(double p_time) {
+	shader_time_override_active = true;
+	shader_time_override_value = p_time;
+}
+
+void RasterizerGLES3::clear_shader_time_override() {
+	shader_time_override_active = false;
 }
 
 void RasterizerGLES3::end_frame(bool p_swap_buffers) {

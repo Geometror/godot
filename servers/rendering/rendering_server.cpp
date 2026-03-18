@@ -3558,6 +3558,9 @@ void RenderingServer::_bind_methods() {
 #ifndef DISABLE_DEPRECATED
 	ClassDB::bind_method(D_METHOD("set_boot_image", "image", "color", "scale", "use_filter"), &RenderingServer::set_boot_image, DEFVAL(true));
 #endif
+	ClassDB::bind_method(D_METHOD("set_shader_time_override", "time"), &RenderingServer::set_shader_time_override);
+	ClassDB::bind_method(D_METHOD("clear_shader_time_override"), &RenderingServer::clear_shader_time_override);
+
 	ClassDB::bind_method(D_METHOD("get_default_clear_color"), &RenderingServer::get_default_clear_color);
 	ClassDB::bind_method(D_METHOD("set_default_clear_color", "color"), &RenderingServer::set_default_clear_color);
 

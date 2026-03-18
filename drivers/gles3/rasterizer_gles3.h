@@ -57,6 +57,9 @@ private:
 
 	double time_total = 0.0;
 
+	bool shader_time_override_active = false;
+	double shader_time_override_value = 0.0;
+
 #ifdef WINDOWS_ENABLED
 	static bool screen_flipped_y;
 #endif
@@ -100,6 +103,9 @@ public:
 
 	void initialize();
 	void begin_frame(double frame_step);
+
+	void set_shader_time_override(double p_time) override;
+	void clear_shader_time_override() override;
 
 	void blit_render_targets_to_screen(DisplayServer::WindowID p_screen, const BlitToScreen *p_render_targets, int p_amount);
 

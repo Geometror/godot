@@ -101,6 +101,9 @@ protected:
 	double time = 0.0;
 	double delta = 0.0;
 
+	bool shader_time_override_active = false;
+	double shader_time_override_value = 0.0;
+
 	static uint64_t frame;
 	static RendererCompositorRD *singleton;
 
@@ -134,6 +137,9 @@ public:
 	_ALWAYS_INLINE_ double get_frame_delta_time() const { return delta; }
 	_ALWAYS_INLINE_ double get_total_time() const { return time; }
 	_ALWAYS_INLINE_ bool can_create_resources_async() const { return true; }
+
+	void set_shader_time_override(double p_time) override;
+	void clear_shader_time_override() override;
 
 	virtual bool is_xr_enabled() const { return RendererCompositor::is_xr_enabled(); }
 

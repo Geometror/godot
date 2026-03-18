@@ -108,13 +108,29 @@ void RendererCompositorRD::blit_render_targets_to_screen(DisplayServer::WindowID
 void RendererCompositorRD::begin_frame(double frame_step) {
 	frame++;
 	delta = frame_step;
-	time += frame_step;
 
-	double time_roll_over = GLOBAL_GET_CACHED(double, "rendering/limits/time/time_rollover_secs");
-	time = Math::fmod(time, time_roll_over);
+	if (shader_time_override_active) {
+		time = shader_time_override_value;
+		canvas->set_time(time);
+		scene->set_time(time, 0.0);
+	} else {
+		time += frame_step;
 
-	canvas->set_time(time);
-	scene->set_time(time, frame_step);
+		double time_roll_over = GLOBAL_GET_CACHED(double, "rendering/limits/time/time_rollover_secs");
+		time = Math::fmod(time, time_roll_over);
+
+		canvas->set_time(time);
+		scene->set_time(time, frame_step);
+	}
+}
+
+void RendererCompositorRD::set_shader_time_override(double p_time) {
+	shader_time_override_active = true;
+	shader_time_override_value = p_time;
+}
+
+void RendererCompositorRD::clear_shader_time_override() {
+	shader_time_override_active = false;
 }
 
 void RendererCompositorRD::end_frame(bool p_present) {
