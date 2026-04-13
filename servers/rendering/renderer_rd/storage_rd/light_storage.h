@@ -380,7 +380,7 @@ private:
 
 	/* SHADOW ATLAS */
 
-	uint64_t shadow_atlas_realloc_tolerance_msec = 500;
+	uint64_t shadow_atlas_realloc_tolerance_msec = 0;
 
 	struct ShadowShrinkStage {
 		RID texture;
