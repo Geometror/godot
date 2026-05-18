@@ -1317,6 +1317,21 @@ struct EditorSceneFormatImporterMeshLightmapSurface {
 
 static const uint32_t custom_shift[RSE::ARRAY_CUSTOM_COUNT] = { Mesh::ARRAY_FORMAT_CUSTOM0_SHIFT, Mesh::ARRAY_FORMAT_CUSTOM1_SHIFT, Mesh::ARRAY_FORMAT_CUSTOM2_SHIFT, Mesh::ARRAY_FORMAT_CUSTOM3_SHIFT };
 
+// Snap float to consistent precision by zeroing the 6 least significant mantissa bits.
+// This absorbs minor cross-platform floating-point differences (e.g., from Blender's
+// GLTF export) ensuring lightmap unwrap cache stability across operating systems.
+static float _lightmap_snap_float(float p_value) {
+	uint32_t bits;
+	memcpy(&bits, &p_value, sizeof(uint32_t));
+	bits &= ~0x3Fu;
+	memcpy(&p_value, &bits, sizeof(uint32_t));
+	return p_value;
+}
+
+static Vector3 _lightmap_read_vertex(const LocalVector<float> &p_vertices, int p_idx) {
+	return Vector3(p_vertices[p_idx * 3 + 0], p_vertices[p_idx * 3 + 1], p_vertices[p_idx * 3 + 2]);
+}
+
 Error ImporterMesh::lightmap_unwrap_cached(const Transform3D &p_base_transform, float p_texel_size, const Vector<uint8_t> &p_src_cache, Vector<uint8_t> &r_dst_cache) {
 	ERR_FAIL_NULL_V(array_mesh_lightmap_unwrap_callback, ERR_UNCONFIGURED);
 	ERR_FAIL_COND_V_MSG(blend_shapes.size() != 0, ERR_UNAVAILABLE, "Can't unwrap mesh with blend shapes.");
@@ -1368,12 +1383,14 @@ Error ImporterMesh::lightmap_unwrap_cached(const Transform3D &p_base_transform, 
 			Vector3 v = transform.xform(rvertices[j]);
 			Vector3 n = normal_basis.xform(rnormals[j]).normalized();
 
-			vertices[(j + vertex_ofs) * 3 + 0] = v.x;
-			vertices[(j + vertex_ofs) * 3 + 1] = v.y;
-			vertices[(j + vertex_ofs) * 3 + 2] = v.z;
-			normals[(j + vertex_ofs) * 3 + 0] = n.x;
-			normals[(j + vertex_ofs) * 3 + 1] = n.y;
-			normals[(j + vertex_ofs) * 3 + 2] = n.z;
+			// Snap to consistent precision and use the snapped values for both
+			// the cache hash and the degenerate triangle check below.
+			vertices[(j + vertex_ofs) * 3 + 0] = _lightmap_snap_float(v.x);
+			vertices[(j + vertex_ofs) * 3 + 1] = _lightmap_snap_float(v.y);
+			vertices[(j + vertex_ofs) * 3 + 2] = _lightmap_snap_float(v.z);
+			normals[(j + vertex_ofs) * 3 + 0] = _lightmap_snap_float(n.x);
+			normals[(j + vertex_ofs) * 3 + 1] = _lightmap_snap_float(n.y);
+			normals[(j + vertex_ofs) * 3 + 2] = _lightmap_snap_float(n.z);
 			uv_indices[j + vertex_ofs] = Pair<int, int>(i, j);
 		}
 
@@ -1383,9 +1400,9 @@ Error ImporterMesh::lightmap_unwrap_cached(const Transform3D &p_base_transform, 
 		float eps = 1.19209290e-7F; // Taken from xatlas.h
 		if (ic == 0) {
 			for (int j = 0; j < vc / 3; j++) {
-				Vector3 p0 = transform.xform(rvertices[j * 3 + 0]);
-				Vector3 p1 = transform.xform(rvertices[j * 3 + 1]);
-				Vector3 p2 = transform.xform(rvertices[j * 3 + 2]);
+				Vector3 p0 = _lightmap_read_vertex(vertices, vertex_ofs + j * 3 + 0);
+				Vector3 p1 = _lightmap_read_vertex(vertices, vertex_ofs + j * 3 + 1);
+				Vector3 p2 = _lightmap_read_vertex(vertices, vertex_ofs + j * 3 + 2);
 
 				if ((p0 - p1).length_squared() < eps || (p1 - p2).length_squared() < eps || (p2 - p0).length_squared() < eps) {
 					continue;
@@ -1401,9 +1418,9 @@ Error ImporterMesh::lightmap_unwrap_cached(const Transform3D &p_base_transform, 
 				ERR_FAIL_INDEX_V(rindices[j * 3 + 0], rvertices.size(), ERR_INVALID_DATA);
 				ERR_FAIL_INDEX_V(rindices[j * 3 + 1], rvertices.size(), ERR_INVALID_DATA);
 				ERR_FAIL_INDEX_V(rindices[j * 3 + 2], rvertices.size(), ERR_INVALID_DATA);
-				Vector3 p0 = transform.xform(rvertices[rindices[j * 3 + 0]]);
-				Vector3 p1 = transform.xform(rvertices[rindices[j * 3 + 1]]);
-				Vector3 p2 = transform.xform(rvertices[rindices[j * 3 + 2]]);
+				Vector3 p0 = _lightmap_read_vertex(vertices, vertex_ofs + rindices[j * 3 + 0]);
+				Vector3 p1 = _lightmap_read_vertex(vertices, vertex_ofs + rindices[j * 3 + 1]);
+				Vector3 p2 = _lightmap_read_vertex(vertices, vertex_ofs + rindices[j * 3 + 2]);
 
 				if ((p0 - p1).length_squared() < eps || (p1 - p2).length_squared() < eps || (p2 - p0).length_squared() < eps) {
 					continue;
